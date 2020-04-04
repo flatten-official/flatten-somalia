@@ -1,5 +1,5 @@
 const requestIp = require("request-ip");
-const healthStatus = require("./healthStatus.js");
+const healthStatus = require("./utils/healthStatus.js");
 
 const form_response_fields = [
     "q1",

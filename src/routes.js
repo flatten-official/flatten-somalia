@@ -5,7 +5,7 @@ const { OAuth2Client } = require("google-auth-library");
 
 const router = express.Router();
 
-const utils = require("./utils");
+const utils = require("./utils/secrets");
 const googleData = require("./dataStore");
 
 const schema = require("./schema.js");
@@ -96,7 +96,7 @@ router.post("/submit", async (req, res) => {
   await googleData.insertMarketingData(userEmail);
 
   if (pepper === undefined) {
-    let kms = require("./kms.js");
+    let kms = require("./utils/kms.js");
     pepper = await kms.loadPepper();
   }
   //Used to create a hash
@@ -158,7 +158,7 @@ router.post("/login", async (req, res) => {
   const cookie_id = req.signedCookies.userCookieValue;
 
   if (pepper === undefined) {
-    let kms = require("./kms.js");
+    let kms = require("./utils/kms.js");
     pepper = await kms.loadPepper();
   }
   //Need to associate it w the googleUserID instead and delete the old one

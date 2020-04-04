@@ -7,7 +7,7 @@ const helmet = require("helmet");
 const app = express();
 
 const routes = require("./routes");
-const utils = require("./utils");
+const utils = require("./utils/secrets");
 
 var cookieSecret = new utils.Secret(process.env.COOKIE_SECRET);
 

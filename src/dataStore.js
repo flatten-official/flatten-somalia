@@ -1,7 +1,7 @@
 const { Datastore } = require("@google-cloud/datastore");
 const crypto = require("crypto");
 const moment = require("moment");
-const kms = require("./kms.js");
+const kms = require("./utils/kms.js");
 
 const datastore = new Datastore();
 
