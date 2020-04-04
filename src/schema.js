@@ -1,5 +1,5 @@
 const requestIp = require("request-ip");
-const flattenMatrix = require("./flattenMatrix/matrix.js");
+const healthStatus = require("./healthStatus.js");
 
 const form_response_fields = [
     "q1",
@@ -27,8 +27,8 @@ exports.requestToSubmission = function(req) {
     const submission = {
         timestamp,
         ip_address: requestIp.getClientIp(req),
-        at_risk: flattenMatrix.atRisk(req.body),
-        probable: flattenMatrix.probable(req.body),
+        at_risk: healthStatus.atRisk(req.body),
+        probable: healthStatus.probable(req.body),
         form_responses: {
             ...form_responses,
             timestamp
