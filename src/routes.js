@@ -1,72 +1,37 @@
 const express = require("express");
 const crypto = require("crypto");
-const axios = require("axios");
-const requestIp = require("request-ip");
 const { v4: uuidv4 } = require("uuid");
 const { OAuth2Client } = require("google-auth-library");
 
 const router = express.Router();
 
 const utils = require("./utils");
-const flattenMatrix = require("./flattenMatrix/matrix.js");
 const googleData = require("./dataStore");
 
+const schema = require("./schema.js");
+
 const hashingIterations = 100000;
-var pepper, oauth_client_id, recaptcha_secret;
+var pepper;
+
+var recaptcha_secret = new utils.Recaptcha();
+var oauth_secret = new utils.Secret(process.env.OAUTH_SECRET);
 
 // submit endpoint
 router.post("/submit", async (req, res) => {
-  if (recaptcha_secret === undefined) {
-    recaptcha_secret = await utils
-      .accessSecretVersion(process.env.RECAPTCHA_SECRET)
-      .catch(console.error);
-  }
 
-  const recaptchaResponse = await axios.post(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${recaptcha_secret}&response=${req.body.reactVerification}`
-  );
-  if (!recaptchaResponse.data.success) {
-    res.status(400).send("Sorry, your recaptcha was invalid.");
+  [recaptchaSuccess, recaptchaFailMessage] = await recaptcha_secret.verifyRecaptcha(req.body.reactVerification);
+  if (!recaptchaSuccess) {
+    res.status(400).send(recaptchaFailMessage);
     return;
   }
 
-  const form_response_fields = [
-    "q1",
-    "q2",
-    "q3",
-    "q4",
-    "q5",
-    "q6",
-    "q7",
-    "q8",
-    "postalCode"
-  ];
-  const form_responses = form_response_fields.reduce(
-    (obj, field) => ({
-      ...obj,
-      [field]: req.body[field]
-    }),
-    {}
-  );
-
-  const timestamp = Date.now();
-  const submission = {
-    timestamp,
-    ip_address: requestIp.getClientIp(req),
-    at_risk: flattenMatrix.atRisk(req.body),
-    probable: flattenMatrix.probable(req.body),
-    form_responses: {
-      ...form_responses,
-      timestamp
-    }
-  };
+  const submission = schema.requestToSubmission(req);
 
   //Cookie Form
   if (!req.body.tokenId) {
     //If not logged in, use cookie to store form as before
 
     // Check if cookie value already exists; if not, generate a new one
-    console.log(req);
     if (req.signedCookies.userCookieValue) {
       submission.cookie_id = req.signedCookies.userCookieValue;
     } else {
@@ -102,11 +67,8 @@ router.post("/submit", async (req, res) => {
 
   //Google Sign-In Token Verification
   //Add google token field to req body
-  if (oauth_client_id === undefined) {
-    oauth_client_id = await utils
-      .accessSecretVersion(process.env.OAUTH_SECRET)
-      .catch(console.error);
-  }
+  let oauth_client_id = await oauth_secret.get();
+
   const client = new OAuth2Client(oauth_client_id);
   let userID = null;
   let userEmail = null;
@@ -168,11 +130,7 @@ router.post("/submit", async (req, res) => {
 router.post("/login", async (req, res) => {
   //Include google token field and cookies to req body
   //Google Sign-In Token Verification
-  if (oauth_client_id === undefined) {
-    oauth_client_id = await utils
-      .accessSecretVersion(process.env.OAUTH_SECRET)
-      .catch(console.error);
-  }
+  let oauth_client_id = await oauth_secret.get();
 
   const client = new OAuth2Client(oauth_client_id);
   let userID = null;
