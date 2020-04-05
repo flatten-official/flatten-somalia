@@ -1,66 +1,103 @@
+const { Datastore } = require("@google-cloud/datastore");
+
+const { gstore } = require('./db');
+const Account = require('../models/account');
+
+const moment = require("moment");
 const { v4: uuidv4 } = require("uuid");
-const { Datastore: Accounts } = require("@google-cloud/datastore");
+
 const kms = require("../utils/kms");
 const email = require("./emails");
 
-const datastore = new Accounts();
 
 class UserAccount {
   constructor() {
-    this.data = undefined;
-    this.namespace = process.env.DATASTORE_NAMESPACE
+    this.entity = undefined;
   }
 
-  async CreateNewUser() {
-      this.data = {
-        'uuid' : uuidv4(),
-        'tokens' : [],
-        'cookies' : [],
-        'hashed_emails' : [],
-        'user_responses' : []
-      }
-  }
-
-  /* Append a cookie to the history along with a timestamp of when it was set */
-  setCookie(cookie_id, timestamp) {
-    this.data.cookies.push({
-      'cookie-id': cookie_id,
-      'timestamp': timestamp
-    })
+  createNewUser() {
+      this.entity = new Account({}, data.user_id);
   }
 
   /* Append a token used for email verification to the history */
-  setToken(token_id, timestamp, expiry) {
-    this.data.tokens.push({
-      'token-id': token_id,
-      'timestamp': timestamp,
+  setToken(token_id, expiry) {
+    this.entity.tokens.push({
+      'token_id': token_id,
+      'timestamp': moment().valueOf(),
       'expiry': expiry
     })
   }
 
+  setCookie(cookie_id) {
+    this.entity.cookies.push({
+      'cookie_id': cookie_id,
+      'cookie_created': moment().valueOf(),
+    })
+  }
+
   /* Add a hash + peppered email to the user's list of emails */
-  setEmail(email, timestamp) {
-
+  setEmail(hashed_email) {
+    this.entity.hashed_emails.push({
+      'hash': hashed_email,
+      'added': moment().valueOf(),
+      'verified': false
+    });
   }
 
-  /* Query a user by ID and load it into this object */
-  async LoadUserFromID(user_id) {
-
+  /* Query a user by ID and load it into this object.
+  * Returns true upon a successful load, false if failed.  */
+  async loadUserFromID(user_id) {
+    let success = true;
+    try {
+      this.entity = await Account.get(user_id);
+    } catch (e) {
+      success = false;
+    }
+    return success;
   }
 
-  /* Query a user by cookie and load it into this object */
-  async LoadUserFromCookie(cookie) {
+  async pushUser() {
 
+    if (this.entity === undefined) {
+      throw Error("Cannot push undefined Account entity");
+    }
+
+    await this.entity.save(null, {method: 'upsert'}).catch(console.error);
+  }
+
+  async runSingleQuery(query ) {
+
+    var success = true;
+    const res = await query.run();
+
+    if (res.entities.length === 1) {
+      this.entity = res.entities[0];
+    } else {
+      success=false;
+    }
+    console.log(success);
+
+    return success;
+  }
+
+  /* Query a user by cookie and load it into this object. Returns boolean flag indicating success. */
+  async loadUserFromCookie(cookie) {
+    const query = Account.query().filter('cookies.cookie_id', '=', cookie);
+    return await this.runSingleQuery(query);
   }
 
   /* Query a user by token and load it into this object */
-  async LoadUserFromToken(token) {
-
+  async loadUserFromToken(token) {
+    const query = Account.query().filter('cookies.token_id', '=', token);
+    return await this.runSingleQuery(query);
   }
 
   /* Query a user by email and load it into this object */
-  async LoadUserFromEmail(email) {
-
+  async loadUserFromEmail(email) {
+    // TODO: hash the email
+    var hashed_email = email;
+    const query = Account.query().filter('cookies.hashed_email', '=', hashed_email);
+    return await this.runSingleQuery(query);
   }
 
 }
