@@ -3,7 +3,6 @@ const { Datastore } = require("@google-cloud/datastore");
 const { gstore } = require('./db');
 const Account = require('../models/account');
 
-const moment = require("moment");
 const { v4: uuidv4 } = require("uuid");
 
 const kms = require("../utils/kms");
@@ -28,7 +27,7 @@ class AccountService {
   setToken(token_value, expires) {
     this.entity.tokens.push({
       'value': token_value,
-      'created': moment().valueOf(),
+      'created': Date.now(),
       'expires': expires
     })
   }
@@ -37,7 +36,7 @@ class AccountService {
   setCookie(cookie_value, expires) {
     this.entity.cookies.push({
       'value': cookie_value,
-      'created': moment().valueOf(),
+      'created': Date.now(),
       'expires': expires
     })
   }
@@ -46,7 +45,7 @@ class AccountService {
   setEmail(hashed_email) {
     this.entity.email.push({
       'hash': hashed_email,
-      'added': moment().valueOf(),
+      'added': Date.now(),
       'verified': false
     });
   }
