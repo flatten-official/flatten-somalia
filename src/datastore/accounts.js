@@ -19,19 +19,23 @@ class UserAccount {
       this.entity = new Account({}, data.user_id);
   }
 
-  /* Append a token used for email verification to the history */
-  setToken(token_id, expiry) {
+  /* Append a token used for email verification to the history.
+  * Value and expires are UTC Unix timestamps in milliseconds
+  * */
+  setToken(token_value, expires) {
     this.entity.tokens.push({
-      'token_id': token_id,
-      'timestamp': moment().valueOf(),
-      'expiry': expiry
+      'value': token_value,
+      'created': moment().valueOf(),
+      'expires': expires
     })
   }
 
-  setCookie(cookie_id) {
+  /* Append a cookie */
+  setCookie(cookie_value, expires) {
     this.entity.cookies.push({
-      'cookie_id': cookie_id,
-      'cookie_created': moment().valueOf(),
+      'value': cookie_value,
+      'created': moment().valueOf(),
+      'expires': expires
     })
   }
 
@@ -97,6 +101,21 @@ class UserAccount {
   }
 
 }
+
+async function test() {
+  const acc = new UserAccount();
+
+  await acc.loadUserFromCookie('2495f228-ed65-443b-b2db-3ae6f3959752');
+  acc.setEmail('arthur@allshire.org');
+  await acc.pushUser();
+  // let success = await acc.loadUserFromID('3135bf04-29a9-43eb-b44b-738214d263b6');
+  // console.log(success);
+  //
+  // acc.setCookie(uuidv4());
+  // await acc.pushUser();
+
+}
+test();
 
 
 // Encrypts the Ip address in data, storing the cypher text in a different field
