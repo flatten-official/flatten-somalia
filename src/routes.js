@@ -7,13 +7,12 @@ const router = express.Router();
 
 const secrets = require("./utils/secrets");
 const kms = require("./utils/kms");
+const hash = require("./utils/hash");
 
 const googleData = require("./datastore/accounts");
 const email = require("./datastore/emails");
 
 const schema = require("./schema.js");
-
-const hashingIterations = 100000;
 
 var recaptcha_secret = new secrets.Recaptcha();
 var oauth_secret = new secrets.Secret(process.env.OAUTH_SECRET);
@@ -96,36 +95,16 @@ router.post("/submit", async (req, res) => {
       );
     return;
   }
-  await googleData.insertMarketingData(userEmail);
+  await email.insertMarketingData(userEmail);
 
-  let pepper = await pepper_secret.get();
+  try {
+    var hashedUserID = hash.hashPepper(userID, pepper_secret);
+    await googleData.insertForm(submission, hashedUserID);
+  } catch (e) {
+    res.status(400).send("Error inserting google data");
+  }
+  res.status(200).send(true);
 
-  //Used to create a hash
-  crypto.pbkdf2(
-    userID, //Thing to hash
-    pepper, //128bit Pepper
-    hashingIterations, //Num of iterations (recomended is aprox 100k)
-    64, //Key length
-    "sha512", // HMAC Digest Algorithm
-    async (err, derivedKey) => {
-      if (err) {
-        res.status(400).send(`Hashing error: ${err}`);
-        return;
-      }
-      const hashedUserID = derivedKey.toString("hex");
-      try {
-        await googleData.insertForm(submission, hashedUserID);
-      } catch (e) {
-        res
-          .status(400)
-          .send(
-            "Sorry, an error occured with your form submission. Please refresh the page and try again."
-          );
-        return;
-      }
-      res.status(200).send(true);
-    }
-  );
 });
 
 router.post("/login", async (req, res) => {
@@ -158,29 +137,18 @@ router.post("/login", async (req, res) => {
   //If cookie exists there may be a form associated w it
   const cookie_id = req.signedCookies.userCookieValue;
 
-  let pepper = await pepper_secret.get();
-
-  //Need to associate it w the googleUserID instead and delete the old one
-  if (cookie_id) {
-    crypto.pbkdf2(
-      userID, // Thing to hash
-      pepper, // 128bit Pepper
-      hashingIterations, // Num of iterations (recomended is aprox 100k)
-      64, // Key length
-      "sha512", // HMAC Digest Algorithm
-      async (err, derivedKey) => {
-        if (err) {
-          res.status(400).send(`Hashing error: ${err}`);
-          return;
-        }
-        await googleData.migrateCookieForm(
-          derivedKey.toString("hex"),
-          cookie_id,
-          userEmail
-        );
-      }
-    );
+  try {
+    var hashedUserID = hash.hashPepper(userID, pepper_secret);
+    await googleData.insertForm(submission, hashedUserID);
+  } catch (e) {
+    res.status(400).send("Error inserting google data");
   }
+  await googleData.migrateCookieForm(
+      hashedUserID,
+      cookie_id,
+      userEmail);
+  res.status(200).send(true);
+
   const data = { loginSuccess: true };
   res.status(200).json(data);
 });
