@@ -1,7 +1,10 @@
 const { Datastore } = require("@google-cloud/datastore");
 
 const { gstore } = require('./db');
+
 const Account = require('../models/account');
+
+const submissions = require('./submissions');
 
 const { v4: uuidv4 } = require("uuid");
 
@@ -48,6 +51,31 @@ class AccountService {
       'added': Date.now(),
       'verified': false
     });
+  }
+
+  async submit(cookie, form_responses, ip) {
+    var success = this.loadUserFromCookie();
+    if (success) {
+      // TODO
+    } else {
+      // try to load by email, allow if verified
+      // TODO
+
+      // if this does not work
+      this.createNewUser();
+    }
+  }
+
+  async migrateOldUser(oldEntity) {
+    this.createNewUser();
+    this.entity.users = submissions.migrateOldUser(oldEntity, this.entity.users);
+
+    if (!(oldEntity.cookie_id === undefined)) {
+      // set expiry as now, because we don't actually know when it expires - we were not tracking this before...
+      this.setCookie(oldEntity.cookie_id, Date.now());
+    }
+    this.pushUser();
+
   }
 
   /* Query a user by ID and load it into this object.
