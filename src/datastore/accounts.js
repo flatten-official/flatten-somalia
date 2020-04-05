@@ -105,21 +105,6 @@ class UserAccount {
 
 }
 
-async function test() {
-  const acc = new UserAccount();
-
-  await acc.loadUserFromCookie('2495f228-ed65-443b-b2db-3ae6f3959752');
-  acc.setEmail('arthur@allshire.org');
-  await acc.pushUser();
-  // let success = await acc.loadUserFromID('3135bf04-29a9-43eb-b44b-738214d263b6');
-  // console.log(success);
-  //
-  // acc.setCookie(uuidv4());
-  // await acc.pushUser();
-
-}
-test();
-
 
 // Encrypts the Ip address in data, storing the cypher text in a different field
 async function encryptIp(data) {
