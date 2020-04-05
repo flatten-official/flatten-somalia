@@ -7,13 +7,12 @@ const router = express.Router();
 
 const secrets = require("./utils/secrets");
 const kms = require("./utils/kms");
+const hash = require("./utils/hash");
 
 const googleData = require("./datastore/accounts");
 const email = require("./datastore/emails");
 
 const schema = require("./schema.js");
-
-const hashingIterations = 100000;
 
 var recaptcha_secret = new secrets.Recaptcha();
 var oauth_secret = new secrets.Secret(process.env.OAUTH_SECRET);
@@ -24,25 +23,45 @@ var pepper_secret = new kms.KMSSecret(
 
 // submit endpoint
 router.post("/submit", async (req, res) => {
-  [
-    recaptchaSuccess,
-    recaptchaFailMessage,
-  ] = await recaptcha_secret.verifyRecaptcha(req.body.reactVerification);
-  if (!recaptchaSuccess) {
-    res.status(400).send(recaptchaFailMessage);
-    return;
-  }
+  // [
+  //   recaptchaSuccess,
+  //   recaptchaFailMessage,
+  // ] = await recaptcha_secret.verifyRecaptcha(req.body.reactVerification);
+  // if (!recaptchaSuccess) {
+  //   res.status(400).send(recaptchaFailMessage);
+  //   return;
+  // }
 
   const submission = { ...schema.requestToSubmission(req), history: [] };
 
-  // If cookie exists
-  if (req.signedCookies.userCookieValue) {
-    await googleData.update(submission, req.signedCookies.userCookieValue);
-  } else {
-    await googleData.submitNew(submission, cookie_id);
+  try {
+    var hashedEmail = await hash.hashPepper(
+      submission.form_responses.email,
+      pepper_secret
+    );
+  } catch (e) {
+    // No email was given
   }
 
-  const cookie_id = uuidv4();
+  console.log(hashedEmail);
+  const cookie_id = req.signedCookies.userCookieValue
+    ? req.signedCookies.userCookieValue
+    : uuidv4();
+
+  console.log(cookie_id);
+  // If cookie exists
+  try {
+    if (req.signedCookies.userCookieValue) {
+      await googleData.update(submission, cookie_id, hashedEmail);
+    } else {
+      await googleData.submitNew(submission, cookie_id, hashedEmail);
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(400).send("error updating datastore");
+    return;
+  }
+
   const submission_cookie_options = {
     domain: process.env.DOMAIN,
     httpOnly: true,
@@ -50,9 +69,8 @@ router.post("/submit", async (req, res) => {
     secure: true,
     signed: true,
   };
-
   res.cookie("userCookieValue", cookie_id, submission_cookie_options);
-  res.status(200).send();
+  res.status(200).send("Submit Success");
 });
 
 router.post("/login", async (req, res) => {
@@ -85,29 +103,15 @@ router.post("/login", async (req, res) => {
   //If cookie exists there may be a form associated w it
   const cookie_id = req.signedCookies.userCookieValue;
 
-  let pepper = await pepper_secret.get();
-
-  //Need to associate it w the googleUserID instead and delete the old one
-  if (cookie_id) {
-    crypto.pbkdf2(
-      userID, // Thing to hash
-      pepper, // 128bit Pepper
-      hashingIterations, // Num of iterations (recomended is aprox 100k)
-      64, // Key length
-      "sha512", // HMAC Digest Algorithm
-      async (err, derivedKey) => {
-        if (err) {
-          res.status(400).send(`Hashing error: ${err}`);
-          return;
-        }
-        await googleData.migrateCookieForm(
-          derivedKey.toString("hex"),
-          cookie_id,
-          userEmail
-        );
-      }
-    );
+  try {
+    var hashedUserID = hash.hashPepper(userID, pepper_secret);
+    await googleData.insertForm(submission, hashedUserID);
+  } catch (e) {
+    res.status(400).send("Error inserting google data");
   }
+  await googleData.migrateCookieForm(hashedUserID, cookie_id, userEmail);
+  res.status(200).send(true);
+
   const data = { loginSuccess: true };
   res.status(200).json(data);
 });

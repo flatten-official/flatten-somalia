@@ -111,4 +111,4 @@ class KMSSecret {
   }
 }
 
-module.exports = { KMSSecret };
+module.exports = { KMSSecret, encrypt, decrypt };

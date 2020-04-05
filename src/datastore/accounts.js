@@ -3,13 +3,12 @@ const { Datastore } = require("@google-cloud/datastore");
 const { gstore } = require("./db");
 const Account = require("../models/account");
 
-const moment = require("moment");
 const { v4: uuidv4 } = require("uuid");
 
 const kms = require("../utils/kms");
 const email = require("./emails");
 
-class UserAccount {
+class AccountService {
   constructor() {
     this.entity = undefined;
   }
@@ -27,7 +26,7 @@ class UserAccount {
   setToken(token_value, expires) {
     this.entity.tokens.push({
       value: token_value,
-      created: moment().valueOf(),
+      created: Date.now(),
       expires: expires,
     });
   }
@@ -35,8 +34,8 @@ class UserAccount {
   /* Append a cookie */
   setCookie(cookie_value, expires) {
     this.entity.cookies.push({
-      cookie_id: cookie_value,
-      created: moment().valueOf(),
+      value: cookie_value,
+      created: Date.now(),
       expires: expires,
     });
   }
@@ -45,7 +44,7 @@ class UserAccount {
   setEmail(hashed_email) {
     this.entity.email.push({
       hash: hashed_email,
-      added: moment().valueOf(),
+      added: Date.now(),
       verified: false,
     });
   }
@@ -116,9 +115,10 @@ async function encryptIp(data) {
   delete data.ip_address; // deletes the existing plaintext ip address, if it exists
 }
 
-exports.update = async (submission, cookieID) => {
-  const User = new UserAccount();
+exports.update = async (submission, cookieID, hashedEmail) => {
+  const User = new AccountService();
   await User.loadUserFromCookie(cookieID);
+  User.setEmail(hashedEmail);
 
   let data = User.entity.user_responses.Primary;
   data.history.push(submission.form_responses);
@@ -133,13 +133,14 @@ exports.update = async (submission, cookieID) => {
   User.pushUser();
 };
 
-exports.submitNew = async (submission, cookieID) => {
-  const User = new UserAccount();
+exports.submitNew = async (submission, cookieID, hashedEmail) => {
+  const User = new AccountService();
   User.createNewUser();
   // await encryptIp(submission);
   const Primary = { ...submission, history: [submission.form_responses] };
   User.entity.user_responses = { Primary };
   User.setCookie(cookieID, Date.now() + 2 * 365 * 24 * 60 * 60 * 1000);
+  User.setEmail(hashedEmail);
   User.pushUser();
 };
 
@@ -163,7 +164,7 @@ exports.migrateCookieForm = async (hashedUserID, cookie_id, email) => {
     return;
   }
 
-  await email.insertMarketingData(email, cookieKeyData.timestamp / 1000);
+  await email.insertEmailData(email);
 
   // encrypt the IP in the cookie key data
   if (cookieKeyData.ip_encrypted === undefined) {

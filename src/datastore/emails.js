@@ -1,48 +1,55 @@
-const { Datastore } = require("@google-cloud/datastore");
+const MarketingEmail = require('../models/email');
 
 const moment = require("moment");
-const datastore = new Datastore();
 
-/*
-email is user's email.
-timestamp is the time that the user submitted the form, in UTC Unix time in sec since origin.
- */
-exports.insertMarketingData = async (email, timestamp) => {
-    const key = datastore.key({
-        path: [process.env.DATASTORE_KIND_MARKETING, email],
-        namespace: process.env.DATASTORE_NAMESPACE
-    });
-
-    if (timestamp === undefined) {
-        timestamp = moment
-            .utc()
-            .startOf("day")
-            .unix();
+class MarketingEmailService {
+    constructor() {
+        this.entity = undefined;
     }
-    timestamp = Math.round(timestamp);
 
-    try {
-        // Try to insert an object with hashed email as key. If already submitted, fails
-        const entity = {
-            key,
-            data: {
-                email: email,
-                timestamp: timestamp,
-                timestamp_history: [timestamp]
-            }
+    createNewUser(email) {
+        const data = {
+            email: email
         };
-        await datastore.insert(entity);
-    } catch (e) {
-        // If it already exists, update with new history
-        let [data] = await datastore.get(key);
-
-        data.timestamp = timestamp;
-        data.timestamp_history.push(timestamp);
-
-        const entity = {
-            key,
-            data
-        };
-        const response = await datastore.update(entity);
+        this.entity = new MarketingEmail(data, email);
     }
+
+    async notifySubmit(email) {
+        let success = await this.loadEmail(email);
+        if (!success) {
+            this.createNewUser(email);
+        }
+        this.setSubmissionTime();
+        this.pushEmail();
+    }
+
+    async loadEmail(email) {
+        let success = true;
+        try {
+            this.entity = await MarketingEmail.get(email);
+        } catch (e) {
+            success = false;
+        }
+        return success;
+    }
+
+    async pushEmail() {
+
+        if (this.entity === undefined) {
+            throw Error("Cannot push undefined Account entity");
+        }
+
+        await this.entity.save(null, {method: 'upsert'}).catch(console.error);
+    }
+
+    setSubmissionTime() {
+        // get timestamp in ms since unix origin as an integer
+        let timestamp = Math.round(moment().startOf('day').valueOf());
+        this.entity.submission_times.push(timestamp);
+    }
+}
+
+exports.insertEmailData = async(email) => {
+    let emailData = new MarketingEmailService();
+    await emailData.notifySubmit(email);
 };
