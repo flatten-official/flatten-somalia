@@ -95,7 +95,7 @@ router.post("/submit", async (req, res) => {
       );
     return;
   }
-  await email.insertMarketingData(userEmail);
+  await email.insertEmailData(email);
 
   try {
     var hashedUserID = hash.hashPepper(userID, pepper_secret);

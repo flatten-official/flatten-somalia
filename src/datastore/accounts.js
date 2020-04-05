@@ -10,7 +10,7 @@ const kms = require("../utils/kms");
 const email = require("./emails");
 
 
-class UserAccount {
+class AccountService {
   constructor() {
     this.entity = undefined;
   }
@@ -214,7 +214,7 @@ exports.insertForm = async (submission, hashedUserID) => {
     return;
   }
 
-  await email.insertMarketingData(email, cookieKeyData.timestamp/1000.);
+  await email.insertEmailData(email);
 
   // encrypt the IP in the cookie key data
   if (cookieKeyData.ip_encrypted === undefined) {
