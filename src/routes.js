@@ -6,7 +6,8 @@ const { OAuth2Client } = require("google-auth-library");
 const router = express.Router();
 
 const utils = require("./utils/secrets");
-const googleData = require("./dataStore");
+const googleData = require("./datastore/accounts");
+const email = require("./datastore/emails");
 
 const schema = require("./schema.js");
 

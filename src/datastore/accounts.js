@@ -1,9 +1,70 @@
-const { Datastore } = require("@google-cloud/datastore");
-const crypto = require("crypto");
-const moment = require("moment");
-const kms = require("./utils/kms.js");
+const { v4: uuidv4 } = require("uuid");
+const { Datastore: Accounts } = require("@google-cloud/datastore");
+const kms = require("../utils/kms");
+const email = require("./emails");
 
-const datastore = new Datastore();
+const datastore = new Accounts();
+
+class UserAccount {
+  constructor() {
+    this.data = undefined;
+    this.namespace = process.env.DATASTORE_NAMESPACE
+  }
+
+  async CreateNewUser() {
+      this.data = {
+        'uuid' : uuidv4(),
+        'tokens' : [],
+        'cookies' : [],
+        'hashed_emails' : [],
+        'user_responses' : []
+      }
+  }
+
+  /* Append a cookie to the history along with a timestamp of when it was set */
+  setCookie(cookie_id, timestamp) {
+    this.data.cookies.push({
+      'cookie-id': cookie_id,
+      'timestamp': timestamp
+    })
+  }
+
+  /* Append a token used for email verification to the history */
+  setToken(token_id, timestamp, expiry) {
+    this.data.tokens.push({
+      'token-id': token_id,
+      'timestamp': timestamp,
+      'expiry': expiry
+    })
+  }
+
+  /* Add a hash + peppered email to the user's list of emails */
+  setEmail(email, timestamp) {
+
+  }
+
+  /* Query a user by ID and load it into this object */
+  async LoadUserFromID(user_id) {
+
+  }
+
+  /* Query a user by cookie and load it into this object */
+  async LoadUserFromCookie(cookie) {
+
+  }
+
+  /* Query a user by token and load it into this object */
+  async LoadUserFromToken(token) {
+
+  }
+
+  /* Query a user by email and load it into this object */
+  async LoadUserFromEmail(email) {
+
+  }
+
+}
+
 
 // Encrypts the Ip address in data, storing the cypher text in a different field
 async function encryptIp(data) {
@@ -19,15 +80,12 @@ exports.insertForm = async (submission, hashedUserID) => {
   //Cookie Form handling
   if (!hashedUserID) {
     //User is not logged in, use cookie as before to store/update form
-    console.log("no login");
     const key = datastore.key({
       path: [process.env.DATASTORE_KIND, submission.cookie_id],
       namespace: process.env.DATASTORE_NAMESPACE
     });
-    console.log(`key: ${key}`);
 
     try {
-      console.log("Entering try");
       let data = { ...submission, history: [submission.form_responses] };
       // encrypt the ip of the submission using the cookie as the key
       await encryptIp(data);
@@ -38,7 +96,6 @@ exports.insertForm = async (submission, hashedUserID) => {
       };
       await datastore.insert(entity);
     } catch (e) {
-      console.log("catch error");
       // If it already exists, update with new history
       let [data] = await datastore.get(key);
 
@@ -77,7 +134,6 @@ exports.insertForm = async (submission, hashedUserID) => {
       data: data
     };
     await datastore.insert(entity);
-    console.log("Form submitted");
   } catch (e) {
     // If it already exists, update with new history
     let [data] = await datastore.get(key);
@@ -118,7 +174,7 @@ exports.insertForm = async (submission, hashedUserID) => {
     return;
   }
 
-  await exports.insertMarketingData(email, cookieKeyData.timestamp/1000.);
+  await email.insertMarketingData(email, cookieKeyData.timestamp/1000.);
 
   // encrypt the IP in the cookie key data
   if (cookieKeyData.ip_encrypted === undefined) {
@@ -146,54 +202,7 @@ exports.insertForm = async (submission, hashedUserID) => {
       data: userIDKeyData
     };
     const response = await datastore.update(updatedEntity);
-    console.log("UserID entry Updated");
   }
   // Delete old cookieID entry
   await datastore.delete(cookieKey);
-};
-
-
-/*
-email is user's email.
-timestamp is the time that the user submitted the form, in UTC Unix time in sec since origin.
- */
-exports.insertMarketingData = async (email, timestamp) => {
-  const key = datastore.key({
-    path: [process.env.DATASTORE_KIND_MARKETING, email],
-    namespace: process.env.DATASTORE_NAMESPACE
-  });
-
-  if (timestamp === undefined) {
-    timestamp = moment
-        .utc()
-        .startOf("day")
-        .unix();
-  }
-  timestamp = Math.round(timestamp);
-
-  try {
-    // Try to insert an object with hashed email as key. If already submitted, fails
-    const entity = {
-      key,
-      data: {
-        email: email,
-        timestamp: timestamp,
-        timestamp_history: [timestamp]
-      }
-    };
-    await datastore.insert(entity);
-  } catch (e) {
-    // If it already exists, update with new history
-    let [data] = await datastore.get(key);
-
-    data.timestamp = timestamp;
-    data.timestamp_history.push(timestamp);
-
-    const entity = {
-      key,
-      data
-    };
-    const response = await datastore.update(entity);
-    console.log(response);
-  }
 };
