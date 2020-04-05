@@ -18,9 +18,9 @@ exports.appPromise = cookieSecret.load().then(() => {
     cors({
       origin: [
         `https://${process.env.DOMAIN}`,
-        `https://fr.${process.env.DOMAIN}`
+        `https://fr.${process.env.DOMAIN}`,
       ],
-      credentials: true
+      credentials: true,
     })
   );
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,6 +32,6 @@ exports.appPromise = cookieSecret.load().then(() => {
   app.use(cookieParser(cookieSecret.secret));
   app.use("/", routes);
 
-  console.log(cookieSecret);
+  console.log(cookieSecret.secret);
   return app;
 });

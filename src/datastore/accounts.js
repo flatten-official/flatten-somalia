@@ -1,14 +1,13 @@
 const { Datastore } = require("@google-cloud/datastore");
 
-const { gstore } = require('./db');
-const Account = require('../models/account');
+const { gstore } = require("./db");
+const Account = require("../models/account");
 
 const moment = require("moment");
 const { v4: uuidv4 } = require("uuid");
 
 const kms = require("../utils/kms");
 const email = require("./emails");
-
 
 class UserAccount {
   constructor() {
@@ -17,42 +16,42 @@ class UserAccount {
 
   createNewUser() {
     const data = {
-      'account_id': uuidv4()
+      account_id: uuidv4(),
     };
     this.entity = new Account(data, data.account_id);
   }
 
   /* Append a token used for email verification to the history.
-  * Value and expires are UTC Unix timestamps in milliseconds
-  * */
+   * Value and expires are UTC Unix timestamps in milliseconds
+   * */
   setToken(token_value, expires) {
     this.entity.tokens.push({
-      'value': token_value,
-      'created': moment().valueOf(),
-      'expires': expires
-    })
+      value: token_value,
+      created: moment().valueOf(),
+      expires: expires,
+    });
   }
 
   /* Append a cookie */
   setCookie(cookie_value, expires) {
     this.entity.cookies.push({
-      'value': cookie_value,
-      'created': moment().valueOf(),
-      'expires': expires
-    })
+      cookie_id: cookie_value,
+      created: moment().valueOf(),
+      expires: expires,
+    });
   }
 
   /* Add a hash + peppered email to the user's list of emails */
   setEmail(hashed_email) {
     this.entity.email.push({
-      'hash': hashed_email,
-      'added': moment().valueOf(),
-      'verified': false
+      hash: hashed_email,
+      added: moment().valueOf(),
+      verified: false,
     });
   }
 
   /* Query a user by ID and load it into this object.
-  * Returns true upon a successful load, false if failed.  */
+   * Returns true upon a successful load, false if failed.  */
   async loadUserFromID(user_id) {
     let success = true;
     try {
@@ -64,20 +63,23 @@ class UserAccount {
   }
 
   async pushUser() {
-
     if (this.entity === undefined) {
       throw Error("Cannot push undefined Account entity");
     }
 
-    await this.entity.save(null, {method: 'upsert'}).catch(console.error);
+    await this.entity.save(null, { method: "upsert" }).catch(console.error);
   }
 
   /* Query a user by cookie and load it into this object. Returns boolean flag indicating success. */
   async loadUserFromCookie(cookie) {
     try {
-      this.entity = await Account.findOne({'cookies.cookie_id': cookie});
+      console.log("it worked");
+
+      this.entity = await Account.findOne({ "cookies.cookie_id": cookie });
       return true;
     } catch {
+      console.log(":(((((((");
+
       return false;
     }
   }
@@ -85,7 +87,7 @@ class UserAccount {
   /* Query a user by token and load it into this object */
   async loadUserFromToken(token) {
     try {
-      this.entity = await Account.findOne({'tokens.token_id': token});
+      this.entity = await Account.findOne({ "tokens.token_id": token });
       return true;
     } catch {
       return false;
@@ -96,15 +98,13 @@ class UserAccount {
   async loadUserFromEmail(email) {
     // TODO: hash the email
     try {
-      this.entity = await Account.findOne({'email.hash': email});
+      this.entity = await Account.findOne({ "email.hash": email });
       return true;
     } catch {
       return false;
     }
   }
-
 }
-
 
 // Encrypts the Ip address in data, storing the cypher text in a different field
 async function encryptIp(data) {
@@ -116,95 +116,44 @@ async function encryptIp(data) {
   delete data.ip_address; // deletes the existing plaintext ip address, if it exists
 }
 
-exports.insertForm = async (submission, hashedUserID) => {
-  //Cookie Form handling
-  if (!hashedUserID) {
-    //User is not logged in, use cookie as before to store/update form
-    const key = datastore.key({
-      path: [process.env.DATASTORE_KIND, submission.cookie_id],
-      namespace: process.env.DATASTORE_NAMESPACE
-    });
+exports.update = async (submission, cookieID) => {
+  const User = new UserAccount();
+  await User.loadUserFromCookie(cookieID);
 
-    try {
-      let data = { ...submission, history: [submission.form_responses] };
-      // encrypt the ip of the submission using the cookie as the key
-      await encryptIp(data);
-      // Try to insert an object with cookie_id as key. If already submitted, fails
-      const entity = {
-        key,
-        data: data
-      };
-      await datastore.insert(entity);
-    } catch (e) {
-      // If it already exists, update with new history
-      let [data] = await datastore.get(key);
+  let data = User.entity.user_responses.Primary;
+  data.history.push(submission.form_responses);
+  data.form_responses = submission.form_responses;
+  data.timestamp = submission.timestamp;
+  data.at_risk = submission.at_risk;
+  data.probable = submission.probable;
+  data.ip_address = submission.ip_address;
+  const Primary = { ...data };
 
-      data.history.push(submission.form_responses);
-      data.form_responses = submission.form_responses;
-      data.timestamp = submission.timestamp;
-      data.at_risk = submission.at_risk;
-      data.probable = submission.probable;
-      // encrypt the ip of the submission using the cookie as the key, however this time we know that
-      // the key already exists
-      data.ip_address = submission.ip_address;
-      await encryptIp(data);
-
-      const entity = {
-        key,
-        data
-      };
-      const response = await datastore.update(entity);
-    }
-    return;
-  }
-  //End Cookie Form handling
-
-  //Otherwise is logged in so proceed using the hashedUserID
-  const key = datastore.key({
-    path: [process.env.DATASTORE_KIND, hashedUserID],
-    namespace: process.env.DATASTORE_NAMESPACE
-  });
-
-  try {
-    // Try to insert an object with hashed userId as key. If already submitted, fails
-    let data = { ...submission, history: [submission.form_responses] };
-    await encryptIp(data);
-    const entity = {
-      key,
-      data: data
-    };
-    await datastore.insert(entity);
-  } catch (e) {
-    // If it already exists, update with new history
-    let [data] = await datastore.get(key);
-
-    data.history.push(submission.form_responses);
-    data.form_responses = submission.form_responses;
-    data.timestamp = submission.timestamp;
-    data.at_risk = submission.at_risk;
-    data.probable = submission.probable;
-    data.ip_address = submission.ip_address;
-    await encryptIp(data);
-
-    const entity = {
-      key,
-      data
-    };
-    const response = await datastore.update(entity);
-  }
+  User.entity.user_responses = { Primary };
+  User.pushUser();
 };
 
-  // Migrates form submitted with cookie as a key to use google userID as a key
-  exports.migrateCookieForm = async (hashedUserID, cookie_id, email) => {
+exports.submitNew = async (submission, cookieID) => {
+  const User = new UserAccount();
+  User.createNewUser();
+  // await encryptIp(submission);
+  const Primary = { ...submission, history: [submission.form_responses] };
+  User.entity.user_responses = { Primary };
+  User.setCookie(cookieID, Date.now() + 2 * 365 * 24 * 60 * 60 * 1000);
+  User.pushUser();
+};
+
+// Migrates form submitted with cookie as a key to use google userID as a key
+exports.migrateCookieForm = async (hashedUserID, cookie_id, email) => {
   //userID is the hashed userID
   const cookieKey = datastore.key({
     path: [process.env.DATASTORE_KIND, cookie_id],
-    namespace: process.env.DATASTORE_NAMESPACE
+    namespace: process.env.DATASTORE_NAMESPACE,
   });
 
   const userIDKey = datastore.key({
     path: [process.env.DATASTORE_KIND, hashedUserID],
-    namespace: process.env.DATASTORE_NAMESPACE
+    namespace: process.env.DATASTORE_NAMESPACE,
   });
 
   //cookieKey Data
@@ -214,7 +163,7 @@ exports.insertForm = async (submission, hashedUserID) => {
     return;
   }
 
-  await email.insertMarketingData(email, cookieKeyData.timestamp/1000.);
+  await email.insertMarketingData(email, cookieKeyData.timestamp / 1000);
 
   // encrypt the IP in the cookie key data
   if (cookieKeyData.ip_encrypted === undefined) {
@@ -227,7 +176,7 @@ exports.insertForm = async (submission, hashedUserID) => {
     // Try to insert an object with userId as key. If already submitted, fails
     const newEntity = {
       key: userIDKey,
-      data: cookieKeyData
+      data: cookieKeyData,
     };
     await datastore.insert(newEntity);
   } catch (e) {
@@ -239,7 +188,7 @@ exports.insertForm = async (submission, hashedUserID) => {
     userIDKeyData.history = userIDKeyData.history.concat(cookieKeyData.history);
     const updatedEntity = {
       key: userIDKey,
-      data: userIDKeyData
+      data: userIDKeyData,
     };
     const response = await datastore.update(updatedEntity);
   }
