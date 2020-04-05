@@ -16,7 +16,10 @@ class UserAccount {
   }
 
   createNewUser() {
-      this.entity = new Account({}, data.user_id);
+    const data = {
+      'account_id': uuidv4()
+    };
+    this.entity = new Account(data, data.account_id);
   }
 
   /* Append a token used for email verification to the history.
