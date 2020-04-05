@@ -14,7 +14,7 @@ const accountSchema = new gstore.Schema({
     // A list of tokens of the form {token_value: "", expiry: "YYYY-MM-DD"}
     tokens: {type: Array, default: []},
     cookies: {type: Array, default: []},
-    hashed_emails: {type: Array, default: []},
+    email: {type: Array, default: []},
     user_responses: {type: Object, default: {}},
     user_created: {type: Date, default: () => moment().valueOf()}
 });

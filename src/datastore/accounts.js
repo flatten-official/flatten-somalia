@@ -37,7 +37,7 @@ class UserAccount {
 
   /* Add a hash + peppered email to the user's list of emails */
   setEmail(hashed_email) {
-    this.entity.hashed_emails.push({
+    this.entity.email.push({
       'hash': hashed_email,
       'added': moment().valueOf(),
       'verified': false
@@ -65,39 +65,35 @@ class UserAccount {
     await this.entity.save(null, {method: 'upsert'}).catch(console.error);
   }
 
-  async runSingleQuery(query ) {
-
-    var success = true;
-    const res = await query.run();
-
-    if (res.entities.length === 1) {
-      this.entity = res.entities[0];
-    } else {
-      success=false;
-    }
-    console.log(success);
-
-    return success;
-  }
-
   /* Query a user by cookie and load it into this object. Returns boolean flag indicating success. */
   async loadUserFromCookie(cookie) {
-    const query = Account.query().filter('cookies.cookie_id', '=', cookie);
-    return await this.runSingleQuery(query);
+    try {
+      this.entity = await Account.findOne({'cookies.cookie_id': cookie});
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   /* Query a user by token and load it into this object */
   async loadUserFromToken(token) {
-    const query = Account.query().filter('cookies.token_id', '=', token);
-    return await this.runSingleQuery(query);
+    try {
+      this.entity = await Account.findOne({'tokens.token_id': token});
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   /* Query a user by email and load it into this object */
   async loadUserFromEmail(email) {
     // TODO: hash the email
-    var hashed_email = email;
-    const query = Account.query().filter('cookies.hashed_email', '=', hashed_email);
-    return await this.runSingleQuery(query);
+    try {
+      this.entity = await Account.findOne({'email.hash': email});
+      return true;
+    } catch {
+      return false;
+    }
   }
 
 }
