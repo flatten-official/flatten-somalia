@@ -5,17 +5,19 @@ const { OAuth2Client } = require("google-auth-library");
 
 const router = express.Router();
 
-const utils = require("./utils/secrets");
+const secrets = require("./utils/secrets");
+const kms = require("./utils/kms");
+
 const googleData = require("./datastore/accounts");
 const email = require("./datastore/emails");
 
 const schema = require("./schema.js");
 
 const hashingIterations = 100000;
-var pepper;
 
-var recaptcha_secret = new utils.Recaptcha();
-var oauth_secret = new utils.Secret(process.env.OAUTH_SECRET);
+var recaptcha_secret = new secrets.Recaptcha();
+var oauth_secret = new secrets.Secret(process.env.OAUTH_SECRET);
+var pepper_secret = new kms.KMSSecret(process.env.PEPPER_KEY, process.env.PEPPER_FILE);
 
 // submit endpoint
 router.post("/submit", async (req, res) => {
@@ -96,10 +98,8 @@ router.post("/submit", async (req, res) => {
   }
   await googleData.insertMarketingData(userEmail);
 
-  if (pepper === undefined) {
-    let kms = require("./utils/kms.js");
-    pepper = await kms.loadPepper();
-  }
+  let pepper = await pepper_secret.get();
+
   //Used to create a hash
   crypto.pbkdf2(
     userID, //Thing to hash
@@ -158,10 +158,8 @@ router.post("/login", async (req, res) => {
   //If cookie exists there may be a form associated w it
   const cookie_id = req.signedCookies.userCookieValue;
 
-  if (pepper === undefined) {
-    let kms = require("./utils/kms.js");
-    pepper = await kms.loadPepper();
-  }
+  let pepper = await pepper_secret.get();
+
   //Need to associate it w the googleUserID instead and delete the old one
   if (cookie_id) {
     crypto.pbkdf2(

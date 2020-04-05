@@ -2,7 +2,7 @@
 const kms = require('@google-cloud/kms');
 const client = new kms.KeyManagementServiceClient();
 
-exports.createCryptoKey = async (
+createCryptoKey = async (
     keyRingId, // The ID of the keyring that the key is to be stored on.
     cryptoKeyId // Name of the crypto key
 ) => {
@@ -24,7 +24,7 @@ exports.createCryptoKey = async (
     });
 };
 
-exports.encrypt = async (
+encrypt = async (
     keyRingId, // The ID of the keyring that the key is to be stored on.
     cryptoKeyId, // Name of the crypto key
     plaintext // Plaintext to be encrypted
@@ -49,7 +49,7 @@ exports.encrypt = async (
 };
 
 
-exports.decrypt = async (
+decrypt = async (
     keyRingId, // The ID of the keyring that the key is to be stored on.
     cryptoKeyId, // Name of the crypto key, e.g. "my-key"
     ciphertext, // Data to be decrypted, file path or string
@@ -86,9 +86,23 @@ exports.decrypt = async (
     return result.plaintext.toString('utf8');
 };
 
-// Loads the pepper by decrypting it using KMS.
-exports.loadPepper = async () => {
-    const pepper = await exports.decrypt(process.env.SECRETS_KEYRING, process.env.PEPPER_KEY, process.env.PEPPER_FILE, true);
-    return pepper;
-};
+class KMSSecret {
+    constructor(secret_key, secret_file_path) {
+        this.secret = undefined;
+        this.secret_key = secret_key;
+        this.secret_file_path = secret_file_path;
+        this.secret_keyring = process.env.SECRETS_KEYRING;
+    }
 
+    async get() {
+        await this.load();
+        return this.secret;
+    }
+    async load() {
+        if (this.secret === undefined) {
+            this.secret = await decrypt(this.secret_keyring, this.secret_key, this.secret_file_path, true);
+        }
+    }
+}
+
+module.exports = {KMSSecret};
