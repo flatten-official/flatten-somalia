@@ -53,7 +53,11 @@ class AccountService {
 
   /* Add a hash + peppered email to the user's list of emails */
   setEmail(hashed_email) {
-    // todo: test if email has already been added
+    for(var emailObj of this.entity.email) {
+      if (hashed_email === emailObj.hash) {
+        return;
+      }
+    }
     this.entity.email.push({
       hash: hashed_email,
       added: Date.now(),
@@ -98,13 +102,9 @@ class AccountService {
   /* Query a user by cookie and load it into this object. Returns boolean flag indicating success. */
   async loadUserFromCookie(cookie) {
     try {
-      console.log("it worked");
-
-      this.entity = await Account.findOne({ "cookies.cookie_id": cookie });
+      this.entity = await Account.findOne({ "cookies.value": cookie });
       return true;
     } catch {
-      console.log(":(((((((");
-
       return false;
     }
   }
@@ -112,7 +112,7 @@ class AccountService {
   /* Query a user by token and load it into this object */
   async loadUserFromToken(token) {
     try {
-      this.entity = await Account.findOne({ "tokens.token_id": token });
+      this.entity = await Account.findOne({ "tokens.value": token });
       return true;
     } catch {
       return false;
@@ -122,6 +122,8 @@ class AccountService {
   /* Query a user by email and load it into this object */
   async loadUserFromEmail(email) {
     let emailHash = await hash.hashPepper(email, pepper_secret);
+    // TODO - look for whole list of results, search for *verified* emails
+    // needed for when we start to do email stuff
     try {
       this.entity = await Account.findOne({ "email.hash": emailHash });
       return true;
@@ -138,9 +140,7 @@ exports.push = async (ip, submission, email, cookie) => {
     account.createNewUser();
     account.setCookie(cookie.id, Date.now()+cookie.maxAge);
   }
-  console.log("hello world " + email);
   if(!(email === undefined)) {
-    console.log("Trying email");
     try {
       let hashedEmail = await hash.hashPepper(
         email,
