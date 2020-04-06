@@ -1,7 +1,5 @@
 const { gstore } = require("../datastore/db");
 
-const UserSubmissionService = require("./submissions");
-
 const { v4: uuidv4 } = require("uuid");
 
 const newUser = {
