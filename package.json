@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/yifei7zhang/covid-19-backend#readme",
   "dependencies": {
-    "@google-cloud/datastore": "^5.0.0",
+    "@google-cloud/datastore": "^5.1.0",
     "@google-cloud/kms": "^1.6.3",
     "@google-cloud/secret-manager": "^2.1.0",
     "axios": "^0.19.2",
@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
     "google-auth-library": "^6.0.0",
+    "gstore-node": "^7.2.4",
     "helmet": "^3.22.0",
     "moment": "^2.24.0",
     "request": "^2.88.2",

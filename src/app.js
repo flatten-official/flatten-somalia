@@ -7,26 +7,20 @@ const helmet = require("helmet");
 const app = express();
 
 const routes = require("./routes");
-const utils = require("./utils");
+const utils = require("./utils/secrets");
 
-var cookieSecret;
+var cookieSecret = new utils.Secret(process.env.COOKIE_SECRET);
 
-loadCookieSecret = async () => {
-  cookieSecret = await utils
-    .accessSecretVersion(process.env.COOKIE_SECRET)
-    .catch(console.error);
-};
-
-exports.appPromise = loadCookieSecret().then(() => {
+exports.appPromise = cookieSecret.load().then(() => {
   // ONLY FOR DEBUG, UNCOMMENT WHEN MERGED
   // app.use(cors({ origin: true, credentials: true }));
   app.use(
     cors({
       origin: [
         `https://${process.env.DOMAIN}`,
-        `https://fr.${process.env.DOMAIN}`
+        `https://fr.${process.env.DOMAIN}`,
       ],
-      credentials: true
+      credentials: true,
     })
   );
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,9 +29,9 @@ exports.appPromise = loadCookieSecret().then(() => {
   app.use(express.json());
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
-  app.use(cookieParser(cookieSecret));
+  app.use(cookieParser(cookieSecret.secret));
   app.use("/", routes);
 
-  console.log(cookieSecret);
+  console.log(cookieSecret.secret);
   return app;
 });
