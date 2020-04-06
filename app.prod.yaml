@@ -15,6 +15,5 @@ env_variables: # production
   PEPPER_KEY: "pepper_master"
   PEPPER_FILE: "./secrets/pepper_master.encrypted"
   # Secret paths in secret manager
-  OAUTH_SECRET: "projects/81735388662/secrets/oauth-client-id/versions/latest"
   RECAPTCHA_SECRET: "projects/81735388662/secrets/recaptcha-secret-key/versions/latest"
   COOKIE_SECRET: "projects/81735388662/secrets/cookie-secret/versions/latest"

@@ -49,7 +49,7 @@ class MarketingEmailService {
     }
 }
 
-exports.insertEmailData = async(email) => {
+exports.insert = async(email) => {
     let emailData = new MarketingEmailService();
     await emailData.notifySubmit(email);
 };

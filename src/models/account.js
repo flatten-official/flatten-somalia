@@ -16,7 +16,7 @@ const accountSchema = new gstore.Schema({
   cookies: { type: Array, default: [] },
   email: { type: Array, default: [] },
   users: { type: Object, default: newUser },
-  account_created: { type: Date, default: () => Date.now() },
+  account_created: { type: Number, default: () => Date.now() },
 });
 
 const Account = gstore.model("FlattenAccount", accountSchema);

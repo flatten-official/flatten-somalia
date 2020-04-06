@@ -1,9 +1,8 @@
-const requestIp = require("request-ip");
 
 const kms = require("../utils/kms");
 
 
-migrateOldUserSubmissions = async(old_entity, users) => {
+migrateOldUser = async(old_entity, users) => {
 
   users["Primary"].form_responses = old_entity.form_responses;
   // some old IPs were encrypted, some not, so we have to determine.
@@ -19,7 +18,7 @@ migrateOldUserSubmissions = async(old_entity, users) => {
 
 };
 
-requestToSubmission = async (user_profile, form_response, ip) => {
+submissionToAccount = async (user_profile, form_response, ip) => {
   const timestamp = Date.now();
 
   const ip_encrypted = await encryptIp(ip);
@@ -32,11 +31,11 @@ requestToSubmission = async (user_profile, form_response, ip) => {
 };
 
 encryptIp = async (ip) => {
-  data.ip_encrypted = await kms.encrypt(
+  return await kms.encrypt(
       process.env.SECRETS_KEYRING,
       process.env.IP_KEY,
       ip
   );
 };
 
-module.exports = {requestToSubmission, migrateOldUser};
+module.exports = {submissionToAccount, migrateOldUser};

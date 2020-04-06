@@ -6,10 +6,18 @@ const Account = require("../models/account");
 
 const submissions = require("./submissions");
 
+const kms = require("../utils/kms");
+const hash = require("../utils/hash");
+
 const { v4: uuidv4 } = require("uuid");
 
-const kms = require("../utils/kms");
-const email = require("./emails");
+const emailData = require("./emails");
+
+var pepper_secret = new kms.KMSSecret(
+  process.env.PEPPER_KEY,
+  process.env.PEPPER_FILE
+);
+
 
 class AccountService {
   constructor() {
@@ -45,24 +53,12 @@ class AccountService {
 
   /* Add a hash + peppered email to the user's list of emails */
   setEmail(hashed_email) {
+    // todo: test if email has already been added
     this.entity.email.push({
       hash: hashed_email,
       added: Date.now(),
       verified: false,
     });
-  }
-
-  async submit(cookie, form_responses, ip) {
-    var success = this.loadUserFromCookie();
-    if (success) {
-      // TODO
-    } else {
-      // try to load by email, allow if verified
-      // TODO
-
-      // if this does not work
-      this.createNewUser();
-    }
   }
 
   async migrateOldUser(oldEntity) {
@@ -125,9 +121,9 @@ class AccountService {
 
   /* Query a user by email and load it into this object */
   async loadUserFromEmail(email) {
-    // TODO: hash the email
+    let emailHash = await hash.hashPepper(email, pepper_secret);
     try {
-      this.entity = await Account.findOne({ "email.hash": email });
+      this.entity = await Account.findOne({ "email.hash": emailHash });
       return true;
     } catch {
       return false;
@@ -135,94 +131,28 @@ class AccountService {
   }
 }
 
-// Encrypts the Ip address in data, storing the cypher text in a different field
-async function encryptIp(data) {
-  data.ip_encrypted = await kms.encrypt(
-    process.env.SECRETS_KEYRING,
-    process.env.IP_KEY,
-    data.ip_address
-  );
-  delete data.ip_address; // deletes the existing plaintext ip address, if it exists
-}
-
-exports.update = async (submission, cookieID, hashedEmail) => {
-  const User = new AccountService();
-  await User.loadUserFromCookie(cookieID);
-  User.setEmail(hashedEmail);
-
-  let data = User.entity.user_responses.Primary;
-  data.history.push(submission.form_responses);
-  data.form_responses = submission.form_responses;
-  data.timestamp = submission.timestamp;
-  data.at_risk = submission.at_risk;
-  data.probable = submission.probable;
-  data.ip_address = submission.ip_address;
-  const Primary = { ...data };
-
-  User.entity.user_responses = { Primary };
-  User.pushUser();
-};
-
-exports.submitNew = async (submission, cookieID, hashedEmail) => {
-  const User = new AccountService();
-  User.createNewUser();
-  // await encryptIp(submission);
-  const Primary = { ...submission, history: [submission.form_responses] };
-  User.entity.user_responses = { Primary };
-  User.setCookie(cookieID, Date.now() + 2 * 365 * 24 * 60 * 60 * 1000);
-  User.setEmail(hashedEmail);
-  User.pushUser();
-};
-
-// Migrates form submitted with cookie as a key to use google userID as a key
-exports.migrateCookieForm = async (hashedUserID, cookie_id, email) => {
-  //userID is the hashed userID
-  const cookieKey = datastore.key({
-    path: [process.env.DATASTORE_KIND, cookie_id],
-    namespace: process.env.DATASTORE_NAMESPACE,
-  });
-
-  const userIDKey = datastore.key({
-    path: [process.env.DATASTORE_KIND, hashedUserID],
-    namespace: process.env.DATASTORE_NAMESPACE,
-  });
-
-  //cookieKey Data
-  const [cookieKeyData] = await datastore.get(cookieKey);
-  if (!cookieKeyData) {
-    // No cookieKey form exists;
-    return;
+exports.push = async (ip, submission, email, cookie) => {
+  const account = new AccountService();
+  let success = await account.loadUserFromCookie(cookie.id);
+  if (!success) {
+    account.createNewUser();
+    account.setCookie(cookie.id, Date.now()+cookie.maxAge);
+  }
+  console.log("hello world " + email);
+  if(!(email === undefined)) {
+    console.log("Trying email");
+    try {
+      let hashedEmail = await hash.hashPepper(
+        email,
+        pepper_secret
+      );
+      account.setEmail(hashedEmail);
+    } catch (e) { /* No email was given */ }
+    await emailData.insert(email);
   }
 
-  await email.insertEmailData(email);
+  await submissions.submissionToAccount(account.entity.users, submission, ip);
 
-  // encrypt the IP in the cookie key data
-  if (cookieKeyData.ip_encrypted === undefined) {
-    // hash the ip with the new id
-    await encryptIp(cookieKeyData);
-  }
+  await account.pushUser();
 
-  delete cookieKeyData.cookie_id; //Deletes old cookie_id field, no longer needed as express-session cookies are used
-  try {
-    // Try to insert an object with userId as key. If already submitted, fails
-    const newEntity = {
-      key: userIDKey,
-      data: cookieKeyData,
-    };
-    await datastore.insert(newEntity);
-  } catch (e) {
-    // If it already exists, add cookie to the cookies array
-    let [userIDKeyData] = await datastore.get(userIDKey);
-    delete userIDKeyData.cookie_id;
-
-    //Concat history to the existing one
-    userIDKeyData.history = userIDKeyData.history.concat(cookieKeyData.history);
-    const updatedEntity = {
-      key: userIDKey,
-      data: userIDKeyData,
-    };
-    const response = await datastore.update(updatedEntity);
-  }
-  // Delete old cookieID entry
-  await datastore.delete(cookieKey);
 };
