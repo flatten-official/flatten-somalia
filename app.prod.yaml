@@ -17,3 +17,4 @@ env_variables: # production
   # Secret paths in secret manager
   RECAPTCHA_SECRET: "projects/81735388662/secrets/recaptcha-secret-key/versions/latest"
   COOKIE_SECRET: "projects/81735388662/secrets/cookie-secret/versions/latest"
+  JWT_SECRET: "projects/81735388662/secrets/email-verification-jwt-secret/versions/latest"

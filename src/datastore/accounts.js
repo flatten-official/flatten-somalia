@@ -94,13 +94,20 @@ class AccountService {
   }
 
   /* Query a user by token and load it into this object */
-  async loadUserFromToken(token) {
+  async loadUserFromToken(token_id) {
     try {
-      this.entity = await Account.findOne({ "tokens.value": token });
+      this.entity = await Account.findOne({ "tokens.value": token_id });
+      console.log(this.entity);
       return true;
     } catch {
       return false;
     }
+  }
+
+  /* Remove a token associated with a user */
+  removeToken(token_id) {
+    console.log(this.entity);
+    this.entity.tokens = this.entity.tokens.filter((t) => t.value === token_id);
   }
 
   /* Query a user by email and load it into this object */
@@ -117,7 +124,7 @@ class AccountService {
   }
 }
 
-exports.push = async (ip, submission, email, cookie) => {
+push = async (ip, submission, email, cookie) => {
   const account = new AccountService();
   let success = await account.loadUserFromCookie(cookie.id);
   if (!success) {
@@ -141,7 +148,7 @@ exports.push = async (ip, submission, email, cookie) => {
 
 };
 
-exports.migrate = async (oldEntity) => {
+migrate = async (oldEntity) => {
   let account = new AccountService();
   account.createNewUser();
   await submissions.migrateOldUser(
@@ -155,3 +162,5 @@ exports.migrate = async (oldEntity) => {
   }
   await account.pushUser();
 };
+
+module.exports = {push, migrate, AccountService};

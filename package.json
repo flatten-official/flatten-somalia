@@ -31,6 +31,7 @@
     "google-auth-library": "^6.0.0",
     "gstore-node": "^7.2.4",
     "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "request": "^2.88.2",
     "request-ip": "^2.1.3",
