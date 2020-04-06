@@ -1,6 +1,6 @@
 const requestIp = require("request-ip");
 
-const kms = require("./utils/kms");
+const kms = require("../utils/kms");
 
 
 migrateOldUserSubmissions = async(old_entity, users) => {
@@ -39,4 +39,4 @@ encryptIp = async (ip) => {
   );
 };
 
-module.exports = {requestToSubmission, newUser, migrateOldUser};
+module.exports = {requestToSubmission, migrateOldUser};
