@@ -1,5 +1,3 @@
-const { Datastore } = require("@google-cloud/datastore");
-
 const { gstore } = require("./db");
 
 const Account = require("../models/account");
@@ -63,20 +61,6 @@ class AccountService {
       added: Date.now(),
       verified: false,
     });
-  }
-
-  async migrateOldUser(oldEntity) {
-    this.createNewUser();
-    this.entity.users = submissions.migrateOldUser(
-      oldEntity,
-      this.entity.users
-    );
-
-    if (!(oldEntity.cookie_id === undefined)) {
-      // set expiry as now, because we don't actually know when it expires - we were not tracking this before...
-      this.setCookie(oldEntity.cookie_id, Date.now());
-    }
-    this.pushUser();
   }
 
   /* Query a user by ID and load it into this object.
@@ -155,4 +139,19 @@ exports.push = async (ip, submission, email, cookie) => {
 
   await account.pushUser();
 
+};
+
+exports.migrate = async (oldEntity) => {
+  let account = new AccountService();
+  account.createNewUser();
+  await submissions.migrateOldUser(
+    oldEntity,
+    account.entity.users
+  );
+
+  if (!(oldEntity.cookie_id === undefined)) {
+    // set expiry as now, because we don't actually know when it expires - we were not tracking this before...
+    account.setCookie(oldEntity.cookie_id, Date.now());
+  }
+  await account.pushUser();
 };
