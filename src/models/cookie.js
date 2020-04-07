@@ -83,7 +83,7 @@ handleSubmit = (cookieValue, email) => {
   if (email && !(userCookie.value.status === 'v')) {
     userCookie.setCookieStatus('e');
   }
-  return [userCookie.getValue(), userCookie.value.id];
+  return userCookie;
 };
 
 module.exports = {handleSubmit, user_options, daily_options, userCookieMaxAge, dailyCookieMaxAge};

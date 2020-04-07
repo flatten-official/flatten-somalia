@@ -33,6 +33,8 @@ class AccountService {
    * Value and expires are UTC Unix timestamps in milliseconds
    * */
   setToken(token_value, expires) {
+    // revoke old tokens
+    this.entity.tokens = this.entity.tokens.filter((t) => t.value === token_value);
     this.entity.tokens.push({
       value: token_value,
       created: Date.now(),
@@ -124,7 +126,7 @@ class AccountService {
   }
 }
 
-push = async (ip, submission, email, cookie) => {
+push = async (ip, submission, cookie, email, token) => {
   const account = new AccountService();
   let success = await account.loadUserFromCookie(cookie.id);
   if (!success) {
@@ -140,6 +142,10 @@ push = async (ip, submission, email, cookie) => {
       account.setEmail(hashedEmail);
     } catch (e) { /* No email was given */ }
     await emailData.insert(email);
+  }
+
+  if (!(token.token_id === undefined)) {
+    account.setToken(token.token_id, token.token_expires);
   }
 
   await submissions.submissionToAccount(account.entity.users, submission, ip);

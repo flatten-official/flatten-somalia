@@ -10,23 +10,22 @@ const verificationTimeout = 60*60*6; // 6 hours
 
 let jwt_secret = new secrets.Secret(process.env.JWT_SECRET);
 
-/* Given an email and account, generate a token, and insert relevant properties into it and the account */
-exports.generateAttachToken = async (account, email) => {
+/* Given an email generate a token */
+exports.generateToken = async (email) => {
   let secret = await jwt_secret.get();
 
-  let id = uuidv4();
+  let jwtid = uuidv4();
 
   let exp = Math.round((Date.now()/1000) + verificationTimeout);
 
-  let jwt_token = jwt.sign({
+  let token = jwt.sign({
     email,
-    id,
     exp
-  }, secret);
+  }, secret, {
+    jwtid
+  });
 
-  account.setToken(id, exp*1000);
-
-  return jwt_token;
+  return [token, jwtid, exp*1000];
 };
 
 /* Given a token, find the user associated with it, if they exist */

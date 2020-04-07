@@ -1,16 +1,19 @@
 const express = require("express");
-const crypto = require("crypto");
 const requestIp = require("request-ip");
 const { v4: uuidv4 } = require("uuid");
-const { OAuth2Client } = require("google-auth-library");
+const {URL} = require("url");
 
 const router = express.Router();
 
 const secrets = require("./utils/secrets");
 const googleData = require("./datastore/accounts");
 const cookies = require("./models/cookie");
+const verification = require("./utils/verification");
+const sg = require("./utils/sendgrid");
 
 var recaptcha_secret = new secrets.Recaptcha();
+
+const verify_path = "/verify";
 
 // submit endpoint
 router.post("/submit", async (req, res) => {
@@ -27,24 +30,35 @@ router.post("/submit", async (req, res) => {
   const email = req.body.form_responses.email;
   delete req.body.form_responses.email;
 
-  let [cookie_value, cookie_id] = cookies.handleSubmit(req.signedCookies.userCookieValue, email);
+  let userCookie = cookies.handleSubmit(req.signedCookies.userCookieValue, email);
+
+  let token_id = undefined;
+  let token_expires = undefined;
+  if (userCookie.value.status === "e" && !(email===undefined)) {
+    let token;
+    [token, token_id, token_expires] = await verification.generateToken(email);
+
+    let verify_url = `https://api.${process.env.DOMAIN}${verify_path}?token=${token}`;
+
+    await sg.sendVerificationEmail(email, verify_url);
+  }
 
   try {
-    await googleData.push(ip, req.body.form_responses, email, {id: cookie_id, maxAge: cookies.userCookieMaxAge});
+    await googleData.push(ip, req.body.form_responses, {id: userCookie.value.id, maxAge: cookies.userCookieMaxAge}, email, {token_id, token_expires});
   } catch(e) {
     console.error(e);
     res.status(400).send("Error updating datastore");
     return;
   }
 
-  res.cookie("userCookieValue", cookie_value, cookies.user_options);
+  res.cookie("userCookieValue", userCookie.getValue(), cookies.user_options);
   res.cookie("dailyCookie", uuidv4(), cookies.daily_options);
   res.status(200).send("Submit Success");
 });
 
 // determines if a cookie already exists
 router.get("/read-cookie", (req, res) => {
-  // todo - convert format of cookie
+  // todo - convert format of cookie, send info based on reaing of signing
   const exists = req.signedCookies.userCookieValue ? true : false;
   res.send({ exists });
 });
