@@ -37,14 +37,16 @@ router.post("/submit", async (req, res) => {
   if (userCookie.value.status === "e" && !(email===undefined)) {
     let token;
     [token, token_id, token_expires] = await verification.generateToken(email);
-
     let verify_url = `https://api.${process.env.DOMAIN}${verify_path}?token=${token}`;
-
-    await sg.sendVerificationEmail(email, verify_url);
+    await sg.sendVerificationEmail(email, verify_url).catch(() => {console.error("Issue sending verification email")});
   }
 
+  // only email should have been submitted if it was just verification, and that has been sanisised out of this object
+  let isFormSubmission = Object.keys(req.body.form_responses).keys.length > 0;
   try {
-    await googleData.push(ip, req.body.form_responses, {id: userCookie.value.id, maxAge: cookies.userCookieMaxAge}, email, {token_id, token_expires});
+    // submission set to undefined if it is not a form submission
+    let submission = isFormSubmission ? req.body.form_responses : undefined;
+    await googleData.push({id: userCookie.value.id, maxAge: cookies.userCookieMaxAge}, email, {token_id, token_expires}, ip, submission);
   } catch(e) {
     console.error(e);
     res.status(400).send("Error updating datastore");
@@ -52,8 +54,11 @@ router.post("/submit", async (req, res) => {
   }
 
   // todo - investigate do we need to fiddle with cookie refresh options here?
-  res.cookie("dailyCookie", uuidv4(), cookies.daily_options);
   res.cookie("userCookieValue", userCookie.getValue(), cookies.user_options);
+  if (isFormSubmission) {
+    res.cookie("dailyCookie", uuidv4(), cookies.daily_options);
+  }
+
   res.status(200).send("Submit Success");
 });
 
@@ -73,7 +78,7 @@ router.get(verify_path, async (req, res) => {
   }
 
   if(!verifySuccess) {
-    res.status(400).send("Error verifying token");
+    res.status(403).send("Looks like your verification link has already been used, or didn't exist in the first place...");
     return;
   }
 
@@ -84,7 +89,8 @@ router.get(verify_path, async (req, res) => {
   // todo - investigate do we need to fiddle with cookie refresh options here?
   res.cookie("userCookieValue", userCookie.getValue(), cookies.user_options);
 
-  res.status(200).send("Verify Success");
+  res.setHeader("Location", `https://${process.env.DOMAIN}/`);
+  res.status(302).send("Redirecting...");
 
 });
 

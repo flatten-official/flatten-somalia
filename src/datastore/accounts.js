@@ -141,7 +141,7 @@ class AccountService {
   }
 }
 
-push = async (ip, submission, cookie, email, token) => {
+push = async (cookie, email, token, ip, submission) => {
   const account = new AccountService();
   let success = await account.loadUserFromCookie(cookie.id);
   if (!success) {
@@ -159,7 +159,9 @@ push = async (ip, submission, cookie, email, token) => {
     account.setToken(token.token_id, token.token_expires);
   }
 
-  await submissions.submissionToAccount(account.entity.users, submission, ip);
+  if (!(submission===undefined)) {
+    await submissions.submissionToAccount(account.entity.users, submission, ip);
+  }
 
   await account.pushUser();
 

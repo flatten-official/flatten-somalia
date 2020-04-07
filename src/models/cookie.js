@@ -6,7 +6,8 @@ const userCookieMaxAge = 2 * 365 * 24 * 60 * 60 * 1000; // 2 years
 const dailyCookieMaxAge = 12 * 60 * 60 * 1000; // 12h
 
 user_options = {
-  domain: process.env.DOMAIN,
+  // todo - test these cookie options to see if they work on the main and sub domain
+  domain: `.${process.env.DOMAIN}`,
   httpOnly: true,
   maxAge: userCookieMaxAge,
   secure: true,

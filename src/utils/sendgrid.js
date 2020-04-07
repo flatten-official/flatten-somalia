@@ -4,11 +4,12 @@
 const secrets = require('./secrets');
 const sgMail = require('@sendgrid/mail');
 
-sg_secret = new secrets.Secret(process.env.SENDGRID_SECRET);
+sg_secret = new secrets.Secret(process.env.SG_SECRET);
 
+/* Sends a verification link to a user given an email and the link. */
 sendVerificationEmail = async (email, verification_link) => {
   let api_key = await sg_secret.get();
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  sgMail.setApiKey(api_key);
   const msg = {
     to: email,
     from: {
