@@ -51,16 +51,14 @@ router.post("/submit", async (req, res) => {
     return;
   }
 
-  res.cookie("userCookieValue", userCookie.getValue(), cookies.user_options);
   res.cookie("dailyCookie", uuidv4(), cookies.daily_options);
+  res.cookie("userCookieValue", userCookie.getValue(), cookies.user_options);
   res.status(200).send("Submit Success");
 });
 
 // determines if a cookie already exists
 router.get("/read-cookie", (req, res) => {
-  // todo - convert format of cookie, send info based on reaing of signing
-  const exists = req.signedCookies.userCookieValue ? true : false;
-  res.send({ exists });
+  res.send(cookies.handleRead(req.signedCookies.userCookieValue, req.signedCookies.dailyCookie));
 });
 
 // clears cookie

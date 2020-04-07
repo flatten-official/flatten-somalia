@@ -31,6 +31,19 @@ class UserCookie {
    * "<cookie_id>|<cookie status value>"
    */
 
+  constructor(cookieValue) {
+    if (cookieValue && !isOldCookie(cookieValue)) {
+      // new schema cookie exists
+      this.parse(cookieValue);
+    } else if (cookieValue) {
+      // old cookie exists
+      this.migrateOldCookie(cookieValue);
+    } else {
+      // no cookie exists
+      this.setNewCookie(uuidv4(), 'a');
+    }
+  }
+
   setNewCookie(cookie_id, status) {
     this.value = {
       id: cookie_id,
@@ -68,17 +81,7 @@ isOldCookie = (cookie_value) => {
 };
 
 handleSubmit = (cookieValue, email) => {
-  let userCookie = new UserCookie();
-  if (cookieValue && !isOldCookie(cookieValue)) {
-    // new schema cookie exists
-    userCookie.parse(cookieValue);
-  } else if (cookieValue) {
-    // old cookie exists
-    userCookie.migrateOldCookie(cookieValue);
-  } else {
-    // no cookie exists
-    userCookie.setNewCookie(uuidv4(), 'a');
-  }
+  let userCookie = new UserCookie(cookieValue);
   // if an email is supplied, and it has not already been verified
   if (email && !(userCookie.value.status === 'v')) {
     userCookie.setCookieStatus('e');
@@ -86,4 +89,18 @@ handleSubmit = (cookieValue, email) => {
   return userCookie;
 };
 
-module.exports = {handleSubmit, user_options, daily_options, userCookieMaxAge, dailyCookieMaxAge};
+handleRead = (userCookieValue, dailyCookieValue) => {
+  let userCookie = new UserCookie(userCookieValue);
+  let dailyCookie = new UserCookie(dailyCookieValue);
+  return {
+    user: {
+      exists: !!userCookieValue,
+      ...userCookie.value
+    },
+    daily: {
+      exists: !!dailyCookieValue
+    }
+  };
+};
+
+module.exports = {handleSubmit, handleRead, user_options, daily_options, userCookieMaxAge, dailyCookieMaxAge};
