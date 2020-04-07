@@ -91,12 +91,16 @@ handleSubmit = (cookieValue, email) => {
 };
 
 handleRead = (userCookieValue, dailyCookieValue) => {
-  let userCookie = new UserCookie(userCookieValue);
-  let dailyCookie = new UserCookie(dailyCookieValue);
+  let status = 'n';
+  let userCookie;
+  if (!!userCookieValue) {
+    userCookie = new UserCookie(userCookieValue);
+    status = userCookie.status;
+  }
   return {
     user: {
       exists: !!userCookieValue,
-      ...userCookie.value
+      status
     },
     daily: {
       exists: !!dailyCookieValue
