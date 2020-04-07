@@ -34,7 +34,7 @@ exports.verifyTokenFetchAccount = async(token) => {
   let account = new AccountService();
   let secret = await jwt_secret.get();
 
-  let token_data;
+  var token_data;
   try {
     token_data = jwt.verify(token, secret);
   } catch (e) {
@@ -42,12 +42,15 @@ exports.verifyTokenFetchAccount = async(token) => {
     return [false, undefined];
   }
 
-  success = await account.loadUserFromToken(token_data.id);
+  success = await account.loadUserFromToken(token_data.jti);
   if (!success) {
+    console.log("Error loading user from token");
     return [false, undefined];
   }
 
-  account.removeToken(token.id);
+  account.removeToken(token_data.id);
+
+  await account.verifyEmail(token_data.email);
 
   if (token_data.exp < Date.now()/1000) {
     return [false, undefined];

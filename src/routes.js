@@ -51,6 +51,7 @@ router.post("/submit", async (req, res) => {
     return;
   }
 
+  // todo - investigate do we need to fiddle with cookie refresh options here?
   res.cookie("dailyCookie", uuidv4(), cookies.daily_options);
   res.cookie("userCookieValue", userCookie.getValue(), cookies.user_options);
   res.status(200).send("Submit Success");
@@ -59,6 +60,32 @@ router.post("/submit", async (req, res) => {
 // determines if a cookie already exists
 router.get("/read-cookie", (req, res) => {
   res.send(cookies.handleRead(req.signedCookies.userCookieValue, req.signedCookies.dailyCookie));
+});
+
+router.get(verify_path, async (req, res) => {
+  // verify the token in the datastore, and redirect the user to the frontend
+  let account;
+  let verifySuccess = false;
+  try {
+    [verifySuccess, account] = await verification.verifyTokenFetchAccount(req.query.token);
+  } catch(e) {
+    console.error(e);
+  }
+
+  if(!verifySuccess) {
+    res.status(400).send("Error verifying token");
+    return;
+  }
+
+  let userCookie = cookies.handleVerify(req.signedCookies.userCookieValue);
+  // set cookie for user
+  account.setCookie(userCookie.value.id, Date.now()+cookies.userCookieMaxAge);
+  await account.pushUser();
+  // todo - investigate do we need to fiddle with cookie refresh options here?
+  res.cookie("userCookieValue", userCookie.getValue(), cookies.user_options);
+
+  res.status(200).send("Verify Success");
+
 });
 
 // clears cookie

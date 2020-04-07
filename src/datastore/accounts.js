@@ -44,16 +44,24 @@ class AccountService {
 
   /* Append a cookie */
   setCookie(cookie_value, expires) {
-    this.entity.cookies.push({
-      value: cookie_value,
-      created: Date.now(),
-      expires: expires,
-    });
+    var existing = this.entity.cookies.filter(obj => {
+      return obj.value === cookie_value;
+    })[0];
+    if (existing === undefined) {
+      this.entity.cookies.push({
+        value: cookie_value,
+        created: Date.now(),
+        expires: expires
+      });
+    } else {
+      this.entity.cookies.expires = expires;
+    }
   }
 
   /* Add a hash + peppered email to the user's list of emails */
-  setEmail(hashed_email) {
-    for(var emailObj of this.entity.email) {
+  async setEmail(email) {
+    let hashedEmail = await hash.hashPepper(email, pepper_secret);
+    for(let emailObj of this.entity.email) {
       if (hashed_email === emailObj.hash) {
         return;
       }
@@ -63,6 +71,15 @@ class AccountService {
       added: Date.now(),
       verified: false,
     });
+  }
+
+  async verifyEmail(email) {
+    let hashedEmail = await hash.hashPepper(email, pepper_secret);
+    for(let emailObj of this.entity.email) {
+      if (hashedEmail === emailObj.hash) {
+        emailObj.verified = true;
+      }
+    }
   }
 
   /* Query a user by ID and load it into this object.
@@ -99,7 +116,6 @@ class AccountService {
   async loadUserFromToken(token_id) {
     try {
       this.entity = await Account.findOne({ "tokens.value": token_id });
-      console.log(this.entity);
       return true;
     } catch {
       return false;
@@ -108,7 +124,6 @@ class AccountService {
 
   /* Remove a token associated with a user */
   removeToken(token_id) {
-    console.log(this.entity);
     this.entity.tokens = this.entity.tokens.filter((t) => t.value === token_id);
   }
 
@@ -131,15 +146,11 @@ push = async (ip, submission, cookie, email, token) => {
   let success = await account.loadUserFromCookie(cookie.id);
   if (!success) {
     account.createNewUser();
-    account.setCookie(cookie.id, Date.now()+cookie.maxAge);
+    account.setCookie(cookie.id, Date.now()+cookie.userCookieMaxAge);
   }
   if(!(email === undefined)) {
     try {
-      let hashedEmail = await hash.hashPepper(
-        email,
-        pepper_secret
-      );
-      account.setEmail(hashedEmail);
+      await account.setEmail(email);
     } catch (e) { /* No email was given */ }
     await emailData.insert(email);
   }

@@ -103,4 +103,10 @@ handleRead = (userCookieValue, dailyCookieValue) => {
   };
 };
 
-module.exports = {handleSubmit, handleRead, user_options, daily_options, userCookieMaxAge, dailyCookieMaxAge};
+handleVerify = (userCookieValue) => {
+  let userCookie = new UserCookie(userCookieValue);
+  userCookie.setCookieStatus('v');
+  return userCookie;
+};
+
+module.exports = {handleSubmit, handleRead, handleVerify, user_options, daily_options, userCookieMaxAge, dailyCookieMaxAge};
