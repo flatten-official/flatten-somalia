@@ -100,7 +100,7 @@ handleRead = (userCookieValue, dailyCookieValue) => {
   return {
     user: {
       exists: !!userCookieValue,
-      status
+      status: status
     },
     daily: {
       exists: !!dailyCookieValue
