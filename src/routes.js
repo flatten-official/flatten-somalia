@@ -1,17 +1,19 @@
 const express = require("express");
-const crypto = require("crypto");
 const requestIp = require("request-ip");
 const { v4: uuidv4 } = require("uuid");
-const { OAuth2Client } = require("google-auth-library");
+const {URL} = require("url");
 
 const router = express.Router();
 
 const secrets = require("./utils/secrets");
 const googleData = require("./datastore/accounts");
+const cookies = require("./models/cookie");
+const verification = require("./utils/verification");
+const sg = require("./utils/sendgrid");
 
 var recaptcha_secret = new secrets.Recaptcha();
 
-const cookieMaxAge = 2 * 365 * 24 * 60 * 60 * 1000; // 2 years
+const verify_path = "/verify";
 
 // submit endpoint
 router.post("/submit", async (req, res) => {
@@ -28,33 +30,68 @@ router.post("/submit", async (req, res) => {
   const email = req.body.form_responses.email;
   delete req.body.form_responses.email;
 
-  const cookie_id = req.signedCookies.userCookieValue
-    ? req.signedCookies.userCookieValue
-    : uuidv4();
+  let userCookie = cookies.handleSubmit(req.signedCookies.userCookieValue, email);
 
+  let token_id = undefined;
+  let token_expires = undefined;
+  if (userCookie.value.status === "e" && !(email===undefined)) {
+    let token;
+    [token, token_id, token_expires] = await verification.generateToken(email);
+    let verify_url = `https://api.${process.env.DOMAIN}${verify_path}?token=${token}`;
+    await sg.sendVerificationEmail(email, verify_url).catch(() => {console.error("Issue sending verification email")});
+  }
+
+  // only email should have been submitted if it was just verification, and that has been sanisised out of this object
+  let isFormSubmission = Object.keys(req.body.form_responses).length > 0;
   try {
-    await googleData.push(ip, req.body.form_responses, email, {id: cookie_id, maxAge: cookieMaxAge});
+    // submission set to undefined if it is not a form submission
+    let submission = isFormSubmission ? req.body.form_responses : undefined;
+    await googleData.push({id: userCookie.value.id, maxAge: cookies.userCookieMaxAge}, email, {token_id, token_expires}, ip, submission);
   } catch(e) {
     console.error(e);
     res.status(400).send("Error updating datastore");
     return;
   }
 
-  const submission_cookie_options = {
-    domain: process.env.DOMAIN,
-    httpOnly: true,
-    maxAge: cookieMaxAge,
-    secure: true,
-    signed: true,
-  };
-  res.cookie("userCookieValue", cookie_id, submission_cookie_options);
+  // todo - investigate do we need to fiddle with cookie refresh options here?
+  res.cookie("userCookieValue", userCookie.getValue(), cookies.user_options);
+  if (isFormSubmission) {
+    res.cookie("dailyCookie", uuidv4(), cookies.daily_options);
+  }
+
   res.status(200).send("Submit Success");
 });
 
 // determines if a cookie already exists
 router.get("/read-cookie", (req, res) => {
-  const exists = req.signedCookies.userCookieValue ? true : false;
-  res.send({ exists });
+  res.send(cookies.handleRead(req.signedCookies.userCookieValue, req.signedCookies.dailyCookie));
+});
+
+router.get(verify_path, async (req, res) => {
+  // verify the token in the datastore, and redirect the user to the frontend
+  let account;
+  let verifySuccess = false;
+  try {
+    [verifySuccess, account] = await verification.verifyTokenFetchAccount(req.query.token);
+  } catch(e) {
+    console.error(e);
+  }
+
+  if(!verifySuccess) {
+    res.status(403).send("Looks like your verification link has already been used, or didn't exist in the first place...");
+    return;
+  }
+
+  let userCookie = cookies.handleVerify(req.signedCookies.userCookieValue);
+  // set cookie for user
+  account.setCookie(userCookie.value.id, Date.now()+cookies.userCookieMaxAge);
+  await account.pushUser();
+  // todo - investigate do we need to fiddle with cookie refresh options here?
+  res.cookie("userCookieValue", userCookie.getValue(), cookies.user_options);
+
+  res.setHeader("Location", `https://${process.env.DOMAIN}/`);
+  res.status(302).send("Redirecting...");
+
 });
 
 // clears cookie

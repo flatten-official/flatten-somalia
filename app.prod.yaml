@@ -17,3 +17,6 @@ env_variables: # production
   # Secret paths in secret manager
   RECAPTCHA_SECRET: "projects/81735388662/secrets/recaptcha-secret-key/versions/latest"
   COOKIE_SECRET: "projects/81735388662/secrets/cookie-secret/versions/latest"
+  JWT_SECRET: "projects/81735388662/secrets/email-verification-jwt-secret/versions/latest"
+  SG_SECRET: "projects/81735388662/secrets/sendgrid-api-key/versions/latest"
+  SG_TEMPLATE_ID: 'd-e255d26765aa426e97d7af738a0ae83d'
