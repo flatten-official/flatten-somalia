@@ -8,10 +8,9 @@ const router = express.Router();
 
 const secrets = require("./utils/secrets");
 const googleData = require("./datastore/accounts");
+const cookies = require("./models/cookie");
 
 var recaptcha_secret = new secrets.Recaptcha();
-
-const cookieMaxAge = 2 * 365 * 24 * 60 * 60 * 1000; // 2 years
 
 // submit endpoint
 router.post("/submit", async (req, res) => {
@@ -28,31 +27,24 @@ router.post("/submit", async (req, res) => {
   const email = req.body.form_responses.email;
   delete req.body.form_responses.email;
 
-  const cookie_id = req.signedCookies.userCookieValue
-    ? req.signedCookies.userCookieValue
-    : uuidv4();
+  let [cookie_value, cookie_id] = cookies.handleSubmit(req.signedCookies.userCookieValue, email);
 
   try {
-    await googleData.push(ip, req.body.form_responses, email, {id: cookie_id, maxAge: cookieMaxAge});
+    await googleData.push(ip, req.body.form_responses, email, {id: cookie_id, maxAge: cookies.userCookieMaxAge});
   } catch(e) {
     console.error(e);
     res.status(400).send("Error updating datastore");
     return;
   }
 
-  const submission_cookie_options = {
-    domain: process.env.DOMAIN,
-    httpOnly: true,
-    maxAge: cookieMaxAge,
-    secure: true,
-    signed: true,
-  };
-  res.cookie("userCookieValue", cookie_id, submission_cookie_options);
+  res.cookie("userCookieValue", cookie_value, cookies.user_options);
+  res.cookie("dailyCookie", uuidv4(), cookies.daily_options);
   res.status(200).send("Submit Success");
 });
 
 // determines if a cookie already exists
 router.get("/read-cookie", (req, res) => {
+  // todo - convert format of cookie
   const exists = req.signedCookies.userCookieValue ? true : false;
   res.send({ exists });
 });
