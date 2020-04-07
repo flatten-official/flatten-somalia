@@ -3,6 +3,7 @@ const { gstore } = require("./db");
 const Account = require("../models/account");
 
 const submissions = require("./submissions");
+const validator = require('validator');
 
 const kms = require("../utils/kms");
 const hash = require("../utils/hash");
@@ -62,7 +63,7 @@ class AccountService {
   async setEmail(email) {
     let hashedEmail = await hash.hashPepper(email, pepper_secret);
     for(let emailObj of this.entity.email) {
-      if (hashed_email === emailObj.hash) {
+      if (hashedEmail === emailObj.hash) {
         return;
       }
     }
@@ -148,7 +149,7 @@ push = async (cookie, email, token, ip, submission) => {
     account.createNewUser();
     account.setCookie(cookie.id, Date.now()+cookie.userCookieMaxAge);
   }
-  if(!(email === undefined)) {
+  if(!(email === undefined) && validator.isEmail(email)) {
     try {
       await account.setEmail(email);
     } catch (e) { /* No email was given */ }
