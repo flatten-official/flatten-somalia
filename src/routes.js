@@ -42,7 +42,7 @@ router.post("/submit", async (req, res) => {
   }
 
   // only email should have been submitted if it was just verification, and that has been sanisised out of this object
-  let isFormSubmission = Object.keys(req.body.form_responses).keys.length > 0;
+  let isFormSubmission = Object.keys(req.body.form_responses).length > 0;
   try {
     // submission set to undefined if it is not a form submission
     let submission = isFormSubmission ? req.body.form_responses : undefined;

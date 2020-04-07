@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const { AccountService } = require('../datastore/accounts');
+const { AccountService, mergeVerifiedAccounts } = require('../datastore/accounts');
 
 const { v4: uuidv4 } = require("uuid");
 
@@ -55,6 +55,8 @@ exports.verifyTokenFetchAccount = async(token) => {
   if (token_data.exp < Date.now()/1000) {
     return [false, undefined];
   }
+
+  await mergeVerifiedAccounts(token_data.email, account, token_data.jti);
 
   return [true, account];
 };
