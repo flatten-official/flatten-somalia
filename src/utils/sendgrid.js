@@ -14,7 +14,7 @@ sendVerificationEmail = async (email, verification_link) => {
     to: email,
     from: {
       email: 'noreply@flatten.ca',
-      name: 'Flatten Verification Service'
+      name: 'The FLATTEN Team'
     },
     template_id: process.env.SG_TEMPLATE_ID,
     dynamic_template_data: {
