@@ -35,7 +35,7 @@ class UserCookie {
   constructor(cookieValue) {
     if (cookieValue && !isOldCookie(cookieValue)) {
       // new schema cookie exists
-      this.parse(cookieValue);
+      this.parseValue(cookieValue);
     } else if (cookieValue) {
       // old cookie exists
       this.migrateOldCookie(cookieValue);
@@ -95,7 +95,7 @@ handleRead = (userCookieValue, dailyCookieValue) => {
   let userCookie;
   if (!!userCookieValue) {
     userCookie = new UserCookie(userCookieValue);
-    status = userCookie.status;
+    status = userCookie.value.status;
   }
   return {
     user: {
