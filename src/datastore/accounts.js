@@ -31,6 +31,7 @@ class AccountService {
       cookies: [],
       tokens: [],
       email: [],
+      users: { Primary: { form_responses: [] } }
     };
     this.entity = new Account(data, data.account_id);
   }

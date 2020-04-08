@@ -9,7 +9,7 @@ const accountSchema = new gstore.Schema({
   tokens: { type: Array, default: [] },
   cookies: { type: Array, default: [] },
   email: { type: Array, default: [] },
-  users: { type: Object, default: { Primary: { form_responses: [] } } },
+  users: { type: Object},
   created: { type: Number, default: () => Date.now() },
 });
 
