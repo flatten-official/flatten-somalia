@@ -2,12 +2,6 @@ const { gstore } = require("../datastore/db");
 
 const { v4: uuidv4 } = require("uuid");
 
-const newUser = {
-  Primary: {
-    form_responses: [],
-  },
-};
-
 const accountSchema = new gstore.Schema({
   // TODO: add exclude from indices to these properties
   // TODO: add custom validation to each of these properties
@@ -15,7 +9,7 @@ const accountSchema = new gstore.Schema({
   tokens: { type: Array, default: [] },
   cookies: { type: Array, default: [] },
   email: { type: Array, default: [] },
-  users: { type: Object, default: newUser },
+  users: { type: Object, default: { Primary: { form_responses: [] } } },
   created: { type: Number, default: () => Date.now() },
 });
 
