@@ -20,7 +20,7 @@ router.post("/submit", async (req, res) => {
   [
     recaptchaSuccess,
     recaptchaFailMessage,
-  ] = await recaptcha_secret.verifyRecaptcha(req.body.formValues.reactVerification);
+  ] = await recaptcha_secret.verifyRecaptcha(req.body.formValues.recaptchaVerification);
   if (!recaptchaSuccess) {
     res.status(400).send(recaptchaFailMessage);
     return;
@@ -31,7 +31,7 @@ router.post("/submit", async (req, res) => {
   const isFormSubmission = req.body.formValues.isFormSubmission;
   // delete values that we don't include in the submissions
   delete req.body.formValues.email;
-  delete req.body.formValues.reactVerification;
+  delete req.body.formValues.recaptchaVerification;
   delete req.body.formValues.isFormSubmission;
 
   let userCookie = cookies.handleSubmit(req.signedCookies.userCookieValue, email);
