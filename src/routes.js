@@ -20,15 +20,19 @@ router.post("/submit", async (req, res) => {
   [
     recaptchaSuccess,
     recaptchaFailMessage,
-  ] = await recaptcha_secret.verifyRecaptcha(req.body.reactVerification);
+  ] = await recaptcha_secret.verifyRecaptcha(req.body.formValues.reactVerification);
   if (!recaptchaSuccess) {
     res.status(400).send(recaptchaFailMessage);
     return;
   }
 
   const ip = requestIp.getClientIp(req);
-  const email = req.body.form_responses.email;
-  delete req.body.form_responses.email;
+  const email = req.body.formValues.email;
+  const isFormSubmission = req.body.formValues.isFormSubmission;
+  // delete values that we don't include in the submissions
+  delete req.body.formValues.email;
+  delete req.body.formValues.reactVerification;
+  delete req.body.formValues.isFormSubmission;
 
   let userCookie = cookies.handleSubmit(req.signedCookies.userCookieValue, email);
 
@@ -41,11 +45,9 @@ router.post("/submit", async (req, res) => {
     await sg.sendVerificationEmail(email, verify_url).catch(() => {console.error("Issue sending verification email")});
   }
 
-  // only email should have been submitted if it was just verification, and that has been sanisised out of this object
-  let isFormSubmission = Object.keys(req.body.form_responses).length > 0;
   try {
     // submission set to undefined if it is not a form submission
-    let submission = isFormSubmission ? req.body.form_responses : undefined;
+    let submission = isFormSubmission ? req.body.formValues : undefined;
     await googleData.push({id: userCookie.value.id, maxAge: cookies.userCookieMaxAge}, email, {token_id, token_expires}, ip, submission);
   } catch(e) {
     console.error(e);
@@ -78,7 +80,7 @@ router.get(verify_path, async (req, res) => {
   }
 
   if(!verifySuccess) {
-    res.status(403).send("Looks like your verification link has already been used, or didn't exist in the first place...");
+    res.status(302).send("Looks like your verification link has already been used, or didn't exist in the first place...");
     return;
   }
 
