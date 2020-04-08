@@ -80,7 +80,7 @@ router.get(verify_path, async (req, res) => {
   }
 
   if(!verifySuccess) {
-    res.status(403).send("Looks like your verification link has already been used, or didn't exist in the first place...");
+    res.status(302).send("Looks like your verification link has already been used, or didn't exist in the first place...");
     return;
   }
 
