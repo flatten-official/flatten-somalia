@@ -7,7 +7,7 @@ const dailyCookieMaxAge = 12 * 60 * 60 * 1000; // 12h
 
 user_options = {
   // todo - test these cookie options to see if they work on the main and sub domain
-  domain: `.${process.env.DOMAIN}`,
+  domain: process.env.DOMAIN,
   httpOnly: true,
   maxAge: userCookieMaxAge,
   secure: true,
@@ -100,7 +100,7 @@ handleRead = (userCookieValue, dailyCookieValue) => {
   return {
     user: {
       exists: !!userCookieValue,
-      status
+      status: status
     },
     daily: {
       exists: !!dailyCookieValue
