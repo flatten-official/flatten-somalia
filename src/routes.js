@@ -20,19 +20,19 @@ router.post("/submit", async (req, res) => {
   [
     recaptchaSuccess,
     recaptchaFailMessage,
-  ] = await recaptcha_secret.verifyRecaptcha(req.body.formValues.recaptchaVerification);
+  ] = await recaptcha_secret.verifyRecaptcha(req.body.recaptchaVerification);
   if (!recaptchaSuccess) {
     res.status(400).send(recaptchaFailMessage);
     return;
   }
 
   const ip = requestIp.getClientIp(req);
-  const email = req.body.formValues.email;
-  const isFormSubmission = req.body.formValues.isFormSubmission;
+  const email = req.body.email;
+  const isFormSubmission = req.body.isFormSubmission;
   // delete values that we don't include in the submissions
-  delete req.body.formValues.email;
-  delete req.body.formValues.recaptchaVerification;
-  delete req.body.formValues.isFormSubmission;
+  delete req.body.email;
+  delete req.body.recaptchaVerification;
+  delete req.body.isFormSubmission;
 
   let userCookie = cookies.handleSubmit(req.signedCookies.userCookieValue, email);
 
@@ -47,7 +47,7 @@ router.post("/submit", async (req, res) => {
 
   try {
     // submission set to undefined if it is not a form submission
-    let submission = isFormSubmission ? req.body.formValues : undefined;
+    let submission = isFormSubmission ? req.body: undefined;
     await googleData.push({id: userCookie.value.id, maxAge: cookies.userCookieMaxAge}, email, {token_id, token_expires}, ip, submission);
   } catch(e) {
     console.error(e);

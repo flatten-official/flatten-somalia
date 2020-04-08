@@ -35,7 +35,7 @@ class UserCookie {
   constructor(cookieValue) {
     if (cookieValue && !isOldCookie(cookieValue)) {
       // new schema cookie exists
-      this.parse(cookieValue);
+      this.parseValue(cookieValue);
     } else if (cookieValue) {
       // old cookie exists
       this.migrateOldCookie(cookieValue);
