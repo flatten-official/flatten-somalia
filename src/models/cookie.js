@@ -95,7 +95,7 @@ handleRead = (userCookieValue, dailyCookieValue) => {
   let userCookie;
   if (!!userCookieValue) {
     userCookie = new UserCookie(userCookieValue);
-    status = userCookie.status;
+    status = userCookie.value.status;
   }
   return {
     user: {
