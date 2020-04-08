@@ -46,10 +46,21 @@ class MarketingEmailService {
         // get timestamp in ms since unix origin as an integer
         let timestamp = Math.round(moment().startOf('day').valueOf());
         this.entity.submission_times.push(timestamp);
+        this.entity.latest = timestamp;
     }
 }
 
 exports.insert = async(email) => {
     let emailData = new MarketingEmailService();
     await emailData.notifySubmit(email);
+};
+
+exports.migrate = async(entity) => {
+    let emailData = new MarketingEmailService();
+    emailData.createNewUser(entity.email);
+    let history = entity.timestamp_history.map((v)=>1000*parseInt(v));
+    emailData.entity.submission_times = history;
+    emailData.entity.created = history[0];
+    emailData.entity.latest = history[history.length-1];
+    await emailData.pushEmail();
 };
