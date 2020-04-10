@@ -20,3 +20,4 @@ env_variables: # test
   JWT_SECRET: "projects/233853318753/secrets/email-verification-jwt-secret/versions/latest"
   SG_SECRET: "projects/233853318753/secrets/sendgrid-api-key/versions/latest"
   SG_TEMPLATE_ID: 'd-e255d26765aa426e97d7af738a0ae83d'
+  IPGEO_SECRET: "projects/233853318753/secrets/ip-geo-secret/versions/latest"
