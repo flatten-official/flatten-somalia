@@ -10,6 +10,7 @@ const googleData = require("./datastore/accounts");
 const cookies = require("./models/cookie");
 const verification = require("./utils/verification");
 const sg = require("./utils/sendgrid");
+const ipgeo = require("./utils/ipgeo");
 
 var recaptcha_secret = new secrets.Recaptcha();
 
@@ -94,6 +95,11 @@ router.get(verify_path, async (req, res) => {
   res.setHeader("Location", `https://${process.env.DOMAIN}/`);
   res.status(302).send("Redirecting...");
 
+});
+
+router.get("/locale", async (req, res) => {
+  let data = await ipgeo(requestIp.getClientIp(req));
+  res.send(data);
 });
 
 // clears cookie

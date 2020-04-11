@@ -18,7 +18,7 @@ exports.appPromise = cookieSecret.load().then(() => {
     cors({
       origin: [
         `https://${process.env.DOMAIN}`,
-        `https://fr.${process.env.DOMAIN}`,
+        `https://${process.env.DOMAIN_US}`,
       ],
       credentials: true,
     })
