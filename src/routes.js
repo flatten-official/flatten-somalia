@@ -18,12 +18,15 @@ const verify_path = "/verify";
 
 // submit endpoint
 router.post("/submit", async (req, res) => {
+  console.log(`${JSON.stringify(req.body)}`)
+  console.log("Submit");
   [
     recaptchaSuccess,
     recaptchaFailMessage,
   ] = await recaptcha_secret.verifyRecaptcha(req.body.recaptchaVerification);
   if (!recaptchaSuccess) {
     res.status(400).send(recaptchaFailMessage);
+    console.log("Recaptcha Failed");
     return;
   }
 
@@ -34,12 +37,15 @@ router.post("/submit", async (req, res) => {
   delete req.body.email;
   delete req.body.recaptchaVerification;
   delete req.body.isFormSubmission;
+  console.log(`isFormSubmission: ${isFormSubmission} email ${email}`);
 
   let userCookie = cookies.handleSubmit(req.signedCookies.userCookieValue, email);
+  console.log(`cookieValue: ${req.signedCookies.userCookieValue}, value ${JSON.stringify(userCookie.value)}`);
 
   let token_id = undefined;
   let token_expires = undefined;
   if (userCookie.value.status === "e" && !(email===undefined)) {
+    console.log(`SendVerificationEmail`);
     let token;
     [token, token_id, token_expires] = await verification.generateToken(email);
     let verify_url = `https://api.${process.env.DOMAIN}${verify_path}?token=${token}`;
