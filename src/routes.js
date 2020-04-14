@@ -106,7 +106,7 @@ router.post("/set-daily-cookie", (req, res) => {
     cookieValue = req.signedCookies.dailyCookie;
   }
   console.log(cookieValue);
-  res.cookie("dailyCookie", cookieValue, cookies.form_options);
+  res.cookie("dailyCookie", cookieValue, cookies.daily_options);
   res.sendStatus(200);
 });
 

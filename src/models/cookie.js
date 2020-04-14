@@ -22,14 +22,6 @@ daily_options = {
   signed: true,
 };
 
-form_options = {
-  domain: "flatten-covid.paperform.co",
-  httpOnly: true,
-  maxAge: dailyCookieMaxAge,
-  secure: true,
-  signed: true,
-};
-
 class UserCookie {
   /* cookie status values:
    * 'a' - user has not yet entered an email, but has a cookie
@@ -127,7 +119,6 @@ module.exports = {
   handleVerify,
   user_options,
   daily_options,
-  form_options,
   userCookieMaxAge,
   dailyCookieMaxAge,
 };
