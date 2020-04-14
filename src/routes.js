@@ -90,7 +90,7 @@ router.post("/set-daily-cookie", (req, res) => {
   res.sendStatus(200);
 });
 
-router.post("/submit-paperform", async (req, res) => {
+router.get("/submit-paperform", async (req, res) => {
 
   let paperform_key = await paperform_secret.get();
 
