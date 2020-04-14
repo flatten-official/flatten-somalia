@@ -19,6 +19,7 @@ exports.appPromise = cookieSecret.load().then(() => {
       origin: [
         `https://${process.env.DOMAIN}`,
         `https://${process.env.DOMAIN_US}`,
+        `https://paperform.co`,
       ],
       credentials: true,
     })
