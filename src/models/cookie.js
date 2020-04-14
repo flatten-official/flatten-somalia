@@ -1,4 +1,4 @@
-const validator = require('validator');
+const validator = require("validator");
 const { v4: uuidv4 } = require("uuid");
 
 // Module to handle cookies on the site
@@ -16,6 +16,14 @@ user_options = {
 
 daily_options = {
   domain: process.env.DOMAIN,
+  httpOnly: true,
+  maxAge: dailyCookieMaxAge,
+  secure: true,
+  signed: true,
+};
+
+form_options = {
+  domain: "flatten-covid.paperform.co",
   httpOnly: true,
   maxAge: dailyCookieMaxAge,
   secure: true,
@@ -41,57 +49,56 @@ class UserCookie {
       this.migrateOldCookie(cookieValue);
     } else {
       // no cookie exists
-      this.setNewCookie(uuidv4(), 'a');
+      this.setNewCookie(uuidv4(), "a");
     }
   }
 
   setNewCookie(cookie_id, status) {
     this.value = {
       id: cookie_id,
-      status
+      status,
     };
   }
 
   setCookieStatus(status) {
-    this.value.status = status
+    this.value.status = status;
   }
 
   parseValue(cookie_value) {
-    let cookie_arr = cookie_value.split('|');
+    let cookie_arr = cookie_value.split("|");
     this.value = {
       id: cookie_arr[0],
-      status: cookie_arr[1]
-    }
+      status: cookie_arr[1],
+    };
   }
 
   getValue() {
-    return `${this.value.id}|${this.value.status}`
+    return `${this.value.id}|${this.value.status}`;
   }
 
   migrateOldCookie(cookie_value) {
     this.value = {
       id: cookie_value,
-      status: 'a'
-    }
+      status: "a",
+    };
   }
-
 }
 
 isOldCookie = (cookie_value) => {
-  return validator.isUUID(cookie_value)
+  return validator.isUUID(cookie_value);
 };
 
 handleSubmit = (cookieValue, email) => {
   let userCookie = new UserCookie(cookieValue);
   // if an email is supplied, and it has not already been verified
-  if (email && !(userCookie.value.status === 'v')) {
-    userCookie.setCookieStatus('e');
+  if (email && !(userCookie.value.status === "v")) {
+    userCookie.setCookieStatus("e");
   }
   return userCookie;
 };
 
 handleRead = (userCookieValue, dailyCookieValue) => {
-  let status = 'n';
+  let status = "n";
   let userCookie;
   if (!!userCookieValue) {
     userCookie = new UserCookie(userCookieValue);
@@ -100,18 +107,27 @@ handleRead = (userCookieValue, dailyCookieValue) => {
   return {
     user: {
       exists: !!userCookieValue,
-      status: status
+      status: status,
     },
     daily: {
-      exists: !!dailyCookieValue
-    }
+      exists: !!dailyCookieValue,
+    },
   };
 };
 
 handleVerify = (userCookieValue) => {
   let userCookie = new UserCookie(userCookieValue);
-  userCookie.setCookieStatus('v');
+  userCookie.setCookieStatus("v");
   return userCookie;
 };
 
-module.exports = {handleSubmit, handleRead, handleVerify, user_options, daily_options, userCookieMaxAge, dailyCookieMaxAge};
+module.exports = {
+  handleSubmit,
+  handleRead,
+  handleVerify,
+  user_options,
+  daily_options,
+  form_options,
+  userCookieMaxAge,
+  dailyCookieMaxAge,
+};
