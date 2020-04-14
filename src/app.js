@@ -20,6 +20,7 @@ exports.appPromise = cookieSecret.load().then(() => {
         `https://${process.env.DOMAIN}`,
         `https://${process.env.DOMAIN_US}`,
         `https://paperform.co`,
+        `https://flatten-covid.paperform.co`,
       ],
       credentials: true,
     })
