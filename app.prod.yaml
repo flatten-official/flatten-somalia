@@ -22,3 +22,4 @@ env_variables: # production
   SG_SECRET: "projects/81735388662/secrets/sendgrid-api-key/versions/latest"
   SG_TEMPLATE_ID: "d-e255d26765aa426e97d7af738a0ae83d"
   IPGEO_SECRET: "projects/81735388662/secrets/ip-geo-secret/versions/latest"
+  PAPERFORM_SECRET: "projects/81735388662/secrets/paperform-endpoint-key/versions/latest"
