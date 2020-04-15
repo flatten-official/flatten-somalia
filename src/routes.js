@@ -146,6 +146,7 @@ router.post("/submit-paperform", async (req, res) => {
     return map;
   }, {});
   req.body.timestamp = Date.now();
+  delete req.body.device;
   delete req.body.charge;
 
   await paperformData.pushPaperform(req.body);
