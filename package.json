@@ -1,0 +1,41 @@
+{
+  "name": "react-app-starterkit",
+  "private": true,
+  "homepage": ".",
+  "scripts": {
+    "deploy": "now && now alias",
+    "start": "react-scripts start",
+    "now-start": "serve -s ./build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "precommit": "pretty-quick --staged"
+  },
+  "devDependencies": {
+    "react-scripts": "^3.4.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "bootswatch": "^4.3.1",
+    "connected-react-router": "4.5.0",
+    "font-awesome": "^4.7.0",
+    "formiojs": "^4.0.0-rc.21",
+    "history": "^4.9.0",
+    "node-sass": "^4.13.1",
+    "react": "16.8.2",
+    "react-dom": "16.8.2",
+    "react-formio": "^4.2.6",
+    "react-redux": "5.1.1",
+    "react-router": "4.3.1",
+    "react-router-dom": "4.3.1",
+    "redux": "4.0.1",
+    "redux-thunk": "2.3.0",
+    "serve": "10.1.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
