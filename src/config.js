@@ -24,3 +24,8 @@ export const AuthConfig = {
     form: 'user/register'
   }
 };
+
+export const FormConfig = {
+  formName: 'volunteerFormSomalia',
+  formTitle: 'Volunteer Form Somalia'
+}

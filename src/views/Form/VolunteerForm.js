@@ -5,9 +5,16 @@ import {selectRoot, resetSubmissions, saveSubmission, Form, selectError, Errors,
 import {push} from 'connected-react-router';
 import Loading from '../../containers/Loading'
 
-const formName = 'volunteerFormSomalia';
-
 const VolunteerForm = class extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            formName: props.formName,
+            formTitle: props.formTitle
+        };
+    }
+
     componentWillMount() {
         this.props.getForm();
     }
@@ -29,7 +36,7 @@ const VolunteerForm = class extends Component {
 
         return (
             <div>
-                <h3>Somalia Volunteer Form</h3>
+                <h3>{this.state.formTitle}</h3>
                 <Errors errors={errors} />
                 <Form 
                   form={form}
@@ -45,12 +52,12 @@ const VolunteerForm = class extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        form: selectRoot('form', selectRoot(formName, state)),
+        form: selectRoot('form', selectRoot(ownProps.formName, state)),
         errors: [
-            selectError('form', selectRoot(formName, state)),
-            selectError('submission', selectRoot(formName, state)),
+            selectError('form', selectRoot(ownProps.formName, state)),
+            selectError('submission', selectRoot(ownProps.formName, state)),
         ],
         options: {
             noAlerts: true
@@ -60,11 +67,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getForm: () => dispatch(getForm(formName)),
+        getForm: () => dispatch(getForm(ownProps.formName)),
         onSubmit: (submission) => {
-            dispatch(saveSubmission(formName, submission, null, (err, submission)=> {
+            dispatch(saveSubmission(ownProps.formName, submission, null, (err, submission)=> {
                 if(!err) {
-                    dispatch(resetSubmissions(formName));
+                    dispatch(resetSubmissions(ownProps.formName));
                     dispatch(push('/success'));
                 }
             }))
