@@ -11,5 +11,10 @@ export default combineReducers({
     form: form({ name: 'event'}),
     submission: submission({name: 'event'}),
     submissions: submissions({name: 'event'}),
+  }),
+  volunteerFormSomalia: combineReducers({
+    form: form({ name: 'volunteerFormSomalia'}),
+    submission: submission({name: 'volunteerFormSomalia'}),
+    submissions: submissions({name: 'volunteerFormSomalia'}),
   })
 })

@@ -31,9 +31,9 @@ $danger:        $red;
 $light:         $gray-100;
 $dark:          $gray-800;
 
-@import "~bootswatch/dist/cosmo/_variables.scss";
+@import "~bootswatch/dist/litera/_variables.scss";
 @import "~bootstrap/scss/bootstrap.scss";
-@import "~bootswatch/dist/cosmo/_bootswatch.scss";
+@import "~bootswatch/dist/litera/_bootswatch.scss";
 $fa-font-path: '../fonts';
 @import '~font-awesome/scss/font-awesome';
 @import '~formiojs/dist/formio.full.css';
