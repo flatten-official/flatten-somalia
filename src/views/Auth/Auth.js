@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import NavLink from '../../containers/NavLink';
 import Login from './Login';
 import Register from './Register';
-import {Route} from "react-router-dom";
-import {AppConfig} from '../../config';
 
 const Auth = class extends Component {
   render() {

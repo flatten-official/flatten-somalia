@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { connect, createSelectorHook } from 'react-redux';
+import { connect } from 'react-redux';
 import {PropTypes} from 'prop-types';
 import VolunteerForm from './Form/VolunteerForm'
 import Auth from './Auth/Auth'
-import { selectRoot, auth} from "react-formio";
+import { selectRoot } from "react-formio";
 
 const Home = class extends Component {
   static propTypes = {
