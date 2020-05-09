@@ -20,21 +20,15 @@ const Header = class extends Component {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            <h3 class="wordmark">
+            <h3 className="wordmark">
               FLATTEN.so
             </h3>
           </Link>
           <ul className="nav navbar-nav mr-auto">
             { (auth.is.hasOwnProperty('administrator') && auth.is.administrator) ? (
-              <NavLink to="/form" role="navigation link" className="nav-link">
-                <i className="fa fa-wpforms"></i>&nbsp;
-                Forms
-              </NavLink>
-            ) : null }
-            { auth.authenticated ? (
-              <NavLink to="/event" role="navigation link" className="nav-link">
-                <i className="fa fa-calendar"></i>&nbsp;
-                Events
+              <NavLink to="/admin" role="navigation link" className="nav-link">
+                <i className="fa fa-unlock-alt"></i>&nbsp;
+                Admin Panel
               </NavLink>
             ) : null }
           </ul>

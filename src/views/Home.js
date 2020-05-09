@@ -1,9 +1,21 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import { connect, createSelectorHook } from 'react-redux';
 import {PropTypes} from 'prop-types';
 import VolunteerForm from './Form/VolunteerForm'
 import Auth from './Auth/Auth'
-import { selectRoot } from "react-formio";
+import { selectRoot, auth} from "react-formio";
+
+const checkRole = (auth, role) => {
+  console.log(auth);
+  try {
+    let id = auth.roles[role]._id;
+    let index = auth.user.roles.indexOf(id);
+    console.log(index);
+    return index > -1;
+  } catch{
+    return false;
+  }
+}
 
 const Home = class extends Component {
   static propTypes = {
