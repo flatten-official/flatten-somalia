@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {PropTypes} from 'prop-types';
 import VolunteerForm from './Form/VolunteerForm'
+import Auth from './Auth/Auth'
 import { selectRoot } from "react-formio";
 
 const Home = class extends Component {
@@ -29,7 +30,7 @@ const Home = class extends Component {
                 ) : null
               }
             </div>) :
-            null
+            <Auth />
           }
         </div>
       </div>
