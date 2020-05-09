@@ -3,9 +3,8 @@ import { Route } from 'react-router-dom'
 import Header from './containers/Header'
 import Footer from './containers/Footer'
 import Home from './views/Home'
-import Form from './views/Form'
-import Event from './views/Event'
 import Auth from './views/Auth/Auth'
+import Admin from './views/Admin/Admin'
 import { AppConfig } from './config';
 
 const App = () => (
@@ -18,8 +17,7 @@ const App = () => (
         : null
       }
       <Route exact path="/" component={Home} />
-      <Route path="/form" component={Form} />
-      <Route path="/event" component={Event} />
+      <Route exact path="/admin" component={Admin} />
       <Route path="/auth" component={Auth} />
     </div>
 

@@ -38,6 +38,13 @@ $fa-font-path: '../fonts';
 @import '~font-awesome/scss/font-awesome';
 @import '~formiojs/dist/formio.full.css';
 
+.wordmark {
+  font-family: "DM Sans", sans-serif;
+  font-size: 4vw;
+  letter-spacing: 0.75px;
+  color: $black;
+}
+
 .logo {
   height: 1.9em;
 }

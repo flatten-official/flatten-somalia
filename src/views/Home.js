@@ -14,25 +14,23 @@ const Home = class extends Component {
     const {auth} = this.props;
     return (
       <div>
-        <div className="container">
-          { auth.authenticated ? (
-            <div className="well text-center">
-              { (auth.user && auth.user.data) ?
-                (
-                  <div>
-                    <h3>
-                      You are logged in as&nbsp;
-                      <strong>{ auth.user.data.email }</strong>
-                      !
-                    </h3>
-                  <VolunteerForm />
-                  </div>
-                ) : null
-              }
-            </div>) :
-            <Auth />
-          }
-        </div>
+        { auth.authenticated ? (
+          <div className="well text-center">
+            { (auth.user && auth.user.data) ?
+              (
+                <div>
+                  <h3>
+                    You are logged in as&nbsp;
+                    <strong>{ auth.user.data.email }</strong>
+                    !
+                  </h3>
+                <VolunteerForm />
+                </div>
+              ) : null
+            }
+          </div>) :
+          <Auth />
+        }
       </div>
     );
   }

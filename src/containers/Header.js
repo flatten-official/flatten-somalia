@@ -17,15 +17,14 @@ const Header = class extends Component {
     const {auth, logout} = this.props;
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            <img className="logo" alt="Form.io" src="https://portal.form.io/images/formio-logo.png" height="25px" />
+            <h3 class="wordmark">
+              FLATTEN.so
+            </h3>
           </Link>
           <ul className="nav navbar-nav mr-auto">
-            <NavLink exact to="/" role="navigation button" className="nav-link">
-              <span className="fa fa-home" />
-            </NavLink>
             { (auth.is.hasOwnProperty('administrator') && auth.is.administrator) ? (
               <NavLink to="/form" role="navigation link" className="nav-link">
                 <i className="fa fa-wpforms"></i>&nbsp;
