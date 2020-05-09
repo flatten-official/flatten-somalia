@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import {selectRoot, resetSubmissions, saveSubmission, Form, selectError, Errors, getForm} from 'react-formio';
-// import {push} from 'connected-react-router';
+import {push} from 'connected-react-router';
 import Loading from '../../containers/Loading'
 
 const formName = 'volunteerFormSomalia';
@@ -65,6 +65,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(saveSubmission(formName, submission, null, (err, submission)=> {
                 if(!err) {
                     dispatch(resetSubmissions(formName));
+                    dispatch(push('/success'));
                 }
             }))
         }

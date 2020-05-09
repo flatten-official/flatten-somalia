@@ -5,6 +5,7 @@ import Footer from './containers/Footer'
 import Home from './views/Home'
 import Auth from './views/Auth/Auth'
 import Admin from './views/Admin/Admin'
+import Success from './views/Form/Success'
 import { AppConfig } from './config';
 
 const App = () => (
@@ -19,6 +20,7 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/admin" component={Admin} />
       <Route path="/auth" component={Auth} />
+      <Route path="/success" component={Success} />
     </div>
 
     <Footer />
