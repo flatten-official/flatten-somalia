@@ -5,8 +5,9 @@ export default class Footer extends Component {
     return (
       <footer className="footer">
         <div className="container text-center" style={{padding: '15px'}}>
-          Built with ♥ by&nbsp;
-          <a href="https://flatten.ca">Flatten.ca</a>
+          Built by&nbsp;
+          <a href="https://flatten.ca">Flatten.ca</a>&nbsp;
+          |&nbsp;Forms powered by <a href="https://form.io">form.io</a>
         </div>
       </footer>
     );

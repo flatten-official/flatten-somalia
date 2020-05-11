@@ -7,7 +7,7 @@ import { selectRoot } from "react-formio";
 import {FormConfig} from '../config'
 
 const checkFormRoles = (auth) => {
-  let access = auth.submissionAccess[FormConfig.formName].create_own;
+  let access = auth.submissionAccess[FormConfig.volunteerForm.formName].create_own;
   for (let role of auth.user.roles) {
     if (access.indexOf(role) > -1) return true;
   }
@@ -35,7 +35,7 @@ const Home = class extends Component {
                     !
                   </h3>
                 {checkFormRoles(auth) ?
-                  (<VolunteerForm {...FormConfig} />)
+                  (<VolunteerForm {...FormConfig.volunteerForm} />)
                   : <h3> You do not have permission to access this form. Please contact an admin to get access. </h3>
                  }
                 </div>

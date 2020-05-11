@@ -32,20 +32,19 @@ const Header = class extends Component {
               </NavLink>
             ) : null }
           </ul>
-          <ul className="nav navbar-nav ml-auto">
-            { auth.authenticated ? (
-              <li className="nav-item">
+          {auth.authenticated?
+            <ul className="nav navbar-nav mr-auto">
                 <span className="nav-link" role="navigation link" onClick={logout}>
                   <span className="fa fa-sign-out" />&nbsp;
-                  Logout
+                  Logged in as { auth.user.data.email } | Logout
                 </span>
-              </li>
-            ) : (
-              <NavLink to="/auth" role="navigation link" className="nav-link">
-                Login | Register
-              </NavLink>
-            )}
+            </ul>
+          : <ul className="nav navbar-nav mr-auto">
+            <NavLink to="/auth" role="navigation link" className="nav-link">
+              Login | Register
+            </NavLink>
           </ul>
+          }
         </div>
       </nav>
     );

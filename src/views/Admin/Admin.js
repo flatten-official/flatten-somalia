@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {PropTypes} from 'prop-types';
 import { selectRoot } from "react-formio";
+import VolunteerForm from "../Form/VolunteerForm"
+import {FormConfig} from '../../config'
 
 const Admin = class extends Component {
   static propTypes = {
@@ -15,7 +17,9 @@ const Admin = class extends Component {
     return (
         <div>
             {isAdmin ? 
-            <div> Welcome to the admin panel! </div>
+            <div> Welcome to the admin panel!
+                <VolunteerForm {...FormConfig.addVolunteerForm} />
+            </div>
             : <div> Not authorised </div>}
         </div>
     );

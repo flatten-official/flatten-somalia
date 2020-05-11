@@ -26,6 +26,13 @@ export const AuthConfig = {
 };
 
 export const FormConfig = {
-  formName: 'volunteerFormSomalia',
-  formTitle: 'Volunteer Form Somalia'
+  volunteerForm: {
+    formName: 'volunteerFormSomalia',
+    formTitle: 'Volunteer Form Somalia'
+  },
+  addVolunteerForm: {
+    formName: 'addVolunteerSomalia',
+    formTitle: 'Add a new volunteer'
+
+  }
 }
