@@ -6,6 +6,13 @@ window.location.search.substr(1).split('&').forEach(function(item) {
   query[item.split('=')[0]] = item.split('=')[1] && decodeURIComponent(item.split('=')[1]);
 });
 
+if (query.token) {
+  localStorage.setItem('formioToken', query.token);
+  localStorage.removeItem('formioAppUser');
+  localStorage.removeItem('formioUser');
+  window.history.pushState("", "", window.location.pathname + window.location.hash);
+}
+
 PROJECT_URL = query.projectUrl || PROJECT_URL;
 API_URL = query.apiUrl || API_URL;
 
