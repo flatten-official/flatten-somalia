@@ -1,29 +1,14 @@
 import React, {Component} from 'react';
 import Login from './Login';
-import Register from './Register';
 
 const Auth = class extends Component {
   render() {
-    return <div className="row">
-              <div className="col-lg-6 col-md-6">
-                <div className="panel panel-primary login-container card">
-                  <div className="panel-heading card-header">
-                    Login
-                  </div>
-                  <div className="panel-body card-body">
-                    <Login />
-                  </div>
-                </div>
+    return <div>
+              <div className="panel-heading card-header">
+                Login
               </div>
-              <div className="col-lg-6 col-md-6">
-                <div className="panel panel-primary register-container card">
-                  <div className="panel-heading card-header">
-                    Register
-                  </div>
-                  <div className="panel-body card-body">
-                    <Register />
-                  </div>
-                </div>
+              <div className="panel-body card-body">
+                <Login />
               </div>
             </div>;
   }

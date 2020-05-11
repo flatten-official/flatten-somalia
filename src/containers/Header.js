@@ -41,7 +41,7 @@ const Header = class extends Component {
             </ul>
           : <ul className="nav navbar-nav mr-auto">
             <NavLink to="/auth" role="navigation link" className="nav-link">
-              Login | Register
+              Login
             </NavLink>
           </ul>
           }
