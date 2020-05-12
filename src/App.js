@@ -1,11 +1,11 @@
-import React from 'react'
-import { Route } from 'react-router-dom'
-import Header from './containers/Header'
-import Footer from './containers/Footer'
-import Home from './views/Home'
-import Auth from './views/Auth/Auth'
-import Admin from './views/Admin/Admin'
-import Success from './views/Form/Success'
+import React from "react";
+import { Route } from "react-router-dom";
+import Header from "./containers/Header";
+import Footer from "./containers/Footer";
+import Home from "./views/Home";
+import Auth from "./views/Auth/Auth";
+import Admin from "./views/Admin/Admin";
+import Success from "./views/Form/Success";
 
 const App = () => (
   <div>
@@ -20,6 +20,6 @@ const App = () => (
 
     <Footer />
   </div>
-)
+);
 
-export default App
+export default App;

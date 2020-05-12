@@ -1,4 +1,4 @@
-$white:    #fff;
+$white: #fff;
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
 $gray-300: #dee2e6;
@@ -8,35 +8,35 @@ $gray-600: #868e96;
 $gray-700: #495057;
 $gray-800: #373a3c;
 $gray-900: #212529;
-$black:    #000;
+$black: #000;
 
-$blue:    #2780E3;
-$indigo:  #6610f2;
-$purple:  #613d7c;
-$pink:    #e83e8c;
-$red:     #FF0039;
-$orange:  #F2661F;
-$yellow:  #BED32B;
-$green:   #3FB618;
-$teal:    #20c997;
-$cyan:    #9954BB;
+$blue: #2780e3;
+$indigo: #6610f2;
+$purple: #613d7c;
+$pink: #e83e8c;
+$red: #ff0039;
+$orange: #f2661f;
+$yellow: #bed32b;
+$green: #3fb618;
+$teal: #20c997;
+$cyan: #9954bb;
 $lightblue: lighten($blue, 20%);
 
-$primary:       $blue;
-$secondary:     $orange;
-$success:       $green;
-$info:          $lightblue;
-$warning:       $yellow;
-$danger:        $red;
-$light:         $gray-100;
-$dark:          $gray-800;
+$primary: $blue;
+$secondary: $orange;
+$success: $green;
+$info: $lightblue;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-800;
 
 @import "~bootswatch/dist/litera/_variables.scss";
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~bootswatch/dist/litera/_bootswatch.scss";
-$fa-font-path: '../fonts';
-@import '~font-awesome/scss/font-awesome';
-@import '~formiojs/dist/formio.full.css';
+$fa-font-path: "../fonts";
+@import "~font-awesome/scss/font-awesome";
+@import "~formiojs/dist/formio.full.css";
 
 .wordmark {
   font-family: "DM Sans", sans-serif;
@@ -50,7 +50,7 @@ $fa-font-path: '../fonts';
 }
 
 .text-blue {
-  color: #127ABF;
+  color: #127abf;
 }
 
 .text-green {
