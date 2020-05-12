@@ -92,6 +92,9 @@ checkBrowsers(paths.appPath, isInteractive)
       errors: errors =>
         devServer.sockWrite(devServer.sockets, 'errors', errors),
     };
+
+    const useTypeScript = false;
+
     // Create a webpack compiler that is configured with custom messages.
     const compiler = createCompiler({
       appName,
@@ -99,7 +102,7 @@ checkBrowsers(paths.appPath, isInteractive)
       devSocket,
       urls,
       useYarn,
-      false,
+      useTypeScript,
       tscCompileOnError,
       webpack,
     });
