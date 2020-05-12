@@ -25,7 +25,6 @@
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.19.0",
     "eslint-plugin-react-hooks": "^1.6.1",
-    "firebase-tools": "^8.2.0",
     "html-webpack-plugin": "4.0.0-beta.11",
     "mini-css-extract-plugin": "0.9.0",
     "node-sass": "^4.13.1",
