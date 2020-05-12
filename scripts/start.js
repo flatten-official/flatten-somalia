@@ -58,7 +58,7 @@ checkBrowsers(paths.appPath, isInteractive)
     const config = configFactory('development');
     const appName = require(paths.appPackageJson).name;
     const urls = prepareUrls(
-      'https',
+      'http',
       HOST,
       port,
       paths.publicUrlOrPath.slice(0, -1)
