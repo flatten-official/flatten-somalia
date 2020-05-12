@@ -79,7 +79,6 @@ checkBrowsers(paths.appPath, isInteractive)
     const config = configFactory('development');
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
     const appName = require(paths.appPackageJson).name;
-    const useTypeScript = fs.existsSync(paths.appTsConfig);
     const tscCompileOnError = process.env.TSC_COMPILE_ON_ERROR === 'true';
     const urls = prepareUrls(
       protocol,
@@ -100,7 +99,7 @@ checkBrowsers(paths.appPath, isInteractive)
       devSocket,
       urls,
       useYarn,
-      useTypeScript,
+      false,
       tscCompileOnError,
       webpack,
     });
@@ -132,7 +131,7 @@ checkBrowsers(paths.appPath, isInteractive)
       if (process.env.NODE_PATH) {
         console.log(
           chalk.yellow(
-            'Setting NODE_PATH to resolve modules absolutely has been deprecated in favor of setting baseUrl in jsconfig.json (or tsconfig.json if you are using TypeScript) and will be removed in a future major release of create-react-app.'
+            'Setting NODE_PATH to resolve modules absolutely has been deprecated in favor of setting baseUrl in jsconfig.json and will be removed in a future major release of create-react-app.'
           )
         );
         console.log();
