@@ -1,7 +1,7 @@
 {
-  "name": "react-app-starterkit",
+  "name": "flatten-so-volunteer",
   "private": true,
-  "homepage": ".",
+  "homepage": "v.flatten.so",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
