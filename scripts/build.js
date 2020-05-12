@@ -155,13 +155,6 @@ function build(previousFileSizes) {
 
         let errMessage = err.message;
 
-        // Add additional information for postcss errors
-        if (Object.prototype.hasOwnProperty.call(err, 'postcssNode')) {
-          errMessage +=
-            '\nCompileError: Begins at CSS selector ' +
-            err['postcssNode'].selector;
-        }
-
         messages = formatWebpackMessages({
           errors: [errMessage],
           warnings: [],
