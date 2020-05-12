@@ -8,23 +8,14 @@
     "precommit": "pretty-quick --staged"
   },
   "devDependencies": {
-    "firebase-tools": "^8.2.0"
-  },
-  "dependencies": {
     "@babel/core": "7.9.0",
-    "@svgr/webpack": "4.3.3",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.1.0",
     "babel-plugin-named-asset-import": "^0.3.6",
     "babel-preset-react-app": "^9.1.2",
-    "bootstrap": "^4.3.1",
-    "bootswatch": "^4.3.1",
-    "camelcase": "^5.3.1",
-    "case-sensitive-paths-webpack-plugin": "2.3.0",
-    "connected-react-router": "4.5.0",
-    "css-loader": "3.4.2",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
+    "firebase-tools": "^8.2.0",
     "eslint": "^6.6.0",
     "eslint-config-react-app": "^5.2.1",
     "eslint-loader": "3.0.3",
@@ -33,6 +24,15 @@
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.19.0",
     "eslint-plugin-react-hooks": "^1.6.1",
+    "webpack-dev-server": "3.10.3"
+  },
+  "dependencies": {
+    "@svgr/webpack": "4.3.3",
+    "bootstrap": "^4.3.1",
+    "bootswatch": "^4.3.1",
+    "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "connected-react-router": "4.5.0",
+    "css-loader": "3.4.2",
     "file-loader": "4.3.0",
     "font-awesome": "^4.7.0",
     "formiojs": "^4.0.0-rc.21",
@@ -68,7 +68,6 @@
     "ts-pnp": "1.1.6",
     "url-loader": "2.3.0",
     "webpack": "4.42.0",
-    "webpack-dev-server": "3.10.3",
     "webpack-manifest-plugin": "2.2.0",
     "workbox-webpack-plugin": "4.3.1"
   },
