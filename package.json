@@ -12,6 +12,7 @@
     "precommit": "pretty-quick --staged"
   },
   "devDependencies": {
+    "firebase-tools": "^8.2.0",
     "react-scripts": "^3.4.0"
   },
   "dependencies": {
