@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
 const evalSourceMapMiddleware = require('react-dev-utils/evalSourceMapMiddleware');
@@ -7,12 +5,6 @@ const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMi
 const ignoredFiles = require('react-dev-utils/ignoredFiles');
 const redirectServedPath = require('react-dev-utils/redirectServedPathMiddleware');
 const paths = require('./paths');
-const getHttpsConfig = require('./getHttpsConfig');
-
-const host = process.env.HOST || '0.0.0.0';
-const sockHost = process.env.WDS_SOCKET_HOST;
-const sockPath = process.env.WDS_SOCKET_PATH; // default: '/sockjs-node'
-const sockPort = process.env.WDS_SOCKET_PORT;
 
 module.exports = function(proxy, allowedHost) {
   return {
@@ -69,12 +61,6 @@ module.exports = function(proxy, allowedHost) {
     // Prevent a WS client from getting injected as we're already including
     // `webpackHotDevClient`.
     injectClient: false,
-    // Enable custom sockjs pathname for websocket connection to hot reloading server.
-    // Enable custom sockjs hostname, pathname and port for websocket connection
-    // to hot reloading server.
-    sockHost,
-    sockPath,
-    sockPort,
     // It is important to tell WebpackDevServer to use the same "publicPath" path as
     // we specified in the webpack config. When homepage is '.', default to serving
     // from the root.
@@ -90,8 +76,8 @@ module.exports = function(proxy, allowedHost) {
     watchOptions: {
       ignored: ignoredFiles(paths.appSrc),
     },
-    https: getHttpsConfig(),
-    host,
+    https: false,
+    host: '0.0.0.0',
     overlay: false,
     historyApiFallback: {
       // Paths with dots should still use the history fallback.
