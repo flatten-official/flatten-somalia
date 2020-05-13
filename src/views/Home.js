@@ -7,8 +7,13 @@ import { selectRoot } from "react-formio";
 import { FormConfig } from "../config";
 
 const checkFormRoles = (auth) => {
-  let access =
+  let access;
+  try {
+    access =
     auth.submissionAccess[FormConfig.volunteerForm.formName].create_own;
+  } catch {
+    return false;
+  }
   for (let role of auth.user.roles) {
     if (access.indexOf(role) > -1) return true;
   }
@@ -22,10 +27,9 @@ const Home = class extends Component {
 
   render() {
     const { auth } = this.props;
-    console.log(auth);
     return (
       <div>
-        {auth.authenticated ? (
+        {auth.is.authenticated ? (
           <div className="well text-center">
             {auth.user && auth.user.data ? (
               <div>
