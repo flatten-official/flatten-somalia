@@ -1,6 +1,8 @@
 steps:
   - name: gcr.io/cloud-builders/gsutil
-    args: ["cp", "app.$_BRANCH.yaml", "app.yaml"]
+    # $BRANCH_NAME is automatically set by GCloud Build. No need to specify as env var.
+    # https://cloud.google.com/cloud-build/docs/configuring-builds/substitute-variable-values
+    args: ["cp", "app.$BRANCH_NAME.yaml", "app.yaml"]
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
 timeout: "1600s"

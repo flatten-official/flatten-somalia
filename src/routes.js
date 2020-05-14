@@ -1,9 +1,9 @@
 const express = require("express");
 
+const root_route = require('./routes/root');
+
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.status(200).send(`COVID-19 ${process.env.BACKEND_BRANCH} BACKEND ONLINE`);
-});
+router.get("/", root_route);
 
 module.exports = router;

@@ -1,22 +1,13 @@
 {
-  "name": "covid-19-backend",
+  "name": "flatten-somalia-backend",
   "version": "1.0.0",
-  "description": "backend for covid-19 application",
+  "description": "The backend server for flatten.so",
+  "author": "Flatten",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yifei7zhang/covid-19-backend.git"
-  },
-  "author": "Yifei Zhang",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/yifei7zhang/covid-19-backend/issues"
-  },
-  "homepage": "https://github.com/yifei7zhang/covid-19-backend#readme",
   "dependencies": {
     "@google-cloud/secret-manager": "^2.1.0",
     "axios": "^0.19.2",
@@ -24,10 +15,7 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "nodemon": "^2.0.3",
     "prettier": "^2.0.5"
-  },
-  "cloud-repo-tools": {
-    "requiresKeyFile": true,
-    "requiresProjectId": true
   }
 }
