@@ -1,25 +1,2 @@
-service: production
+service: backend-so
 runtime: nodejs10
-env_variables: # production
-  DATASTORE_NAMESPACE: "flatten_production"
-  DATASTORE_KIND: "form-user"
-  DATASTORE_KIND_MARKETING: "marketing"
-  BACKEND_BRANCH: "PROD"
-  DOMAIN: "flatten.ca"
-  DOMAIN_US: "flatten.org"
-  PROJECT_ID: "flatten-271620"
-  KEYRING_LOCATION: "global"
-  SECRETS_KEYRING: "backend-secrets"
-  FORM_KEYRING: "form-data"
-  # Secrets for the database
-  IP_KEY: "ip"
-  PEPPER_KEY: "pepper_master"
-  PEPPER_FILE: "./secrets/pepper_master.encrypted"
-  # Secret paths in secret manager
-  RECAPTCHA_SECRET: "projects/81735388662/secrets/recaptcha-secret-key/versions/latest"
-  COOKIE_SECRET: "projects/81735388662/secrets/cookie-secret/versions/latest"
-  JWT_SECRET: "projects/81735388662/secrets/email-verification-jwt-secret/versions/latest"
-  SG_SECRET: "projects/81735388662/secrets/sendgrid-api-key/versions/latest"
-  SG_TEMPLATE_ID: "d-e255d26765aa426e97d7af738a0ae83d"
-  IPGEO_SECRET: "projects/81735388662/secrets/ip-geo-secret/versions/latest"
-  PAPERFORM_SECRET: "projects/81735388662/secrets/paperform-endpoint-key/versions/latest"

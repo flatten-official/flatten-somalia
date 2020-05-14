@@ -14,7 +14,6 @@ class ProjectInfo {
         this.accessInfo = undefined;
         this.formInfo = undefined;
         this.projectInfo = undefined;
-
     }
 
     async sendFormioReq(path) {
