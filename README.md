@@ -1,27 +1,35 @@
-# COVID-19 Backend
-
-Backend for the COVID-19 project
+# Flatten.so backend
 
 ## Prerequisites
 
-If you haven't already installed Node, please get that setup:
+- Latest version of Node10 [here](https://nodejs.org/en/download/releases/).
 
-We highly recommend that you use nvm to make sure that we are all using the same node and npm versions across the field.
+## Setup
 
-Installation link can be found here for
+1. Create a `.env` file in the root directory where you can set your environment variables. DO NOT commit this file.
+Environment variables will be automatically read from this file by the `dotenv` package. You can use `.env.template`
+as a starter for your `.env` file.
 
-- [Unix/Linux](https://github.com/nvm-sh/nvm)
-- [Windows](https://github.com/coreybutler/nvm-windows)
+2. Enable ESLint in your IDE.
 
-If you'd like to avoid the above package managers, you can install node [here](https://nodejs.org/en/download/releases/), and make sure to select node versions above 10.18.1 (Latest version should be fine)
+3. Run `npm install` to install all the required packages.
 
 ## Running
 
-After making sure you have node and npm set up on your system, you can run `npm install` to get dependencies, and then `npm start` in the root directory to start the project.
+Run `npm run dev` in the root directory to start the project. Then navigate to `localhost` in your browser.
+You should see a message indicating that the server is running locally.
+
+## Development
+
+### Using environment variables
+
+Environment variables should not be used for secrets since they are stored on GitHub (in `app.*.yaml`).
+When adding environment variables ensure to update `.env.template`, `app.master.yaml` and `app.staging.yaml`.
+Finally, **document any changes** in `.env.template`.
 
 ## Additional Tools
 
 The following tools may be very helpful to you, please check them out.
 
 - [Robo3T](https://robomongo.org/) : Helpful mongo db GUI
-- [Postman](https://www.postman.com/) : Let's you test API endpoints easily
+- [Postman](https://www.postman.com/) to test the different API endpoints.  
