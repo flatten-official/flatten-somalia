@@ -10,7 +10,8 @@
 Environment variables will be automatically read from this file by the `dotenv` package. You can use `.env.template`
 as a starter for your `.env` file.
 
-2. Enable ESLint in your IDE.
+2. Enable ESLint in your IDE (normally a plugin to install). ESLint is a code linter that checks logic and syntax.
+ESLint is configured with Prettier to also enforce a standard formatting. 
 
 3. Run `npm install` to install all the required packages.
 
