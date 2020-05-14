@@ -1,2 +1,4 @@
 service: backend-so-staging
 runtime: nodejs10
+env_variables:
+  SERVICE_NAME: backend-so-staging # Displayed on / route
