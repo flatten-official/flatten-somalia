@@ -1,6 +1,6 @@
 const express = require("express");
 
-const root_route = require('./routes/root');
+const root_route = require("./routes/root");
 
 const router = express.Router();
 

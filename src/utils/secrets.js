@@ -1,6 +1,6 @@
 /* File to help with loading of secrets form the cloud secrets manager */
 const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
-const axios = require('axios');
+const axios = require("axios");
 const smClient = new SecretManagerServiceClient();
 
 class Secret {
@@ -21,7 +21,7 @@ class Secret {
 
   async accessSecretVersion() {
     const [version] = await smClient.accessSecretVersion({
-      name: this.secret_path
+      name: this.secret_path,
     });
 
     return version.payload.data.toString("utf8");
@@ -39,15 +39,14 @@ class Recaptcha {
       return [false, "Recaptcha verification failed."];
     }
     const recaptchaResponse = await axios.post(
-        `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${reactVerification}`
+      `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${reactVerification}`
     );
 
     if (!recaptchaResponse.data.success) {
       return [false, "Sorry, your recaptcha was invalid"];
     }
     return [true, ""];
-
   }
 }
 
-module.exports = {Secret, Recaptcha};
+module.exports = { Secret, Recaptcha };
