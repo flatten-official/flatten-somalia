@@ -1,4 +1,6 @@
-let PROJECT_URL = "https://jrnkhofvnfhrvsv.form.io";
+let PROJECT_URL = "https://formio-ngrs5hzi2q-uc.a.run.app/jrnkhofvnfhrvsv" // prod
+// let PROJECT_URL = "https://formio-6eoeawk53a-uc.a.run.app/staging-jrnkhofvnfhrvsv"; // staging
+
 let API_URL = "https://api.form.io";
 
 let query = {};

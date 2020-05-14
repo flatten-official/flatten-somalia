@@ -16,8 +16,7 @@ const mapStateToProps = () => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onSubmitDone: (submission) => {
-      dispatch(push(AuthConfig.authState));
-      dispatch(setUser(submission));
+      dispatch(push('/submitted-email'));
     },
   };
 };
