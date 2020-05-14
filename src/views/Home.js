@@ -10,7 +10,7 @@ const checkFormRoles = (auth) => {
   let access;
   try {
     access =
-    auth.submissionAccess[FormConfig.volunteerForm.formName].create_own;
+      auth.submissionAccess[FormConfig.volunteerForm.formName].create_own;
   } catch {
     return false;
   }
@@ -20,41 +20,36 @@ const checkFormRoles = (auth) => {
   return false;
 };
 
-const Home = class extends Component {
-  static propTypes = {
-    auth: PropTypes.object.isRequired,
-  };
-
-  render() {
-    const { auth } = this.props;
-    return (
-      <div>
-        {auth.is.authenticated ? (
-          <div className="well text-center">
-            {auth.user && auth.user.data ? (
-              <div>
-                <h3>
-                  You are logged in as&nbsp;
-                  <strong>{auth.user.data.email}</strong>!
-                </h3>
-                {checkFormRoles(auth) ? (
-                  <VolunteerForm {...FormConfig.volunteerForm} />
-                ) : (
-                  <h3>
-                    {" "}
-                    You do not have permission to access this form. Please
-                    contact an admin to get access.{" "}
-                  </h3>
-                )}
-              </div>
-            ) : null}
+const Home = ({ auth }) => (
+  <div>
+    {auth.is.authenticated ? (
+      <div className="well text-center">
+        {(auth.user && auth.user.data) ? (
+          <div>
+            <h3>
+              You are logged in as&nbsp;
+              <strong>{auth.user.data.email}</strong>!
+            </h3>
+            {checkFormRoles(auth) ? (
+              <VolunteerForm {...FormConfig.volunteerForm} />
+            ) : (
+              <h3>
+                <br/>
+                You do not have permission to access this form. Please contact
+                an admin to get access.
+              </h3>
+            )}
           </div>
-        ) : (
-          <Auth />
-        )}
+        ) : null}
       </div>
-    );
-  }
+    ) : (
+      <Auth />
+    )}
+  </div>
+);
+
+Home.propTypes = {
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {
