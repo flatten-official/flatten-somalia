@@ -1,8 +1,8 @@
 // using Twilio SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
 
-const secrets = require('./secrets');
-const sgMail = require('@sendgrid/mail');
+const secrets = require("./secrets");
+const sgMail = require("@sendgrid/mail");
 const { loadConfig } = require("./config");
 
 const config = loadConfig();
@@ -16,17 +16,16 @@ async function sendVerificationEmail(email, verification_link) {
   const msg = {
     to: email,
     from: {
-      email: 'noreply@flatten.ca',
-      name: 'The FLATTEN Team'
+      email: "noreply@flatten.ca",
+      name: "The FLATTEN Team",
     },
     template_id: config.verification_email_template,
     dynamic_template_data: {
       subject: "FLATTEN: Verify your email",
-      verification_link
-    }
+      verification_link,
+    },
   };
   await sgMail.send(msg);
-};
+}
 
-
-module.exports = {sendVerificationEmail};
+module.exports = { sendVerificationEmail };

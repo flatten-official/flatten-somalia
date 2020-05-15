@@ -1,6 +1,5 @@
-
-const {generateToken, ProjectInfo} = require("../utils/formio");
-const {sendVerificationEmail} = require("../utils/sendgrid");
+const { generateToken, ProjectInfo } = require("../utils/formio");
+const { sendVerificationEmail } = require("../utils/sendgrid");
 const { loadConfig } = require("../utils/config");
 
 const config = loadConfig();
@@ -10,23 +9,32 @@ module.exports = async (req, res) => {
 
   let project_info = new ProjectInfo();
 
-  
-  let isAdmin = project_info.existsInResource(config.admin_resource, "email", email);
-  let isUser = project_info.existsInResource(config.user_resource, "email", email);
+  let isAdmin = project_info.existsInResource(
+    config.admin_resource,
+    "email",
+    email
+  );
+  let isUser = project_info.existsInResource(
+    config.user_resource,
+    "email",
+    email
+  );
 
   let token;
   if (isAdmin) {
-    console.log("generating admin toke");
-    token = await generateToken(email, config.admin_resource);
+    token = await generateToken(
+      email,
+      config.admin_resource,
+      config.admin_role
+    );
   } else if (isUser) {
-    console.log("generating user toke");
-    token = await generateToken(email, config.user_resource);
+    token = await generateToken(email, config.user_resource, config.user_role);
   } else {
     res.sendStatus(200);
     return;
   }
 
-  let url = `http://${config.frontend_url}?token=${token}`
+  let url = `http://${config.frontend_url}?token=${token}`;
   console.log(email);
   await sendVerificationEmail(email, url);
 

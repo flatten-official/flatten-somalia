@@ -60,9 +60,11 @@ class ProjectInfo {
   }
 
   async existsInResource(resourceName, fieldName, fieldValue) {
-    let res = await this.sendFormioReq(`${resourceName.toLowerCase()}/exists?data.${fieldName}=${fieldValue}`);
+    let res = await this.sendFormioReq(
+      `${resourceName.toLowerCase()}/exists?data.${fieldName}=${fieldValue}`
+    );
     console.log(res);
-    return !(res===undefined);
+    return !(res === undefined);
   }
 }
 
@@ -98,6 +100,6 @@ async function generateToken(email, formName, roleName) {
   let token = jwt.sign(tokenObj, jwt_key);
 
   return token;
-};
+}
 
 module.exports = { ProjectInfo, generateToken };
