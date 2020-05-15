@@ -1,15 +1,16 @@
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
+const { loadConfig } = require("./config");
 
 let secrets = require("./secrets");
 
-// todo - change to staging / prod
-const FORMIO_PROJECT_URL =
-  "formio-6eoeawk53a-uc.a.run.app/staging-jrnkhofvnfhrvsv";
+const config = loadConfig();
+
+let jwt_secret = new secrets.Secret(config.formio_jwt_secret);
 
 class ProjectInfo {
   constructor() {
-    let formio_api_secret = new secrets.Secret(process.env.FORMIO_API_KEY);
+    this.formio_api_secret = new secrets.Secret(config.formio_api_secret);
 
     this.accessInfo = undefined;
     this.formInfo = undefined;
@@ -17,12 +18,10 @@ class ProjectInfo {
   }
 
   async sendFormioReq(path) {
-    let url = `https://${FORMIO_PROJECT_URL}/${path}`;
+    let url = `https://${config.formio_project_url}/${path}`;
     let token = await this.formio_api_secret.get();
     try {
       let res = await axios.get(url, {
-        // url: url,
-        // method: 'get',
         headers: { "x-token": token, "Content-Type": "application/json" },
       });
       return res;
@@ -37,7 +36,7 @@ class ProjectInfo {
       let res = await this.sendFormioReq("access");
       this.accessInfo = res ? res.data : undefined;
     }
-    return this.accessInfo["roles"][role];
+    return this.accessInfo["roles"][role.toLowerCase()];
   }
 
   async getFormInfo(form) {
@@ -60,10 +59,9 @@ class ProjectInfo {
   }
 }
 
-let project_info = new ProjectInfo();
-let jwt_secret = new secrets.Secret(process.env.FORMIO_JWT_SECRET);
+var project_info = new ProjectInfo();
 
-generateToken = async (email, formName, roleName) => {
+async function generateToken(email, formName, roleName) {
   let jwt_key = await jwt_secret.get();
 
   let projectId = (await project_info.getProjectInfo())["_id"];
@@ -91,12 +89,8 @@ generateToken = async (email, formName, roleName) => {
   };
 
   let token = jwt.sign(tokenObj, jwt_key);
-  console.log(tokenObj);
-  console.log(token);
 
   return token;
 };
-
-generateToken("arthur@allshire.org", "somaliaVolunteer", "somaliavolunteer");
 
 module.exports = { generateToken };
