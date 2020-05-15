@@ -12,6 +12,7 @@ class ProjectInfo {
   constructor() {
     this.formio_api_secret = new secrets.Secret(config.formio_api_secret);
 
+    // todo - timeout on this info
     this.accessInfo = undefined;
     this.formInfo = undefined;
     this.projectInfo = undefined;
@@ -57,12 +58,18 @@ class ProjectInfo {
     }
     return this.projectInfo;
   }
-}
 
-var project_info = new ProjectInfo();
+  async existsInResource(resourceName, fieldName, fieldValue) {
+    let res = await this.sendFormioReq(`${resourceName.toLowerCase()}/exists?data.${fieldName}=${fieldValue}`);
+    console.log(res);
+    return !(res===undefined);
+  }
+}
 
 async function generateToken(email, formName, roleName) {
   let jwt_key = await jwt_secret.get();
+
+  let project_info = new ProjectInfo();
 
   let projectId = (await project_info.getProjectInfo())["_id"];
   let formId = (await project_info.getFormInfo(formName))["_id"];
@@ -93,4 +100,4 @@ async function generateToken(email, formName, roleName) {
   return token;
 };
 
-module.exports = { generateToken };
+module.exports = { ProjectInfo, generateToken };
