@@ -60,10 +60,11 @@ class ProjectInfo {
   }
 
   async existsInResource(resourceName, fieldName, fieldValue) {
+    let resource = await this.getFormInfo(resourceName);
+    let resourcePath = resource["path"];
     let res = await this.sendFormioReq(
-      `${resourceName.toLowerCase()}/exists?data.${fieldName}=${fieldValue}`
+      `${resourcePath}/exists?data.${fieldName}=${fieldValue}`
     );
-    console.log(res);
     return !(res === undefined);
   }
 }

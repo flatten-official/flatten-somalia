@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.get("/", root_route);
 
-router.get("/verify_email", verify_route);
+router.get("/volunteer/verify_email", verify_route);
 
 module.exports = router;

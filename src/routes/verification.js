@@ -22,6 +22,7 @@ module.exports = async (req, res) => {
 
   let token;
   if (isAdmin) {
+    console.log("admin resource ", config.admin_resource);
     token = await generateToken(
       email,
       config.admin_resource,
@@ -34,8 +35,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  let url = `http://${config.frontend_url}?token=${token}`;
-  console.log(email);
+  let url = `${config.frontend_url}?token=${token}`;
   await sendVerificationEmail(email, url);
 
   res.sendStatus(200);
