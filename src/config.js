@@ -35,11 +35,8 @@ export const AuthConfig = {
   anonState: "/auth",
   authState: "/",
   login: {
-    form: "user/login",
-  },
-  register: {
-    form: "user/register",
-  },
+    form: "somalia/volunteer/login",
+  }
 };
 
 export const FormConfig = {
