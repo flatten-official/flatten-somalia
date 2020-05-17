@@ -2,14 +2,14 @@ import React from "react";
 import { Route } from "react-router-dom";
 import Header from "./containers/Header";
 import Footer from "./containers/Footer";
-import Home from "./views/Home";
-import Auth from "./views/Auth/Auth";
-import Admin from "./views/Admin/Admin";
-import Success from "./views/Form/Success";
-import SubmittedEmail from "./views/Auth/SubmittedEmail";
+import Home from "./views/root/Home";
+import Auth from "./views/auth/Auth";
+import Admin from "./views/admin/Admin";
+import Success from "./views/sucess/Success";
+import SubmittedEmail from "./views/submitted-email/SubmittedEmail";
 
 const App = () => (
-  <div>
+  <>
     <Header />
 
     <div className="container" id="main">
@@ -21,7 +21,7 @@ const App = () => (
     </div>
 
     <Footer />
-  </div>
+  </>
 );
 
 export default App;

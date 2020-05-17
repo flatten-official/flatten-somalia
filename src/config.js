@@ -1,5 +1,6 @@
 // let PROJECT_URL = "https://forms.flatten.ca/yordvlchrlvervl" // master
-let PROJECT_URL = "https://formio-6eoeawk53a-uc.a.run.app/staging-yordvlchrlvervl"; // staging
+let PROJECT_URL =
+  "https://formio-6eoeawk53a-uc.a.run.app/staging-yordvlchrlvervl"; // staging
 
 let API_URL = "https://forms.flatten.ca";
 
@@ -36,13 +37,13 @@ export const AuthConfig = {
   authState: "/",
   login: {
     form: "somalia/volunteer/login",
-  }
+  },
 };
 
 export const FormConfig = {
   volunteerForm: {
     formName: "volunteerdatacollection",
-    formTitle: "Volunteer Form Somalia",
+    formTitle: "Volunteer root Somalia",
   },
   addVolunteerForm: {
     formName: "addVolunteerSomalia",
