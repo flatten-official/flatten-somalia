@@ -1,7 +1,7 @@
-let PROJECT_URL = "https://formio-ngrs5hzi2q-uc.a.run.app/jrnkhofvnfhrvsv" // prod
-// let PROJECT_URL = "https://formio-6eoeawk53a-uc.a.run.app/staging-jrnkhofvnfhrvsv"; // staging
+// let PROJECT_URL = "https://forms.flatten.ca/yordvlchrlvervl" // master
+let PROJECT_URL = "https://formio-6eoeawk53a-uc.a.run.app/staging-yordvlchrlvervl"; // staging
 
-let API_URL = "https://api.form.io";
+let API_URL = "https://forms.flatten.ca";
 
 let query = {};
 window.location.search
@@ -35,16 +35,13 @@ export const AuthConfig = {
   anonState: "/auth",
   authState: "/",
   login: {
-    form: "user/login",
-  },
-  register: {
-    form: "user/register",
-  },
+    form: "somalia/volunteer/login",
+  }
 };
 
 export const FormConfig = {
   volunteerForm: {
-    formName: "volunteerFormSomalia",
+    formName: "volunteerdatacollection",
     formTitle: "Volunteer Form Somalia",
   },
   addVolunteerForm: {

@@ -1,0 +1,8 @@
+{
+    "en": {
+        "Email": "Example. Should include the translations that are specified here: https://github.com/formio/formio.js/blob/master/src/i18n.js"
+    },
+    "so": {
+        "Email": "In somalian..."
+    }
+}
