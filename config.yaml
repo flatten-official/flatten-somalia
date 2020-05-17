@@ -6,8 +6,14 @@ user_role: SomaliaVolunteer
 admin_resource: somaliaAdmin
 admin_role: SomaliaAdministrator
 staging:
-  formio_project_url: formio-staging-6eoeawk53a-uc.a.run.app/testing-jrnkhofvnfhrvsv
+  formio_project_url: formio-6eoeawk53a-uc.a.run.app/staging-yordvlchrlvervl
   formio_api_secret: projects/233853318753/secrets/formio-api-secret/versions/latest
   sendgrid_secret: projects/233853318753/secrets/sendgrid-api-key/versions/latest
   formio_jwt_secret: projects/233853318753/secrets/formio-jwt-secret/versions/latest
-  frontend_url: localhost:3000
+  frontend_url: https://flatten-staging-271921.web.app
+master:
+  formio_project_url: forms.flatten.ca/yordvlchrlvervl
+  formio_api_secret: projects/81735388662/secrets/formio-api-key/versions/latest
+  sendgrid_secret: projects/81735388662/secrets/sendgrid-api-key/versions/latest
+  formio_jwt_secret: projects/81735388662/secrets/formio-jwt-secret/versions/latest
+  frontend_url: https://v.flatten.so
