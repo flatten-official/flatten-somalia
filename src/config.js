@@ -1,8 +1,7 @@
 // let PROJECT_URL = "https://forms.flatten.ca/yordvlchrlvervl" // master
 let PROJECT_URL = "https://formio-6eoeawk53a-uc.a.run.app/staging-yordvlchrlvervl"; // staging
 
-// let API_URL = "https://forms.flatten.ca/yordvlchrlvervl"; // master
-let API_URL = "https://forms.flatten.ca/staging-yordvlchrlvervl"; // staging
+let API_URL = "https://forms.flatten.ca";
 
 let query = {};
 window.location.search
