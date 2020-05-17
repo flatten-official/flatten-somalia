@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 import VolunteerForm from "./VolunteerForm";
 import Auth from "../auth/Auth";
 import { selectRoot } from "react-formio";
-import { FormConfig } from "../../config";
+import { FormConfig } from "../../../config";
 
 const checkFormRoles = (auth) => {
   let access;

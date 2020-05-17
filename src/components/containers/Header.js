@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { push } from "connected-react-router";
 import NavLink from "./NavLink";
 import { selectRoot, logout } from "react-formio";
-import { AuthConfig } from "../config";
+import { AuthConfig } from "../../config";
 
 const Header = ({ auth, logout }) => (
   <nav className="navbar navbar-expand-lg navbar-light bg-light">

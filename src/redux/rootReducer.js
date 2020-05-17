@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { auth, form, forms, submission, submissions } from "react-formio";
-import { FormConfig } from "./config";
+import { FormConfig } from "../config";
 
 const createReducers = () => {
   let reducersObj = {
