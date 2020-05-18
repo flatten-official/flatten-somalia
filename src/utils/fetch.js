@@ -57,8 +57,8 @@ const formio_api_secret = new Secret(process.env.FORMIO_API_KEY_SECRET_ID);
 
 class FormIORoute extends CachedValue {
   constructor(path) {
-    super(() => {
-      const res = sendFormioReq(path);
+    super(async () => {
+      const res = await sendFormioReq(path);
       return res ? res.data : undefined;
     }, 600);
   }
@@ -67,6 +67,7 @@ class FormIORoute extends CachedValue {
 const sendFormioReq = async (path) => {
   const url = `${process.env.FORMIO_PROJECT_URL}/${path}`;
   const token = await formio_api_secret.get();
+  console.log(url);
   try {
     return await axios.get(url, {
       headers: { "x-token": token, "Content-Type": "application/json" },
