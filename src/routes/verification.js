@@ -1,8 +1,6 @@
 const { generateToken, ProjectInfo } = require("../utils/formio");
 const { sendVerificationEmail } = require("../utils/sendgrid");
-const { loadConfig } = require("../utils/config");
-
-const config = loadConfig();
+const config = require("./../config");
 
 module.exports = async (req, res) => {
   let email = req.query.email;
@@ -14,6 +12,7 @@ module.exports = async (req, res) => {
     "email",
     email
   );
+
   let isUser = project_info.existsInResource(
     config.user_resource,
     "email",

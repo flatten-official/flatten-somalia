@@ -1,31 +1,26 @@
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
-const { loadConfig } = require("./config");
+const { Secret } = require("./secrets");
 
-let secrets = require("./secrets");
-
-const config = loadConfig();
-
-let jwt_secret = new secrets.Secret(config.formio_jwt_secret);
+const jwt_secret = new Secret(process.env.FORMIO_JWT_SECRET_ID);
 
 class ProjectInfo {
   constructor() {
-    this.formio_api_secret = new secrets.Secret(config.formio_api_secret);
+    this.formio_api_secret = new Secret(process.env.FORMIO_API_KEY_SECRET_ID);
 
-    // todo - timeout on this info
+    // TODO - timeout on this info
     this.accessInfo = undefined;
     this.formInfo = undefined;
     this.projectInfo = undefined;
   }
 
   async sendFormioReq(path) {
-    let url = `https://${config.formio_project_url}/${path}`;
-    let token = await this.formio_api_secret.get();
+    const url = `${process.env.FORMIO_PROJECT_URL}/${path}`;
+    const token = await this.formio_api_secret.get();
     try {
-      let res = await axios.get(url, {
+      return await axios.get(url, {
         headers: { "x-token": token, "Content-Type": "application/json" },
       });
-      return res;
     } catch (e) {
       console.error(e);
       return undefined;
@@ -46,9 +41,7 @@ class ProjectInfo {
       this.formInfo = res ? res.data : undefined;
     }
     let forms = this.formInfo.filter((v) => v.name === form);
-    let formInfo = forms.length > 0 ? forms[0] : undefined;
-
-    return formInfo;
+    return forms.length > 0 ? forms[0] : undefined;
   }
 
   async getProjectInfo() {
@@ -98,9 +91,7 @@ async function generateToken(email, formName, roleName) {
     },
   };
 
-  let token = jwt.sign(tokenObj, jwt_key);
-
-  return token;
+  return jwt.sign(tokenObj, jwt_key);
 }
 
 module.exports = { ProjectInfo, generateToken };

@@ -1,13 +1,11 @@
 // using Twilio SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
 
-const secrets = require("./secrets");
+const { Secret } = require("./secrets");
 const sgMail = require("@sendgrid/mail");
-const { loadConfig } = require("./config");
+const config = require("./../config");
 
-const config = loadConfig();
-
-var sg_secret = new secrets.Secret(config.sendgrid_secret);
+const sg_secret = new Secret(process.env.SENDGRID_SECRET_ID);
 
 /* Sends a verification link to a user given an email and the link. */
 async function sendVerificationEmail(email, verification_link) {
