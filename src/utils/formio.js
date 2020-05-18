@@ -1,61 +1,36 @@
-const axios = require("axios");
 const jwt = require("jsonwebtoken");
-const { Secret } = require("./secrets");
+const { Secret, FormIORoute, sendFormioReq } = require("./fetch");
 
 const jwt_secret = new Secret(process.env.FORMIO_JWT_SECRET_ID);
 
-class ProjectInfo {
+class FormIoApi {
   constructor() {
-    this.formio_api_secret = new Secret(process.env.FORMIO_API_KEY_SECRET_ID);
-
-    // TODO - timeout on this info
-    this.accessInfo = undefined;
-    this.formInfo = undefined;
-    this.projectInfo = undefined;
-  }
-
-  async sendFormioReq(path) {
-    const url = `${process.env.FORMIO_PROJECT_URL}/${path}`;
-    const token = await this.formio_api_secret.get();
-    try {
-      return await axios.get(url, {
-        headers: { "x-token": token, "Content-Type": "application/json" },
-      });
-    } catch (e) {
-      console.error(e);
-      return undefined;
-    }
+    this.accessInfo = new FormIORoute("access");
+    this.formInfo = new FormIORoute("form");
+    this.projectInfo = new FormIORoute("");
   }
 
   async getRoleAccessInfo(role) {
-    if (this.accessInfo === undefined) {
-      let res = await this.sendFormioReq("access");
-      this.accessInfo = res ? res.data : undefined;
-    }
-    return this.accessInfo["roles"][role.toLowerCase()];
+    const accessInfo = await this.accessInfo.get();
+    return accessInfo ? accessInfo.roles[role.toLowerCase()] : undefined;
   }
 
   async getFormInfo(form) {
-    if (this.formInfo === undefined) {
-      let res = await this.sendFormioReq("form");
-      this.formInfo = res ? res.data : undefined;
-    }
-    let forms = this.formInfo.filter((v) => v.name === form);
+    const formInfo = await this.formInfo.get();
+    if (formInfo === undefined) return undefined;
+    const forms = formInfo.filter((v) => v.name === form);
     return forms.length > 0 ? forms[0] : undefined;
   }
 
   async getProjectInfo() {
-    if (this.projectInfo === undefined) {
-      let res = await this.sendFormioReq("");
-      this.projectInfo = res ? res.data : undefined;
-    }
-    return this.projectInfo;
+    return this.projectInfo.get();
   }
 
   async existsInResource(resourceName, fieldName, fieldValue) {
     let resource = await this.getFormInfo(resourceName);
+    if (resource === undefined) return undefined;
     let resourcePath = resource["path"];
-    let res = await this.sendFormioReq(
+    let res = await sendFormioReq(
       `${resourcePath}/exists?data.${fieldName}=${fieldValue}`
     );
     return !(res === undefined);
@@ -65,7 +40,7 @@ class ProjectInfo {
 async function generateToken(email, formName, roleName) {
   let jwt_key = await jwt_secret.get();
 
-  let project_info = new ProjectInfo();
+  let project_info = new FormIoApi();
 
   let projectId = (await project_info.getProjectInfo())["_id"];
   let formId = (await project_info.getFormInfo(formName))["_id"];
@@ -94,4 +69,6 @@ async function generateToken(email, formName, roleName) {
   return jwt.sign(tokenObj, jwt_key);
 }
 
-module.exports = { ProjectInfo, generateToken };
+const formIoApi = new FormIoApi();
+
+module.exports = { formIoApi, generateToken };

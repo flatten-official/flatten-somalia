@@ -1,41 +1,45 @@
-const { generateToken, ProjectInfo } = require("../utils/formio");
+const { generateToken, formIoApi } = require("../utils/formio");
 const { sendVerificationEmail } = require("../utils/sendgrid");
-const config = require("./../config");
+const Config = require("./../config");
 
 module.exports = async (req, res) => {
   let email = req.query.email;
 
-  let project_info = new ProjectInfo();
+  if (!email) {
+    res.status(400).send("No email provided.");
+    return;
+  }
 
-  let isAdmin = project_info.existsInResource(
-    config.admin_resource,
+  const isAdmin = formIoApi.existsInResource(
+    Config.admin_resource,
     "email",
     email
   );
 
-  let isUser = project_info.existsInResource(
-    config.user_resource,
+  const isUser = formIoApi.existsInResource(
+    Config.user_resource,
     "email",
     email
   );
 
   let token;
+
   if (isAdmin) {
-    console.log("admin resource ", config.admin_resource);
+    console.log("admin resource ", Config.admin_resource);
     token = await generateToken(
       email,
-      config.admin_resource,
-      config.admin_role
+      Config.admin_resource,
+      Config.admin_role
     );
   } else if (isUser) {
-    token = await generateToken(email, config.user_resource, config.user_role);
+    token = await generateToken(email, Config.user_resource, Config.user_role);
   } else {
     res.sendStatus(200);
     return;
   }
 
-  let url = `${config.frontend_url}?token=${token}`;
-  await sendVerificationEmail(email, url);
+  const url = `${process.env.FRONTEND_URL}?token=${token}`;
+  await sendVerificationEmail(email, url); // TODO do we need to await email sending or can we return success
 
   res.sendStatus(200);
 };
