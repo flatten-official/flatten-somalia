@@ -10,7 +10,7 @@ const checkFormRoles = (auth) => {
   let access;
   try {
     access =
-      auth.submissionAccess[FormConfig.volunteerForm.formName].create_own;
+      auth.submissionAccess[FormConfig.volunteerForm.formPath].create_own;
   } catch {
     return false;
   }
