@@ -1,0 +1,19 @@
+project_id_master: flatten-271620
+project_id_staging: flatten-staging-271921
+verification_email_template: d-7a10ff414f6d44b882eb9a4dadab16ad
+user_resource: somaliaVolunteer
+user_role: SomaliaVolunteer
+admin_resource: somaliaAdmin
+admin_role: SomaliaAdministrator
+staging:
+  formio_project_url: formio-6eoeawk53a-uc.a.run.app/staging-yordvlchrlvervl
+  formio_api_secret: projects/233853318753/secrets/formio-api-secret/versions/latest
+  sendgrid_secret: projects/233853318753/secrets/sendgrid-api-key/versions/latest
+  formio_jwt_secret: projects/233853318753/secrets/formio-jwt-secret/versions/latest
+  frontend_url: https://flatten-staging-271921.web.app
+master:
+  formio_project_url: forms.flatten.ca/yordvlchrlvervl
+  formio_api_secret: projects/81735388662/secrets/formio-api-key/versions/latest
+  sendgrid_secret: projects/81735388662/secrets/sendgrid-api-key/versions/latest
+  formio_jwt_secret: projects/81735388662/secrets/formio-jwt-secret/versions/latest
+  frontend_url: https://v.flatten.so
