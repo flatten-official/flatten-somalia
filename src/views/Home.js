@@ -23,7 +23,7 @@ const checkFormRoles = (auth) => {
 const Home = ({ auth }) => (
   <div>
     {auth.is.authenticated ? (
-      <div className="well text-center">
+      <div className="well text-left">
         {(auth.user && auth.user.data) ? (
           <div>
             <h3>
