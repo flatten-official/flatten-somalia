@@ -41,9 +41,9 @@ export const AuthConfig = {
 
 export const FormConfig = {
   volunteerForm: {
-    formName: "volunteerdatacollection",
+    formName: "somalia",
     formTitle: "Volunteer Form Somalia",
-    formPath: "volunteerDataCollection"
+    formPath: "somalia"
   },
   addVolunteerForm: {
     formName: "addVolunteer",
