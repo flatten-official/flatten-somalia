@@ -8,10 +8,11 @@ const app = express();
 
 const routes = require("./routes");
 const { Secret } = require("./utils/networkValues");
+const cookieSecret = new Secret(process.env.COOKIE_SECRET_ID);
 
-var cookieSecret = new Secret(process.env.COOKIE_SECRET_ID);
+async function getApp() {
+  const cookieSecretString = await cookieSecret.get();
 
-exports.appPromise = cookieSecret.get().then((cookieSecretString) => {
   if (process.env.ENVIRONMENT === "dev") {
     app.use(cors({ origin: true, credentials: true }));
   } else {
@@ -32,4 +33,6 @@ exports.appPromise = cookieSecret.get().then((cookieSecretString) => {
   app.use("/", routes);
 
   return app;
-});
+}
+
+module.exports = { getApp };
