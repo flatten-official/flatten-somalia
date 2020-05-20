@@ -3,4 +3,5 @@ runtime: nodejs10
 env_variables:
   ENVIRONMENT: prod
   SENDGRID_SECRET_ID: projects/81735388662/secrets/sendgrid-api-key/versions/latest
+  COOKIE_SECRET_ID: projects/81735388662/secrets/cookie-secret-so/versions/latest
   FRONTEND_URL: https://v.flatten.so

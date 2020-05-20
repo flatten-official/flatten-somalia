@@ -7,17 +7,17 @@ const helmet = require("helmet");
 const app = express();
 
 const routes = require("./routes");
-const utils = require("./utils/secrets");
+const { Secret } = require("./utils/networkValues");
 
-var cookieSecret = new utils.Secret(process.env.COOKIE_SECRET);
+var cookieSecret = new Secret(process.env.COOKIE_SECRET_ID);
 
-exports.appPromise = cookieSecret.load().then(() => {
-  if (process.env.environment === "dev") {
+exports.appPromise = cookieSecret.get().then((cookieSecretString) => {
+  if (process.env.ENVIRONMENT === "dev") {
     app.use(cors({ origin: true, credentials: true }));
   } else {
     app.use(
       cors({
-        origin: [`https://${process.env.DOMAIN}`],
+        origin: [process.env.FRONTEND_URL],
         credentials: true,
       })
     );
@@ -28,9 +28,8 @@ exports.appPromise = cookieSecret.load().then(() => {
   app.use(express.json());
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
-  app.use(cookieParser(cookieSecret.secret));
+  app.use(cookieParser(cookieSecretString));
   app.use("/", routes);
 
-  console.log(cookieSecret.secret);
   return app;
 });
