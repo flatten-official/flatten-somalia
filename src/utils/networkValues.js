@@ -8,7 +8,7 @@ const smClient = new SecretManagerServiceClient();
 class CachedValue {
   /**
    *
-   * @param fetcher method to fetch value
+   * @param fetcher method to fetch value (should return a promise)
    * @param timeout in seconds
    */
   constructor(fetcher, timeout) {
