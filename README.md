@@ -6,14 +6,17 @@
 
 ## Setup
 
-1. Create a `.env` file in the root directory where you can set your environment variables. DO NOT commit this file.
+1. Ensure an admin has added you to the `Somalia Staging Data Access` group, otherwise you won't have permission to read the database.
+Also ask to be added to the Atlas staging project if you want a GUI to navigate the database.
+
+2. Create a `.env` file in the root directory where you can set your environment variables. DO NOT commit this file.
 Environment variables will be automatically read from this file by the `dotenv` package. You can use `.env.template`
 as a starter for your `.env` file.
 
-2. Enable ESLint in your IDE (normally a plugin to install). ESLint is a code linter that checks logic and syntax.
+3. Enable ESLint in your IDE (normally a plugin to install). ESLint is a code linter that checks logic and syntax.
 ESLint is configured with Prettier to also enforce a standard formatting. 
 
-3. Run `npm install` to install all the required packages.
+4. Run `npm install` to install all the required packages.
 
 ## Running
 
@@ -32,5 +35,4 @@ Finally, **document any changes** in `.env.template`.
 
 The following tools may be very helpful to you, please check them out.
 
-- [Robo3T](https://robomongo.org/) : Helpful mongo db GUI
 - [Postman](https://www.postman.com/) to test the different API endpoints.  
