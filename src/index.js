@@ -2,13 +2,13 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
-import store, { history } from "./redux/store";
+import store, { history } from "./store";
 import { initAuth, Formio } from "react-formio";
-import App from "./components/App";
+import App from "./App";
 
 import { AppConfig } from "./config";
 
-import "./styles/styles.scss";
+import "./styles.scss";
 import "./i18n";
 
 Formio.setProjectUrl(AppConfig.projectUrl);

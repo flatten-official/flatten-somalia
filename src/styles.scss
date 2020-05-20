@@ -31,12 +31,12 @@ $danger: $red;
 $light: $gray-100;
 $dark: $gray-800;
 
-@import "../../node_modules/bootswatch/dist/litera/variables";
-@import "../../node_modules/bootstrap/scss/bootstrap";
-@import "../../node_modules/bootswatch/dist/litera/bootswatch";
+@import "~bootswatch/dist/litera/_variables.scss";
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootswatch/dist/litera/_bootswatch.scss";
 $fa-font-path: "../fonts";
-@import "../../node_modules/font-awesome/scss/font-awesome";
-@import "../../node_modules/formiojs/dist/formio.full.css";
+@import "~font-awesome/scss/font-awesome";
+@import "~formiojs/dist/formio.full.css";
 
 .wordmark {
   font-family: "DM Sans", sans-serif;

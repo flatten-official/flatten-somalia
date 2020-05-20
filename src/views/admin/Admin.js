@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { selectRoot } from "react-formio";
 import VolunteerForm from "../root/VolunteerForm";
-import { FormConfig } from "../../../config";
+import { FormConfig } from "../../config";
 
 const Admin = ({ auth }) => (
   <>
