@@ -1,5 +1,6 @@
 const {
   writeCookie,
+  readCookie,
   Cookie,
 } = require("./../../src/verification/verificationData");
 
@@ -27,7 +28,7 @@ describe("testing cookie database I/O", () => {
    */
   afterAll(async () => await closeDatabase());
 
-  it("writeCookie successfully writes to the database", async () => {
+  it("should write cookie to database", async () => {
     const expiry = Date.now();
     const volunteerID = "56cb91bdc3464f14678934ca";
     const cookieID = await writeCookie(
@@ -42,5 +43,27 @@ describe("testing cookie database I/O", () => {
     expect(retrievedCookie._id.toString()).toMatch(cookieID.toString());
     expect(retrievedCookie.expiry.getTime()).toBe(expiry);
     expect(retrievedCookie.volunteerId.toString()).toMatch(volunteerID);
+  });
+
+  it("should read existing cookie from database", async () => {
+    const expiry = Date.now();
+    const volunteerID = "56cb91bdc3464f14678934ca";
+    const cookieID = await writeCookie(
+      expiry,
+      mongoose.mongo.ObjectId(volunteerID)
+    );
+
+    const cookieValues = await readCookie(cookieID);
+
+    expect(cookieValues.volunteerId.toString()).toMatch(volunteerID);
+    expect(cookieValues.expiry.getTime()).toBe(expiry);
+  });
+
+  it("should fail to read cookie since cookie doesn't exist", async () => {
+    const wrongID = mongoose.mongo.ObjectId("56cb91bdc3464f14678934ca");
+
+    const cookieValues = await readCookie(wrongID);
+
+    expect(cookieValues).toBeNull();
   });
 });

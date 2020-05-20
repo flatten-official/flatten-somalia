@@ -1,4 +1,3 @@
-const { calculateExpiryTime } = require("./../utils/time");
 const mongoose = require("mongoose");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
@@ -24,13 +23,16 @@ async function writeCookie(expiry, volunteerObjectID) {
 }
 
 /**
- *
- * @param the cookiesID
+ * Reads the cookie and returns it's data or returns null if cookie doesn't exist
+ * @param cookieID the cookie id as a hex string
+ * @return a date and objectID objects
  */
-function readCookie(cookieID) {
-  const readCookie = Cookie.findById(cookieID);
+async function readCookie(cookieID) {
+  const readCookie = await Cookie.findById(cookieID);
 
-  return { expiry: readCookie.value, volunteerId: readCookie.volunteerId };
+  if (!readCookie) return null;
+
+  return { expiry: readCookie.expiry, volunteerId: readCookie.volunteerId };
 }
 
 module.exports = { Cookie, writeCookie, readCookie };
