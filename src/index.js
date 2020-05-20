@@ -9,8 +9,8 @@ import App from "./App";
 import { AppConfig } from "./config";
 
 import "./styles.scss";
-import "./i18n"
- 
+import "./i18n";
+
 Formio.setProjectUrl(AppConfig.projectUrl);
 Formio.setBaseUrl(AppConfig.apiUrl);
 
