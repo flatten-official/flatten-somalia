@@ -44,11 +44,18 @@ class Secret extends CachedValue {
   }
 
   async readSecret(secret_id) {
-    const [version] = await smClient.accessSecretVersion({
-      name: secret_id,
-    });
+    try {
+      const [version] = await smClient.accessSecretVersion({
+        name: secret_id,
+      });
 
-    return version.payload.data.toString("utf8");
+      return version.payload.data.toString("utf8");
+    } catch (e) {
+      console.log(
+        `Could not read secret ${secret_id}. Check that you have the proper permissions, and reauthenticate.`
+      );
+      throw e;
+    }
   }
 }
 
