@@ -1,12 +1,25 @@
 const express = require("express");
 
-const root_route = require("./routes/root");
-const verify_route = require("./routes/verification");
+const {
+  loginRoute,
+  verifyTokenRoute,
+} = require("./verification/verificationRoutes");
+const { submitHouseholdRoute } = require("./submission/submissionRoutes");
+const { addVolunteerRoute } = require("./volunteer/volunteerRoutes");
 
 const router = express.Router();
 
-router.get("/", root_route);
+router.get("/", (req, res) => {
+  res
+    .status(200)
+    .send(`Flatten.so backend online (${process.env.ENVIRONMENT})`);
+});
 
-router.get("/volunteer/verify_email", verify_route);
+router.get("/verify/login", loginRoute);
+router.get("/verify/token", verifyTokenRoute);
+
+router.get("/volunteer/add", addVolunteerRoute);
+
+router.get("/submit/household", submitHouseholdRoute);
 
 module.exports = router;
