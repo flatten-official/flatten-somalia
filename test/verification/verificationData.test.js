@@ -2,7 +2,7 @@ const {
   writeCookie,
   readCookie,
   Cookie,
-} = require("./../../src/verification/verificationData");
+} = require("../../src/verification/cookieData");
 
 const {
   connectToDatabase,
