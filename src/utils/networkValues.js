@@ -1,3 +1,5 @@
+const { calculateExpiryTime } = require("./time");
+
 const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 
 const smClient = new SecretManagerServiceClient();
@@ -9,29 +11,20 @@ class CachedValue {
   /**
    *
    * @param fetcher method to fetch value (should return a promise)
-   * @param timeout in seconds
+   * @param timeout in minutes
    */
   constructor(fetcher, timeout) {
     this.fetcher = fetcher;
     this.timeout = timeout;
     this.value = undefined;
-    this.lastFetch = undefined;
-  }
-
-  getTime() {
-    return Date.now() / 1000;
-  }
-
-  getExpiryTime() {
-    return this.lastFetch ? this.lastFetch + this.timeout : -1;
+    this.expiryTime = undefined;
   }
 
   async get() {
-    const now = this.getTime();
-
-    if (!this.value || this.getExpiryTime() > now) {
-      this.value = await this.fetcher();
-      this.lastFetch = now;
+    // If the value is undefined or the current time is past the expiry time
+    if (!this.value || Date.now() > this.expiryTime) {
+      this.value = await this.fetcher(); // Get value
+      this.expiryTime = calculateExpiryTime(this.timeout); // Update expiry time
     }
 
     return this.value;
@@ -40,7 +33,7 @@ class CachedValue {
 
 class Secret extends CachedValue {
   constructor(secret_id) {
-    super(() => this.readSecret(secret_id), 3600);
+    super(() => this.readSecret(secret_id), 60);
   }
 
   async readSecret(secret_id) {
