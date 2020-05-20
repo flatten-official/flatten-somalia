@@ -1,6 +1,6 @@
 require("dotenv").config(); // Load environment variables from .env
 
-const { connectToDB } = require("./utils/mongoUtil");
+const { connectToDB, cleanupDBConnection } = require("./utils/mongo");
 const { getApp } = require("./app");
 
 const port = process.env.PORT || 80;
@@ -18,6 +18,11 @@ async function startServer() {
   });
 }
 
+async function cleanup() {
+  await cleanupDBConnection();
+}
+
 setup()
   .then(startServer)
-  .catch((e) => console.log(e));
+  .catch((e) => console.log(e))
+  .finally(cleanup);
