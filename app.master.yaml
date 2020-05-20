@@ -3,7 +3,4 @@ runtime: nodejs10
 env_variables:
   ENVIRONMENT: prod
   SENDGRID_SECRET_ID: projects/81735388662/secrets/sendgrid-api-key/versions/latest
-  FORMIO_API_KEY_SECRET_ID: projects/81735388662/secrets/formio-api-key/versions/latest
-  FORMIO_JWT_SECRET_ID: projects/81735388662/secrets/formio-jwt-secret/versions/latest
-  FORMIO_PROJECT_URL: https://forms.flatten.ca/yordvlchrlvervl
   FRONTEND_URL: https://v.flatten.so
