@@ -5,3 +5,4 @@ env_variables:
   SENDGRID_SECRET_ID: projects/233853318753/secrets/sendgrid-api-key/versions/latest
   COOKIE_SECRET_ID: projects/233853318753/secrets/cookie-secret-so/versions/latest
   FRONTEND_URL: https://flatten-staging-271921.web.app
+  DB_CONNECTION_SECRET_ID: projects/233853318753/secrets/so-atlas-connection-url/versions/latest
