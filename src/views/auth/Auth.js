@@ -1,19 +1,26 @@
 import React from "react";
+import {connect} from "react-redux"
+import { PropTypes } from "prop-types";
 import Login from "./Login";
-import { useTranslation } from "react-i18next";
+import { Translate } from "react-redux-i18n";
+import EN from '../../translations/en/Auth'
+import SO from '../../translations/so/Auth'
 
-import FormTranslations from "../../translations/Form.json";
-
-const Auth = () => {
-  const { t, i18n } = useTranslation("Login");
+const Auth = ({locale}) => {
   return (
     <div>
-      <div className="panel-heading card-header">{t("Login")}</div>
+      <div className="panel-heading card-header"> <Translate value='Auth.loginForm.title'/> </div>
       <div className="panel-body card-body">
-        <Login options={{ language: i18n.language, i18n: FormTranslations }} />
+        <Login options={{ language: locale, i18n: {en: EN.loginForm, so: SO.loginForm} }}/>
       </div>
     </div>
   );
 };
 
-export default Auth;
+Auth.propTypes = {
+    locale: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = state => ({ locale: state.i18n.locale });
+
+export default connect(mapStateToProps) (Auth);

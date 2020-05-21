@@ -11,6 +11,10 @@ import {
 } from "react-formio";
 import { push } from "connected-react-router";
 import Loading from "../../containers/Loading";
+import { Translate } from "react-redux-i18n";
+import EN from '../../translations/en/VolunteerForm';
+import SO from '../../translations/so/VolunteerForm';
+import {PropTypes} from "prop-types"
 
 const VolunteerForm = ({
   formTitle,
@@ -20,6 +24,7 @@ const VolunteerForm = ({
   form,
   getForm,
   onSubmit,
+  locale
 }) => {
   useEffect(getForm, []);
 
@@ -29,7 +34,7 @@ const VolunteerForm = ({
 
   return (
     <div>
-      <h3>{formTitle}</h3>
+      <h3> <Translate value={"VolunteerForm.title"} /> </h3>
       <Errors errors={errors} />
       <Form
         form={form.form}
@@ -39,10 +44,19 @@ const VolunteerForm = ({
         onSubmit={onSubmit}
         options={{
           noAlerts: true,
+          language: locale,
+          i18n: {
+            en: EN,
+            so: SO
+          }
         }}
       />
     </div>
   );
+};
+
+VolunteerForm.propTypes = {
+  locale: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -52,6 +66,7 @@ const mapStateToProps = (state, ownProps) => {
       selectError("form", selectRoot(ownProps.formName, state)),
       selectError("submission", selectRoot(ownProps.formName, state)),
     ],
+    locale: state.i18n.locale
   };
 };
 
