@@ -6,6 +6,7 @@ import { push } from "connected-react-router";
 import NavLink from "./NavLink";
 import { selectRoot, logout } from "react-formio";
 import { AuthConfig } from "../config";
+import { Translate } from "react-redux-i18n";
 
 const Header = ({ auth, logout }) => (
   <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,7 +18,7 @@ const Header = ({ auth, logout }) => (
         {auth.is.hasOwnProperty("administrator") && auth.is.administrator ? (
           <NavLink to="/admin" role="navigation link" className="nav-link">
             <i className="fa fa-unlock-alt" />
-            &nbsp; Admin Panel
+            &nbsp; <Translate value="Navbar.links.adminPanel" />
           </NavLink>
         ) : null}
       </ul>
@@ -25,13 +26,13 @@ const Header = ({ auth, logout }) => (
         <ul className="nav navbar-nav mr-auto">
           <span className="nav-link" role="navigation link" onClick={logout}>
             <span className="fa fa-sign-out" />
-            &nbsp; Logged in as {auth.user.data.email} | Logout
+            &nbsp; <Translate value="Navbar.links.loggedInAndLogout" user={auth.user.data.email} />
           </span>
         </ul>
       ) : (
         <ul className="nav navbar-nav mr-auto">
           <NavLink to="/auth" role="navigation link" className="nav-link">
-            Login
+            <Translate value="Navbar.links.login" />
           </NavLink>
         </ul>
       )}

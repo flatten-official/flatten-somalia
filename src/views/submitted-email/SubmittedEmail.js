@@ -1,8 +1,8 @@
 import React from "react";
+import { Translate } from "react-redux-i18n";
 
 export default () => (
   <h3>
-    If you are a volunteer, you have received an email with a link to login. If
-    you did not, please contact an administrator.
+    <Translate value={'Auth.submittedEmailMessage'}/>
   </h3>
 );

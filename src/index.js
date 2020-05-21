@@ -4,12 +4,18 @@ import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import store, { history } from "./store";
 import { initAuth, Formio } from "react-formio";
-import App from "./App";
 
+import {
+    setLocale,
+    loadTranslations,
+    syncTranslationWithStore,
+} from "react-redux-i18n";
+import getTranslations from './translations/GetTranslations'
+
+import App from "./App";
 import { AppConfig } from "./config";
 
 import "./styles.scss";
-import "./i18n";
 
 Formio.setProjectUrl(AppConfig.projectUrl);
 Formio.setBaseUrl(AppConfig.apiUrl);
@@ -17,11 +23,17 @@ Formio.setBaseUrl(AppConfig.apiUrl);
 // Initialize the current user
 store.dispatch(initAuth());
 
-render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
-  </Provider>,
-  document.getElementById("root")
-);
+syncTranslationWithStore(store)
+getTranslations().then((locale) => {
+    store.dispatch(loadTranslations(locale))
+    store.dispatch(setLocale('en'));
+
+    render(
+        <Provider store={store}>
+            <ConnectedRouter history={history}>
+                <App />
+            </ConnectedRouter>
+        </Provider>,
+        document.getElementById("root")
+    );
+});

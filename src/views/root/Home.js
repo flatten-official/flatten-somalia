@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Translate } from "react-redux-i18n";
 import { PropTypes } from "prop-types";
 import VolunteerForm from "./VolunteerForm";
 import Auth from "../auth/Auth";
@@ -25,15 +26,14 @@ const Home = ({ auth }) => (
     {auth.is.authenticated && auth.user && auth.user.data ? (
       <div className="well text-center">
         <h3>
-          You are logged in as&nbsp;
-          <strong>{auth.user.data.email}</strong>!
+         <Translate value={'loggedInAs'}/>&nbsp;
+          <strong>{auth.user.data.email}</strong>
         </h3>
         {checkFormRoles(auth) ? (
           <VolunteerForm {...FormConfig.volunteerForm} />
         ) : (
           <h3>
-            You do not have permission to access this form. Please contact an
-            admin to get access.
+            <Translate value={'cannotAccessFormMessage'}/>
           </h3>
         )}
       </div>
