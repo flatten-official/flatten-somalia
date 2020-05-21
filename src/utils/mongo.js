@@ -1,7 +1,21 @@
 const { Secret } = require("./networkValues");
 const mongoose = require("mongoose");
+const { CronJob } = require("cron");
+const { removedExpiredCookies } = require("./../verification/cookieData");
 
-async function connectToDB() {
+const cleanupCookieJob = new CronJob("0 * * * *", removedExpiredCookies);
+
+async function setupDatabase() {
+  await connectToDatabase();
+  cleanupCookieJob.start();
+}
+
+async function cleanupDatabase() {
+  cleanupCookieJob.stop();
+  await mongoose.disconnect();
+}
+
+async function connectToDatabase() {
   const connectionURL = await new Secret(
     process.env.DB_CONNECTION_SECRET_ID
   ).get();
@@ -16,11 +30,7 @@ async function connectToDB() {
     throw e;
   }
 
-  console.log("Connected to database");
+  console.log("Connected to database.");
 }
 
-async function cleanupDBConnection() {
-  return mongoose.disconnect();
-}
-
-module.exports = { connectToDB, cleanupDBConnection };
+module.exports = { setupDatabase, cleanupDatabase };

@@ -31,16 +31,32 @@ async function writeCookie(expiry, volunteerObjectID) {
 }
 
 /**
- * Reads the cookie and returns it's data or returns null if cookie doesn't exist
+ * Reads the cookie and returns it's data or returns null if cookie doesn't exist or is expired
  * @param cookieID the cookie id as a hex string
  * @return a date and objectID objects
  */
 async function readCookie(cookieID) {
-  const readCookie = await Cookie.findById(cookieID);
+  const cookie = await Cookie.findById(cookieID);
 
-  if (!readCookie) return null;
+  if (!cookie) return null;
 
-  return { expiry: readCookie.expiry, volunteerId: readCookie.volunteerId };
+  if (Date.now() > cookie.expiry) {
+    await deleteCookie(cookieID);
+    return null;
+  }
+
+  return { expiry: cookie.expiry, volunteerId: cookie.volunteerId };
 }
 
-module.exports = { Cookie, writeCookie, readCookie };
+/**
+ * Deletes the cookie
+ */
+async function deleteCookie(cookieID) {
+  await Cookie.findByIdAndDelete(cookieID);
+}
+
+async function removedExpiredCookies() {
+  Cookie.deleteMany({ expiry: { $lt: Date.now() } });
+}
+
+module.exports = { Cookie, writeCookie, readCookie, removedExpiredCookies };

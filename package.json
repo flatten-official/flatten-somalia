@@ -13,7 +13,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand --collect-coverage"
   },
   "dependencies": {
     "@google-cloud/secret-manager": "^2.1.0",
@@ -21,6 +21,7 @@
     "axios": "^0.19.2",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "cron": "^1.8.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.22.0",

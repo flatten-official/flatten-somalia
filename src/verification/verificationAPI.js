@@ -4,12 +4,12 @@ const { writeCookie } = require("./cookieData");
 const COOKIE_LIFE = 1080; // In minutes
 
 /**
- *
+ * Verifies a token and generates
  * @param tokenValue
  * @return a cookieID to pass to the user or null if
  */
 async function verifyTokenAndMakeCookie(tokenValue) {
-  // TODO Verify token
+  // TODO Verify that token is good and not expired
   const isValidToken = true;
 
   if (!isValidToken) return null;
@@ -17,9 +17,7 @@ async function verifyTokenAndMakeCookie(tokenValue) {
   // TODO Read volunteerID from token
   const volunteerID = null;
 
-  const cookieExpiry = calculateExpiryTime(COOKIE_LIFE);
-
-  return await writeCookie(cookieExpiry, volunteerID);
+  return await writeCookie(calculateExpiryTime(COOKIE_LIFE), volunteerID);
 }
 
 module.exports = { verifyTokenAndMakeCookie };

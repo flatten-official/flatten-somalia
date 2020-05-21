@@ -11,6 +11,8 @@ const {
   ValidationError,
 } = require("./../testUtils/mongo");
 
+const { calculateExpiryTime } = require("./../../src/utils/time");
+
 const mongoose = require("mongoose");
 
 describe("testing cookie database I/O", () => {
@@ -30,34 +32,28 @@ describe("testing cookie database I/O", () => {
   afterAll(async () => await closeDatabase());
 
   it("should write cookie to database", async () => {
-    const expiry = Date.now();
-    const volunteerID = "56cb91bdc3464f14678934ca";
-    const cookieID = await writeCookie(
-      expiry,
-      mongoose.mongo.ObjectId(volunteerID)
-    );
+    const expiry = calculateExpiryTime(5);
+    const volunteerID = mongoose.mongo.ObjectId("56cb91bdc3464f14678934ca");
+    const cookieID = await writeCookie(expiry, volunteerID);
 
     const all = await Cookie.find();
     expect(all).toHaveLength(1);
 
     const retrievedCookie = all[0];
-    expect(retrievedCookie._id.toString()).toMatch(cookieID.toString());
-    expect(retrievedCookie.expiry.getTime()).toBe(expiry);
-    expect(retrievedCookie.volunteerId.toString()).toMatch(volunteerID);
+    expect(retrievedCookie._id).toStrictEqual(cookieID);
+    expect(retrievedCookie.expiry).toStrictEqual(expiry);
+    expect(retrievedCookie.volunteerId).toStrictEqual(volunteerID);
   });
 
   it("should read existing cookie from database", async () => {
-    const expiry = Date.now();
-    const volunteerID = "56cb91bdc3464f14678934ca";
-    const cookieID = await writeCookie(
-      expiry,
-      mongoose.mongo.ObjectId(volunteerID)
-    );
+    const expiry = calculateExpiryTime(5);
+    const volunteerID = mongoose.mongo.ObjectId("56cb91bdc3464f14678934ca");
+    const cookieID = await writeCookie(expiry, volunteerID);
 
     const cookieValues = await readCookie(cookieID);
 
-    expect(cookieValues.volunteerId.toString()).toMatch(volunteerID);
-    expect(cookieValues.expiry.getTime()).toBe(expiry);
+    expect(cookieValues.volunteerId).toStrictEqual(volunteerID);
+    expect(cookieValues.expiry).toStrictEqual(expiry);
   });
 
   it("should return null when reading cookie since cookie doesn't exist", async () => {
@@ -78,5 +74,17 @@ describe("testing cookie database I/O", () => {
       const cookie = new Cookie(badCookieData);
       await expect(() => cookie.save()).rejects.toBeInstanceOf(ValidationError);
     }
+  });
+
+  it("should fail to read cookie that has expired", async function () {
+    const expiry = Date.now(); // Expires immediately
+    const cookieID = await writeCookie(
+      expiry,
+      mongoose.mongo.ObjectId("56cb91bdc3464f14678934ca")
+    );
+
+    const cookieValues = await readCookie(cookieID);
+
+    expect(cookieValues).toBeNull();
   });
 });
