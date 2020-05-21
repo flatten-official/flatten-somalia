@@ -2,8 +2,14 @@ const mongoose = require("mongoose");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const cookieSchema = new mongoose.Schema({
-  expiry: Date,
-  volunteerId: mongoose.ObjectId,
+  expiry: {
+    type: Date,
+    required: true,
+  },
+  volunteerId: {
+    type: mongoose.ObjectId,
+    required: true,
+  },
 });
 
 const Cookie = mongoose.model("Cookie", cookieSchema);
@@ -15,9 +21,11 @@ const Cookie = mongoose.model("Cookie", cookieSchema);
  * @return the cookieID
  */
 async function writeCookie(expiry, volunteerObjectID) {
-  const newCookie = new Cookie();
-  newCookie.expiry = expiry;
-  newCookie.volunteerId = volunteerObjectID;
+  const newCookie = new Cookie({
+    expiry: expiry,
+    volunteerId: volunteerObjectID,
+  });
+
   await newCookie.save();
   return newCookie._id;
 }

@@ -4,6 +4,8 @@ const { MongoMemoryServer } = require("mongodb-memory-server");
 
 const mongod = new MongoMemoryServer();
 
+const ValidationError = mongoose.Error.ValidationError;
+
 /**
  * Connect to the in-memory database.
  */
@@ -12,9 +14,7 @@ async function connectToDatabase() {
 
   const mongooseOpts = {
     useNewUrlParser: true,
-    autoReconnect: true,
-    reconnectTries: 5,
-    reconnectInterval: 1000,
+    useUnifiedTopology: true,
   };
 
   await mongoose.connect(uri, mongooseOpts);
@@ -36,4 +36,4 @@ async function clearDatabase() {
   await mongoose.connection.dropDatabase();
 }
 
-module.exports = { connectToDatabase, clearDatabase, closeDatabase };
+module.exports = { ValidationError, connectToDatabase, clearDatabase, closeDatabase };
