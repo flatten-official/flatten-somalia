@@ -1,4 +1,4 @@
-import {LOCATION_SUCCESS, LOCATION_FAIL, LOCATION_REQUEST, LOCATION_UNITITIALISED} from "../views/root/Location";
+import {LOCATION_SUCCESS, LOCATION_FAIL, LOCATION_REQUEST, LOCATION_UNITITIALISED} from "../location/locationActions";
 
 const locationReducer = (state={}, action) => {
   switch(action.type) {

@@ -16,6 +16,8 @@ import EN from '../../translations/en/VolunteerForm';
 import SO from '../../translations/so/VolunteerForm';
 import {PropTypes} from "prop-types"
 import Location, {LOCATION_SUCCESS} from "./Location";
+import Location from "../../location/Location";
+import {LOCATION_SUCCESS} from "../../location/locationActions";
 
 const VolunteerForm = ({
   location,
