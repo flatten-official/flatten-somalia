@@ -36,4 +36,9 @@ async function clearDatabase() {
   await mongoose.connection.dropDatabase();
 }
 
-module.exports = { ValidationError, connectToDatabase, clearDatabase, closeDatabase };
+module.exports = {
+  ValidationError,
+  connectToDatabase,
+  clearDatabase,
+  closeDatabase,
+};
