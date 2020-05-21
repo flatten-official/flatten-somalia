@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
+import locationReducer from "./locationReducer";
 import { auth, form, forms, submission, submissions } from "react-formio";
 import { i18nReducer } from "react-redux-i18n";
-import { FormConfig } from "./config";
+import { FormConfig } from "../config";
 
 const createReducers = () => {
   let reducersObj = {
@@ -11,6 +12,7 @@ const createReducers = () => {
     forms: forms({ name: "forms", query: { type: "form", tags: "common" } }),
     submission: submission({ name: "submission" }),
     submissions: submissions({ name: "submissions" }),
+    location: locationReducer
   };
 
   reducersObj[FormConfig.volunteerForm.formName] = combineReducers({

@@ -15,8 +15,10 @@ import { Translate } from "react-redux-i18n";
 import EN from '../../translations/en/VolunteerForm';
 import SO from '../../translations/so/VolunteerForm';
 import {PropTypes} from "prop-types"
+import Location, {LOCATION_SUCCESS} from "./Location";
 
 const VolunteerForm = ({
+  location,
   formTitle,
   submission,
   hideComponents,
@@ -27,6 +29,10 @@ const VolunteerForm = ({
   locale
 }) => {
   useEffect(getForm, []);
+
+  if (!(location.status === LOCATION_SUCCESS)) {
+    return <Location />
+  }
 
   if (form.isActive) {
     return <Loading />;
@@ -61,6 +67,7 @@ VolunteerForm.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    location: state.location,
     form: selectRoot("form", selectRoot(ownProps.formName, state)),
     errors: [
       selectError("form", selectRoot(ownProps.formName, state)),
