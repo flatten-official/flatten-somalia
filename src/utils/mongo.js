@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { CronJob } = require("cron");
 const { removedExpiredCookies } = require("./../verification/cookieData");
 
-const cleanupCookieJob = new CronJob("0 * * * *", removedExpiredCookies);
+const cleanupCookieJob = new CronJob("0 * * * *", removedExpiredCookies); // TODO test if this actually works
 
 async function setupDatabase() {
   await connectToDatabase();

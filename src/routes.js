@@ -3,6 +3,7 @@ const express = require("express");
 const {
   loginRoute,
   verifyTokenRoute,
+  cookieParserMiddleware,
 } = require("./verification/verificationRoutes");
 const { submitHouseholdRoute } = require("./submission/submissionRoutes");
 const { addVolunteerRoute } = require("./volunteer/volunteerRoutes");
@@ -17,6 +18,8 @@ router.get("/", (req, res) => {
 
 router.get("/verify/login", loginRoute);
 router.get("/verify/token", verifyTokenRoute);
+
+router.use(cookieParserMiddleware);
 
 router.get("/volunteer/add", addVolunteerRoute);
 

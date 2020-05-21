@@ -1,15 +1,74 @@
 const mongoose = require("mongoose");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
-const volunteerSchema = new mongoose.Schema({
-  name: String,
-  addedBy: mongoose.ObjectId,
-  permissions: [String],
-  email: { type: String, index: true, unique: true },
-  gender: String,
-  age: Number,
-});
+const Volunteer = mongoose.model(
+  "Volunteer",
+  new mongoose.Schema({
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      index: true,
+      unique: true,
+      required: true,
+    },
+    permissions: {
+      type: [
+        {
+          type: String,
+          enum: ["manageVolunteers", "submitForms"],
+          required: true,
+        },
+      ],
+      required: true,
+    },
+    gender: String,
+    addedBy: mongoose.ObjectId,
+    age: Number,
+  })
+);
 
-const Volunteer = mongoose.model("Volunteer", volunteerSchema);
+/**
+ * Adds a volunteer to the database
+ * @param name
+ * @param email
+ * @param addedBy a volunteer id
+ * @param allowToManageVolunteers
+ * @param allowToSubmitForms
+ * @param gender
+ * @param age
+ * @return {Promise<*>} the volunteer id
+ */
+async function addVolunteer(
+  name,
+  email,
+  addedBy,
+  allowToManageVolunteers = false,
+  allowToSubmitForms = true,
+  gender = null,
+  age = null
+) {
+  let permissions = [];
+  if (allowToManageVolunteers) permissions.push("manageVolunteers");
+  if (allowToSubmitForms) permissions.push("submitForms");
 
-module.exports = { Volunteer };
+  const volunteer = new Volunteer({
+    name: name,
+    email: email,
+    addedBy: addedBy,
+    permissions: permissions,
+    gender: gender,
+    age: age,
+  });
+
+  await volunteer.save(); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
+  return volunteer._id;
+}
+
+async function getPermissions(volunteerId) {
+  return await Volunteer.findById(volunteerId, "permissions").permissions;
+}
+
+module.exports = { Volunteer, addVolunteer, getPermissions };
