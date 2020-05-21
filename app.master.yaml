@@ -6,3 +6,5 @@ env_variables:
   COOKIE_SECRET_ID: projects/81735388662/secrets/cookie-secret-so/versions/latest
   FRONTEND_URL: https://v.flatten.so
   DB_CONNECTION_SECRET_ID: projects/81735388662/secrets/so-atlas-connection-url/versions/latest
+  JWT_SECRET_ID: projects/81735388662/secrets/backend-so-jwt-secret/versions/latest
+  BACKEND_URL: https://backend-so-staging-dot-flatten-staging-271921.appspot.com

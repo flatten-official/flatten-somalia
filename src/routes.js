@@ -1,12 +1,11 @@
 const express = require("express");
 
-const {
-  loginRoute,
-  verifyTokenRoute,
-  cookieParserMiddleware,
-} = require("./verification/verificationRoutes");
-const { submitHouseholdRoute } = require("./submission/submissionRoutes");
-const { addVolunteerRoute } = require("./volunteer/volunteerRoutes");
+const cookieMiddleware = require("./verification/routes/cookieMiddleware");
+const loginRoute = require("./verification/routes/loginRoute");
+const verifyTokenRoute = require("./verification/routes/verifyTokenRoute");
+
+const submitHouseholdRoute = require("./submission/submitFormRoute");
+const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
 
 const router = express.Router();
 
@@ -16,13 +15,13 @@ router.get("/", (req, res) => {
     .send(`Flatten.so backend online (${process.env.ENVIRONMENT})`);
 });
 
-router.get("/verify/login", loginRoute);
+router.post("/verify/login", loginRoute);
 router.get("/verify/token", verifyTokenRoute);
 
-router.use(cookieParserMiddleware);
+router.use(cookieMiddleware);
 
-router.get("/volunteer/add", addVolunteerRoute);
+router.post("/volunteer/add", addVolunteerRoute);
 
-router.get("/submit/household", submitHouseholdRoute);
+router.post("/submit/household", submitHouseholdRoute);
 
 module.exports = router;

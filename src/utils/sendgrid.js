@@ -1,7 +1,7 @@
 // using Twilio SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
 
-const { Secret } = require("./fetch");
+const { Secret } = require("./networkValues");
 const sgMail = require("@sendgrid/mail");
 const Config = require("./../config");
 

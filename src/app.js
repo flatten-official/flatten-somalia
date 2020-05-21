@@ -8,6 +8,7 @@ const app = express();
 
 const routes = require("./routes");
 const { Secret } = require("./utils/networkValues");
+
 const cookieSecret = new Secret(process.env.COOKIE_SECRET_ID);
 
 async function getApp() {

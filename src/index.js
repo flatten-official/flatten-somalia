@@ -24,5 +24,7 @@ async function cleanup() {
 
 setup()
   .then(startServer)
-  .catch((e) => console.log(e))
-  .finally(cleanup);
+  .catch(async (e) => {
+    console.log(e);
+    await cleanup();
+  });

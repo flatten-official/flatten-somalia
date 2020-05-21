@@ -4,4 +4,5 @@ module.exports = {
   user_role: "SomaliaVolunteer",
   admin_resource: "somaliaAdmin",
   admin_role: "SomaliaAdministrator",
+  authentication_url: `${process.env.FRONTEND_DOMAIN}/auth`,
 };

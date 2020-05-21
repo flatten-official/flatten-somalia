@@ -10,7 +10,7 @@ const Volunteer = mongoose.model(
     },
     email: {
       type: String,
-      index: true,
+      index: true, // Since we search by volunteer email
       unique: true,
       required: true,
     },
@@ -71,4 +71,20 @@ async function getPermissions(volunteerId) {
   return await Volunteer.findById(volunteerId, "permissions").permissions;
 }
 
-module.exports = { Volunteer, addVolunteer, getPermissions };
+/**
+ * Returns null if volunteer doesn't exist, otherwise returns the volunteer's Id
+ */
+async function findVolunteerIdByEmail(email) {
+  const volunteer = await Volunteer.findOne({ email: email }, "_id").exec();
+
+  if (!volunteer) return null;
+
+  return volunteer._id;
+}
+
+module.exports = {
+  Volunteer,
+  addVolunteer,
+  getPermissions,
+  findVolunteerIdByEmail,
+};

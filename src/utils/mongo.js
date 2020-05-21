@@ -3,6 +3,12 @@ const mongoose = require("mongoose");
 const { CronJob } = require("cron");
 const { removedExpiredCookies } = require("./../verification/cookieData");
 
+const CONNECTION_OPTIONS = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+};
+
 const cleanupCookieJob = new CronJob("0 * * * *", removedExpiredCookies); // TODO test if this actually works
 
 async function setupDatabase() {
@@ -13,6 +19,7 @@ async function setupDatabase() {
 async function cleanupDatabase() {
   cleanupCookieJob.stop();
   await mongoose.disconnect();
+  console.log("Disconnected from database");
 }
 
 async function connectToDatabase() {
@@ -21,10 +28,7 @@ async function connectToDatabase() {
   ).get();
 
   try {
-    await mongoose.connect(connectionURL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(connectionURL, CONNECTION_OPTIONS);
   } catch (e) {
     console.log("Failed to connect to database.");
     throw e;
@@ -33,4 +37,4 @@ async function connectToDatabase() {
   console.log("Connected to database.");
 }
 
-module.exports = { setupDatabase, cleanupDatabase };
+module.exports = { setupDatabase, cleanupDatabase, CONNECTION_OPTIONS };

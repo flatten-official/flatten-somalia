@@ -1,6 +1,7 @@
 // Inspired from https://dev.to/paulasantamaria/testing-node-js-mongoose-with-an-in-memory-database-32np
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
+const { CONNECTION_OPTIONS } = require("./../../src/utils/mongo");
 
 const mongod = new MongoMemoryServer();
 
@@ -12,12 +13,7 @@ const ValidationError = mongoose.Error.ValidationError;
 async function connectToDatabase() {
   const uri = await mongod.getUri();
 
-  const mongooseOpts = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  };
-
-  await mongoose.connect(uri, mongooseOpts);
+  await mongoose.connect(uri, CONNECTION_OPTIONS);
 }
 
 /**
