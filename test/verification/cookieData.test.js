@@ -1,6 +1,7 @@
 const {
   writeCookie,
   readCookie,
+  removedExpiredCookies,
   Cookie,
 } = require("../../src/verification/cookieData");
 
@@ -15,7 +16,7 @@ const { calculateExpiryTime } = require("./../../src/utils/time");
 
 const mongoose = require("mongoose");
 
-describe("testing cookie database I/O", () => {
+describe("cookie database functions", () => {
   /**
    * Connect to a new in-memory database before running any tests.
    */
@@ -86,5 +87,28 @@ describe("testing cookie database I/O", () => {
     const cookieValues = await readCookie(cookieID);
 
     expect(cookieValues).toBeNull();
+  });
+
+  it("should delete all expired cookies", async function () {
+    // Generate 5 expired cookies
+    for (let i = 0; i < 5; i++) {
+      await new Cookie({
+        expiry: Date.now(),
+        volunteerId: mongoose.mongo.ObjectId("56cb91bdc3464f14678934ca"),
+      }).save();
+    }
+
+    // Generate 3 good cookies
+    for (let i = 0; i < 3; i++) {
+      await new Cookie({
+        expiry: calculateExpiryTime(5),
+        volunteerId: mongoose.mongo.ObjectId("56cb91bdc3464f14678934ca"),
+      }).save();
+    }
+
+    await removedExpiredCookies();
+
+    const goodCookies = await Cookie.find();
+    expect(goodCookies).toHaveLength(3);
   });
 });

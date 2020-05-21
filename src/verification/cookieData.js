@@ -1,18 +1,19 @@
 const mongoose = require("mongoose");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
-const cookieSchema = new mongoose.Schema({
-  expiry: {
-    type: Date,
-    required: true,
-  },
-  volunteerId: {
-    type: mongoose.ObjectId,
-    required: true,
-  },
-});
-
-const Cookie = mongoose.model("Cookie", cookieSchema);
+const Cookie = mongoose.model(
+  "Cookie",
+  new mongoose.Schema({
+    expiry: {
+      type: Date,
+      required: true,
+    },
+    volunteerId: {
+      type: mongoose.ObjectId,
+      required: true,
+    },
+  })
+);
 
 /**
  *
@@ -56,7 +57,7 @@ async function deleteCookie(cookieID) {
 }
 
 async function removedExpiredCookies() {
-  Cookie.deleteMany({ expiry: { $lt: Date.now() } });
+  await Cookie.deleteMany({ expiry: { $lt: Date.now() } });
 }
 
 module.exports = { Cookie, writeCookie, readCookie, removedExpiredCookies };
