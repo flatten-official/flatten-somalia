@@ -9,7 +9,5 @@ export const submitSuccess = (name, payload) => async(dispatch) => {
 
 export const submitFailure = (name, payload) => async(dispatch) => {
   let actionType = `SUBMIT_FAIL_${name}`;
-  console.log(payload);
-  console.log(actionType);
   dispatch({type: actionType, payload});
 }
