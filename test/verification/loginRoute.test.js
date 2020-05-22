@@ -1,5 +1,6 @@
 const sendgrid = require("../../src/utils/sendgrid");
 
+// TODO Improve mocking to not have to set this globally
 const spy = jest
   .spyOn(sendgrid, "sendVerificationEmail")
   .mockImplementation((email, verification_link) => {
