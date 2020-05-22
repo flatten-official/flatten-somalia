@@ -3,8 +3,6 @@ const { Secret } = require("./networkValues");
 
 const jwtSecret = new Secret(process.env.JWT_SECRET_ID);
 
-// TODO switch to JWS since it's all that's required
-
 /**
  * @param jsonPayload json value
  * @param minTillExpiry in minutes
