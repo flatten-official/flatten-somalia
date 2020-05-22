@@ -15,7 +15,8 @@ module.exports = async (req, res) => {
     return;
   }
 
-  await verifyLogin(emailAddress);
+  const success = await verifyLogin(emailAddress); // Returns true even if email was wrong
 
-  res.sendStatus(200);
+  if (success) res.sendStatus(200);
+  else res.status(500).send("We we're unable to send you a login email.");
 };

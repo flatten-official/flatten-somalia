@@ -11,7 +11,7 @@ module.exports.verifyLogin = async (emailAddress) => {
 
   if (!volunteerId) {
     console.log(`Invalid email: ${emailAddress}`);
-    return;
+    return true; // Return true to not let user know if email was invalid to not allow guessing emails
   }
 
   const token = await signToken({ id: volunteerId }, 15);
@@ -19,7 +19,7 @@ module.exports.verifyLogin = async (emailAddress) => {
   const verificationLink =
     process.env.BACKEND_URL + "/verify/token?token=" + token;
 
-  await sendVerificationEmail(emailAddress, verificationLink);
+  return await sendVerificationEmail(emailAddress, verificationLink);
 };
 
 /**
