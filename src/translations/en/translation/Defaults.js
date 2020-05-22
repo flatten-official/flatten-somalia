@@ -1,4 +1,4 @@
-export default {
+exports.default = {
     email: "Email",
     submit: "Submit",
     error : "Please fix the following errors before submitting.",

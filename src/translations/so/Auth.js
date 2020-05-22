@@ -1,8 +1,6 @@
-import FormDefaults from "./FormDefaults"
-
-export default {
-  loginForm: Object.assign({
+exports.default = {
+  loginForm: {
     title: ""
-  }, FormDefaults),
+  },
   submittedEmailMessage: ''
-}
+};

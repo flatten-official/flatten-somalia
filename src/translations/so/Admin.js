@@ -1,9 +1,4 @@
-import FormDefaults from "./FormDefaults"
-
-export default  {
+exports.default = {
     welcomeHeader: "",
-    unauthorized: "",
-    addVolunteerForm: Object.assign({
-        "Add a new volunteer": "add volunteer SO"
-    }, FormDefaults)
+    unauthorized: ""
 }

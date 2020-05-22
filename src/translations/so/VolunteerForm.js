@@ -1,4 +1,4 @@
-export default {
+exports.default = {
     title: "TITLE SO",
     success: 'Success!',
     returnHomePrompt: 'Fill out another?',

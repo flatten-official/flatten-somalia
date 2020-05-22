@@ -1,4 +1,4 @@
-export default {
+exports.default = {
     links: {
         adminPanel: "",
         loggedInAndLogout: "",
