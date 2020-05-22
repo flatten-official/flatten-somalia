@@ -19,8 +19,6 @@ module.exports.verifyLogin = async (emailAddress) => {
   const verificationLink =
     process.env.BACKEND_URL + "/verify/token?token=" + token;
 
-  console.log(verificationLink); // TODO remove
-
   await sendVerificationEmail(emailAddress, verificationLink);
 };
 

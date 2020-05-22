@@ -5,19 +5,8 @@ const { calculateExpiryTime } = require("./../../src/utils/time");
 const mongoose = require("mongoose");
 
 describe("cookie database functions", () => {
-  /**
-   * Connect to a new in-memory database before running any tests.
-   */
   beforeAll(async () => await util.connectToDatabase());
-
-  /**
-   * Clear all test data after every test.
-   */
   afterEach(async () => await util.clearDatabase());
-
-  /**
-   * Remove and close the db and server.
-   */
   afterAll(async () => await util.closeDatabase());
 
   it("should write cookie to database", async () => {

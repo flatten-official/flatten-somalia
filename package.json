@@ -55,6 +55,7 @@
     }
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "globalSetup": "./test/setup.js"
   }
 }

@@ -37,6 +37,8 @@ class Secret extends CachedValue {
   }
 
   async readSecret(secret_id) {
+    if (!secret_id) throw Error("No secret_id passed");
+
     try {
       const [version] = await smClient.accessSecretVersion({
         name: secret_id,
@@ -47,6 +49,7 @@ class Secret extends CachedValue {
       console.log(
         `Could not read secret ${secret_id}. Check that you have the proper permissions, and reauthenticate.`
       );
+      console.trace();
       throw e;
     }
   }
