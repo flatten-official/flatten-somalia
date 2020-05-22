@@ -13,12 +13,8 @@ import {
 import getTranslations from './translations/GetTranslations'
 
 import App from "./App";
-import { AppConfig } from "./config";
 
 import "./styles.scss";
-
-Formio.setProjectUrl(AppConfig.projectUrl);
-Formio.setBaseUrl(AppConfig.apiUrl);
 
 // Initialize the current user
 store.dispatch(initAuth());

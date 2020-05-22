@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 const Form = ( props ) => {
 
-    let {name, submitRoute, formioForm, formioOptions, submitSuccess, submitFailure} = props;
+    let {name, submitApi, formioForm, formioOptions, submitSuccess, submitFailure} = props;
 
     formioOptions=formioOptions===undefined?{}:formioOptions; // optional prop
 
@@ -20,7 +20,7 @@ const Form = ( props ) => {
     // add a hook to send the request to the server
     formioOptions.hooks.beforeSubmit = async(submission, next) => {
         try {
-          let res = await backend.post(submitRoute, submission);
+          let res = await backend.request(submitApi);
           submitSuccess(name, res);
         } catch(e) {
           submitFailure(name, false);
@@ -33,7 +33,7 @@ const Form = ( props ) => {
 
 Form.propTypes = {
   name: PropTypes.string.isRequired,
-  submitRoute: PropTypes.string.isRequired,
+  submitApi: PropTypes.object.isRequired,
   successRedir: PropTypes.string.isRequired,
   formioForm: PropTypes.object.isRequired,
   formioOptions: PropTypes.object,

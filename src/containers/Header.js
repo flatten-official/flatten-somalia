@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { push } from "connected-react-router";
 import NavLink from "./NavLink";
 import { selectRoot, logout } from "react-formio";
-import { AuthConfig } from "../config";
+import { Routes } from "../config";
 import { Translate } from "react-redux-i18n";
 
 const Header = ({ auth, logout }) => (
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   logout: () => {
     dispatch(logout());
-    dispatch(push(AuthConfig.anonState));
+    dispatch(push(Routes.auth));
   },
 });
 

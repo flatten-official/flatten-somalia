@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { Translate } from "react-redux-i18n";
 import { PropTypes } from "prop-types";
 import { selectRoot } from "react-formio";
-import AddVolunteer from "./AddVolunteer"
-import EN from "../../translations/en/Admin"
-import SO from "../../translations/so/Admin"
+import EN from "../translations/en/Admin"
+import SO from "../translations/so/Admin"
 
 const Admin = ({ auth, locale }) => (
   <>
@@ -13,7 +12,6 @@ const Admin = ({ auth, locale }) => (
       <>
         <h2><Translate value={"Admin.welcomeHeader"}/></h2>
         <br/>
-        <AddVolunteer options={{ language: locale, i18n: {en: EN.addVolunteerForm, so: SO.addVolunteerForm} }} />
       </>
     ) : (
       <h3> <Translate value={"Admin.unauthorized"}/> </h3>

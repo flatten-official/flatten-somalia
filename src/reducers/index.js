@@ -1,13 +1,14 @@
 import { combineReducers } from "redux";
 import locationReducer from "./locationReducer";
 import submitReducer from "./submitReducer";
-import { auth, form, forms, submission, submissions } from "react-formio";
+import authReducer from './authReducer';
+import { form, forms, submission, submissions } from "react-formio";
 import { i18nReducer } from "react-redux-i18n";
 import { FormConfig } from "../config";
 
 const createReducers = () => {
   let reducersObj = {
-    auth: auth(),
+    auth: authReducer,
     i18n: i18nReducer,
     form: form({ name: "form" }),
     forms: forms({ name: "forms", query: { type: "form", tags: "common" } }),
