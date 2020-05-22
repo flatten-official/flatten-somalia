@@ -17,7 +17,7 @@ module.exports.verifyToken = async (token) => {
   try {
     return jwt.verify(token, await jwtSecret.get());
   } catch (e) {
-    console.log("Invalid token."); // TODO print different messaged if token is wrong vs if it's expired
+    console.log("Invalid token." + e);
     return null;
   }
 };

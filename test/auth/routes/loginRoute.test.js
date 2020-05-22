@@ -1,5 +1,6 @@
 const sendGrid = require("../../../src/utils/sendGrid");
 const mocks = require("../../testUtils/mocks");
+const { verifyToken } = require("../../../src/utils/jwt");
 
 const sendEmailMock = jest
   .spyOn(sendGrid, "sendVerificationEmail")
@@ -46,7 +47,7 @@ describe("test /auth/login", () => {
   it("should return success if an unknown email is submitted and not send email", async () => {
     await addVolunteer("Test Volunteer", "good@gmail.com", null);
 
-    let res = await request
+    const res = await request
       .post("/auth/login")
       .send({ email: "bad@gmail.com" });
     expect(res.status).toBe(200);
@@ -57,15 +58,33 @@ describe("test /auth/login", () => {
   it("should return success if a known email is submitted", async () => {
     await addVolunteer("Test Volunteer", "good@gmail.com", null);
 
-    let res = await request
+    const res = await request
       .post("/auth/login")
       .send({ email: "good@gmail.com" });
 
     expect(res.status).toBe(200);
+  });
+
+  it("should send email with the payload being the volunteer id", async () => {
+    const volunteerId = await addVolunteer(
+      "Test Volunteer",
+      "good@gmail.com",
+      null
+    );
+
+    await request.post("/auth/login").send({ email: "good@gmail.com" });
 
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
     expect(sendEmailMock.mock.calls[0][0]).toMatch("good@gmail.com");
     expect(sendEmailMock.mock.results[0].type).toMatch("return");
     expect(sendEmailMock.mock.results[0].value).toBe(true);
+
+    const url = sendEmailMock.mock.calls[0][1];
+    const tokenIndex = url.indexOf("token=") + 6; // + 6 to go past token=
+    const token = url.slice(tokenIndex);
+    const payload = await verifyToken(token);
+
+    expect(payload).not.toBeNull();
+    expect(payload.id).toMatch(volunteerId.toString());
   });
 });
