@@ -1,7 +1,7 @@
 const { buildSecret } = require("./networkValues");
 const mongoose = require("mongoose");
 const { CronJob } = require("cron");
-const { removedExpiredCookies } = require("./../verification/cookieData");
+const { removedExpiredCookies } = require("../auth/cookieData");
 
 const CONNECTION_OPTIONS = {
   useNewUrlParser: true,

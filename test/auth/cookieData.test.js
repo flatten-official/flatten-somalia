@@ -1,4 +1,4 @@
-const cookieData = require("../../src/verification/cookieData");
+const cookieData = require("../../src/auth/cookieData");
 const util = require("./../testUtils/mongo");
 const { calculateExpiryTime } = require("./../../src/utils/time");
 

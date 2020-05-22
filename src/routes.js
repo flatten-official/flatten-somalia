@@ -1,10 +1,10 @@
 const express = require("express");
 
-const cookieMiddleware = require("./verification/routes/cookieMiddleware");
-const loginRoute = require("./verification/routes/loginRoute");
-const verifyTokenRoute = require("./verification/routes/verifyTokenRoute");
-const logoutRoute = require("./verification/routes/loginRoute");
-const getAuthRoute = require("./verification/routes/getAuthRoute");
+const cookieMiddleware = require("./auth/routes/cookieMiddleware");
+const loginRoute = require("./auth/routes/loginRoute");
+const verifyTokenRoute = require("./auth/routes/verifyTokenRoute");
+const logoutRoute = require("./auth/routes/loginRoute");
+const getAuthRoute = require("./auth/routes/getAuthRoute");
 const submitFormRoute = require("./submission/submitFormRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
 
