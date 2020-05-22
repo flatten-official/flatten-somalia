@@ -9,8 +9,8 @@ i18n
   // init i18next
   .init({
     resources,
-    fallbackLng: 'so',
+    fallbackLng: 'en',
     debug: ( process.env.NODE_ENV === 'development' ),
   });
 
-i18n.changeLanguage('so')
+i18n.changeLanguage('en')
