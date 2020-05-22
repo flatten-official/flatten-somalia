@@ -1,7 +1,7 @@
-const { calculateExpiryTime } = require("./../utils/time");
+const { calculateExpiryTime } = require("../utils/time");
 const { writeCookie } = require("./cookieData");
-const { findVolunteerIdByEmail } = require("./../volunteer/volunteerData");
-const { verifyToken, signToken } = require("./../utils/jwt");
+const { findVolunteerIdByEmail } = require("../volunteer/volunteerData");
+const { verifyToken, signToken } = require("../utils/jwt");
 const { sendVerificationEmail } = require("../utils/sendGrid");
 
 const COOKIE_LIFE = 1080; // In minutes

@@ -3,7 +3,7 @@
 
 const { buildSecret } = require("./networkValues");
 const sgMail = require("@sendgrid/mail");
-const Config = require("./../config");
+const Config = require("../config");
 
 const apiKey = buildSecret(process.env.SENDGRID_SECRET_ID);
 
