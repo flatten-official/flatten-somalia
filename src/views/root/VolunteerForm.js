@@ -1,21 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  selectRoot,
-  resetSubmissions,
-  saveSubmission,
-  Form,
-  selectError,
-  Errors,
-  getForm,
-} from "react-formio";
-import { push } from "connected-react-router";
+import Form from "../../backend/Form";
+import FormDef from "./VolunteerForm.json";
 import Loading from "../../containers/Loading";
 import { Translate } from "react-redux-i18n";
 import EN from '../../translations/en/VolunteerForm';
 import SO from '../../translations/so/VolunteerForm';
 import {PropTypes} from "prop-types"
-import Location, {LOCATION_SUCCESS} from "./Location";
 import Location from "../../location/Location";
 import {LOCATION_SUCCESS} from "../../location/locationActions";
 
@@ -27,31 +18,25 @@ const VolunteerForm = ({
   errors,
   form,
   getForm,
-  onSubmit,
+  // onSubmit,
   locale
 }) => {
-  useEffect(getForm, []);
 
   if (!(location.status === LOCATION_SUCCESS)) {
     return <Location />
   }
 
-  if (form.isActive) {
-    return <Loading />;
-  }
-
   return (
     <div>
       <h3> <Translate value={"VolunteerForm.title"} /> </h3>
-      <Errors errors={errors} />
+      {/* <Errors errors={errors} /> */}
       <Form
-        form={form.form}
-        submission={submission}
-        url={form.url}
-        hideComponents={hideComponents}
-        onSubmit={onSubmit}
-        options={{
-          noAlerts: true,
+        name="volunteerForm"
+        submitRoute="submit/volunteerForm"
+        successRedir="/success"
+        formioForm={FormDef}
+        formioOptions={{
+          noAlerts: false,
           language: locale,
           i18n: {
             en: EN,
@@ -70,27 +55,11 @@ VolunteerForm.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   return {
     location: state.location,
-    form: selectRoot("form", selectRoot(ownProps.formName, state)),
-    errors: [
-      selectError("form", selectRoot(ownProps.formName, state)),
-      selectError("submission", selectRoot(ownProps.formName, state)),
-    ],
     locale: state.i18n.locale
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  getForm: () => dispatch(getForm(ownProps.formName)),
-  onSubmit: (submission) => {
-    dispatch(
-      saveSubmission(ownProps.formName, submission, null, (err, _) => {
-        if (!err) {
-          dispatch(resetSubmissions(ownProps.formName));
-          dispatch(push("/success"));
-        }
-      })
-    );
-  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VolunteerForm);

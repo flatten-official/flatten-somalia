@@ -6,6 +6,7 @@ import VolunteerForm from "./VolunteerForm";
 import Auth from "../auth/Auth";
 import { selectRoot } from "react-formio";
 import { FormConfig } from "../../config";
+import { push } from "connected-react-router";
 
 const checkFormRoles = (auth) => {
   let access;
@@ -21,9 +22,15 @@ const checkFormRoles = (auth) => {
   return false;
 };
 
-const Home = ({ auth }) => (
+const Home = ({ auth, pushToLogin }) => {
+
+  // todo - add this forcing when we have authentication working
+  // pushToLogin();
+
+  return (
   <>
-    {auth.is.authenticated && auth.user && auth.user.data ? (
+    <VolunteerForm {...FormConfig.volunteerForm} />
+    {/* {auth.is.authenticated && auth.user && auth.user.data ? (
       <div className="well text-center">
         <h3>
          <Translate value={'loggedInAs'}/>&nbsp;
@@ -39,16 +46,22 @@ const Home = ({ auth }) => (
       </div>
     ) : (
       <Auth />
-    )}
+    )} */}
   </>
-);
+)
+};
 
 Home.propTypes = {
   auth: PropTypes.object.isRequired,
+  pushToLogin: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: selectRoot("auth", state),
 });
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => ({
+  pushToLogin: ()=>{dispatch(push('auth'));}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
