@@ -1,17 +1,15 @@
 import backend from "./backend";
 
-export const submitForm = (formName, route, formValues, done) => async (dispatch) => {
-  let submitSuccess;
-  try {
-    const response = await backend.post(route, formValues);
-    console.log(response);
-    done(response, null);
-    submitSuccess = response.data;
-  } catch (e) {
-      console.log("eeeeee");
-    done(null, e);
-    submitSuccess = false;
-  }
+// Redux actions for the backend.
 
-  dispatch({ type: `SUBMIT_FORM_${formName}`, payload: submitSuccess });
-};
+export const submitSuccess = (name, payload) => async(dispatch) => {
+  let actionType = `SUBMIT_SUCCESS_${name}`;
+  dispatch({type: actionType, payload});
+}
+
+export const submitFailure = (name, payload) => async(dispatch) => {
+  let actionType = `SUBMIT_FAIL_${name}`;
+  console.log(payload);
+  console.log(actionType);
+  dispatch({type: actionType, payload});
+}

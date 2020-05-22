@@ -3,31 +3,31 @@ import {connect} from "react-redux";
 import {Form} from "react-formio";
 import {push} from "connected-react-router";
 import {AppConfig, AuthConfig} from "../../config";
-import {submitForm} from "../../backend/backendActions";
 import LoginForm from "./Login.json"
+import backend from "../../backend/backend";
+import {submitSuccess, submitFailure} from "../../backend/backendActions";
 
 class Login extends Component {
 
   constructor(props) {
     super(props);
 
-    this.formRef = createRef();
-  }
-
-  componentDidMount() {
-    let formio = this.formRef.current.instance;
-    // console.log(Object.entries(this.formRef.current));
-    // console.log(formio.on);
-    // formio.on('submit', (submission)=>console.log('submit'));
-    // formio.setAlert('hello', 'hello hello');
   }
   
   render() {
-    return <Form src={this.props.src}
-    options={{hooks:{beforeSubmit:(submission, next)=>{
-      next(Error('my error'));
-    }}}} // form={LoginForm}
-    onSubmit={(submission)=>console.log(submission)} onSubmitDone={()=>console.log('submit done')} onError={(error)=>console.log(error)}  ref={this.formRef} />;
+    return <Form //src={this.props.src}
+    options={{noAlerts: false,
+      hooks:{beforeSubmit:async (submission, next)=>{
+        try {
+          let res = await backend.post(AuthConfig.login.form, submission);
+          console.log(res);
+          this.props.submitSuccess("auth", res);
+        } catch(e) {
+          this.props.submitFailure("auth", false);
+          next(e);
+        }
+    }}}} form={LoginForm}
+     />;
   }
 }
 
@@ -36,20 +36,8 @@ const mapStateToProps = () => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (submission) => {
-    dispatch(
-      submitForm("auth", '/verify/login', submission, (_, err)=> {
-        console.log('onsubmit');
-        console.log(err);
-        console.log(!err)
-        if (!err) {
-          dispatch(push("/submitted-email"));
-        } else {
-        }
-        // stop the submission success
-      })
-    );
-  },
+  submitSuccess: (submission, next) => dispatch(submitSuccess(submission, next)),
+  submitFailure: (submission, next) => dispatch(submitFailure(submission, next)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
