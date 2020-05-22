@@ -1,4 +1,9 @@
 import React from "react";
-import { Translate } from "react-redux-i18n";
+import { useTranslation } from "react-i18next";
 
-export default () => <div><Translate value={'Loading.loading'}/></div>;
+export default () => {
+  let { t, i18n } = useTranslation();
+  return (
+    <div> {t('Loading:loading')} </div>
+  );
+}

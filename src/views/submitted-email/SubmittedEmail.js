@@ -1,8 +1,11 @@
 import React from "react";
-import { Translate } from "react-redux-i18n";
+import { useTranslation } from "react-i18next";
 
-export default () => (
-  <h3>
-    <Translate value={'Auth.submittedEmailMessage'}/>
-  </h3>
-);
+export default () => {
+  let { t, i18n } = useTranslation();
+  return (
+    <h3>
+      {t('Auth:submittedEmailMessage')}
+    </h3>
+  );
+}
