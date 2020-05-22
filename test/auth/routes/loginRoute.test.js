@@ -1,11 +1,9 @@
-const sendgrid = require("../../../src/utils/sendgrid");
+const sendGrid = require("../../../src/utils/sendGrid");
+const mocks = require("../../testUtils/mocks");
 
 const spy = jest
-  .spyOn(sendgrid, "sendVerificationEmail")
-  .mockImplementation((email, verification_link) => {
-    const { isEmail, isURL } = require("validator");
-    return isEmail(email) && isURL(verification_link, { require_tld: false }); // require_tld to allow localhost
-  });
+  .spyOn(sendGrid, "sendVerificationEmail")
+  .mockImplementation(mocks.sendVerificationEmail);
 
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
@@ -29,16 +27,16 @@ describe("test /verify/login", () => {
   });
 
   it("should return error if invalid emails are passed", async () => {
-    let res = await request.post("/verify/login");
+    let res = await request.post("/auth/login");
     expect(res.status).toBe(400);
 
-    res = await request.post("/verify/login").send({ email: "gmail.com" });
+    res = await request.post("/auth/login").send({ email: "gmail.com" });
     expect(res.status).toBe(422);
 
-    res = await request.post("/verify/login").send({ email: "" });
+    res = await request.post("/auth/login").send({ email: "" });
     expect(res.status).toBe(400);
 
-    res = await request.post("/verify/login").send({ email: '{"$gt": ""}' });
+    res = await request.post("/auth/login").send({ email: '{"$gt": ""}' });
     expect(res.status).toBe(422);
   });
 
@@ -46,7 +44,7 @@ describe("test /verify/login", () => {
     await addVolunteer("Test Volunteer", "good@gmail.com", null);
 
     let res = await request
-      .post("/verify/login")
+      .post("/auth/login")
       .send({ email: "bad@gmail.com" });
     expect(res.status).toBe(200);
   });
@@ -55,12 +53,12 @@ describe("test /verify/login", () => {
     await addVolunteer("Test Volunteer", "good@gmail.com", null);
     //
 
-    //const sendgrid = require("./../../src/utils/sendgrid");
+    //const sendGrid = require("./../../src/utils/sendGrid");
 
     //    sendVerificationEmail.mockReturnValue(true);
 
     let res = await request
-      .post("/verify/login")
+      .post("/auth/login")
       .send({ email: "good@gmail.com" });
 
     expect(res.status).toBe(200);
