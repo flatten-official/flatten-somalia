@@ -23,6 +23,8 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 Run `npm run dev` in the root directory to start the project. Then navigate to `localhost` in your browser.
 You should see a message indicating that the server is running locally.
 
+## Useful commands
+
 ## Development
 
 ### Using environment variables

@@ -13,7 +13,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "jest --runInBand --collect-coverage"
+    "test": "jest --runInBand --collect-coverage",
+    "doc": "apidoc -i ./src -o ./docs && open-cli ./docs/index.html"
   },
   "dependencies": {
     "@google-cloud/secret-manager": "^2.1.0",
@@ -33,6 +34,7 @@
     "yaml": "^1.10.0"
   },
   "devDependencies": {
+    "apidoc": "^0.22.1",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-jest": "^23.13.1",
@@ -42,6 +44,7 @@
     "lint-staged": "^10.2.2",
     "mongodb-memory-server": "^6.6.1",
     "nodemon": "^2.0.3",
+    "open-cli": "^6.0.1",
     "prettier": "^2.0.5"
   },
   "lint-staged": {
