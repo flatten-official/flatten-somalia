@@ -1,4 +1,4 @@
-const sendgrid = require("../../src/utils/sendgrid");
+const sendgrid = require("../../../src/utils/sendgrid");
 
 const spy = jest
   .spyOn(sendgrid, "sendVerificationEmail")
@@ -7,10 +7,10 @@ const spy = jest
     return isEmail(email) && isURL(verification_link, { require_tld: false }); // require_tld to allow localhost
   });
 
-const { getApp } = require("./../../src/app");
-const util = require("./../testUtils/mongo");
+const { getApp } = require("../../../src/app");
+const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
-const { addVolunteer } = require("./../../src/volunteer/volunteerData");
+const { addVolunteer } = require("../../../src/volunteer/volunteerData");
 
 let request;
 
