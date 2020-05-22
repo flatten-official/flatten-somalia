@@ -1,19 +1,18 @@
 // using Twilio SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
 
-const { Secret } = require("./networkValues");
+const { buildSecret } = require("./networkValues");
 const sgMail = require("@sendgrid/mail");
 const Config = require("./../config");
 
-async function setup() {
-  sgMail.setApiKey(await new Secret(process.env.SENDGRID_SECRET_ID).get());
-}
+const apiKey = buildSecret(process.env.SENDGRID_SECRET_ID);
 
-const setupComplete = setup();
+// sets sgMail. calling "await setupPromise" ensures setup has finished
+const setupPromise = async () => sgMail.setApiKey(await apiKey.get());
 
 /* Sends a verification link to a user given an email and the link. */
-async function sendVerificationEmail(email, verification_link) {
-  await setupComplete;
+module.exports.sendVerificationEmail = async (email, verification_link) => {
+  await setupPromise;
 
   const msg = {
     to: email,
@@ -27,7 +26,6 @@ async function sendVerificationEmail(email, verification_link) {
       verification_link,
     },
   };
-  await sgMail.send(msg);
-}
 
-module.exports = { sendVerificationEmail };
+  await sgMail.send(msg);
+};

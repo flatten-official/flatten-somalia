@@ -7,7 +7,7 @@ const { authentication_url } = require("../../config");
  * If cookie is valid, add volunteerId and permissions to res.locals for use by the endpoint.
  */
 module.exports = async (req, res, next) => {
-  const cookieID = req.signedCookies.id; // the cookie value
+  const cookieID = req.signedCookies.id; // the cookie valuePromise
 
   if (!cookieID) {
     res.redirect(authentication_url);

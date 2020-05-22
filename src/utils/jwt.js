@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const { Secret } = require("./networkValues");
+const { buildSecret } = require("./networkValues");
 
-const jwtSecret = new Secret(process.env.JWT_SECRET_ID);
+const jwtSecret = buildSecret(process.env.JWT_SECRET_ID);
 
 /**
- * @param jsonPayload json value
+ * @param jsonPayload json valuePromise
  * @param minTillExpiry in minutes
  */
 module.exports.signToken = async (jsonPayload, minTillExpiry) => {
