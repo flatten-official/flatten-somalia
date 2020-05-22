@@ -16,8 +16,8 @@ let request;
 
 describe("test /verify/login", () => {
   beforeAll(async () => {
-    request = supertest(await getApp());
     await util.connectToDatabase();
+    request = supertest(await getApp());
   });
 
   afterEach(async () => await util.clearDatabase());
