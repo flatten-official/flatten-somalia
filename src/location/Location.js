@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {getLocation, LOCATION_SUCCESS, LOCATION_FAIL, LOCATION_REQUEST, LOCATION_UNITITIALISED} from "./locationActions";
+import {getLocation, LOCATION_FAIL, LOCATION_REQUEST} from "./locationActions";
 
 const Location = ({getLocation, location}) => {
 

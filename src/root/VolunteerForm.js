@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import Form from "../../backend/Form";
+import Form from "../backend/Form";
 import FormDef from "./VolunteerForm.json";
-import Loading from "../../containers/Loading";
 import { Translate } from "react-redux-i18n";
-import EN from '../../translations/en/VolunteerForm';
-import SO from '../../translations/so/VolunteerForm';
+import EN from '../translations/en/VolunteerForm';
+import SO from '../translations/so/VolunteerForm';
 import {PropTypes} from "prop-types"
-import Location from "../../location/Location";
-import {LOCATION_SUCCESS} from "../../location/locationActions";
-import flattenApi from "../../backend/api"
+import Location from "../location/Location";
+import {LOCATION_SUCCESS} from "../location/locationActions";
+import flattenApi from "../backend/api"
 
 const VolunteerForm = ({
   location,

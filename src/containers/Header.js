@@ -14,14 +14,15 @@ const Header = ({ auth, logout }) => (
       <Link className="navbar-brand" to="/">
         <h3 className="wordmark">FLATTEN.so</h3>
       </Link>
-      <ul className="nav navbar-nav mr-auto">
+      {/* TODO - refactor this mess, and get it working with new login system! */}
+      {/* <ul className="nav navbar-nav mr-auto">
         {auth.is.hasOwnProperty("administrator") && auth.is.administrator ? (
           <NavLink to="/admin" role="navigation link" className="nav-link">
             <i className="fa fa-unlock-alt" />
             &nbsp; <Translate value="Navbar.links.adminPanel" />
           </NavLink>
         ) : null}
-      </ul>
+      </ul> */}
       {auth.authenticated ? (
         <ul className="nav navbar-nav mr-auto">
           <span className="nav-link" role="navigation link" onClick={logout}>

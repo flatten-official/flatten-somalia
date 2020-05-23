@@ -2,9 +2,9 @@
 // todo - fill in all of the routes
 export const Routes = {
   home: "/",
-  login: "/auth",
+  auth: "/auth",
   submisson: "/submission",
-  adminPanel: "/admin"
+  admin: "/admin"
 }
 
 export const FormConfig = {

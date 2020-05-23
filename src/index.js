@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import store, { history } from "./store";
-import { initAuth, Formio } from "react-formio";
+import { initAuth } from "react-formio";
 
 import {
     setLocale,

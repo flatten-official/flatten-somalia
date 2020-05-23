@@ -10,12 +10,11 @@ import { push } from "connected-react-router";
 import { Routes } from '../config';
 
 const Auth = ({locale, auth, getAuthState, pushToHome}) => {
-  useEffect(getAuthState, []);
+  useEffect(() => {getAuthState()}, []);
 
-
-  if (auth.state === AUTH_INITIALISING) {
+  if (auth.status === AUTH_INITIALISING) {
     return <Loading />;
-  } else if (auth.state == AUTH_SUCCESS) {
+  } else if (auth.status === AUTH_SUCCESS) {
     // TODO - be more intelligent about where to go after login
     pushToHome();
     return <Loading />;

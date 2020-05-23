@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 import { Translate } from "react-redux-i18n";
 import { PropTypes } from "prop-types";
 import { selectRoot } from "react-formio";
+import { AUTH_SUCCESS } from "../auth/authActions";
 import EN from "../translations/en/Admin"
 import SO from "../translations/so/Admin"
 
 const Admin = ({ auth, locale }) => (
   <>
-    {auth.is.administrator ? (
+    {/* TODO - change this depending on what the eventual shape of the permissions object is. */}
+    {auth.status == AUTH_SUCCESS && auth.user.permissions.indexOf('admin') > -1 ? (
       <>
         <h2><Translate value={"Admin.welcomeHeader"}/></h2>
         <br/>

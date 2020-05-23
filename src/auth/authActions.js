@@ -12,7 +12,6 @@ export const fetchAuthState = () => async (dispatch) => {
     dispatch({type:AUTH_INITIALISING});
 
     try {
-
         let res = await backend.request(flattenApi.getAuth);
         // check if the response is empty, indicating failed auth
         if (Object.keys(res.data).length === 0 && res.data.constructor === Object) {
@@ -20,7 +19,6 @@ export const fetchAuthState = () => async (dispatch) => {
         } else {
             dispatch({type:AUTH_SUCCESS, payload:res.data});
         }
-
     } catch (e) {
         console.error(e);
         dispatch({type:AUTH_FAIL});
@@ -30,7 +28,7 @@ export const fetchAuthState = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
 
     try {
-        let res = await backend.request(flattenApi.logout);
+        await backend.request(flattenApi.logout);
         dispatch({type:AUTH_LOGOUT});
     } catch (e) {
         // todo - what do we do for a failed logout???
