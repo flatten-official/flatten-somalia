@@ -4,11 +4,12 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
-const app = express();
 const { Config } = require("./config");
 const routes = require("./routes");
 
-async function getApp() {
+function getApp() {
+  const app = express();
+
   if (process.env.ENVIRONMENT === "dev") {
     app.use(cors({ origin: true, credentials: true }));
   } else {
