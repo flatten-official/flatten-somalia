@@ -1,11 +1,15 @@
 const cookieData = require("../../src/auth/cookieData");
 const util = require("./../testUtils/mongo");
 const { calculateExpiryTime } = require("./../../src/utils/time");
+const { setup } = require("../../src/index");
 
 const mongoose = require("mongoose");
 
 describe("cookie database functions", () => {
-  beforeAll(async () => await util.connectToDatabase());
+  beforeAll(async () => {
+    await setup(false);
+    await util.connectToDatabase();
+  });
   afterEach(async () => await util.clearDatabase());
   afterAll(async () => await util.closeDatabase());
 

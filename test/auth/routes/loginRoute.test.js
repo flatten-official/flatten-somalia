@@ -1,7 +1,6 @@
 const sendGrid = require("../../../src/utils/sendGrid");
 const mocks = require("../../testUtils/mocks");
 const { verifyToken } = require("../../../src/utils/jwt");
-
 const sendEmailMock = jest
   .spyOn(sendGrid, "sendVerificationEmail")
   .mockImplementation(mocks.sendVerificationEmail);
@@ -10,11 +9,13 @@ const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
 const { addVolunteer } = require("../../../src/volunteer/volunteerData");
+const { setup } = require("../../../src/index");
 
 let request;
 
 describe("test /auth/login", () => {
   beforeAll(async () => {
+    await setup(false);
     await util.connectToDatabase();
     request = supertest(await getApp());
   });

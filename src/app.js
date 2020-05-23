@@ -5,15 +5,10 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const app = express();
-
+const { Config } = require("./config");
 const routes = require("./routes");
-const { buildSecret } = require("./utils/networkValues");
-
-const cookieSecret = buildSecret(process.env.COOKIE_SECRET_ID);
 
 async function getApp() {
-  const cookieSecretString = await cookieSecret.get();
-
   if (process.env.ENVIRONMENT === "dev") {
     app.use(cors({ origin: true, credentials: true }));
   } else {
@@ -30,7 +25,7 @@ async function getApp() {
   app.use(express.json());
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
-  app.use(cookieParser(cookieSecretString));
+  app.use(cookieParser(Config.secrets.cookieSecret));
   app.use("/", routes);
 
   return app;

@@ -11,8 +11,8 @@
     "type": "Git"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "node src/launch.js.js",
+    "dev": "nodemon src/launch.js",
     "test": "jest --runInBand --collect-coverage",
     "doc": "apidoc -i ./src -o ./docs && open-cli ./docs/index.html"
   },
@@ -52,7 +52,6 @@
     }
   },
   "jest": {
-    "testEnvironment": "node",
-    "globalSetup": "./test/setup.js"
+    "testEnvironment": "node"
   }
 }
