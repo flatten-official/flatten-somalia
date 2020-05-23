@@ -9,8 +9,8 @@ const prodConfig = {
 };
 
 let Config = {
-  verification_email_template: "d-7a10ff414f6d44b882eb9a4dadab16ad",
-  authentication_url: `${process.env.FRONTEND_DOMAIN}/auth`,
+  authEmailTemplate: "d-7a10ff414f6d44b882eb9a4dadab16ad",
+  loginPage: `${process.env.FRONTEND_DOMAIN}/auth`,
   secrets: {
     sendGridApiKey: undefined,
     cookieSecret: undefined,

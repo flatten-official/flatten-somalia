@@ -67,8 +67,8 @@ async function addVolunteer(
   return volunteer._id;
 }
 
-async function getPermissions(volunteerId) {
-  return await Volunteer.findById(volunteerId, "permissions").permissions;
+async function getVolunteer(volunteerId) {
+  return await Volunteer.findById(volunteerId, "permissions");
 }
 
 /**
@@ -85,6 +85,6 @@ async function findVolunteerIdByEmail(email) {
 module.exports = {
   Volunteer,
   addVolunteer,
-  getPermissions,
+  getVolunteer,
   findVolunteerIdByEmail,
 };

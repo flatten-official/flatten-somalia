@@ -1,6 +1,4 @@
-const { calculateExpiryTime } = require("../../utils/time");
 const { verifyTokenAndMakeCookie } = require("../verificationAPI");
-const { authentication_url } = require("../../config");
 
 // Verifies a token in the request and gives the user a cookie.
 module.exports = async (req, res) => {
@@ -11,7 +9,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const cookieId = await verifyTokenAndMakeCookie(token);
+  const { id: cookieId, expiry } = await verifyTokenAndMakeCookie(token);
 
   if (!cookieId) {
     res
@@ -23,13 +21,12 @@ module.exports = async (req, res) => {
     return;
   }
 
-  res
-    .cookie("id", cookieId, {
-      expires: calculateExpiryTime(1080),
-      secure: true,
-      signed: true,
-      httpOnly: true,
-      sameSite: "Lax",
-    })
-    .redirect(303, process.env.FRONTEND_DOMAIN);
+  res.cookie("id", cookieId, {
+    expires: expiry,
+    secure: true,
+    signed: true,
+    httpOnly: true,
+    sameSite: "Lax",
+  });
+  res.redirect(303, process.env.FRONTEND_DOMAIN);
 };

@@ -32,5 +32,6 @@ module.exports.verifyTokenAndMakeCookie = async (tokenValue) => {
 
   if (!payload) return null;
 
-  return await writeCookie(calculateExpiryTime(COOKIE_LIFE), payload.id);
+  const expiry = calculateExpiryTime(COOKIE_LIFE);
+  return { id: await writeCookie(expiry, payload.id), expiry };
 };

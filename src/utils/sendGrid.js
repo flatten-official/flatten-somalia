@@ -17,7 +17,7 @@ module.exports.sendVerificationEmail = async (email, verification_link) => {
         email: "noreply@flatten.ca",
         name: "The FLATTEN Team",
       },
-      template_id: Config.verification_email_template,
+      template_id: Config.authEmailTemplate,
       dynamic_template_data: {
         subject: "FLATTEN: Verify your email",
         verification_link,
