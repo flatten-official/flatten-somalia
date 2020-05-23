@@ -1,4 +1,9 @@
 import React from "react";
 import { Translate } from "react-redux-i18n";
 
-export default () => <div><Translate value={'Loading.loading'}/></div>;
+const Loading = () => (
+  <div>
+    <Translate value={"Loading.loading"} />
+  </div>
+);
+export default Loading;

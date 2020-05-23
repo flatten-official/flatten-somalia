@@ -6,11 +6,12 @@ import store, { history } from "./store";
 import { initAuth } from "react-formio";
 
 import {
-    setLocale,
-    loadTranslations,
-    syncTranslationWithStore,
+  setLocale,
+  loadTranslations,
+  syncTranslationWithStore,
 } from "react-redux-i18n";
-import getTranslations from './translations/GetTranslations'
+
+import getTranslations from "./translations/GetTranslations";
 
 import App from "./App";
 
@@ -19,17 +20,17 @@ import "./styles.scss";
 // Initialize the current user
 store.dispatch(initAuth());
 
-syncTranslationWithStore(store)
+syncTranslationWithStore(store);
 getTranslations().then((locale) => {
-    store.dispatch(loadTranslations(locale))
-    store.dispatch(setLocale('en'));
+  store.dispatch(loadTranslations(locale));
+  store.dispatch(setLocale("en"));
 
-    render(
-        <Provider store={store}>
-            <ConnectedRouter history={history}>
-                <App />
-            </ConnectedRouter>
-        </Provider>,
-        document.getElementById("root")
-    );
+  render(
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </Provider>,
+    document.getElementById("root")
+  );
 });
