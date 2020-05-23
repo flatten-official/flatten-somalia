@@ -28,7 +28,6 @@ module.exports.verifyLogin = async (emailAddress) => {
  * @return a cookieID to pass to the user or null if
  */
 module.exports.verifyTokenAndMakeCookie = async (tokenValue) => {
-  // TODO Verify that token is good and not expired
   const payload = await verifyToken(tokenValue);
 
   if (!payload) return null;

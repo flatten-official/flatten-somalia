@@ -64,7 +64,7 @@ async function readSecret(secret_id) {
        3. Run gcloud config set project PROJECT_ID.`
     );
     console.trace();
-    throw e;
+    return null;
   }
 }
 

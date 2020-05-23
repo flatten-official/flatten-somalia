@@ -6,12 +6,10 @@ const { authentication_url } = require("../../config");
 module.exports = async (req, res) => {
   const token = req.query.token;
 
-  if (!token) {
+  if (!token || typeof token !== "string") {
     res.status(400).send("No token included.");
     return;
   }
-
-  // TODO check if we need to check that token is string.
 
   const cookieId = await verifyTokenAndMakeCookie(token);
 
@@ -28,5 +26,5 @@ module.exports = async (req, res) => {
       httpOnly: true,
       sameSite: "Lax",
     })
-    .redirect(process.env.FRONTEND_DOMAIN);
+    .redirect(303, process.env.FRONTEND_DOMAIN);
 };
