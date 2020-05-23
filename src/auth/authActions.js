@@ -20,7 +20,6 @@ export const fetchAuthState = () => async (dispatch) => {
             dispatch({type:AUTH_SUCCESS, payload:res.data});
         }
     } catch (e) {
-        console.error(e);
         dispatch({type:AUTH_FAIL});
     }
 }

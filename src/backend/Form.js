@@ -20,7 +20,8 @@ const Form = ( props ) => {
     // add a hook to send the request to the server
     formioOptions.hooks.beforeSubmit = async(submission, next) => {
         try {
-          let res = await backend.request(submitApi);
+          // need to actually add the submission in here!
+          let res = await backend.request({...submitApi, data: submission});
           submitSuccess(name, res);
         } catch(e) {
           submitFailure(name, false);
