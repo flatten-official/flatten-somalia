@@ -11,7 +11,7 @@
     "type": "Git"
   },
   "scripts": {
-    "start": "node src/launch.js.js",
+    "start": "node src/launch.js",
     "dev": "nodemon src/launch.js",
     "test": "jest --runInBand --collect-coverage",
     "doc": "apidoc -i ./src -o ./docs && open-cli ./docs/index.html"
