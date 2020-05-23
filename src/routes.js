@@ -48,6 +48,8 @@ router.post("/auth/login", loginRoute); // if you change route name update tests
  */
 router.get("/auth/token", verifyTokenRoute);
 
+router.use(cookieMiddleware);
+
 /**
  * @api {get} /auth Get Authentication Info
  * @apiName GetAuthInfo
@@ -65,8 +67,6 @@ router.get("/auth/token", verifyTokenRoute);
  *                    }
  */
 router.get("/auth", getAuthRoute);
-
-router.use(cookieMiddleware);
 
 /**
  * @api {delete} /auth/logout Logout from Session
