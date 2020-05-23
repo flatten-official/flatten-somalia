@@ -23,10 +23,12 @@ module.exports = async (req, res) => {
 
   res.cookie("id", cookieId, {
     expires: expiry,
-    secure: true,
+    // secure cookies not wanted in dev environment
+    secure: process.env.ENVIRONMENT == "dev" ? false : true,
     signed: true,
     httpOnly: true,
     sameSite: "Lax",
   });
+
   res.redirect(303, process.env.FRONTEND_DOMAIN);
 };
