@@ -3,7 +3,7 @@ module.exports = (req, res) => {
     res.send({
       permissions: res.locals.volunteer.permissions,
       name: res.locals.volunteer.name,
-      expiry: req.locals.cookieExpiry,
+      expiry: res.locals.cookieExpiry,
     });
   } else {
     res.sendStatus(401);
