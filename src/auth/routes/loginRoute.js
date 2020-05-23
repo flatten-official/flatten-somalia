@@ -1,4 +1,4 @@
-const { verifyLogin } = require("../verificationAPI");
+const { verifyLoginAndSendEmail } = require("../verificationAPI");
 const { isEmail } = require("validator");
 
 // Performs the appropriate actions to log in a user.
@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const success = await verifyLogin(emailAddress); // Returns true even if email was wrong
+  const success = await verifyLoginAndSendEmail(emailAddress); // Returns true even if email was wrong
 
   if (success) res.sendStatus(200);
   else res.status(500).send("We we're unable to send you a login email.");

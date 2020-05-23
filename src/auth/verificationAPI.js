@@ -8,7 +8,7 @@ const { Config } = require("../config");
 const COOKIE_LIFE = 1080; // In minutes
 const EMAIL_EXPIRY = 15; // In minutes
 
-module.exports.verifyLogin = async (emailAddress) => {
+module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
   const volunteerId = await findVolunteerIdByEmail(emailAddress);
 
   if (!volunteerId) {

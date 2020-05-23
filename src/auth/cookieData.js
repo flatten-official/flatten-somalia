@@ -60,4 +60,4 @@ async function removedExpiredCookies() {
   await Cookie.deleteMany({ expiry: { $lt: Date.now() } });
 }
 
-module.exports = { Cookie, writeCookie, readCookie, removedExpiredCookies };
+module.exports = { Cookie, writeCookie, readCookie, removedExpiredCookies, deleteCookie };
