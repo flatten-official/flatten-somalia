@@ -14,9 +14,9 @@ module.exports = {
     ecmaVersion: 11,
   },
   rules: {
-    "prettier/prettier": ["error"],
-    "jest/no-hooks": ["off"],
-    "jest/prefer-expect-assertions": ["off"],
-    "no-unused-vars": ["warn"],
+    "prettier/prettier": "error",
+    "jest/no-hooks": "off",
+    "jest/prefer-expect-assertions": "off",
+    "no-unused-vars": "warn",
   },
 };
