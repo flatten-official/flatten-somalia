@@ -35,17 +35,13 @@ describe("test /auth/login", () => {
     let res = await request.post("/auth/login");
     expect(res.status).toBe(400);
 
-    res = await request
-      .post("/auth/login")
-      .send({ data: { email: "gmail.com" } });
+    res = await request.post("/auth/login").send({ email: "gmail.com" });
     expect(res.status).toBe(422);
 
-    res = await request.post("/auth/login").send({ data: { email: "" } });
+    res = await request.post("/auth/login").send({ email: "" });
     expect(res.status).toBe(400);
 
-    res = await request
-      .post("/auth/login")
-      .send({ data: { email: '{"$gt": ""}' } });
+    res = await request.post("/auth/login").send({ email: '{"$gt": ""}' });
     expect(res.status).toBe(422);
   });
 
@@ -54,7 +50,7 @@ describe("test /auth/login", () => {
 
     const res = await request
       .post("/auth/login")
-      .send({ data: { email: "bad@gmail.com" } });
+      .send({ email: "bad@gmail.com" });
     expect(res.status).toBe(200);
 
     expect(sendEmailMock).toHaveBeenCalledTimes(0);
@@ -65,7 +61,7 @@ describe("test /auth/login", () => {
 
     const res = await request
       .post("/auth/login")
-      .send({ data: { email: "good@gmail.com" } });
+      .send({ email: "good@gmail.com" });
 
     expect(res.status).toBe(200);
   });
@@ -77,9 +73,7 @@ describe("test /auth/login", () => {
       null
     );
 
-    await request
-      .post("/auth/login")
-      .send({ data: { email: "good@gmail.com" } });
+    await request.post("/auth/login").send({ email: "good@gmail.com" });
 
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
     expect(sendEmailMock.mock.calls[0][0]).toMatch("good@gmail.com");
