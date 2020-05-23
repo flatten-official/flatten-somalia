@@ -6,6 +6,7 @@ module.exports = (req, res) => {
       expiry: res.locals.cookieExpiry,
     });
   } else {
-    res.sendStatus(401);
+    // send an empty message signifying that the user is not logged in
+    res.send({});
   }
 };
