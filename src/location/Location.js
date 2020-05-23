@@ -1,35 +1,38 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {getLocation, LOCATION_FAIL, LOCATION_REQUEST} from "./locationActions";
+import {
+  getLocation,
+  LOCATION_FAIL,
+  LOCATION_REQUEST,
+} from "./locationActions";
 
-const Location = ({getLocation, location}) => {
+const Location = ({ getLocation, location }) => {
+  useEffect(getLocation, [getLocation]);
 
-  useEffect(getLocation, []);
-
-  if (location.status===LOCATION_REQUEST) {
+  if (location.status === LOCATION_REQUEST) {
     return <div>Waiting for location to load.</div>;
   } else if (location.status === LOCATION_FAIL) {
     return (
-    <div>
-      Location failed. Click the button to try again, or press the lock in the URL bar to grant location access if this doesn't work.
-      <button onClick={getLocation} class="btn btn-primary">
-        Try again.
-      </button>
-
-    </div>)
+      <div>
+        Location failed. Click the button to try again, or press the lock in the
+        URL bar to grant location access if this doesn&apos;t work.
+        <button onClick={getLocation} className="btn btn-primary">
+          Try again.
+        </button>
+      </div>
+    );
   }
-  return <div>Got location. Waiting for load...</div>
+  return <div>Got location. Waiting for load...</div>;
+};
 
-}
-
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     location: state.location,
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  getLocation: () => dispatch(getLocation())
+const mapDispatchToProps = (dispatch) => ({
+  getLocation: () => dispatch(getLocation()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Location);

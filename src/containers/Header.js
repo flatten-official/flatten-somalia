@@ -25,9 +25,14 @@ const Header = ({ auth, logout }) => (
       </ul> */}
       {auth.authenticated ? (
         <ul className="nav navbar-nav mr-auto">
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
           <span className="nav-link" role="navigation link" onClick={logout}>
             <span className="fa fa-sign-out" />
-            &nbsp; <Translate value="Navbar.links.loggedInAndLogout" user={auth.user.data.email} />
+            &nbsp;{" "}
+            <Translate
+              value="Navbar.links.loggedInAndLogout"
+              user={auth.user.data.email}
+            />
           </span>
         </ul>
       ) : (

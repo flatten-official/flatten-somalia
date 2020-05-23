@@ -1,4 +1,4 @@
 export default {
-    loggedInAs: '',
-    cannotAccessFormMessage: ''
-}
+  loggedInAs: "",
+  cannotAccessFormMessage: "",
+};

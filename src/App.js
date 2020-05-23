@@ -7,7 +7,7 @@ import Auth from "./auth/Auth";
 import Admin from "./admin/Admin";
 import Success from "./form/Success";
 import SubmittedEmail from "./auth/SubmittedEmail";
-import { Routes } from "./config"
+import { Routes } from "./config";
 
 const App = () => (
   <>

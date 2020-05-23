@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
-import {connect} from "react-redux"
+import { connect } from "react-redux";
 import Login from "./Login";
 import { Translate } from "react-redux-i18n";
-import EN from '../translations/en/Auth';
-import SO from '../translations/so/Auth';
-import { AUTH_INITIALISING, AUTH_SUCCESS, fetchAuthState } from './authActions';
-import Loading from '../containers/Loading';
+import EN from "../translations/en/Auth";
+import SO from "../translations/so/Auth";
+import { AUTH_INITIALISING, AUTH_SUCCESS, fetchAuthState } from "./authActions";
+import Loading from "../containers/Loading";
 import { push } from "connected-react-router";
-import { Routes } from '../config';
+import { Routes } from "../config";
 
-const Auth = ({locale, auth, getAuthState, pushToHome}) => {
-  useEffect(() => {getAuthState()}, []);
+const Auth = ({ locale, auth, getAuthState, pushToHome }) => {
+  useEffect(() => {
+    getAuthState();
+  }, [getAuthState]);
 
   if (auth.status === AUTH_INITIALISING) {
     return <Loading />;
@@ -22,19 +24,30 @@ const Auth = ({locale, auth, getAuthState, pushToHome}) => {
 
   return (
     <div>
-      <div className="panel-heading card-header"> <Translate value='Auth.loginForm.title'/> </div>
+      <div className="panel-heading card-header">
+        {" "}
+        <Translate value="Auth.loginForm.title" />{" "}
+      </div>
       <div className="panel-body card-body">
-        <Login options={{ language: locale, i18n: {en: EN.loginForm, so: SO.loginForm} }}/>
+        <Login
+          options={{
+            language: locale,
+            i18n: { en: EN.loginForm, so: SO.loginForm },
+          }}
+        />
       </div>
     </div>
   );
 };
 
-const mapStateToProps = state => ({ locale: state.i18n.locale, auth:state.auth });
-
-const mapDispatchToProps = ( dispatch ) => ({
-  getAuthState: () => dispatch(fetchAuthState()),
-  pushToHome: () => dispatch(push(Routes.home))
+const mapStateToProps = (state) => ({
+  locale: state.i18n.locale,
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps) (Auth);
+const mapDispatchToProps = (dispatch) => ({
+  getAuthState: () => dispatch(fetchAuthState()),
+  pushToHome: () => dispatch(push(Routes.home)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

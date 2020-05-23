@@ -1,7 +1,7 @@
 export default {
-    links: {
-        adminPanel: "",
-        loggedInAndLogout: "",
-        login: ""
-    }
-}
+  links: {
+    adminPanel: "",
+    loggedInAndLogout: "",
+    login: "",
+  },
+};

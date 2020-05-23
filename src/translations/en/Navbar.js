@@ -1,7 +1,7 @@
 export default {
-    links: {
-        adminPanel: "Admin Panel",
-        loggedInAndLogout: "Logged in as %{user}. | Logout",
-        login: "Login"
-    }
-}
+  links: {
+    adminPanel: "Admin Panel",
+    loggedInAndLogout: "Logged in as %{user}. | Logout",
+    login: "Login",
+  },
+};
