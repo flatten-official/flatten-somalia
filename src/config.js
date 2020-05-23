@@ -34,7 +34,10 @@ const loadSecrets = async () => {
 
 const setup = async () => {
   // DON'T USE NODE_ENV because on App Engine it is always prod even in the staging environment
-  if (process.env.ENVIRONMENT === "staging") {
+  if (
+    process.env.ENVIRONMENT === "staging" ||
+    process.env.ENVIRONMENT === "dev"
+  ) {
     Config = { ...Config, ...stagingConfig };
   } else if (process.env.ENVIRONMENT === "prod") {
     Config = { ...Config, ...prodConfig };
