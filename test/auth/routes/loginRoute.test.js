@@ -84,7 +84,7 @@ describe("test /auth/login", () => {
     const url = sendEmailMock.mock.calls[0][1];
     const tokenIndex = url.indexOf("?token=");
 
-    const token = url.slice(tokenIndex + 7); // +7 to go past token=
+    const token = url.slice(tokenIndex + 7); // +7 to go past ?token=
     const payload = await verifyToken(token);
 
     expect(payload).not.toBeNull();
