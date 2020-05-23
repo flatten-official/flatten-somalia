@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
   res.cookie("id", cookieId, {
     expires: expiry,
     // secure cookies not wanted in dev environment
-    secure: process.env.ENVIRONMENT == "dev" ? false : true,
+    secure: process.env.ENVIRONMENT !== "dev",
     signed: true,
     httpOnly: true,
     sameSite: "Lax",
