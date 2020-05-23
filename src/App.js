@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import Header from "./containers/Header";
 import Footer from "./containers/Footer";
@@ -7,22 +7,48 @@ import Auth from "./auth/Auth";
 import Admin from "./admin/Admin";
 import Success from "./form/Success";
 import SubmittedEmail from "./auth/SubmittedEmail";
+import Loading from "./containers/Loading";
 import { Routes } from "./config";
+import { connect } from "react-redux";
+import { push } from "connected-react-router";
+import {
+  AUTH_INITIALISING,
+  fetchAuthState,
+  AUTH_SUCCESS,
+} from "./auth/authActions";
 
-const App = () => (
-  <>
-    <Header />
+const App = ({ getAuthState, auth }) => {
+  useEffect(() => {
+    getAuthState();
+  }, [getAuthState]);
 
-    <div className="container" id="main">
-      <Route exact path={Routes.home} component={Home} />
-      <Route exact path={Routes.admin} component={Admin} />
-      <Route path={Routes.auth} component={Auth} />
-      <Route path="/success" component={Success} />
-      <Route path="/submitted-email" component={SubmittedEmail} />
-    </div>
+  return (
+    <>
+      <Header />
 
-    <Footer />
-  </>
-);
+      {auth.status == AUTH_INITIALISING ? (
+        <Loading />
+      ) : (
+        <div className="container" id="main">
+          <Route exact path={Routes.home} component={Home} />
+          <Route exact path={Routes.admin} component={Admin} />
+          <Route path={Routes.auth} component={Auth} />
+          <Route path="/success" component={Success} />
+          <Route path="/submitted-email" component={SubmittedEmail} />
+        </div>
+      )}
 
-export default App;
+      <Footer />
+    </>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getAuthState: () => dispatch(fetchAuthState()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

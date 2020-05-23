@@ -4,22 +4,14 @@ import Login from "./Login";
 import { Translate } from "react-redux-i18n";
 import EN from "../translations/en/Auth";
 import SO from "../translations/so/Auth";
-import { AUTH_INITIALISING, AUTH_SUCCESS, fetchAuthState } from "./authActions";
+import { AUTH_SUCCESS } from "./authActions";
 import Loading from "../containers/Loading";
 import { push } from "connected-react-router";
 import { Routes } from "../config";
 
-const Auth = ({ locale, auth, getAuthState, pushToHome }) => {
-  useEffect(() => {
-    getAuthState();
-  }, [getAuthState]);
-
-  if (auth.status === AUTH_INITIALISING) {
-    return <Loading />;
-  } else if (auth.status === AUTH_SUCCESS) {
-    // TODO - be more intelligent about where to go after login
+const Auth = ({ locale, auth, pushToHome }) => {
+  if (auth.status === AUTH_SUCCESS) {
     pushToHome();
-    return <Loading />;
   }
 
   return (
@@ -46,7 +38,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getAuthState: () => dispatch(fetchAuthState()),
   pushToHome: () => dispatch(push(Routes.home)),
 });
 

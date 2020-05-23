@@ -3,34 +3,25 @@ import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import VolunteerForm from "./VolunteerForm";
 import { FormConfig, Routes } from "../config";
-import { push } from "connected-react-router";
-import { AUTH_SUCCESS } from "../auth/authActions";
+import { hasPermission } from "../auth/authApi";
+import { NavLink } from "react-router-dom";
 
-const Home = ({ auth, pushToAuth }) => {
-  if (!(auth.status === AUTH_SUCCESS)) {
-    pushToAuth();
-  }
-
-  return (
-    <>
+const Home = ({ auth }) => (
+  <>
+    {hasPermission(auth, "submitForms") ? (
       <VolunteerForm {...FormConfig.volunteerForm} />
-    </>
-  );
-};
+    ) : (
+      <p>Not authorised.</p>
+    )}
+  </>
+);
 
 Home.propTypes = {
   auth: PropTypes.object.isRequired,
-  pushToAuth: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  pushToAuth: () => {
-    dispatch(push(Routes.auth));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);

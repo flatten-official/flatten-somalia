@@ -1,5 +1,7 @@
 import backend from "../backend/backend";
 import flattenApi from "../backend/api";
+import { Routes } from "../config";
+import { push } from "connected-react-router";
 
 // actions
 export const AUTH_INITIALISING = "AUTH_INITIALISING";
@@ -15,6 +17,7 @@ export const fetchAuthState = () => async (dispatch) => {
     // check if the response is empty, indicating failed auth
     if (Object.keys(res.data).length === 0 && res.data.constructor === Object) {
       dispatch({ type: AUTH_FAIL });
+      dispatch(push(Routes.auth));
     } else {
       dispatch({ type: AUTH_SUCCESS, payload: res.data });
     }
