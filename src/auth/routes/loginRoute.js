@@ -3,7 +3,7 @@ const { isEmail } = require("validator");
 
 // Performs the appropriate actions to log in a user.
 module.exports = async (req, res) => {
-  const emailAddress = req.body.data.email;
+  const emailAddress = req.body.email;
 
   if (!emailAddress) {
     res.status(400).send("No email specified.");
