@@ -68,7 +68,7 @@ async function addVolunteer(
 }
 
 async function getVolunteer(volunteerId) {
-  return await Volunteer.findById(volunteerId, "permissions");
+  return await Volunteer.findById(volunteerId);
 }
 
 /**
