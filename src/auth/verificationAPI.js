@@ -17,7 +17,7 @@ module.exports.verifyLogin = async (emailAddress) => {
   const token = await signToken({ id: volunteerId }, 15);
 
   const verificationLink =
-    process.env.BACKEND_URL + "/verify/token?token=" + token;
+    process.env.BACKEND_URL + "/auth/token?token=" + token;
 
   return await sendVerificationEmail(emailAddress, verificationLink);
 };

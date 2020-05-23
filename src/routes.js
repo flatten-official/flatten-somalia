@@ -34,7 +34,7 @@ router.get("/", (req, res) => {
  *                    "email" : "<Volunteer's-Email>"
  *                  }
  */
-router.post("/auth/login", loginRoute);
+router.post("/auth/login", loginRoute); // if you change route name update tests and email
 
 /**
  * @api {get} /auth/token Verify Token
