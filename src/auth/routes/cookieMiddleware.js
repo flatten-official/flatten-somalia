@@ -1,6 +1,5 @@
 const { readCookie } = require("../cookieData");
-const { getPermissions } = require("../../volunteer/volunteerData");
-const { authentication_url } = require("../../config");
+const { getVolunteer } = require("../../volunteer/volunteerData");
 
 /**
  * If cookie is invalid, redirects to the /auth page.
@@ -10,19 +9,19 @@ module.exports = async (req, res, next) => {
   const cookieID = req.signedCookies.id; // the cookie valuePromise
 
   if (!cookieID) {
-    res.redirect(authentication_url);
+    next();
     return;
   }
 
   const cookie = await readCookie(cookieID);
 
   if (!cookie) {
-    res.redirect(authentication_url);
+    next();
     return;
   }
 
-  res.locals.permissions = await getPermissions(cookie.volunteerId);
-  res.locals.volunteerId = cookie.volunteerId;
+  res.locals.volunteer = await getVolunteer(cookie.volunteerId);
+  res.locals.cookieExpiry = cookie.expiry;
 
   next();
 };
