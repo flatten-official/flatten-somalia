@@ -14,7 +14,12 @@ module.exports = async (req, res) => {
   const cookieId = await verifyTokenAndMakeCookie(token);
 
   if (!cookieId) {
-    res.redirect(authentication_url);
+    res
+      .status(401)
+      .send(
+        "Your link is invalid (it might have expired)." +
+          "Go to https://v.flatten.so to login again"
+      );
     return;
   }
 
