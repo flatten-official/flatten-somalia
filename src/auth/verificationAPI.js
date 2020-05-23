@@ -3,8 +3,10 @@ const { writeCookie } = require("./cookieData");
 const { findVolunteerIdByEmail } = require("../volunteer/volunteerData");
 const { verifyToken, signToken } = require("../utils/jwt");
 const { sendVerificationEmail } = require("../utils/sendGrid");
+const { Config } = require("../config");
 
 const COOKIE_LIFE = 1080; // In minutes
+const EMAIL_EXPIRY = 15; // In minutes
 
 module.exports.verifyLogin = async (emailAddress) => {
   const volunteerId = await findVolunteerIdByEmail(emailAddress);
@@ -14,10 +16,9 @@ module.exports.verifyLogin = async (emailAddress) => {
     return true; // Return true to not let user know if email was invalid to not allow guessing emails
   }
 
-  const token = await signToken({ id: volunteerId }, 15);
+  const token = await signToken({ id: volunteerId }, EMAIL_EXPIRY);
 
-  const verificationLink =
-    process.env.BACKEND_URL + "/auth/token?token=" + token;
+  const verificationLink = Config.urls.emailLink + "?token=" + token;
 
   return await sendVerificationEmail(emailAddress, verificationLink);
 };

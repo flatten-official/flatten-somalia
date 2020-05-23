@@ -10,6 +10,7 @@ const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
 const { addVolunteer } = require("../../../src/volunteer/volunteerData");
 const { setup } = require("../../../src/index");
+const { Config } = require("../../../src/config");
 
 let request;
 
@@ -81,11 +82,15 @@ describe("test /auth/login", () => {
     expect(sendEmailMock.mock.results[0].value).toBe(true);
 
     const url = sendEmailMock.mock.calls[0][1];
-    const tokenIndex = url.indexOf("token=") + 6; // + 6 to go past token=
-    const token = url.slice(tokenIndex);
+    const tokenIndex = url.indexOf("?token=");
+
+    const token = url.slice(tokenIndex + 7); // +7 to go past token=
     const payload = await verifyToken(token);
 
     expect(payload).not.toBeNull();
     expect(payload.id).toMatch(volunteerId.toString());
+
+    const emailLinkBase = url.slice(0, tokenIndex);
+    expect(emailLinkBase).toMatch(Config.urls.emailLink);
   });
 });

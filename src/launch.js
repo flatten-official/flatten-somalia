@@ -1,3 +1,4 @@
+require("dotenv").config(); // Load environment variables from .env
 const { setup, startServer, cleanup } = require("./index");
 
 setup()

@@ -10,6 +10,8 @@ module.exports.setup = () => {
 
 /* Sends a verification link to a user given an email and the link. */
 module.exports.sendVerificationEmail = async (email, verification_link) => {
+  console.log(verification_link);
+
   try {
     const msg = {
       to: email,

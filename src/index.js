@@ -1,4 +1,3 @@
-require("dotenv").config(); // Load environment variables from .env
 const { cleanupDatabase, setupDatabase } = require("./utils/mongo");
 const { getApp } = require("./app");
 const { setup: configSetup } = require("./config");

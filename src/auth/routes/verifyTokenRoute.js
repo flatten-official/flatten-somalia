@@ -1,4 +1,5 @@
 const { verifyTokenAndMakeCookie } = require("../verificationAPI");
+const { Config } = require("../../config");
 
 // Verifies a token in the request and gives the user a cookie.
 module.exports = async (req, res) => {
@@ -30,5 +31,5 @@ module.exports = async (req, res) => {
     sameSite: "Lax",
   });
 
-  res.redirect(303, process.env.FRONTEND_DOMAIN);
+  res.redirect(303, Config.urls.homePage);
 };
