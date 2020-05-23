@@ -49,13 +49,6 @@ router.post("/auth/login", loginRoute);
 router.get("/auth/token", verifyTokenRoute);
 
 /**
- * @api {delete} /auth/logout Logout from Session
- * @apiName Logout
- * @apiGroup Authentication
- */
-router.delete("/auth/logout", logoutRoute);
-
-/**
  * @api {get} /auth Get Authentication Info
  * @apiName GetAuthInfo
  * @apiGroup Authentication
@@ -74,6 +67,13 @@ router.delete("/auth/logout", logoutRoute);
 router.get("/auth", getAuthRoute);
 
 router.use(cookieMiddleware);
+
+/**
+ * @api {delete} /auth/logout Logout from Session
+ * @apiName Logout
+ * @apiGroup Authentication
+ */
+router.delete("/auth/logout", logoutRoute);
 
 /**
  * @api {post} /volunteer/add Add volunteer
