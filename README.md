@@ -20,8 +20,10 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 
 ## Running
 
-Run `npm run dev` in the root directory to start the project. Then navigate to `localhost` in your browser.
-You should see a message indicating that the server is running locally.
+1. Run `npm run auth` to login through `gcloud`.
+
+2. Run `npm run dev`. 
+Navigate to `localhost` in your browser, you should see a message indicating that the server is running locally.
 
 ## Useful commands
 
