@@ -30,7 +30,6 @@ function PrivateRoute({ auth, requiredPermission, comp: Component, ...rest }) {
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.i18n.locale,
   auth: state.auth,
 });
 
