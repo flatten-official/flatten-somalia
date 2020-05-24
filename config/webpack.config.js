@@ -7,20 +7,19 @@ const InlineChunkHtmlPlugin = require("react-dev-utils/InlineChunkHtmlPlugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const safePostCssParser = require("postcss-safe-parser");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
+const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 const paths = require("./paths");
-const getClientEnvironment = require("./env");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
 
-const appPackageJson = require(paths.appPackageJson);
+const postcssNormalize = require("postcss-normalize");
 
-// style files regexes
-const cssRegex = /\.css$/;
-const sassRegex = /\.(scss|sass)$/;
+const appPackageJson = require(paths.appPackageJson);
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -28,32 +27,41 @@ module.exports = function (webpackEnv) {
   const isEnvDevelopment = webpackEnv === "development";
   const isEnvProduction = webpackEnv === "production";
 
-  // Variable used for enabling profiling in Production
-  // passed into alias object. Uses a flag if passed into the build command
-  const isEnvProductionProfile =
-    isEnvProduction && process.argv.includes("--profile");
-
-  // We will provide `paths.publicUrlOrPath` to our app
-  // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
-  // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
-  // Get environment variables to inject into our app.
-  const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
-
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
       isEnvDevelopment && require.resolve("style-loader"),
       isEnvProduction && {
         loader: MiniCssExtractPlugin.loader,
-        // css is located in `static/css`, use '../../' to locate index.html folder
-        // in production `paths.publicUrlOrPath` can be a relative path
-        options: paths.publicUrlOrPath.startsWith(".")
-          ? { publicPath: "../../" }
-          : {},
       },
       {
         loader: require.resolve("css-loader"),
         options: cssOptions,
+      },
+      {
+        // Options for PostCSS as we reference these options twice
+        // Adds vendor prefixing based on your specified browser support in
+        // package.json
+        loader: require.resolve("postcss-loader"),
+        options: {
+          // Necessary for external CSS imports to work
+          // https://github.com/facebook/create-react-app/issues/2677
+          ident: "postcss",
+          plugins: () => [
+            require("postcss-flexbugs-fixes"),
+            require("postcss-preset-env")({
+              autoprefixer: {
+                flexbox: "no-2009",
+              },
+              stage: 3,
+            }),
+            // Adds PostCSS Normalize as the reset css with default options,
+            // so that it honors browserslist config in package.json
+            // which in turn let's users customize the target behavior as per their needs.
+            postcssNormalize(),
+          ],
+          sourceMap: isEnvProduction && true,
+        },
       },
     ].filter(Boolean);
     if (preProcessor) {
@@ -171,8 +179,8 @@ module.exports = function (webpackEnv) {
               safari10: true,
             },
             // Added for profiling in devtools
-            keep_classnames: isEnvProductionProfile,
-            keep_fnames: isEnvProductionProfile,
+            keep_classnames: false,
+            keep_fnames: false,
             output: {
               ecma: 5,
               comments: false,
@@ -186,6 +194,7 @@ module.exports = function (webpackEnv) {
         // This is only used in production mode
         new OptimizeCSSAssetsPlugin({
           cssProcessorOptions: {
+            parser: safePostCssParser,
             map: {
               // `inline: false` forces the sourcemap to be output into a
               // separate file
@@ -233,11 +242,6 @@ module.exports = function (webpackEnv) {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         "react-native": "react-native-web",
-        // Allows for better profiling with ReactDevTools
-        ...(isEnvProductionProfile && {
-          "react-dom$": "react-dom/profiling",
-          "scheduler/tracing": "scheduler/tracing-profiling",
-        }),
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -273,9 +277,9 @@ module.exports = function (webpackEnv) {
             {
               options: {
                 cache: true,
+                formatter: require.resolve("react-dev-utils/eslintFormatter"),
                 eslintPath: require.resolve("eslint"),
                 resolvePluginsRelativeTo: __dirname,
-                emitWarning: isEnvDevelopment,
               },
               loader: require.resolve("eslint-loader"),
             },
@@ -301,7 +305,7 @@ module.exports = function (webpackEnv) {
             // Process application JS with Babel.
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
-              test: /\.(js|mjs|jsx)$/,
+              test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: paths.appSrc,
               loader: require.resolve("babel-loader"),
               options: {
@@ -366,7 +370,8 @@ module.exports = function (webpackEnv) {
             // of CSS.
             // By default we support CSS Modules with the extension .module.css
             {
-              test: cssRegex,
+              test: /\.css$/,
+              exclude: /\.module\.css$/,
               use: getStyleLoaders({
                 importLoaders: 1,
                 sourceMap: isEnvProduction && true,
@@ -377,11 +382,24 @@ module.exports = function (webpackEnv) {
               // See https://github.com/webpack/webpack/issues/6571
               sideEffects: true,
             },
+            // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
+            // using the extension .module.css
+            {
+              test: /\.module\.css$/,
+              use: getStyleLoaders({
+                importLoaders: 1,
+                sourceMap: isEnvProduction && true,
+                modules: {
+                  getLocalIdent: getCSSModuleLocalIdent,
+                },
+              }),
+            },
             // Opt-in support for SASS (using .scss or .sass extensions).
             // By default we support SASS Modules with the
             // extensions .module.scss or .module.sass
             {
-              test: sassRegex,
+              test: /\.(scss|sass)$/,
+              exclude: /\.module\.(scss|sass)$/,
               use: getStyleLoaders(
                 {
                   importLoaders: 3,
@@ -394,6 +412,21 @@ module.exports = function (webpackEnv) {
               // Remove this when webpack adds a warning or an error for this.
               // See https://github.com/webpack/webpack/issues/6571
               sideEffects: true,
+            },
+            // Adds support for CSS Modules, but using SASS
+            // using the extension .module.scss or .module.sass
+            {
+              test: /\.module\.(scss|sass)$/,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 3,
+                  sourceMap: isEnvProduction && true,
+                  modules: {
+                    getLocalIdent: getCSSModuleLocalIdent,
+                  },
+                },
+                "sass-loader"
+              ),
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
@@ -448,13 +481,16 @@ module.exports = function (webpackEnv) {
       // a network request.
       // https://github.com/facebook/create-react-app/issues/5358
       isEnvProduction &&
+        true &&
         new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/]),
       // Makes some environment variables available in index.html.
       // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
       // <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
       // It will be an empty string unless you specify "homepage"
       // in `package.json`, in which case it will be the pathname of that URL.
-      new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
+      new InterpolateHtmlPlugin(HtmlWebpackPlugin, {
+        NODE_ENV: process.env.NODE_ENV || "development",
+      }),
       // This gives some necessary context to module not found errors, such as
       // the requesting resource.
       new ModuleNotFoundPlugin(paths.appPath),
@@ -463,7 +499,13 @@ module.exports = function (webpackEnv) {
       // It is absolutely essential that NODE_ENV is set to production
       // during a production build.
       // Otherwise React will be compiled in the very slow development mode.
-      new webpack.DefinePlugin(env.stringified),
+      new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: JSON.stringify(
+            { NODE_ENV: process.env.NODE_ENV || "development" }["NODE_ENV"]
+          ),
+        },
+      }),
       // This is necessary to emit hot updates (currently CSS only):
       isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
       // Watcher doesn't work well if you mistype casing in a path so we use

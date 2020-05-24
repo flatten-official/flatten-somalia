@@ -1,4 +1,3 @@
-const fs = require("fs");
 const errorOverlayMiddleware = require("react-dev-utils/errorOverlayMiddleware");
 const evalSourceMapMiddleware = require("react-dev-utils/evalSourceMapMiddleware");
 const noopServiceWorkerMiddleware = require("react-dev-utils/noopServiceWorkerMiddleware");
@@ -6,26 +5,8 @@ const ignoredFiles = require("react-dev-utils/ignoredFiles");
 const redirectServedPath = require("react-dev-utils/redirectServedPathMiddleware");
 const paths = require("./paths");
 
-module.exports = function (proxy, allowedHost) {
+module.exports = function (allowedHost) {
   return {
-    // WebpackDevServer 2.4.3 introduced a security fix that prevents remote
-    // websites from potentially accessing local content through DNS rebinding:
-    // https://github.com/webpack/webpack-dev-server/issues/887
-    // https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a
-    // However, it made several existing use cases such as development in cloud
-    // environment or subdomains in development significantly more complicated:
-    // https://github.com/facebook/create-react-app/issues/2271
-    // https://github.com/facebook/create-react-app/issues/2233
-    // While we're investigating better solutions, for now we will take a
-    // compromise. Since our WDS configuration only serves files in the `public`
-    // folder we won't consider accessing them a vulnerability. However, if you
-    // use the `proxy` feature, it gets more dangerous because it can expose
-    // remote code execution vulnerabilities in backends like Django and Rails.
-    // So we will disable the host check normally, but enable it if you have
-    // specified the `proxy` setting. Finally, we let you override it if you
-    // really know what you're doing with a special environment variable.
-    disableHostCheck:
-      !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === "true",
     // Enable gzip compression of generated files.
     compress: true,
     // Silence WebpackDevServer's own logs since they're generally not useful.
@@ -46,7 +27,7 @@ module.exports = function (proxy, allowedHost) {
     // for some reason broken when imported through webpack. If you just want to
     // use an image, put it in `src` and `import` it from JavaScript instead.
     contentBase: paths.appPublic,
-    contentBasePublicPath: paths.publicUrlOrPath,
+    contentBasePublicPath: "/",
     // By default files from `contentBase` will not trigger a page reload.
     watchContentBase: true,
     // Enable hot reloading server. It will provide WDS_SOCKET_PATH endpoint
@@ -65,7 +46,7 @@ module.exports = function (proxy, allowedHost) {
     // we specified in the webpack config. When homepage is '.', default to serving
     // from the root.
     // remove last slash so user can land on `/test` instead of `/test/`
-    publicPath: paths.publicUrlOrPath.slice(0, -1),
+    publicPath: "",
     // WebpackDevServer is noisy by default so we emit custom message instead
     // by listening to the compiler events with `compiler.hooks[...].tap` calls above.
     quiet: true,
@@ -86,8 +67,6 @@ module.exports = function (proxy, allowedHost) {
       index: paths.publicUrlOrPath,
     },
     public: allowedHost,
-    // `proxy` is run between `before` and `after` `webpack-dev-server` hooks
-    proxy,
     before(app, server) {
       // Keep `evalSourceMapMiddleware` and `errorOverlayMiddleware`
       // middlewares before `redirectServedPath` otherwise will not have any effect
@@ -95,11 +74,6 @@ module.exports = function (proxy, allowedHost) {
       app.use(evalSourceMapMiddleware(server));
       // This lets us open files from the runtime error overlay.
       app.use(errorOverlayMiddleware());
-
-      if (fs.existsSync(paths.proxySetup)) {
-        // This registers user provided middleware for proxy reasons
-        require(paths.proxySetup)(app);
-      }
     },
     after(app) {
       // Redirect to `PUBLIC_URL` or `homepage` from `package.json` if url not match

@@ -9,9 +9,6 @@ process.on("unhandledRejection", (err) => {
   throw err;
 });
 
-// Ensure environment variables are read.
-require("../config/env");
-
 const path = require("path");
 const chalk = require("react-dev-utils/chalk");
 const fs = require("fs-extra");
@@ -27,7 +24,6 @@ const printBuildError = require("react-dev-utils/printBuildError");
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
-const useYarn = false;
 
 // These sizes are pretty large. We'll warn for bundles exceeding them.
 const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
@@ -94,12 +90,28 @@ checkBrowsers(paths.appPath, isInteractive)
       const publicUrl = paths.publicUrlOrPath;
       const publicPath = config.output.publicPath;
       const buildFolder = path.relative(process.cwd(), paths.appBuild);
-      printHostingInstructions(appPackage, publicUrl, publicPath, buildFolder);
+      printHostingInstructions(
+        appPackage,
+        publicUrl,
+        publicPath,
+        buildFolder,
+        false
+      );
     },
     (err) => {
-      console.log(chalk.red("Failed to compile.\n"));
-      printBuildError(err);
-      process.exit(1);
+      const tscCompileOnError = process.env.TSC_COMPILE_ON_ERROR === "true";
+      if (tscCompileOnError) {
+        console.log(
+          chalk.yellow(
+            "Compiled with the following type errors (you may want to check these before deploying your app):\n"
+          )
+        );
+        printBuildError(err);
+      } else {
+        console.log(chalk.red("Failed to compile.\n"));
+        printBuildError(err);
+        process.exit(1);
+      }
     }
   )
   .catch((err) => {
@@ -111,6 +123,18 @@ checkBrowsers(paths.appPath, isInteractive)
 
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
+  // We used to support resolving modules according to `NODE_PATH`.
+  // This now has been deprecated in favor of jsconfig/tsconfig.json
+  // This lets you use absolute paths in imports inside large monorepos:
+  if (process.env.NODE_PATH) {
+    console.log(
+      chalk.yellow(
+        "Setting NODE_PATH to resolve modules absolutely has been deprecated in favor of setting baseUrl in jsconfig.json (or tsconfig.json if you are using TypeScript) and will be removed in a future major release of create-react-app."
+      )
+    );
+    console.log();
+  }
+
   console.log("Creating an optimized production build...");
 
   const compiler = webpack(config);
@@ -123,6 +147,13 @@ function build(previousFileSizes) {
         }
 
         let errMessage = err.message;
+
+        // Add additional information for postcss errors
+        if (Object.prototype.hasOwnProperty.call(err, "postcssNode")) {
+          errMessage +=
+            "\nCompileError: Begins at CSS selector " +
+            err["postcssNode"].selector;
+        }
 
         messages = formatWebpackMessages({
           errors: [errMessage],
@@ -140,6 +171,20 @@ function build(previousFileSizes) {
           messages.errors.length = 1;
         }
         return reject(new Error(messages.errors.join("\n\n")));
+      }
+      if (
+        process.env.CI &&
+        (typeof process.env.CI !== "string" ||
+          process.env.CI.toLowerCase() !== "false") &&
+        messages.warnings.length
+      ) {
+        console.log(
+          chalk.yellow(
+            "\nTreating warnings as errors because process.env.CI = true.\n" +
+              "Most CI servers set it automatically.\n"
+          )
+        );
+        return reject(new Error(messages.warnings.join("\n\n")));
       }
 
       return resolve({
