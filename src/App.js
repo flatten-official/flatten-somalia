@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
+import PrivateRoute from "./auth/PrivateRoute";
 import Header from "./containers/Header";
 import Footer from "./containers/Footer";
 import Home from "./root/Home";
@@ -15,6 +16,7 @@ import {
   AUTH_INITIALISING,
   fetchAuthState,
   AUTH_SUCCESS,
+  AUTH_UNINITIALISED,
 } from "./auth/authActions";
 
 const App = ({ getAuthState, auth }) => {
@@ -26,11 +28,16 @@ const App = ({ getAuthState, auth }) => {
     <>
       <Header />
 
-      {auth.status == AUTH_INITIALISING ? (
+      {auth.status == AUTH_INITIALISING || auth.status == AUTH_UNINITIALISED ? (
         <Loading />
       ) : (
         <div className="container" id="main">
-          <Route exact path={Routes.home} component={Home} />
+          <PrivateRoute
+            exact
+            path={Routes.home}
+            comp={Home}
+            requiredPermission="submitForms"
+          />
           <Route exact path={Routes.admin} component={Admin} />
           <Route path={Routes.auth} component={Auth} />
           <Route path="/success" component={Success} />

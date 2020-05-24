@@ -4,6 +4,7 @@ import { Routes } from "../config";
 import { push } from "connected-react-router";
 
 // actions
+export const AUTH_UNINITIALISED = "AUTH_UNITIALISED";
 export const AUTH_INITIALISING = "AUTH_INITIALISING";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";

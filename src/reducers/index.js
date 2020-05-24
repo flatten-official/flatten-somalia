@@ -3,7 +3,6 @@ import locationReducer from "./locationReducer";
 import submitReducer from "./submitReducer";
 import authReducer from "./authReducer";
 import { form, forms, submission, submissions } from "react-formio";
-import { i18nReducer } from "react-redux-i18n";
 import { FormConfig } from "../config";
 import { connectRouter } from "connected-react-router";
 
@@ -11,7 +10,6 @@ const createRootReducer = (history) => {
   let reducersObj = {
     router: connectRouter(history),
     auth: authReducer,
-    i18n: i18nReducer,
     form: form({ name: "form" }),
     forms: forms({ name: "forms", query: { type: "form", tags: "common" } }),
     submission: submission({ name: "submission" }),

@@ -1,11 +1,15 @@
 import {
+  AUTH_UNINITIALISED,
   AUTH_INITIALISING,
   AUTH_SUCCESS,
   AUTH_FAIL,
   AUTH_LOGOUT,
 } from "../auth/authActions";
 
-const authReducer = (state = {}, action) => {
+const authReducer = (
+  state = { status: AUTH_UNINITIALISED, user: undefined },
+  action
+) => {
   switch (action.type) {
     case AUTH_INITIALISING:
       return { ...state, status: AUTH_INITIALISING, user: undefined };

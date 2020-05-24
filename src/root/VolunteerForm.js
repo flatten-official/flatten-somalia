@@ -1,16 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 import Form from "../backend/Form";
 import FormDef from "./VolunteerForm.json";
-import { Translate } from "react-redux-i18n";
-import EN from "../translations/en/VolunteerForm";
-import SO from "../translations/so/VolunteerForm";
-import { PropTypes } from "prop-types";
 import Location from "../location/Location";
 import { LOCATION_SUCCESS } from "../location/locationActions";
 import flattenApi from "../backend/api";
 
 const VolunteerForm = ({ location, locale }) => {
+  let { t } = useTranslation();
+
   if (!(location.status === LOCATION_SUCCESS)) {
     return <Location />;
   }
@@ -18,8 +17,7 @@ const VolunteerForm = ({ location, locale }) => {
   return (
     <div>
       <h3>
-        {" "}
-        <Translate value={"VolunteerForm.title"} />{" "}
+        {" "} {t("VolunteerForm:title")} {" "}
       </h3>
       {/* <Errors errors={errors} /> */}
       <Form
@@ -28,26 +26,16 @@ const VolunteerForm = ({ location, locale }) => {
         successRedir="/success"
         formioForm={FormDef}
         formioOptions={{
-          noAlerts: false,
-          language: locale,
-          i18n: {
-            en: EN,
-            so: SO,
-          },
+          noAlerts: false
         }}
       />
     </div>
   );
 };
 
-VolunteerForm.propTypes = {
-  locale: PropTypes.string.isRequired,
-};
-
 const mapStateToProps = (state) => {
   return {
     location: state.location,
-    locale: state.i18n.locale,
   };
 };
 

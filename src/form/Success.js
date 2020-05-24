@@ -1,14 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Translate } from "react-redux-i18n";
+import { useTranslation } from "react-i18next";
 
-const Success = () => (
-  <>
-    <Translate value={"VolunteerForm.success"} />{" "}
-    <Link to="/">
-      {" "}
-      <Translate value={"VolunteerForm.returnHomePrompt"} />{" "}
-    </Link>
-  </>
-);
+const Success = () => {
+  let { t } = useTranslation();
+  return (
+    <>
+      {t('VolunteerForm:success')} {" "}
+      <Link to="/">
+        {" "}
+        {t('VolunteerForm:returnHomePrompt')} {" "}
+      </Link>
+    </>
+  );
+}
+
 export default Success;

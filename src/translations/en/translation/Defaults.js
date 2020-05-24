@@ -1,6 +1,11 @@
-export default {
+exports.default = {
   email: "Email",
   submit: "Submit",
+  optional: 'Optional',
+  other: 'Other',
+  yes: 'Yes',
+  no: 'No',
+  unknown: 'I don\'t know',
   error: "Please fix the following errors before submitting.",
   invalid_date: "{{field}} is not a valid date.",
   invalid_email: "{{field}} must be a valid email.",
@@ -13,5 +18,5 @@ export default {
   next: "Next",
   pattern: "{{field}} does not match the pattern {{pattern}}",
   previous: "Previous",
-  required: "{{field}} is required",
-};
+  required: "{{field}} is required"
+}
