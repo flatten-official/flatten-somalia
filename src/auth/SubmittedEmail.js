@@ -1,10 +1,13 @@
 import React from "react";
-import { Translate } from "react-redux-i18n";
+import { useTranslation } from "react-i18next";
 
-const SubmittedEmail = () => (
-  <h3>
-    <Translate value={"Auth.submittedEmailMessage"} />
-  </h3>
-);
+let SubmittedEmail = () => {
+  let { t } = useTranslation();
+  return (
+    <h3>
+      {t('Auth:submittedEmailMessage')}
+    </h3>
+  );
+}
 
 export default SubmittedEmail;

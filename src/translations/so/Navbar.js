@@ -1,7 +1,7 @@
-export default {
+exports.default = {
   links: {
     adminPanel: "",
     loggedInAndLogout: "",
-    login: "",
-  },
-};
+    login: ""
+  }
+}

@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 import VolunteerForm from "./VolunteerForm";
 import { FormConfig, Routes } from "../config";
 import { hasPermission } from "../auth/authApi";
-import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Home = ({ auth }) => <VolunteerForm {...FormConfig.volunteerForm} />;
 

@@ -1,12 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 import { push } from "connected-react-router";
+import { useTranslation } from "react-i18next";
 import { Form as FormioForm } from "react-formio";
+import PropTypes from "prop-types";
 import backend from "./backend";
 import { submitSuccess, submitFailure } from "./backendActions";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 
 const Form = (props) => {
+  let { i18n } = useTranslation()
+
   let {
     name,
     submitApi,
@@ -19,7 +22,7 @@ const Form = (props) => {
 
   formioOptions = formioOptions === undefined ? {} : formioOptions; // optional prop
 
-  if (!("hooks" in formioOptions)) {
+  if (!( "hooks" in formioOptions )) {
     formioOptions.hooks = {};
   }
 
@@ -37,7 +40,11 @@ const Form = (props) => {
     }
   };
 
-  return <FormioForm options={formioOptions} form={formioForm} />;
+  // the form localization should always be consistent with the site's
+  formioOptions.i18n = i18n
+  formioOptions.language = i18n.language
+
+  return <FormioForm options={formioOptions} form={formioForm}/>;
 };
 
 Form.propTypes = {
@@ -51,15 +58,15 @@ Form.propTypes = {
   submitHook: PropTypes.func,
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = () => ( {} );
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ( {
   submitSuccess: (submission, next) => {
     dispatch(submitSuccess(submission, next));
     dispatch(push(ownProps.successRedir));
   },
   submitFailure: (submission, next) =>
     dispatch(submitFailure(submission, next)),
-});
+} );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
