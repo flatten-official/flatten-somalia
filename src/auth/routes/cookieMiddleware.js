@@ -8,7 +8,10 @@ const { getVolunteer } = require("../../volunteer/volunteerData");
 module.exports = async (req, res, next) => {
   const cookieID = req.signedCookies.id; // the cookie valuePromise
 
+  console.log(cookieID);
+
   if (!cookieID) {
+    console.log("COOKIE ID FAILED");
     next();
     return;
   }
