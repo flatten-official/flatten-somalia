@@ -124,29 +124,32 @@ checkBrowsers(paths.appPath, isInteractive)
 // recursively turn a directory into a json object
 // this method skips the translation directory to comply with formio
 function combineDirObjects(dir) {
-  let obj = {}
+  let obj = {};
   for (let file of fs.readdirSync(dir)) {
-    let ns = file
+    let ns = file;
     let child;
-    if (ns.endsWith('.js')) {
-      ns = ns.replace('.js', '')
-      child = require('.' + dir + '/' + ns).default
+    if (ns.endsWith(".js")) {
+      ns = ns.replace(".js", "");
+      child = require("." + dir + "/" + ns).default;
     } else {
-      child = combineDirObjects(dir + '/' + file)
+      child = combineDirObjects(dir + "/" + file);
     }
-    if (dir.endsWith('translation')) {
-      Object.assign(obj, child)
+    if (dir.endsWith("translation")) {
+      Object.assign(obj, child);
     } else {
-      obj[ns] = {}
-      Object.assign(obj[ns], child)
+      obj[ns] = {};
+      Object.assign(obj[ns], child);
     }
   }
-  return obj
+  return obj;
 }
 
 // create the translations resource
-let resource = combineDirObjects('./src/translations')
-fs.writeFileSync(__dirname + '/../src/i18nResources.json', JSON.stringify(resource))
+let resource = combineDirObjects("./src/translations");
+fs.writeFileSync(
+  __dirname + "/../src/i18nResources.json",
+  JSON.stringify(resource)
+);
 
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
