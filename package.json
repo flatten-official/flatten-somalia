@@ -74,8 +74,31 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "bootswatch": "^4.5.0",
+    "connected-react-router": "^6.8.0",
+    "file-loader": "6.0.0",
+    "font-awesome": "^4.7.0",
+    "formiojs": "^4.9.26",
+    "fs-extra": "^9.0.0",
+    "history": "^4.10.1",
+    "i18next": "^19.4.4",
+    "i18next-browser-languagedetector": "^4.2.0",
+    "i18next-http-backend": "^1.0.12",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.6",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-formio": "^4.3.0",
+    "react-i18next": "^11.5.0",
+    "react-redux": "7.2.0",
+    "react-redux-i18n": "^1.9.3",
+    "react-router": "5.2.0",
+    "react-router-dom": "5.2.0",
+    "redux": "4.0.5",
+    "redux-thunk": "2.3.0",
+    "resolve-url-loader": "3.1.1",
+    "url-loader": "4.1.0"
   }
 }
