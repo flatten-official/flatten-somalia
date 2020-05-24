@@ -6,15 +6,14 @@ import EN from "../translations/en/Auth";
 import SO from "../translations/so/Auth";
 import { AUTH_SUCCESS } from "./authActions";
 import Loading from "../containers/Loading";
+import { Route, Redirect } from "react-router-dom";
 import { push } from "connected-react-router";
 import { Routes } from "../config";
 
 const Auth = ({ locale, auth, pushToHome }) => {
-  if (auth.status === AUTH_SUCCESS) {
-    pushToHome();
-  }
-
-  return (
+  return auth.status == AUTH_SUCCESS ? (
+    <Redirect to="/" />
+  ) : (
     <div>
       <div className="panel-heading card-header">
         {" "}

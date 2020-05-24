@@ -6,15 +6,7 @@ import { FormConfig, Routes } from "../config";
 import { hasPermission } from "../auth/authApi";
 import { NavLink } from "react-router-dom";
 
-const Home = ({ auth }) => (
-  <>
-    {hasPermission(auth, "submitForms") ? (
-      <VolunteerForm {...FormConfig.volunteerForm} />
-    ) : (
-      <p>Not authorised.</p>
-    )}
-  </>
-);
+const Home = ({ auth }) => <VolunteerForm {...FormConfig.volunteerForm} />;
 
 Home.propTypes = {
   auth: PropTypes.object.isRequired,
