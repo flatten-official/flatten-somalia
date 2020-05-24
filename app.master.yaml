@@ -1,6 +1,6 @@
 service: backend-so
 runtime: nodejs10
 env_variables:
-  ENVIRONMENT: prod
+  ENVIRONMENT: production
   FRONTEND_URL: https://v.flatten.so
   BACKEND_URL: https://backend-so-dot-flatten-271620.appspot.com/

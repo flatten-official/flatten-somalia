@@ -31,7 +31,7 @@ const buildConfig = () => {
     case "staging":
     case "dev":
       return { ...SharedConfig, ...stagingConfig };
-    case "prod":
+    case "production":
       return { ...SharedConfig, ...prodConfig };
     default:
       throw Error(`Invalid value for ENVIRONMENT: ${environment}`);
