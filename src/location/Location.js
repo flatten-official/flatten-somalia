@@ -5,12 +5,13 @@ import {
   LOCATION_FAIL,
   LOCATION_REQUEST,
 } from "./locationActions";
+import Loading from "../containers/Loading"
 
 const Location = ({ getLocation, location }) => {
   useEffect(getLocation, [getLocation]);
 
   if (location.status === LOCATION_REQUEST) {
-    return <div>Waiting for location to load.</div>;
+    return <Loading text="Waiting for location to load."></Loading>;
   } else if (location.status === LOCATION_FAIL) {
     return (
       <div>
