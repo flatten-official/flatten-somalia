@@ -1,8 +1,6 @@
 .idea
-dist
 node_modules
 .firebaserc
 .firebase
 build
-src/i18nResources.json
 src/backend/backend.js
