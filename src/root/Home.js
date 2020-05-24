@@ -4,17 +4,20 @@ import { PropTypes } from "prop-types";
 import VolunteerForm from "./VolunteerForm";
 import { FormConfig, Routes } from "../config";
 import { hasPermission } from "../auth/authApi";
-import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const Home = ({ auth }) => (
-  <>
-    {hasPermission(auth, "submitForms") ? (
-      <VolunteerForm {...FormConfig.volunteerForm} />
-    ) : (
-      <p>Not authorised.</p>
-    )}
-  </>
-);
+const Home = ({ auth }) => {
+  let { t } = useTranslation()
+  return (
+    <>
+      {hasPermission(auth, "submitForms") ? (
+        <VolunteerForm {...FormConfig.volunteerForm} />
+      ) : (
+        <p>{t('Auth:unauthorized')}</p>
+      )}
+    </>
+  );
+}
 
 Home.propTypes = {
   auth: PropTypes.object.isRequired,

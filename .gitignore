@@ -4,4 +4,4 @@ node_modules
 .firebaserc
 .firebase
 build
-src/backend/backend.js
+src/i18nResources.json

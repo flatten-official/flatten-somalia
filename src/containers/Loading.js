@@ -1,9 +1,11 @@
 import React from "react";
-import { Translate } from "react-redux-i18n";
+import { useTranslation } from "react-i18next";
 
-const Loading = () => (
-  <div>
-    <Translate value={"Loading.loading"} />
-  </div>
-);
+const Loading = () => {
+  let { t } = useTranslation()
+  return (
+    <div> {t('Loading:loading')} </div>
+  );
+}
+
 export default Loading;

@@ -1,3 +1,3 @@
-export default {
-  builtBy: "Built by",
-};
+exports.default = {
+  builtBy: 'Built by'
+}
