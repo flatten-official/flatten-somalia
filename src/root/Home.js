@@ -1,19 +1,20 @@
 import React from "react";
-import { connect } from "react-redux";
-import { PropTypes } from "prop-types";
-import VolunteerForm from "./VolunteerForm";
-import { FormConfig, Routes } from "../config";
-import { hasPermission } from "../auth/authApi";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { PropTypes } from "prop-types";
+import VolunteerForm from "../form/VolunteerForm";
+import { Routes } from "../config";
+import { Link } from "react-router-dom";
 
-const Home = ({ auth }) => <VolunteerForm {...FormConfig.volunteerForm} />;
+const Home = ({ }) => {
+  let auth = useSelector(state=>state.auth); // use the auth state from the store
+  let { t } = useTranslation();
 
-Home.propTypes = {
-  auth: PropTypes.object.isRequired,
-};
+  return (
+    <>
+      <Link to={Routes.submission}>{t("Home:goToSubmissionText")}</Link>
+    </>
+  );
+}
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;

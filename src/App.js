@@ -6,6 +6,7 @@ import Footer from "./containers/Footer";
 import Home from "./root/Home";
 import Auth from "./auth/Auth";
 import Admin from "./admin/Admin";
+import SubmissionPage from "./form/SubmissionPage"
 import Success from "./form/Success";
 import SubmittedEmail from "./auth/SubmittedEmail";
 import Loading from "./containers/Loading";
@@ -36,6 +37,12 @@ const App = ({ getAuthState, auth }) => {
             exact
             path={Routes.home}
             comp={Home}
+            requiredPermission="submitForms"
+          />
+          <PrivateRoute
+            exact
+            path={Routes.submission}
+            comp={SubmissionPage}
             requiredPermission="submitForms"
           />
           <Route exact path={Routes.admin} component={Admin} />
