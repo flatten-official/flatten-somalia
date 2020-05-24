@@ -121,6 +121,36 @@ checkBrowsers(paths.appPath, isInteractive)
     process.exit(1);
   });
 
+// recursively turn a directory into a json object
+// this method skips the translation directory to comply with formio
+function combineDirObjects(dir) {
+  let obj = {};
+  for (let file of fs.readdirSync(dir)) {
+    let ns = file;
+    let child;
+    if (ns.endsWith(".js")) {
+      ns = ns.replace(".js", "");
+      child = require("." + dir + "/" + ns).default;
+    } else {
+      child = combineDirObjects(dir + "/" + file);
+    }
+    if (dir.endsWith("translation")) {
+      Object.assign(obj, child);
+    } else {
+      obj[ns] = {};
+      Object.assign(obj[ns], child);
+    }
+  }
+  return obj;
+}
+
+// create the translations resource
+let resource = combineDirObjects("./src/translations");
+fs.writeFileSync(
+  __dirname + "/../src/i18nResources.json",
+  JSON.stringify(resource)
+);
+
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
   // We used to support resolving modules according to `NODE_PATH`.
