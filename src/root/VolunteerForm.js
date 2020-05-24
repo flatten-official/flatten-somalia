@@ -16,9 +16,7 @@ const VolunteerForm = ({ location, locale }) => {
 
   return (
     <div>
-      <h3>
-        {" "} {t("VolunteerForm:title")} {" "}
-      </h3>
+      <h3> {t("VolunteerForm:title")} </h3>
       {/* <Errors errors={errors} /> */}
       <Form
         name="volunteerForm"
@@ -26,7 +24,7 @@ const VolunteerForm = ({ location, locale }) => {
         successRedir="/success"
         formioForm={FormDef}
         formioOptions={{
-          noAlerts: false
+          noAlerts: false,
         }}
       />
     </div>

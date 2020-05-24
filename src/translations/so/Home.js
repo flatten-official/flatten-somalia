@@ -1,4 +1,4 @@
 exports.default = {
-  loggedInAs: '',
-  cannotAccessFormMessage: ''
-}
+  loggedInAs: "",
+  cannotAccessFormMessage: "",
+};

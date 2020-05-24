@@ -1,3 +1,3 @@
 exports.default = {
-  loading: 'Loading...'
-}
+  loading: "Loading...",
+};

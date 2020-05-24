@@ -1,11 +1,11 @@
 exports.default = {
   email: "Emayl",
   submit: "gudbi",
-  optional: 'Option',
-  other: 'Wax kale',
-  yes: 'Haa',
-  no: 'Maya',
-  unknown: 'Ma aqaan',
+  optional: "Option",
+  other: "Wax kale",
+  yes: "Haa",
+  no: "Maya",
+  unknown: "Ma aqaan",
   error: "",
   invalid_date: "",
   invalid_email: "",
@@ -18,5 +18,5 @@ exports.default = {
   next: "",
   pattern: "",
   previous: "",
-  required: ""
-}
+  required: "",
+};

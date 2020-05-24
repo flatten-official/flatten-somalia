@@ -1,3 +1,3 @@
 exports.default = {
-  builtBy: ''
-}
+  builtBy: "",
+};

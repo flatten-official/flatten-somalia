@@ -13,26 +13,22 @@ const Admin = ({ auth }) => {
       {auth.status === AUTH_SUCCESS &&
       auth.user.permissions.indexOf("admin") > -1 ? (
         <>
-          <h2>
-            {t("Admin:welcomeHeader")}
-          </h2>
+          <h2>{t("Admin:welcomeHeader")}</h2>
           <br />
         </>
       ) : (
-        <h3>
-          {" "} {t("Auth:unauthorized")} {" "}
-        </h3>
+        <h3> {t("Auth:unauthorized")} </h3>
       )}
     </>
   );
-}
+};
 
 Admin.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: selectRoot("auth", state)
+  auth: selectRoot("auth", state),
 });
 
 export default connect(mapStateToProps)(Admin);

@@ -9,16 +9,17 @@ import { Routes } from "../config";
 import { useTranslation } from "react-i18next";
 
 const Auth = ({ locale, auth, pushToHome }) => {
-  let { t } = useTranslation()
+  let { t } = useTranslation();
   return auth.status == AUTH_SUCCESS ? (
     <Redirect to="/" />
   ) : (
     <div>
       <div className="panel-heading card-header">
-        {" "} {t('Auth:loginForm.title')} {" "}
+        {" "}
+        {t("Auth:loginForm.title")}{" "}
       </div>
       <div className="panel-body card-body">
-        <Login/>
+        <Login />
       </div>
     </div>
   );

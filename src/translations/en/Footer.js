@@ -1,3 +1,3 @@
 exports.default = {
-  builtBy: 'Built by'
-}
+  builtBy: "Built by",
+};

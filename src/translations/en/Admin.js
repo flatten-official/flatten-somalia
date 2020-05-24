@@ -1,3 +1,3 @@
 exports.default = {
-  welcomeHeader: "Welcome to the admin panel!"
-}
+  welcomeHeader: "Welcome to the admin panel!",
+};

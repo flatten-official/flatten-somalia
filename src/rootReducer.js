@@ -12,7 +12,7 @@ const createReducers = () => {
   };
 
   reducersObj[FormConfig.volunteerForm.formName] = combineReducers({
-    form: form({ name: FormConfig.volunteerForm.formName, language: 'en' }),
+    form: form({ name: FormConfig.volunteerForm.formName, language: "en" }),
     submission: submission({ name: FormConfig.volunteerForm.formName }),
     submissions: submissions({ name: FormConfig.volunteerForm.formName }),
   });

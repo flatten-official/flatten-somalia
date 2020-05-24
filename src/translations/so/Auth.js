@@ -1,7 +1,7 @@
 exports.default = {
   loginForm: {
-    title: ""
+    title: "",
   },
-  submittedEmailMessage: '',
-  unauthorized: ""
+  submittedEmailMessage: "",
+  unauthorized: "",
 };

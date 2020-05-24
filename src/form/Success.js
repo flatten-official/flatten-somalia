@@ -6,13 +6,10 @@ const Success = () => {
   let { t } = useTranslation();
   return (
     <>
-      {t('VolunteerForm:success')} {" "}
-      <Link to="/">
-        {" "}
-        {t('VolunteerForm:returnHomePrompt')} {" "}
-      </Link>
+      {t("VolunteerForm:success")}{" "}
+      <Link to="/"> {t("VolunteerForm:returnHomePrompt")} </Link>
     </>
   );
-}
+};
 
 export default Success;

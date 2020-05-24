@@ -8,7 +8,7 @@ import backend from "./backend";
 import { submitSuccess, submitFailure } from "./backendActions";
 
 const Form = (props) => {
-  let { i18n } = useTranslation()
+  let { i18n } = useTranslation();
 
   let {
     name,
@@ -22,7 +22,7 @@ const Form = (props) => {
 
   formioOptions = formioOptions === undefined ? {} : formioOptions; // optional prop
 
-  if (!( "hooks" in formioOptions )) {
+  if (!("hooks" in formioOptions)) {
     formioOptions.hooks = {};
   }
 
@@ -41,10 +41,10 @@ const Form = (props) => {
   };
 
   // the form localization should always be consistent with the site's
-  formioOptions.i18n = i18n
-  formioOptions.language = i18n.language
+  formioOptions.i18n = i18n;
+  formioOptions.language = i18n.language;
 
-  return <FormioForm options={formioOptions} form={formioForm}/>;
+  return <FormioForm options={formioOptions} form={formioForm} />;
 };
 
 Form.propTypes = {
@@ -58,15 +58,15 @@ Form.propTypes = {
   submitHook: PropTypes.func,
 };
 
-const mapStateToProps = () => ( {} );
+const mapStateToProps = () => ({});
 
-const mapDispatchToProps = (dispatch, ownProps) => ( {
+const mapDispatchToProps = (dispatch, ownProps) => ({
   submitSuccess: (submission, next) => {
     dispatch(submitSuccess(submission, next));
     dispatch(push(ownProps.successRedir));
   },
   submitFailure: (submission, next) =>
     dispatch(submitFailure(submission, next)),
-} );
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
