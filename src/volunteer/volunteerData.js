@@ -24,7 +24,7 @@ const Volunteer = mongoose.model(
       ],
       required: true,
     },
-    gender: String,
+    gender: String, // TODO Make enum
     addedBy: mongoose.ObjectId,
     age: Number,
   })
