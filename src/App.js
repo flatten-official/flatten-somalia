@@ -12,9 +12,10 @@ import SubmittedEmail from "./auth/SubmittedEmail";
 import Loading from "./containers/Loading";
 import { Routes } from "./config";
 import { useDispatch, useSelector } from "react-redux";
+import { permissions } from './auth/authApi';
 import {
-  AUTH_INITIALISING,
   fetchAuthState,
+  AUTH_INITIALISING,
   AUTH_UNINITIALISED,
 } from "./auth/authActions";
 
@@ -39,13 +40,13 @@ const App = () => {
             exact
             path={Routes.home}
             comp={Home}
-            requiredPermission="submitForms"
+            requiredPermission={permissions.submitForms}
           />
           <PrivateRoute
             exact
             path={Routes.submission}
             comp={SubmissionPage}
-            requiredPermission="submitForms"
+            requiredPermission={permissions.submitForms}
           />
           <Route exact path={Routes.admin} component={Admin} />
           <Route path={Routes.auth} component={Auth} />

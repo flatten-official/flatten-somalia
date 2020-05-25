@@ -21,16 +21,18 @@ const Header = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <LinkContainer to={Routes.home}>
-            <Nav.Link>{t("Navbar:links:home")}</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to={Routes.submission}>
-            <Nav.Link>{t("Navbar:links:submitForm")}</Nav.Link>
-          </LinkContainer>
           {auth.status === AUTH_SUCCESS ? (
+            <>
+            <LinkContainer to={Routes.home}>
+              <Nav.Link>{t("Navbar:links:home")}</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to={Routes.submission}>
+              <Nav.Link>{t("Navbar:links:submitForm")}</Nav.Link>
+            </LinkContainer>
             <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
               {t("Navbar:links:logout")}
             </Nav.Link>
+            </>
           ) : (
             <LinkContainer to={Routes.auth}>
               <Nav.Link>{t("Navbar:links:login")}</Nav.Link>

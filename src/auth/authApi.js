@@ -1,5 +1,10 @@
 import { AUTH_SUCCESS } from "./authActions";
 
+export const permissions = {
+  submitForms: "submitForms",
+  manageVolunteers: "manageVolunteers"
+}
+
 export const hasPermission = (auth, permission) => {
   try {
     return (
