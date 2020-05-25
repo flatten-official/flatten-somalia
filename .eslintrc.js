@@ -28,16 +28,15 @@ module.exports = {
 
   parser: "babel-eslint",
 
-  plugins: [
-    "import",
-    "flowtype",
-    "jsx-a11y",
-    "react",
-    "react-hooks",
-    "prettier",
-  ],
+  plugins: ["import", "flowtype", "jsx-a11y", "react", "react-hooks"],
 
-  extends: ["prettier"],
+  extends: [
+    "eslint:recommended",
+    "plugin:flowtype/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+  ],
 
   env: {
     browser: true,
@@ -196,6 +195,11 @@ module.exports = {
       },
     ],
     "getter-return": "warn",
+
+    // modifications to default create-react-app
+    "prefer-const": "warn",
+    "react/prop-types": "warn",
+    "react/no-unescaped-entities": "warn",
 
     // https://github.com/benmosher/eslint-plugin-import/tree/master/docs/rules
     "import/first": "error",
