@@ -1,3 +1,7 @@
+const { addVolunteerAndAuthenticate } = require('./volunteerAPI');
+
 module.exports = async (req, res) => {
-  res.sendStatus(200);
+  console.log(req);
+  let [success, message] = await addVolunteerAndAuthenticate(res.locals.volunteer, req.body.data);
+  res.send({success, message});
 };
