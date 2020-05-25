@@ -4,7 +4,7 @@ import Form from "../form/Form";
 import FormDef from "./AddVolunteer.json";
 import flattenApi from "../backend/api";
 
-const VolunteerForm = ( ) => {
+const VolunteerForm = () => {
   const { t } = useTranslation();
 
   // TODO - fix translations here

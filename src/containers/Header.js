@@ -23,15 +23,15 @@ const Header = () => {
         <Nav className="mr-auto">
           {auth.status === AUTH_SUCCESS ? (
             <>
-            <LinkContainer to={Routes.home}>
-              <Nav.Link>{t("Navbar:links:home")}</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to={Routes.submission}>
-              <Nav.Link>{t("Navbar:links:submitForm")}</Nav.Link>
-            </LinkContainer>
-            <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
-              {t("Navbar:links:logout")}
-            </Nav.Link>
+              <LinkContainer to={Routes.home}>
+                <Nav.Link>{t("Navbar:links:home")}</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to={Routes.submission}>
+                <Nav.Link>{t("Navbar:links:submitForm")}</Nav.Link>
+              </LinkContainer>
+              <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
+                {t("Navbar:links:logout")}
+              </Nav.Link>
             </>
           ) : (
             <LinkContainer to={Routes.auth}>

@@ -31,6 +31,8 @@ $danger: $red;
 $light: $gray-100;
 $dark: $gray-800;
 
+// TODO Switch to @use
+// https://sass-lang.com/documentation/at-rules/import#main-content
 @import "~bootswatch/dist/flatly/_variables.scss";
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~bootswatch/dist/flatly/_bootswatch.scss";

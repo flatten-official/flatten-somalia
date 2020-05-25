@@ -36,7 +36,7 @@ const VolunteerForm = ({ consentGiven }) => {
             location: {
               latitude: location.location.coords.latitude,
               longitude: location.location.coords.longitude,
-              accuracy: location.location.coords.accuracy
+              accuracy: location.location.coords.accuracy,
             },
             consentGiven,
           };

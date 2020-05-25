@@ -10,7 +10,7 @@ import Loading from "../containers/Loading";
 const Location = () => {
   const dispatch = useDispatch();
   const location = useSelector((state) => state.location);
-  useEffect(() => dispatch(getLocation()), []);
+  useEffect(() => dispatch(getLocation()), [dispatch]);
 
   if (location.status === LOCATION_REQUEST) {
     return <Loading text="Waiting for location to load." />;

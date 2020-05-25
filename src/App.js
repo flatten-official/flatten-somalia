@@ -12,7 +12,7 @@ import SubmittedEmail from "./auth/SubmittedEmail";
 import Loading from "./containers/Loading";
 import { Routes } from "./config";
 import { useDispatch, useSelector } from "react-redux";
-import { permissions } from './auth/authApi';
+import { permissions } from "./auth/authApi";
 import {
   fetchAuthState,
   AUTH_INITIALISING,
