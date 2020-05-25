@@ -124,8 +124,8 @@ checkBrowsers(paths.appPath, isInteractive)
 // recursively turn a directory into a json object
 // this method skips the translation directory to comply with formio
 function combineDirObjects(dir) {
-  let obj = {};
-  for (let file of fs.readdirSync(dir)) {
+  const obj = {};
+  for (const file of fs.readdirSync(dir)) {
     let ns = file;
     let child;
     if (ns.endsWith(".js")) {
@@ -145,7 +145,7 @@ function combineDirObjects(dir) {
 }
 
 // create the translations resource
-let resource = combineDirObjects("./src/translations");
+const resource = combineDirObjects("./src/translations");
 fs.writeFileSync(
   __dirname + "/../src/i18nResources.json",
   JSON.stringify(resource)

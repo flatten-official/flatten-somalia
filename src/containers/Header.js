@@ -1,6 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
-import { PropTypes } from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "connected-react-router";
 import NavLink from "./NavLink";
@@ -8,8 +7,17 @@ import { selectRoot, logout } from "react-formio";
 import { useTranslation } from "react-i18next";
 import { Routes } from "../config";
 
-const Header = ({ auth, logout }) => {
-  let { t } = useTranslation();
+const Header = () => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => selectRoot("auth", state));
+
+  const { t } = useTranslation();
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(push(Routes.auth));
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -28,7 +36,11 @@ const Header = ({ auth, logout }) => {
         {auth.authenticated ? (
           <ul className="nav navbar-nav mr-auto">
             {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
-            <span className="nav-link" role="navigation link" onClick={logout}>
+            <span
+              className="nav-link"
+              role="navigation link"
+              onClick={onLogout}
+            >
               <span className="fa fa-sign-out" />
               &nbsp;{" "}
               {t("Navbar:links.loggedInAndLogout", {
@@ -49,20 +61,4 @@ const Header = ({ auth, logout }) => {
   );
 };
 
-Header.propTypes = {
-  auth: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  auth: selectRoot("auth", state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  logout: () => {
-    dispatch(logout());
-    dispatch(push(Routes.auth));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

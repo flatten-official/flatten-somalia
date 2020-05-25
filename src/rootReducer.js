@@ -3,7 +3,7 @@ import { auth, form, forms, submission, submissions } from "react-formio";
 import { FormConfig } from "./config";
 
 const createReducers = () => {
-  let reducersObj = {
+  const reducersObj = {
     auth: auth(),
     form: form({ name: "form" }),
     forms: forms({ name: "forms", query: { type: "form", tags: "common" } }),

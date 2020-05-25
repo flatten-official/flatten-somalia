@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { useTranslation } from "react-i18next";
 import { Form as FormioForm } from "react-formio";
@@ -7,18 +7,24 @@ import PropTypes from "prop-types";
 import backend from "./backend";
 import { submitSuccess, submitFailure } from "./backendActions";
 
-const Form = (props) => {
-  let { i18n } = useTranslation();
+const Form = ({
+  name,
+  submitApi,
+  formioForm,
+  formioOptions,
+  submitHook,
+  successRedir,
+}) => {
+  const { i18n } = useTranslation();
+  const dispatch = useDispatch();
 
-  let {
-    name,
-    submitApi,
-    formioForm,
-    formioOptions,
-    submitSuccess,
-    submitFailure,
-    submitHook,
-  } = props;
+  const onSubmitSuccess = (submission, next) => {
+    dispatch(submitSuccess(submission, next));
+    dispatch(push(successRedir));
+  };
+
+  const onSubmitFailure = (submission) =>
+    dispatch(submitFailure(submission, false));
 
   formioOptions = formioOptions === undefined ? {} : formioOptions; // optional prop
 
@@ -29,13 +35,12 @@ const Form = (props) => {
   // add a hook to send the request to the server
   formioOptions.hooks.beforeSubmit = async (submission, next) => {
     try {
-      submission =
-        submitHook === undefined ? submission : submitHook(submission);
+      submission = submitHook ? submitHook(submission) : submission;
       // need to actually add the submission in here!
-      let res = await backend.request({ ...submitApi, data: submission });
-      submitSuccess(name, res);
+      const res = await backend.request({ ...submitApi, data: submission });
+      onSubmitSuccess(name, res);
     } catch (e) {
-      submitFailure(name, false);
+      onSubmitFailure(name);
       next(e);
     }
   };
@@ -58,15 +63,4 @@ Form.propTypes = {
   submitHook: PropTypes.func,
 };
 
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  submitSuccess: (submission, next) => {
-    dispatch(submitSuccess(submission, next));
-    dispatch(push(ownProps.successRedir));
-  },
-  submitFailure: (submission, next) =>
-    dispatch(submitFailure(submission, next)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default Form;

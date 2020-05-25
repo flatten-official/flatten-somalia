@@ -3,10 +3,11 @@ import { AUTH_SUCCESS } from "./authActions";
 import { hasPermission } from "./authApi";
 import { Routes } from "../config";
 import { Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
-function PrivateRoute({ auth, requiredPermission, comp: Component, ...rest }) {
-  let authed = hasPermission(auth, requiredPermission);
+function PrivateRoute({ requiredPermission, comp: Component, ...rest }) {
+  const auth = useSelector((state) => state.auth);
+  const authed = hasPermission(auth, requiredPermission);
   // if logged in but without the right permission to use this page
   if (!authed && auth.state === AUTH_SUCCESS) {
     return <div>Unauthorised.</div>;
@@ -14,7 +15,7 @@ function PrivateRoute({ auth, requiredPermission, comp: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={({ location }) =>
+      render={() =>
         authed ? (
           <Component />
         ) : (
@@ -29,8 +30,4 @@ function PrivateRoute({ auth, requiredPermission, comp: Component, ...rest }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute;

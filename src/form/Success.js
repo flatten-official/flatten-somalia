@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const Success = () => {
-  let { t } = useTranslation();
+  const { t } = useTranslation();
   return (
     <>
       {t("VolunteerForm:success")}{" "}

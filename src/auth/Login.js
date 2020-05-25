@@ -4,13 +4,13 @@ import LoginForm from "./Login.json";
 import flattenApi from "../backend/api";
 
 const Login = () => {
-  let hook = (submission) => ({ email: submission.data.email });
+  const onSubmitHook = (submission) => ({ email: submission.data.email });
   return (
     <Form
       formioForm={LoginForm}
       name="login"
       submitApi={flattenApi.login}
-      submitHook={hook}
+      submitHook={onSubmitHook}
       successRedir="/submitted-email"
       formioOptions={{}}
     />

@@ -14,8 +14,9 @@ export const fetchAuthState = () => async (dispatch) => {
   dispatch({ type: AUTH_INITIALISING });
 
   try {
-    let res = await backend.request(flattenApi.getAuth);
+    const res = await backend.request(flattenApi.getAuth);
     // check if the response is empty, indicating failed auth
+    // https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
     if (Object.keys(res.data).length === 0 && res.data.constructor === Object) {
       dispatch({ type: AUTH_FAIL });
       dispatch(push(Routes.auth));

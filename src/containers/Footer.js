@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const Footer = () => {
-  let { t } = useTranslation();
+  const { t } = useTranslation();
   return (
     <footer className="footer">
       <div className="container text-center" style={{ padding: "15px" }}>

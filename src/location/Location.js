@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
 import {
   getLocation,
   LOCATION_FAIL,
   LOCATION_REQUEST,
 } from "./locationActions";
+import { useDispatch, useSelector } from "react-redux";
 
-const Location = ({ getLocation, location }) => {
-  useEffect(getLocation, [getLocation]);
+const Location = () => {
+  const dispatch = useDispatch();
+  const location = useSelector((state) => state.location);
+  useEffect(dispatch(getLocation()), []);
 
   if (location.status === LOCATION_REQUEST) {
     return <div>Waiting for location to load.</div>;
@@ -25,14 +27,4 @@ const Location = ({ getLocation, location }) => {
   return <div>Got location. Waiting for load...</div>;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    location: state.location,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  getLocation: () => dispatch(getLocation()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Location);
+export default Location;

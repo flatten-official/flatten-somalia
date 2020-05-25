@@ -6,30 +6,32 @@ import Footer from "./containers/Footer";
 import Home from "./root/Home";
 import Auth from "./auth/Auth";
 import Admin from "./admin/Admin";
-import SubmissionPage from "./form/SubmissionPage"
+import SubmissionPage from "./form/SubmissionPage";
 import Success from "./form/Success";
 import SubmittedEmail from "./auth/SubmittedEmail";
 import Loading from "./containers/Loading";
 import { Routes } from "./config";
-import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import { useDispatch, useSelector } from "react-redux";
 import {
   AUTH_INITIALISING,
   fetchAuthState,
-  AUTH_SUCCESS,
   AUTH_UNINITIALISED,
 } from "./auth/authActions";
 
-const App = ({ getAuthState, auth }) => {
+const App = () => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
   useEffect(() => {
-    getAuthState();
-  }, [getAuthState]);
+    dispatch(fetchAuthState());
+  }, [dispatch]);
 
   return (
     <>
       <Header />
 
-      {auth.status == AUTH_INITIALISING || auth.status == AUTH_UNINITIALISED ? (
+      {auth.status === AUTH_INITIALISING ||
+      auth.status === AUTH_UNINITIALISED ? (
         <Loading />
       ) : (
         <div className="container" id="main">
@@ -57,12 +59,4 @@ const App = ({ getAuthState, auth }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getAuthState: () => dispatch(fetchAuthState()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

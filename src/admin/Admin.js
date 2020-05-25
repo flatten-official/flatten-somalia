@@ -1,12 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
-import { PropTypes } from "prop-types";
+import { useSelector } from "react-redux";
 import { selectRoot } from "react-formio";
 import { AUTH_SUCCESS } from "../auth/authActions";
 import { useTranslation } from "react-i18next";
 
-const Admin = ({ auth }) => {
-  let { t } = useTranslation();
+const Admin = () => {
+  const auth = useSelector((state) => selectRoot("auth", state));
+  const { t } = useTranslation();
   return (
     <>
       {/* TODO - change this depending on what the eventual shape of the permissions object is. */}
@@ -23,12 +23,4 @@ const Admin = ({ auth }) => {
   );
 };
 
-Admin.propTypes = {
-  auth: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  auth: selectRoot("auth", state),
-});
-
-export default connect(mapStateToProps)(Admin);
+export default Admin;

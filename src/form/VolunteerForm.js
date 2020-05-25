@@ -8,10 +8,12 @@ import { LOCATION_SUCCESS } from "../location/locationActions";
 import flattenApi from "../backend/api";
 
 const VolunteerForm = ({ consentGiven }) => {
-  let { t } = useTranslation();
-  let location = useSelector(state=>state.location);
-  let [startTime, setStartTime] = useState(0);
-  useEffect(() => {setStartTime(Date.UTC())}, [setStartTime]);
+  const { t } = useTranslation();
+  const location = useSelector((state) => state.location);
+  const [startTime, setStartTime] = useState(0);
+  useEffect(() => {
+    setStartTime(Date.UTC());
+  }, [setStartTime]);
 
   if (!(location.status === LOCATION_SUCCESS)) {
     return <Location />;
@@ -25,15 +27,15 @@ const VolunteerForm = ({ consentGiven }) => {
         submitApi={flattenApi.volunteerForm}
         successRedir="/success"
         formioForm={FormDef}
-        submitHook={(submission)=> {
-          let endTime = Date.UTC();
+        submitHook={(submission) => {
+          const endTime = Date.UTC();
           submission.flattenData = {
             startTime: startTime,
             endTime: endTime,
             timeToComplete: endTime - startTime,
             location: location.location,
-            consentGiven
-          }
+            consentGiven,
+          };
         }}
         formioOptions={{
           noAlerts: false,

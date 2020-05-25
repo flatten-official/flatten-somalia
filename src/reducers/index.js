@@ -7,7 +7,7 @@ import { FormConfig } from "../config";
 import { connectRouter } from "connected-react-router";
 
 const createRootReducer = (history) => {
-  let reducersObj = {
+  const reducersObj = {
     router: connectRouter(history),
     auth: authReducer,
     form: form({ name: "form" }),
