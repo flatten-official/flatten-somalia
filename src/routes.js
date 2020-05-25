@@ -16,9 +16,7 @@ const router = express.Router();
  * @apiGroup Root
  */
 router.get("/", (req, res) => {
-  res
-    .status(200)
-    .send(`Flatten.so backend online (${process.env.ENVIRONMENT})`);
+  res.status(200).send(`Backend-Somalia online (${process.env.ENVIRONMENT})`);
 });
 
 /**

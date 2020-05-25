@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
       .status(401)
       .send(
         "Your link is invalid (it might have expired)." +
-          "Go to https://v.flatten.so to login again"
+          "Go to https://v.flatten.org to login again"
       );
     return;
   }
