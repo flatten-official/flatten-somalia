@@ -39,7 +39,7 @@ $fa-font-path: "../fonts";
 
 .wordmark {
   font-family: "DM Sans", sans-serif;
-  font-size: 3vw;
+  font-size: 2.75vw;
   letter-spacing: 0.75px;
   color: $black;
 }
@@ -63,4 +63,10 @@ $fa-font-path: "../fonts";
 
 #main {
   margin-top: 10px;
+}
+
+.body {
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.25vw;
+  letter-spacing: 0.75px;
 }
