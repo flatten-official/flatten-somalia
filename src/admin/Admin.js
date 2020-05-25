@@ -3,17 +3,18 @@ import { useSelector } from "react-redux";
 import { selectRoot } from "react-formio";
 import { AUTH_SUCCESS } from "../auth/authActions";
 import { useTranslation } from "react-i18next";
+import { permissions, hasPermission } from "../auth/authApi";
+import AddVolunteer from "./AddVolunteer"
 
 const Admin = () => {
   const auth = useSelector((state) => selectRoot("auth", state));
   const { t } = useTranslation();
   return (
     <>
-      {/* TODO - change this depending on what the eventual shape of the permissions object is. */}
-      {auth.status === AUTH_SUCCESS &&
-      auth.user.permissions.indexOf("admin") > -1 ? (
+      {hasPermission(auth, permissions.manageVolunteers) ? (
         <>
           <h2>{t("Admin:welcomeHeader")}</h2>
+          <AddVolunteer />
           <br />
         </>
       ) : (
