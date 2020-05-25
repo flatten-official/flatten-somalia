@@ -12,7 +12,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="header" expand="lg">
       <LinkContainer to={Routes.home}>
         <Navbar.Brand>
           <h3 className="wordmark">v.FLATTEN.org</h3>
