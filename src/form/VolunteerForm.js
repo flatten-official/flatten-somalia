@@ -12,7 +12,7 @@ const VolunteerForm = ({ consentGiven }) => {
   const location = useSelector((state) => state.location);
   const [startTime, setStartTime] = useState(0);
   useEffect(() => {
-    setStartTime(Date.UTC());
+    setStartTime(Date.now());
   }, [setStartTime]);
 
   if (!(location.status === LOCATION_SUCCESS)) {
@@ -28,14 +28,19 @@ const VolunteerForm = ({ consentGiven }) => {
         successRedir="/success"
         formioForm={FormDef}
         submitHook={(submission) => {
-          const endTime = Date.UTC();
+          const endTime = Date.now();
           submission.flattenData = {
             startTime: startTime,
             endTime: endTime,
             timeToComplete: endTime - startTime,
-            location: location.location,
+            location: {
+              latitude: location.location.coords.latitude,
+              longitude: location.location.coords.longitude,
+              accuracy: location.location.coords.accuracy
+            },
             consentGiven,
           };
+          return submission;
         }}
         formioOptions={{
           noAlerts: false,
