@@ -31,16 +31,15 @@ $danger: $red;
 $light: $gray-100;
 $dark: $gray-800;
 
-@import "~bootswatch/dist/litera/_variables.scss";
+@import "~bootswatch/dist/flatly/_variables.scss";
 @import "~bootstrap/scss/bootstrap.scss";
-@import "~bootswatch/dist/litera/_bootswatch.scss";
+@import "~bootswatch/dist/flatly/_bootswatch.scss";
 $fa-font-path: "../fonts";
-@import "~font-awesome/scss/font-awesome";
 @import "~formiojs/dist/formio.full.css";
 
 .wordmark {
   font-family: "DM Sans", sans-serif;
-  font-size: 4vw;
+  font-size: 3vw;
   letter-spacing: 0.75px;
   color: $black;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Form from "../backend/Form";
+import Form from "./Form";
 import FormDef from "./VolunteerForm.json";
 import Location from "../location/Location";
 import { LOCATION_SUCCESS } from "../location/locationActions";

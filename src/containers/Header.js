@@ -1,64 +1,50 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
 import { Link } from "react-router-dom";
 import { push } from "connected-react-router";
 import NavLink from "./NavLink";
-import { selectRoot, logout } from "react-formio";
 import { useTranslation } from "react-i18next";
 import { Routes } from "../config";
+import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import {LinkContainer } from "react-router-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import {logout, AUTH_SUCCESS} from "../auth/authActions";
 
-const Header = () => {
+
+const Header = ( ) => {
+  let { t } = useTranslation();
+  let {auth} = useSelector(state=>state);
   const dispatch = useDispatch();
-  const auth = useSelector((state) => selectRoot("auth", state));
-
-  const { t } = useTranslation();
-
-  const onLogout = () => {
-    dispatch(logout());
-    dispatch(push(Routes.auth));
-  };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container">
-        <Link className="navbar-brand" to="/">
+    <Navbar bg="light" expand="lg">
+      <LinkContainer to={Routes.home}>
+        <Navbar.Brand>
           <h3 className="wordmark">FLATTEN.so</h3>
-        </Link>
-        {/* TODO - refactor this mess, and get it working with new login system! */}
-        {/* <ul className="nav navbar-nav mr-auto">
-        {auth.is.hasOwnProperty("administrator") && auth.is.administrator ? (
-          <NavLink to="/admin" role="navigation link" className="nav-link">
-            <i className="fa fa-unlock-alt" />
-              &nbsp; {t("Navbar:links.adminPanel")}
-          </NavLink>
-        ) : null}
-      </ul> */}
-        {auth.authenticated ? (
-          <ul className="nav navbar-nav mr-auto">
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
-            <span
-              className="nav-link"
-              role="navigation link"
-              onClick={onLogout}
-            >
-              <span className="fa fa-sign-out" />
-              &nbsp;{" "}
-              {t("Navbar:links.loggedInAndLogout", {
-                user: auth.user.data.email,
-              })}{" "}
-              />
-            </span>
-          </ul>
-        ) : (
-          <ul className="nav navbar-nav mr-auto">
-            <NavLink to="/auth" role="navigation link" className="nav-link">
-              {t("Navbar:links.login")}
-            </NavLink>
-          </ul>
-        )}
-      </div>
-    </nav>
-  );
+        </Navbar.Brand>
+      </LinkContainer>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <LinkContainer to={Routes.home}>
+            <Nav.Link>{t("Navbar:links:home")}</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to={Routes.submission}>
+            <Nav.Link>{t("Navbar:links:submitForm")}</Nav.Link>
+          </LinkContainer>
+          {
+            auth.status === AUTH_SUCCESS ?
+          <Nav.Link className="ml-auto" onClick={()=>dispatch(logout())} >{t("Navbar:links:logout")}</Nav.Link>
+            :
+            <LinkContainer to={Routes.auth}>
+              <Nav.Link>{t("Navbar:links:login")}</Nav.Link>
+            </LinkContainer>
+          }
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  )
 };
 
 export default Header;

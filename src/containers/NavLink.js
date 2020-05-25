@@ -1,20 +1,14 @@
 import React from "react";
 import { Link, withRouter, matchPath } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 const NavLink = ({ to, location, exact, role, className, children }) => {
-  const liClass = matchPath(location.pathname, {
-    path: to,
-    exact,
-    strict: false,
-  })
-    ? "nav-item active"
-    : "nav-item";
 
   return (
-    <li className={liClass}>
+    <Nav.Link>
       <Link {...{ to, role, className }}>{children}</Link>
-    </li>
+    </Nav.Link>
   );
 };
 

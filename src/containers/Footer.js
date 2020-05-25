@@ -7,8 +7,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="container text-center" style={{ padding: "15px" }}>
         {t("Footer:builtBy")} &nbsp;
-        <a href="https://flatten.ca">Flatten.ca</a>&nbsp; |&nbsp;Forms powered
-        by <a href="https://form.io">form.io</a>
+        <a href="https://flatten.ca">Flatten.ca</a>
       </div>
     </footer>
   );
