@@ -1,10 +1,9 @@
 import React from "react";
-import { Link, withRouter, matchPath } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 const NavLink = ({ to, location, exact, role, className, children }) => {
-
   return (
     <Nav.Link>
       <Link {...{ to, role, className }}>{children}</Link>

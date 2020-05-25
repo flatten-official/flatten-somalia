@@ -1,3 +1,3 @@
 exports.default = {
-  goToSubmissionText: "Go to submission page."
+  goToSubmissionText: "Go to submission page.",
 };

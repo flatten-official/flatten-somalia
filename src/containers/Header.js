@@ -1,20 +1,14 @@
 import React from "react";
-import { connect } from "react-redux";
-import { PropTypes } from "prop-types";
-import { Link } from "react-router-dom";
-import { push } from "connected-react-router";
-import NavLink from "./NavLink";
 import { useTranslation } from "react-i18next";
 import { Routes } from "../config";
-import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
-import {LinkContainer } from "react-router-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import {logout, AUTH_SUCCESS} from "../auth/authActions";
+import { logout, AUTH_SUCCESS } from "../auth/authActions";
 
-
-const Header = ( ) => {
-  let { t } = useTranslation();
-  let {auth} = useSelector(state=>state);
+const Header = () => {
+  const { t } = useTranslation();
+  const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   return (
@@ -33,18 +27,19 @@ const Header = ( ) => {
           <LinkContainer to={Routes.submission}>
             <Nav.Link>{t("Navbar:links:submitForm")}</Nav.Link>
           </LinkContainer>
-          {
-            auth.status === AUTH_SUCCESS ?
-          <Nav.Link className="ml-auto" onClick={()=>dispatch(logout())} >{t("Navbar:links:logout")}</Nav.Link>
-            :
+          {auth.status === AUTH_SUCCESS ? (
+            <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
+              {t("Navbar:links:logout")}
+            </Nav.Link>
+          ) : (
             <LinkContainer to={Routes.auth}>
               <Nav.Link>{t("Navbar:links:login")}</Nav.Link>
             </LinkContainer>
-          }
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-  )
+  );
 };
 
 export default Header;
