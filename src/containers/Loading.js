@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Spinner, Row, Container } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const Loading = ({ text }) => {
   const { t } = useTranslation();
@@ -27,7 +28,7 @@ const Loading = ({ text }) => {
 };
 
 Loading.propTypes = {
-  text: String,
+  text: PropTypes.string,
 };
 
 export default Loading;
