@@ -4,8 +4,8 @@ import { push } from "connected-react-router";
 import { useTranslation } from "react-i18next";
 import { Form as FormioForm } from "react-formio";
 import PropTypes from "prop-types";
-import backend from "./backend";
-import { submitSuccess, submitFailure } from "./backendActions";
+import backend from "../backend/backend";
+import { submitSuccess, submitFailure } from "../backend/backendActions";
 
 const Form = (props) => {
   let { i18n } = useTranslation();

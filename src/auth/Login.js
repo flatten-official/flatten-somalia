@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../backend/Form";
+import Form from "../form/Form";
 import LoginForm from "./Login.json";
 import flattenApi from "../backend/api";
 
