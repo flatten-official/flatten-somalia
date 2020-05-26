@@ -17,8 +17,6 @@ const VolunteerForm = ({ consentGiven }) => {
     return <Location locationCallback={setLocation} />;
   }
 
-  console.log(location);
-
   return (
     <div>
       <h3> {t("VolunteerForm:title")} </h3>
@@ -33,11 +31,7 @@ const VolunteerForm = ({ consentGiven }) => {
             startTime: startTime,
             endTime: endTime,
             timeToComplete: endTime - startTime,
-            location: {
-              latitude: location.location.coords.latitude,
-              longitude: location.location.coords.longitude,
-              accuracy: location.location.coords.accuracy,
-            },
+            location,
             consentGiven,
           };
           return submission;
