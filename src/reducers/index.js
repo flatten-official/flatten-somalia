@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import locationReducer from "./locationReducer";
 import submitReducer from "./submitReducer";
 import authReducer from "./authReducer";
 import { form, forms, submission, submissions } from "react-formio";
@@ -14,7 +13,6 @@ const createRootReducer = (history) => {
     forms: forms({ name: "forms", query: { type: "form", tags: "common" } }),
     submission: submission({ name: "submission" }),
     submissions: submissions({ name: "submissions" }),
-    location: locationReducer,
   };
 
   reducersObj[FormConfig.volunteerForm.formName] = submitReducer(

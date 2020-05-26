@@ -1,28 +1,28 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { LocationObj } from "./Location";
 
-const LocationPicker = ({ submitCallback }) => {
-  const onCancel = () => {
+const LocationPicker = ({ onSubmit, onCancel }) => {
+  const submitHelper = () => {
     //TODO determine location
-    submitCallback({ lat: "43", lng: "43" });
+    onSubmit(LocationObj("45", "46", 200, 200, true));
   };
-
-  const onSubmit = () => submitCallback(null);
 
   return (
     <div>
-      <p>Location picker</p>
-      <Button variant="light" onClick={onSubmit}>
+      <h4>Pick your location</h4>
+      <Button variant="light" onClick={onCancel}>
         Cancel
       </Button>
-      <Button onClick={onCancel}>Submit</Button>
+      <Button onClick={submitHelper}>Submit</Button>
     </div>
   );
 };
 
 LocationPicker.propTypes = {
-  submitCallback: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
 export default LocationPicker;
