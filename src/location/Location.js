@@ -45,6 +45,7 @@ export const Location = ({ locationCallback }) => {
   // Called when the manual location picker submits
   const onUseManual = () => setStatus(LOCATION_MANUAL);
 
+  // eslint-disable-next-line default-case
   switch (status) {
     case LOCATION_REQUESTED:
       return <Loading text="Waiting for location to load." />;
