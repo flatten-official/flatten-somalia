@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Routes } from "../config";
 import { Link } from "react-router-dom";
 
-const Home = ({}) => {
+const Home = () => {
   //let auth = useSelector((state) => state.auth); // use the auth state from the store
   //let followUp = useSelector((state) => state.followUp);
   const { t } = useTranslation();
