@@ -1,59 +1,64 @@
-import React, { Component, createRef } from "react";
+import React, { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { LocationObj } from "./Location";
 import { Map, Marker, TileLayer } from "react-leaflet";
 
-const initialZoom = 13;
-const initialPosition = [2.045, 45.333];
+const INITIAL_ZOOM = 13;
+const INITIAL_CENTER = [2.045, 45.333];
 
-// TODO round values returned
-class LocationPicker extends Component {
-  state = { markerPosition: initialPosition };
+// TODO round returned values
+/**
+ * Component that allows the user to pick their location
+ */
+const LocationPicker = ({ onSubmit, onCancel }) => {
+  const [markerPosition, setMarkerPosition] = useState(INITIAL_CENTER);
 
-  mapRef = createRef();
+  const mapRef = useRef(); // Reference to the map object
 
-  getCenter = () => this.mapRef.current.leafletElement.getCenter();
+  const getCenter = () => mapRef.current.leafletElement.getCenter();
 
-  submitHelper = () => {
-    const center = this.getCenter();
-    this.props.onSubmit(LocationObj(center.lat, center.lng, null, null, true));
+  // Called when submit button is pressed
+  const submitHelper = () => {
+    const center = getCenter();
+    onSubmit(LocationObj(center.lat, center.lng, null, null, true));
   };
 
-  onMove = () => {
-    const center = this.getCenter();
-    this.setState({ markerPosition: [center.lat, center.lng] });
+  // Called while the map moves
+  const onMove = () => {
+    const center = getCenter();
+    setMarkerPosition([center.lat, center.lng]);
   };
 
-  render() {
-    return (
-      <div>
-        <h4>Pick your location</h4>
-        <Map
-          ref={this.mapRef}
-          onMove={this.onMove}
-          className="map"
-          zoom={initialZoom}
-          center={initialPosition}
-        >
-          <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          />
-          <Marker position={this.state.markerPosition} />
-        </Map>
-        <Button variant="light" onClick={this.props.onCancel}>
-          Cancel
-        </Button>
-        <Button onClick={this.submitHelper}>Submit</Button>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h4>Pick your location</h4>
+      <Map
+        ref={mapRef}
+        onMove={onMove}
+        className="map"
+        zoom={INITIAL_ZOOM}
+        center={INITIAL_CENTER}
+      >
+        <TileLayer // TODO Pick better base layer
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <Marker // TODO Style Marker
+          position={markerPosition}
+        />
+      </Map>
+      <Button variant="light" onClick={onCancel}>
+        Cancel
+      </Button>
+      <Button onClick={submitHelper}>Submit</Button>
+    </div>
+  );
+};
 
 LocationPicker.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired, // Callback called when location is submitted
+  onCancel: PropTypes.func.isRequired, // Callback called when operation is cancelled
 };
 
 export default LocationPicker;
