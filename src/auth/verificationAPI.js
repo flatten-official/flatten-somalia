@@ -18,6 +18,10 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
 
   const token = await signToken({ id: volunteerId }, EMAIL_EXPIRY);
 
+  if (Config.debug) {
+    console.log(token);
+  }
+
   const verificationLink = Config.urls.emailLink + "?token=" + token;
 
   return await sendVerificationEmail(emailAddress, verificationLink);

@@ -3,12 +3,19 @@ const { getJSONSecret } = require("./utils/secretGCP");
 // DON'T USE NODE_ENV because on App Engine it is always prod even in the staging environment
 const environment = process.env.ENVIRONMENT;
 
+const devConfig = {
+  secretId: "projects/233853318753/secrets/backend-so-config/versions/latest",
+  debug: true,
+};
+
 const stagingConfig = {
   secretId: "projects/233853318753/secrets/backend-so-config/versions/latest",
+  debug: false,
 };
 
 const prodConfig = {
   secretId: null, // TODO setup
+  debug: false,
 };
 
 const SharedConfig = {
@@ -28,8 +35,9 @@ const SharedConfig = {
 
 const buildConfig = () => {
   switch (environment) {
-    case "staging":
     case "dev":
+      return { ...SharedConfig, ...devConfig };
+    case "staging":
       return { ...SharedConfig, ...stagingConfig };
     case "production":
       return { ...SharedConfig, ...prodConfig };
