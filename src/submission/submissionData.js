@@ -26,16 +26,33 @@ const Submission = mongoose.model(
     // recorded on the user's browser with JS Date.now()
     filledOutTimestamp: { type: Number, index: true },
     timeToComplete: Number, // ms
-    consentGiven: Boolean,
+    consentGiven: {
+      Boolean,
+      required: true,
+    },
     uploadTimestamp: {
       type: Date,
       index: true,
+      required: true,
+      default: Date.now,
     },
     // this is filled in when this submission has been followed up with
     // submission -> household
-    followUpId: {
-      type: mongoose.ObjectId,
-      required: false,
+    followUp: {
+      id: {
+        type: mongoose.ObjectId,
+        required: false,
+        index: true,
+      },
+      inProgress: {
+        type: Boolean,
+        required: true,
+        index: true,
+      },
+      followUpStartTime: {
+        type: Date,
+        index: true,
+      },
     },
   })
 );
@@ -102,21 +119,76 @@ const Person = mongoose.model(
 // todo - is there a way to queue up the operations
 
 async function addSubmission(
-  submissionData, // break up into the sub components of a submission
-  previousId = undefined
-) {}
+  submitterId,
+  location,
+  filledOutTimestamp,
+  timeToComplete,
+  consentGiven,
+  previousId = undefined // id of the previous submission for the same household
+) {
+  const newSubmission = new Submission({
+    addedBy: submitterId,
+    location,
+    filledOutTimestamp,
+    timeToComplete,
+    consentGiven,
+  });
 
-async function addHousehold(submissionData, submissionId) {}
+  newSubmission.save();
 
-async function addPerson() {}
+  if (previousId !== undefined) {
+    Submission.findByIdAndUpdate(previousId, {
+      followUp: { id: previousId, inProgress: false, followUpStartTime: null },
+    });
+  }
 
-async function addSubmissionToHousehold(householdId, newSubmission) {}
-async function addSubmissionToPerson(personId, newSubmission) {}
+  return newSubmission._id;
+}
 
+async function createHousehold(data, submissionId) {
+  const household = new Household({
+    submissions: [
+      {
+        data,
+        submissionRef: submissionId,
+      },
+    ],
+  });
+  household.save();
+  return household._id;
+}
 
+async function addPerson(data, submissionKind, householdId) {
+  const person = new Person({
+    submissions: [{ data, submissionKind }],
+    isAlive: submissionKind !== "death",
+    householdId: householdId,
+  });
+  person.save();
+  return person._id;
+}
+
+async function addSubmissionToHousehold(householdId, data, submissionRef) {
+  Household.findByIdAndUpdate(householdId, {
+    $push: {
+      submissions: {
+        data,
+        submissionRef,
+      },
+    },
+  });
+}
+
+async function addSubmissionToPerson(personId, data, submissionRef) {
+  Person.findByIdAndUpdate(personId, {
+    $push: { submissions: { data, submissionRef } },
+  });
+}
 
 module.exports = {
-  householdInitialSubmission,
-  getDataByVolunteer,
-  getHouseholdByHouseholdId,
+  addSubmission,
+  createHousehold,
+  addPerson,
+  addSubmissionToHousehold,
+  addSubmissionToPerson,
 };
