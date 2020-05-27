@@ -17,7 +17,7 @@
     "doc": "apidoc -i ./src -o ./docs && open-cli ./docs/index.html",
     "depcheck": "depcheck . --ignores=\"eslint*\" --ignore-dirs=\"coverage,docs\"",
     "lint": "eslint --fix .",
-    "precommit": "npm run depcheck && npm run lint",
+    "precommit": "npm run lint",
     "auth": "gcloud auth login && gcloud auth application-default login && gcloud config set project flatten-staging-271921"
   },
   "dependencies": {
