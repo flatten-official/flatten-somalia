@@ -1,6 +1,7 @@
 const { addVolunteer } = require("./volunteerData");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
+  if (!addedByData) return [false, "Not authenticated"];
   if (!addedByData.permissions.includes("manageVolunteers")) {
     return [false, "Wrong Permissions"];
   }
