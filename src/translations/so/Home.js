@@ -1,4 +1,0 @@
-exports.default = {
-  loggedInAs: "",
-  cannotAccessFormMessage: "",
-};

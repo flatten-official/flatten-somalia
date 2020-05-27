@@ -1,0 +1,22 @@
+{
+  "email": "Emayl",
+  "submit": "gudbi",
+  "optional": "Option",
+  "other": "Wax kale",
+  "yes": "Haa",
+  "no": "Maya",
+  "unknown": "Ma aqaan",
+  "error": "",
+  "invalid_date": "",
+  "invalid_email": "",
+  "invalid_regex": "",
+  "mask": "",
+  "max": "",
+  "maxLength": "",
+  "min": "",
+  "minLength": "",
+  "next": "",
+  "pattern": "",
+  "previous": "",
+  "required": ""
+}
