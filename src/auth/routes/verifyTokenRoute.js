@@ -10,9 +10,9 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const { id: cookieId, expiry } = await verifyTokenAndMakeCookie(token);
+  const tokenContent = await verifyTokenAndMakeCookie(token);
 
-  if (!cookieId) {
+  if (!tokenContent) {
     res
       .status(401)
       .send(
@@ -22,8 +22,8 @@ module.exports = async (req, res) => {
     return;
   }
 
-  res.cookie("id", cookieId, {
-    expires: expiry,
+  res.cookie("id", tokenContent.id, {
+    expires: tokenContent.expiry,
     // secure cookies not wanted in dev environment
     secure: process.env.ENVIRONMENT !== "dev",
     signed: true,
