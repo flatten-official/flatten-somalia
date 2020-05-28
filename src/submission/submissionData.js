@@ -12,6 +12,7 @@ const Submission = mongoose.model(
     },
     // form schema version (the thing contained in the data object)
     submissionSchema: {
+      // todo - maybe validate these using enums?
       form: { type: String, index: true, required: true }, // eg. 'somaliaInitialVolunteerSurvey'
       version: { type: String, index: true, required: true }, // eg. '1.0'
     },
@@ -65,11 +66,13 @@ const Household = mongoose.model(
         // raw submission data (excluding people and death data)
         data: {
           type: mongoose.Mixed,
+          required: true,
         },
         submissionRef: {
           type: mongoose.ObjectId,
           ref: "Submission",
           index: true,
+          required: true,
         },
       },
     ],
@@ -93,12 +96,19 @@ const Person = mongoose.model(
       {
         data: {
           type: mongoose.Mixed,
+          required: true,
         },
         submissionKind: {
           type: String,
           enum: ["person", "death"],
+          required: true,
         },
-        submissionRef: { type: mongoose.ObjectId, ref: "Submission" },
+        submissionRef: {
+          type: mongoose.ObjectId,
+          ref: "Submission",
+          index: true,
+          required: true,
+        },
       },
     ],
     // todo - is there an easy way to query on the latest submission kind
@@ -112,6 +122,7 @@ const Person = mongoose.model(
     householdId: {
       type: mongoose.ObjectId,
       required: true,
+      index: true,
     },
   })
 );
@@ -147,6 +158,7 @@ async function addSubmission(
   return newSubmission._id;
 }
 
+// todo - maybe refactor so you can have a household in absence of submission data?
 async function createHousehold(data, publicId, submissionId) {
   const household = new Household({
     submissions: [
@@ -161,18 +173,18 @@ async function createHousehold(data, publicId, submissionId) {
   return household._id;
 }
 
-async function addPerson(data, submissionKind, householdId) {
+async function addPerson(data, submissionKind, submissionId, householdId) {
   const person = new Person({
-    submissions: [{ data, submissionKind }],
+    submissions: [{ data, submissionKind, submissionRef: submissionId }],
     isAlive: submissionKind !== "death",
     householdId: householdId,
   });
-  person.save();
+  await person.save();
   return person._id;
 }
 
 async function addSubmissionToHousehold(householdId, data, submissionRef) {
-  Household.findByIdAndUpdate(householdId, {
+  await Household.findByIdAndUpdate(householdId, {
     $push: {
       submissions: {
         data,
@@ -183,7 +195,7 @@ async function addSubmissionToHousehold(householdId, data, submissionRef) {
 }
 
 async function addSubmissionToPerson(personId, data, submissionRef) {
-  Person.findByIdAndUpdate(personId, {
+  await Person.findByIdAndUpdate(personId, {
     $push: { submissions: { data, submissionRef } },
   });
 }

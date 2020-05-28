@@ -3,8 +3,6 @@ const util = require("../testUtils/mongo");
 const { setup } = require("../../src/index");
 
 const mongoose = require("mongoose");
-const { addSubmission } = require("../../src/submission/submissionData");
-const { expectCt } = require("helmet");
 
 const dummyVolunteerId = "56cb91bdc3464f14678934ca";
 const basicSubmission = {
@@ -21,11 +19,22 @@ const basicSubmission = {
   timeToComplete: 3000,
   consentGiven: true,
 };
-basicHouseholdId = "id-test-0";
-basicHouseholdData = {
+const basicHouseholdId = "id-test-0";
+const basicHouseholdData = {
   email: "test@example.com",
   phone: "01189998819991197253",
 };
+
+const basicPeople = [
+  {
+    data: { name: "John Doe" },
+    submissionKind: "death",
+  },
+  {
+    data: { name: "Jane Doe" },
+    submissionKind: "person",
+  },
+];
 
 describe("submission database functions", () => {
   beforeAll(async () => {
@@ -104,7 +113,54 @@ describe("submission database functions", () => {
     );
   });
 
-  it("should create a person within a household correctly", async () => {});
+  it("should create a person within a household correctly", async () => {
+    const submissionId = await submissionData.addSubmission(
+      basicSubmission.addedBy,
+      basicSubmission.submissionSchema,
+      basicSubmission.location,
+      basicSubmission.filledOutTimestamp,
+      basicSubmission.timeToComplete,
+      basicSubmission.consentGiven
+    );
+
+    const householdId = await submissionData.createHousehold(
+      basicHouseholdData,
+      basicHouseholdId,
+      submissionId
+    );
+
+    const p0id = await submissionData.addPerson(
+      basicPeople[0].data,
+      basicPeople[0].submissionKind,
+      submissionId,
+      householdId
+    );
+    const p1id = await submissionData.addPerson(
+      basicPeople[1].data,
+      basicPeople[1].submissionKind,
+      submissionId,
+      householdId
+    );
+
+    const ids = [p0id, p1id];
+
+    const all = await submissionData.Person.find();
+
+    expect(all).toHaveLength(2);
+
+    for (let [i, id] of Object.entries(ids)) {
+      let personDb = all.filter(
+        (obj) => obj["_id"].toString() === id.toString()
+      )[0];
+      console.log(personDb);
+      console.log(personDb.submissions[0]);
+      expect(personDb.submissions[0].data).toStrictEqual(basicPeople[i].data);
+      expect(personDb.submissions[0].submissionKind).toStrictEqual(
+        basicPeople[i].submissionKind
+      );
+      expect(personDb.submissions[0].submissionRef.toString()).toStrictEqual(submissionId.toString());
+    }
+  });
 
   it("should add a submission to a household correctly", async () => {});
 
