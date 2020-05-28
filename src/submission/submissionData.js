@@ -11,7 +11,7 @@ const Submission = mongoose.model(
       index: true,
     },
     // form schema version (the thing contained in the data object)
-    schema: {
+    submissionSchema: {
       form: { type: String, index: true, required: true }, // eg. 'somaliaInitialVolunteerSurvey'
       version: { type: String, index: true, required: true }, // eg. '1.0'
     },
@@ -27,7 +27,7 @@ const Submission = mongoose.model(
     filledOutTimestamp: { type: Number, index: true },
     timeToComplete: Number, // ms
     consentGiven: {
-      Boolean,
+      type: Boolean,
       required: true,
     },
     uploadTimestamp: {
@@ -46,7 +46,7 @@ const Submission = mongoose.model(
       },
       inProgress: {
         type: Boolean,
-        required: true,
+        required: false,
         index: true,
       },
       followUpStartTime: {
@@ -73,7 +73,7 @@ const Household = mongoose.model(
         },
       },
     ],
-    // TODO - decide if we remove this
+    // TODO - decide if we remove this - can we query the latest in the submissions
     latestPhone: String,
     latestEmail: String,
     // the id that is given to volunteers (NOT the ID in the DB), TODO...!!
@@ -120,6 +120,7 @@ const Person = mongoose.model(
 
 async function addSubmission(
   submitterId,
+  submissionSchema,
   location,
   filledOutTimestamp,
   timeToComplete,
@@ -128,16 +129,17 @@ async function addSubmission(
 ) {
   const newSubmission = new Submission({
     addedBy: submitterId,
+    submissionSchema,
     location,
     filledOutTimestamp,
     timeToComplete,
     consentGiven,
   });
 
-  newSubmission.save();
+  await newSubmission.save();
 
   if (previousId !== undefined) {
-    Submission.findByIdAndUpdate(previousId, {
+    await Submission.findByIdAndUpdate(previousId, {
       followUp: { id: previousId, inProgress: false, followUpStartTime: null },
     });
   }
@@ -145,7 +147,7 @@ async function addSubmission(
   return newSubmission._id;
 }
 
-async function createHousehold(data, submissionId) {
+async function createHousehold(data, publicId, submissionId) {
   const household = new Household({
     submissions: [
       {
@@ -153,8 +155,9 @@ async function createHousehold(data, submissionId) {
         submissionRef: submissionId,
       },
     ],
+    publicId,
   });
-  household.save();
+  await household.save();
   return household._id;
 }
 
@@ -186,6 +189,9 @@ async function addSubmissionToPerson(personId, data, submissionRef) {
 }
 
 module.exports = {
+  Submission,
+  Household,
+  Person,
   addSubmission,
   createHousehold,
   addPerson,
