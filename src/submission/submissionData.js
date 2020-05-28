@@ -42,12 +42,10 @@ const Submission = mongoose.model(
     followUp: {
       id: {
         type: mongoose.ObjectId,
-        required: false,
         index: true,
       },
       inProgress: {
         type: Boolean,
-        required: false,
         index: true,
       },
       followUpStartTime: {
@@ -135,8 +133,7 @@ async function createSubmission(
   location,
   filledOutTimestamp,
   timeToComplete,
-  consentGiven,
-  previousId = undefined // id of the previous submission for the same household
+  consentGiven
 ) {
   const newSubmission = new Submission({
     addedBy: submitterId,
@@ -148,12 +145,6 @@ async function createSubmission(
   });
 
   await newSubmission.save();
-
-  if (previousId !== undefined) {
-    await Submission.findByIdAndUpdate(previousId, {
-      followUp: { id: previousId, inProgress: false, followUpStartTime: null },
-    });
-  }
 
   return newSubmission._id;
 }
@@ -218,6 +209,62 @@ async function addSubmissionToPerson(
   });
 }
 
+async function getVolunteerNextFollowUp(
+  // todo - add option to select by district if needed
+  // todo - add option to not select by volunteer
+  volunteerId,
+  minTimeSinceLastSubmission,
+  followUpTimeout = 24 * 60 * 60 * 1000 // ms
+) {
+  let next = await Submission.findOne(
+    {
+      $and: [
+        { uploadTimestamp: { $gt: Date.now() - minTimeSinceLastSubmission } },
+        { "followUp.id": { $exists: false } },
+        {
+          $or: [
+            { "followUp.inProgress": { $eq: false } },
+            {
+              "followUp.followUpStartTime": {
+                $lt: Date.now() - followUpTimeout,
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      // get earliest non-followed-up submission first
+      sort: { uploadTimestamp: -1 },
+    }
+  );
+
+  next.followUp = {
+    inProgress: true,
+    followUpStartTime: Date.now(),
+  };
+
+  await next.save();
+
+  // TODO - return next follow up metadata instead of just id
+  return next._id;
+}
+
+// add submission that we followed up with
+async function createFollowUpSubmisison(submissionId, ...newSubmissionData) {
+  let newSubmissionId = await createSubmission(...newSubmissionData);
+
+  await Submission.findByIdAndUpdate(submissionId, {
+    followUp: { id: newSubmissionId, inProgress: false },
+  });
+}
+
+async function cancelVolunteerFollowUp(submissionId) {
+  await Submission.findByIdAndUpdate(submissionId, {
+    followUp: { inProgress: false },
+  });
+}
+
 module.exports = {
   Submission,
   Household,
@@ -227,4 +274,7 @@ module.exports = {
   createPerson,
   addSubmissionToHousehold,
   addSubmissionToPerson,
+  getVolunteerNextFollowUp,
+  createFollowUpSubmisison,
+  cancelVolunteerFollowUp,
 };
