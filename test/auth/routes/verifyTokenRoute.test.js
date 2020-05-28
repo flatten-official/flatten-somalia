@@ -39,9 +39,8 @@ describe("test /auth/token", () => {
     let token = await signToken({ id: volunteerId }, 10);
 
     let res = await request.get("/auth/token?token=" + token);
-    console.log(!!res);
     // cookie should exist
-    expect(!!res.cookie).toBe(true);
+    expect(!!res.headers["set-cookie"]).toBe(true);
     expect(res.status).toBe(303);
   });
 });
