@@ -117,8 +117,8 @@ describe("submission database functions", () => {
     );
 
     const householdId = await submissionData.createHousehold(
-      initialHouseholdData,
       testPublicHouseholdId,
+      initialHouseholdData,
       submissionId
     );
 
@@ -151,22 +151,22 @@ describe("submission database functions", () => {
     );
 
     const householdId = await submissionData.createHousehold(
-      initialHouseholdData,
       testPublicHouseholdId,
+      initialHouseholdData,
       submissionId
     );
 
     const p0id = await submissionData.createPerson(
-      initialPeople[0].data,
-      initialPeople[0].submissionKind,
       householdId,
-      submissionId
+      submissionId,
+      initialPeople[0].data,
+      initialPeople[0].submissionKind
     );
     const p1id = await submissionData.createPerson(
+      householdId,
+      submissionId,
       initialPeople[1].data,
       initialPeople[1].submissionKind,
-      householdId,
-      submissionId
     );
 
     const ids = [p0id, p1id];
@@ -205,8 +205,8 @@ describe("submission database functions", () => {
     }
 
     const householdId = await submissionData.createHousehold(
-      initialHouseholdData,
       testPublicHouseholdId,
+      initialHouseholdData,
       submissionIds[0]
     );
 
@@ -259,16 +259,16 @@ describe("submission database functions", () => {
     }
 
     const householdId = await submissionData.createHousehold(
-      initialHouseholdData,
       testPublicHouseholdId,
+      initialHouseholdData,
       submissionIds[0]
     );
 
     const personId = await submissionData.createPerson(
-      initialPeople[0].data,
-      initialPeople[0].submissionKind,
       householdId,
-      submissionIds[0]
+      submissionIds[0],
+      initialPeople[0].data,
+      initialPeople[0].submissionKind
     );
 
     await submissionData.addSubmissionToPerson(

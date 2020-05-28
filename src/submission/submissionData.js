@@ -158,23 +158,34 @@ async function createSubmission(
   return newSubmission._id;
 }
 
-// todo - maybe refactor so you can have a household in absence of submission data?
+// todo - find if there is an easy way to get the final property that exists in a list of objects
 
-async function createHousehold(data, publicId, submissionId) {
+async function createHousehold(publicId, data, submissionId) {
+  const submissions = [];
+  if (data !== undefined) {
+    submissions.push({
+      data,
+      submissionRef: submissionId,
+    });
+  }
+  // todo add phone numbers to outer of object
   const household = new Household({
-    submissions: [
-      {
-        data,
-        submissionRef: submissionId,
-      },
-    ],
+    submissions,
     publicId,
   });
   await household.save();
   return household._id;
 }
 
-async function createPerson(data, submissionKind, householdId, submissionId) {
+async function createPerson(householdId, submissionId, data, submissionKind) {
+  const submissions = [];
+  if (submissionId !== undefined) {
+    submissions.push({
+      data,
+      submissionKind,
+      submissionRef: submissionId,
+    });
+  }
   const person = new Person({
     submissions: [{ data, submissionKind, submissionRef: submissionId }],
     isAlive: submissionKind !== "death",
@@ -195,7 +206,13 @@ async function addSubmissionToHousehold(householdId, data, submissionRef) {
   });
 }
 
-async function addSubmissionToPerson(personId, data, submissionKind, submissionRef) {
+async function addSubmissionToPerson(
+  personId,
+  data,
+  submissionKind,
+  submissionRef
+) {
+  // todo - update isAlive flag
   await Person.findByIdAndUpdate(personId, {
     $push: { submissions: { data, submissionRef } },
   });
