@@ -129,7 +129,7 @@ const Person = mongoose.model(
 
 // todo - is there a way to queue up the operations
 
-async function addSubmission(
+async function createSubmission(
   submitterId,
   submissionSchema,
   location,
@@ -159,6 +159,7 @@ async function addSubmission(
 }
 
 // todo - maybe refactor so you can have a household in absence of submission data?
+
 async function createHousehold(data, publicId, submissionId) {
   const household = new Household({
     submissions: [
@@ -173,7 +174,7 @@ async function createHousehold(data, publicId, submissionId) {
   return household._id;
 }
 
-async function addPerson(data, submissionKind, submissionId, householdId) {
+async function createPerson(data, submissionKind, householdId, submissionId) {
   const person = new Person({
     submissions: [{ data, submissionKind, submissionRef: submissionId }],
     isAlive: submissionKind !== "death",
@@ -194,7 +195,7 @@ async function addSubmissionToHousehold(householdId, data, submissionRef) {
   });
 }
 
-async function addSubmissionToPerson(personId, data, submissionRef) {
+async function addSubmissionToPerson(personId, data, submissionKind, submissionRef) {
   await Person.findByIdAndUpdate(personId, {
     $push: { submissions: { data, submissionRef } },
   });
@@ -204,9 +205,9 @@ module.exports = {
   Submission,
   Household,
   Person,
-  addSubmission,
+  createSubmission,
   createHousehold,
-  addPerson,
+  createPerson,
   addSubmissionToHousehold,
   addSubmissionToPerson,
 };
