@@ -34,6 +34,13 @@ describe("test /auth/token", () => {
     expect(res.status).toBe(401);
   });
 
+  it("should fail with 401 for a bad token", async () => {
+    const res = await request.get(
+      "/auth/token?token=baaaaaaaaaaaaaaaaaaadTokennnnnnnnnnn.eyJpZCI6IjVlY2ViZDI0NTE5ZjIyMjY4NDVkNjRiMCIsImlhdCI6MTU5MDYwODY3NiwiZXhwIjoxNTkxNTA4Njc2fQ.9XsbPNiybwkZl2M7v3orXk_Imn66vvGflRG267MJ6Ds"
+    );
+    expect(res.status).toBe(401);
+  });
+
   it("should return a cookie & redirect for a valid token", async () => {
     let volunteerId = await addVolunteer("Kanye West", "good@gmail.com", null);
     let token = await signToken({ id: volunteerId }, 10);
