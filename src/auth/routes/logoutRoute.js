@@ -6,7 +6,10 @@ module.exports = async (req, res) => {
   if (cookieId) {
     res.cookie("id"); // Remove cookie
     await deleteCookie(cookieId);
+
+    res.send(200);
+    return;
   }
 
-  res.send(200);
+  res.send(204);
 };
