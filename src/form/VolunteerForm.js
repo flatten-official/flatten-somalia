@@ -27,14 +27,30 @@ const VolunteerForm = ({ consentGiven }) => {
         formioForm={FormDef}
         submitHook={(submission) => {
           const endTime = Date.now();
-          submission.flattenData = {
-            startTime: startTime,
-            endTime: endTime,
-            timeToComplete: endTime - startTime,
-            location,
-            consentGiven,
+          const reformatted = {
+            household: {},
+            metedata: {
+              startTime: startTime,
+              endTime: endTime,
+              timeToComplete: endTime - startTime,
+              location,
+              consentGiven,
+            },
+            schema: {
+              form: "volunteerInitialForm",
+              version: "0.1",
+            },
           };
-          return submission;
+          Object.entries(submission.data).map(([k, v]) => {
+            if (k === "personGrid") {
+              reformatted.people = v;
+            } else if (k === "deathGrid") {
+              reformatted.deaths = v;
+            } else {
+              reformatted.household[k] = v;
+            }
+          });
+          return reformatted;
         }}
         formioOptions={{
           noAlerts: false,
