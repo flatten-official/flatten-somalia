@@ -7,8 +7,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "depcheck": "depcheck . --ignores=\"eslint-*,babel*,*/webpack,prettier,*sass*,depcheck,font-awesome,formiojs\"",
-    "lint": "eslint --fix .",
-    "precommit": "npm run depcheck && npm run lint"
+    "lint": "eslint --fix ."
   },
   "browserslist": {
     "production": [
@@ -51,6 +50,7 @@
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "4.0.0-beta.11",
     "husky": "^4.2.5",
+    "lint-staged": "^10.2.6",
     "mini-css-extract-plugin": "0.9.0",
     "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "5.0.3",
@@ -101,8 +101,10 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run precommit",
-      "post-merge": "npm run install"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
   }
 }
