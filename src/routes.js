@@ -74,12 +74,12 @@ router.get("/auth", getAuthRoute);
 router.delete("/auth/logout", logoutRoute);
 
 /**
- * @api {post} /volunteer/add Add volunteer
+ * @api {post} /volunteer Add volunteer
  * @apiName AddVolunteer
  * @apiGroup Volunteer
  * @apiDescription Unimplemented
  */
-router.post("/volunteer/add", addVolunteerRoute);
+router.post("/volunteer", addVolunteerRoute);
 
 /**
  * @api {post} /submit Submit the form

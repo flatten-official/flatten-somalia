@@ -11,7 +11,7 @@ const { setup } = require("../../../src/index");
 
 let request;
 
-describe("test /auth/token", () => {
+describe("test /volunteer", () => {
   beforeAll(async () => {
     await setup(false);
     await util.connectToDatabase();
@@ -39,7 +39,7 @@ describe("test /auth/token", () => {
     ];
 
     const res = await request
-      .post("/volunteer/add")
+      .post("/volunteer")
       .set("cookie", cookie)
       .send({
         volunteerData: {
@@ -69,7 +69,7 @@ describe("test /auth/token", () => {
     ];
 
     const res = await request
-      .post("/volunteer/add")
+      .post("/volunteer")
       .set("cookie", cookie)
       .send({
         volunteerData: {
@@ -99,7 +99,7 @@ describe("test /auth/token", () => {
     ];
 
     await request
-      .post("/volunteer/add")
+      .post("/volunteer")
       .set("cookie", cookie)
       .send({
         volunteerData: {
@@ -124,7 +124,7 @@ describe("test /auth/token", () => {
   it("should fail with 401 when no cookie is provided", async () => {
     const newVolunteerEmail = "irrelevant@gmail.com";
 
-    let res = await request.post("/volunteer/add").send({
+    const res = await request.post("/volunteer").send({
       volunteerData: {
         name: "irrelevant",
         email: newVolunteerEmail,
@@ -152,7 +152,7 @@ describe("test /auth/token", () => {
     ];
 
     await request
-      .post("/volunteer/add")
+      .post("/volunteer")
       .set("cookie", cookie)
       .send({
         volunteerData: {
@@ -162,7 +162,7 @@ describe("test /auth/token", () => {
       });
 
     const res = await request
-      .post("/volunteer/add")
+      .post("/volunteer")
       .set("cookie", cookie)
       .send({
         volunteerData: {
