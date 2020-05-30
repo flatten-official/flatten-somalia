@@ -1,16 +1,12 @@
-const {
-  addVolunteer,
-  PERMISSION_SUBMIT_FORMS,
-} = require("../../src/volunteer/volunteerData");
+const { addVolunteer } = require("../../src/volunteer/volunteerData");
 const { signToken } = require("../../src/utils/jwt");
 const supertest = require("supertest");
 const _ = require("lodash");
 
 const TEST_VOLUNTEER = {
   name: "default_name",
-  email: "default_email",
+  email: "default_email@example.ca",
   addedBy: null,
-  permissions: [PERMISSION_SUBMIT_FORMS],
 };
 
 /**
@@ -19,7 +15,11 @@ const TEST_VOLUNTEER = {
 const login = async (app, volunteer) => {
   const agent = supertest.agent(app, {});
 
-  volunteer = _.defaults(volunteer, TEST_VOLUNTEER);
+  volunteer = _.defaults(
+    volunteer,
+    { email: "default_email2@example.ca" }, // Provide an email to not cause collisions if default is used in test
+    TEST_VOLUNTEER
+  );
 
   volunteer = await addVolunteer(volunteer);
 

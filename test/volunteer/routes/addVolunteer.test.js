@@ -2,6 +2,8 @@ const { signToken } = require("../../../src/utils/jwt");
 const {
   addVolunteer,
   findVolunteerByEmail,
+  PERMISSION_MANAGE_VOLUNTEERS,
+  PERMISSION_SUBMIT_FORMS,
 } = require("../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../src/app");
@@ -25,22 +27,36 @@ describe("endpoint POST /volunteer", () => {
   afterAll(async () => await util.closeDatabase());
 
   it("should add a volunteer upon valid request", async () => {
-    const { agent } = await login(app);
+    const { agent, volunteer: adminVolunteer } = await login(app, {
+      permissions: [PERMISSION_MANAGE_VOLUNTEERS],
+    });
 
     const newVolunteerEmail = "new-volunteer@example.ca";
 
     const res = await agent.post("/volunteer").send({
       volunteerData: {
-        name: "new",
+        name: "new_name",
         email: newVolunteerEmail,
+        permSubmitForms: true,
       },
     });
 
-    const newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
+    let newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
 
     expect(res.status).toBe(200);
     expect(newVolunteer).not.toBeNull();
-    expect(newVolunteer.email).toMatch(newVolunteerEmail);
+
+    // remove properties that aren't used in comparison
+    newVolunteer = newVolunteer.toJSON();
+    delete newVolunteer._id;
+    delete newVolunteer.__v;
+
+    expect(newVolunteer).toStrictEqual({
+      name: "new_name",
+      email: newVolunteerEmail,
+      permissions: [PERMISSION_SUBMIT_FORMS],
+      addedBy: adminVolunteer._id,
+    });
   });
 
   it("should fail with 403 for missing permissions", async () => {
