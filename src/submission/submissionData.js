@@ -125,12 +125,9 @@ const Person = mongoose.model(
   })
 );
 
-// todo - is there a way to queue up the operations
-
 async function createPeople(perPersonData) {
   let ret = await Person.insertMany(perPersonData);
-
-  return ret.data.map((v) => v._id);
+  return ret.map((v) => v._id);
 }
 
 async function createSubmission(
@@ -168,10 +165,10 @@ async function createSubmission(
 
 async function createHousehold(publicId, phone, email, headOfHouseholdName) {
   const household = new Household({
+    publicId,
     phone,
     email,
     headOfHouseholdName,
-    publicId,
   });
   await household.save();
   return household._id;
