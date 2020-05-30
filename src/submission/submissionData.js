@@ -243,6 +243,8 @@ async function createFollowUpSubmisison(submissionId, ...newSubmissionData) {
   await Submission.findByIdAndUpdate(submissionId, {
     followUp: { id: newSubmissionId, inProgress: false },
   });
+
+  return newSubmissionId;
 }
 
 async function cancelVolunteerFollowUp(submissionId) {

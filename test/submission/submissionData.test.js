@@ -56,7 +56,8 @@ const testPeopleInitial = [
   [{ name: "Hello World" }],
 ];
 
-const testPeopleFollowUp = [{ testField: "hello " }, { testField: "hello 2" }];
+const retrieveById = (all, id) =>
+  all.filter((obj) => obj._id.toString() === id.toString())[0];
 
 describe("submission database functions", () => {
   beforeAll(async () => {
@@ -73,7 +74,6 @@ describe("submission database functions", () => {
     );
 
     const peopleIds = await submissionData.createPeople(
-
       testPeopleInitial[0].map((person) => {
         return { ...person, household: householdId };
       })
@@ -141,7 +141,6 @@ describe("submission database functions", () => {
 
     const peopleIds = await submissionData.createPeople(
       testPeopleInitial[0].map((person) => {
-        console.log(person);
         return { ...person, household: householdId };
       })
     );
@@ -166,10 +165,9 @@ describe("submission database functions", () => {
     const peopleIdsNested = [];
     const submissionIdsInitial = [];
 
-    // TODO - make this test query by volunteer id and district
-    // once we decide to support those things in the code
+    // 1. Create submissions associated with two different households.
 
-    for (let [i, householdData] of Object.entries(testHouseholdData)) {
+    for (const [i, householdData] of Object.entries(testHouseholdData)) {
       householdIds.push(
         await submissionData.createHousehold(
           householdData.publicId,
@@ -198,7 +196,13 @@ describe("submission database functions", () => {
       );
     }
 
-    const [
+
+    // 2. Test that the next follow up submission resolves correctly to the
+    //  first submission, and that the entries within this submission are correct
+    // TODO - make this test query by volunteer id and district
+    // once we decide to support those things in the code
+
+    let [
       nextId,
       nextHousehold,
       nextPeople,
@@ -214,8 +218,45 @@ describe("submission database functions", () => {
       new Set(peopleIdsNested[0].map((o) => o._id.toString()))
     ).toStrictEqual(new Set(nextPeople.map((o) => o._id.toString())));
 
-    // TODO - assertions on inserting the next submission
+    const testPeopleFollowUp = [{ testField: "1" }, { testField: "2" }];
+    const householdFollowUp = { someUpdatedProperty: "hello" };
 
-    await submissionData.createFollowUpSubmisison(nextId);
+    // 3. Insert the follow up submission using the interface (assertions below
+    // check that this inserts reference to next submission correctly and resets the flag).
+
+    const newSubmissionId = await submissionData.createFollowUpSubmisison(
+      nextId,
+      dummyVolunteerId,
+      { form: "volunteerFollowUpForm", version: "0.1" },
+      testSubmissions[0].metadata,
+      peopleIdsNested[0],
+      testPeopleFollowUp,
+      householdIds[0],
+      householdFollowUp
+    );
+
+    // 4. Test grabbing the next submission to follow up with, specifically
+    // to ensure that we do not end up grabbing the original submission
+    // (meaning dequeuing of the original submission happened correctly).
+
+    [
+      nextId,
+      nextHousehold,
+      nextPeople,
+    ] = await submissionData.getVolunteerNextFollowUp(
+      dummyVolunteerId,
+      "not yet implemented",
+      0
+    );
+
+    expect(nextId).not.toStrictEqual(submissionIdsInitial[0]);
+
+    const all = await submissionData.Submission.find();
+
+    const oldSubmission = retrieveById(all, submissionIdsInitial[0]._id);
+    expect(oldSubmission.followUp.id.toString()).toStrictEqual(
+      newSubmissionId.toString()
+    );
+    expect(oldSubmission.followUp.inProgress).toBe(false);
   });
 });
