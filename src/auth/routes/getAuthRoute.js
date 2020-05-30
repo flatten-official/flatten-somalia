@@ -7,6 +7,6 @@ module.exports = (req, res) => {
     });
   } else {
     // send an empty message signifying that the user is not logged in
-    res.status(204).send({});
+    res.status(200).send({});
   }
 };
