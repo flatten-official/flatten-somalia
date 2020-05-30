@@ -77,8 +77,9 @@ const Submission = mongoose.model(
       inProgress: {
         type: Boolean,
         index: true,
+        default: false,
       },
-      followUpStartTime: {
+      startTime: {
         type: Date,
         index: true,
       },
@@ -193,13 +194,17 @@ async function getVolunteerNextFollowUp(
   let next = await Submission.findOne(
     {
       $and: [
-        { uploadTimestamp: { $gt: Date.now() - minTimeSinceLastSubmission } },
+        {
+          "metadata.uploadTimestamp": {
+            $lt: Date.now() - minTimeSinceLastSubmission,
+          },
+        },
         { "followUp.id": { $exists: false } },
         {
           $or: [
             { "followUp.inProgress": { $eq: false } },
             {
-              "followUp.followUpStartTime": {
+              "followUp.startTime": {
                 $lt: Date.now() - followUpTimeout,
               },
             },
@@ -207,6 +212,7 @@ async function getVolunteerNextFollowUp(
         },
       ],
     },
+    {},
     {
       // get earliest non-followed-up submission first
       sort: { uploadTimestamp: -1 },
@@ -215,7 +221,7 @@ async function getVolunteerNextFollowUp(
 
   next.followUp = {
     inProgress: true,
-    followUpStartTime: Date.now(),
+    startTime: Date.now(),
   };
 
   await next.save();
