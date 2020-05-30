@@ -5,6 +5,7 @@ const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
 const { setup } = require("../../../src/index");
+const { TEST_VOLUNTEER } = require("../../testUtils/requests");
 
 let request;
 
@@ -42,7 +43,7 @@ describe("test /auth/token", () => {
   });
 
   it("should return a cookie & redirect for a valid token", async () => {
-    const volunteer = await addVolunteer("Kanye West", "good@gmail.com", null);
+    const volunteer = await addVolunteer(TEST_VOLUNTEER);
     const token = await signToken({ id: volunteer._id }, 10);
 
     const res = await request.get("/auth/token?token=" + token);

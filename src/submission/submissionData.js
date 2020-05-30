@@ -216,7 +216,7 @@ async function getVolunteerNextFollowUp(
   minTimeSinceLastSubmission,
   followUpTimeout = 24 * 60 * 60 * 1000 // ms
 ) {
-  let next = await Submission.findOne(
+  const next = await Submission.findOne(
     {
       $and: [
         { uploadTimestamp: { $gt: Date.now() - minTimeSinceLastSubmission } },
@@ -252,7 +252,7 @@ async function getVolunteerNextFollowUp(
 
 // add submission that we followed up with
 async function createFollowUpSubmisison(submissionId, ...newSubmissionData) {
-  let newSubmissionId = await createSubmission(...newSubmissionData);
+  const newSubmissionId = await createSubmission(...newSubmissionData);
 
   await Submission.findByIdAndUpdate(submissionId, {
     followUp: { id: newSubmissionId, inProgress: false },

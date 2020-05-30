@@ -51,7 +51,7 @@ const Config = buildConfig();
 const loadSecrets = async () => {
   const secretJson = await getJSONSecret(Config.secretId);
 
-  for (let key in Config.secrets) {
+  for (const key in Config.secrets) {
     // eslint-disable-next-line no-prototype-builtins
     if (Config.secrets.hasOwnProperty(key)) {
       if (!(key in secretJson))

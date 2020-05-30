@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
+const _ = require("lodash");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
+const PERMISSION_MANAGE_VOLUNTEERS = "manageVolunteers";
+const PERMISSION_SUBMIT_FORMS = "submitForms";
+
 const Volunteer = mongoose.model(
   "Volunteer",
   new mongoose.Schema({
@@ -18,7 +22,7 @@ const Volunteer = mongoose.model(
       type: [
         {
           type: String,
-          enum: ["manageVolunteers", "submitForms"],
+          enum: [PERMISSION_MANAGE_VOLUNTEERS, PERMISSION_SUBMIT_FORMS],
           required: true,
         },
       ],
@@ -30,41 +34,18 @@ const Volunteer = mongoose.model(
   })
 );
 
+const defaultVolunteer = {
+  permissions: [PERMISSION_SUBMIT_FORMS],
+};
+
 /**
  * Adds a volunteer to the database
- * @param name
- * @param email
- * @param addedBy a volunteer id
- * @param allowToManageVolunteers
- * @param allowToSubmitForms
- * @param gender
- * @param age
  * @return {Promise<*>} the volunteer
  */
-async function addVolunteer(
-  name,
-  email,
-  addedBy,
-  allowToManageVolunteers = false,
-  allowToSubmitForms = true,
-  gender = null,
-  age = null
-) {
-  const permissions = [];
-  if (allowToManageVolunteers) permissions.push("manageVolunteers");
-  if (allowToSubmitForms) permissions.push("submitForms");
+function addVolunteer(newVolunteer) {
+  newVolunteer = _.defaults(newVolunteer, defaultVolunteer);
 
-  const volunteer = new Volunteer({
-    name: name,
-    email: email,
-    addedBy: addedBy,
-    permissions: permissions,
-    gender: gender,
-    age: age,
-  });
-
-  await volunteer.save(); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
-  return volunteer;
+  return new Volunteer(newVolunteer).save(); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
 }
 
 /**
@@ -85,4 +66,6 @@ module.exports = {
   addVolunteer,
   findVolunteerById,
   findVolunteerByEmail,
+  PERMISSION_MANAGE_VOLUNTEERS,
+  PERMISSION_SUBMIT_FORMS,
 };

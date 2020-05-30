@@ -1,24 +1,27 @@
-const { addVolunteer } = require("../../src/volunteer/volunteerData");
+const {
+  addVolunteer,
+  PERMISSION_SUBMIT_FORMS,
+} = require("../../src/volunteer/volunteerData");
 const { signToken } = require("../../src/utils/jwt");
 const supertest = require("supertest");
+const _ = require("lodash");
+
+const TEST_VOLUNTEER = {
+  name: "default_name",
+  email: "default_email",
+  addedBy: null,
+  permissions: [PERMISSION_SUBMIT_FORMS],
+};
 
 /**
  * Most importantly returns an agent that stores cookies and can be used to call other endpoints with cookies
  */
-module.exports.login = async (
-  app,
-  volunteerName = "name",
-  volunteerEmail = "test@example.ca",
-  manageVolunteers = false
-) => {
+const login = async (app, volunteer) => {
   const agent = supertest.agent(app, {});
 
-  const volunteer = await addVolunteer(
-    volunteerName,
-    volunteerEmail,
-    null,
-    manageVolunteers
-  );
+  volunteer = _.defaults(volunteer, TEST_VOLUNTEER);
+
+  volunteer = await addVolunteer(volunteer);
 
   const token = await signToken({ id: volunteer._id }, 10);
 
@@ -26,3 +29,5 @@ module.exports.login = async (
 
   return { agent, volunteer };
 };
+
+module.exports = { TEST_VOLUNTEER, login };

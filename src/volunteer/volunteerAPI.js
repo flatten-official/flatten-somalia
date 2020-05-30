@@ -1,4 +1,8 @@
-const { addVolunteer } = require("./volunteerData");
+const {
+  addVolunteer,
+  PERMISSION_MANAGE_VOLUNTEERS,
+  PERMISSION_SUBMIT_FORMS,
+} = require("./volunteerData");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   if (!addedByData) return [false, "Not authenticated"];
@@ -6,15 +10,22 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
     return [false, "Wrong Permissions"];
   }
 
+  const permissions = [];
+  if (newVolunteerData.permManageVolunteers)
+    permissions.push(PERMISSION_MANAGE_VOLUNTEERS);
+  if (newVolunteerData.permSubmitForms)
+    permissions.push(PERMISSION_SUBMIT_FORMS);
+
+  const volunteer = {
+    name: newVolunteerData.name,
+    email: newVolunteerData.email,
+    addedBy: addedByData["_id"],
+    permissions,
+    // todo - gender and age
+  };
+
   try {
-    await addVolunteer(
-      newVolunteerData.name,
-      newVolunteerData.email,
-      addedByData["_id"],
-      newVolunteerData.permManageVolunteers,
-      newVolunteerData.permSubmitForms
-      // todo - gender and age
-    );
+    await addVolunteer(volunteer);
   } catch (e) {
     console.error(e);
     return [false, "Database Error"];

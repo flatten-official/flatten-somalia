@@ -11,6 +11,7 @@ const supertest = require("supertest");
 const { addVolunteer } = require("../../../src/volunteer/volunteerData");
 const { setup } = require("../../../src/index");
 const { Config } = require("../../../src/config");
+const { TEST_VOLUNTEER } = require("../../testUtils/requests");
 
 let request;
 
@@ -47,7 +48,7 @@ describe("test /auth/login", () => {
   });
 
   it("should return success if an unknown email is submitted and not send email", async () => {
-    await addVolunteer("Test Volunteer", "good@gmail.com", null);
+    await addVolunteer(TEST_VOLUNTEER);
 
     const res = await request
       .post("/auth/login")
@@ -58,26 +59,22 @@ describe("test /auth/login", () => {
   });
 
   it("should return success if a known email is submitted", async () => {
-    await addVolunteer("Test Volunteer", "good@gmail.com", null);
+    await addVolunteer(TEST_VOLUNTEER);
 
     const res = await request
       .post("/auth/login")
-      .send({ email: "good@gmail.com" });
+      .send({ email: TEST_VOLUNTEER.email });
 
     expect(res.status).toBe(200);
   });
 
   it("should send email with the payload being the volunteer id", async () => {
-    const volunteer = await addVolunteer(
-      "Test Volunteer",
-      "good@gmail.com",
-      null
-    );
+    const volunteer = await addVolunteer(TEST_VOLUNTEER);
 
-    await request.post("/auth/login").send({ email: "good@gmail.com" });
+    await request.post("/auth/login").send({ email: TEST_VOLUNTEER.email });
 
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
-    expect(sendEmailMock.mock.calls[0][0]).toMatch("good@gmail.com");
+    expect(sendEmailMock.mock.calls[0][0]).toMatch(TEST_VOLUNTEER.email);
     expect(sendEmailMock.mock.results[0].type).toMatch("return");
     expect(sendEmailMock.mock.results[0].value).toBe(true);
 

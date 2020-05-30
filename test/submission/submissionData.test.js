@@ -166,7 +166,7 @@ describe("submission database functions", () => {
       householdId,
       submissionId,
       initialPeople[1].data,
-      initialPeople[1].submissionKind,
+      initialPeople[1].submissionKind
     );
 
     const ids = [p0id, p1id];
@@ -175,8 +175,8 @@ describe("submission database functions", () => {
 
     expect(all).toHaveLength(2);
 
-    for (let [i, id] of Object.entries(ids)) {
-      let personDb = all.filter(
+    for (const [i, id] of Object.entries(ids)) {
+      const personDb = all.filter(
         (obj) => obj["_id"].toString() === id.toString()
       )[0];
       expect(personDb.submissions[0].data).toStrictEqual(initialPeople[i].data);
@@ -190,8 +190,8 @@ describe("submission database functions", () => {
   });
 
   it("should add a submission to a household correctly", async () => {
-    let submissionIds = [];
-    for (let submission of testSubmissions) {
+    const submissionIds = [];
+    for (const submission of testSubmissions) {
       submissionIds.push(
         await submissionData.createSubmission(
           submission.addedBy,
@@ -244,8 +244,8 @@ describe("submission database functions", () => {
   });
 
   it("should add a submission to a person correctly", async () => {
-    let submissionIds = [];
-    for (let submission of testSubmissions) {
+    const submissionIds = [];
+    for (const submission of testSubmissions) {
       submissionIds.push(
         await submissionData.createSubmission(
           submission.addedBy,

@@ -76,6 +76,7 @@ describe("endpoint POST /volunteer", () => {
   it("should be unable to create an admin", async () => {
     const newVolunteerEmail = "irrelevant@gmail.com";
 
+    // TODO Fix
     const maker = await addVolunteer(
       "not admin",
       "irrelevant1@gmail.com",
