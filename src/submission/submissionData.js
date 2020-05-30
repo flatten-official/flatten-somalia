@@ -148,7 +148,7 @@ async function createSubmission(
     });
   }
 
-  let newSubmission = new Submission({
+  const newSubmission = new Submission({
     addedBy: submitterId,
     submissionSchema,
     metadata,
@@ -171,6 +171,7 @@ async function createHousehold(publicId, phone, email, headOfHouseholdName) {
     email,
     headOfHouseholdName,
   });
+  // TODO - handle different kinds of submsisions here
   await household.save();
   return household._id;
 }
@@ -227,8 +228,8 @@ async function getVolunteerNextFollowUp(
   await next.save();
 
   // get associated household/people so that we can display metadata
-  let household = await Household.findById(next.household.ref);
-  let people = await Person.find({
+  const household = await Household.findById(next.household.ref);
+  const people = await Person.find({
     _id: { $in: next.people.map((o) => o.ref) },
   });
 
