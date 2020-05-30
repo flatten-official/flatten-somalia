@@ -67,20 +67,22 @@ async function addVolunteer(
   return volunteer._id;
 }
 
-async function getVolunteer(volunteerId) {
-  return await Volunteer.findById(volunteerId);
-}
+/**
+ *
+ * @param volunteerId
+ * @return {Promise}
+ */
+const findVolunteerById = (volunteerId) => Volunteer.findById(volunteerId);
 
 /**
  * Returns null if volunteer doesn't exist, otherwise returns the volunteer object
+ * @return {Promise}
  */
-async function findVolunteerByEmail(email) {
-  return Volunteer.findOne({ email: email });
-}
+const findVolunteerByEmail = (email) => Volunteer.findOne({ email: email });
 
 module.exports = {
   Volunteer,
   addVolunteer,
-  getVolunteer,
+  findVolunteerById,
   findVolunteerByEmail,
 };

@@ -1,5 +1,5 @@
 const { readCookie } = require("../cookieData");
-const { getVolunteer } = require("../../volunteer/volunteerData");
+const { findVolunteerById } = require("../../volunteer/volunteerData");
 
 /**
  * If cookie is invalid, redirects to the /auth page.
@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
     return;
   }
 
-  res.locals.volunteer = await getVolunteer(cookie.volunteerId);
+  res.locals.volunteer = await findVolunteerById(cookie.volunteerId);
   res.locals.cookieExpiry = cookie.expiry;
 
   next();
