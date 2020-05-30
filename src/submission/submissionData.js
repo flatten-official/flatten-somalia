@@ -10,32 +10,62 @@ const Submission = mongoose.model(
       required: true,
       index: true,
     },
+    people: [
+      {
+        // raw submission data (excluding people and death data)
+        data: {
+          type: mongoose.Mixed,
+          required: true,
+        },
+        ref: {
+          type: mongoose.ObjectId,
+          ref: "Person",
+          index: true,
+          required: true,
+        },
+      },
+    ],
+    household: {
+      // raw submission data (excluding people and death data)
+      data: {
+        type: mongoose.Mixed,
+        required: true,
+      },
+      ref: {
+        type: mongoose.ObjectId,
+        ref: "Household",
+        index: true,
+        required: true,
+      },
+    },
     // form schema version (the thing contained in the data object)
     submissionSchema: {
       // todo - maybe validate these using enums?
       form: { type: String, index: true, required: true }, // eg. 'somaliaInitialVolunteerSurvey'
       version: { type: String, index: true, required: true }, // eg. '1.0'
     },
-    // contains location etc
-    location: {
-      lat: Number,
-      long: Number,
-      accuracy: Number,
-      altitude: Number,
-      wasManual: Boolean,
-    },
-    // recorded on the user's browser with JS Date.now()
-    filledOutTimestamp: { type: Number, index: true },
-    timeToComplete: Number, // ms
-    consentGiven: {
-      type: Boolean,
-      required: true,
-    },
-    uploadTimestamp: {
-      type: Date,
-      index: true,
-      required: true,
-      default: Date.now,
+    metadata: {
+      // contains location etc
+      location: {
+        lat: Number,
+        long: Number,
+        accuracy: Number,
+        altitude: Number,
+        wasManual: Boolean,
+      },
+      // recorded on the user's browser with JS Date.now()
+      filledOutTimestamp: { type: Number, index: true },
+      timeToComplete: Number, // ms
+      consentGiven: {
+        type: Boolean,
+        required: true,
+      },
+      uploadTimestamp: {
+        type: Date,
+        index: true,
+        required: true,
+        default: Date.now,
+      },
     },
     // this is filled in when this submission has been followed up with
     // submission -> household
@@ -47,8 +77,9 @@ const Submission = mongoose.model(
       inProgress: {
         type: Boolean,
         index: true,
+        default: false,
       },
-      followUpStartTime: {
+      startTime: {
         type: Date,
         index: true,
       },
@@ -59,24 +90,10 @@ const Submission = mongoose.model(
 const Household = mongoose.model(
   "Household",
   new mongoose.Schema({
-    submissions: [
-      {
-        // raw submission data (excluding people and death data)
-        data: {
-          type: mongoose.Mixed,
-          required: true,
-        },
-        submissionRef: {
-          type: mongoose.ObjectId,
-          ref: "Submission",
-          index: true,
-          required: true,
-        },
-      },
-    ],
     // TODO - decide if we remove this - can we query the latest in the submissions
-    latestPhone: String,
-    latestEmail: String,
+    phone: String,
+    email: String,
+    headOfHouseholdName: String,
     // the id that is given to volunteers (NOT the ID in the DB), TODO...!!
     publicId: {
       type: String,
@@ -90,58 +107,56 @@ const Household = mongoose.model(
 const Person = mongoose.model(
   "Person",
   new mongoose.Schema({
-    submissions: [
-      {
-        data: {
-          type: mongoose.Mixed,
-          required: true,
-        },
-        submissionKind: {
-          type: String,
-          enum: ["person", "death"],
-          required: true,
-        },
-        submissionRef: {
-          type: mongoose.ObjectId,
-          ref: "Submission",
-          index: true,
-          required: true,
-        },
-      },
-    ],
+    name: String,
+    gender: String,
     // todo - is there an easy way to query on the latest submission kind
     // or if there is a kind that is death in the list
-    isAlive: {
+    alive: {
       type: Boolean,
       required: true,
       index: true,
       default: true,
     },
-    householdId: {
+    household: {
       type: mongoose.ObjectId,
+      ref: "Household",
       required: true,
       index: true,
     },
   })
 );
 
-// todo - is there a way to queue up the operations
+async function createPeople(perPersonData) {
+  let ret = await Person.insertMany(perPersonData);
+  return ret.map((v) => v._id);
+}
 
 async function createSubmission(
   submitterId,
   submissionSchema,
-  location,
-  filledOutTimestamp,
-  timeToComplete,
-  consentGiven
+  metadata,
+  peopleIds,
+  peopleData,
+  householdId,
+  householdData
 ) {
-  const newSubmission = new Submission({
+  let people = [];
+  for (let [i, _] of Object.entries(peopleIds)) {
+    people.push({
+      data: peopleData[i],
+      ref: peopleIds[i],
+    });
+  }
+
+  let newSubmission = new Submission({
     addedBy: submitterId,
     submissionSchema,
-    location,
-    filledOutTimestamp,
-    timeToComplete,
-    consentGiven,
+    metadata,
+    people,
+    household: {
+      data: householdData,
+      ref: householdId,
+    },
   });
 
   await newSubmission.save();
@@ -149,63 +164,22 @@ async function createSubmission(
   return newSubmission._id;
 }
 
-// todo - find if there is an easy way to get the final property that exists in a list of objects
-
-async function createHousehold(publicId, data, submissionId) {
-  const submissions = [];
-  if (data !== undefined) {
-    submissions.push({
-      data,
-      submissionRef: submissionId,
-    });
-  }
-  // todo add phone numbers to outer of object
+async function createHousehold(publicId, phone, email, headOfHouseholdName) {
   const household = new Household({
-    submissions,
     publicId,
+    phone,
+    email,
+    headOfHouseholdName,
   });
   await household.save();
   return household._id;
 }
 
-async function createPerson(householdId, submissionId, data, submissionKind) {
-  const submissions = [];
-  if (submissionId !== undefined) {
-    submissions.push({
-      data,
-      submissionKind,
-      submissionRef: submissionId,
-    });
-  }
-  const person = new Person({
-    submissions: [{ data, submissionKind, submissionRef: submissionId }],
-    isAlive: submissionKind !== "death",
-    householdId: householdId,
-  });
-  await person.save();
-  return person._id;
-}
-
-async function addSubmissionToHousehold(householdId, data, submissionRef) {
-  await Household.findByIdAndUpdate(householdId, {
-    $push: {
-      submissions: {
-        data,
-        submissionRef,
-      },
-    },
-  });
-}
-
-async function addSubmissionToPerson(
-  personId,
-  data,
-  submissionKind,
-  submissionRef
-) {
-  // todo - update isAlive flag
+async function setPersonToDead(personId) {
   await Person.findByIdAndUpdate(personId, {
-    $push: { submissions: { data, submissionRef } },
+    $push: {
+      alive: false,
+    },
   });
 }
 
@@ -213,19 +187,24 @@ async function getVolunteerNextFollowUp(
   // todo - add option to select by district if needed
   // todo - add option to not select by volunteer
   volunteerId,
-  minTimeSinceLastSubmission,
+  district,
+  minTimeSinceLastSubmission = 6 * 60 * 60 * 1000, // ms
   followUpTimeout = 24 * 60 * 60 * 1000 // ms
 ) {
   const next = await Submission.findOne(
     {
       $and: [
-        { uploadTimestamp: { $gt: Date.now() - minTimeSinceLastSubmission } },
+        {
+          "metadata.uploadTimestamp": {
+            $lt: Date.now() - minTimeSinceLastSubmission,
+          },
+        },
         { "followUp.id": { $exists: false } },
         {
           $or: [
             { "followUp.inProgress": { $eq: false } },
             {
-              "followUp.followUpStartTime": {
+              "followUp.startTime": {
                 $lt: Date.now() - followUpTimeout,
               },
             },
@@ -233,6 +212,7 @@ async function getVolunteerNextFollowUp(
         },
       ],
     },
+    {},
     {
       // get earliest non-followed-up submission first
       sort: { uploadTimestamp: -1 },
@@ -241,13 +221,18 @@ async function getVolunteerNextFollowUp(
 
   next.followUp = {
     inProgress: true,
-    followUpStartTime: Date.now(),
+    startTime: Date.now(),
   };
 
   await next.save();
 
-  // TODO - return next follow up metadata instead of just id
-  return next._id;
+  // get associated household/people so that we can display metadata
+  let household = await Household.findById(next.household.ref);
+  let people = await Person.find({
+    _id: { $in: next.people.map((o) => o.ref) },
+  });
+
+  return [next._id, household, people];
 }
 
 // add submission that we followed up with
@@ -271,9 +256,8 @@ module.exports = {
   Person,
   createSubmission,
   createHousehold,
-  createPerson,
-  addSubmissionToHousehold,
-  addSubmissionToPerson,
+  createPeople,
+  setPersonToDead,
   getVolunteerNextFollowUp,
   createFollowUpSubmisison,
   cancelVolunteerFollowUp,
