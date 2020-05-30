@@ -28,12 +28,12 @@ describe("test /auth", () => {
   });
 
   it("should return  name, permissions, and session expiry for a logged in volunteer", async () => {
-    const { agent, volunteerName } = await login(app);
+    const { agent, volunteer } = await login(app);
 
     const res = await agent.get("/auth");
 
     expect(res.status).toBe(200);
-    expect(res.body.name).toBe(volunteerName);
+    expect(res.body.name).toBe(volunteer.name);
     // expected value set in volunteerData.js
     expect(res.body.permissions).toMatchObject(["submitForms"]);
     // expiry field should exist

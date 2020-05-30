@@ -23,13 +23,15 @@ describe("test /auth", () => {
   afterAll(async () => await util.closeDatabase());
 
   it("should return 204 if the session was ended", async () => {
-    const { agent, volunteerEmail } = await login(app);
+    const { agent, volunteer } = await login(app);
     const res = await agent.delete("/auth/logout");
 
     expect(res.status).toBe(204);
 
     // check that the was actually removed from the db
-    expect(await findCookiesByVolunteerEmail(volunteerEmail)).toStrictEqual([]);
+    expect(await findCookiesByVolunteerEmail(volunteer.email)).toStrictEqual(
+      []
+    );
 
     // check that the cookie was unset from the browser (auth returns {})
     const resAuth = await agent.get("/auth");

@@ -25,7 +25,7 @@ describe("endpoint POST /volunteer", () => {
   afterAll(async () => await util.closeDatabase());
 
   it("should add a volunteer upon valid request", async () => {
-    const { agent, volunteerEmail } = await login(app);
+    const { agent } = await login(app);
 
     const newVolunteerEmail = "new-volunteer@example.ca";
 
