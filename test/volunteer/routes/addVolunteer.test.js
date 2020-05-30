@@ -75,41 +75,26 @@ describe("endpoint POST /volunteer", () => {
   });
 
   it("should be unable to create an admin", async () => {
-    const newVolunteerEmail = "irrelevant@gmail.com";
+    const { agent, volunteer: adminVolunteer } = await login(app, {
+      permissions: [PERMISSION_MANAGE_VOLUNTEERS],
+    });
 
-    // TODO Fix
-    const maker = await addVolunteer(
-      "not admin",
-      "irrelevant1@gmail.com",
-      null,
-      true
-    );
-    let token = await signToken({ id: maker._id }, 10);
-    const cookie = (await request.get("/auth/token?token=" + token)).headers[
-      "set-cookie"
-    ];
+    const newVolunteerEmail = "new-volunteer@example.com";
 
-    await request
-      .post("/volunteer")
-      .set("cookie", cookie)
-      .send({
-        volunteerData: {
-          name: "irrelevant",
-          email: newVolunteerEmail,
-          permManageVolunteers: true,
-        },
-      });
+    const res = await agent.post("/volunteer").send({
+      volunteerData: {
+        name: "irrelevant",
+        email: newVolunteerEmail,
+        permManageVolunteers: true,
+      },
+    });
+
+    expect(res.status).toBe(200);
 
     const newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
-    expect(newVolunteer).not.toBeNull();
-
-    // new volunteer should not be an admin
-    token = await signToken({ id: newVolunteer._id }, 10);
-    let res = await request.get("/auth/token?token=" + token);
-    res = await request.get("/auth").set("cookie", res.headers["set-cookie"]);
-
-    expect(res.body["permissions"]).not.toContain("manageVolunteers");
-    expect(res.status).toBe(200);
+    expect(newVolunteer.permissions).not.toContain(
+      PERMISSION_MANAGE_VOLUNTEERS
+    );
   });
 
   it("should fail with 401 when no cookie is provided", async () => {

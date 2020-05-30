@@ -9,11 +9,9 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   if (!addedByData.permissions.includes(PERMISSION_MANAGE_VOLUNTEERS))
     return [403, "Wrong Permissions"];
 
-  const permissions = [];
-  if (newVolunteerData.permManageVolunteers)
-    permissions.push(PERMISSION_MANAGE_VOLUNTEERS);
-  if (newVolunteerData.permSubmitForms)
-    permissions.push(PERMISSION_SUBMIT_FORMS);
+  const permissions = newVolunteerData.permSubmitForms
+    ? [PERMISSION_SUBMIT_FORMS]
+    : [];
 
   const volunteer = {
     name: newVolunteerData.name,
