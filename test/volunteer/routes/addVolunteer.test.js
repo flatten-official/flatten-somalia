@@ -75,7 +75,7 @@ describe("endpoint POST /volunteer", () => {
   });
 
   it("should be unable to create an admin", async () => {
-    const { agent, volunteer: adminVolunteer } = await login(app, {
+    const { agent } = await login(app, {
       permissions: [PERMISSION_MANAGE_VOLUNTEERS],
     });
 
@@ -114,39 +114,33 @@ describe("endpoint POST /volunteer", () => {
   });
 
   it("should fail with 400 when trying to create a volunteer with an unavailable email address", async () => {
-    const newVolunteerEmail = "irrelevant@gmail.com";
+    const { agent, volunteer: adminVolunteer } = await login(app, {
+      permissions: [PERMISSION_MANAGE_VOLUNTEERS],
+    });
 
-    const maker = await addVolunteer(
-      "not admin",
-      "irrelevant1@gmail.com",
-      null,
-      true
-    );
-    const token = await signToken({ id: maker._id }, 10);
-    const cookie = (await request.get("/auth/token?token=" + token)).headers[
-      "set-cookie"
-    ];
-
-    await request
-      .post("/volunteer")
-      .set("cookie", cookie)
-      .send({
-        volunteerData: {
-          name: "irrelevant 1",
-          email: newVolunteerEmail,
-        },
-      });
-
-    const res = await request
-      .post("/volunteer")
-      .set("cookie", cookie)
-      .send({
-        volunteerData: {
-          name: "irrelevant 2",
-          email: newVolunteerEmail,
-        },
-      });
+    const res = await agent.post("/volunteer").send({
+      volunteerData: {
+        name: "volunteer with same email as admin",
+        email: adminVolunteer.email,
+      },
+    });
 
     expect(res.status).toBe(400);
   });
+
+  it("should fail with 400 when trying to create a volunteer without an email", async () => {
+    const { agent } = await login(app, {
+      permissions: [PERMISSION_MANAGE_VOLUNTEERS],
+    });
+
+    const res = await agent.post("/volunteer").send({
+      volunteerData: {
+        name: "volunteer with same email as admin",
+      },
+    });
+
+    expect(res.status).toBe(400);
+  });
+
+  // TODO test for missing email, missing name or invalid permission array. basically too many or missing parameters
 });
