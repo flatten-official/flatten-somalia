@@ -13,6 +13,10 @@ let request;
 const BAD_TOKEN =
   "baaaaaaaaaaaaaaaaaaadTokennnnnnnnnnn.eyJpZCI6IjVlY2ViZDI0NTE5ZjIyMjY4NDVkNjRiMCIsImlhdCI6MTU5MDYwODY3NiwiZXhwIjoxNTkxNTA4Njc2fQ.9XsbPNiybwkZl2M7v3orXk_Imn66vvGflRG267MJ6Ds";
 
+// token used here was signed for a valid email on May 30th and should be expired
+const OLD_TOKEN =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYzZlOWQwODkwODkwNWIxMDFhM2MzZCIsImlhdCI6MTU5MDgxODk2NiwiZXhwIjoxNTkwODE5ODY2fQ.yWaruFe0mRamjXAHW0lPcbWoOWq4s5InMt7ILjpSsys";
+
 describe("test /auth/token", () => {
   beforeAll(async () => {
     await setup(false);
@@ -32,10 +36,7 @@ describe("test /auth/token", () => {
   });
 
   it("should fail with 401 for an old token", async () => {
-    // token used here was signed for a valid email on May 27 and should be expired
-    const res = await request.get(
-      "/auth/token?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlY2ViZDI0NTE5ZjIyMjY4NDVkNjRiMCIsImlhdCI6MTU5MDYwODY3NiwiZXhwIjoxNTkxNTA4Njc2fQ.9XsbPNiybwkZl2M7v3orXk_Imn66vvGflRG267MJ6Ds"
-    );
+    const res = await request.get("/auth/token?token=" + OLD_TOKEN);
 
     expect(res.status).toBe(401);
     expect(res.headers["set-cookie"]).toBeUndefined();

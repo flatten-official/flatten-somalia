@@ -1,6 +1,4 @@
-const { signToken } = require("../../../src/utils/jwt");
 const {
-  addVolunteer,
   findVolunteerByEmail,
   PERMISSION_MANAGE_VOLUNTEERS,
   PERMISSION_SUBMIT_FORMS,

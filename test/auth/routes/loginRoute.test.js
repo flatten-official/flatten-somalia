@@ -85,7 +85,7 @@ describe("test /auth/login", () => {
     const payload = await verifyToken(token);
 
     expect(payload).not.toBeNull();
-    expect(payload.id).toMatch(volunteer._id);
+    expect(payload.id).toMatch(volunteer._id.toString());
 
     const emailLinkBase = url.slice(0, tokenIndex);
     expect(emailLinkBase).toMatch(Config.urls.emailLink);
