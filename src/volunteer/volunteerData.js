@@ -48,7 +48,8 @@ const getNextFriendlyId = async () => {
   const largestVolunteer = await Volunteer.find({}, "friendlyId")
     .sort({ friendlyId: -1 })
     .limit(1);
-  if (largestVolunteer.length === 0) return 0;
+  if (largestVolunteer.length === 0 || !largestVolunteer[0].friendlyId)
+    return 0;
   else return largestVolunteer[0].friendlyId + 1;
 };
 
@@ -84,6 +85,7 @@ module.exports = {
   addVolunteer,
   findVolunteerById,
   findVolunteerByEmail,
+  getNextFriendlyId,
   PERMISSION_MANAGE_VOLUNTEERS,
   PERMISSION_SUBMIT_FORMS,
 };
