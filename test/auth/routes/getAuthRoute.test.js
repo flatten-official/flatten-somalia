@@ -4,6 +4,9 @@ const supertest = require("supertest");
 const { setup } = require("../../../src/index");
 
 const { login } = require("../../testUtils/requests");
+const {
+  PERMISSION_SUBMIT_FORMS,
+} = require("../../../src/volunteer/volunteerData");
 
 let request;
 let app;
@@ -35,8 +38,10 @@ describe("test /auth", () => {
     expect(res.status).toBe(200);
     expect(res.body.name).toBe(volunteer.name);
     // expected value set in volunteerData.js
-    expect(res.body.permissions).toMatchObject(["submitForms"]);
+    expect(res.body.permissions).toMatchObject([PERMISSION_SUBMIT_FORMS]);
     // expiry field should exist
     expect(res.body.expiry).not.toBeNull();
+    // Should have a friendly id field
+    expect(res.body.friendlyId).toBe(0);
   });
 });
