@@ -7,7 +7,7 @@ const { Config } = require("../config");
  */
 module.exports.signToken = async (jsonPayload, minTillExpiry) => {
   return jwt.sign(jsonPayload, Config.secrets.jwtSecret, {
-    expiresIn: minTillExpiry * 60000,
+    expiresIn: minTillExpiry * 60,
   });
 };
 
