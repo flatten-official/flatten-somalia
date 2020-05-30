@@ -12,6 +12,8 @@
 
 3. To be able to Login ask Martin or Arthur to add you to the volunteer staging database.
 
+4. Enable ESLint in your code editor (normally through the ESLint Plugin)
+
 ## Running locally
 
 1. Run `npm run start`
