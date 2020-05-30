@@ -3,5 +3,5 @@ export default {
   login: { method: "post", url: "/auth/login" },
   logout: { method: "delete", url: "auth/logout" },
   volunteerForm: { method: "post", url: "submit" },
-  addVolunteer: { method: "post", url: "volunteer/add" },
+  addVolunteer: { method: "post", url: "volunteer" },
 };
