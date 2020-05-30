@@ -18,5 +18,6 @@ module.exports = {
     "jest/no-hooks": "off",
     "jest/prefer-expect-assertions": "off",
     "no-unused-vars": "warn",
+    "prefer-const": "warn",
   },
 };
