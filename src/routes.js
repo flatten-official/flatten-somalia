@@ -5,7 +5,9 @@ const loginRoute = require("./auth/routes/loginRoute");
 const verifyTokenRoute = require("./auth/routes/verifyTokenRoute");
 const logoutRoute = require("./auth/routes/logoutRoute");
 const getAuthRoute = require("./auth/routes/getAuthRoute");
-const submitFormRoute = require("./submission/submitFormRoute");
+const submitInitialRoute = require("./submission/submitInitialRoute");
+const submitFollowUpRoute = require("./submission/submitFollowUpRoute");
+const submitGetNextRoute = require("./submission/submitGetNextRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
 
 const router = express.Router();
@@ -82,11 +84,27 @@ router.delete("/auth/logout", logoutRoute);
 router.post("/volunteer", addVolunteerRoute);
 
 /**
- * @api {post} /submit Submit the form
- * @apiName SubmitForm
+ * @api {post} /submit/initial Submit the form for a new household
+ * @apiName SubmitFormInitial
  * @apiGroup Submissions
  * @apiDescription Unimplemented
  */
-router.post("/submit", submitFormRoute);
+router.post("/submit/initial", submitInitialRoute);
+
+/**
+ * @api {post} /submit/followup Submit the form for an existing household from a follow up.
+ * @apiName SubmitFormFollowUp
+ * @apiGroup Submissions
+ * @apiDescription Unimplemented
+ */
+router.post("/submit/followup", submitFollowUpRoute);
+
+/**
+ * @api {get} /submit/next Get the info about the next follow up that this volunteer should do
+ * @apiName GetNextFollowUp
+ * @apiGroup Submissions
+ * @apiDescription Unimplemented
+ */
+router.post("/submit/next", submitGetNextRoute);
 
 module.exports = router;
