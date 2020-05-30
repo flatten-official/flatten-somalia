@@ -60,33 +60,23 @@ describe("endpoint POST /volunteer", () => {
   });
 
   it("should fail with 403 for missing permissions", async () => {
-    const newVolunteerEmail = "irrelevant@gmail.com";
+    const { agent } = await login(app, {
+      permissions: [PERMISSION_SUBMIT_FORMS],
+    });
 
-    const admin = await addVolunteer(
-      "admin",
-      "irrelevant@gmail.com",
-      null,
-      false
-    );
-    const token = await signToken({ id: admin._id }, 10);
-    const cookie = (await request.get("/auth/token?token=" + token)).headers[
-      "set-cookie"
-    ];
+    const newVolunteerEmail = "new-volunteer@example.ca";
 
-    const res = await request
-      .post("/volunteer")
-      .set("cookie", cookie)
-      .send({
-        volunteerData: {
-          name: "irrelevant",
-          email: newVolunteerEmail,
-        },
-      });
+    const res = await agent.post("/volunteer").send({
+      volunteerData: {
+        name: "irrelevant",
+        email: newVolunteerEmail,
+      },
+    });
+
+    expect(res.status).toBe(403);
 
     const newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
-
     expect(newVolunteer).toBeNull();
-    expect(res.status).toBe(403);
   });
 
   it("should be unable to create an admin", async () => {

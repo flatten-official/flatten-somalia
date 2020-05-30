@@ -12,7 +12,7 @@ const TEST_VOLUNTEER = {
 /**
  * Most importantly returns an agent that stores cookies and can be used to call other endpoints with cookies
  */
-const login = async (app, volunteer) => {
+const login = async (app, volunteer = {}) => {
   const agent = supertest.agent(app, {});
 
   volunteer = _.defaults(
