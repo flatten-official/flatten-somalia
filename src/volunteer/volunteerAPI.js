@@ -5,10 +5,9 @@ const {
 } = require("./volunteerData");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
-  if (!addedByData) return [false, "Not authenticated"];
-  if (!addedByData.permissions.includes("manageVolunteers")) {
-    return [false, "Wrong Permissions"];
-  }
+  if (!addedByData) return [401, "Not authenticated"];
+  if (!addedByData.permissions.includes(PERMISSION_MANAGE_VOLUNTEERS))
+    return [403, "Wrong Permissions"];
 
   const permissions = [];
   if (newVolunteerData.permManageVolunteers)
@@ -28,10 +27,10 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
     await addVolunteer(volunteer);
   } catch (e) {
     console.error(e);
-    return [false, "Database Error"];
+    return [500, "Database Error"]; // TODO if validation return 400 error instead
   }
 
-  return [true, "Success"];
+  return [200, "Success"];
 }
 
 module.exports = {

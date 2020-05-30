@@ -10,7 +10,7 @@ const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
 const { setup } = require("../../../src/index");
-const { login } = require("../../testUtils/requests");
+const { login, TEST_VOLUNTEER } = require("../../testUtils/requests");
 
 describe("endpoint POST /volunteer", () => {
   let app;
@@ -66,12 +66,7 @@ describe("endpoint POST /volunteer", () => {
 
     const newVolunteerEmail = "new-volunteer@example.ca";
 
-    const res = await agent.post("/volunteer").send({
-      volunteerData: {
-        name: "irrelevant",
-        email: newVolunteerEmail,
-      },
-    });
+    const res = await agent.post("/volunteer").send(TEST_VOLUNTEER);
 
     expect(res.status).toBe(403);
 
