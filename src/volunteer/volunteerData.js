@@ -18,6 +18,12 @@ const Volunteer = mongoose.model(
       unique: true,
       required: true,
     },
+    friendlyId: {
+      type: Number,
+      required: true,
+      unique: true,
+      index: true,
+    },
     permissions: {
       type: [
         {
@@ -38,15 +44,27 @@ const defaultVolunteer = {
   permissions: [PERMISSION_SUBMIT_FORMS],
 };
 
+const getNextFriendlyId = async () => {
+  const largestVolunteer = await Volunteer.find({}, "friendlyId")
+    .sort({ friendlyId: -1 })
+    .limit(1);
+  if (largestVolunteer.length === 0) return 0;
+  else return largestVolunteer[0].friendlyId + 1;
+};
+
 /**
  * Adds a volunteer to the database
  * @return {Promise<*>} the volunteer
  */
-function addVolunteer(newVolunteer) {
-  newVolunteer = _.defaults(newVolunteer, defaultVolunteer);
+const addVolunteer = async (newVolunteer) => {
+  newVolunteer = _.defaults(
+    { friendlyId: await getNextFriendlyId() },
+    newVolunteer,
+    defaultVolunteer
+  );
 
   return new Volunteer(newVolunteer).save(); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
-}
+};
 
 /**
  *

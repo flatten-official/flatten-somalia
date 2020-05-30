@@ -52,6 +52,7 @@ describe("endpoint POST /volunteer", () => {
     expect(newVolunteer).toStrictEqual({
       name: "new_name",
       email: newVolunteerEmail,
+      friendlyId: 1, // 0 already taken by admin
       permissions: [PERMISSION_SUBMIT_FORMS],
       addedBy: adminVolunteer._id,
     });
