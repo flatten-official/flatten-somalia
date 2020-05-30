@@ -38,5 +38,7 @@ describe("test /auth", () => {
     expect(res.body.permissions).toMatchObject(["submitForms"]);
     // expiry field should exist
     expect(res.body.expiry).not.toBeNull();
+    // Should have a friendly id field
+    expect(res.body.friendlyId).toBe(0);
   });
 });

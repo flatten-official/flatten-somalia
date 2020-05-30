@@ -4,6 +4,7 @@ module.exports = (req, res) => {
       permissions: res.locals.volunteer.permissions,
       name: res.locals.volunteer.name,
       expiry: res.locals.cookieExpiry,
+      friendlyId: res.locals.volunteer.friendlyId,
     });
   } else {
     // send an empty message signifying that the user is not logged in
