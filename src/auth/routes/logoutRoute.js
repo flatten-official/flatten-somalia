@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     res.cookie("id"); // Remove cookie
     await deleteCookie(cookieId);
 
-    res.sendStatus(200);
+    res.sendStatus(204);
     return;
   }
 
