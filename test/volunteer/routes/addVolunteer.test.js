@@ -1,57 +1,45 @@
 const { signToken } = require("../../../src/utils/jwt");
 const {
   addVolunteer,
-  findVolunteerIdByEmail,
+  findVolunteerByEmail,
 } = require("../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
 const { setup } = require("../../../src/index");
-
-let request;
+const { login } = require("../../testUtils/requests");
 
 describe("test /volunteer", () => {
+  let app;
+  let request;
+
   beforeAll(async () => {
     await setup(false);
     await util.connectToDatabase();
-    request = supertest(await getApp());
+    app = await getApp();
+    request = supertest(app);
   });
 
-  afterEach(async () => {
-    await util.clearDatabase();
-    jest.clearAllMocks();
-  });
+  afterEach(async () => await util.clearDatabase());
   afterAll(async () => await util.closeDatabase());
 
   it("should add a volunteer upon valid request", async () => {
-    const newVolunteerEmail = "new@gmail.com";
+    const { agent } = await login(app);
 
-    const adminID = await addVolunteer(
-      "admin",
-      "irrelevant@gmail.com",
-      null,
-      true
-    );
-    const token = await signToken({ id: adminID }, 10);
-    const cookie = (await request.get("/auth/token?token=" + token)).headers[
-      "set-cookie"
-    ];
+    const newVolunteerEmail = "new-volunteer@example.ca";
 
-    const res = await request
-      .post("/volunteer")
-      .set("cookie", cookie)
-      .send({
-        volunteerData: {
-          name: "new",
-          email: newVolunteerEmail,
-        },
-      });
+    const res = await agent.post("/volunteer").send({
+      volunteerData: {
+        name: "new",
+        email: newVolunteerEmail,
+      },
+    });
 
-    const newVolunteerID = await findVolunteerIdByEmail(newVolunteerEmail);
+    const newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
 
-    expect(newVolunteerID).not.toBeNull();
     expect(res.status).toBe(200);
+    expect(newVolunteer).not.toBeNull();
   });
 
   it("should fail with 403 for missing permissions", async () => {
@@ -78,9 +66,9 @@ describe("test /volunteer", () => {
         },
       });
 
-    const newVolunteerID = await findVolunteerIdByEmail(newVolunteerEmail);
+    const newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
 
-    expect(newVolunteerID).toBeNull();
+    expect(newVolunteer).toBeNull();
     expect(res.status).toBe(403);
   });
 
@@ -109,11 +97,11 @@ describe("test /volunteer", () => {
         },
       });
 
-    const newVolunteerID = await findVolunteerIdByEmail(newVolunteerEmail);
-    expect(newVolunteerID).not.toBeNull();
+    const newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
+    expect(newVolunteer).not.toBeNull();
 
     // new volunteer should not be an admin
-    token = await signToken({ id: newVolunteerID }, 10);
+    token = await signToken({ id: newVolunteer._id }, 10);
     let res = await request.get("/auth/token?token=" + token);
     res = await request.get("/auth").set("cookie", res.headers["set-cookie"]);
 
@@ -131,9 +119,9 @@ describe("test /volunteer", () => {
       },
     });
 
-    const newVolunteerID = await findVolunteerIdByEmail(newVolunteerEmail);
+    const newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
 
-    expect(newVolunteerID).toBeNull();
+    expect(newVolunteer).toBeNull();
     expect(res.status).toBe(401);
   });
 

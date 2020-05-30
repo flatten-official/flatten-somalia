@@ -50,7 +50,7 @@ async function addVolunteer(
   gender = null,
   age = null
 ) {
-  let permissions = [];
+  const permissions = [];
   if (allowToManageVolunteers) permissions.push("manageVolunteers");
   if (allowToSubmitForms) permissions.push("submitForms");
 
@@ -72,19 +72,15 @@ async function getVolunteer(volunteerId) {
 }
 
 /**
- * Returns null if volunteer doesn't exist, otherwise returns the volunteer's Id
+ * Returns null if volunteer doesn't exist, otherwise returns the volunteer object
  */
-async function findVolunteerIdByEmail(email) {
-  const volunteer = await Volunteer.findOne({ email: email }, "_id").exec();
-
-  if (!volunteer) return null;
-
-  return volunteer._id;
+async function findVolunteerByEmail(email) {
+  return Volunteer.findOne({ email: email });
 }
 
 module.exports = {
   Volunteer,
   addVolunteer,
   getVolunteer,
-  findVolunteerIdByEmail,
+  findVolunteerByEmail,
 };

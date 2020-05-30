@@ -1,6 +1,6 @@
 const { calculateExpiryTime } = require("../utils/time");
 const { writeCookie } = require("./cookieData");
-const { findVolunteerIdByEmail } = require("../volunteer/volunteerData");
+const { findVolunteerByEmail } = require("../volunteer/volunteerData");
 const { verifyToken, signToken } = require("../utils/jwt");
 const { sendVerificationEmail } = require("../utils/sendGrid");
 const { Config } = require("../config");
@@ -9,14 +9,14 @@ const COOKIE_LIFE = 1080; // In minutes
 const EMAIL_EXPIRY = 15; // In minutes
 
 module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
-  const volunteerId = await findVolunteerIdByEmail(emailAddress);
+  const volunteer = await findVolunteerByEmail(emailAddress);
 
-  if (!volunteerId) {
+  if (!volunteer) {
     console.log(`Invalid email: ${emailAddress}`);
     return true; // Return true to not let user know if email was invalid to not allow guessing emails
   }
 
-  const token = await signToken({ id: volunteerId }, EMAIL_EXPIRY);
+  const token = await signToken({ id: volunteer._id }, EMAIL_EXPIRY);
 
   if (Config.debug) {
     console.log(token);

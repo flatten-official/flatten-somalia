@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { findVolunteerIdByEmail } = require("../volunteer/volunteerData");
+const { findVolunteerByEmail } = require("../volunteer/volunteerData");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Cookie = mongoose.model(
@@ -62,9 +62,9 @@ async function removedExpiredCookies() {
 }
 
 async function findCookieByVolunteerEmail(email) {
-  const volunteerId = await findVolunteerIdByEmail(email);
-  if (!volunteerId) return null;
-  return Cookie.find({ volunteerId: volunteerId });
+  const volunteer = await findVolunteerByEmail(email);
+  if (!volunteer) return null;
+  return Cookie.find({ volunteerId: volunteer._id });
 }
 
 module.exports = {
