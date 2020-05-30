@@ -12,9 +12,9 @@ module.exports.login = async (
 ) => {
   const agent = supertest.agent(app, {});
 
-  const volunteerId = await addVolunteer(volunteerName, volunteerEmail, null);
+  const volunteer = await addVolunteer(volunteerName, volunteerEmail, null);
 
-  const token = await signToken({ id: volunteerId }, 10);
+  const token = await signToken({ id: volunteer._id }, 10);
 
   await agent.get("/auth/token?token=" + token);
 

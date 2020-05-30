@@ -10,7 +10,7 @@ const supertest = require("supertest");
 const { setup } = require("../../../src/index");
 const { login } = require("../../testUtils/requests");
 
-describe("test /volunteer", () => {
+describe("endpoint POST /volunteer", () => {
   let app;
   let request;
 
@@ -25,7 +25,7 @@ describe("test /volunteer", () => {
   afterAll(async () => await util.closeDatabase());
 
   it("should add a volunteer upon valid request", async () => {
-    const { agent } = await login(app);
+    const { agent, volunteerEmail } = await login(app);
 
     const newVolunteerEmail = "new-volunteer@example.ca";
 
@@ -40,18 +40,19 @@ describe("test /volunteer", () => {
 
     expect(res.status).toBe(200);
     expect(newVolunteer).not.toBeNull();
+    expect(newVolunteer.email).toMatch(newVolunteerEmail);
   });
 
   it("should fail with 403 for missing permissions", async () => {
     const newVolunteerEmail = "irrelevant@gmail.com";
 
-    const adminID = await addVolunteer(
+    const admin = await addVolunteer(
       "admin",
       "irrelevant@gmail.com",
       null,
       false
     );
-    const token = await signToken({ id: adminID }, 10);
+    const token = await signToken({ id: admin._id }, 10);
     const cookie = (await request.get("/auth/token?token=" + token)).headers[
       "set-cookie"
     ];
@@ -75,13 +76,13 @@ describe("test /volunteer", () => {
   it("should be unable to create an admin", async () => {
     const newVolunteerEmail = "irrelevant@gmail.com";
 
-    const makerID = await addVolunteer(
+    const maker = await addVolunteer(
       "not admin",
       "irrelevant1@gmail.com",
       null,
       true
     );
-    let token = await signToken({ id: makerID }, 10);
+    let token = await signToken({ id: maker._id }, 10);
     const cookie = (await request.get("/auth/token?token=" + token)).headers[
       "set-cookie"
     ];
@@ -128,13 +129,13 @@ describe("test /volunteer", () => {
   it("should fail with 400 when trying to create a volunteer with an unavailable email address", async () => {
     const newVolunteerEmail = "irrelevant@gmail.com";
 
-    const makerID = await addVolunteer(
+    const maker = await addVolunteer(
       "not admin",
       "irrelevant1@gmail.com",
       null,
       true
     );
-    const token = await signToken({ id: makerID }, 10);
+    const token = await signToken({ id: maker._id }, 10);
     const cookie = (await request.get("/auth/token?token=" + token)).headers[
       "set-cookie"
     ];

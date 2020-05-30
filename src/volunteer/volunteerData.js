@@ -39,7 +39,7 @@ const Volunteer = mongoose.model(
  * @param allowToSubmitForms
  * @param gender
  * @param age
- * @return {Promise<*>} the volunteer id
+ * @return {Promise<*>} the volunteer
  */
 async function addVolunteer(
   name,
@@ -64,7 +64,7 @@ async function addVolunteer(
   });
 
   await volunteer.save(); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
-  return volunteer._id;
+  return volunteer;
 }
 
 /**

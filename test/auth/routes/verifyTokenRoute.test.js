@@ -42,10 +42,10 @@ describe("test /auth/token", () => {
   });
 
   it("should return a cookie & redirect for a valid token", async () => {
-    let volunteerId = await addVolunteer("Kanye West", "good@gmail.com", null);
-    let token = await signToken({ id: volunteerId }, 10);
+    const volunteer = await addVolunteer("Kanye West", "good@gmail.com", null);
+    const token = await signToken({ id: volunteer._id }, 10);
 
-    let res = await request.get("/auth/token?token=" + token);
+    const res = await request.get("/auth/token?token=" + token);
     // cookie should exist
     expect(!!res.headers["set-cookie"]).toBe(true);
     expect(res.status).toBe(303);

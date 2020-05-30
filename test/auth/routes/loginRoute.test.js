@@ -68,7 +68,7 @@ describe("test /auth/login", () => {
   });
 
   it("should send email with the payload being the volunteer id", async () => {
-    const volunteerId = await addVolunteer(
+    const volunteer = await addVolunteer(
       "Test Volunteer",
       "good@gmail.com",
       null
@@ -88,7 +88,7 @@ describe("test /auth/login", () => {
     const payload = await verifyToken(token);
 
     expect(payload).not.toBeNull();
-    expect(payload.id).toMatch(volunteerId.toString());
+    expect(payload.id).toMatch(volunteer._id);
 
     const emailLinkBase = url.slice(0, tokenIndex);
     expect(emailLinkBase).toMatch(Config.urls.emailLink);
