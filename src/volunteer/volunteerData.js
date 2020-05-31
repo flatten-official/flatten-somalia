@@ -2,8 +2,12 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
-const PERMISSION_MANAGE_VOLUNTEERS = "manageVolunteers";
-const PERMISSION_SUBMIT_FORMS = "submitForms";
+const Permissions = {
+  manageVolunteers: "manageVolunteers",
+  submitForms: "submitForms",
+};
+
+Object.freeze(Permissions);
 
 const Volunteer = mongoose.model(
   "Volunteer",
@@ -28,7 +32,7 @@ const Volunteer = mongoose.model(
       type: [
         {
           type: String,
-          enum: [PERMISSION_MANAGE_VOLUNTEERS, PERMISSION_SUBMIT_FORMS],
+          enum: [Permissions.manageVolunteers, Permissions.submitForms],
           required: true,
         },
       ],
@@ -41,7 +45,7 @@ const Volunteer = mongoose.model(
 );
 
 const defaultVolunteer = {
-  permissions: [PERMISSION_SUBMIT_FORMS],
+  permissions: [Permissions.submitForms],
 };
 
 const getNextFriendlyId = async () => {
@@ -86,6 +90,5 @@ module.exports = {
   findVolunteerById,
   findVolunteerByEmail,
   getNextFriendlyId,
-  PERMISSION_MANAGE_VOLUNTEERS,
-  PERMISSION_SUBMIT_FORMS,
+  Permissions,
 };

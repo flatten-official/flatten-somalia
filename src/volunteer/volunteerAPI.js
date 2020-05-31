@@ -1,17 +1,9 @@
-const {
-  addVolunteer,
-  PERMISSION_MANAGE_VOLUNTEERS,
-  PERMISSION_SUBMIT_FORMS,
-} = require("./volunteerData");
+const { addVolunteer, Permissions } = require("./volunteerData");
 const { Error } = require("mongoose");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
-  if (!addedByData) return [401, "Not authenticated"];
-  if (!addedByData.permissions.includes(PERMISSION_MANAGE_VOLUNTEERS))
-    return [403, "Wrong Permissions"];
-
   const permissions = newVolunteerData.permSubmitForms
-    ? [PERMISSION_SUBMIT_FORMS]
+    ? [Permissions.submitForms]
     : [];
 
   const volunteer = {
@@ -36,11 +28,4 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   return [200, "Success"];
 }
 
-function canSubmitForms(volunteer) {
-  return volunteer.permissions.indexOf(PERMISSION_SUBMIT_FORMS) > -1;
-}
-
-module.exports = {
-  addVolunteerAndAuthenticate,
-  canSubmitForms,
-};
+module.exports = { addVolunteerAndAuthenticate };

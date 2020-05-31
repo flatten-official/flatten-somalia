@@ -1,7 +1,8 @@
 const express = require("express");
 
 const cookieMiddleware = require("./auth/routes/cookieMiddleware");
-const submissionMiddleware = require("./submission/submissionMiddleware");
+const protectedMiddleware = require("./utils/protectedMiddleware");
+const { Permissions } = require("./volunteer/volunteerData");
 const loginRoute = require("./auth/routes/loginRoute");
 const verifyTokenRoute = require("./auth/routes/verifyTokenRoute");
 const logoutRoute = require("./auth/routes/logoutRoute");
@@ -82,7 +83,11 @@ router.delete("/auth/logout", logoutRoute);
  * @apiGroup Volunteer
  * @apiDescription Unimplemented
  */
-router.post("/volunteer", addVolunteerRoute);
+router.post(
+  "/volunteer",
+  protectedMiddleware([Permissions.manageVolunteers]),
+  addVolunteerRoute
+);
 
 /**
  * @api {post} /submit/initial Submit the form for a new household
@@ -90,7 +95,11 @@ router.post("/volunteer", addVolunteerRoute);
  * @apiGroup Submissions
  * @apiDescription Unimplemented
  */
-router.post("/submit/initial", submissionMiddleware, submitInitialRoute);
+router.post(
+  "/submit/initial",
+  protectedMiddleware([Permissions.submitForms]),
+  submitInitialRoute
+);
 
 /**
  * @api {post} /submit/followup Submit the form for an existing household from a follow up.
@@ -98,7 +107,11 @@ router.post("/submit/initial", submissionMiddleware, submitInitialRoute);
  * @apiGroup Submissions
  * @apiDescription Unimplemented
  */
-router.post("/submit/followup", submissionMiddleware, submitFollowUpRoute);
+router.post(
+  "/submit/followup",
+  protectedMiddleware([Permissions.submitForms]),
+  submitFollowUpRoute
+);
 
 /**
  * @api {get} /submit/next Get the info about the next follow up that this volunteer should do
@@ -106,6 +119,10 @@ router.post("/submit/followup", submissionMiddleware, submitFollowUpRoute);
  * @apiGroup Submissions
  * @apiDescription Unimplemented
  */
-router.post("/submit/next", submissionMiddleware, submitGetNextRoute);
+router.post(
+  "/submit/next",
+  protectedMiddleware([Permissions.submitForms]),
+  submitGetNextRoute
+);
 
 module.exports = router;

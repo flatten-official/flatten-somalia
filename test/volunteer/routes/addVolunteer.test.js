@@ -1,7 +1,6 @@
 const {
   findVolunteerByEmail,
-  PERMISSION_MANAGE_VOLUNTEERS,
-  PERMISSION_SUBMIT_FORMS,
+  Permissions,
 } = require("../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../src/app");
@@ -26,7 +25,7 @@ describe("endpoint POST /volunteer", () => {
 
   it("should add a volunteer upon valid request", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, {
-      permissions: [PERMISSION_MANAGE_VOLUNTEERS],
+      permissions: [Permissions.manageVolunteers],
     });
 
     const newVolunteerEmail = "new-volunteer@example.ca";
@@ -53,14 +52,14 @@ describe("endpoint POST /volunteer", () => {
       name: "new_name",
       email: newVolunteerEmail,
       friendlyId: 1, // 0 already taken by admin
-      permissions: [PERMISSION_SUBMIT_FORMS],
+      permissions: [Permissions.submitForms],
       addedBy: adminVolunteer._id,
     });
   });
 
   it("should fail with 403 for missing permissions", async () => {
     const { agent } = await login(app, {
-      permissions: [PERMISSION_SUBMIT_FORMS],
+      permissions: [Permissions.submitForms],
     });
 
     const newVolunteerEmail = "new-volunteer@example.ca";
@@ -75,7 +74,7 @@ describe("endpoint POST /volunteer", () => {
 
   it("should be unable to create an admin", async () => {
     const { agent } = await login(app, {
-      permissions: [PERMISSION_MANAGE_VOLUNTEERS],
+      permissions: [Permissions.manageVolunteers],
     });
 
     const newVolunteerEmail = "new-volunteer@example.com";
@@ -92,7 +91,7 @@ describe("endpoint POST /volunteer", () => {
 
     const newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
     expect(newVolunteer.permissions).not.toContain(
-      PERMISSION_MANAGE_VOLUNTEERS
+      Permissions.manageVolunteers
     );
   });
 
@@ -114,7 +113,7 @@ describe("endpoint POST /volunteer", () => {
 
   it("should fail with 400 when trying to create a volunteer with an unavailable email address", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, {
-      permissions: [PERMISSION_MANAGE_VOLUNTEERS],
+      permissions: [Permissions.manageVolunteers],
     });
 
     const res = await agent.post("/volunteer").send({
@@ -129,7 +128,7 @@ describe("endpoint POST /volunteer", () => {
 
   it("should fail with 400 when trying to create a volunteer without an email", async () => {
     const { agent } = await login(app, {
-      permissions: [PERMISSION_MANAGE_VOLUNTEERS],
+      permissions: [Permissions.manageVolunteers],
     });
 
     const res = await agent.post("/volunteer").send({
