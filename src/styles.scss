@@ -114,15 +114,15 @@ a:hover{
   height: 70vh;
 }
 
-.buttons {
-background-color: #f5f3f2;
-font-size: 22px;
-margin: 10px 15%;
-padding: 10px 30px;
+.btn {
+  background-color: #f5f3f2;
+  font-size: 22px;
+  margin: 5px 15%;
+  padding: 10px 30px;
+  width: 70%
 }
-
-.buttons:hover{
-  background-color:#4285f4;
+.btn:hover{
+  background-color: #bbccee;
 }
 
 .seventypxmargin{
@@ -135,11 +135,4 @@ padding: 10px 30px;
 
 .twentypxmargin{
   margin-top: 20px;
-}
-
-.smallbutton{
-  background-color: #f5f3f2;
-  font-size: 22px;
-  margin: 10px 15%;
-  padding: 10px 30px; 
 }
