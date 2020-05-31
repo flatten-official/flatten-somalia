@@ -1,4 +1,7 @@
 {
-  "loggedInAs": "",
-  "cannotAccessFormMessage": ""
+  "welcome": "",
+  "formSelectionPrompt": "",
+  "goToSubmissionText": "",
+  "goToGraveDigger": "",
+  "goToFollowUp": ""
 }
