@@ -1,7 +1,12 @@
 {
   "welcome": "Welcome, Volunteer!",
   "formSelectionPrompt": "Select the form you need:",
-  "goToSubmissionText": "Initial Household Survey",
-  "goToGraveDigger": "Gravedigger Survey",
-  "goToFollowUp": "Followup Household Survey"
+  "goToInitialSurvey": "Initial Household Survey",
+  "goToGravediggerSurvey": "Gravedigger Survey",
+  "goToFollowupSurvey": "Followup Household Survey",
+  "languageTogglePrompt": "Switch language:",
+  "lang": {
+    "EN": "English",
+    "SO": "Soomaali"
+  }
 }

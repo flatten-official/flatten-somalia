@@ -1,7 +1,12 @@
 {
   "welcome": "",
   "formSelectionPrompt": "",
-  "goToSubmissionText": "",
-  "goToGraveDigger": "",
-  "goToFollowUp": ""
+  "goToInitialSurvey": "",
+  "goToGravediggerSurvey": "",
+  "goToFollowupSurvey": "",
+  "languageTogglePrompt": "",
+  "lang": {
+    "EN": "English",
+    "SO": "Soomaali"
+  }
 }

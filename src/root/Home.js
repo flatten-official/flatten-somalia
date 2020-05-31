@@ -7,7 +7,12 @@ import Button from "react-bootstrap/Button";
 const Home = () => {
   //let auth = useSelector((state) => state.auth); // use the auth state from the store
   //let followUp = useSelector((state) => state.followUp);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const toggleLanguage = (e) => {
+    e.preventDefault();
+    i18n.changeLanguage(i18n.language === "en" ? "so" : "en");
+  };
 
   return (
     <>
@@ -32,6 +37,12 @@ const Home = () => {
         {/* Don't know if theres a more secure/better way to do this auth.user.permissions.includes(
             "manageVolunteers"
           ) && <Link to={null}>{t("Home:goToAddVolunteer")}</Link> */}
+        <div className="seventypxmargin" />
+        <div className="heading">{t("Home:languageTogglePrompt")}</div>
+        <div className="twentypxmargin" />
+        <Button variant="light" size="lg" onClick={toggleLanguage}>
+          {i18n.language === "en" ? t("Home:lang.SO") : t("Home:lang.EN")}
+        </Button>
       </center>
     </>
   );
