@@ -3,6 +3,7 @@ import Loading from "../containers/Loading";
 import { Button } from "react-bootstrap";
 import LocationPicker from "./LocationPicker";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export const LocationObj = (lat, lng, accuracy, altitude, wasManual) => ({
   lat: lat,
@@ -52,10 +53,18 @@ export const Location = ({ locationCallback }) => {
     case LOCATION_FAILED:
       return (
         <>
-          <h3>We need your location.</h3>
-          {/*TODO this button seems to do nothing which is confusing*/}
-          <Button onClick={getBrowserLocation}>Try again.</Button>
-          <Button onClick={onUseManual}>Manually pick location.</Button>
+          <center>
+            <div className="seventypxmargin"></div>
+            <h3>We need your location.</h3>
+            {/*TODO this button seems to do nothing which is confusing*/}
+            <div className="fourtypxmargin"></div>
+            <div className="buttons">
+              <Link onClick={getBrowserLocation}>Try Again.</Link>
+            </div>
+            <div className="buttons">
+              <Link onClick={onUseManual}>Manually pick location.</Link>
+            </div>
+          </center>
         </>
       );
     case LOCATION_MANUAL:

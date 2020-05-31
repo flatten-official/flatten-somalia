@@ -41,7 +41,17 @@ $fa-font-path: "../fonts";
 
 .wordmark {
   font-family: "DM Sans", sans-serif;
-  font-size: 2.75vw;
+  font-size: 24px;
+  letter-spacing: 0.75px;
+  color: $black;
+  padding-top: 10px;
+  padding-left: 15%;
+  padding-right: 80px;
+}
+
+.websitetitle{
+  font-family: "DM Sans", sans-serif;
+  font-size: 32px;
   letter-spacing: 0.75px;
   color: $black;
 }
@@ -73,10 +83,59 @@ $fa-font-path: "../fonts";
 
 .body {
   font-family: "DM Sans", sans-serif;
-  font-size: 1.25vw;
+  font-size: 22px;
   letter-spacing: 0.75px;
+  color: black;
+}
+
+.heading {
+  font-family: "DM Sans", sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.75px;
+  color: black;
+  background-color: #ebf6ee;
+    display: inline-block;
+    line-height: 0.5;
+}
+
+a {
+  color:black;
+  text-decoration:none;
+  background-color:transparent;
+  line-height: 1.5;
+}
+
+a:hover{
+  color: black;
+  text-decoration:underline;
 }
 
 .map {
   height: 70vh;
+}
+
+.buttons {
+background-color: #f5f3f2;
+font-size: 22px;
+margin: 10px 15%;
+padding: 10px 30px;
+}
+
+.buttons:hover{
+  background-color:#4285f4;
+}
+
+.seventypxmargin{
+  margin-top: 70px;
+}
+
+.fourtypxmargin{
+  margin-top: 40px;
+}
+
+.smallbutton{
+  background-color: #f5f3f2;
+  font-size: 22px;
+  margin: 10px 15%;
+  padding: 10px 30px; 
 }

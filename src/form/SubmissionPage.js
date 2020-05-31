@@ -3,6 +3,7 @@ import VolunteerForm from "./VolunteerForm";
 import { FormConfig } from "../config";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const SubmissionPage = () => {
   const { t } = useTranslation();
@@ -18,12 +19,23 @@ const SubmissionPage = () => {
     return (
       <Container>
         <Row>
-          <Col>{t("VolunteerForm:consent")}</Col>
+          <Col>
+            <div className="seventypxmargin"></div>
+            <center>
+              <div className="body">{t("VolunteerForm:consent")}</div>
+            </center>
+          </Col>
         </Row>
         <Row>
-          <Button variant="primary" onClick={startForm}>
-            {t("VolunteerForm:givesConsent")}
-          </Button>{" "}
+          <Col>
+            <center>
+              <div className="buttons">
+                <Link onClick={startForm}>
+                  {t("VolunteerForm:givesConsent")}
+                </Link>
+              </div>{" "}
+            </center>
+          </Col>
         </Row>
       </Container>
     );
