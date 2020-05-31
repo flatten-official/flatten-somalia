@@ -6,11 +6,11 @@ module.exports = async (req, res) => {
   try {
     await submissionApi.initialSubmission(
       res.locals.volunteer._id,
-      req.schema,
-      req.metadata,
-      req.people,
-      req.deaths,
-      req.household
+      req.body.schema,
+      req.body.metadata,
+      req.body.people,
+      req.body.deaths,
+      req.body.household
     );
     res.sendStatus(200);
   } catch (e) {

@@ -36,6 +36,11 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   return [200, "Success"];
 }
 
+function canSubmitForms(volunteer) {
+  return volunteer.permissions.indexOf(PERMISSION_SUBMIT_FORMS) > -1;
+}
+
 module.exports = {
   addVolunteerAndAuthenticate,
+  canSubmitForms,
 };
