@@ -9,7 +9,7 @@ async function initialSubmission(
   household
 ) {
   let householdId = await submissionData.createHousehold(
-    household.id,
+    household.publicId,
     household.phone,
     household.email,
     household.headOfHouseName

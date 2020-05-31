@@ -5,6 +5,11 @@ const { setup } = require("../../../src/index");
 
 const { login } = require("../../testUtils/requests");
 
+const submissionData = require("../../../src/submission/submissionData");
+
+const retrieveById = (all, id) =>
+  all.filter((obj) => obj._id.toString() === id.toString())[0];
+
 let request;
 let app;
 
@@ -25,13 +30,48 @@ describe("test /auth", () => {
   it("should add submissions, people, and households as expected for an initial submission", async () => {
     const { agent, volunteer } = await login(app);
 
-    const res = await agent.get("/submit")
+    const sampleSubmission = {
+      household: {
+        someHouseholdData: "foo",
+        publicId: "bar-007",
+      },
+      people: [{ name: "personA" }, { name: "personB" }],
+      deaths: [{ name: "personC" }],
+      metadata: { filledOutTimestamp: Date.now() },
+      schema: {
+        form: "volunteerInitialForm",
+        version: "0.1",
+      },
+    };
 
-    // TODO
-    expect(true).toStrictEqual(false);
-  });
+    const res = await agent
+      .post("/submit/initial")
+      .send(sampleSubmission)
+      .set("Content-Type", "application/json")
+      .set("Accept", "application/json")
+      .expect(200);
 
-  it("should add submissions, people, and households as expected for a follow up submission", async () => {
+    const allSubmissions = await submissionData.Submission.find();
+    const allHouseholds = await submissionData.Household.find();
+    const allPeople = await submissionData.Person.find();
+
+    expect(allSubmissions).toHaveLength(1);
+    expect(allHouseholds).toHaveLength(1);
+    expect(allPeople).toHaveLength(3);
+
+    const submission = allSubmissions[0];
+    const household = allHouseholds[0];
+
+    expect(submission.household.ref).toStrictEqual(household.ref);
+    expect(submission.household.data).toStrictEqual(sampleSubmission.household);
+
+    expect(household.publicId).toStrictEqual(
+      sampleSubmission.household.publicId
+    );
+
+    // todo - check all people in the database
+
+
     // TODO
     expect(true).toStrictEqual(false);
   });
