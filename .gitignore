@@ -7,3 +7,4 @@ build
 src/i18nResources.json
 src/backend/backend.js
 .eslintcache
+.DS_Store
