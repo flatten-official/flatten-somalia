@@ -1,4 +1,4 @@
-let submissionData = require("./submissionData");
+const submissionData = require("./submissionData");
 
 async function initialSubmission(
   volunteerId,
@@ -46,16 +46,16 @@ async function initialSubmission(
     householdData
   );
 
-  for (const person of people) person.save();
-  household.save();
-  submission.save();
+  for (const person of people) await person.save();
+  await household.save();
+  await submission.save();
 }
 
 // TODO - decide what the props etc are for this
 async function followUpSubmission(submissionData) {}
 
 async function getFollowUpInfo(volunteerId, district) {
-  let [
+  const [
     submissionId,
     household,
     people,
