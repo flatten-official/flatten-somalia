@@ -1,4 +1,6 @@
 {
+  "welcome": "Welcome, Volunteer!",
+  "formSelectionPrompt": "Select the form you need:",
   "goToSubmissionText": "Initial Household Survey",
   "goToGraveDigger": "Gravedigger Survey",
   "goToFollowUp": "Followup Household Survey"

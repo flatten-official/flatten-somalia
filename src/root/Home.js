@@ -11,13 +11,11 @@ const Home = () => {
   return (
     <>
       <center>
-        <div className="seventypxmargin"></div>
+        <div className="seventypxmargin" />
         <div className="websitetitle">
-          <b>Welcome Volunteer!</b>
+          <b>{t("Home:welcome")}</b>
         </div>
-        <div className="heading">
-          <div> Select the form you need: </div>
-        </div>
+        <div className="heading">{t("Home:formSelectionPrompt")}</div>
         <div className="fourtypxmargin"></div>
         <div className="buttons">
           {/*followUp && <div className="alertText">Home:followUpsText</div> */}
