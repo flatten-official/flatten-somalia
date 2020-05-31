@@ -4,47 +4,51 @@ async function initialSubmission(
   volunteerId,
   schema,
   metadata,
-  people,
-  deaths,
-  household
+  peopleData,
+  deathsData,
+  householdData
 ) {
-  let householdId = await submissionData.createHousehold(
-    household.publicId,
-    household.phone,
-    household.email,
-    household.headOfHouseName
+  const household = await submissionData.createHousehold(
+    householdData.publicId,
+    householdData.phone,
+    householdData.email,
+    householdData.headOfHouseName
   );
 
-  let peopleModel = people.map((o) => {
+  const peopleModel = peopleData.map((o) => {
     return {
       name: o.name,
       gender: o.gender,
-      household: householdId,
+      household: household._id,
       alive: false,
     };
   });
-  let deathsModel = deaths.map((o) => {
+  const deathsModel = deathsData.map((o) => {
     return {
       name: o.name,
       gender: o.gender,
-      household: householdId,
+      household: household._id,
       alive: false,
     };
   });
 
-  let peopleIds = await submissionData.createPeople(
+  const people = await submissionData.createPeople(
     [].concat(peopleModel, deathsModel)
   );
 
-  await submissionData.createSubmission(
+  const submission = await submissionData.createSubmission(
     volunteerId,
     schema,
     metadata,
-    peopleIds,
-    [].concat(people, deaths),
-    householdId,
-    household
+    people.map((person) => person._id),
+    [].concat(peopleData, deathsData),
+    household._id,
+    householdData
   );
+
+  for (const person of people) person.save();
+  household.save();
+  submission.save();
 }
 
 // TODO - decide what the props etc are for this

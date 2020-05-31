@@ -127,8 +127,9 @@ const Person = mongoose.model(
 );
 
 async function createPeople(perPersonData) {
-  let ret = await Person.insertMany(perPersonData);
-  return ret.map((v) => v._id);
+  return perPersonData.map((personData) => new Person(personData));
+  // let ret = await Person.insertMany(perPersonData);
+  // return ret.map((v) => v._id);
 }
 
 async function createSubmission(
@@ -159,9 +160,7 @@ async function createSubmission(
     },
   });
 
-  await newSubmission.save();
-
-  return newSubmission._id;
+  return newSubmission;
 }
 
 async function createHousehold(publicId, phone, email, headOfHouseholdName) {
@@ -172,8 +171,7 @@ async function createHousehold(publicId, phone, email, headOfHouseholdName) {
     headOfHouseholdName,
   });
   // TODO - handle different kinds of submsisions here
-  await household.save();
-  return household._id;
+  return household;
 }
 
 async function setPersonToDead(personId) {

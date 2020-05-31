@@ -14,6 +14,7 @@ module.exports = async (req, res) => {
     );
     res.sendStatus(200);
   } catch (e) {
+    console.error(e);
     if (e instanceof ValidationError) {
       res.status(400);
       res.send("Validation problem with form data.");
@@ -21,6 +22,5 @@ module.exports = async (req, res) => {
       res.status(500);
       res.send("Server error.");
     }
-    console.error(e);
   }
 };
