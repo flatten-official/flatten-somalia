@@ -1,5 +1,4 @@
 const submissionApi = require("./submissionApi");
-const mongoose = require("mongoose");
 const { ValidationError } = require("../../test/testUtils/mongo");
 
 module.exports = async (req, res) => {
@@ -14,13 +13,10 @@ module.exports = async (req, res) => {
     );
     res.sendStatus(200);
   } catch (e) {
-    console.error(e);
     if (e instanceof ValidationError) {
+      console.log(e);
       res.status(400);
       res.send("Validation problem with form data.");
-    } else {
-      res.status(500);
-      res.send("Server error.");
-    }
+    } else throw e;
   }
 };

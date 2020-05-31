@@ -1,5 +1,5 @@
 /**
- *
+ * A function that returns middleware to protect the route (aka. require certain permissions)
  * @param requiredPermissions array of permission that are required to access this route
  * @return {function(...[*]=)}
  */

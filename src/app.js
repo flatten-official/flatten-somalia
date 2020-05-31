@@ -1,11 +1,13 @@
 require("dotenv").config();
 const express = require("express");
+require("express-async-errors"); // https://www.npmjs.com/package/express-async-errors
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const { Config } = require("./config");
 const routes = require("./routes");
+const appErrorHandler = require("./utils/express/errorHandler");
 
 function getApp() {
   const app = express();
@@ -28,6 +30,7 @@ function getApp() {
   app.use(helmet.permittedCrossDomainPolicies());
   app.use(cookieParser(Config.secrets.cookieSecret));
   app.use("/", routes);
+  app.use(appErrorHandler);
 
   return app;
 }
