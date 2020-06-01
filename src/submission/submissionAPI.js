@@ -1,4 +1,5 @@
 const submissionData = require("./submissionData");
+const { ValidationError } = require("../../test/testUtils/mongo");
 
 async function initialSubmission(
   volunteerId,
@@ -45,6 +46,12 @@ async function initialSubmission(
     household._id,
     householdData
   );
+
+  for (const person of people) {
+    if (person.validateSync() !== undefined) throw new ValidationError("")
+  }
+  if (household.validateSync() !== undefined) throw new ValidationError("");
+  if (submission.validateSync() !== undefined) throw new ValidationError("");
 
   for (const person of people) await person.save();
   await household.save();
