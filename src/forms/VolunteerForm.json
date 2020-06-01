@@ -1135,7 +1135,11 @@
                 "required": true
               },
               "key": "reasonsForNotUsingNationalHotline",
-              "customConditional": "show = ( (data.usedNationalHotline == \"no\")||(data.awareOfNationalHotline == \"no\"))",
+              "conditional": {
+                "show": true,
+                "when": "usedNationalHotline",
+                "eq": "no"
+              },
               "type": "selectboxes",
               "input": true,
               "inputType": "checkbox"
@@ -2813,7 +2817,7 @@
               "key": "deceasedDisabilities",
               "conditional": {
                 "show": true,
-                "when": "hasDisabilities",
+                "when": "deceasedDisability",
                 "eq": "yes"
               },
               "type": "selectboxes",
