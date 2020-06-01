@@ -1,4 +1,4 @@
-service: backend-so
+service: default
 runtime: nodejs10
 env_variables:
   ENVIRONMENT: production
