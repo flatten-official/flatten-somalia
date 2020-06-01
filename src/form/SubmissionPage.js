@@ -29,11 +29,9 @@ const SubmissionPage = () => {
         <Row>
           <Col>
             <center>
-              <div className="buttons">
-                <Link onClick={startForm}>
-                  {t("VolunteerForm:givesConsent")}
-                </Link>
-              </div>{" "}
+              <Button variant="light" size="sm" onClick={startForm}>
+                {t("VolunteerForm:givesConsent")}
+              </Button>
             </center>
           </Col>
         </Row>
