@@ -63,11 +63,11 @@ const SubmissionPageContent = () => {
 };
 
 const SubmissionPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("VolunteerForm");
 
   return (
     <div>
-      <h3> {t("VolunteerForm:title")} </h3>
+      <h3> {t("title")} </h3>
       <SubmissionPageContent />
     </div>
   );

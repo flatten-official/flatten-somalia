@@ -6,16 +6,13 @@ import { Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const Auth = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("Auth");
   const auth = useSelector((state) => state.auth);
   return auth.status === AUTH_SUCCESS ? (
     <Redirect to="/" />
   ) : (
     <div>
-      <div className="panel-heading card-header">
-        {" "}
-        {t("Auth:loginForm.title")}{" "}
-      </div>
+      <div className="panel-heading card-header"> {t("loginForm.title")} </div>
       <div className="panel-body card-body">
         <Login />
       </div>

@@ -5,7 +5,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import React from "react";
 
 export const Consent = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("VolunteerForm");
   const dispatch = useDispatch();
 
   const onConsent = () => {
@@ -19,7 +19,7 @@ export const Consent = () => {
         <Col>
           <div className="seventypxmargin"></div>
           <center>
-            <div className="body">{t("VolunteerForm:consent")}</div>
+            <div className="body">{t("consent")}</div>
           </center>
         </Col>
       </Row>
@@ -28,7 +28,7 @@ export const Consent = () => {
           <center>
             <div className="buttons">
               <Button onClick={onConsent}>
-                {t("VolunteerForm:givesConsent")}
+                {t("givesConsent")}
               </Button>
             </div>{" "}
           </center>

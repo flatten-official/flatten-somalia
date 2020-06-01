@@ -9,10 +9,10 @@ import { useTranslation } from "react-i18next";
 function PrivateRoute({ requiredPermission, comp: Component, ...rest }) {
   const auth = useSelector((state) => state.auth);
   const authed = hasPermission(auth, requiredPermission);
-  const { t } = useTranslation();
+  const { t } = useTranslation("Admin");
   // if logged in but without the right permission to use this page
   if (!authed && auth.state === AUTH_SUCCESS) {
-    return <div>{t("Admin:unauthorized")}</div>;
+    return <div>{t("unauthorized")}</div>;
   }
   return (
     <Route

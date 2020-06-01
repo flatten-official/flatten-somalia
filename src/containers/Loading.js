@@ -4,8 +4,8 @@ import { Spinner, Row, Container } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 const Loading = ({ text }) => {
-  const { t } = useTranslation();
-  if (!text) text = t("Loading:loading");
+  const { t } = useTranslation("Loading");
+  if (!text) text = t("loading");
   return (
     <Container>
       <Row>
