@@ -30,6 +30,8 @@ const Form = ({ formioForm, formioOptions, submitHook }) => {
   formioOptions.i18n = i18n;
   formioOptions.language = i18n.language;
 
+  formioOptions.breadcrumbSettings = { clickable: false };
+
   return <FormioForm options={formioOptions} form={formioForm} />;
 };
 
