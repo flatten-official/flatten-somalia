@@ -50,8 +50,8 @@ const App = () => {
           />
           <Route exact path={Routes.admin} component={Admin} />
           <Route path={Routes.auth} component={Auth} />
-          <Route path="/success" component={Success} />
-          <Route path="/submitted-email" component={SubmittedEmail} />
+          <Route path={Routes.success} component={Success} />
+          <Route path={Routes.emailSubmitted} component={SubmittedEmail} />
         </div>
       )}
 
