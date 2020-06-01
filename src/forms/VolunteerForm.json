@@ -326,7 +326,6 @@
             "when": "ownershipType",
             "eq": "rent"
           },
-          "customConditional": "show = (data.i==\"rent\") && (data.typeOfHousing == \"terrace\")",
           "type": "select",
           "indexeddb": {
             "filter": {}
