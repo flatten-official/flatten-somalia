@@ -2,6 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
+//region BuildTranslationResource
 import addVolunteerEN from "./translations/en/translation/AddVolunteer.json";
 import defaultsEN from "./translations/en/translation/Defaults.json";
 import IVS_EN from "./translations/en/translation/InitialVolunteerSurvey.json";
@@ -13,7 +14,7 @@ import footerEN from "./translations/en/Footer.json";
 import homeEN from "./translations/en/Home.json";
 import loadingEN from "./translations/en/Loading.json";
 import navbarEN from "./translations/en/Navbar.json";
-import volunteerFormEN from "./translations/en/VolunteerForm.json";
+import volunteerFormEN from "./translations/en/InitialSurvey.json";
 
 import addVolunteerSO from "./translations/so/translation/AddVolunteer.json";
 import defaultsSO from "./translations/so/translation/Defaults.json";
@@ -26,7 +27,7 @@ import footerSO from "./translations/so/Footer.json";
 import homeSO from "./translations/so/Home.json";
 import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
-import volunteerFormSO from "./translations/so/VolunteerForm.json";
+import initialSurveySO from "./translations/so/InitialSurvey.json";
 
 const formioTranslationsEN = {};
 const formioTranslationsSO = {};
@@ -50,7 +51,7 @@ const resources = {
     Home: homeEN,
     Loading: loadingEN,
     Navbar: navbarEN,
-    VolunteerForm: volunteerFormEN,
+    InitialSurvey: volunteerFormEN,
   },
   so: {
     translation: formioTranslationsSO,
@@ -60,9 +61,10 @@ const resources = {
     Home: homeSO,
     Loading: loadingSO,
     Navbar: navbarSO,
-    VolunteerForm: volunteerFormSO,
+    InitialSurvey: initialSurveySO,
   },
 };
+//endregion
 
 i18n
   // pass the i18n instance to react-i18next.
@@ -71,6 +73,5 @@ i18n
   // init i18next
   .init({
     resources,
-    // fallbackLng: "en",
     debug: process.env.NODE_ENV === "development",
   });

@@ -2,6 +2,6 @@
   "links": {
     "login": "LOG IN",
     "logout": "LOG OUT",
-    "home": "HOME"
+    "homepage": "HOME"
   }
 }

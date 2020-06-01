@@ -1,0 +1,7 @@
+{
+  "title": "Initial Household Survey",
+  "askForDataRecordingConsent": "Do the people being surveyed consent to recording your questions?",
+  "consentGiven": "They did. Start the survey.",
+  "success": "Success!",
+  "returnHomePrompt": "Return to homepage."
+}

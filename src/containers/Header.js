@@ -24,7 +24,7 @@ const Header = () => {
           {auth.status === AUTH_SUCCESS ? (
             <>
               <LinkContainer to={Routes.home}>
-                <Nav.Link>{t("links.home")}</Nav.Link>
+                <Nav.Link>{t("links.homepage")}</Nav.Link>
               </LinkContainer>
               <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
                 {t("links.logout")}

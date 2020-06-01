@@ -10,7 +10,7 @@
   "invalid_date": "{{field}} is not a valid date.",
   "invalid_email": "{{field}} must be a valid email.",
   "invalid_regex": "{{field}} does not match the pattern {{regex}}.",
-  "mask": "{{field}} does not match the mask.",
+  "mask": "{{field}} does not match the pattern.",
   "max": "{{field}} cannot be greater than {{max}}.",
   "maxLength": "{{field}} must be shorter than {{length}} characters.",
   "min": "{{field}} cannot be less than {{min}}.",

@@ -68,7 +68,7 @@ const SubmissionPageContent = () => {
 };
 
 const SubmissionPage = () => {
-  const { t } = useTranslation("VolunteerForm");
+  const { t } = useTranslation("InitialSurvey");
 
   return (
     <div>

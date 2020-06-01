@@ -4,7 +4,7 @@
   "goToInitialSurvey": "Initial Household Survey",
   "goToGravediggerSurvey": "Gravedigger Survey",
   "goToFollowupSurvey": "Followup Household Survey",
-  "languageTogglePrompt": "Switch language:",
+  "languageTogglePrompt": "Switch language to:",
   "lang": {
     "EN": "English",
     "SO": "Soomaali"
