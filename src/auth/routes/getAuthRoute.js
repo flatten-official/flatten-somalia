@@ -5,6 +5,7 @@ module.exports = (req, res) => {
       name: res.locals.volunteer.name,
       expiry: res.locals.cookieExpiry,
       friendlyId: res.locals.volunteer.friendlyId,
+      teamName: res.locals.volunteer.teamName,
     });
   } else {
     // send an empty message signifying that the user is not logged in

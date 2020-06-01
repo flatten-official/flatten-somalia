@@ -22,6 +22,7 @@ const Volunteer = mongoose.model(
       unique: true,
       required: true,
     },
+    teamName: String,
     friendlyId: {
       type: Number,
       required: true,
