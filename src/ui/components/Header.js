@@ -1,15 +1,22 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Routes } from "../../config";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, AUTH_SUCCESS } from "../../backend/auth/authActions";
 
 const Header = () => {
-  const { t } = useTranslation("Navbar");
+  const { t, i18n } = useTranslation("Navbar");
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  const setLanguage = (lang) => {
+    return (e) => {
+      e.preventDefault();
+      i18n.changeLanguage(lang);
+    };
+  };
 
   return (
     <Navbar className="header" expand="lg">
@@ -35,6 +42,16 @@ const Header = () => {
               <Nav.Link>{t("links.login")}</Nav.Link>
             </LinkContainer>
           )}
+        </Nav>
+        <Nav className="justify-content-end">
+          <NavDropdown id="dropdown-menu" title="LANGUAGE">
+            <NavDropdown.Item onClick={setLanguage("so")}>
+              SOMALI
+            </NavDropdown.Item>
+            <NavDropdown.Item onClick={setLanguage("en")}>
+              ENGLISH
+            </NavDropdown.Item>
+          </NavDropdown>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
