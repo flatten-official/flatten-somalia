@@ -4,4 +4,6 @@ export const Routes = {
   auth: "/login",
   submission: "/submission",
   admin: "/admin",
+  success: "/success",
+  emailSubmitted: "/submitted-email",
 };
