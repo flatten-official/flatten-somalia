@@ -3,10 +3,5 @@
   "formSelectionPrompt": "Select the form you need:",
   "goToInitialSurvey": "Initial Household Survey",
   "goToGravediggerSurvey": "Gravedigger Survey",
-  "goToFollowupSurvey": "Followup Household Survey",
-  "languageTogglePrompt": "Switch language to:",
-  "lang": {
-    "EN": "English",
-    "SO": "Soomaali"
-  }
+  "goToFollowupSurvey": "Followup Household Survey"
 }

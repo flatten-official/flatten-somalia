@@ -34,12 +34,6 @@ const Home = () => {
         {/* Don't know if theres a more secure/better way to do this auth.user.permissions.includes(
             "manageVolunteers"
           ) && <Link to={null}>{t("goToAddVolunteer")}</Link> */}
-        <div className="seventypxmargin" />
-        <div className="heading">{t("languageTogglePrompt")}</div>
-        <div className="twentypxmargin" />
-        <Button variant="light" size="lg" onClick={toggleLanguage}>
-          {i18n.language === "en" ? t("lang.SO") : t("lang.EN")}
-        </Button>
       </center>
     </>
   );
