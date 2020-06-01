@@ -9,7 +9,6 @@ import flattenApi from "../backend/api";
 import backend from "../backend/backend";
 import { push } from "connected-react-router";
 import { Consent } from "./Consent";
-import FollowUpIdDisplay from "./FollowUpId";
 
 const SubmissionPageContent = () => {
   const formData = useSelector((state) => state.volunteerForm);
@@ -56,8 +55,6 @@ const SubmissionPageContent = () => {
   if (!formData.consent) return <Consent />;
 
   if (!formData.location) return <LocationPicker />;
-
-  if (!formData.isFollowUpIdRecorded) return <FollowUpIdDisplay />;
 
   return (
     <Form
