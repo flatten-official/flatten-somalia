@@ -2,3 +2,4 @@ README.md
 .env.template
 .eslintrc.js
 apidoc.json
+node_modules
