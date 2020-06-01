@@ -8,6 +8,7 @@ const helmet = require("helmet");
 const { Config } = require("./config");
 const routes = require("./routes");
 const appErrorHandler = require("./utils/express/errorHandler");
+const loggerMiddleware = require("./utils/express/loggerMiddleware");
 
 function getApp() {
   const app = express();
@@ -29,6 +30,7 @@ function getApp() {
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
   app.use(cookieParser(Config.secrets.cookieSecret));
+  app.use(loggerMiddleware);
   app.use("/", routes);
   app.use(appErrorHandler);
 
