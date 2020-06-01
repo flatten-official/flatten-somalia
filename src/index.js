@@ -1,12 +1,28 @@
-require("dotenv").config();
-const port = process.env.PORT || 80;
-const routes = require("./routes");
-const express = require("express");
+const { cleanupDatabase, setupDatabase } = require("./utils/mongo");
+const { getApp } = require("./app");
+const { setup: configSetup } = require("./config");
+const { setup: sendGridSetup } = require("./utils/sendGrid");
 
-const app = express();
+/**
+ * @param includeDatabase used by test environment to load custom database
+ */
+async function setup(includeDatabase = true) {
+  await configSetup();
+  if (includeDatabase) await setupDatabase();
+  sendGridSetup();
+}
 
-app.use("/", routes);
+async function startServer() {
+  const port = process.env.PORT || 80;
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}.`);
-});
+  const app = await getApp();
+  app.listen(port, () => {
+    console.log(`listening on port ${port}.`);
+  });
+}
+
+async function cleanup() {
+  await cleanupDatabase();
+}
+
+module.exports = { setup, startServer, cleanup };

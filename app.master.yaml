@@ -1,4 +1,6 @@
 service: backend-so
 runtime: nodejs10
 env_variables:
-  ENVIRONMENT: prod
+  ENVIRONMENT: production
+  FRONTEND_URL: https://v.flatten.org
+  BACKEND_URL: https://api.flatten.org

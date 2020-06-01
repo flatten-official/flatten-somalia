@@ -4,8 +4,8 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ["eslint:recommended", "prettier"],
-  plugins: ["prettier"],
+  extends: ["eslint:recommended", "prettier", "plugin:jest/all"],
+  plugins: ["prettier", "jest"],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly",
@@ -14,6 +14,10 @@ module.exports = {
     ecmaVersion: 11,
   },
   rules: {
-    "prettier/prettier": ["error"],
+    "prettier/prettier": "error",
+    "jest/no-hooks": "off",
+    "jest/prefer-expect-assertions": "off",
+    "no-unused-vars": "warn",
+    "prefer-const": "warn",
   },
 };
