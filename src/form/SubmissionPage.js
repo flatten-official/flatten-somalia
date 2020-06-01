@@ -9,18 +9,21 @@ import flattenApi from "../backend/api";
 import backend from "../backend/backend";
 import { push } from "connected-react-router";
 import { Consent } from "./Consent";
+import FollowUpIdDisplay from "./FollowUpId";
 
 const SubmissionPageContent = () => {
   const formData = useSelector((state) => state.volunteerForm);
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch({ type: Types.RESTART_FORM }), [dispatch]);
+  useEffect(() => {
+    dispatch({ type: Types.RESTART_FORM });
+  }, [dispatch]);
 
   const onSubmit = async (data) => {
     const endTime = Date.now();
     const reformatted = {
       household: {},
-      metedata: {
+      metadata: {
         startTime: formData.startTime,
         endTime: endTime,
         timeToComplete: endTime - formData.startTime,
@@ -52,6 +55,8 @@ const SubmissionPageContent = () => {
   if (!formData.consent) return <Consent />;
 
   if (!formData.location) return <LocationPicker />;
+
+  if (!formData.followUpId) return <FollowUpIdDisplay />;
 
   return (
     <Form
