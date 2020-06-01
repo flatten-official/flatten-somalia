@@ -72,8 +72,8 @@
           "key": "phoneNumber",
           "conditional": {
             "show": true,
-            "when": "phoneNumber",
-            "eq": "yes"
+            "when": "sharePhoneNumberConsent",
+            "eq": "consentToSharingPhoneNumber"
           },
           "type": "phoneNumber",
           "input": true
@@ -323,7 +323,7 @@
           "key": "rentRange",
           "conditional": {
             "show": true,
-            "when": "i",
+            "when": "ownershipType",
             "eq": "rent"
           },
           "customConditional": "show = (data.i==\"rent\") && (data.typeOfHousing == \"terrace\")",
