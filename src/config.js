@@ -14,7 +14,7 @@ const stagingConfig = {
 };
 
 const prodConfig = {
-  secretId: null, // TODO setup
+  secretId: "projects/81735388662/secrets/backend-so-config/versions/latest",
   debug: false,
 };
 
