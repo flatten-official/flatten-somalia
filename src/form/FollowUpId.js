@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { setFollowUpId, Types } from "./FormActions";
 
 const FollowUpIdDisplay = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation("InitialSurvey");
   const followUpId = useSelector((state) => state.volunteerForm.followUpId);
   const volunteerFriendlyId = useSelector(
     (state) => state.auth.user.friendlyId
@@ -20,14 +22,11 @@ const FollowUpIdDisplay = () => {
 
   return (
     <>
-      <h3>
-        If the volunteer doesn&apos;t have a phone number to follow-up, give
-        them a block with this number.
-      </h3>
+      <h3>{t("followupIDMessage")}</h3>
 
       <h2>{followUpId}</h2>
 
-      <Button onClick={onDone}>Done</Button>
+      <Button onClick={onDone}>{t("done")}</Button>
     </>
   );
 };

@@ -2,6 +2,8 @@
   "title": "Initial Household Survey",
   "askForDataRecordingConsent": "Do the people being surveyed consent to recording your questions?",
   "consentGiven": "They did. Start the survey.",
+  "followupIDMessage": "If the volunteer doesn't have a phone number to follow-up, give them a block with this number.",
+  "Done": "Done",
   "success": "Success!",
   "returnHomePrompt": "Return to homepage."
 }
