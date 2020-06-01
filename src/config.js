@@ -14,7 +14,8 @@ const stagingConfig = {
 };
 
 const prodConfig = {
-  secretId: "projects/81735388662/secrets/backend-so-config/versions/latest",
+  secretId:
+    "projects/915444252630/secrets/backend-gae-config-so/versions/latest",
   debug: false,
 };
 
