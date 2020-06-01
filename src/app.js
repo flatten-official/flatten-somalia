@@ -12,15 +12,15 @@ const appErrorHandler = require("./utils/express/errorHandler");
 function getApp() {
   const app = express();
 
-  if (process.env.ENVIRONMENT === "production") {
+  if (process.env.ENVIRONMEN === "dev") {
+    app.use(cors({ origin: true, credentials: true }));
+  } else {
     app.use(
       cors({
         origin: [process.env.FRONTEND_URL],
         credentials: true,
       })
     );
-  } else {
-    app.use(cors({ origin: true, credentials: true }));
   }
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
