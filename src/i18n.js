@@ -15,12 +15,13 @@ import homeEN from "./translations/en/Home.json";
 import loadingEN from "./translations/en/Loading.json";
 import navbarEN from "./translations/en/Navbar.json";
 import volunteerFormEN from "./translations/en/InitialSurvey.json";
+import FormIoCustomTextEn from "./translations/en/FormIoCustomText.json";
 
 import addVolunteerSO from "./translations/so/translation/AddVolunteer.json";
 import defaultsSO from "./translations/so/translation/Defaults.json";
 import IVS_SO from "./translations/so/translation/InitialVolunteerSurvey.json";
 import volunteerLoginSO from "./translations/so/translation/VolunteerLogin.json";
-
+import FormIoCustomTextSO from "./translations/so/FormIoCustomText.json";
 import adminSO from "./translations/so/Admin.json";
 import loginSO from "./translations/so/Login.json";
 import footerSO from "./translations/so/Footer.json";
@@ -52,6 +53,7 @@ const resources = {
     Loading: loadingEN,
     Navbar: navbarEN,
     InitialSurvey: volunteerFormEN,
+    FormIOCustomText: FormIoCustomTextEn,
   },
   so: {
     translation: formioTranslationsSO,
@@ -62,6 +64,7 @@ const resources = {
     Loading: loadingSO,
     Navbar: navbarSO,
     InitialSurvey: initialSurveySO,
+    FormIOCustomText: FormIoCustomTextSO,
   },
 };
 //endregion
@@ -75,3 +78,5 @@ i18n
     resources,
     debug: process.env.NODE_ENV === "development",
   });
+
+export default i18n;

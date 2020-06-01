@@ -9,11 +9,13 @@ import App from "./ui/App";
 
 import "./i18n";
 import "./styles/styles.scss";
-import CustomFormIoComponent from "./ui/components/CustomFormComponent";
+import CustomFormIoComponent from "./ui/components/formio/CustomFormComponent";
 import FollowUpId from "./ui/initialSurvey/elements/FollowUpId";
+import TranslatedText from "./ui/components/formio/TranslatedText";
 
 Components.setComponents({
   customFollowUpId: CustomFormIoComponent(FollowUpId),
+  customText: CustomFormIoComponent(TranslatedText),
 });
 
 render(
