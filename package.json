@@ -85,6 +85,7 @@
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.5.1",
     "leaflet": "^1.6.0",
+    "moment": "^2.26.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",

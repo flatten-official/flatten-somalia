@@ -5,8 +5,7 @@ import PropTypes from "prop-types";
 
 const Loading = ({ text }) => {
   const { t } = useTranslation();
-  // todo - is there a better way to assign a default prop with translation?
-  const loadingText = text === undefined ? t("Loading:loading") : text;
+  if (!text) text = t("Loading:loading");
   return (
     <Container>
       <Row>
@@ -21,7 +20,7 @@ const Loading = ({ text }) => {
         />
       </Row>
       <Row>
-        <div style={{ margin: "auto" }}>{loadingText}</div>
+        <div style={{ margin: "auto" }}>{text}</div>
       </Row>
     </Container>
   );

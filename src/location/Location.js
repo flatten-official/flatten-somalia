@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../containers/Loading";
-import { Button } from "react-bootstrap";
 import LocationPicker from "./LocationPicker";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Types } from "../form/FormActions";
 
 export const LocationObj = (lat, lng, accuracy, altitude, wasManual) => ({
   lat: lat,
@@ -13,12 +13,17 @@ export const LocationObj = (lat, lng, accuracy, altitude, wasManual) => ({
   wasManual: wasManual,
 });
 
-export const Location = ({ locationCallback }) => {
+export const Location = () => {
   const LOCATION_REQUESTED = "LOCATION_REQUESTED";
   const LOCATION_FAILED = "LOCATION_FAILED_AUTO";
   const LOCATION_MANUAL = "LOCATION_MANUAL";
 
+  const dispatch = useDispatch();
+
   const [status, setStatus] = useState(LOCATION_REQUESTED);
+
+  const onLocationFound = (location) =>
+    dispatch({ type: Types.SET_LOCATION, payload: location });
 
   /**
    * Gets the location from the browser (in LOCATION_REQUESTED state while fetching)
@@ -27,7 +32,7 @@ export const Location = ({ locationCallback }) => {
     setStatus(LOCATION_REQUESTED);
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        locationCallback(
+        onLocationFound(
           LocationObj(
             position.coords.latitude,
             position.coords.longitude,
@@ -70,13 +75,9 @@ export const Location = ({ locationCallback }) => {
     case LOCATION_MANUAL:
       return (
         <LocationPicker
-          onSubmit={locationCallback}
+          onSubmit={onLocationFound}
           onCancel={() => setStatus(LOCATION_FAILED)}
         />
       );
   }
-};
-
-Location.propTypes = {
-  locationCallback: PropTypes.func.isRequired,
 };
