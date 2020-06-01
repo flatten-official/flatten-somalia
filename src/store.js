@@ -1,8 +1,10 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import { routerMiddleware } from "connected-react-router";
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
+import { connectRouter, routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
-import createRootReducer from "./reducers";
+import authReducer from "./reducers/authReducer";
+import { volunteerFormReducer } from "./reducers/volunteerFormReducer";
+import { form, forms, submission, submissions } from "react-formio";
 
 export const history = createBrowserHistory();
 
@@ -20,7 +22,15 @@ if (process.env.NODE_ENV === "development") {
 const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
 
 export default createStore(
-  createRootReducer(history),
+  combineReducers({
+    router: connectRouter(history),
+    auth: authReducer,
+    volunteerForm: volunteerFormReducer,
+    form: form({ name: "form" }),
+    forms: forms({ name: "forms", query: { type: "form", tags: "common" } }),
+    submission: submission({ name: "submission" }),
+    submissions: submissions({ name: "submissions" }),
+  }),
   initialState,
   composedEnhancers
 );

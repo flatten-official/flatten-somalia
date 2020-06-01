@@ -18,7 +18,7 @@ export const fetchAuthState = () => async (dispatch) => {
     // check if the response is empty, indicating failed auth
     // https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
     if (
-      res.status != 200 ||
+      res.status !== 200 ||
       (Object.keys(res.data).length === 0 && res.data.constructor === Object)
     ) {
       dispatch({ type: AUTH_FAIL });

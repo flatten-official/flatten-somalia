@@ -1,64 +1,75 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import Loading from "../containers/Loading";
 import { Button } from "react-bootstrap";
-import PropTypes from "prop-types";
-import { LocationObj } from "./Location";
-import { Map, Marker, TileLayer } from "react-leaflet";
+import ManualLocationPicker from "./ManualLocationPicker";
+import { useDispatch } from "react-redux";
+import { Types } from "../form/FormActions";
 
-const INITIAL_ZOOM = 13;
-const INITIAL_CENTER = [2.045, 45.333];
+export const LocationObj = (lat, lng, accuracy, altitude, wasManual) => ({
+  lat: lat,
+  lng: lng,
+  accuracy: accuracy,
+  altitude: altitude,
+  wasManual: wasManual,
+});
 
-// TODO round returned values
-/**
- * Component that allows the user to pick their location
- */
-const LocationPicker = ({ onSubmit, onCancel }) => {
-  const [markerPosition, setMarkerPosition] = useState(INITIAL_CENTER);
+export const LocationPicker = () => {
+  const LOCATION_REQUESTED = "LOCATION_REQUESTED";
+  const LOCATION_FAILED = "LOCATION_FAILED_AUTO";
+  const LOCATION_MANUAL = "LOCATION_MANUAL";
 
-  const mapRef = useRef(); // Reference to the map object
+  const dispatch = useDispatch();
 
-  const getCenter = () => mapRef.current.leafletElement.getCenter();
+  const [status, setStatus] = useState(LOCATION_REQUESTED);
 
-  // Called when submit button is pressed
-  const submitHelper = () => {
-    const center = getCenter();
-    onSubmit(LocationObj(center.lat, center.lng, null, null, true));
+  const onLocationFound = (location) =>
+    dispatch({ type: Types.SET_LOCATION, payload: location });
+
+  /**
+   * Gets the location from the browser (in LOCATION_REQUESTED state while fetching)
+   */
+  const getBrowserLocation = () => {
+    setStatus(LOCATION_REQUESTED);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        onLocationFound(
+          LocationObj(
+            position.coords.latitude,
+            position.coords.longitude,
+            position.coords.accuracy,
+            position.coords.altitude,
+            false
+          )
+        );
+      },
+      () => setStatus(LOCATION_FAILED)
+    );
   };
 
-  // Called while the map moves
-  const onMove = () => {
-    const center = getCenter();
-    setMarkerPosition([center.lat, center.lng]);
-  };
+  useEffect(getBrowserLocation, []); // Call the function on start
 
-  return (
-    <div>
-      <h4>Pick your location</h4>
-      <Map
-        ref={mapRef}
-        onMove={onMove}
-        className="map"
-        zoom={INITIAL_ZOOM}
-        center={INITIAL_CENTER}
-      >
-        <TileLayer // TODO Pick better base layer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  // Called when the manual location picker submits
+  const onUseManual = () => setStatus(LOCATION_MANUAL);
+
+  // eslint-disable-next-line default-case
+  switch (status) {
+    case LOCATION_REQUESTED:
+      return <Loading text="Waiting for location to load." />;
+    case LOCATION_FAILED:
+      return (
+        <>
+          <h3>We need your location.</h3>
+          {/*TODO this button seems to do nothing which is confusing*/}
+          <Button onClick={getBrowserLocation}>Try again.</Button>
+          <Button onClick={onUseManual}>Manually pick location.</Button>
+        </>
+      );
+    case LOCATION_MANUAL:
+      return (
+        <ManualLocationPicker
+          onSubmit={onLocationFound}
+          onCancel={() => setStatus(LOCATION_FAILED)}
         />
-        <Marker // TODO Style Marker
-          position={markerPosition}
-        />
-      </Map>
-      <Button variant="light" onClick={onCancel}>
-        Cancel
-      </Button>
-      <Button onClick={submitHelper}>Submit</Button>
-    </div>
-  );
+      );
+  }
 };
-
-LocationPicker.propTypes = {
-  onSubmit: PropTypes.func.isRequired, // Callback called when location is submitted
-  onCancel: PropTypes.func.isRequired, // Callback called when operation is cancelled
-};
-
-export default LocationPicker;
