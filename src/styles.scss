@@ -126,6 +126,11 @@ a:hover {
   background-color: #bbccee;
 }
 
+.btn-light:disabled {
+  color: #b1b1b1;
+  background-color: #faf6f6;
+}
+
 .seventypxmargin {
   margin-top: 70px;
 }
