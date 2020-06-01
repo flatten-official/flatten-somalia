@@ -5,12 +5,12 @@ import { ConnectedRouter } from "connected-react-router";
 import store, { history } from "./store";
 import { Components } from "formiojs";
 
-import App from "./App";
+import App from "./ui/App";
 
 import "./i18n";
-import "./styles.scss";
-import CustomFormIoComponent from "./form/CustomFormComponent";
-import FollowUpId from "./form/FollowUpId";
+import "./styles/styles.scss";
+import CustomFormIoComponent from "./ui/components/CustomFormComponent";
+import FollowUpId from "./ui/initialSurvey/elements/FollowUpId";
 
 Components.setComponents({
   customFollowUpId: CustomFormIoComponent(FollowUpId),

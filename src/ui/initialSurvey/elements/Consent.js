@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { setFollowUpId, Types } from "./FormActions";
+import { setFollowUpId, Types } from "../actions";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import React from "react";
 
@@ -22,7 +22,7 @@ export const Consent = () => {
     <Container>
       <Row>
         <Col>
-          <div className="seventypxmargin"></div>
+          <div className="seventypxmargin" />
           <center>
             <div className="body">{t("askForDataRecordingConsent")}</div>
           </center>

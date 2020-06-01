@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ReactComponent } from "react-formio";
 import { Provider } from "react-redux";
-import store from "../store";
+import store from "../../store";
 
 const CustomFormIoComponent = (InnerComponent) => {
   return class FollowUpDisplayInjector extends ReactComponent {

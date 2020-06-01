@@ -9,7 +9,7 @@ import IVS_EN from "./translations/en/translation/InitialVolunteerSurvey.json";
 import volunteerLoginEN from "./translations/en/translation/VolunteerLogin.json";
 
 import adminEN from "./translations/en/Admin.json";
-import authEN from "./translations/en/Auth.json";
+import loginEN from "./translations/en/Login.json";
 import footerEN from "./translations/en/Footer.json";
 import homeEN from "./translations/en/Home.json";
 import loadingEN from "./translations/en/Loading.json";
@@ -22,7 +22,7 @@ import IVS_SO from "./translations/so/translation/InitialVolunteerSurvey.json";
 import volunteerLoginSO from "./translations/so/translation/VolunteerLogin.json";
 
 import adminSO from "./translations/so/Admin.json";
-import authSO from "./translations/so/Auth.json";
+import loginSO from "./translations/so/Login.json";
 import footerSO from "./translations/so/Footer.json";
 import homeSO from "./translations/so/Home.json";
 import loadingSO from "./translations/so/Loading.json";
@@ -46,7 +46,7 @@ const resources = {
   en: {
     translation: formioTranslationsEN,
     Admin: adminEN,
-    Auth: authEN,
+    Login: loginEN,
     Footer: footerEN,
     Home: homeEN,
     Loading: loadingEN,
@@ -56,7 +56,7 @@ const resources = {
   so: {
     translation: formioTranslationsSO,
     Admin: adminSO,
-    Auth: authSO,
+    Login: loginSO,
     Footer: footerSO,
     Home: homeSO,
     Loading: loadingSO,

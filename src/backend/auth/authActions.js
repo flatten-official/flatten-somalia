@@ -1,6 +1,6 @@
-import backend from "../backend/backend";
-import flattenApi from "../backend/api";
-import { Routes } from "../config";
+import backend from "../api/backend";
+import flattenApi from "../api/api";
+import { Routes } from "../../config";
 import { push } from "connected-react-router";
 
 // actions

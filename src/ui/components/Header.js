@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Routes } from "../config";
+import { Routes } from "../../config";
 import { Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, AUTH_SUCCESS } from "../auth/authActions";
+import { logout, AUTH_SUCCESS } from "../../backend/auth/authActions";
 
 const Header = () => {
   const { t } = useTranslation("Navbar");

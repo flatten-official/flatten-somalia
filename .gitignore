@@ -5,6 +5,6 @@ node_modules
 .firebase
 build
 src/i18nResources.json
-src/backend/backend.js
+src/backend/api/backend.js
 .eslintcache
 .DS_Store

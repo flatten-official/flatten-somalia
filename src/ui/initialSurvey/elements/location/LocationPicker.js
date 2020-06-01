@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Loading from "../containers/Loading";
+import Loading from "../../../components/Loading";
 import { Button } from "react-bootstrap";
 import ManualLocationPicker from "./ManualLocationPicker";
 import { useDispatch } from "react-redux";
-import { Types } from "../form/FormActions";
+import { Types } from "../../actions";
 
 export const LocationObj = (lat, lng, accuracy, altitude, wasManual) => ({
   lat: lat,

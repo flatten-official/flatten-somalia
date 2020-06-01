@@ -1,6 +1,6 @@
 steps:
   - name: gcr.io/cloud-builders/gsutil
-    args: ["cp", "src/backend/backend.$_ENVIRONMENT.js", "src/backend/backend.js"]
+    args: ["cp", "src/backend/api/backend.$_ENVIRONMENT.js", "src/backend/api/backend.js"]
   - name: gcr.io/cloud-builders/npm
     entrypoint: "npm"
     args: ["install"]

@@ -33,11 +33,11 @@ $dark: $gray-800;
 
 // TODO Switch to @use
 // https://sass-lang.com/documentation/at-rules/import#main-content
-@import "~bootswatch/dist/flatly/_variables.scss";
-@import "~bootstrap/scss/bootstrap.scss";
-@import "~bootswatch/dist/flatly/_bootswatch.scss";
+@import "../../node_modules/bootswatch/dist/flatly/variables";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootswatch/dist/flatly/bootswatch";
 $fa-font-path: "../fonts";
-@import "~formiojs/dist/formio.full.css";
+@import "../../node_modules/formiojs/dist/formio.full.css";
 
 .wordmark {
   font-family: "DM Sans", sans-serif;

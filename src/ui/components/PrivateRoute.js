@@ -1,7 +1,7 @@
 import React from "react";
-import { AUTH_SUCCESS } from "./authActions";
-import { hasPermission } from "./authApi";
-import { Routes } from "../config";
+import { AUTH_SUCCESS } from "../../backend/auth/authActions";
+import { hasPermission } from "../../backend/auth/authApi";
+import { Routes } from "../../config";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";

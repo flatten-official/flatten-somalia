@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Types } from "./FormActions";
-import { LocationPicker } from "../location/LocationPicker";
-import Form from "./Form";
-import FormDef from "./VolunteerForm.json";
-import flattenApi from "../backend/api";
-import backend from "../backend/backend";
+import { Types } from "./actions";
+import { LocationPicker } from "./elements/location/LocationPicker";
+import Form from "../components/Form";
+import FormDef from "../../forms/VolunteerForm.json";
+import flattenApi from "../../backend/api/api";
+import backend from "../../backend/api/backend";
 import { push } from "connected-react-router";
-import { Consent } from "./Consent";
+import { Consent } from "./elements/Consent";
 
 const SubmissionPageContent = () => {
   const formData = useSelector((state) => state.volunteerForm);

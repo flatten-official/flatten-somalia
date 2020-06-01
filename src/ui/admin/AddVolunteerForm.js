@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Form from "../form/Form";
-import FormDef from "./AddVolunteer.json";
-import flattenApi from "../backend/api";
+import Form from "../components/Form";
+import FormDef from "../../forms/AddVolunteer.json";
+import flattenApi from "../../backend/api/api";
 
 const VolunteerForm = () => {
   const { t } = useTranslation("VolunteerForm");

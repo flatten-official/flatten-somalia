@@ -1,6 +1,6 @@
-import { Types } from "../form/FormActions";
+import { Types } from "./actions";
 
-export const volunteerFormReducer = (state = {}, action) => {
+export const reducer = (state = {}, action) => {
   switch (action.type) {
     case Types.SET_FOLLOW_UP_ID:
       return { ...state, followUpId: action.payload };

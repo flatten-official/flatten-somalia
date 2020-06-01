@@ -1,12 +1,12 @@
 import React from "react";
-import Form from "../form/Form";
-import LoginForm from "./Login.json";
-import flattenApi from "../backend/api";
+import Form from "../components/Form";
+import LoginFormJson from "../../forms/Login.json";
+import flattenApi from "../../backend/api/api";
 import { useDispatch } from "react-redux";
-import backend from "../backend/backend";
+import backend from "../../backend/api/backend";
 import { push } from "connected-react-router";
 
-const Login = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
@@ -15,7 +15,7 @@ const Login = () => {
     dispatch(push("/submitted-email"));
   };
 
-  return <Form formioForm={LoginForm} submitHook={onSubmit} />;
+  return <Form formioForm={LoginFormJson} submitHook={onSubmit} />;
 };
 
-export default Login;
+export default LoginForm;

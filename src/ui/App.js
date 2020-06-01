@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
-import PrivateRoute from "./auth/PrivateRoute";
-import Header from "./containers/Header";
-import Footer from "./containers/Footer";
-import Home from "./root/Home";
-import Auth from "./auth/Auth";
+import PrivateRoute from "./components/PrivateRoute";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./home/Home";
+import Login from "./login/Login";
 import Admin from "./admin/Admin";
-import SubmissionPageContent from "./form/SubmissionPage";
-import Success from "./form/Success";
-import SubmittedEmail from "./auth/SubmittedEmail";
-import Loading from "./containers/Loading";
-import { Routes } from "./config";
+import SubmissionPageContent from "./initialSurvey/SubmissionPage";
+import Success from "./initialSurvey/Success";
+import LoginSuccess from "./login/LoginSuccess";
+import Loading from "./components/Loading";
+import { Routes } from "../config";
 import { useDispatch, useSelector } from "react-redux";
-import { permissions } from "./auth/authApi";
+import { permissions } from "../backend/auth/authApi";
 import {
   fetchAuthState,
   AUTH_INITIALISING,
   AUTH_UNINITIALISED,
-} from "./auth/authActions";
+} from "../backend/auth/authActions";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -49,9 +49,9 @@ const App = () => {
             requiredPermission={permissions.submitForms}
           />
           <Route exact path={Routes.admin} component={Admin} />
-          <Route path={Routes.auth} component={Auth} />
+          <Route path={Routes.auth} component={Login} />
           <Route path="/success" component={Success} />
-          <Route path="/submitted-email" component={SubmittedEmail} />
+          <Route path="/submitted-email" component={LoginSuccess} />
         </div>
       )}
 
