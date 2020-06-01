@@ -1322,7 +1322,8 @@
                 "poorCancerOrImmunity": false,
                 "immunocompromised": false,
                 "malnutrition": false,
-                "cancerOrPoorImmunity": false
+                "cancerOrPoorImmunity": false,
+                "noComorbidities": false
               },
               "values": [
                 {
@@ -1358,6 +1359,11 @@
                 {
                   "label": "malnutrition",
                   "value": "malnutrition",
+                  "shortcut": ""
+                },
+                {
+                  "label": "noComorbidities",
+                  "value": "noComorbidities",
                   "shortcut": ""
                 },
                 {
@@ -2486,7 +2492,8 @@
                 "diabetes": false,
                 "heartDiseaseOrIrritability": false,
                 "pneumoniaOrAsthma": false,
-                "poorCancerOrImmunity": false
+                "poorCancerOrImmunity": false,
+                "noComorbidities": false
               },
               "values": [
                 {
@@ -2517,6 +2524,11 @@
                 {
                   "label": "immunocompromised",
                   "value": "immunocompromised",
+                  "shortcut": ""
+                },
+                {
+                  "label": "noComorbidities",
+                  "value": "noComorbidities",
                   "shortcut": ""
                 },
                 {
@@ -2903,7 +2915,8 @@
             "financial": false,
             "housing": false,
             "sanitation": false,
-            "medicalSuport": false
+            "medicalSuport": false,
+            "noSupport": false
           },
           "values": [
             {
@@ -2924,6 +2937,11 @@
             {
               "label": "housing",
               "value": "housing",
+              "shortcut": ""
+            },
+            {
+              "label": "noSupport",
+              "value": "noSupport",
               "shortcut": ""
             },
             {
