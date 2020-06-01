@@ -22,9 +22,12 @@ const SubmissionPageContent = () => {
   const onSubmit = async (data) => {
     const endTime = Date.now();
     const reformatted = {
-      household: {},
+      household: {
+        followUpId: formData.followUpId,
+      },
+      people: data.personGrid,
+      deaths: data.deathGrid,
       metadata: {
-        startTime: formData.startTime,
         endTime: endTime,
         timeToComplete: endTime - formData.startTime,
         location: formData.location,
@@ -35,20 +38,18 @@ const SubmissionPageContent = () => {
         version: "0.1",
       },
     };
-    Object.entries(data).map(([k, v]) => {
-      if (k === "personGrid") {
-        reformatted.people = v;
-      } else if (k === "deathGrid") {
-        reformatted.deaths = v;
-      } else {
+
+    Object.entries(data).forEach(([k, v]) => {
+      if (!(k === "personGrid" || k === "deathGrid"))
         reformatted.household[k] = v;
-      }
     });
+
     // need to actually add the submission in here!
     await backend.request({
       ...flattenApi.volunteerForm,
       data: reformatted,
     });
+
     dispatch(push("/success"));
   };
 
