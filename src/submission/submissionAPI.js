@@ -1,5 +1,5 @@
 const submissionData = require("./submissionData");
-const { ValidationError } = require("../../test/testUtils/mongo");
+const { Error } = require("mongoose");
 
 async function initialSubmission(
   volunteerId,
@@ -48,10 +48,13 @@ async function initialSubmission(
   );
 
   for (const person of people) {
-    if (person.validateSync() !== undefined) throw new ValidationError("")
+    if (person.validateSync() !== undefined)
+      throw new Error.ValidationError("");
   }
-  if (household.validateSync() !== undefined) throw new ValidationError("");
-  if (submission.validateSync() !== undefined) throw new ValidationError("");
+  if (household.validateSync() !== undefined)
+    throw new Error.ValidationError("");
+  if (submission.validateSync() !== undefined)
+    throw new Error.ValidationError("");
 
   for (const person of people) await person.save();
   await household.save();
