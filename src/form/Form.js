@@ -1,46 +1,27 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { push } from "connected-react-router";
 import { useTranslation } from "react-i18next";
 import { Form as FormioForm } from "react-formio";
 import PropTypes from "prop-types";
-import backend from "../backend/backend";
-import { submitSuccess, submitFailure } from "../backend/backendActions";
 
-const Form = ({
-  name,
-  submitApi,
-  formioForm,
-  formioOptions,
-  submitHook,
-  successRedir,
-}) => {
+/**
+ *
+ * @param formioForm the form defintion json
+ * @param formioOptions some form options
+ * @param submitHook function that is called when the form is submitted
+ */
+const Form = ({ formioForm, formioOptions, submitHook }) => {
   const { i18n } = useTranslation();
-  const dispatch = useDispatch();
 
-  const onSubmitSuccess = (submission, next) => {
-    dispatch(submitSuccess(submission, next));
-    dispatch(push(successRedir));
-  };
+  formioOptions = formioOptions ? formioOptions : {}; // optional prop
 
-  const onSubmitFailure = (submission) =>
-    dispatch(submitFailure(submission, false));
-
-  formioOptions = formioOptions === undefined ? {} : formioOptions; // optional prop
-
-  if (!("hooks" in formioOptions)) {
-    formioOptions.hooks = {};
-  }
+  if (!formioOptions.hooks) formioOptions.hooks = {};
 
   // add a hook to send the request to the server
   formioOptions.hooks.beforeSubmit = async (submission, next) => {
     try {
-      submission = submitHook ? submitHook(submission) : submission;
-      // need to actually add the submission in here!
-      const res = await backend.request({ ...submitApi, data: submission });
-      onSubmitSuccess(name, res);
+      await submitHook(submission.data);
     } catch (e) {
-      onSubmitFailure(name);
+      console.log(e);
       next(e);
     }
   };
@@ -53,13 +34,8 @@ const Form = ({
 };
 
 Form.propTypes = {
-  name: PropTypes.string.isRequired,
-  submitApi: PropTypes.object.isRequired,
-  successRedir: PropTypes.string.isRequired,
   formioForm: PropTypes.object.isRequired,
   formioOptions: PropTypes.object,
-  submitSuccess: PropTypes.func,
-  submitFailure: PropTypes.func,
   submitHook: PropTypes.func,
 };
 

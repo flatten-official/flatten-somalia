@@ -81,6 +81,7 @@
     "formiojs": "^4.9.26",
     "history": "^4.10.1",
     "i18next": "^19.4.4",
+    "i18next-browser-languagedetector": "^4.2.0",
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.5.1",
     "leaflet": "^1.6.0",

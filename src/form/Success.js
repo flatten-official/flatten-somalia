@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const Success = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("VolunteerForm");
   return (
     <>
-      {t("VolunteerForm:success")}{" "}
-      <Link to="/"> {t("VolunteerForm:returnHomePrompt")} </Link>
+      {t("success")}
+      <Link to="/"> {t("returnHomePrompt")} </Link>
     </>
   );
 };

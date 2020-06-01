@@ -5,13 +5,13 @@ import FormDef from "./AddVolunteer.json";
 import flattenApi from "../backend/api";
 
 const VolunteerForm = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("VolunteerForm");
 
   // TODO - fix translations here
   // TODO - add proper success redir route
   return (
     <div>
-      <h3> {t("VolunteerForm:title")} </h3>
+      <h3> {t("title")} </h3>
       <Form
         name="addVolunteeerForm"
         submitApi={flattenApi.addVolunteer}
