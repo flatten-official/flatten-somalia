@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ReactComponent } from "react-formio";
 import { Provider } from "react-redux";
-import store from "../../store";
+import store from "../../../store";
+import { I18nextProvider } from "react-i18next";
 
 const CustomFormIoComponent = (InnerComponent) => {
   return class FollowUpDisplayInjector extends ReactComponent {
@@ -15,7 +16,7 @@ const CustomFormIoComponent = (InnerComponent) => {
       // eslint-disable-next-line react/no-render-return-value
       return ReactDOM.render(
         <Provider store={store}>
-          <InnerComponent />
+          <InnerComponent component={this.component} />
         </Provider>,
         element
       );

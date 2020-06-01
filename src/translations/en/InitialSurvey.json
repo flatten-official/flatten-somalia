@@ -12,5 +12,6 @@
     "loading": "Waiting for location to load."
   },
   "success": "Success!",
-  "returnHomePrompt": "Return to homepage."
+  "returnHomePrompt": "Return to homepage.",
+  "askToGiveFollowUpId": "If the volunteer doesn't have a phone number to follow-up, give them a block with this number."
 }
