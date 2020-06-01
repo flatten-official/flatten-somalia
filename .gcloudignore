@@ -3,3 +3,12 @@ README.md
 .eslintrc.js
 apidoc.json
 node_modules
+test
+coverage
+docs
+.idea
+scripts
+.env
+.eslintcache
+.gitattributes
+.gitignore
