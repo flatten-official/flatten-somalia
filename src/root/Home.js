@@ -27,11 +27,11 @@ const Home = () => {
         <Button variant="light" size="lg" href={Routes.submission}>
           {t("Home:goToInitialSurvey")}
         </Button>
-        <Button variant="light" size="lg" href={null}>
+        <Button variant="light" size="lg" href={null} disabled="true">
           {t("Home:goToGravediggerSurvey")}
         </Button>
         {/*TODO there should be a check for if there are follow ups and a notification will show*/}
-        <Button variant="light" size="lg" href={null}>
+        <Button variant="light" size="lg" href={null} disabled="true">
           {t("Home:goToFollowupSurvey")}
         </Button>
         {/* Don't know if theres a more secure/better way to do this auth.user.permissions.includes(
