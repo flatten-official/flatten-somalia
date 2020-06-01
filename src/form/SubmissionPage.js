@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Types } from "./FormActions";
-import { Location } from "../location/Location";
+import { LocationPicker } from "../location/LocationPicker";
 import Form from "./Form";
 import FormDef from "./VolunteerForm.json";
 import flattenApi from "../backend/api";
@@ -85,7 +85,7 @@ const SubmissionPageContent = () => {
 
   if (!formData.consent) return <Consent />;
 
-  if (!formData.location) return <Location />;
+  if (!formData.location) return <LocationPicker />;
 
   return (
     <Form
