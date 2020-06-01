@@ -1,5 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
 
 import addVolunteerEN from "./translations/en/translation/AddVolunteer.json";
 import defaultsEN from "./translations/en/translation/Defaults.json";
@@ -66,10 +67,9 @@ const resources = {
 i18n
   // pass the i18n instance to react-i18next.
   .use(initReactI18next)
+  .use(LanguageDetector)
   // init i18next
   .init({
     resources,
     debug: process.env.NODE_ENV === "development",
   });
-
-i18n.changeLanguage("en");
