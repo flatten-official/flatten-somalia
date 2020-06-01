@@ -1,12 +1,10 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-
 //region BuildTranslationResource
 import addVolunteerEN from "./translations/en/translation/AddVolunteer.json";
 import defaultsEN from "./translations/en/translation/Defaults.json";
 import IVS_EN from "./translations/en/translation/InitialVolunteerSurvey.json";
-import volunteerLoginEN from "./translations/en/translation/VolunteerLogin.json";
 
 import adminEN from "./translations/en/Admin.json";
 import loginEN from "./translations/en/Login.json";
@@ -30,22 +28,14 @@ import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
 import initialSurveySO from "./translations/so/InitialSurvey.json";
 
-const formioTranslationsEN = {};
-const formioTranslationsSO = {};
-
-Object.assign(formioTranslationsEN, addVolunteerEN);
-Object.assign(formioTranslationsEN, defaultsEN);
-Object.assign(formioTranslationsEN, IVS_EN);
-Object.assign(formioTranslationsEN, volunteerLoginEN);
-
-Object.assign(formioTranslationsSO, addVolunteerSO);
-Object.assign(formioTranslationsSO, defaultsSO);
-Object.assign(formioTranslationsSO, IVS_SO);
-Object.assign(formioTranslationsSO, volunteerLoginSO);
-
 const resources = {
   en: {
-    translation: formioTranslationsEN,
+    translation: {
+      ...addVolunteerEN,
+      ...defaultsEN,
+      ...IVS_EN,
+      ...volunteerFormEN,
+    },
     Admin: adminEN,
     Login: loginEN,
     Footer: footerEN,
@@ -56,7 +46,12 @@ const resources = {
     FormIOCustomText: FormIoCustomTextEn,
   },
   so: {
-    translation: formioTranslationsSO,
+    translation: {
+      ...addVolunteerSO,
+      ...defaultsSO,
+      ...IVS_SO,
+      ...volunteerLoginSO,
+    },
     Admin: adminSO,
     Login: loginSO,
     Footer: footerSO,
