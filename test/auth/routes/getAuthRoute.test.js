@@ -40,6 +40,6 @@ describe("test /auth", () => {
     // expiry field should exist
     expect(res.body.expiry).not.toBeNull();
     // Should have a friendly id field
-    expect(res.body.friendlyId).toBe(0);
+    expect(res.body.friendlyId).toBe(1);
   });
 });

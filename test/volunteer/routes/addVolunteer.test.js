@@ -29,6 +29,7 @@ describe("endpoint POST /volunteer", () => {
     });
 
     const newVolunteerEmail = "new-volunteer@example.ca";
+    console.log("test");
 
     const res = await agent.post("/volunteer").send({
       volunteerData: {
@@ -51,7 +52,7 @@ describe("endpoint POST /volunteer", () => {
     expect(newVolunteer).toStrictEqual({
       name: "new_name",
       email: newVolunteerEmail,
-      friendlyId: 1, // 0 already taken by admin
+      friendlyId: 2, // 1 already taken by admin
       permissions: [Permissions.submitForms],
       addedBy: adminVolunteer._id,
     });
@@ -84,6 +85,7 @@ describe("endpoint POST /volunteer", () => {
         name: "irrelevant",
         email: newVolunteerEmail,
         permManageVolunteers: true,
+        permissions: [Permissions.manageVolunteers],
       },
     });
 
