@@ -91,7 +91,7 @@ module.exports = function (webpackEnv) {
       ? "source-map"
       : isEnvDevelopment && "cheap-module-source-map",
     // These are the "entry points" to our application.
-    // This means they will be the "root" imports that are included in JS bundle.
+    // This means they will be the "home" imports that are included in JS bundle.
     entry: [
       // Include an alternative client for WebpackDevServer. A client's job is to
       // connect to WebpackDevServer by a socket and get notified about changes.
@@ -569,7 +569,7 @@ module.exports = function (webpackEnv) {
             // Exclude any URLs whose last part seems to be a file extension
             // as they're likely a resource and not a SPA route.
             // URLs containing a "?" character won't be blacklisted as they're likely
-            // a route with query params (e.g. auth callbacks).
+            // a route with query params (e.g. login callbacks).
             new RegExp("/[^/?]+\\.[^/]+$"),
           ],
         }),

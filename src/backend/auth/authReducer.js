@@ -4,7 +4,7 @@ import {
   AUTH_SUCCESS,
   AUTH_FAIL,
   AUTH_LOGOUT,
-} from "../auth/authActions";
+} from "./authActions";
 
 const authReducer = (
   state = { status: AUTH_UNINITIALISED, user: undefined },
@@ -22,7 +22,7 @@ const authReducer = (
     default:
       return {
         ...state,
-        status: state.status === undefined ? AUTH_LOGOUT : state.status,
+        status: state.status ? state.status : AUTH_LOGOUT,
       };
   }
 };

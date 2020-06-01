@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Routes } from "../config";
+import { Routes } from "../../config";
 import Button from "react-bootstrap/Button";
 
 const Home = () => {
