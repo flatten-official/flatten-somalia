@@ -27,9 +27,7 @@ export const Consent = () => {
         <Col>
           <center>
             <div className="buttons">
-              <Button onClick={onConsent}>
-                {t("givesConsent")}
-              </Button>
+              <Button onClick={onConsent}>{t("givesConsent")}</Button>
             </div>{" "}
           </center>
         </Col>
