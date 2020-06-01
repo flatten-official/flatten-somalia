@@ -71,5 +71,6 @@ i18n
   // init i18next
   .init({
     resources,
+    // fallbackLng: "en",
     debug: process.env.NODE_ENV === "development",
   });
