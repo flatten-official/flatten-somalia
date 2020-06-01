@@ -8,12 +8,13 @@ export const Types = {
   NOTIFY_FOLLOW_UP_ID_RECORDED: "NOTIFY_FOLLOW_UP_ID_RECORDED",
 };
 
-export const setFollowUpId = (volunteerFriendlyId) => (dispatch) => {
-  // TODO  generate follow up id
-  const followUpId =
-    volunteerFriendlyId.toString() + "-" + Date.now().toString();
+// DO NOT MODIFY, WILL BREAK FOLLOW SYSTEM
+const INITIAL_START_DATE = new Date(1590981168000); // Represents a fixed moment in time serving as a reference
 
-  console.log(followUpId);
+export const setFollowUpId = (volunteerFriendlyId) => (dispatch) => {
+  const timeDifference = Date.now() - INITIAL_START_DATE;
+  const timeDifferenceInMin = Math.round(timeDifference / (1000 * 60));
+  const followUpId = volunteerFriendlyId + "-" + timeDifferenceInMin;
 
   dispatch({ type: Types.SET_FOLLOW_UP_ID, payload: followUpId });
 };
