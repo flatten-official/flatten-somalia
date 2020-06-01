@@ -4,6 +4,13 @@
   "consentGiven": "They did. Start the survey.",
   "followupIDMessage": "If the volunteer doesn't have a phone number to follow-up, give them a block with this number.",
   "Done": "Done",
+  "location": {
+    "pickLocationPrompt": "Pick your location.",
+    "isRequiredPrompt": "We need your location.",
+    "rePrompt": "Try again.",
+    "pickManuallyPrompt": "Manually pick location.",
+    "loading": "Waiting for location to load."
+  },
   "success": "Success!",
   "returnHomePrompt": "Return to homepage."
 }

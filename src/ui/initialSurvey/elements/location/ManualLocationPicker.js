@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { Map, Marker, TileLayer } from "react-leaflet";
 import PropTypes from "prop-types";
 import { LocationObj } from "./LocationPicker";
-import { Map, Marker, TileLayer } from "react-leaflet";
 
 const INITIAL_ZOOM = 13;
 const INITIAL_CENTER = [2.045, 45.333];
@@ -12,6 +13,8 @@ const INITIAL_CENTER = [2.045, 45.333];
  * Component that allows the user to pick their location
  */
 const ManualLocationPicker = ({ onSubmit, onCancel }) => {
+  const { t } = useTranslation("InitialSurvey");
+
   const [markerPosition, setMarkerPosition] = useState(INITIAL_CENTER);
 
   const mapRef = useRef(); // Reference to the map object
@@ -32,7 +35,7 @@ const ManualLocationPicker = ({ onSubmit, onCancel }) => {
 
   return (
     <div>
-      <h4>Pick your location</h4>
+      <h4>{t("location.pickLocationPrompt")}</h4>
       <Map
         ref={mapRef}
         onMove={onMove}
@@ -49,9 +52,9 @@ const ManualLocationPicker = ({ onSubmit, onCancel }) => {
         />
       </Map>
       <Button variant="light" onClick={onCancel}>
-        Cancel
+        {t("translation:cancel")}
       </Button>
-      <Button onClick={submitHelper}>Submit</Button>
+      <Button onClick={submitHelper}>{t("translation:submit")}</Button>
     </div>
   );
 };

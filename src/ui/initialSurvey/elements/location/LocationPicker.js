@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Loading from "../../../components/Loading";
-import { Button } from "react-bootstrap";
-import ManualLocationPicker from "./ManualLocationPicker";
 import { useDispatch } from "react-redux";
+import { Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import ManualLocationPicker from "./ManualLocationPicker";
+import Loading from "../../../components/Loading";
 import { Types } from "../../actions";
 
 export const LocationObj = (lat, lng, accuracy, altitude, wasManual) => ({
@@ -18,6 +19,7 @@ export const LocationPicker = () => {
   const LOCATION_FAILED = "LOCATION_FAILED_AUTO";
   const LOCATION_MANUAL = "LOCATION_MANUAL";
 
+  const { t } = useTranslation("InitialSurvey");
   const dispatch = useDispatch();
 
   const [status, setStatus] = useState(LOCATION_REQUESTED);
@@ -54,14 +56,16 @@ export const LocationPicker = () => {
   // eslint-disable-next-line default-case
   switch (status) {
     case LOCATION_REQUESTED:
-      return <Loading text="Waiting for location to load." />;
+      return <Loading text={t("location.loading")} />;
     case LOCATION_FAILED:
       return (
         <>
-          <h3>We need your location.</h3>
+          <h3>{t("location.isRequiredPrompt")}</h3>
           {/*TODO this button seems to do nothing which is confusing*/}
-          <Button onClick={getBrowserLocation}>Try again.</Button>
-          <Button onClick={onUseManual}>Manually pick location.</Button>
+          <Button onClick={getBrowserLocation}>{t("location.rePrompt")}</Button>
+          <Button onClick={onUseManual}>
+            {t("location.pickManuallyPrompt")}
+          </Button>
         </>
       );
     case LOCATION_MANUAL:
