@@ -1,15 +1,22 @@
 import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { setFollowUpId } from "./FormActions";
+import { setFollowUpId, Types } from "./FormActions";
 
-const FollowUpIdDisplay = (onDone) => {
+const FollowUpIdDisplay = () => {
   const dispatch = useDispatch();
   const followUpId = useSelector((state) => state.volunteerForm.followUpId);
+  const volunteerFriendlyId = useSelector(
+    (state) => state.auth.user.friendlyId
+  );
 
   useEffect(() => {
-    if (followUpId === null) dispatch(setFollowUpId());
-  }, [followUpId, dispatch]);
+    if (!followUpId) dispatch(setFollowUpId(volunteerFriendlyId));
+  }, [followUpId, dispatch, volunteerFriendlyId]);
+
+  const onDone = () => {
+    dispatch({ type: Types.NOTIFY_FOLLOW_UP_ID_RECORDED, payload: followUpId });
+  };
 
   return (
     <>

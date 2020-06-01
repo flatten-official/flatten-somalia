@@ -9,7 +9,7 @@ export const Consent = () => {
   const dispatch = useDispatch();
 
   const onConsent = () => {
-    dispatch({ type: Types.SET_CONSENT, payload: true });
+    dispatch({ type: Types.NOTIFY_CONSENT_GIVEN });
     dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
   };
 

@@ -56,7 +56,7 @@ const SubmissionPageContent = () => {
 
   if (!formData.location) return <LocationPicker />;
 
-  if (!formData.followUpId) return <FollowUpIdDisplay />;
+  if (!formData.isFollowUpIdRecorded) return <FollowUpIdDisplay />;
 
   return (
     <Form

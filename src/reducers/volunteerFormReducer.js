@@ -10,10 +10,12 @@ export const volunteerFormReducer = (state = {}, action) => {
       return { ...state, formIO: action.payload };
     case Types.SET_START_TIME:
       return { ...state, startTime: action.payload };
-    case Types.SET_CONSENT:
-      return { ...state, consent: action.payload };
+    case Types.NOTIFY_CONSENT_GIVEN:
+      return { ...state, consent: true };
+    case Types.NOTIFY_FOLLOW_UP_ID_RECORDED:
+      return { ...state, isFollowUpIdRecorded: true };
     case Types.RESTART_FORM:
-      return { consent: false };
+      return { consent: false, isFollowUpIdRecorded: false };
     default:
       return state;
   }
