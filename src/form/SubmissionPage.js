@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Types } from "./FormActions";
 import { LocationPicker } from "../location/LocationPicker";
@@ -9,40 +8,7 @@ import FormDef from "./VolunteerForm.json";
 import flattenApi from "../backend/api";
 import backend from "../backend/backend";
 import { push } from "connected-react-router";
-
-function Consent() {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-
-  const onConsent = () => {
-    dispatch({ type: Types.SET_CONSENT, payload: true });
-    dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
-  };
-
-  return (
-    <Container>
-      <Row>
-        <Col>
-          <div className="seventypxmargin"></div>
-          <center>
-            <div className="body">{t("VolunteerForm:consent")}</div>
-          </center>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <center>
-            <div className="buttons">
-              <Button onClick={onConsent}>
-                {t("VolunteerForm:givesConsent")}
-              </Button>
-            </div>{" "}
-          </center>
-        </Col>
-      </Row>
-    </Container>
-  );
-}
+import { Consent } from "./Consent";
 
 const SubmissionPageContent = () => {
   const formData = useSelector((state) => state.volunteerForm);
