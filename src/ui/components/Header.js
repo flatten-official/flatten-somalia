@@ -44,12 +44,12 @@ const Header = () => {
           )}
         </Nav>
         <Nav className="justify-content-end">
-          <NavDropdown id="dropdown-menu" title="LANGUAGE">
+          <NavDropdown id="dropdown-menu" title={t("language")}>
             <NavDropdown.Item onClick={setLanguage("so")}>
-              SOMALI
+              Soomaali
             </NavDropdown.Item>
             <NavDropdown.Item onClick={setLanguage("en")}>
-              ENGLISH
+              English
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>
