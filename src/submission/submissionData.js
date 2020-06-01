@@ -141,8 +141,8 @@ async function createSubmission(
   householdId,
   householdData
 ) {
-  let people = [];
-  for (let [i, _] of Object.entries(peopleIds)) {
+  const people = [];
+  for (const [i, _] of Object.entries(peopleIds)) {
     people.push({
       data: peopleData[i],
       ref: peopleIds[i],
@@ -236,13 +236,13 @@ async function getVolunteerNextFollowUp(
 
 // add submission that we followed up with
 async function createFollowUpSubmisison(submissionId, ...newSubmissionData) {
-  const newSubmissionId = await createSubmission(...newSubmissionData);
+  const newSubmission = await createSubmission(...newSubmissionData);
 
   await Submission.findByIdAndUpdate(submissionId, {
-    followUp: { id: newSubmissionId, inProgress: false },
+    followUp: { id: newSubmission._id, inProgress: false },
   });
 
-  return newSubmissionId;
+  return newSubmission;
 }
 
 async function cancelVolunteerFollowUp(submissionId) {

@@ -69,31 +69,35 @@ describe("submission database functions", () => {
   afterAll(async () => await util.closeDatabase());
 
   it("should write submission to database", async () => {
-    const householdId = await submissionData.createHousehold(
+    const household = await submissionData.createHousehold(
       testHouseholdData[0].publicId
     );
 
-    const peopleIds = await submissionData.createPeople(
+    const people = await submissionData.createPeople(
       testPeopleInitial[0].map((person) => {
-        return { ...person, household: householdId };
+        return { ...person, household: household._id };
       })
     );
-    const submissionId = await submissionData.createSubmission(
+    const submission = await submissionData.createSubmission(
       testSubmissions[0].addedBy,
       testSubmissions[0].submissionSchema,
       testSubmissions[0].metadata,
-      peopleIds,
+      people.map((person) => person._id),
       testPeopleInitial[0],
-      householdId,
+      household._id,
       testHouseholdData[0]
     );
+
+    for (const person of people) await person.save();
+    await household.save();
+    await submission.save();
 
     const all = await submissionData.Submission.find();
     expect(all).toHaveLength(1);
 
     const retrievedSubmission = all[0];
 
-    expect(retrievedSubmission._id).toStrictEqual(submissionId);
+    expect(retrievedSubmission._id).toStrictEqual(submission._id);
     expect(testSubmissions[0].addedBy).toStrictEqual(
       retrievedSubmission.addedBy
     );
@@ -115,18 +119,19 @@ describe("submission database functions", () => {
   });
 
   it("should create a household correctly", async () => {
-    const householdId = await submissionData.createHousehold(
+    const household = await submissionData.createHousehold(
       testHouseholdData[0].publicId,
       testHouseholdData[0].phone,
       testHouseholdData[0].email
     );
+    await household.save();
 
     const all = await submissionData.Household.find();
 
     expect(all).toHaveLength(1);
     const retrievedHousehold = all[0];
 
-    expect(retrievedHousehold._id).toStrictEqual(householdId);
+    expect(retrievedHousehold._id).toStrictEqual(household._id);
     expect(retrievedHousehold.publicId).toStrictEqual(
       testHouseholdData[0].publicId
     );
@@ -135,67 +140,73 @@ describe("submission database functions", () => {
   });
 
   it("should create a person correctly", async () => {
-    const householdId = await submissionData.createHousehold(
+    const household = await submissionData.createHousehold(
       testHouseholdData[0].publicId
     );
+    await household.save();
 
-    const peopleIds = await submissionData.createPeople(
+    const people = await submissionData.createPeople(
       testPeopleInitial[0].map((person) => {
-        return { ...person, household: householdId };
+        return { ...person, household: household._id };
       })
     );
+
+    for (const person of people) await person.save();
 
     const all = await submissionData.Person.find();
 
     expect(all).toHaveLength(2);
 
-    for (const [i, id] of Object.entries(peopleIds)) {
+    for (const [i, person] of Object.entries(people)) {
       const personDb = all.filter(
-        (obj) => obj["_id"].toString() === id.toString()
+        (obj) => obj["_id"].toString() === person._id.toString()
       )[0];
       expect(personDb.name).toStrictEqual(testPeopleInitial[0][i].name);
       expect(personDb.household.toString()).toStrictEqual(
-        householdId.toString()
+        household._id.toString()
       );
     }
   });
 
   it("should handle follow up submissions correctly", async () => {
-    const householdIds = [];
-    const peopleIdsNested = [];
-    const submissionIdsInitial = [];
+    const households = [];
+    const peopleNested = [];
+    const submissionsInitial = [];
 
     // 1. Create submissions associated with two different households.
 
     for (const [i, householdData] of Object.entries(testHouseholdData)) {
-      householdIds.push(
+      households.push(
         await submissionData.createHousehold(
           householdData.publicId,
           householdData.phone,
           householdData.email
         )
       );
-      peopleIdsNested.push(
+
+      await households[i].save();
+      peopleNested.push(
         await submissionData.createPeople(
           testPeopleInitial[i].map((o) => {
-            return { ...o, household: householdIds[i] };
+            return { ...o, household: households[i]._id };
           })
         )
       );
+      for (const person of peopleNested[i]) await person.save();
 
-      submissionIdsInitial.push(
+      submissionsInitial.push(
         await submissionData.createSubmission(
           dummyVolunteerId,
           testSubmissions[i].submissionSchema,
           testSubmissions[i].metadata,
-          peopleIdsNested[i],
+          peopleNested[i].map((obj) => obj._id),
           testPeopleInitial[i],
-          householdIds[i],
+          households[i]._id,
           householdData
         )
       );
+      await submissionsInitial[i].save();
     }
-
 
     // 2. Test that the next follow up submission resolves correctly to the
     //  first submission, and that the entries within this submission are correct
@@ -212,11 +223,11 @@ describe("submission database functions", () => {
       0
     );
 
-    expect(nextId).toStrictEqual(submissionIdsInitial[0]);
-    expect(nextHousehold._id).toStrictEqual(householdIds[0]);
-    expect(
-      new Set(peopleIdsNested[0].map((o) => o._id.toString()))
-    ).toStrictEqual(new Set(nextPeople.map((o) => o._id.toString())));
+    expect(nextId).toStrictEqual(submissionsInitial[0]._id);
+    expect(nextHousehold._id).toStrictEqual(households[0]._id);
+    expect(new Set(peopleNested[0].map((o) => o._id.toString()))).toStrictEqual(
+      new Set(nextPeople.map((o) => o._id.toString()))
+    );
 
     const testPeopleFollowUp = [{ testField: "1" }, { testField: "2" }];
     const householdFollowUp = { someUpdatedProperty: "hello" };
@@ -224,16 +235,18 @@ describe("submission database functions", () => {
     // 3. Insert the follow up submission using the interface (assertions below
     // check that this inserts reference to next submission correctly and resets the flag).
 
-    const newSubmissionId = await submissionData.createFollowUpSubmisison(
+    const newSubmission = await submissionData.createFollowUpSubmisison(
       nextId,
       dummyVolunteerId,
       { form: "volunteerFollowUpForm", version: "0.1" },
       testSubmissions[0].metadata,
-      peopleIdsNested[0],
+      peopleNested[0].map((obj) => obj._id),
       testPeopleFollowUp,
-      householdIds[0],
+      households[0]._id,
       householdFollowUp
     );
+
+    await newSubmission.save();
 
     // 4. Test grabbing the next submission to follow up with, specifically
     // to ensure that we do not end up grabbing the original submission
@@ -249,13 +262,13 @@ describe("submission database functions", () => {
       0
     );
 
-    expect(nextId).not.toStrictEqual(submissionIdsInitial[0]);
+    expect(nextId).not.toStrictEqual(submissionsInitial[0]._id);
 
     const all = await submissionData.Submission.find();
 
-    const oldSubmission = retrieveById(all, submissionIdsInitial[0]._id);
+    const oldSubmission = retrieveById(all, submissionsInitial[0]._id);
     expect(oldSubmission.followUp.id.toString()).toStrictEqual(
-      newSubmissionId.toString()
+      newSubmission._id.toString()
     );
     expect(oldSubmission.followUp.inProgress).toBe(false);
   });
