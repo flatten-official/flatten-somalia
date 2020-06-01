@@ -24,7 +24,6 @@ const SubmissionPageContent = () => {
     const reformatted = {
       household: {},
       metadata: {
-        startTime: formData.startTime,
         endTime: endTime,
         timeToComplete: endTime - formData.startTime,
         location: formData.location,
