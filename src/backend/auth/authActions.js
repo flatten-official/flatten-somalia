@@ -11,8 +11,6 @@ export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const fetchAuthState = () => async (dispatch) => {
-  dispatch({ type: AUTH_INITIALISING });
-
   try {
     const res = await backend.request(flattenApi.getAuth);
     // check if the response is empty, indicating failed auth
@@ -31,12 +29,8 @@ export const fetchAuthState = () => async (dispatch) => {
   }
 };
 
-export const logout = () => async (dispatch) => {
-  try {
-    await backend.request(flattenApi.logout);
-    dispatch({ type: AUTH_LOGOUT });
-  } catch (e) {
-    // todo - what do we do for a failed logout???
-  }
+export const logout = () => (dispatch) => {
+  dispatch({ type: AUTH_LOGOUT });
+  // TODO This behaviour might be misleading (aka. not waiting for response)
+  backend.request(flattenApi.logout).catch("Failed to logout");
 };
-// end actions
