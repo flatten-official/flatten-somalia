@@ -11,11 +11,9 @@ const Header = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const setLanguage = (lang) => {
-    return (e) => {
-      e.preventDefault();
-      i18n.changeLanguage(lang);
-    };
+  const setLanguage = (lang) => (e) => {
+    e.preventDefault();
+    i18n.changeLanguage(lang);
   };
 
   return (

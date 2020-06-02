@@ -16,6 +16,7 @@ import {
   fetchAuthState,
   AUTH_UNINITIALISED,
 } from "../backend/auth/authActions";
+import { Container, Row } from "react-bootstrap";
 
 const AppContent = () => {
   const dispatch = useDispatch();
@@ -49,11 +50,13 @@ const AppContent = () => {
 };
 
 const App = () => (
-  <>
+  <div className="app">
     <Header />
-    <AppContent />
+    <div className="appContent">
+      <AppContent />
+    </div>
     <Footer />
-  </>
+  </div>
 );
 
 export default App;
