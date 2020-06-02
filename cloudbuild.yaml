@@ -3,7 +3,7 @@ steps:
     args: ["cp", "src/backend/api/backend.$_ENVIRONMENT.js", "src/backend/api/backend.js"]
   - name: gcr.io/cloud-builders/npm
     entrypoint: "npm"
-    args: ["install"]
+    args: ["install", "--production"]
   - name: gcr.io/cloud-builders/npm
     entrypoint: "npm"
     args: ["run", "build"]
