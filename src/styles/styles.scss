@@ -171,3 +171,7 @@ $fa-font-path: "../fonts";
 .spinnerText {
   margin: auto;
 }
+
+[id^="wizard-"][id$="-header"] {
+  display: none;
+}
