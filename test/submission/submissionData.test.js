@@ -80,6 +80,7 @@ describe("submission database functions", () => {
     );
     const submission = await submissionData.createSubmission(
       testSubmissions[0].addedBy,
+      "testTeam",
       testSubmissions[0].submissionSchema,
       testSubmissions[0].metadata,
       people.map((person) => person._id),
@@ -197,6 +198,7 @@ describe("submission database functions", () => {
       submissionsInitial.push(
         await submissionData.createSubmission(
           dummyVolunteerId,
+          "testTeam",
           testSubmissions[i].submissionSchema,
           testSubmissions[i].metadata,
           peopleNested[i].map((obj) => obj._id),
@@ -238,6 +240,7 @@ describe("submission database functions", () => {
     const newSubmission = await submissionData.createFollowUpSubmisison(
       nextId,
       dummyVolunteerId,
+      "testTeam",
       { form: "volunteerFollowUpForm", version: "0.1" },
       testSubmissions[0].metadata,
       peopleNested[0].map((obj) => obj._id),

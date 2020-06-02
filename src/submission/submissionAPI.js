@@ -3,6 +3,7 @@ const { Error } = require("mongoose");
 
 async function initialSubmission(
   volunteerId,
+  volunteerTeamName,
   schema,
   metadata,
   peopleData,
@@ -39,6 +40,7 @@ async function initialSubmission(
 
   const submission = await submissionData.createSubmission(
     volunteerId,
+    volunteerTeamName,
     schema,
     metadata,
     people.map((person) => person._id),

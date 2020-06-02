@@ -10,6 +10,11 @@ const Submission = mongoose.model(
       required: true,
       index: true,
     },
+    teamName: {
+      type: String,
+      required: true,
+      index: true,
+    },
     people: [
       {
         // raw submission data (excluding people and death data)
@@ -134,6 +139,7 @@ async function createPeople(perPersonData) {
 
 async function createSubmission(
   submitterId,
+  submitterTeamName,
   submissionSchema,
   metadata,
   peopleIds,
@@ -151,6 +157,7 @@ async function createSubmission(
 
   const newSubmission = new Submission({
     addedBy: submitterId,
+    teamName: submitterTeamName,
     submissionSchema,
     metadata,
     people,
