@@ -1,1 +1,11 @@
 README.md
+.idea
+dist
+node_modules
+.firebaserc
+.firebase
+build
+src/i18nResources.json
+backend.js
+.eslintcache
+.DS_Store
