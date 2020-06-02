@@ -18,7 +18,8 @@ function PrivateRoute({ requiredPermission, comp: Component, ...rest }) {
     else
       return (
         <Route
-          render={() => <Redirect to={{ pathname: Routes.auth }} {...rest} />}
+          render={() => <Redirect to={{ pathname: Routes.auth }} />}
+          {...rest}
         />
       );
   }
