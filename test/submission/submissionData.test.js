@@ -61,7 +61,7 @@ const retrieveById = (all, id) =>
 
 describe("submission database functions", () => {
   beforeAll(async () => {
-    await setup(false);
+    await setup({ database: false });
     await util.connectToDatabase();
   });
 

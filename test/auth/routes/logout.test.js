@@ -10,7 +10,7 @@ describe("test /auth", () => {
   let app;
 
   beforeAll(async () => {
-    await setup(false);
+    await setup({ database: false });
     await util.connectToDatabase();
     app = await getApp();
     request = supertest(app);

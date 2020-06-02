@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 
 describe("cookie database functions", () => {
   beforeAll(async () => {
-    await setup(false);
+    await setup({ database: false });
     await util.connectToDatabase();
   });
   afterEach(async () => await util.clearDatabase());

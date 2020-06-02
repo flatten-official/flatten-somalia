@@ -17,7 +17,7 @@ let request;
 
 describe("test /auth/login", () => {
   beforeAll(async () => {
-    await setup(false);
+    await setup({ database: false });
     await util.connectToDatabase();
     request = supertest(await getApp());
   });

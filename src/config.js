@@ -1,8 +1,5 @@
 const { getJSONSecret } = require("./utils/secretGCP");
 
-// DON'T USE NODE_ENV because on App Engine it is always prod even in the staging environment
-const environment = process.env.ENVIRONMENT;
-
 const devConfig = {
   secretId: "projects/233853318753/secrets/backend-so-config/versions/latest",
   debug: true,
@@ -35,6 +32,9 @@ const SharedConfig = {
 };
 
 const buildConfig = () => {
+  // DON'T USE NODE_ENV because on App Engine it is always prod even in the staging environment
+  const environment = process.env.ENVIRONMENT;
+
   switch (environment) {
     case "dev":
       return { ...SharedConfig, ...devConfig };
@@ -50,8 +50,9 @@ const buildConfig = () => {
 const Config = buildConfig();
 
 const loadSecrets = async () => {
-  const secretJson = await getJSONSecret(Config.secretId);
+  if (!Config.secretId) return; // Include null check since some scripts override this property to null
 
+  const secretJson = await getJSONSecret(Config.secretId);
   for (const key in Config.secrets) {
     // eslint-disable-next-line no-prototype-builtins
     if (Config.secrets.hasOwnProperty(key)) {
@@ -61,8 +62,11 @@ const loadSecrets = async () => {
       Config.secrets[key] = secretJson[key];
     }
   }
+};
 
+const setup = async () => {
+  await loadSecrets();
   Object.freeze(Config);
 };
 
-module.exports = { Config, setup: () => loadSecrets() };
+module.exports = { Config, setup };

@@ -2,14 +2,21 @@ const { cleanupDatabase, setupDatabase } = require("./utils/mongo");
 const { getApp } = require("./app");
 const { setup: configSetup } = require("./config");
 const { setup: sendGridSetup } = require("./utils/sendGrid");
+const _ = require("lodash");
 
 /**
- * @param includeDatabase used by test environment to load custom database
+ * @param options object whose parameters indicate what to setup
  */
-async function setup(includeDatabase = true) {
-  await configSetup();
-  if (includeDatabase) await setupDatabase();
-  sendGridSetup();
+async function setup(options = {}) {
+  options = _.defaults(options, {
+    config: true,
+    database: true,
+    sendGrid: true,
+  });
+
+  if (options.config) await configSetup();
+  if (options.database) await setupDatabase();
+  if (options.sendGrid) sendGridSetup();
 }
 
 async function startServer() {

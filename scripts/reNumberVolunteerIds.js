@@ -10,7 +10,7 @@ const { setup, cleanup } = require("../src/index");
 const { Volunteer } = require("../src/volunteer/volunteerData");
 
 const main = async () => {
-  await setup();
+  await setup({ sendGrid: false });
 
   let friendlyId = 0;
 
