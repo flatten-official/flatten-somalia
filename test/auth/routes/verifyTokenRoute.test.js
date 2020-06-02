@@ -5,7 +5,6 @@ const { findCookiesByVolunteerEmail } = require("../../../src/auth/cookieData");
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
-const { setup } = require("../../../src/index");
 const { TEST_VOLUNTEER } = require("../../testUtils/requests");
 
 let request;

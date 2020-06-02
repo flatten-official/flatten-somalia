@@ -1,7 +1,6 @@
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
-const { setup } = require("../../../src/index");
 
 const { login } = require("../../testUtils/requests");
 const { Permissions } = require("../../../src/volunteer/volunteerData");

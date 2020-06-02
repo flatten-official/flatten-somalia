@@ -1,7 +1,6 @@
 const submissionData = require("./submissionData");
 
 const { Error } = require("mongoose");
-const { NO_TEAM_NAME } = require("./submissionData");
 
 async function initialSubmission(
   volunteerId,
