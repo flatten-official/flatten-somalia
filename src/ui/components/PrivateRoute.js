@@ -10,26 +10,18 @@ function PrivateRoute({ requiredPermission, comp: Component, ...rest }) {
   const auth = useSelector((state) => state.auth);
   const authed = hasPermission(auth, requiredPermission);
   const { t } = useTranslation("Admin");
-  // if logged in but without the right permission to use this page
-  if (!authed && auth.state === AUTH_SUCCESS) {
-    return <div>{t("unauthorized")}</div>;
+
+  if (authed) return <Route render={() => <Component />} {...rest} />;
+  else {
+    // if logged in but without the right permission to use this page
+    if (auth.state === AUTH_SUCCESS) return <div>{t("unauthorized")}</div>;
+    else
+      return (
+        <Route
+          render={() => <Redirect to={{ pathname: Routes.auth }} {...rest} />}
+        />
+      );
   }
-  return (
-    <Route
-      {...rest}
-      render={() =>
-        authed ? (
-          <Component />
-        ) : (
-          <Redirect
-            to={{
-              pathname: Routes.auth,
-            }}
-          />
-        )
-      }
-    />
-  );
 }
 
 export default PrivateRoute;

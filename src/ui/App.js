@@ -16,7 +16,6 @@ import {
   fetchAuthState,
   AUTH_UNINITIALISED,
 } from "../backend/auth/authActions";
-import { Container, Row } from "react-bootstrap";
 
 const AppContent = () => {
   const dispatch = useDispatch();
