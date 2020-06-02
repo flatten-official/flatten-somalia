@@ -284,55 +284,6 @@
           "input": true
         },
         {
-          "label": "rentRange",
-          "widget": "choicesjs",
-          "tableView": true,
-          "data": {
-            "values": [
-              {
-                "label": "0-50$",
-                "value": "050"
-              },
-              {
-                "label": "51-100$",
-                "value": "51100"
-              },
-              {
-                "label": "101-200$",
-                "value": "101200"
-              },
-              {
-                "label": "201-500$",
-                "value": "201500"
-              },
-              {
-                "label": "501-100$",
-                "value": "501100"
-              },
-              {
-                "label": ">1000$",
-                "value": "1000"
-              }
-            ]
-          },
-          "selectThreshold": 0.3,
-          "calculateServer": false,
-          "validate": {
-            "required": true
-          },
-          "key": "rentRange",
-          "conditional": {
-            "show": true,
-            "when": "ownershipType",
-            "eq": "rent"
-          },
-          "type": "select",
-          "indexeddb": {
-            "filter": {}
-          },
-          "input": true
-        },
-        {
           "label": "roomsCount",
           "mask": false,
           "spellcheck": true,
@@ -630,35 +581,6 @@
               "input": true
             },
             {
-              "label": "primaryIncomeSource",
-              "widget": "choicesjs",
-              "tableView": true,
-              "data": {
-                "values": [
-                  {
-                    "label": "youtube",
-                    "value": "youtube"
-                  }
-                ]
-              },
-              "selectThreshold": 0.3,
-              "calculateServer": false,
-              "validate": {
-                "required": true
-              },
-              "key": "primaryIncomeSource",
-              "conditional": {
-                "show": true,
-                "when": "employed",
-                "eq": "no"
-              },
-              "type": "select",
-              "indexeddb": {
-                "filter": {}
-              },
-              "input": true
-            },
-            {
               "label": "educationLevel",
               "widget": "choicesjs",
               "tableView": true,
@@ -708,32 +630,40 @@
               "data": {
                 "values": [
                   {
-                    "label": "0-100$",
-                    "value": "0100"
+                    "label": "0to99",
+                    "value": "0to99"
                   },
                   {
-                    "label": "101-200$",
-                    "value": "101200"
+                    "label": "100to499",
+                    "value": "100to499"
                   },
                   {
-                    "label": "201-400$",
-                    "value": "201400"
+                    "label": "500to999",
+                    "value": "500to999"
                   },
                   {
-                    "label": "401-500$",
-                    "value": "401500"
+                    "label": "1000to1999",
+                    "value": "1000to1999"
                   },
                   {
-                    "label": "501-1000$",
-                    "value": "5011000"
+                    "label": "2000to4999",
+                    "value": "2000to4999"
                   },
                   {
-                    "label": "1001-2000$",
-                    "value": "10012000"
+                    "label": "5000to9999",
+                    "value": "5000to9999"
                   },
                   {
-                    "label": ">2000$",
-                    "value": "2000"
+                    "label": "10000to14999",
+                    "value": "10000to14999"
+                  },
+                  {
+                    "label": "15000to19999",
+                    "value": "15000to19999"
+                  },
+                  {
+                    "label": "over20000",
+                    "value": "over20000"
                   }
                 ]
               },
@@ -1029,7 +959,7 @@
               "inputType": "checkbox"
             },
             {
-              "label": "awareOfNationalHotline",
+              "label": "nationalHotlineAwareness",
               "optionsLabelPosition": "right",
               "inline": false,
               "tableView": false,
@@ -1049,12 +979,12 @@
               "validate": {
                 "required": true
               },
-              "key": "awareOfNationalHotline",
+              "key": "nationalHotlineAwareness",
               "type": "radio",
               "input": true
             },
             {
-              "label": "usedNationalHotline",
+              "label": "nationalHotlineUsage",
               "optionsLabelPosition": "right",
               "inline": false,
               "tableView": false,
@@ -1074,10 +1004,10 @@
               "validate": {
                 "required": true
               },
-              "key": "usedNationalHotline",
+              "key": "nationalHotlineUsage",
               "conditional": {
                 "show": true,
-                "when": "awareOfNationalHotline",
+                "when": "nationalHotlineAwareness",
                 "eq": "yes"
               },
               "type": "radio",
@@ -1137,7 +1067,7 @@
               "key": "reasonsForNotUsingNationalHotline",
               "conditional": {
                 "show": true,
-                "when": "usedNationalHotline",
+                "when": "nationalHotlineUsage",
                 "eq": "no"
               },
               "type": "selectboxes",
@@ -1319,7 +1249,6 @@
                 "diabetes": false,
                 "heartDisease": false,
                 "lungDisease": false,
-                "poorCancerOrImmunity": false,
                 "immunocompromised": false,
                 "malnutrition": false,
                 "cancerOrPoorImmunity": false,
@@ -1424,7 +1353,7 @@
               },
               "values": [
                 {
-                  "label": "New Fever",
+                  "label": "newFever",
                   "value": "newFever",
                   "shortcut": ""
                 },
@@ -1449,7 +1378,7 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "Sneezing",
+                  "label": "sneezing",
                   "value": "sneezing",
                   "shortcut": ""
                 },
@@ -1881,7 +1810,7 @@
               },
               "values": [
                 {
-                  "label": "public bus",
+                  "label": "publicBus",
                   "value": "publicBus",
                   "shortcut": ""
                 },
@@ -2374,11 +2303,6 @@
                 "required": true
               },
               "key": "deceasedSex",
-              "conditional": {
-                "show": true,
-                "when": "hasAnyoneDiedInTheHousehold",
-                "eq": "yes"
-              },
               "type": "radio",
               "input": true
             },
@@ -2401,60 +2325,30 @@
               "input": true
             },
             {
-              "label": "officialCauseOfDeathDetermined",
-              "optionsLabelPosition": "right",
-              "inline": false,
-              "tableView": false,
-              "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                },
-                {
-                  "label": "unknown",
-                  "value": "unknown",
-                  "shortcut": ""
-                }
-              ],
-              "calculateServer": false,
-              "validate": {
-                "required": true
-              },
-              "key": "officialCauseOfDeathDetermined",
-              "type": "radio",
-              "input": true
-            },
-            {
               "label": "causeOfDeath",
               "widget": "choicesjs",
               "tableView": true,
               "data": {
                 "values": [
                   {
-                    "label": "Sokor",
-                    "value": "sokor"
+                    "label": "deathSugar",
+                    "value": "deathSugar"
                   },
                   {
-                    "label": "Dhiig kar",
-                    "value": "dhiigKar"
+                    "label": "deathHighBloodPressure",
+                    "value": "deathHighBloodPressure"
                   },
                   {
-                    "label": "Covid19",
-                    "value": "covid19"
+                    "label": "deathCOVID19",
+                    "value": "deathCOVID19"
                   },
                   {
-                    "label": "Ma aqaan",
-                    "value": "maAqaan"
+                    "label": "deathUnknown",
+                    "value": "deathUnknown"
                   },
                   {
-                    "label": "Wax kale ",
-                    "value": "waxKale"
+                    "label": "other",
+                    "value": "other"
                   }
                 ]
               },
@@ -2464,11 +2358,6 @@
                 "required": true
               },
               "key": "causeOfDeath",
-              "conditional": {
-                "show": true,
-                "when": "officialCauseOfDeathDetermined",
-                "eq": "yes"
-              },
               "type": "select",
               "indexeddb": {
                 "filter": {}
@@ -2491,7 +2380,6 @@
                 "highBloodPressure": false,
                 "diabetes": false,
                 "heartDiseaseOrIrritability": false,
-                "pneumoniaOrAsthma": false,
                 "poorCancerOrImmunity": false,
                 "noComorbidities": false
               },
@@ -2512,13 +2400,13 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "PneumoniaOrAsthma",
-                  "value": "pneumoniaOrAsthma",
+                  "label": "lungDisease",
+                  "value": "lungDisease",
                   "shortcut": ""
                 },
                 {
-                  "label": "poorCancerOrImmunity",
-                  "value": "poorCancerOrImmunity",
+                  "label": "cancerOrPoorImmunity",
+                  "value": "cancerOrPoorImmunity",
                   "shortcut": ""
                 },
                 {
@@ -2600,7 +2488,7 @@
               },
               "values": [
                 {
-                  "label": "New Fever",
+                  "label": "newFever",
                   "value": "newFever",
                   "shortcut": ""
                 },
@@ -2625,7 +2513,7 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "Sneezing",
+                  "label": "sneezing",
                   "value": "sneezing",
                   "shortcut": ""
                 },
@@ -2718,143 +2606,6 @@
               "input": true
             },
             {
-              "label": "deceasedPregnancy",
-              "optionsLabelPosition": "right",
-              "inline": false,
-              "tableView": false,
-              "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                }
-              ],
-              "calculateServer": false,
-              "validate": {
-                "required": true
-              },
-              "key": "deceasedPregnancy",
-              "conditional": {
-                "show": true,
-                "when": "deceasedSex",
-                "eq": "female"
-              },
-              "type": "radio",
-              "input": true
-            },
-            {
-              "label": "deceasedDisability",
-              "optionsLabelPosition": "right",
-              "inline": false,
-              "tableView": false,
-              "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                }
-              ],
-              "calculateServer": false,
-              "validate": {
-                "required": true
-              },
-              "key": "deceasedDisability",
-              "type": "radio",
-              "input": true
-            },
-            {
-              "label": "deceasedDisabilities",
-              "optionsLabelPosition": "right",
-              "tableView": false,
-              "defaultValue": {
-                "": false,
-                "other": false,
-                "physicalDisability": false,
-                "learningDisability": false,
-                "psychiatricDisability": false,
-                "visualDisability": false,
-                "hearingDisability": false,
-                "physical": false,
-                "learning": false,
-                "psychiatric": false,
-                "visual": false,
-                "hearing": false
-              },
-              "values": [
-                {
-                  "label": "physical",
-                  "value": "physical",
-                  "shortcut": ""
-                },
-                {
-                  "label": "learning",
-                  "value": "learning",
-                  "shortcut": ""
-                },
-                {
-                  "label": "psychiatric",
-                  "value": "psychiatric",
-                  "shortcut": ""
-                },
-                {
-                  "label": "visual",
-                  "value": "visual",
-                  "shortcut": ""
-                },
-                {
-                  "label": "hearing",
-                  "value": "hearing",
-                  "shortcut": ""
-                },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                }
-              ],
-              "calculateServer": false,
-              "validate": {
-                "required": true
-              },
-              "key": "deceasedDisabilities",
-              "conditional": {
-                "show": true,
-                "when": "deceasedDisability",
-                "eq": "yes"
-              },
-              "type": "selectboxes",
-              "input": true,
-              "inputType": "checkbox"
-            },
-            {
-              "label": "other",
-              "placeholder": "otherDeceasedDisabilities",
-              "spellcheck": true,
-              "tableView": true,
-              "calculateServer": false,
-              "validate": {
-                "required": true
-              },
-              "key": "otherDeceasedDisabilities",
-              "conditional": {
-                "show": true,
-                "when": "deceasedDisabilities",
-                "eq": "other"
-              },
-              "type": "textfield",
-              "input": true
-            },
-            {
               "label": "deathDate",
               "format": "yyyy-MM-dd",
               "tableView": false,
@@ -2925,8 +2676,8 @@
               "shortcut": ""
             },
             {
-              "label": "medicalSuport",
-              "value": "medicalSuport",
+              "label": "medicalSupport",
+              "value": "medicalSupport",
               "shortcut": ""
             },
             {
