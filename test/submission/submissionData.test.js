@@ -41,12 +41,12 @@ const testSubmissions = [
 ];
 const testHouseholdData = [
   {
-    publicId: "90210",
+    followUpId: "90210",
     email: "test@example.com",
     phone: "01189998819991197253",
   },
   {
-    publicId: "90020",
+    followUpId: "90020",
     email: "billgates@example.com",
     phone: "240240240",
   },
@@ -70,7 +70,7 @@ describe("submission database functions", () => {
 
   it("should write submission to database", async () => {
     const household = await submissionData.createHousehold(
-      testHouseholdData[0].publicId
+      testHouseholdData[0].followUpId
     );
 
     const people = await submissionData.createPeople(
@@ -121,7 +121,7 @@ describe("submission database functions", () => {
 
   it("should create a household correctly", async () => {
     const household = await submissionData.createHousehold(
-      testHouseholdData[0].publicId,
+      testHouseholdData[0].followUpId,
       testHouseholdData[0].phone,
       testHouseholdData[0].email
     );
@@ -133,8 +133,8 @@ describe("submission database functions", () => {
     const retrievedHousehold = all[0];
 
     expect(retrievedHousehold._id).toStrictEqual(household._id);
-    expect(retrievedHousehold.publicId).toStrictEqual(
-      testHouseholdData[0].publicId
+    expect(retrievedHousehold.followUpId).toStrictEqual(
+      testHouseholdData[0].followUpId
     );
     expect(retrievedHousehold.phone).toStrictEqual(testHouseholdData[0].phone);
     expect(retrievedHousehold.email).toStrictEqual(testHouseholdData[0].email);
@@ -142,7 +142,7 @@ describe("submission database functions", () => {
 
   it("should create a person correctly", async () => {
     const household = await submissionData.createHousehold(
-      testHouseholdData[0].publicId
+      testHouseholdData[0].followUpId
     );
     await household.save();
 
@@ -179,7 +179,7 @@ describe("submission database functions", () => {
     for (const [i, householdData] of Object.entries(testHouseholdData)) {
       households.push(
         await submissionData.createHousehold(
-          householdData.publicId,
+          householdData.followUpId,
           householdData.phone,
           householdData.email
         )

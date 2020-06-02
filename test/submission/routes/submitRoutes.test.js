@@ -17,7 +17,7 @@ let app;
 const sampleSubmission = {
   household: {
     someHouseholdData: "foo",
-    publicId: "bar-007",
+    followUpId: "bar-007",
   },
   people: [{ name: "personA" }, { name: "personB" }],
   deaths: [{ name: "personC" }],
@@ -31,7 +31,7 @@ const sampleSubmission = {
 const sampleSubmissionInvalid = {
   household: {
     someHouseholdData: "foo",
-    publicId: "bar-007",
+    followUpId: "bar-007",
   },
   people: [{ name: "personA" }, { name: "personB" }],
   deaths: [{ name: "personC" }],
@@ -81,8 +81,8 @@ describe("test /auth", () => {
     expect(submission.household.ref).toStrictEqual(household._id);
     expect(submission.household.data).toStrictEqual(sampleSubmission.household);
 
-    expect(household.publicId).toStrictEqual(
-      sampleSubmission.household.publicId
+    expect(household.followUpId).toStrictEqual(
+      sampleSubmission.household.followUpId
     );
 
     const allVolunteers = await volunteerData.Volunteer.find();

@@ -2,7 +2,10 @@ const submissionApi = require("./submissionAPI");
 const { Error } = require("mongoose");
 
 module.exports = async (req, res) => {
+  console.log(req);
   try {
+    if (req.body.people === undefined) req.body.people = [];
+    if (req.body.deaths === undefined) req.body.deaths = [];
     await submissionApi.initialSubmission(
       res.locals.volunteer._id,
       res.locals.volunteer.teamName,
@@ -15,6 +18,7 @@ module.exports = async (req, res) => {
     res.sendStatus(200);
   } catch (e) {
     if (e instanceof Error.ValidationError) {
+      console.error(e);
       res.status(400);
       res.send("Validation problem with form data.");
     } else throw e;
