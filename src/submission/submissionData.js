@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+// name used if a volunteer doesn't have a team assigned (but we don't want to lose their submission)
+const NO_TEAM_NAME = "noTeam";
+
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Submission = mongoose.model(
   "Submission",
@@ -100,7 +103,7 @@ const Household = mongoose.model(
     email: String,
     headOfHouseholdName: String,
     // the id that is given to volunteers (NOT the ID in the DB), TODO...!!
-    publicId: {
+    followUpId: {
       type: String,
       required: true,
       index: true,
@@ -170,9 +173,9 @@ async function createSubmission(
   return newSubmission;
 }
 
-async function createHousehold(publicId, phone, email, headOfHouseholdName) {
+async function createHousehold(followUpId, phone, email, headOfHouseholdName) {
   const household = new Household({
-    publicId,
+    followUpId,
     phone,
     email,
     headOfHouseholdName,
@@ -269,4 +272,5 @@ module.exports = {
   getVolunteerNextFollowUp,
   createFollowUpSubmisison,
   cancelVolunteerFollowUp,
+  NO_TEAM_NAME,
 };

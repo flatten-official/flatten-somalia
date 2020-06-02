@@ -1,5 +1,7 @@
 const submissionData = require("./submissionData");
+
 const { Error } = require("mongoose");
+const { NO_TEAM_NAME } = require("./submissionData");
 
 async function initialSubmission(
   volunteerId,
@@ -10,8 +12,15 @@ async function initialSubmission(
   deathsData,
   householdData
 ) {
+  if (volunteerTeamName === undefined) {
+    console.log(
+      `Warning: ${volunteerId} has no team name. Assigning default ${submissionData.NO_TEAM_NAME}`
+    );
+    volunteerTeamName = submissionData.NO_TEAM_NAME;
+  }
+
   const household = await submissionData.createHousehold(
-    householdData.publicId,
+    householdData.followUpId,
     householdData.phone,
     householdData.email,
     householdData.headOfHouseName
@@ -50,13 +59,22 @@ async function initialSubmission(
   );
 
   for (const person of people) {
-    if (person.validateSync() !== undefined)
+    const validation = person.validateSync();
+    if (validation !== undefined) {
+      console.error(validation);
       throw new Error.ValidationError("");
+    }
   }
-  if (household.validateSync() !== undefined)
+  const householdValidation = household.validateSync();
+  if (householdValidation !== undefined) {
+    console.error(householdValidation);
     throw new Error.ValidationError("");
-  if (submission.validateSync() !== undefined)
+  }
+  const submissionValidation = submission.validateSync();
+  if (submissionValidation !== undefined) {
+    console.log(submissionValidation);
     throw new Error.ValidationError("");
+  }
 
   for (const person of people) await person.save();
   await household.save();
