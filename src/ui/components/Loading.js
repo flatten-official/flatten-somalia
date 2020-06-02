@@ -9,18 +9,10 @@ const Loading = ({ text }) => {
   return (
     <Container>
       <Row>
-        <Spinner
-          style={{
-            margin: "auto",
-            marginTop: 10 + "px",
-            marginBottom: 10 + "px",
-          }}
-          variant="primary"
-          animation="border"
-        />
+        <Spinner className="spinner" variant="primary" animation="border" />
       </Row>
       <Row>
-        <div style={{ margin: "auto" }}>{text}</div>
+        <div className="spinnerText">{text}</div>
       </Row>
     </Container>
   );

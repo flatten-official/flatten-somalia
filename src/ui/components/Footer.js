@@ -5,10 +5,10 @@ const Footer = () => {
   const { t } = useTranslation("Footer");
   return (
     <footer className="footer">
-      <div className="container text-center" style={{ padding: "15px" }}>
-        {t("builtBy")} &nbsp;
-        <a href="https://flatten.ca">Flatten.ca</a>
-      </div>
+      {t("builtBy")}&nbsp;
+      <a href="https://flatten.ca/about-us" className="footerLink">
+        Flatten
+      </a>
     </footer>
   );
 };
