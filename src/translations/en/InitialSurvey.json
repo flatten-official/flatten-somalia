@@ -13,5 +13,7 @@
   },
   "success": "Success!",
   "returnHomePrompt": "Return to homepage.",
-  "askToGiveFollowUpId": "If the volunteer doesn't have a phone number to follow-up, give them a block with this number."
+  "askToGiveFollowUpId": "If the volunteer doesn't have a phone number to follow-up, give them a block with this number.",
+  "flattenConsent": "By continuing you agree to Flatten's <1>Privacy Policy</1> and <3>Terms of Service</3>.",
+  "braConsent": "After greetings, my name is __ and I work with the community surveys of covid19 in this District. ”We are conducting research on the effects of covid19 virus disease in all 17 districts in Mogadishu, and I want to assure you that 'All you give is confidential. You can refuse to answer any specific question. You can also end the interview whenever there are no consequences.\nHowever, we greatly appreciate your thoughts on these topics, which will help to generalize the impact that covid10 has had on the various communities.\nThank you for this information"
 }
