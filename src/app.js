@@ -9,20 +9,12 @@ const { Config } = require("./config");
 const routes = require("./routes");
 const appErrorHandler = require("./utils/express/errorHandler");
 const loggerMiddleware = require("./utils/express/loggerMiddleware");
+const bodySanitizer = require("./utils/express/bodySanitizer");
 
 function getApp() {
   const app = express();
 
-  if (process.env.ENVIRONMEN === "dev") {
-    app.use(cors({ origin: true, credentials: true }));
-  } else {
-    app.use(
-      cors({
-        origin: [process.env.FRONTEND_URL],
-        credentials: true,
-      })
-    );
-  }
+  app.use(cors({ origin: [process.env.FRONTEND_URL], credentials: true }));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(bodyParser.raw());
@@ -30,6 +22,7 @@ function getApp() {
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
   app.use(cookieParser(Config.secrets.cookieSecret));
+  app.use(bodySanitizer);
   app.use(loggerMiddleware);
   app.use("/", routes);
   app.use(appErrorHandler);
