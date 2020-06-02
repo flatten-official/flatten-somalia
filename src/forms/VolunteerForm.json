@@ -1067,7 +1067,7 @@
               "key": "reasonsForNotUsingNationalHotline",
               "conditional": {
                 "show": true,
-                "when": "usedNationalHotline",
+                "when": "nationalHotlineUsage",
                 "eq": "no"
               },
               "type": "selectboxes",
