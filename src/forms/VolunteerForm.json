@@ -1007,7 +1007,7 @@
               "key": "nationalHotlineUsage",
               "conditional": {
                 "show": true,
-                "when": "awareOfNationalHotline",
+                "when": "nationalHotlineAwareness",
                 "eq": "yes"
               },
               "type": "radio",
