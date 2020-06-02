@@ -1,12 +1,12 @@
 const {
   findVolunteerByEmail,
+  Volunteer,
   Permissions,
 } = require("../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
-const { setup } = require("../../../src/index");
 const { login, TEST_VOLUNTEER } = require("../../testUtils/requests");
 
 describe("endpoint POST /volunteer", () => {
@@ -14,7 +14,6 @@ describe("endpoint POST /volunteer", () => {
   let request;
 
   beforeAll(async () => {
-    await setup({ database: false });
     await util.connectToDatabase();
     app = await getApp();
     request = supertest(app);
@@ -28,8 +27,8 @@ describe("endpoint POST /volunteer", () => {
       permissions: [Permissions.manageVolunteers],
     });
 
+    console.log(await Volunteer.find());
     const newVolunteerEmail = "new-volunteer@example.ca";
-    console.log("test");
 
     const res = await agent.post("/volunteer").send({
       volunteerData: {

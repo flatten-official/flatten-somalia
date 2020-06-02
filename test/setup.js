@@ -1,2 +1,1 @@
-require("dotenv").config();
-process.env.ENVIRONMENT = "dev";
+process.env.ENVIRONMENT = "test";

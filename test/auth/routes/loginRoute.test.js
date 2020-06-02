@@ -9,15 +9,13 @@ const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
 const { addVolunteer } = require("../../../src/volunteer/volunteerData");
-const { setup } = require("../../../src/index");
-const { Config } = require("../../../src/config");
+const { getConfig } = require("../../../src/config");
 const { TEST_VOLUNTEER } = require("../../testUtils/requests");
 
 let request;
 
 describe("test /auth/login", () => {
   beforeAll(async () => {
-    await setup({ database: false });
     await util.connectToDatabase();
     request = supertest(await getApp());
   });
@@ -88,6 +86,8 @@ describe("test /auth/login", () => {
     expect(payload.id).toMatch(volunteer._id.toString());
 
     const emailLinkBase = url.slice(0, tokenIndex);
-    expect(emailLinkBase).toMatch(Config.urls.emailLink);
+    expect(emailLinkBase).toMatch(
+      getConfig().urls.backendHost + getConfig().urls.emailLink
+    );
   });
 });

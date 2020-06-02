@@ -27,7 +27,6 @@
     "cors": "^2.8.5",
     "cron": "^1.8.2",
     "depcheck": "^0.9.2",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "helmet": "^3.22.0",
@@ -64,5 +63,10 @@
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
+  },
+  "nodemonConfig": {
+    "env": {
+      "ENVIRONMENT": "dev"
+    }
   }
 }

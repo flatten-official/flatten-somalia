@@ -5,20 +5,13 @@
  *  For running in production you need to set MONGO_URI in .env and comment out some lines below
  */
 
-const result = require("dotenv").config();
-
-if (result.error) throw result.error;
+process.env.ENVIRONMENT = "dev";
 
 const { setup, cleanup } = require("../src/index");
 const {
   addVolunteer,
   // Permissions
 } = require("../src/volunteer/volunteerData");
-
-// Only comment out these lines for production
-// const { Config } = require("./../src/config");
-// Config.secrets.mongoUri = process.env.MONGO_URI;
-// Config.secretId = null;
 
 const VOLUNTEERS = [
   // Example volunteer
@@ -30,7 +23,16 @@ const VOLUNTEERS = [
 ];
 
 const main = async (volunteers) => {
-  await setup({ sendGrid: false });
+  // Only comment out these lines for production
+  await setup({
+    database: true,
+    // customConfig: {
+    //   secretId: null,
+    //   secrets: {
+    //     mongoUri: "customURIToFillIn",
+    //   },
+    // },
+  });
 
   for (const volunteer of volunteers) {
     await addVolunteer(volunteer);

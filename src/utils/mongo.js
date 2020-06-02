@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { CronJob } = require("cron");
 const { removedExpiredCookies } = require("../auth/cookieData");
-const { Config } = require("../config");
+const { getConfig } = require("../config");
 
 const CONNECTION_OPTIONS = {
   useNewUrlParser: true,
@@ -24,9 +24,9 @@ async function cleanupDatabase() {
 
 async function connectToDatabase() {
   try {
-    await mongoose.connect(Config.secrets.mongoUri, CONNECTION_OPTIONS);
+    await mongoose.connect(getConfig().secrets.mongoUri, CONNECTION_OPTIONS);
   } catch (e) {
-    console.log("Failed to connect to database.");
+    console.log("Failed to connect to database." + e);
     throw e;
   }
 

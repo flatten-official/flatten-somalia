@@ -60,11 +60,7 @@ const retrieveById = (all, id) =>
   all.filter((obj) => obj._id.toString() === id.toString())[0];
 
 describe("submission database functions", () => {
-  beforeAll(async () => {
-    await setup({ database: false });
-    await util.connectToDatabase();
-  });
-
+  beforeAll(async () => await util.connectToDatabase());
   afterEach(async () => await util.clearDatabase());
   afterAll(async () => await util.closeDatabase());
 

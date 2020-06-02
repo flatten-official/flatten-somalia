@@ -45,7 +45,6 @@ const sampleSubmissionInvalid = {
 
 describe("test /auth", () => {
   beforeAll(async () => {
-    await setup({ database: false });
     await util.connectToDatabase();
     app = await getApp();
     request = supertest(app);

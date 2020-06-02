@@ -10,11 +10,12 @@ const _ = require("lodash");
 async function setup(options = {}) {
   options = _.defaults(options, {
     config: true,
-    database: true,
-    sendGrid: true,
+    database: false,
+    sendGrid: false,
+    customConfig: {},
   });
 
-  if (options.config) await configSetup();
+  if (options.config) await configSetup(options.customConfig);
   if (options.database) await setupDatabase();
   if (options.sendGrid) sendGridSetup();
 }

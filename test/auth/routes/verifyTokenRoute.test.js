@@ -19,7 +19,6 @@ const OLD_TOKEN =
 
 describe("test /auth/token", () => {
   beforeAll(async () => {
-    await setup({ database: false });
     await util.connectToDatabase();
     request = supertest(await getApp());
   });

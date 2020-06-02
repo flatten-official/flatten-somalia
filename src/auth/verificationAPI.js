@@ -3,7 +3,7 @@ const { writeCookie } = require("./cookieData");
 const { findVolunteerByEmail } = require("../volunteer/volunteerData");
 const { verifyToken, signToken } = require("../utils/jwt");
 const { sendVerificationEmail } = require("../utils/sendGrid");
-const { Config } = require("../config");
+const { getConfig } = require("../config");
 
 const COOKIE_LIFE = 1080; // In minutes
 const EMAIL_EXPIRY = 15; // In minutes
@@ -18,11 +18,15 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
 
   const token = await signToken({ id: volunteer._id }, EMAIL_EXPIRY);
 
-  if (Config.debug) {
+  if (getConfig().debug) {
     console.log(token);
   }
 
-  const verificationLink = Config.urls.emailLink + "?token=" + token;
+  const verificationLink =
+    getConfig().urls.backendHost +
+    getConfig().urls.emailLink +
+    "?token=" +
+    token;
 
   return await sendVerificationEmail(emailAddress, verificationLink);
 };
