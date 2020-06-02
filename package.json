@@ -4,10 +4,23 @@
   "private": true,
   "main": "./scripts/start.js",
   "scripts": {
-    "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "depcheck": "depcheck . --ignores=\"eslint-*,babel*,*/webpack,prettier,*sass*,depcheck,font-awesome,formiojs\"",
-    "lint": "eslint --fix ."
+    "lint": "eslint --fix .",
+    "start": "node scripts/start.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
   },
   "browserslist": {
     "production": [
@@ -21,22 +34,20 @@
       "last 1 safari version"
     ]
   },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
-  },
-  "devDependencies": {
+  "dependencies": {
     "@babel/core": "7.9.0",
     "@svgr/webpack": "4.3.3",
+    "axios": "^0.19.2",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.1.0",
     "babel-plugin-named-asset-import": "^0.3.6",
     "babel-preset-react-app": "^9.1.2",
+    "bootstrap": "^4.5.0",
+    "bootswatch": "^4.5.0",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
     "confusing-browser-globals": "^1.0.9",
+    "connected-react-router": "^6.8.0",
     "css-loader": "3.4.2",
-    "depcheck": "^0.9.2",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-loader": "3.0.3",
@@ -47,10 +58,16 @@
     "eslint-plugin-react": "7.19.0",
     "eslint-plugin-react-hooks": "^1.6.1",
     "file-loader": "6.0.0",
+    "font-awesome": "^4.7.0",
+    "formiojs": "^4.9.26",
     "fs-extra": "^8.1.0",
+    "history": "^4.10.1",
     "html-webpack-plugin": "4.0.0-beta.11",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.6",
+    "i18next": "^19.4.4",
+    "i18next-browser-languagedetector": "^4.2.0",
+    "immutable": "^4.0.0-rc.12",
+    "jquery": "^3.5.1",
+    "leaflet": "^1.6.0",
     "mini-css-extract-plugin": "0.9.0",
     "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "5.0.3",
@@ -61,29 +78,6 @@
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
     "prettier": "^2.0.5",
-    "resolve-url-loader": "3.1.1",
-    "sass-loader": "8.0.2",
-    "style-loader": "0.23.1",
-    "terser-webpack-plugin": "2.3.5",
-    "url-loader": "2.3.0",
-    "webpack": "4.42.0",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "4.3.1"
-  },
-  "dependencies": {
-    "axios": "^0.19.2",
-    "bootstrap": "^4.5.0",
-    "bootswatch": "^4.5.0",
-    "connected-react-router": "^6.8.0",
-    "font-awesome": "^4.7.0",
-    "formiojs": "^4.9.26",
-    "history": "^4.10.1",
-    "i18next": "^19.4.4",
-    "i18next-browser-languagedetector": "^4.2.0",
-    "immutable": "^4.0.0-rc.12",
-    "jquery": "^3.5.1",
-    "leaflet": "^1.6.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
@@ -98,14 +92,20 @@
     "react-router-dom": "5.2.0",
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
-    "seamless-immutable": "^7.1.4"
+    "resolve-url-loader": "3.1.1",
+    "sass-loader": "8.0.2",
+    "seamless-immutable": "^7.1.4",
+    "style-loader": "0.23.1",
+    "terser-webpack-plugin": "2.3.5",
+    "url-loader": "2.3.0",
+    "webpack": "4.42.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-manifest-plugin": "2.2.0",
+    "workbox-webpack-plugin": "4.3.1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": "eslint --cache --fix"
+  "devDependencies": {
+    "depcheck": "^0.9.2",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.6"
   }
 }

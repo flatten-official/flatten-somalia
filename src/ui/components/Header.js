@@ -6,18 +6,51 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, AUTH_SUCCESS } from "../../backend/auth/authActions";
 
-const Header = () => {
+const LanguageDropDown = () => {
   const { t, i18n } = useTranslation("Navbar");
+
+  const setLanguage = (lang) => (e) => {
+    e.preventDefault();
+    i18n.changeLanguage(lang);
+  };
+
+  return (
+    <Nav className="justify-content-end">
+      <NavDropdown id="dropdown-menu" title={t("language")}>
+        <NavDropdown.Item onClick={setLanguage("so")}>
+          Soomaali
+        </NavDropdown.Item>
+        <NavDropdown.Item onClick={setLanguage("en")}>English</NavDropdown.Item>
+      </NavDropdown>
+    </Nav>
+  );
+};
+
+const Links = () => {
+  const { t } = useTranslation("Navbar");
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const setLanguage = (lang) => {
-    return (e) => {
-      e.preventDefault();
-      i18n.changeLanguage(lang);
-    };
-  };
+  if (auth.status === AUTH_SUCCESS)
+    return (
+      <>
+        <LinkContainer to={Routes.home}>
+          <Nav.Link>{t("links.homepage")}</Nav.Link>
+        </LinkContainer>
+        <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
+          {t("links.logout")}
+        </Nav.Link>
+      </>
+    );
+  else
+    return (
+      <LinkContainer to={Routes.auth}>
+        <Nav.Link>{t("links.login")}</Nav.Link>
+      </LinkContainer>
+    );
+};
 
+const Header = () => {
   return (
     <Navbar className="header" expand="lg">
       <LinkContainer to={Routes.home}>
@@ -28,31 +61,9 @@ const Header = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          {auth.status === AUTH_SUCCESS ? (
-            <>
-              <LinkContainer to={Routes.home}>
-                <Nav.Link>{t("links.homepage")}</Nav.Link>
-              </LinkContainer>
-              <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
-                {t("links.logout")}
-              </Nav.Link>
-            </>
-          ) : (
-            <LinkContainer to={Routes.auth}>
-              <Nav.Link>{t("links.login")}</Nav.Link>
-            </LinkContainer>
-          )}
+          <Links />
         </Nav>
-        <Nav className="justify-content-end">
-          <NavDropdown id="dropdown-menu" title={t("language")}>
-            <NavDropdown.Item onClick={setLanguage("so")}>
-              Soomaali
-            </NavDropdown.Item>
-            <NavDropdown.Item onClick={setLanguage("en")}>
-              English
-            </NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
+        <LanguageDropDown />
       </Navbar.Collapse>
     </Navbar>
   );
