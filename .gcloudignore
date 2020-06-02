@@ -9,3 +9,4 @@ src/i18nResources.json
 backend.js
 .eslintcache
 .DS_Store
+.git
