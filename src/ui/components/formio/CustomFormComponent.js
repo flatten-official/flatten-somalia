@@ -3,8 +3,11 @@ import ReactDOM from "react-dom";
 import { ReactComponent } from "react-formio";
 import { Provider } from "react-redux";
 import store from "../../../store";
-import { I18nextProvider } from "react-i18next";
 
+/**
+ * Returns a FormIoComponent that contains the InnerComponent
+ * This pattern is required since FormIO is a 3rd party library and doesn't take React but rather pure JS.
+ **/
 const CustomFormIoComponent = (InnerComponent) => {
   return class FollowUpDisplayInjector extends ReactComponent {
     /**
