@@ -1,0 +1,154 @@
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #868e96;
+$gray-700: #495057;
+$gray-800: #373a3c;
+$gray-900: #212529;
+$black: #000;
+
+$blue: #2780e3;
+$indigo: #6610f2;
+$purple: #613d7c;
+$pink: #e83e8c;
+$red: #ff0039;
+$orange: #f2661f;
+$yellow: #bed32b;
+$green: #3fb618;
+$teal: #20c997;
+$cyan: #9954bb;
+$lightblue: lighten($blue, 20%);
+
+$primary: $blue;
+$secondary: $orange;
+$success: $green;
+$info: $lightblue;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-800;
+
+// TODO Switch to @use
+// https://sass-lang.com/documentation/at-rules/import#main-content
+@import "../../node_modules/bootswatch/dist/flatly/variables";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootswatch/dist/flatly/bootswatch";
+$fa-font-path: "../fonts";
+@import "../../node_modules/formiojs/dist/formio.full.css";
+
+.wordmark {
+  font-family: "DM Sans", sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.75px;
+  color: $black;
+  padding-top: 10px;
+  padding-left: 15%;
+  padding-right: 80px;
+}
+
+.websitetitle {
+  font-family: "DM Sans", sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.75px;
+  color: $black;
+}
+
+.header {
+  background-color: #ebf6ee;
+}
+
+.logo {
+  height: 1.9em;
+}
+
+.text-blue {
+  color: #127abf;
+}
+
+.text-green {
+  color: #449414;
+}
+
+.hero-image {
+  display: inline;
+  height: 2em;
+}
+
+#main {
+  margin-top: 10px;
+}
+
+.body {
+  font-family: "DM Sans", sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.75px;
+  color: black;
+}
+
+.heading {
+  font-family: "DM Sans", sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.75px;
+  color: black;
+  background-color: #ebf6ee;
+  display: inline-block;
+  line-height: 0.5;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  background-color: transparent;
+  line-height: 1.5;
+}
+
+a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+.map {
+  height: 70vh;
+}
+
+.btn-light {
+  background-color: #f5f3f2;
+}
+
+.btn-lg {
+  font-size: 22px;
+  margin: 5px 15%;
+  padding: 10px 30px;
+  width: 70%
+}
+
+.btn-sm {
+  font-size: 18px;
+  margin: 3px 8%;
+  padding: 5px 15px;
+  width: 40%
+}
+
+.btn-light:hover {
+  background-color: #bbccee;
+}
+
+.btn-light:disabled {
+  color: #b1b1b1;
+  background-color: #faf6f6;
+}
+
+.seventypxmargin {
+  margin-top: 70px;
+}
+
+.fourtypxmargin {
+  margin-top: 40px;
+}
+
+.twentypxmargin {
+  margin-top: 20px;
+}

@@ -1,30 +1,28 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { ConnectedRouter } from 'connected-react-router'
-import store, { history } from './store'
-import { initAuth, Formio, Components } from 'react-formio';
-import App from './App'
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { ConnectedRouter } from "connected-react-router";
+import store, { history } from "./store";
+import { Components } from "formiojs";
 
-import components from './components';
-import {AppConfig} from './config';
+import App from "./ui/App";
 
-import './styles.scss'
+import "./i18n";
+import "./styles/styles.scss";
+import CustomFormIoComponent from "./ui/components/formio/CustomFormComponent";
+import FollowUpId from "./ui/initialSurvey/elements/FollowUpId";
+import TranslatedText from "./ui/components/formio/TranslatedText";
 
-Formio.setProjectUrl(AppConfig.projectUrl);
-Formio.setBaseUrl(AppConfig.apiUrl);
-Components.setComponents(components);
-
-// Initialize the current user
-store.dispatch(initAuth());
+Components.setComponents({
+  customFollowUpId: CustomFormIoComponent(FollowUpId),
+  customText: CustomFormIoComponent(TranslatedText),
+});
 
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <div>
-        <App />
-      </div>
+      <App />
     </ConnectedRouter>
   </Provider>,
-  document.getElementById('root')
-)
+  document.getElementById("root")
+);

@@ -1,43 +1,19 @@
-Form.io React Starter Application
----------------------------------
-This is a starter application that uses React, Bootstrap, Webpack, and Form.io to create a powerful Serverless application.
+# The Volunteer Form Website
 
-Installation
----------
- - Download this application within your local machine and then type the following.
-```
-npm install
-```
+## Prerequisites
 
- - If you have not already, create a project on [https://portal.form.io](https://portal.form.io). You can import the ```src/project.json``` file to add all the forms and resources needed for this project.
+- Node
 
- - Modify the ```src/config.js``` file to point the PROJECT_URL variable to the project you created in form.io.
+## Setup
 
-Running
------------
-You can develop within this application by typing the following
+1. Run `npm install`
 
-```
-npm start
-```
+2. Copy the content of `./src/backend/backend.dev.js` to a new file called `./src/backend/backend.js`
 
-This will launch the application locally @ https://localhost:3000. Now, whenever you make changes, those will be directly reflected within the launched application.
+3. To be able to Login ask Martin or Arthur to add you to the volunteer staging database.
 
+4. Enable ESLint in your code editor (normally through the ESLint Plugin)
 
-Building
-------------
-Once you have your application developed, it is now time to build the application for deployment. This can be done by typing the following.
+## Running locally
 
-```
-npm run build
-```
-
-This will generate the **build** folder which you can then use to install within any webserver, Github Page, an Amazon S3 bucket, etc.
-
-Commands
-------------
-To see all available commands type the following
-
-```
-npm run
-```
+1. Run `npm run start`

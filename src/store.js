@@ -1,30 +1,36 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { connectRouter, routerMiddleware } from 'connected-react-router'
-import thunk from 'redux-thunk'
-import { createHashHistory as createHistory } from 'history'
-import rootReducer from './rootReducer'
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
+import { connectRouter, routerMiddleware } from "connected-react-router";
+import thunk from "redux-thunk";
+import { createBrowserHistory } from "history";
+import authReducer from "./backend/auth/authReducer";
+import { reducer } from "./ui/initialSurvey/reducer";
+import { form, forms, submission, submissions } from "react-formio";
 
-export const history = createHistory()
+export const history = createBrowserHistory();
 
-const initialState = {}
-const enhancers = []
-const middleware = [thunk, routerMiddleware(history)]
+const initialState = {};
+const enhancers = [];
+const middleware = [thunk, routerMiddleware(history)];
 
-if (process.env.NODE_ENV === 'development') {
-  const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__
-
-  if (typeof devToolsExtension === 'function') {
-    enhancers.push(devToolsExtension())
+if (process.env.NODE_ENV === "development") {
+  const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
+  if (typeof devToolsExtension === "function") {
+    enhancers.push(devToolsExtension());
   }
 }
 
-const composedEnhancers = compose(
-  applyMiddleware(...middleware),
-  ...enhancers
-)
+const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
 
 export default createStore(
-  connectRouter(history)(rootReducer),
+  combineReducers({
+    router: connectRouter(history),
+    auth: authReducer,
+    volunteerForm: reducer,
+    form: form({ name: "form" }),
+    forms: forms({ name: "forms", query: { type: "form", tags: "common" } }),
+    submission: submission({ name: "submission" }),
+    submissions: submissions({ name: "submissions" }),
+  }),
   initialState,
   composedEnhancers
-)
+);
