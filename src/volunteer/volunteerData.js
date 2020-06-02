@@ -50,8 +50,6 @@ const defaultVolunteer = {
 };
 
 const getNextFriendlyId = async () => {
-  const all = await Volunteer.find();
-  console.log(all.toString());
   const largestVolunteer = await Volunteer.find({}, "friendlyId")
     .sort({ friendlyId: -1 })
     .limit(1);
