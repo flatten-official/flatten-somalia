@@ -1,10 +1,10 @@
 steps:
   - name: gcr.io/cloud-builders/gsutil
     args: ["cp", "src/backend/api/backend.$_ENVIRONMENT.js", "src/backend/api/backend.js"]
-  - name: gcr.io/cloud-builders/npm
+  - name: gcr.io/cloud-builders/npm:current
     entrypoint: "npm"
     args: ["install", "--production"]
-  - name: gcr.io/cloud-builders/npm
+  - name: gcr.io/cloud-builders/npm:current
     entrypoint: "npm"
     args: ["run", "build"]
   - name: gcr.io/$PROJECT_ID/firebase
