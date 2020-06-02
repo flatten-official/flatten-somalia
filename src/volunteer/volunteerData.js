@@ -77,7 +77,8 @@ const addVolunteer = async (newVolunteer) => {
  * @param volunteerId
  * @return {Promise}
  */
-const findVolunteerById = (volunteerId) => Volunteer.findById(volunteerId);
+const findVolunteerById = (volunteerId) =>
+  Volunteer.findById(volunteerId).exec(); // exec() required to force return of promise
 
 /**
  * Returns null if volunteer doesn't exist, otherwise returns the volunteer object
