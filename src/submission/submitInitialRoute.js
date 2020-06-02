@@ -5,6 +5,7 @@ module.exports = async (req, res) => {
   try {
     await submissionApi.initialSubmission(
       res.locals.volunteer._id,
+      res.locals.volunteer.teamName,
       req.body.schema,
       req.body.metadata,
       req.body.people,

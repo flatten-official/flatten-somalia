@@ -6,6 +6,7 @@ const { setup } = require("../../../src/index");
 const { login } = require("../../testUtils/requests");
 
 const submissionData = require("../../../src/submission/submissionData");
+const volunteerData = require("../../../src/volunteer/volunteerData");
 
 const retrieveById = (all, id) =>
   all.filter((obj) => obj._id.toString() === id.toString())[0];
@@ -83,6 +84,11 @@ describe("test /auth", () => {
     expect(household.publicId).toStrictEqual(
       sampleSubmission.household.publicId
     );
+
+    const allVolunteers = await volunteerData.Volunteer.find();
+    expect(allVolunteers).toHaveLength(1);
+
+    expect(allVolunteers[0].teamName).toStrictEqual(submission.teamName);
   });
 
   it("should fail for a user without the right permissions", async () => {
