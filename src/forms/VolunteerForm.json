@@ -708,32 +708,40 @@
               "data": {
                 "values": [
                   {
-                    "label": "0-100$",
-                    "value": "0100"
+                    "label": "0to99",
+                    "value": "0to99"
                   },
                   {
-                    "label": "101-200$",
-                    "value": "101200"
+                    "label": "100to499",
+                    "value": "100to499"
                   },
                   {
-                    "label": "201-400$",
-                    "value": "201400"
+                    "label": "500to999",
+                    "value": "500to999"
                   },
                   {
-                    "label": "401-500$",
-                    "value": "401500"
+                    "label": "1000to1999",
+                    "value": "1000to1999"
                   },
                   {
-                    "label": "501-1000$",
-                    "value": "5011000"
+                    "label": "2000to4999",
+                    "value": "2000to4999"
                   },
                   {
-                    "label": "1001-2000$",
-                    "value": "10012000"
+                    "label": "5000to9999",
+                    "value": "5000to9999"
                   },
                   {
-                    "label": ">2000$",
-                    "value": "2000"
+                    "label": "10000to14999",
+                    "value": "10000to14999"
+                  },
+                  {
+                    "label": "15000to19999",
+                    "value": "15000to19999"
+                  },
+                  {
+                    "label": "over20000",
+                    "value": "over20000"
                   }
                 ]
               },
@@ -1029,7 +1037,7 @@
               "inputType": "checkbox"
             },
             {
-              "label": "awareOfNationalHotline",
+              "label": "nationalHotlineAwareness",
               "optionsLabelPosition": "right",
               "inline": false,
               "tableView": false,
@@ -1049,12 +1057,12 @@
               "validate": {
                 "required": true
               },
-              "key": "awareOfNationalHotline",
+              "key": "nationalHotlineAwareness",
               "type": "radio",
               "input": true
             },
             {
-              "label": "usedNationalHotline",
+              "label": "nationalHotlineUsage",
               "optionsLabelPosition": "right",
               "inline": false,
               "tableView": false,
@@ -1074,7 +1082,7 @@
               "validate": {
                 "required": true
               },
-              "key": "usedNationalHotline",
+              "key": "nationalHotlineUsage",
               "conditional": {
                 "show": true,
                 "when": "awareOfNationalHotline",
@@ -1319,7 +1327,6 @@
                 "diabetes": false,
                 "heartDisease": false,
                 "lungDisease": false,
-                "poorCancerOrImmunity": false,
                 "immunocompromised": false,
                 "malnutrition": false,
                 "cancerOrPoorImmunity": false,
@@ -1424,7 +1431,7 @@
               },
               "values": [
                 {
-                  "label": "New Fever",
+                  "label": "newFever",
                   "value": "newFever",
                   "shortcut": ""
                 },
@@ -1449,7 +1456,7 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "Sneezing",
+                  "label": "sneezing",
                   "value": "sneezing",
                   "shortcut": ""
                 },
@@ -1881,7 +1888,7 @@
               },
               "values": [
                 {
-                  "label": "public bus",
+                  "label": "publicBus",
                   "value": "publicBus",
                   "shortcut": ""
                 },
@@ -2374,11 +2381,6 @@
                 "required": true
               },
               "key": "deceasedSex",
-              "conditional": {
-                "show": true,
-                "when": "hasAnyoneDiedInTheHousehold",
-                "eq": "yes"
-              },
               "type": "radio",
               "input": true
             },
@@ -2401,7 +2403,7 @@
               "input": true
             },
             {
-              "label": "officialCauseOfDeathDetermined",
+              "label": "causeOfDeath",
               "optionsLabelPosition": "right",
               "inline": false,
               "tableView": false,
@@ -2426,7 +2428,7 @@
               "validate": {
                 "required": true
               },
-              "key": "officialCauseOfDeathDetermined",
+              "key": "causeOfDeath",
               "type": "radio",
               "input": true
             },
@@ -2437,24 +2439,24 @@
               "data": {
                 "values": [
                   {
-                    "label": "Sokor",
-                    "value": "sokor"
+                    "label": "deathSugar",
+                    "value": "deathSugar"
                   },
                   {
-                    "label": "Dhiig kar",
-                    "value": "dhiigKar"
+                    "label": "deathHighBloodPressure",
+                    "value": "deathHighBloodPressure"
                   },
                   {
-                    "label": "Covid19",
-                    "value": "covid19"
+                    "label": "deathCOVID19",
+                    "value": "deathCOVID19"
                   },
                   {
-                    "label": "Ma aqaan",
-                    "value": "maAqaan"
+                    "label": "deathUnknown",
+                    "value": "deathUnknown"
                   },
                   {
-                    "label": "Wax kale ",
-                    "value": "waxKale"
+                    "label": "other",
+                    "value": "other"
                   }
                 ]
               },
@@ -2491,7 +2493,6 @@
                 "highBloodPressure": false,
                 "diabetes": false,
                 "heartDiseaseOrIrritability": false,
-                "pneumoniaOrAsthma": false,
                 "poorCancerOrImmunity": false,
                 "noComorbidities": false
               },
@@ -2512,13 +2513,13 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "PneumoniaOrAsthma",
-                  "value": "pneumoniaOrAsthma",
+                  "label": "lungDisease",
+                  "value": "lungDisease",
                   "shortcut": ""
                 },
                 {
-                  "label": "poorCancerOrImmunity",
-                  "value": "poorCancerOrImmunity",
+                  "label": "cancerOrPoorImmunity",
+                  "value": "cancerOrPoorImmunity",
                   "shortcut": ""
                 },
                 {
@@ -2600,7 +2601,7 @@
               },
               "values": [
                 {
-                  "label": "New Fever",
+                  "label": "newFever",
                   "value": "newFever",
                   "shortcut": ""
                 },
@@ -2625,7 +2626,7 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "Sneezing",
+                  "label": "sneezing",
                   "value": "sneezing",
                   "shortcut": ""
                 },
@@ -2925,8 +2926,8 @@
               "shortcut": ""
             },
             {
-              "label": "medicalSuport",
-              "value": "medicalSuport",
+              "label": "medicalSupport",
+              "value": "medicalSupport",
               "shortcut": ""
             },
             {
