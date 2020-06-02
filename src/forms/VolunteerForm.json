@@ -2355,36 +2355,6 @@
             },
             {
               "label": "causeOfDeath",
-              "optionsLabelPosition": "right",
-              "inline": false,
-              "tableView": false,
-              "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                },
-                {
-                  "label": "unknown",
-                  "value": "unknown",
-                  "shortcut": ""
-                }
-              ],
-              "calculateServer": false,
-              "validate": {
-                "required": true
-              },
-              "key": "causeOfDeath",
-              "type": "radio",
-              "input": true
-            },
-            {
-              "label": "causeOfDeath",
               "widget": "choicesjs",
               "tableView": true,
               "data": {
@@ -2417,11 +2387,6 @@
                 "required": true
               },
               "key": "causeOfDeath",
-              "conditional": {
-                "show": true,
-                "when": "officialCauseOfDeathDetermined",
-                "eq": "yes"
-              },
               "type": "select",
               "indexeddb": {
                 "filter": {}
