@@ -18,6 +18,7 @@
   "hold": "I have a hold",
   "rent": "Rent",
   "otherOwnershipType": "Other Ownership Type",
+  "rentRange": "Where on the range does your rent fall?",
   "roomsCount": "How many rooms are in your home?",
   "residentsCount": "How people live in your home?",
   "age": "What is your age?",

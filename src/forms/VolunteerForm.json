@@ -284,6 +284,55 @@
           "input": true
         },
         {
+          "label": "rentRange",
+          "widget": "choicesjs",
+          "tableView": true,
+          "data": {
+            "values": [
+              {
+                "label": "0-50$",
+                "value": "050"
+              },
+              {
+                "label": "51-100$",
+                "value": "51100"
+              },
+              {
+                "label": "101-200$",
+                "value": "101200"
+              },
+              {
+                "label": "201-500$",
+                "value": "201500"
+              },
+              {
+                "label": "501-100$",
+                "value": "501100"
+              },
+              {
+                "label": ">1000$",
+                "value": "1000"
+              }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "rentRange",
+          "conditional": {
+            "show": true,
+            "when": "ownershipType",
+            "eq": "rent"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
           "label": "roomsCount",
           "mask": false,
           "spellcheck": true,
