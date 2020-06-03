@@ -40,7 +40,7 @@ const SubmissionPage = () => {
 
   return (
     <>
-      <h3> {t("title")} </h3>
+      <h3 className="submissionPageTitle"> {t("title")} </h3>
       <SubmissionPageContent />
     </>
   );

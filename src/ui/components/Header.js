@@ -54,8 +54,8 @@ const Header = () => {
   return (
     <Navbar className="header" expand="lg">
       <LinkContainer to={Routes.home}>
-        <Navbar.Brand>
-          <h3 className="wordmark">FLATTEN</h3>
+        <Navbar.Brand className="wordmark">
+          <h4>FLATTEN</h4>
         </Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

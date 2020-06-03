@@ -7,14 +7,11 @@ const Home = () => {
   const { t } = useTranslation("Home");
 
   return (
-    <center>
-      <div className="seventypxmargin" />
-      <div className="websitetitle">
+    <>
+      <h3 className="homePageTitle">
         <b>{t("welcome")}</b>
-      </div>
-      <div className="fourtypxmargin" />
-      <div className="heading">{t("formSelectionPrompt")}</div>
-      <div className="twentypxmargin" />
+      </h3>
+      <h5 className="homePageSelectFormTitle">{t("formSelectionPrompt")}</h5>
       <Button variant="light" size="lg" href={Routes.submission}>
         {t("goToInitialSurvey")}
       </Button>
@@ -28,7 +25,7 @@ const Home = () => {
       {/* Don't know if theres a more secure/better way to do this auth.user.permissions.includes(
             "manageVolunteers"
           ) && <Link to={null}>{t("goToAddVolunteer")}</Link> */}
-    </center>
+    </>
   );
 };
 

@@ -28,24 +28,23 @@ const AppContent = () => {
   if (auth.status === AUTH_UNINITIALISED) return <Loading />;
 
   return (
-    <center><div className="container" id="main">
-        <PrivateRoute
-          exact
-          path={Routes.home}
-          comp={Home}
-          requiredPermission={permissions.submitForms}
-        />
-        <PrivateRoute
-          exact
-          path={Routes.submission}
-          comp={SubmissionPageContent}
-          requiredPermission={permissions.submitForms}
-        />
-        <Route path={Routes.auth} component={Login} />
-        <Route path={Routes.success} component={Success} />
-        <Route path={Routes.emailSubmitted} component={LoginSuccess} />
-      </div>
-    </center>
+    <div className="container" id="main">
+      <PrivateRoute
+        exact
+        path={Routes.home}
+        comp={Home}
+        requiredPermission={permissions.submitForms}
+      />
+      <PrivateRoute
+        exact
+        path={Routes.submission}
+        comp={SubmissionPageContent}
+        requiredPermission={permissions.submitForms}
+      />
+      <Route path={Routes.auth} component={Login} />
+      <Route path={Routes.success} component={Success} />
+      <Route path={Routes.emailSubmitted} component={LoginSuccess} />
+    </div>
   );
 };
 

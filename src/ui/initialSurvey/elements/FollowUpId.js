@@ -8,7 +8,7 @@ const FollowUpId = () => {
   return (
     <>
       <h3>{t("askToGiveFollowUpId")}</h3>
-      <h2>{followUpId}</h2>
+      <h3>{followUpId}</h3>
     </>
   );
 };

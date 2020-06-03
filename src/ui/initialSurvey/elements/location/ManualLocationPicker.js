@@ -51,10 +51,16 @@ const ManualLocationPicker = ({ onSubmit, onCancel }) => {
           position={markerPosition}
         />
       </Map>
-      <Button variant="light" onClick={onCancel}>
-        {t("translation:cancel")}
-      </Button>
-      <Button onClick={submitHelper}>{t("translation:submit")}</Button>
+      <div className="locationPickerButtons">
+        <Button
+          variant="light"
+          onClick={onCancel}
+          className="locationPickerCancel"
+        >
+          {t("translation:cancel")}
+        </Button>
+        <Button onClick={submitHelper}>{t("translation:submit")}</Button>
+      </div>
     </div>
   );
 };
