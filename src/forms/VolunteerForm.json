@@ -284,6 +284,55 @@
           "input": true
         },
         {
+          "label": "rentRange",
+          "widget": "choicesjs",
+          "tableView": true,
+          "data": {
+            "values": [
+              {
+                "label": "0to50",
+                "value": "0to50"
+              },
+              {
+                "label": "51to100",
+                "value": "51to100"
+              },
+              {
+                "label": "101to200",
+                "value": "101to200"
+              },
+              {
+                "label": "201to500",
+                "value": "201to500"
+              },
+              {
+                "label": "501to1000",
+                "value": "501to1000"
+              },
+              {
+                "label": "above1000",
+                "value": "above1000"
+              }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "rentRange",
+          "conditional": {
+            "show": true,
+            "when": "ownershipType",
+            "eq": "rent"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
           "label": "roomsCount",
           "mask": false,
           "spellcheck": true,
@@ -372,7 +421,7 @@
               "validate": {
                 "required": true,
                 "min": 0,
-                "max": 125
+                "max": 110
               },
               "key": "age",
               "type": "number",
@@ -2259,7 +2308,8 @@
           },
           "key": "deathsWithinHousehold",
           "type": "radio",
-          "input": true
+          "input": true,
+          "defaultValue": "no"
         },
         {
           "label": "deathGrid",
