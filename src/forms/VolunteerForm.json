@@ -421,7 +421,7 @@
               "validate": {
                 "required": true,
                 "min": 0,
-                "max": 125
+                "max": 110
               },
               "key": "age",
               "type": "number",
@@ -2308,7 +2308,8 @@
           },
           "key": "deathsWithinHousehold",
           "type": "radio",
-          "input": true
+          "input": true,
+          "defaultValue": "no"
         },
         {
           "label": "deathGrid",
