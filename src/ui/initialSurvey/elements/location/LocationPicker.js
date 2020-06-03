@@ -60,10 +60,15 @@ export const LocationPicker = () => {
     case LOCATION_FAILED:
       return (
         <>
-          <h3>{t("location.isRequiredPrompt")}</h3>
+          <center>
+            <h2>{t("location.isRequiredPrompt")}</h2>
+            <div className="twentypxmargin" />
+          </center>
           {/*TODO this button seems to do nothing which is confusing*/}
-          <Button onClick={getBrowserLocation}>{t("location.rePrompt")}</Button>
-          <Button onClick={onUseManual}>
+          <Button variant="light" size="lg" onClick={getBrowserLocation}>
+            {t("location.rePrompt")}
+          </Button>
+          <Button variant="light" size="lg" onClick={onUseManual}>
             {t("location.pickManuallyPrompt")}
           </Button>
         </>

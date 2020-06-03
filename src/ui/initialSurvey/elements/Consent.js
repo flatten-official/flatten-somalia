@@ -20,25 +20,30 @@ export const Consent = () => {
 
   return (
     <Container>
+      <div className="twentypxmargin" />
       <Row>
         <Col>
-          <div className="seventypxmargin" />
           <p>{t("braConsent")}</p>
-          <Trans i18nKey="InitialSurvey:flattenConsent">
-            MissingTranslation {/* Is replaced by i18n*/}
-            <a href="https://flatten.ca/privacy-policy">Privacy Policy</a>
-            and
-            <a href="https://flatten.ca/terms-of-service">Terms of Service</a>.
-          </Trans>
-          <h4>{t("askForDataRecordingConsent")}</h4>
+          <center>
+            <Trans i18nKey="InitialSurvey:flattenConsent">
+              MissingTranslation {/* Is replaced by i18n*/}
+              <a href="https://flatten.ca/privacy-policy">Privacy Policy</a>
+              and
+              <a href="https://flatten.ca/terms-of-service">Terms of Service</a>.
+            </Trans>
+          </center>
+          <div className="fourtypxmargin" />
+          <center>
+            <h4>{t("askForDataRecordingConsent")}</h4>
+          </center>
         </Col>
       </Row>
       <Row>
         <Col>
           <center>
-            <div className="buttons">
-              <Button onClick={onConsent}>{t("consentGiven")}</Button>
-            </div>
+            <Button variant="light" size="lg" onClick={onConsent}>
+              {t("consentGiven")}
+            </Button>
           </center>
         </Col>
       </Row>
