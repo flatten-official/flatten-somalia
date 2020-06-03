@@ -290,28 +290,28 @@
           "data": {
             "values": [
               {
-                "label": "0-50$",
-                "value": "050"
+                "label": "0to50",
+                "value": "0to50"
               },
               {
-                "label": "51-100$",
-                "value": "51100"
+                "label": "51to100",
+                "value": "51to100"
               },
               {
-                "label": "101-200$",
-                "value": "101200"
+                "label": "101to200",
+                "value": "101to200"
               },
               {
-                "label": "201-500$",
-                "value": "201500"
+                "label": "201to500",
+                "value": "201to500"
               },
               {
-                "label": "501-100$",
-                "value": "501100"
+                "label": "501to1000",
+                "value": "501to1000"
               },
               {
-                "label": ">1000$",
-                "value": "1000"
+                "label": "above1000",
+                "value": "above1000"
               }
             ]
           },
