@@ -11,13 +11,6 @@ async function initialSubmission(
   deathsData,
   householdData
 ) {
-  if (volunteerTeamName === undefined) {
-    console.log(
-      `Warning: ${volunteerId} has no team name. Assigning default ${submissionData.NO_TEAM_NAME}`
-    );
-    volunteerTeamName = submissionData.NO_TEAM_NAME;
-  }
-
   const household = await submissionData.createHousehold(
     householdData.followUpId,
     householdData.phone,

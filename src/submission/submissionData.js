@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-// name used if a volunteer doesn't have a team assigned (but we don't want to lose their submission)
-const NO_TEAM_NAME = "noTeam";
-
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Submission = mongoose.model(
   "Submission",
@@ -136,8 +133,6 @@ const Person = mongoose.model(
 
 async function createPeople(perPersonData) {
   return perPersonData.map((personData) => new Person(personData));
-  // let ret = await Person.insertMany(perPersonData);
-  // return ret.map((v) => v._id);
 }
 
 async function createSubmission(
@@ -158,7 +153,7 @@ async function createSubmission(
     });
   }
 
-  const newSubmission = new Submission({
+  return new Submission({
     addedBy: submitterId,
     teamName: submitterTeamName,
     submissionSchema,
@@ -169,19 +164,16 @@ async function createSubmission(
       ref: householdId,
     },
   });
-
-  return newSubmission;
 }
 
 async function createHousehold(followUpId, phone, email, headOfHouseholdName) {
-  const household = new Household({
+  // TODO - handle different kinds of submsisions here
+  return new Household({
     followUpId,
     phone,
     email,
     headOfHouseholdName,
   });
-  // TODO - handle different kinds of submsisions here
-  return household;
 }
 
 async function setPersonToDead(personId) {
@@ -272,5 +264,4 @@ module.exports = {
   getVolunteerNextFollowUp,
   createFollowUpSubmisison,
   cancelVolunteerFollowUp,
-  NO_TEAM_NAME,
 };
