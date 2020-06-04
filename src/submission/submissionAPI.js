@@ -14,8 +14,7 @@ async function initialSubmission(
   const household = await submissionData.createHousehold(
     householdData.followUpId,
     householdData.phone,
-    householdData.email,
-    householdData.headOfHouseName
+    householdData.email
   );
 
   const peopleModel = peopleData.map((o) => {

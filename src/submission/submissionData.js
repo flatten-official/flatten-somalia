@@ -98,7 +98,6 @@ const Household = mongoose.model(
     // TODO - decide if we remove this - can we query the latest in the submissions
     phone: String,
     email: String,
-    headOfHouseholdName: String,
     // the id that is given to volunteers (NOT the ID in the DB), TODO...!!
     followUpId: {
       type: String,
@@ -166,14 +165,9 @@ async function createSubmission(
   });
 }
 
-async function createHousehold(followUpId, phone, email, headOfHouseholdName) {
+async function createHousehold(followUpId, phone, email) {
   // TODO - handle different kinds of submsisions here
-  return new Household({
-    followUpId,
-    phone,
-    email,
-    headOfHouseholdName,
-  });
+  return new Household({ followUpId, phone, email });
 }
 
 async function setPersonToDead(personId) {
