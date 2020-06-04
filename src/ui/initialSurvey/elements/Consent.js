@@ -1,7 +1,7 @@
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { setFollowUpId, Types } from "../actions";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import React from "react";
 
 export const Consent = () => {
@@ -19,29 +19,23 @@ export const Consent = () => {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <div className="seventypxmargin" />
-          <p>{t("braConsent")}</p>
-          <Trans i18nKey="InitialSurvey:flattenConsent">
-            MissingTranslation {/* Is replaced by i18n*/}
-            <a href="https://flatten.ca/privacy-policy">Privacy Policy</a>
-            and
-            <a href="https://flatten.ca/terms-of-service">Terms of Service</a>.
-          </Trans>
-          <h4>{t("askForDataRecordingConsent")}</h4>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <center>
-            <div className="buttons">
-              <Button onClick={onConsent}>{t("consentGiven")}</Button>
-            </div>
-          </center>
-        </Col>
-      </Row>
-    </Container>
+    <>
+      {t("braConsent")}
+      <br />
+      <br />
+      <Trans i18nKey="InitialSurvey:flattenConsent">
+        MissingTranslation {/* Is replaced by i18n*/}
+        <a href="https://flatten.ca/privacy-policy">Privacy Policy</a>
+        and
+        <a href="https://flatten.ca/terms-of-service">Terms of Service</a>.
+      </Trans>
+      <br />
+      <br />
+      <h4>{t("askForDataRecordingConsent")}</h4>
+      <br />
+      <Button variant="light" size="lg" onClick={onConsent}>
+        {t("consentGiven")}
+      </Button>
+    </>
   );
 };

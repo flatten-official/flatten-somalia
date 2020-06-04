@@ -46,6 +46,8 @@ export const LocationPicker = () => {
       },
       () => setStatus(LOCATION_FAILED)
     );
+
+    setTimeout(() => setStatus(LOCATION_FAILED), 30000); // after a while set to failed as a worst case
   };
 
   useEffect(getBrowserLocation, []); // Call the function on start
@@ -60,10 +62,13 @@ export const LocationPicker = () => {
     case LOCATION_FAILED:
       return (
         <>
-          <h3>{t("location.isRequiredPrompt")}</h3>
+          <h4>{t("location.isRequiredPrompt")}</h4>
+          <br />
           {/*TODO this button seems to do nothing which is confusing*/}
-          <Button onClick={getBrowserLocation}>{t("location.rePrompt")}</Button>
-          <Button onClick={onUseManual}>
+          <Button variant="light" size="lg" onClick={getBrowserLocation}>
+            {t("location.rePrompt")}
+          </Button>
+          <Button variant="light" size="lg" onClick={onUseManual}>
             {t("location.pickManuallyPrompt")}
           </Button>
         </>

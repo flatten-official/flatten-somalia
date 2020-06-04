@@ -32,7 +32,11 @@ const Form = ({ formioForm, formioOptions, submitHook }) => {
 
   formioOptions.breadcrumbSettings = { clickable: false };
 
-  return <FormioForm options={formioOptions} form={formioForm} />;
+  return (
+    <div className="form">
+      <FormioForm options={formioOptions} form={formioForm} />
+    </div>
+  );
 };
 
 Form.propTypes = {

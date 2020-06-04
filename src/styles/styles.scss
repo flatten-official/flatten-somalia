@@ -33,6 +33,8 @@ $dark: $gray-800;
 
 $background-green: #ebf6ee;
 
+$content-width: 800px; // the max width of the main content
+
 // TODO Switch to @use
 // https://sass-lang.com/documentation/at-rules/import#main-content
 @import "../../node_modules/bootswatch/dist/flatly/variables";
@@ -41,74 +43,60 @@ $background-green: #ebf6ee;
 $fa-font-path: "../fonts";
 @import "../../node_modules/formiojs/dist/formio.full.css";
 
-.app {
+// Applies to all
+body {
   font-family: "DM Sans", sans-serif;
+}
+
+.app {
   display: flex;
   flex-flow: column;
-  min-height: 100vh;
+  min-height: 100vh; // Min height 100% of view height (effectively pushes the footer to the bottom of the page)
 }
 
 .appContent {
-  flex: 1;
+  flex: 1; // Makes content auto expand to fill the page (i.e. footer is pushed to the bottom)
+  width: $content-width; // Fix width allows margin auto, on smaller devices with is 100vm (see below)
+  padding: 30px 10px; // 10px margin really only affects mobile
+  margin: 0 auto; // Center element in page
+  text-align: center; // By default center text
+}
+
+@media only screen and (max-width: $content-width) {
+  .appContent {
+    width: 100vw; // smaller than 800px set the width to the screen
+  }
 }
 
 .header {
   background-color: $background-green;
+  padding: 10px;
 }
 
 .wordmark {
-  font-size: 24px;
   letter-spacing: 0.75px;
-  color: $black;
-  padding-top: 10px;
-  padding-left: 15%;
-  padding-right: 80px;
+  padding: 5px 30px 0 5%; // 5px top cause for some reason it looks offset without.
 }
 
-.websitetitle {
+.homePageTitle {
   font-size: 32px;
   letter-spacing: 0.75px;
   color: $black;
 }
 
-.logo {
-  height: 1.9em;
+.form {
+  text-align: left; // Reset to default alignment for forms
 }
 
-.text-blue {
-  color: #127abf;
-}
-
-.text-green {
-  color: #449414;
-}
-
-.hero-image {
-  display: inline;
-  height: 2em;
-}
-
-#main {
-  margin-top: 10px;
-}
-
-.body {
-  font-size: 22px;
+.homePageSelectFormTitle {
   letter-spacing: 0.75px;
-  color: black;
-}
-
-.heading {
-  font-size: 22px;
-  letter-spacing: 0.75px;
-  color: black;
-  background-color: #ebf6ee;
-  display: inline-block;
   line-height: 0.5;
+  padding: 40px 0 20px;
 }
 
 .map {
   height: 70vh;
+  margin: 30px 0;
 }
 
 .btn-light {
@@ -138,21 +126,22 @@ $fa-font-path: "../fonts";
   background-color: #faf6f6;
 }
 
-.seventypxmargin {
-  margin-top: 70px;
+.locationPickerButtons {
+  text-align: right;
 }
 
-.fourtypxmargin {
-  margin-top: 40px;
+.locationPickerCancel {
+  margin: 0 10px 0 0; // 10px spacing between buttons
 }
 
-.twentypxmargin {
-  margin-top: 20px;
+.submissionPageTitle {
+  padding: 0 0 15px;
 }
 
 .footer {
   padding: 15px;
   text-align: center;
+  font-size: 12px;
 }
 
 .footerLink {
@@ -172,6 +161,7 @@ $fa-font-path: "../fonts";
   margin: auto;
 }
 
+// Hide the form wizard navigation
 [id^="wizard-"][id$="-header"] {
   display: none;
 }
