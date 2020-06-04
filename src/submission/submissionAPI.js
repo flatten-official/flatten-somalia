@@ -22,7 +22,7 @@ async function initialSubmission(
       name: o.name,
       gender: o.gender,
       household: household._id,
-      alive: false,
+      alive: true,
     };
   });
   const deathsModel = deathsData.map((o) => {
