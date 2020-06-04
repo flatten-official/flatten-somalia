@@ -15,11 +15,12 @@ const {
 
 const VOLUNTEERS = [
   // Example volunteer
-  // {
-  //   name: "Mimi",
-  //   email: "miraalkabir@gmail.com",
-  //   permissions: [Permissions.manageVolunteers, Permissions.submitForms],
-  // },
+  {
+    name: "Some name",
+    email: "example@gmail.com",
+    // permissions: [],
+    teamName: "Flatten", // Use Flatten as the team name for people who's submissions should be ignored
+  },
 ];
 
 const main = async (volunteers) => {
@@ -29,7 +30,7 @@ const main = async (volunteers) => {
     // customConfig: {
     //   secretId: null,
     //   secrets: {
-    //     mongoUri: "customURIToFillIn",
+    //     mongoUri: "FILL IN BUT DON'T COMMIT",
     //   },
     // },
   });
