@@ -53,7 +53,7 @@ const Submission = mongoose.model(
       // contains location etc
       location: {
         lat: Number,
-        long: Number,
+        lng: Number,
         accuracy: Number,
         altitude: Number,
         wasManual: Boolean,
