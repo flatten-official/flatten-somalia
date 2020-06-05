@@ -16,8 +16,8 @@ export const submitForm = async (storeData, formioData) => {
       consentGiven: storeData.consent,
     },
     schema: {
-      form: "volunteerInitialForm",
-      version: "0.1",
+      form: "initialSurvey",
+      version: "1.0.0",
     },
   };
 
