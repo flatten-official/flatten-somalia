@@ -1,0 +1,11 @@
+{
+  "newPatients": "Tirada bukaanada cusub",
+  "dischargedPatients": "Tirada bukaanada dibada loo saaray",
+  "totalBedsOccupied": "Tirada sariiraha yaala Isbitaalka oo dhan",
+  "bedsOccupiedInCriticalCare": "Tirada sariiraha yaala xarunta daryeelka halista ah",
+  "bedAvailable": "Tirada sariiraha la heli karo",
+  "patientsCurrentlyHospitalized": "Tirada bukaanada hada Isbitaalka la dhigay",
+  "confirmedPositiveCOVID19": "Tirada la xaqiijiyey ee COVID-19",
+  "suspectedCOVID19": "Tirada looga shakisan yahay COVID-19",
+  "negativeCOVID19": "Tirada laga waayey COVID-19"
+}

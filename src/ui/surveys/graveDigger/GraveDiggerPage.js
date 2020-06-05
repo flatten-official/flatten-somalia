@@ -4,7 +4,7 @@ import FormDef from "../../../forms/GraveDiggerForm";
 import FormPage from "../../components/FormPage";
 
 const GraveDiggerPage = () => {
-  const { t } = useTranslation("GraveDiggerForm");
+  const { t } = useTranslation("GravediggerSurvey");
 
   const onSubmit = (formIoData) => {
     throw Error("Submission not implemented.");

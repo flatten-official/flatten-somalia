@@ -5,6 +5,8 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import addVolunteerEN from "./translations/en/translation/AddVolunteer.json";
 import defaultsEN from "./translations/en/translation/Defaults.json";
 import IVS_EN from "./translations/en/translation/InitialVolunteerSurvey.json";
+import GraveDiggerSurvey_EN from "./translations/en/translation/GravediggerSurvey.json";
+import HospitalSurvey_EN from "./translations/en/translation/HospitalSurvey.json";
 
 import adminEN from "./translations/en/Admin.json";
 import loginEN from "./translations/en/Login.json";
@@ -18,6 +20,9 @@ import FormIoCustomTextEn from "./translations/en/FormIoCustomText.json";
 import addVolunteerSO from "./translations/so/translation/AddVolunteer.json";
 import defaultsSO from "./translations/so/translation/Defaults.json";
 import IVS_SO from "./translations/so/translation/InitialVolunteerSurvey.json";
+import GraveDiggerSurvey_SO from "./translations/so/translation/GravediggerSurvey.json";
+import HospitalSurvey_SO from "./translations/so/translation/HospitalSurvey.json";
+
 import volunteerLoginSO from "./translations/so/translation/VolunteerLogin.json";
 import FormIoCustomTextSO from "./translations/so/FormIoCustomText.json";
 import adminSO from "./translations/so/Admin.json";
@@ -27,6 +32,8 @@ import homeSO from "./translations/so/Home.json";
 import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
 import initialSurveySO from "./translations/so/InitialSurvey.json";
+import GDTitleSO from "./translations/so/GraveDiggerSurvey.json";
+import HTitleSO from "./translations/so/HospitalSurvey.json";
 
 const resources = {
   en: {
@@ -35,6 +42,8 @@ const resources = {
       ...defaultsEN,
       ...IVS_EN,
       ...volunteerFormEN,
+      ...GraveDiggerSurvey_EN,
+      ...HospitalSurvey_EN,
     },
     Admin: adminEN,
     Login: loginEN,
@@ -51,6 +60,8 @@ const resources = {
       ...defaultsSO,
       ...IVS_SO,
       ...volunteerLoginSO,
+      ...GraveDiggerSurvey_SO,
+      ...HospitalSurvey_SO,
     },
     Admin: adminSO,
     Login: loginSO,
@@ -60,6 +71,8 @@ const resources = {
     Navbar: navbarSO,
     InitialSurvey: initialSurveySO,
     FormIOCustomText: FormIoCustomTextSO,
+    HospitalSurvey: HospitalSurvey_SO,
+    GravediggerSurvey: GraveDiggerSurvey_SO,
   },
 };
 //endregion

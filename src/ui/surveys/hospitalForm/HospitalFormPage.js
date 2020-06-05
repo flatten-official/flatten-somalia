@@ -4,7 +4,7 @@ import FormDef from "../../../forms/HospitalForm.json";
 import FormPage from "../../components/FormPage";
 
 const HospitalFormPage = () => {
-  const { t } = useTranslation("HospitalForm");
+  const { t } = useTranslation("HospitalSurvey");
 
   const onSubmit = (formIoData) => {
     throw Error("Submission not implemented.");
