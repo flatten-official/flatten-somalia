@@ -2,15 +2,21 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Routes } from "../../config";
 import Button from "react-bootstrap/Button";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const { t } = useTranslation("Home");
+  const authUser = useSelector((state) => state.auth.user);
 
   return (
     <>
       <h3 className="homePageTitle">
         <b>{t("welcome")}</b>
       </h3>
+
+      <h5>{t("nameMessage", { name: authUser.name })}</h5>
+      <h5>{t("teamNameMessage", { teamName: authUser.teamName })}</h5>
+
       <h5 className="homePageSelectFormTitle">{t("formSelectionPrompt")}</h5>
       <Button variant="light" size="lg" href={Routes.initialHouseholdSurvey}>
         {t("goToInitialSurvey")}

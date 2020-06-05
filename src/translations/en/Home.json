@@ -3,5 +3,7 @@
   "formSelectionPrompt": "Select the form you need:",
   "goToInitialSurvey": "Initial Household Survey",
   "goToGravediggerSurvey": "Gravedigger Survey",
-  "goToFollowupSurvey": "Followup Household Survey"
+  "goToFollowupSurvey": "Followup Household Survey",
+  "nameMessage" : "Name: {{name}}",
+  "teamNameMessage": "Team: {{teamName}}"
 }
