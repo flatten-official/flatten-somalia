@@ -3,6 +3,7 @@ export const Routes = {
   home: "/",
   auth: "/login",
   submission: "/submission",
+  submissionGraveDigger: "/submission/gravedigger",
   admin: "/admin",
   success: "/success",
   emailSubmitted: "/submitted-email",
