@@ -5,8 +5,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./home/Home";
 import Login from "./login/Login";
-import SubmissionPageContent from "./initialSurvey/SubmissionPage";
-import Success from "./initialSurvey/Success";
+import SubmissionPageContent from "./surveys/householdInitial/HouseholdInitialSurvey";
+import Success from "./surveys/householdInitial/Success";
 import LoginSuccess from "./login/LoginSuccess";
 import Loading from "./components/Loading";
 import { Routes } from "../config";
@@ -16,6 +16,8 @@ import {
   fetchAuthState,
   AUTH_UNINITIALISED,
 } from "../backend/auth/authActions";
+import GraveDiggerSurveyPage from "./surveys/graveDigger/GraveDiggerSurveyPage";
+import HospitalSurveyPage from "./surveys/hospital/HospitalSurveyPage";
 
 const AppContent = () => {
   const dispatch = useDispatch();
@@ -37,8 +39,20 @@ const AppContent = () => {
       />
       <PrivateRoute
         exact
-        path={Routes.submission}
+        path={Routes.initialHouseholdSurvey}
         comp={SubmissionPageContent}
+        requiredPermission={permissions.submitForms}
+      />
+      <PrivateRoute
+        exact
+        path={Routes.graveDiggerSurvey}
+        comp={GraveDiggerSurveyPage}
+        requiredPermission={permissions.submitForms}
+      />
+      <PrivateRoute
+        exact
+        path={Routes.hospitalSurvey}
+        comp={HospitalSurveyPage}
         requiredPermission={permissions.submitForms}
       />
       <Route path={Routes.auth} component={Login} />

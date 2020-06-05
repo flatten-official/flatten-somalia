@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Types } from "./actions";
 import { LocationPicker } from "./elements/location/LocationPicker";
-import Form from "../components/formio/Form";
-import FormDef from "../../forms/VolunteerForm.json";
+import Form from "../../components/formio/Form";
+import FormDef from "../../../forms/VolunteerForm.json";
 import { push } from "connected-react-router";
 import { Consent } from "./elements/Consent";
-import { submitForm } from "../../backend/submission";
+import { submitForm } from "../../../backend/submission";
 
-const SubmissionPageContent = () => {
+const HouseholdInitialSurveyPageContent = () => {
   const formData = useSelector((state) => state.volunteerForm);
   const dispatch = useDispatch();
 
@@ -35,15 +35,15 @@ const SubmissionPageContent = () => {
   );
 };
 
-const SubmissionPage = () => {
+const HouseholdInitialSurvey = () => {
   const { t } = useTranslation("InitialSurvey");
 
   return (
     <>
       <h3 className="submissionPageTitle"> {t("title")} </h3>
-      <SubmissionPageContent />
+      <HouseholdInitialSurveyPageContent />
     </>
   );
 };
 
-export default SubmissionPage;
+export default HouseholdInitialSurvey;

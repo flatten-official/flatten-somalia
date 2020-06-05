@@ -1,1 +1,523 @@
-{"_id":"5eda6f9c344729cfebbb0c77","type":"form","tags":[],"owner":"5ec0adf353208fac46755642","components":[{"title":"Deganaanshaha","label":"housing","type":"panel","key":"startPage","components":[{"label":"enterPhoneNumber","inputMask":"99 99 99 999","spellcheck":true,"tableView":true,"calculateServer":false,"validate":{"required":true},"key":"enterPhoneNumber","type":"phoneNumber","input":true},{"label":"email","placeholder":"Optional","spellcheck":true,"tableView":true,"calculateServer":false,"kickbox":{"enabled":true},"key":"email","type":"email","input":true},{"label":"gravesiteName","widget":"choicesjs","tableView":true,"data":{"values":[{"label":"Qabuuraha Xaaji Cabdi (Barakaad)","value":"qabuurahaXaajiCabdiBarakaad"},{"label":"Qabuuraha Macallim Nuur","value":"qabuurahaMacallimNuur"},{"label":"Qabuuraha Jaziira","value":"qabuurahaJaziira"},{"label":"Qabuuraha Ceel Caade","value":"qabuurahaCeelCaade"},{"label":"Qabuuraha Kaxda","value":"qabuurahaKaxda"}]},"selectThreshold":0.3,"calculateServer":false,"validate":{"required":true},"key":"gravesiteName","type":"select","indexeddb":{"filter":{}},"input":true},{"label":"numberOfBurialsForDay","mask":false,"spellcheck":true,"tableView":false,"delimiter":false,"requireDecimal":false,"inputFormat":"plain","calculateServer":false,"validate":{"required":true},"key":"numberOfBurialsForDay","type":"number","input":true}],"input":false,"tableView":false,"breadcrumbClickable":true,"buttonSettings":{"previous":true,"cancel":true,"next":true},"collapsible":false,"nextPage":"next = 'perPerson';"},{"title":"Dhimasho","label":"perDeath","type":"panel","key":"perDeath","input":false,"tableView":false,"breadcrumbClickable":true,"buttonSettings":{"previous":true,"cancel":true,"next":true},"collapsible":false,"components":[{"label":"deathGrid","openWhenEmpty":true,"disableAddingRemovingRows":false,"hideLabel":true,"tableView":false,"templates":{"header":"<div class=\"row\">\n  To add individuals, click \"Add another\" at the bottom of the form\n</div>"},"modal":false,"calculateServer":false,"key":"deathGrid","conditional":{"show":false,"when":"deathsWithinHousehold","eq":"no"},"type":"editgrid","input":true,"components":[{"label":"deceasedSex","optionsLabelPosition":"right","inline":false,"tableView":false,"values":[{"label":"male","value":"male","shortcut":""},{"label":"female","value":"female","shortcut":""}],"calculateServer":false,"key":"deceasedSex","conditional":{"show":true,"when":"hasAnyoneDiedInTheHousehold","eq":"yes"},"type":"radio","input":true},{"label":"deceasedAge","mask":false,"spellcheck":true,"tableView":false,"delimiter":false,"requireDecimal":false,"inputFormat":"plain","calculateServer":false,"validate":{"min":0,"max":110},"key":"deceasedAge","type":"number","input":true},{"label":"officialCauseOfDeathDetermined","optionsLabelPosition":"right","inline":false,"tableView":false,"values":[{"label":"yes","value":"yes","shortcut":""},{"label":"no","value":"no","shortcut":""},{"label":"unknown","value":"unknown","shortcut":""}],"calculateServer":false,"key":"officialCauseOfDeathDetermined","type":"radio","input":true},{"label":"causeOfDeath","widget":"choicesjs","tableView":true,"data":{"values":[{"label":"Sokor","value":"sokor"},{"label":"Dhiig kar","value":"dhiigKar"},{"label":"Covid19","value":"covid19"},{"label":"Ma aqaan","value":"maAqaan"},{"label":"Wax kale ","value":"waxKale"}]},"selectThreshold":0.3,"calculateServer":false,"key":"causeOfDeath","conditional":{"show":true,"when":"officialCauseOfDeathDetermined","eq":"yes"},"type":"select","indexeddb":{"filter":{}},"input":true},{"label":"deceasedComorbidities","optionsLabelPosition":"right","tableView":false,"defaultValue":{"":false,"thing1":false,"other":false,"cadaadisDhiigOoSarreeya":false,"sonkorowSonkorow":false,"wadneXanuunAmaXanaaq":false,"oofWareenkaOofwareenkaNeeftaCopd":false,"kansarLiitaAmaDifaac":false,"highBloodPressure":false,"diabetes":false,"heartDiseaseOrIrritability":false,"pneumoniaOrAsthma":false,"poorCancerOrImmunity":false,"immunocompromised":false},"values":[{"label":"highBloodPressure","value":"highBloodPressure","shortcut":""},{"label":"diabetes","value":"diabetes","shortcut":""},{"label":"heartDiseaseOrIrritability","value":"heartDiseaseOrIrritability","shortcut":""},{"label":"PneumoniaOrAsthma","value":"pneumoniaOrAsthma","shortcut":""},{"label":"poorCancerOrImmunity","value":"poorCancerOrImmunity","shortcut":""},{"label":"immunocompromised","value":"immunocompromised","shortcut":""},{"label":"other","value":"other","shortcut":""}],"calculateServer":false,"key":"deceasedComorbidities","type":"selectboxes","input":true,"inputType":"checkbox"},{"label":"other","placeholder":"otherDeceasedComorbidities","spellcheck":true,"tableView":true,"calculateServer":false,"key":"otherDeceasedComorbidities","conditional":{"show":true,"when":"deceasedComorbidities","eq":"other"},"type":"textfield","input":true},{"label":"deceasedSymptoms","optionsLabelPosition":"right","tableView":false,"defaultValue":{"":false,"none":false,"other":false,"noneIAmFine":false,"newFever":false,"newCoughOrWorseCough":false,"shortnessOfBreathBreathing":false,"lossOrReducedSenseOfTasteOrSmell":false,"fatigue":false,"sneezing":false,"achesPains":false,"runnyNose":false,"chillsNightSweats":false,"soreThroat":false,"diarrhea":false,"headache":false,"nausea":false,"rash":false,"lossOfAppetite":false,"stomachPainCramps":false,"newOrWorseningCough":false,"shortnessOfBreath":false,"gustatoryOrOlfactoryImpairment":false,"achesAndPains":false,"chillsOrNightSweats":false,"appetiteLoss":false,"stomachPainOrCramps":false,"noSymptoms":false},"values":[{"label":"New Fever","value":"newFever","shortcut":""},{"label":"newOrWorseningCough","value":"newOrWorseningCough","shortcut":""},{"label":"shortnessOfBreath","value":"shortnessOfBreath","shortcut":""},{"label":"gustatoryOrOlfactoryImpairment","value":"gustatoryOrOlfactoryImpairment","shortcut":""},{"label":"fatigue","value":"fatigue","shortcut":""},{"label":"Sneezing","value":"sneezing","shortcut":""},{"label":"achesAndPains","value":"achesAndPains","shortcut":""},{"label":"runnyNose","value":"runnyNose","shortcut":""},{"label":"chillsOrNightSweats","value":"chillsOrNightSweats","shortcut":""},{"label":"soreThroat","value":"soreThroat","shortcut":""},{"label":"diarrhea","value":"diarrhea","shortcut":""},{"label":"headache","value":"headache","shortcut":""},{"label":"nausea","value":"nausea","shortcut":""},{"label":"rash","value":"rash","shortcut":""},{"label":"appetiteLoss","value":"appetiteLoss","shortcut":""},{"label":"stomachPainOrCramps","value":"stomachPainOrCramps","shortcut":""},{"label":"other","value":"other","shortcut":""},{"label":"noSymptoms","value":"noSymptoms","shortcut":""}],"calculateServer":false,"key":"whatWereTheSymptomsTheyExperiencedPriorToDeath","type":"selectboxes","input":true,"inputType":"checkbox"},{"label":"other","placeholder":"otherDeceasedSymptoms","spellcheck":true,"tableView":true,"calculateServer":false,"key":"otherDeceasedSymptoms","conditional":{"show":true,"when":"whatWereTheSymptomsTheyExperiencedPriorToDeath","eq":"other"},"type":"textfield","input":true},{"label":"deceasedPregnancy","optionsLabelPosition":"right","inline":false,"tableView":false,"values":[{"label":"yes","value":"yes","shortcut":""},{"label":"no","value":"no","shortcut":""}],"calculateServer":false,"key":"deceasedPregnancy","conditional":{"show":true,"when":"deceasedSex","eq":"female"},"type":"radio","input":true},{"label":"deceasedDisability","optionsLabelPosition":"right","inline":false,"tableView":false,"values":[{"label":"yes","value":"yes","shortcut":""},{"label":"no","value":"no","shortcut":""}],"calculateServer":false,"key":"deceasedDisability","type":"radio","input":true},{"label":"deceasedDisabilities","optionsLabelPosition":"right","tableView":false,"defaultValue":{"":false,"other":false,"physicalDisability":false,"learningDisability":false,"psychiatricDisability":false,"visualDisability":false,"hearingDisability":false,"physical":false,"learning":false,"psychiatric":false,"visual":false,"hearing":false},"values":[{"label":"physical","value":"physical","shortcut":""},{"label":"learning","value":"learning","shortcut":""},{"label":"psychiatric","value":"psychiatric","shortcut":""},{"label":"visual","value":"visual","shortcut":""},{"label":"hearing","value":"hearing","shortcut":""},{"label":"other","value":"other","shortcut":""}],"calculateServer":false,"key":"deceasedDisabilities","conditional":{"show":true,"when":"deceasedDisability","eq":"yes"},"type":"selectboxes","input":true,"inputType":"checkbox"},{"label":"other","placeholder":"otherDeceasedDisabilities","spellcheck":true,"tableView":true,"calculateServer":false,"key":"otherDeceasedDisabilities","conditional":{"show":true,"when":"deceasedDisabilities","eq":"other"},"type":"textfield","input":true},{"label":"deathDate","format":"yyyy-MM-dd","tableView":false,"datePicker":{"maxDate":"moment()","disableWeekends":false,"disableWeekdays":false},"enableTime":false,"calculateServer":false,"key":"dateOfDeath","type":"datetime","input":true,"suffix":"<i ref=\"icon\" class=\"fa fa-calendar\" style=\"\"></i>","widget":{"type":"calendar","displayInTimezone":"viewer","language":"en","useLocaleSettings":false,"allowInput":true,"mode":"single","enableTime":false,"noCalendar":false,"format":"yyyy-MM-dd","hourIncrement":1,"minuteIncrement":1,"time_24hr":false,"minDate":null,"disableWeekends":false,"disableWeekdays":false,"maxDate":"moment()"}}]}],"nextPage":"next = 'humanitarian';"}],"controller":"","revisions":"","_vid":0,"title":"Grave Digger Volunteer Survery Form","display":"wizard","access":[{"roles":["5ec0c80753208f5aea755795","5ec0c80753208fac46755796","5ec0c80753208f19f0755797","5ed48bebb9eb600b183955f1","5ed48bebb9eb60cfa83955f2"],"type":"read_all"}],"submissionAccess":[],"settings":{},"properties":{},"name":"gravediggerSurvey","path":"gravediggervolunteersurveryform","project":"5ec0c80753208f2b4d755794","created":"2020-06-05T16:15:24.094Z","modified":"2020-06-05T16:53:22.667Z","machineName":"yordvlchrlvervl:graveDigger"}
+{
+  "_id": "5eda6f9c344729cfebbb0c77",
+  "type": "form",
+  "tags": [],
+  "owner": "5ec0adf353208fac46755642",
+  "components": [
+    {
+      "title": "Deganaanshaha",
+      "label": "housing",
+      "type": "panel",
+      "key": "startPage",
+      "components": [
+        {
+          "label": "enterPhoneNumber",
+          "inputMask": "99 99 99 999",
+          "spellcheck": true,
+          "tableView": true,
+          "calculateServer": false,
+          "validate": { "required": true },
+          "key": "enterPhoneNumber",
+          "type": "phoneNumber",
+          "input": true
+        },
+        {
+          "label": "email",
+          "placeholder": "Optional",
+          "spellcheck": true,
+          "tableView": true,
+          "calculateServer": false,
+          "kickbox": { "enabled": true },
+          "key": "email",
+          "type": "email",
+          "input": true
+        },
+        {
+          "label": "gravesiteName",
+          "widget": "choicesjs",
+          "tableView": true,
+          "data": {
+            "values": [
+              {
+                "label": "Qabuuraha Xaaji Cabdi (Barakaad)",
+                "value": "qabuurahaXaajiCabdiBarakaad"
+              },
+              {
+                "label": "Qabuuraha Macallim Nuur",
+                "value": "qabuurahaMacallimNuur"
+              },
+              { "label": "Qabuuraha Jaziira", "value": "qabuurahaJaziira" },
+              {
+                "label": "Qabuuraha Ceel Caade",
+                "value": "qabuurahaCeelCaade"
+              },
+              { "label": "Qabuuraha Kaxda", "value": "qabuurahaKaxda" }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": { "required": true },
+          "key": "gravesiteName",
+          "type": "select",
+          "indexeddb": { "filter": {} },
+          "input": true
+        },
+        {
+          "label": "numberOfBurialsForDay",
+          "mask": false,
+          "spellcheck": true,
+          "tableView": false,
+          "delimiter": false,
+          "requireDecimal": false,
+          "inputFormat": "plain",
+          "calculateServer": false,
+          "validate": { "required": true },
+          "key": "numberOfBurialsForDay",
+          "type": "number",
+          "input": true
+        }
+      ],
+      "input": false,
+      "tableView": false,
+      "breadcrumbClickable": true,
+      "buttonSettings": { "previous": true, "cancel": true, "next": true },
+      "collapsible": false,
+      "nextPage": "next = 'perPerson';"
+    },
+    {
+      "title": "Dhimasho",
+      "label": "perDeath",
+      "type": "panel",
+      "key": "perDeath",
+      "input": false,
+      "tableView": false,
+      "breadcrumbClickable": true,
+      "buttonSettings": { "previous": true, "cancel": true, "next": true },
+      "collapsible": false,
+      "components": [
+        {
+          "label": "deathGrid",
+          "openWhenEmpty": true,
+          "disableAddingRemovingRows": false,
+          "hideLabel": true,
+          "tableView": false,
+          "templates": {
+            "header": "<div class=\"row\">\n  To add individuals, click \"Add another\" at the bottom of the form\n</div>"
+          },
+          "modal": false,
+          "calculateServer": false,
+          "key": "deathGrid",
+          "conditional": {
+            "show": false,
+            "when": "deathsWithinHousehold",
+            "eq": "no"
+          },
+          "type": "editgrid",
+          "input": true,
+          "components": [
+            {
+              "label": "deceasedSex",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                { "label": "male", "value": "male", "shortcut": "" },
+                { "label": "female", "value": "female", "shortcut": "" }
+              ],
+              "calculateServer": false,
+              "key": "deceasedSex",
+              "conditional": {
+                "show": true,
+                "when": "hasAnyoneDiedInTheHousehold",
+                "eq": "yes"
+              },
+              "type": "radio",
+              "input": true
+            },
+            {
+              "label": "deceasedAge",
+              "mask": false,
+              "spellcheck": true,
+              "tableView": false,
+              "delimiter": false,
+              "requireDecimal": false,
+              "inputFormat": "plain",
+              "calculateServer": false,
+              "validate": { "min": 0, "max": 110 },
+              "key": "deceasedAge",
+              "type": "number",
+              "input": true
+            },
+            {
+              "label": "officialCauseOfDeathDetermined",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" },
+                { "label": "unknown", "value": "unknown", "shortcut": "" }
+              ],
+              "calculateServer": false,
+              "key": "officialCauseOfDeathDetermined",
+              "type": "radio",
+              "input": true
+            },
+            {
+              "label": "causeOfDeath",
+              "widget": "choicesjs",
+              "tableView": true,
+              "data": {
+                "values": [
+                  { "label": "Sokor", "value": "sokor" },
+                  { "label": "Dhiig kar", "value": "dhiigKar" },
+                  { "label": "Covid19", "value": "covid19" },
+                  { "label": "Ma aqaan", "value": "maAqaan" },
+                  { "label": "Wax kale ", "value": "waxKale" }
+                ]
+              },
+              "selectThreshold": 0.3,
+              "calculateServer": false,
+              "key": "causeOfDeath",
+              "conditional": {
+                "show": true,
+                "when": "officialCauseOfDeathDetermined",
+                "eq": "yes"
+              },
+              "type": "select",
+              "indexeddb": { "filter": {} },
+              "input": true
+            },
+            {
+              "label": "deceasedComorbidities",
+              "optionsLabelPosition": "right",
+              "tableView": false,
+              "defaultValue": {
+                "": false,
+                "thing1": false,
+                "other": false,
+                "cadaadisDhiigOoSarreeya": false,
+                "sonkorowSonkorow": false,
+                "wadneXanuunAmaXanaaq": false,
+                "oofWareenkaOofwareenkaNeeftaCopd": false,
+                "kansarLiitaAmaDifaac": false,
+                "highBloodPressure": false,
+                "diabetes": false,
+                "heartDiseaseOrIrritability": false,
+                "pneumoniaOrAsthma": false,
+                "poorCancerOrImmunity": false,
+                "immunocompromised": false
+              },
+              "values": [
+                {
+                  "label": "highBloodPressure",
+                  "value": "highBloodPressure",
+                  "shortcut": ""
+                },
+                { "label": "diabetes", "value": "diabetes", "shortcut": "" },
+                {
+                  "label": "heartDiseaseOrIrritability",
+                  "value": "heartDiseaseOrIrritability",
+                  "shortcut": ""
+                },
+                {
+                  "label": "PneumoniaOrAsthma",
+                  "value": "pneumoniaOrAsthma",
+                  "shortcut": ""
+                },
+                {
+                  "label": "poorCancerOrImmunity",
+                  "value": "poorCancerOrImmunity",
+                  "shortcut": ""
+                },
+                {
+                  "label": "immunocompromised",
+                  "value": "immunocompromised",
+                  "shortcut": ""
+                },
+                { "label": "other", "value": "other", "shortcut": "" }
+              ],
+              "calculateServer": false,
+              "key": "deceasedComorbidities",
+              "type": "selectboxes",
+              "input": true,
+              "inputType": "checkbox"
+            },
+            {
+              "label": "other",
+              "placeholder": "otherDeceasedComorbidities",
+              "spellcheck": true,
+              "tableView": true,
+              "calculateServer": false,
+              "key": "otherDeceasedComorbidities",
+              "conditional": {
+                "show": true,
+                "when": "deceasedComorbidities",
+                "eq": "other"
+              },
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "deceasedSymptoms",
+              "optionsLabelPosition": "right",
+              "tableView": false,
+              "defaultValue": {
+                "": false,
+                "none": false,
+                "other": false,
+                "noneIAmFine": false,
+                "newFever": false,
+                "newCoughOrWorseCough": false,
+                "shortnessOfBreathBreathing": false,
+                "lossOrReducedSenseOfTasteOrSmell": false,
+                "fatigue": false,
+                "sneezing": false,
+                "achesPains": false,
+                "runnyNose": false,
+                "chillsNightSweats": false,
+                "soreThroat": false,
+                "diarrhea": false,
+                "headache": false,
+                "nausea": false,
+                "rash": false,
+                "lossOfAppetite": false,
+                "stomachPainCramps": false,
+                "newOrWorseningCough": false,
+                "shortnessOfBreath": false,
+                "gustatoryOrOlfactoryImpairment": false,
+                "achesAndPains": false,
+                "chillsOrNightSweats": false,
+                "appetiteLoss": false,
+                "stomachPainOrCramps": false,
+                "noSymptoms": false
+              },
+              "values": [
+                { "label": "New Fever", "value": "newFever", "shortcut": "" },
+                {
+                  "label": "newOrWorseningCough",
+                  "value": "newOrWorseningCough",
+                  "shortcut": ""
+                },
+                {
+                  "label": "shortnessOfBreath",
+                  "value": "shortnessOfBreath",
+                  "shortcut": ""
+                },
+                {
+                  "label": "gustatoryOrOlfactoryImpairment",
+                  "value": "gustatoryOrOlfactoryImpairment",
+                  "shortcut": ""
+                },
+                { "label": "fatigue", "value": "fatigue", "shortcut": "" },
+                { "label": "Sneezing", "value": "sneezing", "shortcut": "" },
+                {
+                  "label": "achesAndPains",
+                  "value": "achesAndPains",
+                  "shortcut": ""
+                },
+                { "label": "runnyNose", "value": "runnyNose", "shortcut": "" },
+                {
+                  "label": "chillsOrNightSweats",
+                  "value": "chillsOrNightSweats",
+                  "shortcut": ""
+                },
+                {
+                  "label": "soreThroat",
+                  "value": "soreThroat",
+                  "shortcut": ""
+                },
+                { "label": "diarrhea", "value": "diarrhea", "shortcut": "" },
+                { "label": "headache", "value": "headache", "shortcut": "" },
+                { "label": "nausea", "value": "nausea", "shortcut": "" },
+                { "label": "rash", "value": "rash", "shortcut": "" },
+                {
+                  "label": "appetiteLoss",
+                  "value": "appetiteLoss",
+                  "shortcut": ""
+                },
+                {
+                  "label": "stomachPainOrCramps",
+                  "value": "stomachPainOrCramps",
+                  "shortcut": ""
+                },
+                { "label": "other", "value": "other", "shortcut": "" },
+                { "label": "noSymptoms", "value": "noSymptoms", "shortcut": "" }
+              ],
+              "calculateServer": false,
+              "key": "whatWereTheSymptomsTheyExperiencedPriorToDeath",
+              "type": "selectboxes",
+              "input": true,
+              "inputType": "checkbox"
+            },
+            {
+              "label": "other",
+              "placeholder": "otherDeceasedSymptoms",
+              "spellcheck": true,
+              "tableView": true,
+              "calculateServer": false,
+              "key": "otherDeceasedSymptoms",
+              "conditional": {
+                "show": true,
+                "when": "whatWereTheSymptomsTheyExperiencedPriorToDeath",
+                "eq": "other"
+              },
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "deceasedPregnancy",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" }
+              ],
+              "calculateServer": false,
+              "key": "deceasedPregnancy",
+              "conditional": {
+                "show": true,
+                "when": "deceasedSex",
+                "eq": "female"
+              },
+              "type": "radio",
+              "input": true
+            },
+            {
+              "label": "deceasedDisability",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" }
+              ],
+              "calculateServer": false,
+              "key": "deceasedDisability",
+              "type": "radio",
+              "input": true
+            },
+            {
+              "label": "deceasedDisabilities",
+              "optionsLabelPosition": "right",
+              "tableView": false,
+              "defaultValue": {
+                "": false,
+                "other": false,
+                "physicalDisability": false,
+                "learningDisability": false,
+                "psychiatricDisability": false,
+                "visualDisability": false,
+                "hearingDisability": false,
+                "physical": false,
+                "learning": false,
+                "psychiatric": false,
+                "visual": false,
+                "hearing": false
+              },
+              "values": [
+                { "label": "physical", "value": "physical", "shortcut": "" },
+                { "label": "learning", "value": "learning", "shortcut": "" },
+                {
+                  "label": "psychiatric",
+                  "value": "psychiatric",
+                  "shortcut": ""
+                },
+                { "label": "visual", "value": "visual", "shortcut": "" },
+                { "label": "hearing", "value": "hearing", "shortcut": "" },
+                { "label": "other", "value": "other", "shortcut": "" }
+              ],
+              "calculateServer": false,
+              "key": "deceasedDisabilities",
+              "conditional": {
+                "show": true,
+                "when": "deceasedDisability",
+                "eq": "yes"
+              },
+              "type": "selectboxes",
+              "input": true,
+              "inputType": "checkbox"
+            },
+            {
+              "label": "other",
+              "placeholder": "otherDeceasedDisabilities",
+              "spellcheck": true,
+              "tableView": true,
+              "calculateServer": false,
+              "key": "otherDeceasedDisabilities",
+              "conditional": {
+                "show": true,
+                "when": "deceasedDisabilities",
+                "eq": "other"
+              },
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "deathDate",
+              "format": "yyyy-MM-dd",
+              "tableView": false,
+              "datePicker": {
+                "maxDate": "moment()",
+                "disableWeekends": false,
+                "disableWeekdays": false
+              },
+              "enableTime": false,
+              "calculateServer": false,
+              "key": "dateOfDeath",
+              "type": "datetime",
+              "input": true,
+              "suffix": "<i ref=\"icon\" class=\"fa fa-calendar\" style=\"\"></i>",
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "language": "en",
+                "useLocaleSettings": false,
+                "allowInput": true,
+                "mode": "single",
+                "enableTime": false,
+                "noCalendar": false,
+                "format": "yyyy-MM-dd",
+                "hourIncrement": 1,
+                "minuteIncrement": 1,
+                "time_24hr": false,
+                "minDate": null,
+                "disableWeekends": false,
+                "disableWeekdays": false,
+                "maxDate": "moment()"
+              }
+            }
+          ]
+        }
+      ],
+      "nextPage": "next = 'humanitarian';"
+    }
+  ],
+  "controller": "",
+  "revisions": "",
+  "_vid": 0,
+  "title": "Grave Digger Volunteer Survery Form",
+  "display": "wizard",
+  "access": [
+    {
+      "roles": [
+        "5ec0c80753208f5aea755795",
+        "5ec0c80753208fac46755796",
+        "5ec0c80753208f19f0755797",
+        "5ed48bebb9eb600b183955f1",
+        "5ed48bebb9eb60cfa83955f2"
+      ],
+      "type": "read_all"
+    }
+  ],
+  "submissionAccess": [],
+  "settings": {},
+  "properties": {},
+  "name": "gravediggerSurvey",
+  "path": "gravediggervolunteersurveryform",
+  "project": "5ec0c80753208f2b4d755794",
+  "created": "2020-06-05T16:15:24.094Z",
+  "modified": "2020-06-05T16:53:22.667Z",
+  "machineName": "yordvlchrlvervl:graveDigger"
+}
