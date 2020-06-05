@@ -12,13 +12,13 @@ const Home = () => {
         <b>{t("welcome")}</b>
       </h3>
       <h5 className="homePageSelectFormTitle">{t("formSelectionPrompt")}</h5>
-      <Button variant="light" size="lg" href={Routes.submission}>
+      <Button variant="light" size="lg" href={Routes.initialHouseholdSurvey}>
         {t("goToInitialSurvey")}
       </Button>
-      <Button variant="light" size="lg" href={Routes.submissionGraveDigger}>
+      <Button variant="light" size="lg" href={Routes.graveDiggerSurvey}>
         {t("goToGraveDiggerForm")}
       </Button>
-      <Button variant="light" size="lg" href={Routes.submissionHospitalForm}>
+      <Button variant="light" size="lg" href={Routes.hospitalSurvey}>
         {t("goToGraveDiggerForm")}
       </Button>
       {/*<Button variant="light" size="lg" href={null} disabled="true">*/}

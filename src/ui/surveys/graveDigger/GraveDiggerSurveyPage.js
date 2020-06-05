@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import React from "react";
 import FormDef from "../../../forms/GraveDiggerForm";
-import FormPage from "../../components/FormPage";
+import SurveyPage from "../../components/SurveyPage";
 
-const GraveDiggerPage = () => {
+const GraveDiggerSurveyPage = () => {
   const { t } = useTranslation("GravediggerSurvey");
 
   const onSubmit = (formIoData) => {
@@ -11,8 +11,8 @@ const GraveDiggerPage = () => {
   };
 
   return (
-    <FormPage formDef={FormDef} submitHook={onSubmit} title={t("title")} />
+    <SurveyPage formDef={FormDef} submitHook={onSubmit} title={t("title")} />
   );
 };
 
-export default GraveDiggerPage;
+export default GraveDiggerSurveyPage;

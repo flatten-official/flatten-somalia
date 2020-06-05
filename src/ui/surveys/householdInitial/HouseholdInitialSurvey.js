@@ -9,7 +9,7 @@ import { push } from "connected-react-router";
 import { Consent } from "./elements/Consent";
 import { submitForm } from "../../../backend/submission";
 
-const SubmissionPageContent = () => {
+const HouseholdInitialSurveyPageContent = () => {
   const formData = useSelector((state) => state.volunteerForm);
   const dispatch = useDispatch();
 
@@ -35,15 +35,15 @@ const SubmissionPageContent = () => {
   );
 };
 
-const SubmissionPage = () => {
+const HouseholdInitialSurvey = () => {
   const { t } = useTranslation("InitialSurvey");
 
   return (
     <>
       <h3 className="submissionPageTitle"> {t("title")} </h3>
-      <SubmissionPageContent />
+      <HouseholdInitialSurveyPageContent />
     </>
   );
 };
 
-export default SubmissionPage;
+export default HouseholdInitialSurvey;
