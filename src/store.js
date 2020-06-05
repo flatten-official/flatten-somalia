@@ -3,7 +3,7 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
 import authReducer from "./backend/auth/authReducer";
-import { reducer } from "./ui/surveys/initialSurvey/reducer";
+import { reducer } from "./ui/surveys/householdsInitial/reducer";
 import { form, forms, submission, submissions } from "react-formio";
 
 export const history = createBrowserHistory();
