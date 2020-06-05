@@ -5,8 +5,8 @@
   "owner": "5ec0adf353208fac46755642",
   "components": [
     {
-      "title": "Deganaanshaha",
-      "label": "housing",
+      "title": "Ugu Weyn",
+      "label": "main",
       "type": "panel",
       "key": "startPage",
       "components": [
@@ -82,7 +82,7 @@
       "breadcrumbClickable": true,
       "buttonSettings": { "previous": true, "cancel": true, "next": true },
       "collapsible": false,
-      "nextPage": "next = 'perPerson';"
+      "nextPage": "next = 'perDeath';"
     },
     {
       "title": "Dhimasho",
