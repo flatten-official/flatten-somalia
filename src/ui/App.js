@@ -16,6 +16,8 @@ import {
   fetchAuthState,
   AUTH_UNINITIALISED,
 } from "../backend/auth/authActions";
+import GraveDiggerPage from "./surveys/graveDigger/GraveDiggerPage";
+import HospitalFormPage from "./surveys/hospitalForm/HospitalFormPage";
 
 const AppContent = () => {
   const dispatch = useDispatch();
@@ -39,6 +41,18 @@ const AppContent = () => {
         exact
         path={Routes.submission}
         comp={SubmissionPageContent}
+        requiredPermission={permissions.submitForms}
+      />
+      <PrivateRoute
+        exact
+        path={Routes.submissionGraveDigger}
+        comp={GraveDiggerPage}
+        requiredPermission={permissions.submitForms}
+      />
+      <PrivateRoute
+        exact
+        path={Routes.submissionHospitalForm}
+        comp={HospitalFormPage}
         requiredPermission={permissions.submitForms}
       />
       <Route path={Routes.auth} component={Login} />

@@ -15,6 +15,12 @@ const Home = () => {
       <Button variant="light" size="lg" href={Routes.submission}>
         {t("goToInitialSurvey")}
       </Button>
+      <Button variant="light" size="lg" href={Routes.submissionGraveDigger}>
+        {t("goToGraveDiggerForm")}
+      </Button>
+      <Button variant="light" size="lg" href={Routes.submissionHospitalForm}>
+        {t("goToGraveDiggerForm")}
+      </Button>
       {/*<Button variant="light" size="lg" href={null} disabled="true">*/}
       {/*  {t("goToGravediggerSurvey")}*/}
       {/*</Button>*/}
