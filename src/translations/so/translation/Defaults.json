@@ -1,9 +1,24 @@
 {
   "email": "Emayl",
   "submit": "Gudbi",
-  "optional": "Option",
+  "cancel": "Baajin",
+  "next": "Xiga",
+  "previous": "Hore",
+  "optional": "Ikhtiyaar",
   "other": "Wax kale",
   "yes": "Haa",
   "no": "Maya",
-  "unknown": "Ma aqaan"
+  "unknown": "Ma aqaan",
+  "done": "Dhammaaday",
+  "error": "Fadlan hagaaji khaladaadka soo socda ka hor intaadan gudbin.",
+  "required": "Waa loo baahanyahay.",
+  "pattern": "Fildhigu kuma eka qaabkan.",
+  "minLength": "Fildhigu waa inuu ka dheeraado xarfaha.",
+  "maxLength": "Fildhigu kama gaaban karo.",
+  "min": "Fildhiigu kama yaraan karo.",
+  "max": "Fildhigu kama weynaan karo.",
+  "mask": "Fildhigu kuma eka qaabkan.",
+  "invalid_regex": "Fildhigu kuma eka qaabkan.",
+  "invalid_email": "Fildhigu waa inuu lahaadaa Iimayl sax ah",
+  "invalid_date": "Fildhigu malahan taariikh sax ah"
 }
