@@ -20,7 +20,7 @@ import FormIoCustomTextEn from "./translations/en/FormIoCustomText.json";
 import addVolunteerSO from "./translations/so/translation/AddVolunteer.json";
 import defaultsSO from "./translations/so/translation/Defaults.json";
 import IVS_SO from "./translations/so/translation/InitialVolunteerSurvey.json";
-import GraveDiggerSurvey_SO from "./translations/so/translation/GravediggerSurvey.json";
+import GraveDiggerSurvey_SO from "./translations/so/translation/GraveDiggerSurvey.json";
 import HospitalSurvey_SO from "./translations/so/translation/HospitalSurvey.json";
 
 import volunteerLoginSO from "./translations/so/translation/VolunteerLogin.json";
@@ -71,8 +71,8 @@ const resources = {
     Navbar: navbarSO,
     InitialSurvey: initialSurveySO,
     FormIOCustomText: FormIoCustomTextSO,
-    HospitalSurvey: HospitalSurvey_SO,
-    GravediggerSurvey: GraveDiggerSurvey_SO,
+    HospitalSurvey: HTitleSO,
+    GravediggerSurvey: GDTitleSO,
   },
 };
 //endregion
