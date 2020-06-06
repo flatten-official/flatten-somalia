@@ -149,7 +149,7 @@
   "cycling": "Cycling",
   "otherMeansOfTransportation": "Other Means of Transportation",
   "recentTravelOutsideDistrict": "Have you ever traveled outside of the district within the last 7 days?",
-  "tripsOutsideDistricCount": "How many journeys have you made?",
+  "recentTripsOutsideDistrictCount": "How many journeys have you made?",
   "reasonForTripsOutsideDistrict": "What was the reason? (Select all that apply)",
   "occupational": "Occupational",
   "social": "Social",

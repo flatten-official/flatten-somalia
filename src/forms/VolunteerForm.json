@@ -2055,9 +2055,6 @@
               "optionsLabelPosition": "right",
               "tableView": false,
               "defaultValue": {
-                "": false,
-                "place1": false,
-                "place2": false,
                 "dharkeynley": false,
                 "deynille": false,
                 "hodan": false,
@@ -2065,7 +2062,9 @@
                 "waberi": false,
                 "hawlWadag": false,
                 "hamarJabjab": false,
-                "villaSomalia": false,
+                "kaxda": false,
+                "garasbaley": false,
+                "gubadley": false,
                 "wardhigley": false,
                 "bondhere": false,
                 "hamarWeye": false,
@@ -2117,13 +2116,13 @@
                   "shortcut": ""
                 },
                 {
-                  "name": "Garasbaley",
+                  "label": "Garasbaley",
                   "value": "garasbaley",
                   "shortcut": ""
                 },
                 {
-                  "name": "Gubadley",
-                  "value": "gubadley",
+                  "label": "Gudbaley",
+                  "value": "gudbaley",
                   "shortcut": ""
                 },
                 {
