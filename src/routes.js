@@ -8,6 +8,8 @@ const verifyTokenRoute = require("./auth/routes/verifyTokenRoute");
 const logoutRoute = require("./auth/routes/logoutRoute");
 const getAuthRoute = require("./auth/routes/getAuthRoute");
 const submitInitialRoute = require("./submission/submitInitialRoute");
+const submitGravediggerRoute = require("./surveys/submitGravediggerSurveyRoute");
+const submitHospitalRoute = require("./surveys/submitHospitalSurveyRoute");
 const submitFollowUpRoute = require("./submission/submitFollowUpRoute");
 const submitGetNextRoute = require("./submission/submitGetNextRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
@@ -99,6 +101,30 @@ router.post(
   "/submit/initial",
   protectedMiddleware([Permissions.submitForms]),
   submitInitialRoute
+);
+
+/**
+ * @api {post} /survey/gravedigger Submit a gravedigger survey.
+ * @apiName SubmitFormGravedigger
+ * @apiGroup Submissions
+ * @apiDescription Unimplemented
+ */
+router.post(
+  "/survey/gravedigger",
+  protectedMiddleware([Permissions.submitForms]),
+  submitGravediggerRoute
+);
+
+/**
+ * @api {post} /survey/hospital Submit a hospital survey.
+ * @apiName SubmitFormHospital
+ * @apiGroup Submissions
+ * @apiDescription Unimplemented
+ */
+router.post(
+  "/survey/hospital",
+  protectedMiddleware([Permissions.submitForms]),
+  submitHospitalRoute
 );
 
 /**
