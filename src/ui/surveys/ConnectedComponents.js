@@ -22,9 +22,8 @@ const mapStateToPropsFollowUpId = (state) => ({
 });
 
 const mapDispatchToPropsFollowUpId = (dispatch) => ({
-  setFollowUpId: (followUpId) => {
-    dispatch({ type: Types.SET_FOLLOW_UP_ID, payload: followUpId });
-  },
+  setFollowUpId: (followUpId) =>
+    dispatch({ type: Types.SET_FOLLOW_UP_ID, payload: followUpId }),
 });
 
 export const ConnectedConsent = connect(

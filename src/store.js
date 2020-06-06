@@ -8,7 +8,6 @@ import surveyReducer from "./ui/surveys/reducer";
 
 export const history = createBrowserHistory();
 
-const initialState = {};
 const enhancers = [];
 const middleware = [thunk, routerMiddleware(history)];
 
@@ -25,13 +24,12 @@ export default createStore(
   combineReducers({
     router: connectRouter(history),
     auth: authReducer,
-    // volunteerForm: reducer,
     surveys: surveyReducer,
     form: form({ name: "form" }),
     forms: forms({ name: "forms", query: { type: "form", tags: "common" } }),
     submission: submission({ name: "submission" }),
     submissions: submissions({ name: "submissions" }),
   }),
-  initialState,
+  {},
   composedEnhancers
 );

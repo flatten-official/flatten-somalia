@@ -1,6 +1,6 @@
 import Types from "./actionTypes";
 
-const INITIAL_SURVEY_STATE = { consent: false, isFollowUpIdRecorded: false };
+const INITIAL_SURVEY_STATE = { consent: false };
 const TYPES_ARRAY = Object.values(Types);
 
 const subReducer = (state = INITIAL_SURVEY_STATE, action) => {
@@ -16,8 +16,6 @@ const subReducer = (state = INITIAL_SURVEY_STATE, action) => {
       return { ...state, startTime: action.payload };
     case Types.NOTIFY_CONSENT_GIVEN:
       return { ...state, consent: true };
-    case Types.NOTIFY_FOLLOW_UP_ID_RECORDED:
-      return { ...state, isFollowUpIdRecorded: true };
     default:
       console.log(`Does not support action ${action.type}`);
       return state;
