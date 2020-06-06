@@ -22,7 +22,11 @@ const Volunteer = mongoose.model(
       unique: true,
       required: true,
     },
-    teamName: String,
+    teamName: {
+      type: String,
+      required: true,
+      index: true,
+    },
     friendlyId: {
       type: Number,
       required: true,
@@ -50,8 +54,6 @@ const defaultVolunteer = {
 };
 
 const getNextFriendlyId = async () => {
-  const all = await Volunteer.find();
-  console.log(all.toString());
   const largestVolunteer = await Volunteer.find({}, "friendlyId")
     .sort({ friendlyId: -1 })
     .limit(1);
@@ -79,7 +81,8 @@ const addVolunteer = async (newVolunteer) => {
  * @param volunteerId
  * @return {Promise}
  */
-const findVolunteerById = (volunteerId) => Volunteer.findById(volunteerId);
+const findVolunteerById = (volunteerId) =>
+  Volunteer.findById(volunteerId).exec(); // exec() required to force return of promise
 
 /**
  * Returns null if volunteer doesn't exist, otherwise returns the volunteer object

@@ -2,7 +2,6 @@ const { login } = require("../../testUtils/requests");
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
-const { setup } = require("../../../src/index");
 const { findCookiesByVolunteerEmail } = require("../../../src/auth/cookieData");
 
 describe("test /auth", () => {
@@ -10,7 +9,6 @@ describe("test /auth", () => {
   let app;
 
   beforeAll(async () => {
-    await setup(false);
     await util.connectToDatabase();
     app = await getApp();
     request = supertest(app);

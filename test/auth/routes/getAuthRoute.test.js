@@ -1,7 +1,6 @@
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
-const { setup } = require("../../../src/index");
 
 const { login } = require("../../testUtils/requests");
 const { Permissions } = require("../../../src/volunteer/volunteerData");
@@ -11,7 +10,6 @@ let app;
 
 describe("test /auth", () => {
   beforeAll(async () => {
-    await setup(false);
     await util.connectToDatabase();
     app = await getApp();
     request = supertest(app);

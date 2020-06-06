@@ -1,5 +1,5 @@
 const { verifyTokenAndMakeCookie } = require("../verificationAPI");
-const { Config } = require("../../config");
+const { getConfig } = require("../../config");
 
 // Verifies a token in the request and gives the user a cookie.
 module.exports = async (req, res) => {
@@ -25,11 +25,11 @@ module.exports = async (req, res) => {
   res.cookie("id", tokenContent.id, {
     expires: tokenContent.expiry,
     // secure cookies not wanted in dev environment
-    secure: process.env.ENVIRONMENT !== "dev",
+    secure: getConfig().secureCookies,
     signed: true,
     httpOnly: true,
     sameSite: "Lax",
   });
 
-  res.redirect(303, Config.urls.homePage);
+  res.redirect(303, getConfig().urls.frontendHost);
 };

@@ -1,7 +1,6 @@
 const submissionData = require("./submissionData");
 
 const { Error } = require("mongoose");
-const { NO_TEAM_NAME } = require("./submissionData");
 
 async function initialSubmission(
   volunteerId,
@@ -12,18 +11,10 @@ async function initialSubmission(
   deathsData,
   householdData
 ) {
-  if (volunteerTeamName === undefined) {
-    console.log(
-      `Warning: ${volunteerId} has no team name. Assigning default ${submissionData.NO_TEAM_NAME}`
-    );
-    volunteerTeamName = submissionData.NO_TEAM_NAME;
-  }
-
   const household = await submissionData.createHousehold(
     householdData.followUpId,
     householdData.phone,
-    householdData.email,
-    householdData.headOfHouseName
+    householdData.email
   );
 
   const peopleModel = peopleData.map((o) => {
@@ -31,7 +22,7 @@ async function initialSubmission(
       name: o.name,
       gender: o.gender,
       household: household._id,
-      alive: false,
+      alive: true,
     };
   });
   const deathsModel = deathsData.map((o) => {

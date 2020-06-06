@@ -2,10 +2,10 @@
 // https://github.com/sendgrid/sendgrid-nodejs
 
 const sgMail = require("@sendgrid/mail");
-const { Config } = require("../config");
+const { getConfig } = require("../config");
 
 module.exports.setup = () => {
-  sgMail.setApiKey(Config.secrets.sendGridApiKey);
+  sgMail.setApiKey(getConfig().secrets.sendGridApiKey);
 };
 
 /* Sends a verification link to a user given an email and the link. */
@@ -17,7 +17,7 @@ module.exports.sendVerificationEmail = async (email, verification_link) => {
         email: "noreply@flatten.ca",
         name: "The FLATTEN Team",
       },
-      template_id: Config.authEmailTemplate,
+      template_id: getConfig().authEmailTemplate,
       dynamic_template_data: {
         subject: "FLATTEN: Verify your email",
         verification_link,

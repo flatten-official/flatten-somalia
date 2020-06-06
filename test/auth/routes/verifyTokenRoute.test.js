@@ -5,7 +5,6 @@ const { findCookiesByVolunteerEmail } = require("../../../src/auth/cookieData");
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
-const { setup } = require("../../../src/index");
 const { TEST_VOLUNTEER } = require("../../testUtils/requests");
 
 let request;
@@ -19,7 +18,6 @@ const OLD_TOKEN =
 
 describe("test /auth/token", () => {
   beforeAll(async () => {
-    await setup(false);
     await util.connectToDatabase();
     request = supertest(await getApp());
   });

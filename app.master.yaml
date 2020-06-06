@@ -2,7 +2,5 @@ service: default
 runtime: nodejs10
 env_variables:
   ENVIRONMENT: production
-  FRONTEND_URL: https://v.flatten.org
-  BACKEND_URL: https://api.flatten.org
 vpc_access_connector:
   name: "projects/somalia-prod/locations/europe-west1/connectors/gae-to-atlas-so-prod"

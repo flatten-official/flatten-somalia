@@ -1,18 +1,10 @@
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
-const supertest = require("supertest");
-const { setup } = require("../../../src/index");
 
 const { login } = require("../../testUtils/requests");
 
 const submissionData = require("../../../src/submission/submissionData");
 const volunteerData = require("../../../src/volunteer/volunteerData");
-
-const retrieveById = (all, id) =>
-  all.filter((obj) => obj._id.toString() === id.toString())[0];
-
-let request;
-let app;
 
 const sampleSubmission = {
   household: {
@@ -44,11 +36,11 @@ const sampleSubmissionInvalid = {
 };
 
 describe("test /auth", () => {
+  let app;
+
   beforeAll(async () => {
-    await setup(false);
     await util.connectToDatabase();
     app = await getApp();
-    request = supertest(app);
   });
 
   afterEach(async () => {
@@ -58,9 +50,9 @@ describe("test /auth", () => {
   afterAll(async () => await util.closeDatabase());
 
   it("should add submissions, people, and households as expected for an initial submission", async () => {
-    const { agent, volunteer } = await login(app);
+    const { agent } = await login(app);
 
-    const res = await agent
+    await agent
       .post("/submit/initial")
       .send(sampleSubmission)
       .set("Content-Type", "application/json")
@@ -92,9 +84,9 @@ describe("test /auth", () => {
   });
 
   it("should fail for a user without the right permissions", async () => {
-    const { agent, volunteer } = await login(app, { permissions: [] });
+    const { agent } = await login(app, { permissions: [] });
 
-    const res = await agent
+    await agent
       .post("/submit/initial")
       .send(sampleSubmission)
       .set("Content-Type", "application/json")
@@ -111,9 +103,9 @@ describe("test /auth", () => {
   });
 
   it("should fail for an invalid submission", async () => {
-    const { agent, volunteer } = await login(app);
+    const { agent } = await login(app);
 
-    const res = await agent
+    await agent
       .post("/submit/initial")
       .send(sampleSubmissionInvalid)
       .set("Content-Type", "application/json")

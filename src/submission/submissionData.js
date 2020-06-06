@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-// name used if a volunteer doesn't have a team assigned (but we don't want to lose their submission)
-const NO_TEAM_NAME = "noTeam";
-
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Submission = mongoose.model(
   "Submission",
@@ -56,7 +53,7 @@ const Submission = mongoose.model(
       // contains location etc
       location: {
         lat: Number,
-        long: Number,
+        lng: Number,
         accuracy: Number,
         altitude: Number,
         wasManual: Boolean,
@@ -101,7 +98,6 @@ const Household = mongoose.model(
     // TODO - decide if we remove this - can we query the latest in the submissions
     phone: String,
     email: String,
-    headOfHouseholdName: String,
     // the id that is given to volunteers (NOT the ID in the DB), TODO...!!
     followUpId: {
       type: String,
@@ -136,8 +132,6 @@ const Person = mongoose.model(
 
 async function createPeople(perPersonData) {
   return perPersonData.map((personData) => new Person(personData));
-  // let ret = await Person.insertMany(perPersonData);
-  // return ret.map((v) => v._id);
 }
 
 async function createSubmission(
@@ -158,7 +152,7 @@ async function createSubmission(
     });
   }
 
-  const newSubmission = new Submission({
+  return new Submission({
     addedBy: submitterId,
     teamName: submitterTeamName,
     submissionSchema,
@@ -169,19 +163,11 @@ async function createSubmission(
       ref: householdId,
     },
   });
-
-  return newSubmission;
 }
 
-async function createHousehold(followUpId, phone, email, headOfHouseholdName) {
-  const household = new Household({
-    followUpId,
-    phone,
-    email,
-    headOfHouseholdName,
-  });
+async function createHousehold(followUpId, phone, email) {
   // TODO - handle different kinds of submsisions here
-  return household;
+  return new Household({ followUpId, phone, email });
 }
 
 async function setPersonToDead(personId) {
@@ -272,5 +258,4 @@ module.exports = {
   getVolunteerNextFollowUp,
   createFollowUpSubmisison,
   cancelVolunteerFollowUp,
-  NO_TEAM_NAME,
 };
