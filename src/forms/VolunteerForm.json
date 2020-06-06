@@ -5,6 +5,27 @@
   "owner": "5ed48ca2b9eb60b9c939562b",
   "components": [
     {
+      "title": "Follow Up ID",
+      "label": "Page 6",
+      "type": "panel",
+      "key": "page6",
+      "input": false,
+      "tableView": false,
+      "components": [
+        {
+          "type": "customFollowUpId",
+          "key": "followUpId",
+          "protected": true,
+          "input": true,
+          "tableView": false,
+          "label": ""
+        }
+      ],
+      "breadcrumbClickable": true,
+      "buttonSettings": { "previous": true, "cancel": true, "next": true },
+      "collapsible": false
+    },
+    {
       "title": "Deganaanshaha",
       "label": "housing",
       "type": "panel",
@@ -28,9 +49,7 @@
             }
           ],
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "sharePhoneNumberConsent",
           "type": "radio",
           "input": true
@@ -41,9 +60,7 @@
           "spellcheck": true,
           "tableView": true,
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "phoneNumber",
           "conditional": {
             "show": true,
@@ -54,27 +71,12 @@
           "input": true
         },
         {
-          "type": "customFollowUpId",
-          "key": "followUpId",
-          "protected": true,
-          "input": true,
-          "tableView": false,
-          "label": "",
-          "conditional": {
-            "show": true,
-            "when": "sharePhoneNumberConsent",
-            "eq": "willNotSharePhoneNumber"
-          }
-        },
-        {
           "label": "email",
           "placeholder": "optional",
           "spellcheck": true,
           "tableView": true,
           "calculateServer": false,
-          "kickbox": {
-            "enabled": true
-          },
+          "kickbox": { "enabled": true },
           "key": "email",
           "type": "email",
           "input": true
@@ -85,80 +87,33 @@
           "tableView": true,
           "dataSrc": "json",
           "data": {
-            "values": [
-              {
-                "label": "",
-                "value": ""
-              }
-            ],
+            "values": [{ "label": "", "value": "" }],
             "json": [
-              {
-                "name": "Dharkeynley"
-              },
-              {
-                "name": "Deynille"
-              },
-              {
-                "name": "Hodan"
-              },
-              {
-                "name": "Wadajir"
-              },
-              {
-                "name": "Waberi"
-              },
-              {
-                "name": "Hawl Wadag"
-              },
-              {
-                "name": "Hamar Jabjab"
-              },
-              {
-                "name": "Wardhigley"
-              },
-              {
-                "name": "Kaxda"
-              },
-              {
-                "name": "Garasbaley"
-              },
-              {
-                "name": "Gubadley"
-              },
-              {
-                "name": "Bondhere"
-              },
-              {
-                "name": "Hamar Weye"
-              },
-              {
-                "name": "Cabdi Caziz"
-              },
-              {
-                "name": "Shibis"
-              },
-              {
-                "name": "Yaqshid"
-              },
-              {
-                "name": "Karan"
-              },
-              {
-                "name": "Huriwa"
-              }
+              { "name": "Dharkeynley" },
+              { "name": "Deynille" },
+              { "name": "Hodan" },
+              { "name": "Wadajir" },
+              { "name": "Waberi" },
+              { "name": "Hawl Wadag" },
+              { "name": "Hamar Jabjab" },
+              { "name": "Villa Somalia" },
+              { "name": "Wardhigley" },
+              { "name": "Bondhere" },
+              { "name": "Hamar Weye" },
+              { "name": "Cabdi Caziz" },
+              { "name": "Shibis" },
+              { "name": "Yaqshid" },
+              { "name": "Karan" },
+              { "name": "Huriwa" }
             ]
           },
           "template": "<span>{{ item.name }}</span>",
           "selectThreshold": 0.3,
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "district",
           "type": "select",
-          "indexeddb": {
-            "filter": {}
-          },
+          "indexeddb": { "filter": {} },
           "input": true
         },
         {
@@ -167,16 +122,8 @@
           "inline": false,
           "tableView": false,
           "values": [
-            {
-              "label": "terrace",
-              "value": "terrace",
-              "shortcut": ""
-            },
-            {
-              "label": "villa",
-              "value": "villa",
-              "shortcut": ""
-            },
+            { "label": "terrace", "value": "terrace", "shortcut": "" },
+            { "label": "villa", "value": "villa", "shortcut": "" },
             {
               "label": "apartmentOrFlat",
               "value": "apartmentOrFlat",
@@ -187,26 +134,16 @@
               "value": "corrugatedIron",
               "shortcut": ""
             },
-            {
-              "label": "tents",
-              "value": "tents",
-              "shortcut": ""
-            },
+            { "label": "tents", "value": "tents", "shortcut": "" },
             {
               "label": "corralStoneHouse",
               "value": "corralStoneHouse",
               "shortcut": ""
             },
-            {
-              "label": "other",
-              "value": "other",
-              "shortcut": ""
-            }
+            { "label": "other", "value": "other", "shortcut": "" }
           ],
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "housingType",
           "type": "radio",
           "input": true
@@ -218,11 +155,7 @@
           "tableView": true,
           "calculateServer": false,
           "key": "other",
-          "conditional": {
-            "show": true,
-            "when": "housingType",
-            "eq": "other"
-          },
+          "conditional": { "show": true, "when": "housingType", "eq": "other" },
           "type": "textfield",
           "input": true
         },
@@ -232,31 +165,13 @@
           "inline": false,
           "tableView": false,
           "values": [
-            {
-              "label": "own",
-              "value": "own",
-              "shortcut": ""
-            },
-            {
-              "label": "hold",
-              "value": "hold",
-              "shortcut": ""
-            },
-            {
-              "label": "rent",
-              "value": "rent",
-              "shortcut": ""
-            },
-            {
-              "label": "other",
-              "value": "other",
-              "shortcut": ""
-            }
+            { "label": "own", "value": "own", "shortcut": "" },
+            { "label": "hold", "value": "hold", "shortcut": "" },
+            { "label": "rent", "value": "rent", "shortcut": "" },
+            { "label": "other", "value": "other", "shortcut": "" }
           ],
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "ownershipType",
           "customConditional": "show = ((data.housingType == \"apartmentOrFlat\")||(data.housingType==\"villa\")||(data.housingType ==\"terrace\")||(data.housingType==\"tents\")||(data.housingType==\"other\")||(data.housingType==\"corrugatedIron\")||(data.housingType==\"corralStoneHouse\"))",
           "type": "radio",
@@ -283,37 +198,17 @@
           "tableView": true,
           "data": {
             "values": [
-              {
-                "label": "0to50",
-                "value": "0to50"
-              },
-              {
-                "label": "51to100",
-                "value": "51to100"
-              },
-              {
-                "label": "101to200",
-                "value": "101to200"
-              },
-              {
-                "label": "201to500",
-                "value": "201to500"
-              },
-              {
-                "label": "501to1000",
-                "value": "501to1000"
-              },
-              {
-                "label": "above1000",
-                "value": "above1000"
-              }
+              { "label": "0-50$", "value": "050" },
+              { "label": "51-100$", "value": "51100" },
+              { "label": "101-200$", "value": "101200" },
+              { "label": "201-500$", "value": "201500" },
+              { "label": "501-100$", "value": "501100" },
+              { "label": ">1000$", "value": "1000" }
             ]
           },
           "selectThreshold": 0.3,
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "rentRange",
           "conditional": {
             "show": true,
@@ -321,9 +216,7 @@
             "eq": "rent"
           },
           "type": "select",
-          "indexeddb": {
-            "filter": {}
-          },
+          "indexeddb": { "filter": {} },
           "input": true
         },
         {
@@ -335,11 +228,7 @@
           "requireDecimal": false,
           "inputFormat": "plain",
           "calculateServer": false,
-          "validate": {
-            "required": true,
-            "min": 0,
-            "max": 15
-          },
+          "validate": { "required": true, "min": 0, "max": 15 },
           "key": "roomsCount",
           "type": "number",
           "input": true
@@ -353,11 +242,7 @@
           "requireDecimal": false,
           "inputFormat": "plain",
           "calculateServer": false,
-          "validate": {
-            "required": true,
-            "min": 0,
-            "max": 25
-          },
+          "validate": { "required": true, "min": 0, "max": 25 },
           "key": "residentsCount",
           "type": "number",
           "input": true
@@ -366,11 +251,7 @@
       "input": false,
       "tableView": false,
       "breadcrumbClickable": true,
-      "buttonSettings": {
-        "previous": true,
-        "cancel": true,
-        "next": true
-      },
+      "buttonSettings": { "previous": true, "cancel": true, "next": true },
       "collapsible": false,
       "nextPage": "next = 'perPerson';"
     },
@@ -412,11 +293,7 @@
               "requireDecimal": false,
               "inputFormat": "plain",
               "calculateServer": false,
-              "validate": {
-                "required": true,
-                "min": 0,
-                "max": 110
-              },
+              "validate": { "required": true, "min": 0, "max": 110 },
               "key": "age",
               "type": "number",
               "input": true
@@ -427,28 +304,36 @@
               "inline": false,
               "tableView": false,
               "values": [
-                {
-                  "label": "male",
-                  "value": "male",
-                  "shortcut": ""
-                },
-                {
-                  "label": "female",
-                  "value": "female",
-                  "shortcut": ""
-                }
+                { "label": "male", "value": "male", "shortcut": "" },
+                { "label": "female", "value": "female", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "sex",
               "type": "radio",
               "input": true
             },
             {
+              "label": "residenceStatus",
+              "widget": "choicesjs",
+              "tableView": true,
+              "data": {
+                "values": [
+                  { "label": "resident", "value": "resident" },
+                  { "label": "idp", "value": "idp" }
+                ]
+              },
+              "selectThreshold": 0.3,
+              "calculateServer": false,
+              "validate": { "required": true },
+              "key": "residenceStatus",
+              "type": "select",
+              "indexeddb": { "filter": {} },
+              "input": true
+            },
+            {
               "type": "customText",
-              "key": "customTextEmploymentpplsection1",
+              "key": "customTextdemographicspplsection1",
               "i18nKey": "employmentSection",
               "input": true,
               "tableView": false,
@@ -460,21 +345,11 @@
               "inline": false,
               "tableView": false,
               "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                }
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "employed",
               "type": "radio",
               "input": true
@@ -485,18 +360,9 @@
               "tableView": true,
               "data": {
                 "values": [
-                  {
-                    "label": "Koronto Yaqaan",
-                    "value": "korontoYaqaan"
-                  },
-                  {
-                    "label": "Fuundi",
-                    "value": "fuundi"
-                  },
-                  {
-                    "label": "Faryaamo",
-                    "value": "faryaamo"
-                  },
+                  { "label": "Koronto Yaqaan", "value": "korontoYaqaan" },
+                  { "label": "Fuundi", "value": "fuundi" },
+                  { "label": "Faryaamo", "value": "faryaamo" },
                   {
                     "label": "Feeroole ( Ninka Guryaha Shubo)",
                     "value": "feerooleNinkaGuryahaShubo"
@@ -505,107 +371,48 @@
                     "label": "Makaaniko (Gawaarida ninka Sameeyo)",
                     "value": "makaanikoGawaaridaNinkaSameeyo"
                   },
-                  {
-                    "label": "Tubiiste",
-                    "value": "tubiiste"
-                  },
+                  { "label": "Tubiiste", "value": "tubiiste" },
                   {
                     "label": "Xamaali (Muruq Maal)",
                     "value": "xamaaliMuruqMaal"
                   },
-                  {
-                    "label": "Rinjiile",
-                    "value": "rinjiile"
-                  },
+                  { "label": "Rinjiile", "value": "rinjiile" },
                   {
                     "label": "Farsama yaqaan dabka gawaarida",
                     "value": "farsamaYaqaanDabkaGawaarida"
                   },
-                  {
-                    "label": "Caseeye ",
-                    "value": "caseeye"
-                  },
+                  { "label": "Caseeye ", "value": "caseeye" },
                   {
                     "label": "Kooke (Kuwa Cunada kariyo)",
                     "value": "kookeKuwaCunadaKariyo"
                   },
-                  {
-                    "label": "Kabalyeeri",
-                    "value": "kabalyeeri"
-                  },
-                  {
-                    "label": "Timajare",
-                    "value": "timajare"
-                  },
-                  {
-                    "label": "Kalkaaliye ",
-                    "value": "kalkaaliye"
-                  },
-                  {
-                    "label": "Doctor",
-                    "value": "doctor"
-                  },
-                  {
-                    "label": "Engineer",
-                    "value": "engineer"
-                  },
-                  {
-                    "label": "Umuliso",
-                    "value": "umuliso"
-                  },
-                  {
-                    "label": "Macalin School",
-                    "value": "macalinSchool"
-                  },
-                  {
-                    "label": "Prof",
-                    "value": "prof"
-                  },
-                  {
-                    "label": "Shaqale dowladeed",
-                    "value": "shaqaleDowladeed"
-                  },
+                  { "label": "Kabalyeeri", "value": "kabalyeeri" },
+                  { "label": "Timajare", "value": "timajare" },
+                  { "label": "Kalkaaliye ", "value": "kalkaaliye" },
+                  { "label": "Doctor", "value": "doctor" },
+                  { "label": "Engineer", "value": "engineer" },
+                  { "label": "Umuliso", "value": "umuliso" },
+                  { "label": "Macalin School", "value": "macalinSchool" },
+                  { "label": "Prof", "value": "prof" },
+                  { "label": "Shaqale dowladeed", "value": "shaqaleDowladeed" },
                   {
                     "label": "Shaqaale hey,adeed",
                     "value": "shaqaaleHeyAdeed"
                   },
-                  {
-                    "label": "Shaqaale ganacsi",
-                    "value": "shaqaaleGanacsi"
-                  },
-                  {
-                    "label": "Ganacsade",
-                    "value": "ganacsade"
-                  },
-                  {
-                    "label": "Arday jamacadeed",
-                    "value": "ardayJamacadeed"
-                  },
-                  {
-                    "label": "Arday iskool",
-                    "value": "ardayIskool"
-                  },
-                  {
-                    "label": "other",
-                    "value": "other"
-                  }
+                  { "label": "Shaqaale ganacsi", "value": "shaqaaleGanacsi" },
+                  { "label": "Ganacsade", "value": "ganacsade" },
+                  { "label": "Arday jamacadeed", "value": "ardayJamacadeed" },
+                  { "label": "Arday iskool", "value": "ardayIskool" },
+                  { "label": "other", "value": "other" }
                 ]
               },
               "selectThreshold": 0.3,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "occupation",
-              "conditional": {
-                "show": true,
-                "when": "employed",
-                "eq": "yes"
-              },
+              "conditional": { "show": true, "when": "employed", "eq": "yes" },
               "type": "select",
-              "indexeddb": {
-                "filter": {}
-              },
+              "indexeddb": { "filter": {} },
               "input": true
             },
             {
@@ -624,46 +431,43 @@
               "input": true
             },
             {
+              "label": "primaryIncomeSource",
+              "widget": "choicesjs",
+              "tableView": true,
+              "data": {
+                "values": [{ "label": "youtube", "value": "youtube" }]
+              },
+              "selectThreshold": 0.3,
+              "calculateServer": false,
+              "validate": { "required": true },
+              "key": "primaryIncomeSource",
+              "conditional": { "show": true, "when": "employed", "eq": "no" },
+              "type": "select",
+              "indexeddb": { "filter": {} },
+              "input": true
+            },
+            {
               "label": "educationLevel",
               "widget": "choicesjs",
               "tableView": true,
               "dataSrc": "json",
               "data": {
-                "values": [
-                  {
-                    "label": "",
-                    "value": ""
-                  }
-                ],
+                "values": [{ "label": "", "value": "" }],
                 "json": [
-                  {
-                    "name": "none"
-                  },
-                  {
-                    "name": "primarySchool"
-                  },
-                  {
-                    "name": "secondarySchool"
-                  },
-                  {
-                    "name": "university"
-                  },
-                  {
-                    "name": "islamicStudies"
-                  }
+                  { "name": "none" },
+                  { "name": "primarySchool" },
+                  { "name": "secondarySchool" },
+                  { "name": "university" },
+                  { "name": "islamicStudies" }
                 ]
               },
               "template": "<span>{{ item.name }}</span>",
               "selectThreshold": 0.3,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "educationLevel",
               "type": "select",
-              "indexeddb": {
-                "filter": {}
-              },
+              "indexeddb": { "filter": {} },
               "input": true
             },
             {
@@ -672,60 +476,32 @@
               "tableView": true,
               "data": {
                 "values": [
-                  {
-                    "label": "0to99",
-                    "value": "0to99"
-                  },
-                  {
-                    "label": "100to499",
-                    "value": "100to499"
-                  },
-                  {
-                    "label": "500to999",
-                    "value": "500to999"
-                  },
-                  {
-                    "label": "1000to1999",
-                    "value": "1000to1999"
-                  },
-                  {
-                    "label": "2000to4999",
-                    "value": "2000to4999"
-                  },
-                  {
-                    "label": "5000to9999",
-                    "value": "5000to9999"
-                  },
-                  {
-                    "label": "10000to14999",
-                    "value": "10000to14999"
-                  },
-                  {
-                    "label": "15000to19999",
-                    "value": "15000to19999"
-                  },
-                  {
-                    "label": "over20000",
-                    "value": "over20000"
-                  }
+                  { "label": "0-100$", "value": "0100" },
+                  { "label": "101-200$", "value": "101200" },
+                  { "label": "201-400$", "value": "201400" },
+                  { "label": "401-500$", "value": "401500" },
+                  { "label": "501-1000$", "value": "5011000" },
+                  { "label": "1001-2000$", "value": "10012000" },
+                  { "label": ">2000$", "value": "2000" }
                 ]
               },
               "selectThreshold": 0.3,
               "calculateServer": false,
               "key": "monthlyIncome1",
               "type": "select",
-              "indexeddb": {
-                "filter": {}
-              },
+              "indexeddb": { "filter": {} },
               "input": true
             },
             {
-              "type": "customText",
-              "key": "customTextAwarenesspplsection",
-              "i18nKey": "awarenessSection",
-              "input": true,
+              "label": "HTML",
+              "tag": "h4",
+              "attrs": [{ "attr": "", "value": "" }],
+              "content": "<!DOCTYPE HTML>\n<b><u>Ogaanshaha</b></u>",
+              "refreshOnChange": false,
               "tableView": false,
-              "label": ""
+              "key": "html2",
+              "type": "htmlelement",
+              "input": false
             },
             {
               "label": "COVID19KnowledgeLevel",
@@ -733,38 +509,21 @@
               "tableView": true,
               "dataSrc": "json",
               "data": {
-                "values": [
-                  {
-                    "label": "",
-                    "value": ""
-                  }
-                ],
+                "values": [{ "label": "", "value": "" }],
                 "json": [
-                  {
-                    "name": "none"
-                  },
-                  {
-                    "name": "minimal"
-                  },
-                  {
-                    "name": "average"
-                  },
-                  {
-                    "name": "wellInformed"
-                  }
+                  { "name": "none" },
+                  { "name": "minimal" },
+                  { "name": "average" },
+                  { "name": "wellInformed" }
                 ]
               },
               "template": "<span>{{ item.name }}</span>",
               "selectThreshold": 0.3,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "COVID19KnowledgeLevel",
               "type": "select",
-              "indexeddb": {
-                "filter": {}
-              },
+              "indexeddb": { "filter": {} },
               "input": true
             },
             {
@@ -786,26 +545,14 @@
                 "television": false
               },
               "values": [
-                {
-                  "label": "internet",
-                  "value": "internet",
-                  "shortcut": ""
-                },
-                {
-                  "label": "radio",
-                  "value": "radio",
-                  "shortcut": ""
-                },
+                { "label": "internet", "value": "internet", "shortcut": "" },
+                { "label": "radio", "value": "radio", "shortcut": "" },
                 {
                   "label": "television",
                   "value": "television",
                   "shortcut": ""
                 },
-                {
-                  "label": "phone",
-                  "value": "phone",
-                  "shortcut": ""
-                },
+                { "label": "phone", "value": "phone", "shortcut": "" },
                 {
                   "label": "newsHotline",
                   "value": "newsHotline",
@@ -816,16 +563,8 @@
                   "value": "friendsAndFamily",
                   "shortcut": ""
                 },
-                {
-                  "label": "mosques",
-                  "value": "mosques",
-                  "shortcut": ""
-                },
-                {
-                  "label": "schools",
-                  "value": "schools",
-                  "shortcut": ""
-                },
+                { "label": "mosques", "value": "mosques", "shortcut": "" },
+                { "label": "schools", "value": "schools", "shortcut": "" },
                 {
                   "label": "traditionalElder",
                   "value": "traditionalElder",
@@ -836,16 +575,10 @@
                   "value": "socialMedia",
                   "shortcut": ""
                 },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                }
+                { "label": "other", "value": "other", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "primaryInformationSource",
               "type": "selectboxes",
               "input": true,
@@ -856,9 +589,7 @@
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "primaryInformationSourceOther",
               "conditional": {
                 "show": true,
@@ -881,31 +612,13 @@
                 "other": false
               },
               "values": [
-                {
-                  "label": "facebook",
-                  "value": "facebook",
-                  "shortcut": ""
-                },
-                {
-                  "label": "whatsapp",
-                  "value": "whatsapp",
-                  "shortcut": ""
-                },
-                {
-                  "label": "twitter",
-                  "value": "twitter",
-                  "shortcut": ""
-                },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                }
+                { "label": "facebook", "value": "facebook", "shortcut": "" },
+                { "label": "whatsapp", "value": "whatsapp", "shortcut": "" },
+                { "label": "twitter", "value": "twitter", "shortcut": "" },
+                { "label": "other", "value": "other", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "socialMedia",
               "conditional": {
                 "show": true,
@@ -922,9 +635,7 @@
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "otherSocialMedia",
               "conditional": {
                 "show": true,
@@ -993,64 +704,42 @@
                 }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "COVID19PreventionMeasures",
               "type": "selectboxes",
               "input": true,
               "inputType": "checkbox"
             },
             {
-              "label": "nationalHotlineAwareness",
+              "label": "awareOfNationalHotline",
               "optionsLabelPosition": "right",
               "inline": false,
               "tableView": false,
               "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                }
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
-              "key": "nationalHotlineAwareness",
+              "validate": { "required": true },
+              "key": "awareOfNationalHotline",
               "type": "radio",
               "input": true
             },
             {
-              "label": "nationalHotlineUsage",
+              "label": "usedNationalHotline",
               "optionsLabelPosition": "right",
               "inline": false,
               "tableView": false,
               "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                }
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
-              "key": "nationalHotlineUsage",
+              "validate": { "required": true },
+              "key": "usedNationalHotline",
               "conditional": {
                 "show": true,
-                "when": "nationalHotlineAwareness",
+                "when": "awareOfNationalHotline",
                 "eq": "yes"
               },
               "type": "radio",
@@ -1072,11 +761,7 @@
                 "alreadyFeelSecure": false
               },
               "values": [
-                {
-                  "label": "fear",
-                  "value": "fear",
-                  "shortcut": ""
-                },
+                { "label": "fear", "value": "fear", "shortcut": "" },
                 {
                   "label": "trustIssues",
                   "value": "trustIssues",
@@ -1097,20 +782,14 @@
                   "value": "religiousReasons",
                   "shortcut": ""
                 },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                }
+                { "label": "other", "value": "other", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "reasonsForNotUsingNationalHotline",
               "conditional": {
                 "show": true,
-                "when": "nationalHotlineUsage",
+                "when": "usedNationalHotline",
                 "eq": "no"
               },
               "type": "selectboxes",
@@ -1123,9 +802,7 @@
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "otherReasonsForNotUsingNationalHotline",
               "conditional": {
                 "show": true,
@@ -1136,12 +813,15 @@
               "input": true
             },
             {
-              "type": "customText",
-              "key": "customTextMedicalpplsection",
-              "i18nKey": "medicalSection",
-              "input": true,
+              "label": "HTML",
+              "tag": "h4",
+              "attrs": [{ "attr": "", "value": "" }],
+              "content": "<!DOCTYPE HTML>\n<b><u>Caafimaadka</b></u>",
+              "refreshOnChange": false,
               "tableView": false,
-              "label": ""
+              "key": "html3",
+              "type": "htmlelement",
+              "input": false
             },
             {
               "label": "isPregnant",
@@ -1149,27 +829,13 @@
               "inline": false,
               "tableView": false,
               "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                }
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "isPregnant",
-              "conditional": {
-                "show": true,
-                "when": "sex",
-                "eq": "female"
-              },
+              "conditional": { "show": true, "when": "sex", "eq": "female" },
               "type": "radio",
               "input": true
             },
@@ -1179,21 +845,11 @@
               "inline": false,
               "tableView": false,
               "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                }
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "hasDisabilities",
               "type": "radio",
               "input": true
@@ -1217,41 +873,19 @@
                 "hearing": false
               },
               "values": [
-                {
-                  "label": "physical",
-                  "value": "physical",
-                  "shortcut": ""
-                },
-                {
-                  "label": "learning",
-                  "value": "learning",
-                  "shortcut": ""
-                },
+                { "label": "physical", "value": "physical", "shortcut": "" },
+                { "label": "learning", "value": "learning", "shortcut": "" },
                 {
                   "label": "psychiatric",
                   "value": "psychiatric",
                   "shortcut": ""
                 },
-                {
-                  "label": "visual",
-                  "value": "visual",
-                  "shortcut": ""
-                },
-                {
-                  "label": "hearing",
-                  "value": "hearing",
-                  "shortcut": ""
-                },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                }
+                { "label": "visual", "value": "visual", "shortcut": "" },
+                { "label": "hearing", "value": "hearing", "shortcut": "" },
+                { "label": "other", "value": "other", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "disabilityTypes",
               "conditional": {
                 "show": true,
@@ -1269,9 +903,7 @@
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "otherDisability",
               "conditional": {
                 "show": true,
@@ -1292,10 +924,10 @@
                 "diabetes": false,
                 "heartDisease": false,
                 "lungDisease": false,
+                "poorCancerOrImmunity": false,
                 "immunocompromised": false,
                 "malnutrition": false,
-                "cancerOrPoorImmunity": false,
-                "noComorbidities": false
+                "cancerOrPoorImmunity": false
               },
               "values": [
                 {
@@ -1303,11 +935,7 @@
                   "value": "highBloodPressure",
                   "shortcut": ""
                 },
-                {
-                  "label": "diabetes",
-                  "value": "diabetes",
-                  "shortcut": ""
-                },
+                { "label": "diabetes", "value": "diabetes", "shortcut": "" },
                 {
                   "label": "heartDisease",
                   "value": "heartDisease",
@@ -1333,21 +961,10 @@
                   "value": "malnutrition",
                   "shortcut": ""
                 },
-                {
-                  "label": "noComorbidities",
-                  "value": "noComorbidities",
-                  "shortcut": ""
-                },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                }
+                { "label": "other", "value": "other", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "comorbidities",
               "type": "selectboxes",
               "input": true,
@@ -1395,11 +1012,7 @@
                 "stomachPainCramps": false
               },
               "values": [
-                {
-                  "label": "newFever",
-                  "value": "newFever",
-                  "shortcut": ""
-                },
+                { "label": "New Fever", "value": "newFever", "shortcut": "" },
                 {
                   "label": "newOrWorseningCough",
                   "value": "newOrWorseningCough",
@@ -1415,26 +1028,14 @@
                   "value": "gustatoryOrOlfactoryImpairment",
                   "shortcut": ""
                 },
-                {
-                  "label": "fatigue",
-                  "value": "fatigue",
-                  "shortcut": ""
-                },
-                {
-                  "label": "sneezing",
-                  "value": "sneezing",
-                  "shortcut": ""
-                },
+                { "label": "fatigue", "value": "fatigue", "shortcut": "" },
+                { "label": "Sneezing", "value": "sneezing", "shortcut": "" },
                 {
                   "label": "achesAndPains",
                   "value": "achesAndPains",
                   "shortcut": ""
                 },
-                {
-                  "label": "runnyNose",
-                  "value": "runnyNose",
-                  "shortcut": ""
-                },
+                { "label": "runnyNose", "value": "runnyNose", "shortcut": "" },
                 {
                   "label": "chillsOrNightSweats",
                   "value": "chillsOrNightSweats",
@@ -1445,26 +1046,10 @@
                   "value": "soreThroat",
                   "shortcut": ""
                 },
-                {
-                  "label": "diarrhea",
-                  "value": "diarrhea",
-                  "shortcut": ""
-                },
-                {
-                  "label": "headache",
-                  "value": "headache",
-                  "shortcut": ""
-                },
-                {
-                  "label": "nausea",
-                  "value": "nausea",
-                  "shortcut": ""
-                },
-                {
-                  "label": "rash",
-                  "value": "rash",
-                  "shortcut": ""
-                },
+                { "label": "diarrhea", "value": "diarrhea", "shortcut": "" },
+                { "label": "headache", "value": "headache", "shortcut": "" },
+                { "label": "nausea", "value": "nausea", "shortcut": "" },
+                { "label": "rash", "value": "rash", "shortcut": "" },
                 {
                   "label": "appetiteLoss",
                   "value": "appetiteLoss",
@@ -1475,21 +1060,11 @@
                   "value": "stomachPainOrCramps",
                   "shortcut": ""
                 },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                },
-                {
-                  "label": "noSymptoms",
-                  "value": "noSymptoms",
-                  "shortcut": ""
-                }
+                { "label": "other", "value": "other", "shortcut": "" },
+                { "label": "noSymptoms", "value": "noSymptoms", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "currentSymptoms1",
               "type": "selectboxes",
               "input": true,
@@ -1501,9 +1076,7 @@
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "otherSymptoms",
               "conditional": {
                 "show": true,
@@ -1524,9 +1097,7 @@
               },
               "enableTime": false,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "startOfSymptoms",
               "conditional": {
                 "show": false,
@@ -1561,21 +1132,11 @@
               "inline": false,
               "tableView": false,
               "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                }
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "hasBeenTestedForCOVID19",
               "type": "radio",
               "input": true
@@ -1591,9 +1152,7 @@
               },
               "enableTime": false,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "COVID19testDate",
               "conditional": {
                 "show": true,
@@ -1628,16 +1187,8 @@
               "inline": false,
               "tableView": false,
               "values": [
-                {
-                  "label": "positive",
-                  "value": "positive",
-                  "shortcut": ""
-                },
-                {
-                  "label": "negative",
-                  "value": "negative",
-                  "shortcut": ""
-                },
+                { "label": "positive", "value": "positive", "shortcut": "" },
+                { "label": "negative", "value": "negative", "shortcut": "" },
                 {
                   "label": "unknownTestResult",
                   "value": "unknownTestResult",
@@ -1645,9 +1196,7 @@
                 }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "COVID19TestResult",
               "conditional": {
                 "show": true,
@@ -1682,9 +1231,7 @@
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "reasonsForNotBeingTested",
               "conditional": {
                 "show": true,
@@ -1700,16 +1247,8 @@
               "inline": false,
               "tableView": false,
               "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                },
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" },
                 {
                   "label": "contactUnknown",
                   "value": "contactUnknown",
@@ -1717,9 +1256,7 @@
                 }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "closeContactWithInfectedOrSymptomaticPerson",
               "type": "radio",
               "input": true
@@ -1735,9 +1272,7 @@
               },
               "enableTime": false,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "potentialContactDate",
               "conditional": {
                 "show": true,
@@ -1831,12 +1366,15 @@
               ]
             },
             {
-              "type": "customText",
-              "key": "customTextTransportationpplsection",
-              "i18nKey": "transportationSection",
-              "input": true,
+              "label": "HTML",
+              "tag": "h4",
+              "attrs": [{ "attr": "", "value": "" }],
+              "content": "<!DOCTYPE HTML>\n<b><u>Dhaqdhaqaaqaga</b></u>",
+              "refreshOnChange": false,
               "tableView": false,
-              "label": ""
+              "key": "html4",
+              "type": "htmlelement",
+              "input": false
             },
             {
               "label": "cityTransportationMethod",
@@ -1852,41 +1390,15 @@
                 "cycling": false
               },
               "values": [
-                {
-                  "label": "publicBus",
-                  "value": "publicBus",
-                  "shortcut": ""
-                },
-                {
-                  "label": "driving",
-                  "value": "driving",
-                  "shortcut": ""
-                },
-                {
-                  "label": "bajaaj",
-                  "value": "bajaaj",
-                  "shortcut": ""
-                },
-                {
-                  "label": "walking",
-                  "value": "walking",
-                  "shortcut": ""
-                },
-                {
-                  "label": "cycling",
-                  "value": "cycling",
-                  "shortcut": ""
-                },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                }
+                { "label": "publicBus", "value": "publicBus", "shortcut": "" },
+                { "label": "driving", "value": "driving", "shortcut": "" },
+                { "label": "bajaaj", "value": "bajaaj", "shortcut": "" },
+                { "label": "walking", "value": "walking", "shortcut": "" },
+                { "label": "cycling", "value": "cycling", "shortcut": "" },
+                { "label": "other", "value": "other", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "cityTransportationMethod",
               "type": "selectboxes",
               "input": true,
@@ -1898,9 +1410,7 @@
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "other1",
               "conditional": {
                 "show": true,
@@ -1916,21 +1426,11 @@
               "inline": false,
               "tableView": false,
               "values": [
-                {
-                  "label": "yes",
-                  "value": "yes",
-                  "shortcut": ""
-                },
-                {
-                  "label": "no",
-                  "value": "no",
-                  "shortcut": ""
-                }
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "recentTravelOutsideDistrict",
               "type": "radio",
               "input": true
@@ -1941,29 +1441,15 @@
               "tableView": true,
               "data": {
                 "values": [
-                  {
-                    "label": "1-3 Journeys",
-                    "value": "13Journeys"
-                  },
-                  {
-                    "label": "4-6 Journeys",
-                    "value": "46Journeys"
-                  },
-                  {
-                    "label": "6-10 Journeys",
-                    "value": "610Journeys"
-                  },
-                  {
-                    "label": ">10 Journeys",
-                    "value": "10Journeys"
-                  }
+                  { "label": "1-3 Journeys", "value": "13Journeys" },
+                  { "label": "4-6 Journeys", "value": "46Journeys" },
+                  { "label": "6-10 Journeys", "value": "610Journeys" },
+                  { "label": ">10 Journeys", "value": "10Journeys" }
                 ]
               },
               "selectThreshold": 0.3,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "recentTripsOutsideDistricCount",
               "conditional": {
                 "show": true,
@@ -1971,9 +1457,7 @@
                 "eq": "yes"
               },
               "type": "select",
-              "indexeddb": {
-                "filter": {}
-              },
+              "indexeddb": { "filter": {} },
               "input": true
             },
             {
@@ -1997,31 +1481,17 @@
                   "value": "occupational",
                   "shortcut": ""
                 },
-                {
-                  "label": "social",
-                  "value": "social",
-                  "shortcut": ""
-                },
-                {
-                  "label": "medical",
-                  "value": "medical",
-                  "shortcut": ""
-                },
+                { "label": "social", "value": "social", "shortcut": "" },
+                { "label": "medical", "value": "medical", "shortcut": "" },
                 {
                   "label": "educational",
                   "value": "educational",
                   "shortcut": ""
                 },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                }
+                { "label": "other", "value": "other", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "reasonForTripsOutsideDistrict",
               "conditional": {
                 "show": true,
@@ -2038,9 +1508,7 @@
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "otherReasonsForTravelOutsideDistrict",
               "conditional": {
                 "show": true,
@@ -2081,31 +1549,11 @@
                   "value": "dharkeynley",
                   "shortcut": ""
                 },
-                {
-                  "label": "Deynille",
-                  "value": "deynille",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Hodan",
-                  "value": "hodan",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Wadajir",
-                  "value": "wadajir",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Waberi",
-                  "value": "waberi",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Hawl Wadag",
-                  "value": "hawlWadag",
-                  "shortcut": ""
-                },
+                { "label": "Deynille", "value": "deynille", "shortcut": "" },
+                { "label": "Hodan", "value": "hodan", "shortcut": "" },
+                { "label": "Wadajir", "value": "wadajir", "shortcut": "" },
+                { "label": "Waberi", "value": "waberi", "shortcut": "" },
+                { "label": "Hawl Wadag", "value": "hawlWadag", "shortcut": "" },
                 {
                   "label": "Hamar Jabjab",
                   "value": "hamarJabjab",
@@ -2121,46 +1569,20 @@
                   "value": "wardhigley",
                   "shortcut": ""
                 },
-                {
-                  "label": "Bondhere",
-                  "value": "bondhere",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Hamar Weye",
-                  "value": "hamarWeye",
-                  "shortcut": ""
-                },
+                { "label": "Bondhere", "value": "bondhere", "shortcut": "" },
+                { "label": "Hamar Weye", "value": "hamarWeye", "shortcut": "" },
                 {
                   "label": "Cabdi Caziz",
                   "value": "cabdiCaziz",
                   "shortcut": ""
                 },
-                {
-                  "label": "Shibis",
-                  "value": "shibis",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Yaqshid",
-                  "value": "yaqshid",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Karan",
-                  "value": "karan",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Huriwa",
-                  "value": "huriwa",
-                  "shortcut": ""
-                }
+                { "label": "Shibis", "value": "shibis", "shortcut": "" },
+                { "label": "Yaqshid", "value": "yaqshid", "shortcut": "" },
+                { "label": "Karan", "value": "karan", "shortcut": "" },
+                { "label": "Huriwa", "value": "huriwa", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "districtsVisited",
               "conditional": {
                 "show": true,
@@ -2187,16 +1609,8 @@
                 "curfews": false
               },
               "values": [
-                {
-                  "label": "security",
-                  "value": "security",
-                  "shortcut": ""
-                },
-                {
-                  "label": "flooding",
-                  "value": "flooding",
-                  "shortcut": ""
-                },
+                { "label": "security", "value": "security", "shortcut": "" },
+                { "label": "flooding", "value": "flooding", "shortcut": "" },
                 {
                   "label": "gatedCommunities",
                   "value": "gatedCommunities",
@@ -2212,21 +1626,11 @@
                   "value": "infrastructure",
                   "shortcut": ""
                 },
-                {
-                  "label": "curfews",
-                  "value": "curfews",
-                  "shortcut": ""
-                },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                }
+                { "label": "curfews", "value": "curfews", "shortcut": "" },
+                { "label": "other", "value": "other", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "mobilityRestrictions",
               "type": "selectboxes",
               "input": true,
@@ -2238,9 +1642,7 @@
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "otherMobilityRestrictions",
               "conditional": {
                 "show": true,
@@ -2256,11 +1658,7 @@
       "input": false,
       "tableView": false,
       "breadcrumbClickable": true,
-      "buttonSettings": {
-        "previous": true,
-        "cancel": true,
-        "next": true
-      },
+      "buttonSettings": { "previous": true, "cancel": true, "next": true },
       "collapsible": false,
       "nextPage": "next = 'perDeath';"
     },
@@ -2272,11 +1670,7 @@
       "input": false,
       "tableView": false,
       "breadcrumbClickable": true,
-      "buttonSettings": {
-        "previous": true,
-        "cancel": true,
-        "next": true
-      },
+      "buttonSettings": { "previous": true, "cancel": true, "next": true },
       "collapsible": false,
       "components": [
         {
@@ -2285,21 +1679,11 @@
           "inline": false,
           "tableView": false,
           "values": [
-            {
-              "label": "yes",
-              "value": "yes",
-              "shortcut": ""
-            },
-            {
-              "label": "no",
-              "value": "no",
-              "shortcut": ""
-            }
+            { "label": "yes", "value": "yes", "shortcut": "" },
+            { "label": "no", "value": "no", "shortcut": "" }
           ],
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "deathsWithinHousehold",
           "type": "radio",
           "input": true,
@@ -2331,22 +1715,17 @@
               "inline": false,
               "tableView": false,
               "values": [
-                {
-                  "label": "male",
-                  "value": "male",
-                  "shortcut": ""
-                },
-                {
-                  "label": "female",
-                  "value": "female",
-                  "shortcut": ""
-                }
+                { "label": "male", "value": "male", "shortcut": "" },
+                { "label": "female", "value": "female", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "deceasedSex",
+              "conditional": {
+                "show": true,
+                "when": "hasAnyoneDiedInTheHousehold",
+                "eq": "yes"
+              },
               "type": "radio",
               "input": true
             },
@@ -2359,13 +1738,25 @@
               "requireDecimal": false,
               "inputFormat": "plain",
               "calculateServer": false,
-              "validate": {
-                "required": true,
-                "min": 0,
-                "max": 110
-              },
+              "validate": { "required": true, "min": 0, "max": 110 },
               "key": "deceasedAge",
               "type": "number",
+              "input": true
+            },
+            {
+              "label": "officialCauseOfDeathDetermined",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" },
+                { "label": "unknown", "value": "unknown", "shortcut": "" }
+              ],
+              "calculateServer": false,
+              "validate": { "required": true },
+              "key": "officialCauseOfDeathDetermined",
+              "type": "radio",
               "input": true
             },
             {
@@ -2374,38 +1765,24 @@
               "tableView": true,
               "data": {
                 "values": [
-                  {
-                    "label": "deathSugar",
-                    "value": "deathSugar"
-                  },
-                  {
-                    "label": "deathHighBloodPressure",
-                    "value": "deathHighBloodPressure"
-                  },
-                  {
-                    "label": "deathCOVID19",
-                    "value": "deathCOVID19"
-                  },
-                  {
-                    "label": "deathUnknown",
-                    "value": "deathUnknown"
-                  },
-                  {
-                    "label": "other",
-                    "value": "other"
-                  }
+                  { "label": "Sokor", "value": "sokor" },
+                  { "label": "Dhiig kar", "value": "dhiigKar" },
+                  { "label": "Covid19", "value": "covid19" },
+                  { "label": "Ma aqaan", "value": "maAqaan" },
+                  { "label": "Wax kale ", "value": "waxKale" }
                 ]
               },
               "selectThreshold": 0.3,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "causeOfDeath",
-              "type": "select",
-              "indexeddb": {
-                "filter": {}
+              "conditional": {
+                "show": true,
+                "when": "officialCauseOfDeathDetermined",
+                "eq": "yes"
               },
+              "type": "select",
+              "indexeddb": { "filter": {} },
               "input": true
             },
             {
@@ -2424,8 +1801,8 @@
                 "highBloodPressure": false,
                 "diabetes": false,
                 "heartDiseaseOrIrritability": false,
-                "poorCancerOrImmunity": false,
-                "noComorbidities": false
+                "pneumoniaOrAsthma": false,
+                "poorCancerOrImmunity": false
               },
               "values": [
                 {
@@ -2433,24 +1810,20 @@
                   "value": "highBloodPressure",
                   "shortcut": ""
                 },
-                {
-                  "label": "diabetes",
-                  "value": "diabetes",
-                  "shortcut": ""
-                },
+                { "label": "diabetes", "value": "diabetes", "shortcut": "" },
                 {
                   "label": "heartDiseaseOrIrritability",
                   "value": "heartDiseaseOrIrritability",
                   "shortcut": ""
                 },
                 {
-                  "label": "lungDisease",
-                  "value": "lungDisease",
+                  "label": "PneumoniaOrAsthma",
+                  "value": "pneumoniaOrAsthma",
                   "shortcut": ""
                 },
                 {
-                  "label": "cancerOrPoorImmunity",
-                  "value": "cancerOrPoorImmunity",
+                  "label": "poorCancerOrImmunity",
+                  "value": "poorCancerOrImmunity",
                   "shortcut": ""
                 },
                 {
@@ -2458,21 +1831,10 @@
                   "value": "immunocompromised",
                   "shortcut": ""
                 },
-                {
-                  "label": "noComorbidities",
-                  "value": "noComorbidities",
-                  "shortcut": ""
-                },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                }
+                { "label": "other", "value": "other", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "deceasedComorbidities",
               "type": "selectboxes",
               "input": true,
@@ -2484,9 +1846,7 @@
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "otherDeceasedComorbidities",
               "conditional": {
                 "show": true,
@@ -2531,11 +1891,7 @@
                 "noSymptoms": false
               },
               "values": [
-                {
-                  "label": "newFever",
-                  "value": "newFever",
-                  "shortcut": ""
-                },
+                { "label": "New Fever", "value": "newFever", "shortcut": "" },
                 {
                   "label": "newOrWorseningCough",
                   "value": "newOrWorseningCough",
@@ -2551,26 +1907,14 @@
                   "value": "gustatoryOrOlfactoryImpairment",
                   "shortcut": ""
                 },
-                {
-                  "label": "fatigue",
-                  "value": "fatigue",
-                  "shortcut": ""
-                },
-                {
-                  "label": "sneezing",
-                  "value": "sneezing",
-                  "shortcut": ""
-                },
+                { "label": "fatigue", "value": "fatigue", "shortcut": "" },
+                { "label": "Sneezing", "value": "sneezing", "shortcut": "" },
                 {
                   "label": "achesAndPains",
                   "value": "achesAndPains",
                   "shortcut": ""
                 },
-                {
-                  "label": "runnyNose",
-                  "value": "runnyNose",
-                  "shortcut": ""
-                },
+                { "label": "runnyNose", "value": "runnyNose", "shortcut": "" },
                 {
                   "label": "chillsOrNightSweats",
                   "value": "chillsOrNightSweats",
@@ -2581,26 +1925,10 @@
                   "value": "soreThroat",
                   "shortcut": ""
                 },
-                {
-                  "label": "diarrhea",
-                  "value": "diarrhea",
-                  "shortcut": ""
-                },
-                {
-                  "label": "headache",
-                  "value": "headache",
-                  "shortcut": ""
-                },
-                {
-                  "label": "nausea",
-                  "value": "nausea",
-                  "shortcut": ""
-                },
-                {
-                  "label": "rash",
-                  "value": "rash",
-                  "shortcut": ""
-                },
+                { "label": "diarrhea", "value": "diarrhea", "shortcut": "" },
+                { "label": "headache", "value": "headache", "shortcut": "" },
+                { "label": "nausea", "value": "nausea", "shortcut": "" },
+                { "label": "rash", "value": "rash", "shortcut": "" },
                 {
                   "label": "appetiteLoss",
                   "value": "appetiteLoss",
@@ -2611,21 +1939,11 @@
                   "value": "stomachPainOrCramps",
                   "shortcut": ""
                 },
-                {
-                  "label": "other",
-                  "value": "other",
-                  "shortcut": ""
-                },
-                {
-                  "label": "noSymptoms",
-                  "value": "noSymptoms",
-                  "shortcut": ""
-                }
+                { "label": "other", "value": "other", "shortcut": "" },
+                { "label": "noSymptoms", "value": "noSymptoms", "shortcut": "" }
               ],
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "whatWereTheSymptomsTheyExperiencedPriorToDeath",
               "type": "selectboxes",
               "input": true,
@@ -2637,13 +1955,104 @@
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "otherDeceasedSymptoms",
               "conditional": {
                 "show": true,
                 "when": "whatWereTheSymptomsTheyExperiencedPriorToDeath",
+                "eq": "other"
+              },
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "deceasedPregnancy",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" }
+              ],
+              "calculateServer": false,
+              "validate": { "required": true },
+              "key": "deceasedPregnancy",
+              "conditional": {
+                "show": true,
+                "when": "deceasedSex",
+                "eq": "female"
+              },
+              "type": "radio",
+              "input": true
+            },
+            {
+              "label": "deceasedDisability",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                { "label": "yes", "value": "yes", "shortcut": "" },
+                { "label": "no", "value": "no", "shortcut": "" }
+              ],
+              "calculateServer": false,
+              "validate": { "required": true },
+              "key": "deceasedDisability",
+              "type": "radio",
+              "input": true
+            },
+            {
+              "label": "deceasedDisabilities",
+              "optionsLabelPosition": "right",
+              "tableView": false,
+              "defaultValue": {
+                "": false,
+                "other": false,
+                "physicalDisability": false,
+                "learningDisability": false,
+                "psychiatricDisability": false,
+                "visualDisability": false,
+                "hearingDisability": false,
+                "physical": false,
+                "learning": false,
+                "psychiatric": false,
+                "visual": false,
+                "hearing": false
+              },
+              "values": [
+                { "label": "physical", "value": "physical", "shortcut": "" },
+                { "label": "learning", "value": "learning", "shortcut": "" },
+                {
+                  "label": "psychiatric",
+                  "value": "psychiatric",
+                  "shortcut": ""
+                },
+                { "label": "visual", "value": "visual", "shortcut": "" },
+                { "label": "hearing", "value": "hearing", "shortcut": "" },
+                { "label": "other", "value": "other", "shortcut": "" }
+              ],
+              "calculateServer": false,
+              "validate": { "required": true },
+              "key": "deceasedDisabilities",
+              "conditional": {
+                "show": true,
+                "when": "deceasedDisability",
+                "eq": "yes"
+              },
+              "type": "selectboxes",
+              "input": true,
+              "inputType": "checkbox"
+            },
+            {
+              "label": "other",
+              "placeholder": "otherDeceasedDisabilities",
+              "spellcheck": true,
+              "tableView": true,
+              "calculateServer": false,
+              "validate": { "required": true },
+              "key": "otherDeceasedDisabilities",
+              "conditional": {
+                "show": true,
+                "when": "deceasedDisabilities",
                 "eq": "other"
               },
               "type": "textfield",
@@ -2660,9 +2069,7 @@
               },
               "enableTime": false,
               "calculateServer": false,
-              "validate": {
-                "required": true
-              },
+              "validate": { "required": true },
               "key": "dateOfDeath",
               "type": "datetime",
               "input": true,
@@ -2710,45 +2117,21 @@
             "financial": false,
             "housing": false,
             "sanitation": false,
-            "medicalSuport": false,
-            "noSupport": false
+            "medicalSuport": false
           },
           "values": [
+            { "label": "sanitation", "value": "sanitation", "shortcut": "" },
             {
-              "label": "sanitation",
-              "value": "sanitation",
+              "label": "medicalSuport",
+              "value": "medicalSuport",
               "shortcut": ""
             },
-            {
-              "label": "medicalSupport",
-              "value": "medicalSupport",
-              "shortcut": ""
-            },
-            {
-              "label": "financial",
-              "value": "financial",
-              "shortcut": ""
-            },
-            {
-              "label": "housing",
-              "value": "housing",
-              "shortcut": ""
-            },
-            {
-              "label": "noSupport",
-              "value": "noSupport",
-              "shortcut": ""
-            },
-            {
-              "label": "other",
-              "value": "other",
-              "shortcut": ""
-            }
+            { "label": "financial", "value": "financial", "shortcut": "" },
+            { "label": "housing", "value": "housing", "shortcut": "" },
+            { "label": "other", "value": "other", "shortcut": "" }
           ],
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "supportRequiredForCOVID19RiskManagement",
           "type": "selectboxes",
           "input": true,
@@ -2761,9 +2144,7 @@
           "spellcheck": true,
           "tableView": true,
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "otherCOVID19RiskManagementSupports",
           "conditional": {
             "show": true,
@@ -2793,16 +2174,8 @@
             "noHouseholdNeeds": false
           },
           "values": [
-            {
-              "label": "money",
-              "value": "money",
-              "shortcut": ""
-            },
-            {
-              "label": "sanitation",
-              "value": "sanitation",
-              "shortcut": ""
-            },
+            { "label": "money", "value": "money", "shortcut": "" },
+            { "label": "sanitation", "value": "sanitation", "shortcut": "" },
             {
               "label": "healthcareAccess",
               "value": "healthcareAccess",
@@ -2828,16 +2201,10 @@
               "value": "noHouseholdNeeds",
               "shortcut": ""
             },
-            {
-              "label": "other",
-              "value": "other",
-              "shortcut": ""
-            }
+            { "label": "other", "value": "other", "shortcut": "" }
           ],
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "householdNeeds",
           "type": "selectboxes",
           "input": true,
@@ -2849,9 +2216,7 @@
           "spellcheck": true,
           "tableView": true,
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "otherHouseholdNeeds",
           "conditional": {
             "show": true,
@@ -2875,31 +2240,13 @@
             "SMESupport": false
           },
           "values": [
-            {
-              "label": "food",
-              "value": "food",
-              "shortcut": ""
-            },
-            {
-              "label": "sanitation",
-              "value": "sanitation",
-              "shortcut": ""
-            },
-            {
-              "label": "SMESupport",
-              "value": "SMESupport",
-              "shortcut": ""
-            },
-            {
-              "label": "other",
-              "value": "other",
-              "shortcut": ""
-            }
+            { "label": "food", "value": "food", "shortcut": "" },
+            { "label": "sanitation", "value": "sanitation", "shortcut": "" },
+            { "label": "SMESupport", "value": "SMESupport", "shortcut": "" },
+            { "label": "other", "value": "other", "shortcut": "" }
           ],
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "moneyQuestion",
           "conditional": {
             "show": true,
@@ -2916,9 +2263,7 @@
           "spellcheck": true,
           "tableView": true,
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "otherMonetaryNeeds",
           "conditional": {
             "show": true,
@@ -2949,16 +2294,10 @@
               "value": "rentalSubsidy",
               "shortcut": ""
             },
-            {
-              "label": "other",
-              "value": "other",
-              "shortcut": ""
-            }
+            { "label": "other", "value": "other", "shortcut": "" }
           ],
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "housingSupportNeeds",
           "conditional": {
             "show": true,
@@ -2975,9 +2314,7 @@
           "spellcheck": true,
           "tableView": true,
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "otherHousingNeeds",
           "conditional": {
             "show": true,
@@ -2991,11 +2328,7 @@
       "input": false,
       "tableView": false,
       "breadcrumbClickable": true,
-      "buttonSettings": {
-        "previous": true,
-        "cancel": true,
-        "next": true
-      },
+      "buttonSettings": { "previous": true, "cancel": true, "next": true },
       "collapsible": false,
       "nextPage": "next = 'followUp';"
     },
@@ -3011,21 +2344,11 @@
           "inline": false,
           "tableView": false,
           "values": [
-            {
-              "label": "yes",
-              "value": "yes",
-              "shortcut": ""
-            },
-            {
-              "label": "no",
-              "value": "no",
-              "shortcut": ""
-            }
+            { "label": "yes", "value": "yes", "shortcut": "" },
+            { "label": "no", "value": "no", "shortcut": "" }
           ],
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "followupConsent",
           "conditional": {
             "show": true,
@@ -3041,21 +2364,11 @@
           "inline": false,
           "tableView": false,
           "values": [
-            {
-              "label": "yes",
-              "value": "yes",
-              "shortcut": ""
-            },
-            {
-              "label": "no",
-              "value": "no",
-              "shortcut": ""
-            }
+            { "label": "yes", "value": "yes", "shortcut": "" },
+            { "label": "no", "value": "no", "shortcut": "" }
           ],
           "calculateServer": false,
-          "validate": {
-            "required": true
-          },
+          "validate": { "required": true },
           "key": "followupVisitConsent",
           "conditional": {
             "show": true,
@@ -3064,29 +2377,12 @@
           },
           "type": "radio",
           "input": true
-        },
-        {
-          "type": "followupIDReminder",
-          "key": "followUpId",
-          "protected": true,
-          "input": true,
-          "tableView": false,
-          "label": "",
-          "conditional": {
-            "show": true,
-            "when": "followupVisitConsent",
-            "eq": "yes"
-          }
         }
       ],
       "input": false,
       "tableView": false,
       "breadcrumbClickable": true,
-      "buttonSettings": {
-        "previous": true,
-        "cancel": true,
-        "next": true
-      },
+      "buttonSettings": { "previous": true, "cancel": true, "next": true },
       "collapsible": false
     }
   ],
@@ -3099,18 +2395,9 @@
   "display": "wizard",
   "settings": {},
   "access": [
-    {
-      "roles": [],
-      "type": "create_own"
-    },
-    {
-      "roles": [],
-      "type": "create_all"
-    },
-    {
-      "roles": [],
-      "type": "read_own"
-    },
+    { "roles": [], "type": "create_own" },
+    { "roles": [], "type": "create_all" },
+    { "roles": [], "type": "read_own" },
     {
       "roles": [
         "5ec0c80753208f5aea755795",
@@ -3121,34 +2408,13 @@
       ],
       "type": "read_all"
     },
-    {
-      "roles": [],
-      "type": "update_own"
-    },
-    {
-      "roles": [],
-      "type": "update_all"
-    },
-    {
-      "roles": [],
-      "type": "delete_own"
-    },
-    {
-      "roles": [],
-      "type": "delete_all"
-    },
-    {
-      "roles": [],
-      "type": "team_read"
-    },
-    {
-      "roles": [],
-      "type": "team_write"
-    },
-    {
-      "roles": [],
-      "type": "team_admin"
-    }
+    { "roles": [], "type": "update_own" },
+    { "roles": [], "type": "update_all" },
+    { "roles": [], "type": "delete_own" },
+    { "roles": [], "type": "delete_all" },
+    { "roles": [], "type": "team_read" },
+    { "roles": [], "type": "team_write" },
+    { "roles": [], "type": "team_admin" }
   ],
   "submissionAccess": [
     {
@@ -3160,50 +2426,20 @@
       ],
       "type": "create_own"
     },
-    {
-      "roles": [],
-      "type": "create_all"
-    },
-    {
-      "roles": [],
-      "type": "read_own"
-    },
-    {
-      "roles": [],
-      "type": "read_all"
-    },
-    {
-      "roles": [],
-      "type": "update_own"
-    },
-    {
-      "roles": [],
-      "type": "update_all"
-    },
-    {
-      "roles": [],
-      "type": "delete_own"
-    },
-    {
-      "roles": [],
-      "type": "delete_all"
-    },
-    {
-      "roles": [],
-      "type": "team_read"
-    },
-    {
-      "roles": [],
-      "type": "team_write"
-    },
-    {
-      "roles": [],
-      "type": "team_admin"
-    }
+    { "roles": [], "type": "create_all" },
+    { "roles": [], "type": "read_own" },
+    { "roles": [], "type": "read_all" },
+    { "roles": [], "type": "update_own" },
+    { "roles": [], "type": "update_all" },
+    { "roles": [], "type": "delete_own" },
+    { "roles": [], "type": "delete_all" },
+    { "roles": [], "type": "team_read" },
+    { "roles": [], "type": "team_write" },
+    { "roles": [], "type": "team_admin" }
   ],
   "properties": {},
   "machineName": "yordvlchrlvervl:somaliaFull",
   "project": "5ec0c80753208f2b4d755794",
   "created": "2020-06-01T05:02:36.378Z",
-  "modified": "2020-06-01T10:42:13.922Z"
+  "modified": "2020-06-06T15:03:14.789Z"
 }
