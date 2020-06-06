@@ -1,13 +1,12 @@
 import Types from "./actionTypes";
 
-const initialState = {
-  graveDigger: {},
-  hospital: {},
-};
+const INITIAL_SURVEY_STATE = { consent: false, isFollowUpIdRecorded: false };
+const TYPES_ARRAY = Object.values(Types);
 
-const subReducer = (state = {}, action) => {
+const subReducer = (state = INITIAL_SURVEY_STATE, action) => {
   switch (action.type) {
     case Types.SET_FOLLOW_UP_ID:
+      console.log("1" + JSON.stringify(action));
       return { ...state, followUpId: action.payload };
     case Types.SET_LOCATION:
       return { ...state, location: action.payload };
@@ -25,14 +24,14 @@ const subReducer = (state = {}, action) => {
   }
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = {}, action) => {
   if (action.type === Types.RESTART_SURVEY) {
     return {
       ...state,
-      [action.surveyKey]: { consent: false, isFollowUpIdRecorded: false },
+      [action.payload]: INITIAL_SURVEY_STATE,
       activeSurvey: action.payload,
     };
-  } else if (action.type in Types) {
+  } else if (TYPES_ARRAY.includes(action.type)) {
     return {
       ...state,
       [state.activeSurvey]: subReducer(state[state.activeSurvey], action),

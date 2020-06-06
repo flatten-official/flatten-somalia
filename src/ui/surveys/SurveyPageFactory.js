@@ -8,6 +8,7 @@ import { ConnectedConsent } from "./householdInitial/elements/Consent";
 import { ConnectedLocationPicker } from "./householdInitial/elements/location/LocationPicker";
 import { submitForm } from "../../backend/submission";
 import Types from "./actionTypes";
+import Loading from "../components/Loading";
 
 /**
  * This function generates a survey page.
@@ -21,6 +22,8 @@ const SurveyPageFactory = ({ surveyKey, i18nTitleKey, api, formIOJSON }) => {
     useEffect(() => {
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey });
     }, [dispatch]);
+
+    if (!surveyData) return <Loading />;
 
     if (!surveyData.consent) return <ConnectedConsent />;
 

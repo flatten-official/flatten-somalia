@@ -17,19 +17,27 @@ const FollowUpId = () => {
     (state) => state.auth.user.friendlyId
   );
 
-  const followUpId = useSelector((state) => state.volunteerForm.followUpId);
+  const followUpId = useSelector((state) => {
+    const currentSurvey = state.surveys.activeSurvey;
+    return state.surveys[currentSurvey].followUpId;
+  });
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!followUpId) {
-      dispatch({
-        type: Types.SET_FOLLOW_UP_ID,
-        payload: generateFollowUpID(volunteerFriendlyId),
-      });
+      const followUpID = generateFollowUpID(volunteerFriendlyId);
+
+      console.log(followUpID);
+
+      dispatch({ type: Types.SET_FOLLOW_UP_ID, payload: followUpID });
     }
   }, [dispatch, followUpId, volunteerFriendlyId]);
 
   const { t } = useTranslation("InitialSurvey");
+
+  console.log(followUpId);
+
   return (
     <>
       <h3>{t("askToGiveFollowUpId")}</h3>

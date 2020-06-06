@@ -1,6 +1,7 @@
 import api from "./backend/api/api";
 import graveDiggerSurveyJSON from "./forms/GraveDiggerForm.json";
 import hospitalSurveyJSON from "./forms/HospitalForm.json";
+import initialHouseholdJSON from "./forms/VolunteerForm.json";
 
 // todo - fill in all of the routes
 export const Routes = {
@@ -26,5 +27,11 @@ export const Surveys = {
     i18nTitleKey: "hospitalTitle",
     api: api.hospitalSurvey,
     formIOJSON: hospitalSurveyJSON,
+  },
+  initialHousehold: {
+    surveyKey: "initialHousehold",
+    i18nTitleKey: "initialHouseholdTitle",
+    api: api.volunteerForm,
+    formIOJSON: initialHouseholdJSON,
   },
 };

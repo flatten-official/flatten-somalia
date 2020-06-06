@@ -5,7 +5,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./home/Home";
 import Login from "./login/Login";
-import SubmissionPageContent from "./surveys/householdInitial/HouseholdInitialSurvey";
 import Success from "./surveys/householdInitial/Success";
 import LoginSuccess from "./login/LoginSuccess";
 import Loading from "./components/Loading";
@@ -39,7 +38,7 @@ const AppContent = () => {
       <PrivateRoute
         exact
         path={Routes.initialHouseholdSurvey}
-        comp={SubmissionPageContent}
+        comp={SurveyPageFactory(Surveys.initialHousehold)}
         requiredPermission={permissions.submitForms}
       />
       <PrivateRoute
