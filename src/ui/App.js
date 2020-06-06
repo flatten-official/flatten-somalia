@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./home/Home";
 import Login from "./login/Login";
-import Success from "./surveys/householdInitial/Success";
+import Success from "./surveys/Success";
 import LoginSuccess from "./login/LoginSuccess";
 import Loading from "./components/Loading";
 import { Routes, Surveys } from "../config";

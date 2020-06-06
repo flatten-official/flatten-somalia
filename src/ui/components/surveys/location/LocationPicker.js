@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import ManualLocationPicker from "./ManualLocationPicker";
-import Loading from "../../../../components/Loading";
-import Types from "../../../actionTypes";
+import React, { useEffect, useState } from "react";
+import Loading from "../../Loading";
+import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
+import ManualLocationPicker from "./ManualLocationPicker";
 
 export const LocationObj = (lat, lng, accuracy, altitude, wasManual) => ({
   lat: lat,
@@ -14,7 +12,6 @@ export const LocationObj = (lat, lng, accuracy, altitude, wasManual) => ({
   altitude: altitude,
   wasManual: wasManual,
 });
-
 export const LocationPicker = ({ onLocationFound }) => {
   const STATUS = {
     requested: "LOCATION_REQUESTED",
@@ -86,13 +83,3 @@ export const LocationPicker = ({ onLocationFound }) => {
 LocationPicker.propTypes = {
   onLocationFound: PropTypes.func,
 };
-
-const mapDispatchToProps = (dispatch) => ({
-  onLocationFound: (location) =>
-    dispatch({ type: Types.SET_LOCATION, payload: location }),
-});
-
-export const ConnectedLocationPicker = connect(
-  null,
-  mapDispatchToProps
-)(LocationPicker);

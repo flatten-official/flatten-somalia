@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../components/formio/Form";
+import Form from "../components/surveys/formio/Form";
 import LoginFormJson from "../../forms/Login.json";
 import flattenApi from "../../backend/api/api";
 import { useDispatch } from "react-redux";

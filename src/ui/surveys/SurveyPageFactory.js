@@ -1,14 +1,16 @@
-import Form from "../components/formio/Form";
+import Form from "../components/surveys/formio/Form";
 import React, { useEffect } from "react";
 import { push } from "connected-react-router";
 import { Routes } from "../../config";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { ConnectedConsent } from "./householdInitial/elements/Consent";
-import { ConnectedLocationPicker } from "./householdInitial/elements/location/LocationPicker";
 import { submitForm } from "../../backend/submission";
 import Types from "./actionTypes";
 import Loading from "../components/Loading";
+import {
+  ConnectedConsent,
+  ConnectedLocationPicker,
+} from "./ConnectedComponents";
 
 /**
  * This function generates a survey page.
