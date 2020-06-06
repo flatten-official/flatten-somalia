@@ -35,7 +35,7 @@ const environmentSpecificConfig = {
       backendHost: "https://api.staging.flatten.org",
     },
   },
-  prod: {
+  production: {
     secretId:
       "projects/915444252630/secrets/backend-gae-config-so/versions/latest",
     debug: false,
@@ -61,11 +61,12 @@ const environmentSpecificConfig = {
 
 const buildConfig = (customConfig = {}) => {
   // DON'T USE NODE_ENV because on App Engine it is always prod even in the staging environment
-  return _.defaultsDeep(
-    customConfig,
-    environmentSpecificConfig[process.env.ENVIRONMENT],
-    sharedConfig
-  );
+  const environmentConfig = environmentSpecificConfig[process.env.ENVIRONMENT];
+
+  if (!environmentConfig)
+    throw `Ensure you properly set the ENVIRONMENT env variable (${process.env.ENVIRONMENT})`;
+
+  return _.defaultsDeep(customConfig, environmentConfig, sharedConfig);
 };
 
 let Config = buildConfig(); // Set during setup() is called
