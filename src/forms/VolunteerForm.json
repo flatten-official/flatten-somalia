@@ -2112,8 +2112,18 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "Villa Somalia",
-                  "value": "villaSomalia",
+                  "label": "Kaxda",
+                  "value": "kaxda",
+                  "shortcut": ""
+                },
+                {
+                  "name": "Garasbaley",
+                  "value": "garasbaley",
+                  "shortcut": ""
+                },
+                {
+                  "name": "Gubadley",
+                  "value": "gubadley",
                   "shortcut": ""
                 },
                 {
