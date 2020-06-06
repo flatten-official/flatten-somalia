@@ -4,8 +4,8 @@ import { push } from "connected-react-router";
 import { Routes } from "../../config";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Consent } from "./householdInitial/elements/Consent";
-import { LocationPicker } from "./householdInitial/elements/location/LocationPicker";
+import { ConnectedConsent } from "./householdInitial/elements/Consent";
+import { ConnectedLocationPicker } from "./householdInitial/elements/location/LocationPicker";
 import { submitForm } from "../../backend/submission";
 import Types from "./actionTypes";
 
@@ -22,9 +22,9 @@ const SurveyPageFactory = ({ surveyKey, i18nTitleKey, api, formIOJSON }) => {
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey });
     }, [dispatch]);
 
-    if (!surveyData.consent) return <Consent />;
+    if (!surveyData.consent) return <ConnectedConsent />;
 
-    if (!surveyData.location) return <LocationPicker />;
+    if (!surveyData.location) return <ConnectedLocationPicker />;
 
     const onSubmit = async (formIOData) => {
       await submitForm(surveyData, formIOData);

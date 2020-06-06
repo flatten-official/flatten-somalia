@@ -1,17 +1,12 @@
 import { Trans, useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
 import React from "react";
 import Types from "../../actionTypes";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-export const Consent = () => {
+export const Consent = ({ onConsent }) => {
   const { t } = useTranslation("InitialSurvey"); // TODO Change to surveys
-  const dispatch = useDispatch();
-
-  const onConsent = () => {
-    dispatch({ type: Types.NOTIFY_CONSENT_GIVEN });
-    dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
-  };
 
   return (
     <>
@@ -34,3 +29,16 @@ export const Consent = () => {
     </>
   );
 };
+
+Consent.propTypes = {
+  onConsent: PropTypes.func,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  onConsent: () => {
+    dispatch({ type: Types.NOTIFY_CONSENT_GIVEN });
+    dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
+  },
+});
+
+export const ConnectedConsent = connect(null, mapDispatchToProps)(Consent);
