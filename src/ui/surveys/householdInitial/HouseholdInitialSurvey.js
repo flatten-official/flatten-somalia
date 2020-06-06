@@ -8,6 +8,7 @@ import FormDef from "../../../forms/VolunteerForm.json";
 import { push } from "connected-react-router";
 import { Consent } from "./elements/Consent";
 import { submitForm } from "../../../backend/submission";
+import { Routes } from "../../../config";
 
 const HouseholdInitialSurveyPageContent = () => {
   const formData = useSelector((state) => state.volunteerForm);
@@ -23,7 +24,7 @@ const HouseholdInitialSurveyPageContent = () => {
 
   const submitHook = async (formioData) => {
     await submitForm(formData, formioData);
-    dispatch(push("/success"));
+    dispatch(push(Routes.success));
   };
 
   return (
