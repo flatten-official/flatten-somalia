@@ -6,7 +6,6 @@ const TYPES_ARRAY = Object.values(Types);
 const subReducer = (state = INITIAL_SURVEY_STATE, action) => {
   switch (action.type) {
     case Types.SET_FOLLOW_UP_ID:
-      console.log("1" + JSON.stringify(action));
       return { ...state, followUpId: action.payload };
     case Types.SET_LOCATION:
       return { ...state, location: action.payload };

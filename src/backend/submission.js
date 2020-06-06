@@ -28,7 +28,6 @@ export const getInitialHouseholdSubmitter = (schema) => async (
   storeData,
   formioData
 ) => {
-  console.log(JSON.stringify(storeData));
   const body = {
     household: {
       followUpId: storeData.followUpId,

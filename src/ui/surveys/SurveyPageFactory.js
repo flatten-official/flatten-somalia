@@ -41,8 +41,6 @@ const SurveyPageFactory = ({
 
       if (!this.props.surveyData.location) return <ConnectedLocationPicker />;
 
-      console.log("3" + JSON.stringify(this.props.surveyData));
-
       return (
         <Form
           formioForm={formIOJSON}
