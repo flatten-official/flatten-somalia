@@ -20,7 +20,7 @@ export const FollowUpId = ({
     if (!followUpId) setFollowUpId(generateFollowUpID(volunteerFriendlyId));
   }, [followUpId, volunteerFriendlyId, setFollowUpId]);
 
-  const { t } = useTranslation("InitialSurvey");
+  const { t } = useTranslation("Surveys");
 
   return (
     <>

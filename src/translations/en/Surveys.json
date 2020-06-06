@@ -1,5 +1,21 @@
 {
   "graveDiggerTitle": "Grave Digger Survey",
   "hospitalTitle": "Hospital Survey",
-  "initialHouseholdTitle": "Initial Household Survey"
+  "initialHouseholdTitle": "Initial Household Survey",
+  "askForDataRecordingConsent": "Do the people being surveyed consent to recording your questions?",
+  "consentGiven": "They did. Start the survey.",
+  "followupIDMessage": "If the volunteer doesn't have a phone number to follow-up, give them a block with this number.",
+  "Done": "Done",
+  "location": {
+    "pickLocationPrompt": "Pick your location.",
+    "isRequiredPrompt": "We need your location.",
+    "rePrompt": "Try again.",
+    "pickManuallyPrompt": "Manually pick location.",
+    "loading": "Waiting for location to load."
+  },
+  "success": "Success!",
+  "returnHomePrompt": "Submit another household",
+  "askToGiveFollowUpId": "Please write this number on a block of wood. Place the block outside of the household.",
+  "flattenConsent": "By continuing you agree to Flatten's <1>Privacy Policy</1> and <3>Terms of Service</3>.",
+  "braConsent": "After greetings, my name is __ and I work with the community surveys of covid19 in this District. ”We are conducting research on the effects of COVID-19 virus disease in all 17 districts in Mogadishu, and I want to assure you that 'All you give is confidential. You can refuse to answer any specific question. You can also end the interview whenever there are no consequences.\nHowever, we greatly appreciate your thoughts on these topics, which will help to generalize the impact that COVID-19 has had on the various communities.\nThank you for this information"
 }

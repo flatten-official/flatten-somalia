@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const Success = () => {
-  const { t } = useTranslation("InitialSurvey");
+  const { t } = useTranslation("Surveys");
   return (
     <>
       {t("success")}

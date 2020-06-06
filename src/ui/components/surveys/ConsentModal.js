@@ -4,14 +4,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const ConsentModal = ({ onConsent }) => {
-  const { t } = useTranslation("InitialSurvey"); // TODO Change to surveys
+  const { t } = useTranslation("Surveys");
 
   return (
     <>
       {t("braConsent")}
       <br />
       <br />
-      <Trans i18nKey="InitialSurvey:flattenConsent">
+      <Trans i18nKey="Surveys:flattenConsent">
         MissingTranslation {/* Is replaced by i18n*/}
         <a href="https://flatten.ca/privacy-policy">Privacy Policy</a>
         and

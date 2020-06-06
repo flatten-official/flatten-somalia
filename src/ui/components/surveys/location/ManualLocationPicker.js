@@ -12,7 +12,7 @@ const INITIAL_CENTER = [2.045, 45.333];
  * Component that allows the user to pick their location
  */
 const ManualLocationPicker = ({ onSubmit, onCancel }) => {
-  const { t } = useTranslation("InitialSurvey");
+  const { t } = useTranslation("Surveys");
 
   const [markerPosition, setMarkerPosition] = useState(INITIAL_CENTER);
 

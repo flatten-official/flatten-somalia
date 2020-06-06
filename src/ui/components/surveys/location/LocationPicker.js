@@ -19,7 +19,7 @@ export const LocationPicker = ({ onLocationFound }) => {
     manual: "LOCATION_MANUAL",
   };
 
-  const { t } = useTranslation("InitialSurvey");
+  const { t } = useTranslation("Surveys");
 
   const [currentStatus, setStatus] = useState(STATUS.requested);
 
