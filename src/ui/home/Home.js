@@ -22,16 +22,6 @@ const Home = () => {
       <Button variant="light" size="lg" href={Routes.hospitalSurvey}>
         {tSurvey(Surveys.hospital.i18nTitleKey)}
       </Button>
-      {/*<Button variant="light" size="lg" href={null} disabled="true">*/}
-      {/*  {t("goToGravediggerSurvey")}*/}
-      {/*</Button>*/}
-      {/*/!*TODO there should be a check for if there are follow ups and a notification will show*!/*/}
-      {/*<Button variant="light" size="lg" href={null} disabled="true">*/}
-      {/*  {t("goToFollowupSurvey")}*/}
-      {/*</Button>*/}
-      {/* Don't know if theres a more secure/better way to do this auth.user.permissions.includes(
-            "manageVolunteers"
-          ) && <Link to={null}>{t("goToAddVolunteer")}</Link> */}
     </>
   );
 };
