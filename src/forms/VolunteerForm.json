@@ -1936,7 +1936,7 @@
               "input": true
             },
             {
-              "label": "recentTripsOutsideDistricCount",
+              "label": "recentTripsOutsideDistrictCount",
               "widget": "choicesjs",
               "tableView": true,
               "data": {
