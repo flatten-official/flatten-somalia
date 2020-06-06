@@ -3064,6 +3064,19 @@
           },
           "type": "radio",
           "input": true
+        },
+        {
+          "type": "followupIDReminder",
+          "key": "followUpId",
+          "protected": true,
+          "input": true,
+          "tableView": false,
+          "label": "",
+          "conditional": {
+            "show": true,
+            "when": "followupVisitConsent",
+            "eq": "yes"
+          }
         }
       ],
       "input": false,

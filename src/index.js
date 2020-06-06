@@ -11,10 +11,12 @@ import "./i18n";
 import "./styles/styles.scss";
 import CustomFormIoComponent from "./ui/components/formio/CustomFormComponent";
 import FollowUpId from "./ui/surveys/householdInitial/elements/FollowUpId";
+import FollowUpIdReminder from "./ui/surveys/householdInitial/elements/FollowUpIdReminder";
 import TranslatedText from "./ui/components/formio/TranslatedText";
 
 Components.setComponents({
   customFollowUpId: CustomFormIoComponent(FollowUpId),
+  followupIDReminder: CustomFormIoComponent(FollowUpIdReminder),
   customText: CustomFormIoComponent(TranslatedText),
 });
 
