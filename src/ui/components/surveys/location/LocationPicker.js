@@ -39,10 +39,9 @@ export const LocationPicker = ({ onLocationFound }) => {
           )
         );
       },
-      () => setStatus(STATUS.failed)
+      () => setStatus(STATUS.failed),
+      { timeout: 30000, maximumAge: 180000 }
     );
-
-    setTimeout(() => setStatus(STATUS.failed), 30000); // after a while set to failed as a worst case
   };
 
   // TODO Cleanup to avoid memory leaks
