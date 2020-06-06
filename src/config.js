@@ -2,7 +2,9 @@
 export const Routes = {
   home: "/",
   auth: "/login",
-  submission: "/submission",
+  initialHouseholdSurvey: "/surveys/initialHousehold",
+  graveDiggerSurvey: "/surveys/graveDigger",
+  hospitalSurvey: "/surveys/hospital",
   admin: "/admin",
   success: "/success",
   emailSubmitted: "/submitted-email",

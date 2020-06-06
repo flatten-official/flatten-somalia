@@ -1,0 +1,11 @@
+{
+  "newPatients": "Number of new patients",
+  "dischargedPatients": "Number of discharged patients:",
+  "totalBedsOccupied": "Number of beds occupied throughout the hospital",
+  "bedsOccupiedInCriticalCare": "Number of beds occupied in the critical care centre",
+  "bedAvailable": "Number of beds available",
+  "patientsCurrentlyHospitalized": "Number of patients currently hospitalized",
+  "confirmedPositiveCOVID19": "Number of confirmed positive COVID-19",
+  "suspectedCOVID19": "Number of Suspected COVID-19 cases",
+  "negativeCOVID19": "Number of negative COVID-19 cases"
+}

@@ -5,31 +5,6 @@
   "owner": "5ed48ca2b9eb60b9c939562b",
   "components": [
     {
-      "title": "Follow Up ID",
-      "label": "Page 6",
-      "type": "panel",
-      "key": "page6",
-      "input": false,
-      "tableView": false,
-      "components": [
-        {
-          "type": "customFollowUpId",
-          "key": "followUpId",
-          "protected": true,
-          "input": true,
-          "tableView": false,
-          "label": ""
-        }
-      ],
-      "breadcrumbClickable": true,
-      "buttonSettings": {
-        "previous": true,
-        "cancel": true,
-        "next": true
-      },
-      "collapsible": false
-    },
-    {
       "title": "Deganaanshaha",
       "label": "housing",
       "type": "panel",
@@ -79,6 +54,19 @@
           "input": true
         },
         {
+          "type": "customFollowUpId",
+          "key": "followUpId",
+          "protected": true,
+          "input": true,
+          "tableView": false,
+          "label": "",
+          "conditional": {
+            "show": true,
+            "when": "sharePhoneNumberConsent",
+            "eq": "willNotSharePhoneNumber"
+          }
+        },
+        {
           "label": "email",
           "placeholder": "optional",
           "spellcheck": true,
@@ -126,10 +114,16 @@
                 "name": "Hamar Jabjab"
               },
               {
-                "name": "Villa Somalia"
+                "name": "Wardhigley"
               },
               {
-                "name": "Wardhigley"
+                "name": "Kaxda"
+              },
+              {
+                "name": "Garasbaley"
+              },
+              {
+                "name": "Gubadley"
               },
               {
                 "name": "Bondhere"
@@ -3070,6 +3064,19 @@
           },
           "type": "radio",
           "input": true
+        },
+        {
+          "type": "followupIDReminder",
+          "key": "followUpId",
+          "protected": true,
+          "input": true,
+          "tableView": false,
+          "label": "",
+          "conditional": {
+            "show": true,
+            "when": "followupVisitConsent",
+            "eq": "yes"
+          }
         }
       ],
       "input": false,

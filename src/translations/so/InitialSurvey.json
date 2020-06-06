@@ -1,4 +1,16 @@
 {
   "title": "Xog Aruunta Xalaadaha COVID-19 Mogadishu",
-  "braConsent": "Salaan ka dib, magacaygu waa __ oo waxaan la shaqeeyaa sahanka aasaasiga ah ee bulshada ee covid19 Degmadan\". Waxaan sameyneynaa cilmi baaris la xiriirto waxyeelada cudurka dilaga ah ee coid19 wuxuna  ka socda dhamaan 17 degmo ee magaalada Muqdisho, Waxaan rabaa inaan kuu xaqiijiyo in ra'yiga aad dhiibto dhammaantood ay yihiin kuwo sir ah. Waad diidi kartaa inaad ka jawaabto su'aal kasta oo gaar ah. Sidoo kale waad ku dhamaayin  kartaa wareysiga markasta oo aadan cawaaqib xumo imaan.\nSi kastaba ha noqotee, waxaan si weyn ugu mahadcelineynaa fikradahaaga mowduucyadan, oo gacan ka geysan doona qiimeynta guud ee saameynta aw covid10 ku yeeshay bulshada qaybaheeda kala duwan.\nWaa ku mahadsan tahay xog warisigaan"
+  "askForDataRecordingConsent": "Dadka la wareystay ma ogolaanayaan inay qortaan su'aalahaaga?",
+  "consentGiven": "Way sameeyeen. Bilow xog aruurinta.",
+  "followupIDMessage": "Haddii tabarucha uusan lahayn lambar taleefan oo uu kula socdo, sii balooga lambarkan.",
+  "location": {
+    "pickLocationPrompt": "Xulo goobtaada.",
+    "isRequiredPrompt": "Waxaan u baahanahay goobtaada",
+    "rePrompt": "Isku day markale.",
+    "pickManuallyPrompt": "Gacantaada ku dooro goobtaada."
+  },
+  "askToGiveFollowUpId": "Muhiim ah! Fadlan ku qor nambarka guriga alwaax. Ku dhaji nambarka guriga ee qoyska banaanka guriga.",
+  "followupIDReminder": "Ha hilmaamin inaad qoyska siiso lambarkaas!",
+  "braConsent": "Salaan ka dib, magacaygu waa __ oo waxaan la shaqeeyaa sahanka aasaasiga ah ee bulshada ee covid19 Degmadan\". Waxaan sameyneynaa cilmi baaris la xiriirto waxyeelada cudurka dilaga ah ee coid19 wuxuna  ka socda dhamaan 17 degmo ee magaalada Muqdisho, Waxaan rabaa inaan kuu xaqiijiyo in ra'yiga aad dhiibto dhammaantood ay yihiin kuwo sir ah. Waad diidi kartaa inaad ka jawaabto su'aal kasta oo gaar ah. Sidoo kale waad ku dhamaayin  kartaa wareysiga markasta oo aadan cawaaqib xumo imaan.\nSi kastaba ha noqotee, waxaan si weyn ugu mahadcelineynaa fikradahaaga mowduucyadan, oo gacan ka geysan doona qiimeynta guud ee saameynta aw covid10 ku yeeshay bulshada qaybaheeda kala duwan.\nWaa ku mahadsan tahay xog warisigaan",
+  "flattenConsent": "Markaad sii waddo Foomka waxaad oggolaatay <1>nidaamka asturnaanta</1> ee Flatten iyo <3>shuruudaha adeegga</3> foomkan."
 }

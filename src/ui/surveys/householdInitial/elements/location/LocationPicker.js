@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import ManualLocationPicker from "./ManualLocationPicker";
-import Loading from "../../../components/Loading";
+import Loading from "../../../../components/Loading";
 import { Types } from "../../actions";
 
 export const LocationObj = (lat, lng, accuracy, altitude, wasManual) => ({
@@ -58,7 +58,7 @@ export const LocationPicker = () => {
   // eslint-disable-next-line default-case
   switch (status) {
     case LOCATION_REQUESTED:
-      return <Loading text={t("location.loading")} />;
+      return <Loading />;
     case LOCATION_FAILED:
       return (
         <>

@@ -1,40 +1,56 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-//region BuildTranslationResource
-import addVolunteerEN from "./translations/en/translation/AddVolunteer.json";
-import defaultsEN from "./translations/en/translation/Defaults.json";
-import IVS_EN from "./translations/en/translation/InitialVolunteerSurvey.json";
 
+// FORMIO CONTENT ENGLISH
+import formIOAddVolunteerEN from "./translations/en/translation/AddVolunteer.json";
+import formIODefaultsEN from "./translations/en/translation/Defaults.json";
+import formIOInitialHouseholdSurveyEN from "./translations/en/translation/InitialVolunteerSurvey.json";
+import formIOGraveDiggerSurveyEN from "./translations/en/translation/GravediggerSurvey.json";
+import formIOHospitalSurveyEN from "./translations/en/translation/HospitalSurvey.json";
+import formIOVolunteerLoginEN from "./translations/en/translation/VolunteerLogin.json";
+
+// OTHER ENGLISH CONTENT
 import adminEN from "./translations/en/Admin.json";
 import loginEN from "./translations/en/Login.json";
 import footerEN from "./translations/en/Footer.json";
 import homeEN from "./translations/en/Home.json";
 import loadingEN from "./translations/en/Loading.json";
 import navbarEN from "./translations/en/Navbar.json";
-import volunteerFormEN from "./translations/en/InitialSurvey.json";
-import FormIoCustomTextEn from "./translations/en/FormIoCustomText.json";
+import initialHouseholdSurveyEN from "./translations/en/InitialSurvey.json";
+import formIOCustomTextEN from "./translations/en/FormIoCustomText.json";
+import graveDiggerSurveyEN from "./translations/en/GraveDiggerSurvey.json";
+import hospitalSurveyEN from "./translations/en/HospitalSurvey.json";
 
-import addVolunteerSO from "./translations/so/translation/AddVolunteer.json";
-import defaultsSO from "./translations/so/translation/Defaults.json";
-import IVS_SO from "./translations/so/translation/InitialVolunteerSurvey.json";
-import volunteerLoginSO from "./translations/so/translation/VolunteerLogin.json";
-import FormIoCustomTextSO from "./translations/so/FormIoCustomText.json";
+// FORMIO CONTENT SOMALI
+import formIOAddVolunteerSO from "./translations/so/translation/AddVolunteer.json";
+import formIODefaultsSO from "./translations/so/translation/Defaults.json";
+import formIOInitialHouseholdSurveySO from "./translations/so/translation/InitialVolunteerSurvey.json";
+import formIOGraveDiggerSurveySO from "./translations/so/translation/GraveDiggerSurvey.json";
+import formIOHospitalSurveySO from "./translations/so/translation/HospitalSurvey.json";
+import formIOVolunteerLoginSO from "./translations/so/translation/VolunteerLogin.json";
+import formIOCustomTextSO from "./translations/so/FormIoCustomText.json";
+
+// OTHER SOMALI CONTENT
 import adminSO from "./translations/so/Admin.json";
 import loginSO from "./translations/so/Login.json";
 import footerSO from "./translations/so/Footer.json";
 import homeSO from "./translations/so/Home.json";
 import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
-import initialSurveySO from "./translations/so/InitialSurvey.json";
+import initialHouseholdSurveySO from "./translations/so/InitialSurvey.json";
+import graveDiggerSurveySO from "./translations/so/GraveDiggerSurvey.json";
+import hospitalSurveySO from "./translations/so/HospitalSurvey.json";
 
 const resources = {
   en: {
     translation: {
-      ...addVolunteerEN,
-      ...defaultsEN,
-      ...IVS_EN,
-      ...volunteerFormEN,
+      ...formIOAddVolunteerEN,
+      ...formIODefaultsEN,
+      ...formIOInitialHouseholdSurveyEN,
+      ...formIOVolunteerLoginEN,
+      ...formIOGraveDiggerSurveyEN,
+      ...formIOHospitalSurveyEN,
     },
     Admin: adminEN,
     Login: loginEN,
@@ -42,15 +58,19 @@ const resources = {
     Home: homeEN,
     Loading: loadingEN,
     Navbar: navbarEN,
-    InitialSurvey: volunteerFormEN,
-    FormIOCustomText: FormIoCustomTextEn,
+    InitialSurvey: initialHouseholdSurveyEN,
+    FormIOCustomText: formIOCustomTextEN,
+    HospitalSurvey: hospitalSurveyEN,
+    GravediggerSurvey: graveDiggerSurveyEN,
   },
   so: {
     translation: {
-      ...addVolunteerSO,
-      ...defaultsSO,
-      ...IVS_SO,
-      ...volunteerLoginSO,
+      ...formIOAddVolunteerSO,
+      ...formIODefaultsSO,
+      ...formIOInitialHouseholdSurveySO,
+      ...formIOVolunteerLoginSO,
+      ...formIOGraveDiggerSurveySO,
+      ...formIOHospitalSurveySO,
     },
     Admin: adminSO,
     Login: loginSO,
@@ -58,11 +78,12 @@ const resources = {
     Home: homeSO,
     Loading: loadingSO,
     Navbar: navbarSO,
-    InitialSurvey: initialSurveySO,
-    FormIOCustomText: FormIoCustomTextSO,
+    InitialSurvey: initialHouseholdSurveySO,
+    FormIOCustomText: formIOCustomTextSO,
+    HospitalSurvey: hospitalSurveySO,
+    GravediggerSurvey: graveDiggerSurveySO,
   },
 };
-//endregion
 
 i18n
   // pass the i18n instance to react-i18next.
