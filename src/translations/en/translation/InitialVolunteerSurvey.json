@@ -196,5 +196,8 @@
   "rentalSubsidy": "Rental Subsidy",
   "otherHousingNeeds": "Other Housing Supports",
   "followupConsent": "Are you okay with us following up with you?",
-  "followupVisitConsent": "Are you okay with us coming back to the house?"
+  "followupVisitConsent": "Are you okay with us coming back to the house?",
+  "residenceStatus": "What is your residence status?",
+  "idp": "Internally Displaced person",
+  "resident": "Permanent Resident"
 }
