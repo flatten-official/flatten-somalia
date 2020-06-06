@@ -15,12 +15,12 @@ const Home = () => {
       <Button variant="light" size="lg" href={Routes.initialHouseholdSurvey}>
         {t("InitialSurvey:title")}
       </Button>
-      <Button variant="light" size="lg" href={Routes.graveDiggerSurvey}>
-        {t("GravediggerSurvey:title")}
-      </Button>
-      <Button variant="light" size="lg" href={Routes.hospitalSurvey}>
-        {t("HospitalSurvey:title")}
-      </Button>
+      {/*<Button variant="light" size="lg" href={Routes.graveDiggerSurvey}>*/}
+      {/*  {t("GravediggerSurvey:title")}*/}
+      {/*</Button>*/}
+      {/*<Button variant="light" size="lg" href={Routes.hospitalSurvey}>*/}
+      {/*  {t("HospitalSurvey:title")}*/}
+      {/*</Button>*/}
     </>
   );
 };
