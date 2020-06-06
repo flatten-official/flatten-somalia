@@ -11,7 +11,6 @@ import formIOHospitalSurveyEN from "./translations/en/translation/HospitalSurvey
 import formIOVolunteerLoginEN from "./translations/en/translation/VolunteerLogin.json";
 
 // OTHER ENGLISH CONTENT
-import adminEN from "./translations/en/Admin.json";
 import loginEN from "./translations/en/Login.json";
 import footerEN from "./translations/en/Footer.json";
 import homeEN from "./translations/en/Home.json";
@@ -30,7 +29,6 @@ import formIOVolunteerLoginSO from "./translations/so/translation/VolunteerLogin
 import formIOCustomTextSO from "./translations/so/FormIoCustomText.json";
 
 // OTHER SOMALI CONTENT
-import adminSO from "./translations/so/Admin.json";
 import loginSO from "./translations/so/Login.json";
 import footerSO from "./translations/so/Footer.json";
 import homeSO from "./translations/so/Home.json";
@@ -48,7 +46,6 @@ const resources = {
       ...formIOGraveDiggerSurveyEN,
       ...formIOHospitalSurveyEN,
     },
-    Admin: adminEN,
     Login: loginEN,
     Footer: footerEN,
     Home: homeEN,
@@ -66,7 +63,6 @@ const resources = {
       ...formIOGraveDiggerSurveySO,
       ...formIOHospitalSurveySO,
     },
-    Admin: adminSO,
     Login: loginSO,
     Footer: footerSO,
     Home: homeSO,
