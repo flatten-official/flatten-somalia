@@ -1,10 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Routes } from "../../config";
+import { Routes, Surveys } from "../../config";
 import Button from "react-bootstrap/Button";
 
 const Home = () => {
   const { t } = useTranslation("Home");
+  const { t: tSurvey } = useTranslation("Surveys");
 
   return (
     <>
@@ -16,10 +17,10 @@ const Home = () => {
         {t("goToInitialSurvey")}
       </Button>
       <Button variant="light" size="lg" href={Routes.graveDiggerSurvey}>
-        {t("goToGraveDiggerForm")}
+        {tSurvey(Surveys.graveDigger.i18nTitleKey)}
       </Button>
       <Button variant="light" size="lg" href={Routes.hospitalSurvey}>
-        {t("goToGraveDiggerForm")}
+        {tSurvey(Surveys.hospital.i18nTitleKey)}
       </Button>
       {/*<Button variant="light" size="lg" href={null} disabled="true">*/}
       {/*  {t("goToGravediggerSurvey")}*/}

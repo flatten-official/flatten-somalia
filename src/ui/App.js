@@ -9,15 +9,14 @@ import SubmissionPageContent from "./surveys/householdInitial/HouseholdInitialSu
 import Success from "./surveys/householdInitial/Success";
 import LoginSuccess from "./login/LoginSuccess";
 import Loading from "./components/Loading";
-import { Routes } from "../config";
+import { Routes, Surveys } from "../config";
 import { useDispatch, useSelector } from "react-redux";
 import { permissions } from "../backend/auth/authApi";
 import {
   fetchAuthState,
   AUTH_UNINITIALISED,
 } from "../backend/auth/authActions";
-import GraveDiggerSurveyPage from "./surveys/graveDigger/GraveDiggerSurveyPage";
-import HospitalSurveyPage from "./surveys/hospital/HospitalSurveyPage";
+import SurveyPageFactory from "./surveys/SurveyPageFactory";
 
 const AppContent = () => {
   const dispatch = useDispatch();
@@ -46,13 +45,13 @@ const AppContent = () => {
       <PrivateRoute
         exact
         path={Routes.graveDiggerSurvey}
-        comp={GraveDiggerSurveyPage}
+        comp={SurveyPageFactory(Surveys.graveDigger)}
         requiredPermission={permissions.submitForms}
       />
       <PrivateRoute
         exact
         path={Routes.hospitalSurvey}
-        comp={HospitalSurveyPage}
+        comp={SurveyPageFactory(Surveys.hospital)}
         requiredPermission={permissions.submitForms}
       />
       <Route path={Routes.auth} component={Login} />

@@ -14,6 +14,7 @@ import loadingEN from "./translations/en/Loading.json";
 import navbarEN from "./translations/en/Navbar.json";
 import volunteerFormEN from "./translations/en/InitialSurvey.json";
 import FormIoCustomTextEn from "./translations/en/FormIoCustomText.json";
+import SurveysEN from "./translations/en/Surveys.json";
 
 import addVolunteerSO from "./translations/so/translation/AddVolunteer.json";
 import defaultsSO from "./translations/so/translation/Defaults.json";
@@ -44,6 +45,7 @@ const resources = {
     Navbar: navbarEN,
     InitialSurvey: volunteerFormEN,
     FormIOCustomText: FormIoCustomTextEn,
+    Surveys: SurveysEN,
   },
   so: {
     translation: {
