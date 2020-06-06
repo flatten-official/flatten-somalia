@@ -1,3 +1,12 @@
+/**
+ * This file contains (HOC) components that connect the reusable
+ * components (e.g. LocationPicker, ConsentModal) to the surveys Redux store.
+ * This is done because we want separation between the standalone components
+ * and the surveys "business logic". The "Connected" components use the
+ * normal React-Redux HOC design pattern with mapDispatchToProps and
+ * mapStateToProps.
+ */
+
 import { connect } from "react-redux";
 import Types from "./actionTypes";
 import { ConsentModal } from "../components/surveys/ConsentModal";

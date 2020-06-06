@@ -13,8 +13,11 @@ import {
 } from "./ConnectedComponents";
 
 /**
- * This function generates a survey page.
- * @param config pass in the configuration object for that form
+ * This function returns a survey page component.
+ * @param surveyKey a string representing the form
+ * @param i18nTitleKey the i18next key for the form title
+ * @param formIOJSON the JSON formIO definition
+ * @param onSubmit called with the form data when the form is submitted
  */
 const SurveyPageFactory = ({
   surveyKey,
@@ -22,24 +25,30 @@ const SurveyPageFactory = ({
   formIOJSON,
   onSubmit,
 }) => {
-  // NEED TO USE A CLASS CAUSE FUCKING STALE CLOSURES
+  // Need to use a Class rather than functional components
+  // Since the functional component was running into stale closure issues.
   class SurveyPageContent extends React.Component {
     constructor(props) {
       super(props);
-      this.props.restartForm();
+      this.props.restartForm(); // Reset the form when the component is first loaded
     }
 
+    /**
+     * Calls the onSubmit callback and if no error is thrown redirects to submit page
+     */
     submitHook = async (formIOData) => {
       await onSubmit(this.props.surveyData, formIOData);
       this.props.redirectToSuccess();
     };
 
     render() {
-      if (!this.props.surveyData) return <Loading />;
+      const surveyData = this.props.surveyData;
 
-      if (!this.props.surveyData.consent) return <ConnectedConsent />;
+      if (!surveyData) return <Loading />;
 
-      if (!this.props.surveyData.location) return <ConnectedLocationPicker />;
+      if (!surveyData.consent) return <ConnectedConsent />;
+
+      if (!surveyData.location) return <ConnectedLocationPicker />;
 
       return (
         <Form
