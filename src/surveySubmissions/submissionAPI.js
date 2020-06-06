@@ -1,90 +1,56 @@
-const submissionData = require("./submissionData");
+const { gravediggerSurvey, gravediggerDeathRecord } = require("./models");
 
 const { Error } = require("mongoose");
 
-async function initialSubmission(
+async function gravediggerSurveySubmission(
   volunteerId,
   volunteerTeamName,
   schema,
   metadata,
-  peopleData,
-  deathsData,
-  householdData
+  surveyData
 ) {
-  const household = await submissionData.createHousehold(
-    householdData.followUpId,
-    householdData.phone,
-    householdData.email
-  );
-
-  const peopleModel = peopleData.map((o) => {
-    return {
-      name: o.name,
-      gender: o.gender,
-      household: household._id,
-      alive: true,
-    };
-  });
-  const deathsModel = deathsData.map((o) => {
-    return {
-      name: o.name,
-      gender: o.gender,
-      household: household._id,
-      alive: false,
-    };
+  // create array of mongoose death records
+  const recordedDeaths = surveyData.deaths.map((o) => {
+    return new gravediggerDeathRecord({
+      sex: o.deceasedSex,
+      age: o.deceasedAge,
+      causeOfDeath: o.causeOfDeath,
+      dateOfDeath: o.deathDate,
+      comorbidities: o.deceasedComorbidities,
+      symptoms: o.deceasedSymptoms,
+    });
   });
 
-  const people = await submissionData.createPeople(
-    [].concat(peopleModel, deathsModel)
-  );
+  const deathIDs = [];
 
-  const submission = await submissionData.createSubmission(
-    volunteerId,
-    volunteerTeamName,
+  // write each death to the DB
+  for (const death of recordedDeaths) {
+    // todo catch error + logging
+    await death.save((err, deathRecord) => {
+      // keep track of death records created
+      deathIDs.push(deathRecord._id);
+    });
+  }
+
+  // create survey record from submission data + death record IDs
+  const gravediggerSurveryRecord = new gravediggerSurvey({
+    addedBy: volunteerId,
+    teamName: volunteerTeamName,
     schema,
     metadata,
-    people.map((person) => person._id),
-    [].concat(peopleData, deathsData),
-    household._id,
-    householdData
-  );
+    surveyData: {
+      gravediggerPhoneNumber: surveyData.gravediggerPhoneNumber,
+      gravediggerEmail: surveyData.gravediggerEmail,
+      gravesite: surveyData.gravesite,
+      burialsThatDay: surveyData.burialsThatDay,
+      deaths: deathIDs,
+    },
+  });
 
-  for (const person of people) {
-    const validation = person.validateSync();
-    if (validation !== undefined) {
-      console.error(validation);
-      throw new Error.ValidationError("");
-    }
-  }
-  const householdValidation = household.validateSync();
-  if (householdValidation !== undefined) {
-    console.error(householdValidation);
-    throw new Error.ValidationError("");
-  }
-  const submissionValidation = submission.validateSync();
-  if (submissionValidation !== undefined) {
-    console.log(submissionValidation);
-    throw new Error.ValidationError("");
-  }
-
-  for (const person of people) await person.save();
-  await household.save();
-  await submission.save();
-}
-
-// TODO - decide what the props etc are for this
-async function followUpSubmission(submissionData) {}
-
-async function getFollowUpInfo(volunteerId, district) {
-  const [
-    submissionId,
-    household,
-    people,
-  ] = submissionData.getVolunteerNextFollowUp(volunteerId, district);
-
-  // TODO - return info as the client expects it
+  // todo catch error + logging
+  await gravediggerSurveryRecord.save();
 }
 
 module.exports = {
-  initialSubmission,
+  gravediggerSurveySubmission,
 };
