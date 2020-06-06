@@ -51,7 +51,7 @@ export const LocationPicker = ({ onLocationFound }) => {
   // eslint-disable-next-line default-case
   switch (currentStatus) {
     case STATUS.requested:
-      return <Loading text={t("location.loading")} />;
+      return <Loading />;
     case STATUS.failed:
       return (
         <>
