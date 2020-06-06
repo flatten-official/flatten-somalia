@@ -218,5 +218,8 @@
   "otherHousingNeeds": "Wax kale (caddee)",
   "followUp": "",
   "followupConsent": "Miyaan ka heli karna nambarka taleefankaga si aan kula socono? Hadey haa tahay lambarkiisa oo sax ah.",
-  "followupVisitConsent": "Miyaya kula tahay inaan guriga ku soo noqono?"
+  "followupVisitConsent": "Miyaya kula tahay inaan guriga ku soo noqono?",
+  "residenceStatus": "Waa maxay deegaan kaada?",
+  "idp": "Barakac",
+  "resident": "Deegaan"
 }
