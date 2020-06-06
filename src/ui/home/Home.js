@@ -14,7 +14,7 @@ const Home = () => {
       </h3>
       <h5 className="homePageSelectFormTitle">{t("formSelectionPrompt")}</h5>
       <Button variant="light" size="lg" href={Routes.initialHouseholdSurvey}>
-        {t("goToInitialSurvey")}
+        {tSurvey(Surveys.initialHousehold.i18nTitleKey)}
       </Button>
       <Button variant="light" size="lg" href={Routes.graveDiggerSurvey}>
         {tSurvey(Surveys.graveDigger.i18nTitleKey)}

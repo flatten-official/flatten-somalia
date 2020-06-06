@@ -19,8 +19,6 @@ import loadingEN from "./translations/en/Loading.json";
 import navbarEN from "./translations/en/Navbar.json";
 import initialHouseholdSurveyEN from "./translations/en/InitialSurvey.json";
 import formIOCustomTextEN from "./translations/en/FormIoCustomText.json";
-import graveDiggerSurveyEN from "./translations/en/GraveDiggerSurvey.json";
-import hospitalSurveyEN from "./translations/en/HospitalSurvey.json";
 import SurveysEN from "./translations/en/Surveys.json";
 
 // FORMIO CONTENT SOMALI
@@ -40,8 +38,7 @@ import homeSO from "./translations/so/Home.json";
 import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
 import initialHouseholdSurveySO from "./translations/so/InitialSurvey.json";
-import graveDiggerSurveySO from "./translations/so/GraveDiggerSurvey.json";
-import hospitalSurveySO from "./translations/so/HospitalSurvey.json";
+import SurveysSO from "./translations/so/Surveys.json";
 
 const resources = {
   en: {
@@ -61,8 +58,6 @@ const resources = {
     Navbar: navbarEN,
     InitialSurvey: initialHouseholdSurveyEN,
     FormIOCustomText: formIOCustomTextEN,
-    HospitalSurvey: hospitalSurveyEN,
-    GravediggerSurvey: graveDiggerSurveyEN,
     Surveys: SurveysEN,
   },
   so: {
@@ -82,8 +77,7 @@ const resources = {
     Navbar: navbarSO,
     InitialSurvey: initialHouseholdSurveySO,
     FormIOCustomText: formIOCustomTextSO,
-    HospitalSurvey: hospitalSurveySO,
-    GravediggerSurvey: graveDiggerSurveySO,
+    Surveys: SurveysSO,
   },
 };
 
