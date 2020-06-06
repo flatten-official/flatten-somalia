@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Types } from "./actions";
 import { LocationPicker } from "./elements/location/LocationPicker";
 import Form from "../../components/formio/Form";
 import FormDef from "../../../forms/VolunteerForm.json";
@@ -9,6 +8,7 @@ import { push } from "connected-react-router";
 import { Consent } from "./elements/Consent";
 import { submitForm } from "../../../backend/submission";
 import { Routes } from "../../../config";
+import Types from "../actionTypes";
 
 const HouseholdInitialSurveyPageContent = () => {
   const formData = useSelector((state) => state.volunteerForm);

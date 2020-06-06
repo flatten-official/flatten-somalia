@@ -16,13 +16,13 @@ export const Routes = {
 
 export const Surveys = {
   graveDigger: {
-    storeKey: "graveDigger",
+    surveyKey: "graveDigger",
     i18nTitleKey: "graveDiggerTitle",
     api: api.graveDiggerSurvey,
     formIOJSON: graveDiggerSurveyJSON,
   },
   hospital: {
-    storeKey: "hospital",
+    surveyKey: "hospital",
     i18nTitleKey: "hospitalTitle",
     api: api.hospitalSurvey,
     formIOJSON: hospitalSurveyJSON,

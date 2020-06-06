@@ -1,21 +1,16 @@
 import { Trans, useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { setFollowUpId, Types } from "../actions";
+import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
 import React from "react";
+import Types from "../../actionTypes";
 
 export const Consent = () => {
-  const { t } = useTranslation("InitialSurvey");
+  const { t } = useTranslation("InitialSurvey"); // TODO Change to surveys
   const dispatch = useDispatch();
-
-  const volunteerFriendlyId = useSelector(
-    (state) => state.auth.user.friendlyId
-  );
 
   const onConsent = () => {
     dispatch({ type: Types.NOTIFY_CONSENT_GIVEN });
     dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
-    dispatch(setFollowUpId(volunteerFriendlyId));
   };
 
   return (

@@ -1,24 +1,33 @@
 import Form from "../components/formio/Form";
-import React from "react";
-import backend from "../../backend/api/backend";
+import React, { useEffect } from "react";
 import { push } from "connected-react-router";
 import { Routes } from "../../config";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { Consent } from "./householdInitial/elements/Consent";
+import { LocationPicker } from "./householdInitial/elements/location/LocationPicker";
+import { submitForm } from "../../backend/submission";
+import Types from "./actionTypes";
 
 /**
  * This function generates a survey page.
  * @param config pass in the configuration object for that form
  */
-const SurveyPageFactory = ({ storeKey, i18nTitleKey, api, formIOJSON }) => {
+const SurveyPageFactory = ({ surveyKey, i18nTitleKey, api, formIOJSON }) => {
   const SurveyPageContent = () => {
+    const surveyData = useSelector((state) => state.surveys[surveyKey]);
     const dispatch = useDispatch();
 
-    const onSubmit = async (formIoData) => {
-      await backend.request({
-        ...api,
-        data: formIoData,
-      });
+    useEffect(() => {
+      dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey });
+    }, [dispatch]);
+
+    if (!surveyData.consent) return <Consent />;
+
+    if (!surveyData.location) return <LocationPicker />;
+
+    const onSubmit = async (formIOData) => {
+      await submitForm(surveyData, formIOData);
       dispatch(push(Routes.success));
     };
 

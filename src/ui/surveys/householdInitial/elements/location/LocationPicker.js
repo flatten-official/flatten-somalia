@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import ManualLocationPicker from "./ManualLocationPicker";
 import Loading from "../../../../components/Loading";
-import { Types } from "../../actions";
+import Types from "../../../actionTypes";
 
 export const LocationObj = (lat, lng, accuracy, altitude, wasManual) => ({
   lat: lat,
