@@ -138,6 +138,9 @@
                 "name": "Shibis"
               },
               {
+                "name": "Shangani"
+              },
+              {
                 "name": "Yaqshid"
               },
               {
@@ -2070,6 +2073,7 @@
                 "hamarWeye": false,
                 "cabdiCaziz": false,
                 "shibis": false,
+                "shangani": false,
                 "yaqshid": false,
                 "karan": false,
                 "huriwa": false
@@ -2148,6 +2152,11 @@
                 {
                   "label": "Shibis",
                   "value": "shibis",
+                  "shortcut": ""
+                },
+                {
+                  "label": "Shangani",
+                  "value": "shangani",
                   "shortcut": ""
                 },
                 {
