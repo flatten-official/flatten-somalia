@@ -5,31 +5,6 @@
   "owner": "5ed48ca2b9eb60b9c939562b",
   "components": [
     {
-      "title": "Follow Up ID",
-      "label": "Page 6",
-      "type": "panel",
-      "key": "page6",
-      "input": false,
-      "tableView": false,
-      "components": [
-        {
-          "type": "customFollowUpId",
-          "key": "followUpId",
-          "protected": true,
-          "input": true,
-          "tableView": false,
-          "label": ""
-        }
-      ],
-      "breadcrumbClickable": true,
-      "buttonSettings": {
-        "previous": true,
-        "cancel": true,
-        "next": true
-      },
-      "collapsible": false
-    },
-    {
       "title": "Deganaanshaha",
       "label": "housing",
       "type": "panel",
@@ -77,6 +52,19 @@
           },
           "type": "phoneNumber",
           "input": true
+        },
+        {
+          "type": "customFollowUpId",
+          "key": "followUpId",
+          "protected": true,
+          "input": true,
+          "tableView": false,
+          "label": "",
+          "conditional": {
+            "show": true,
+            "when": "sharePhoneNumberConsent",
+            "eq": "willNotSharePhoneNumber"
+          }
         },
         {
           "label": "email",
@@ -457,6 +445,24 @@
               "key": "sex",
               "type": "radio",
               "input": true
+            },
+            {
+                "label": "residenceStatus",
+                "widget": "choicesjs",
+                "tableView": true,
+                "data": {
+                  "values": [
+                    { "label": "resident", "value": "resident" },
+                    { "label": "idp", "value": "idp" }
+                  ]
+                },
+                "selectThreshold": 0.3,
+                "calculateServer": false,
+                "validate": { "required": true },
+                "key": "residenceStatus",
+                "type": "select",
+                "indexeddb": { "filter": {} },
+                "input": true
             },
             {
               "type": "customText",
@@ -3076,6 +3082,19 @@
           },
           "type": "radio",
           "input": true
+        },
+        {
+          "type": "followupIDReminder",
+          "key": "followUpId",
+          "protected": true,
+          "input": true,
+          "tableView": false,
+          "label": "",
+          "conditional": {
+            "show": true,
+            "when": "followupVisitConsent",
+            "eq": "yes"
+          }
         }
       ],
       "input": false,
