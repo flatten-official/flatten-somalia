@@ -27,9 +27,7 @@ Navigate to `localhost` in your browser, you should see a message indicating tha
 
 ### Using environment variables
 
-Environment variables should not be used for secrets since they are stored on GitHub (in `app.*.yaml`).
-When adding environment variables ensure to update `.env.template`, `app.master.yaml` and `app.staging.yaml`.
-Finally, **document any changes** in `.env.template`.
+Instead of using environmnet variables, we use `config.js` as it allows for more flexibility.
 
 ## Additional Tools
 
