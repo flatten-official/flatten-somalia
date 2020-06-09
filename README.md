@@ -27,7 +27,7 @@ Navigate to `localhost` in your browser, you should see a message indicating tha
 
 ### Using environment variables
 
-Instead of using environmnet variables, we use `config.js` as it allows for more flexibility.
+Instead of using environment variables, we use `config.js` as it allows for more flexibility.
 
 ## Additional Tools
 
