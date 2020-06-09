@@ -17,7 +17,7 @@
           "tableView": true,
           "calculateServer": false,
           "validate": { "required": true },
-          "key": "enterPhoneNumber",
+          "key": "gravediggerPhoneNumber",
           "type": "phoneNumber",
           "input": true
         },
@@ -28,7 +28,7 @@
           "tableView": true,
           "calculateServer": false,
           "kickbox": { "enabled": true },
-          "key": "email",
+          "key": "gravediggerEmail",
           "type": "email",
           "input": true
         },
@@ -57,7 +57,7 @@
           "selectThreshold": 0.3,
           "calculateServer": false,
           "validate": { "required": true },
-          "key": "gravesiteName",
+          "key": "gravesite",
           "type": "select",
           "indexeddb": { "filter": {} },
           "input": true
@@ -72,7 +72,7 @@
           "inputFormat": "plain",
           "calculateServer": false,
           "validate": { "required": true },
-          "key": "numberOfBurialsForDay",
+          "key": "burialsThatDay",
           "type": "number",
           "input": true
         }
