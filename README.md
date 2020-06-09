@@ -17,3 +17,11 @@
 ## Running locally
 
 1. Run `npm run start`
+
+## Modifying forms
+
+1. Remember to increment the form's version number before altering the form on `master`.
+    * Currently, the initial survey's version number is set in `submission.js`
+
+2. Summarize the changes in the relevant changelog.
+    * The commit referenced in the changelog should be the one which actually merged the changes.
