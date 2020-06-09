@@ -1,6 +1,10 @@
 const { Error } = require("mongoose");
 
-const { GravediggerSurvey, GravediggerDeathRecord } = require("./models");
+const {
+  GravediggerSurvey,
+  GravediggerDeathRecord,
+  HospitalSurvey,
+} = require("./models");
 const { definedKeys } = require("./utilities");
 
 async function gravediggerSurveySubmission(
@@ -63,6 +67,25 @@ async function gravediggerSurveySubmission(
   );
 }
 
+async function hospitalSurveySubmission(
+  volunteerId,
+  volunteerTeamName,
+  schema,
+  metadata,
+  surveyData
+) {
+  const surveyDocument = new HospitalSurvey({
+    addedBy: volunteerId,
+    teamName: volunteerTeamName,
+    submissionSchema: schema,
+    metadata,
+    surveyData,
+  });
+
+  await surveyDocument.save();
+}
+
 module.exports = {
   gravediggerSurveySubmission,
+  hospitalSurveySubmission,
 };
