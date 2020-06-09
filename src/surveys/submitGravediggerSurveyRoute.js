@@ -12,6 +12,7 @@ module.exports = async (req, res) => {
     );
     res.sendStatus(200);
   } catch (e) {
+    // TODO fix dealing with errors
     if (e instanceof Error.ValidationError) {
       console.error(e);
       res.status(400).send("Validation problem with form data.");
