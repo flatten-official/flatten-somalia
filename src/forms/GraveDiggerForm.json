@@ -86,387 +86,404 @@
     },
     {
       "title": "Dhimasho",
-      "label": "perDeath",
+      "label": "deathsPage",
       "type": "panel",
       "key": "perDeath",
-      "components": [
-        {
-          "label": "deceasedSex",
-          "optionsLabelPosition": "right",
-          "inline": false,
-          "tableView": false,
-          "values": [
-            {
-              "label": "male",
-              "value": "male",
-              "shortcut": ""
-            },
-            {
-              "label": "female",
-              "value": "female",
-              "shortcut": ""
-            }
-          ],
-          "calculateServer": false,
-          "validate": {
-            "required": true
-          },
-          "key": "deceasedSex",
-          "type": "radio",
-          "input": true
-        },
-        {
-          "label": "deceasedAge",
-          "mask": false,
-          "spellcheck": true,
-          "tableView": false,
-          "delimiter": false,
-          "requireDecimal": false,
-          "inputFormat": "plain",
-          "calculateServer": false,
-          "validate": {
-            "required": true,
-            "min": 0,
-            "max": 110
-          },
-          "key": "deceasedAge",
-          "type": "number",
-          "input": true
-        },
-        {
-          "label": "causeOfDeath",
-          "widget": "choicesjs",
-          "tableView": true,
-          "data": {
-            "values": [
-              {
-                "label": "deathSugar",
-                "value": "deathSugar"
-              },
-              {
-                "label": "deathHighBloodPressure",
-                "value": "deathHighBloodPressure"
-              },
-              {
-                "label": "deathCOVID19",
-                "value": "deathCOVID19"
-              },
-              {
-                "label": "deathUnknown",
-                "value": "deathUnknown"
-              },
-              {
-                "label": "other",
-                "value": "other"
-              }
-            ]
-          },
-          "selectThreshold": 0.3,
-          "calculateServer": false,
-          "validate": {
-            "required": true
-          },
-          "key": "causeOfDeath",
-          "type": "select",
-          "indexeddb": {
-            "filter": {}
-          },
-          "input": true
-        },
-        {
-          "label": "deceasedComorbidities",
-          "optionsLabelPosition": "right",
-          "tableView": false,
-          "defaultValue": {
-            "": false,
-            "thing1": false,
-            "other": false,
-            "cadaadisDhiigOoSarreeya": false,
-            "sonkorowSonkorow": false,
-            "wadneXanuunAmaXanaaq": false,
-            "oofWareenkaOofwareenkaNeeftaCopd": false,
-            "kansarLiitaAmaDifaac": false,
-            "highBloodPressure": false,
-            "diabetes": false,
-            "heartDiseaseOrIrritability": false,
-            "poorCancerOrImmunity": false,
-            "noComorbidities": false
-          },
-          "values": [
-            {
-              "label": "highBloodPressure",
-              "value": "highBloodPressure",
-              "shortcut": ""
-            },
-            {
-              "label": "diabetes",
-              "value": "diabetes",
-              "shortcut": ""
-            },
-            {
-              "label": "heartDiseaseOrIrritability",
-              "value": "heartDiseaseOrIrritability",
-              "shortcut": ""
-            },
-            {
-              "label": "lungDisease",
-              "value": "lungDisease",
-              "shortcut": ""
-            },
-            {
-              "label": "cancerOrPoorImmunity",
-              "value": "cancerOrPoorImmunity",
-              "shortcut": ""
-            },
-            {
-              "label": "immunocompromised",
-              "value": "immunocompromised",
-              "shortcut": ""
-            },
-            {
-              "label": "noComorbidities",
-              "value": "noComorbidities",
-              "shortcut": ""
-            },
-            {
-              "label": "other",
-              "value": "other",
-              "shortcut": ""
-            }
-          ],
-          "calculateServer": false,
-          "validate": {
-            "required": true
-          },
-          "key": "deceasedComorbidities",
-          "type": "selectboxes",
-          "input": true,
-          "inputType": "checkbox"
-        },
-        {
-          "label": "other",
-          "placeholder": "otherDeceasedComorbidities",
-          "spellcheck": true,
-          "tableView": true,
-          "calculateServer": false,
-          "validate": {
-            "required": true
-          },
-          "key": "otherDeceasedComorbidities",
-          "conditional": {
-            "show": true,
-            "when": "deceasedComorbidities",
-            "eq": "other"
-          },
-          "type": "textfield",
-          "input": true
-        },
-        {
-          "label": "deceasedSymptoms",
-          "optionsLabelPosition": "right",
-          "tableView": false,
-          "defaultValue": {
-            "": false,
-            "none": false,
-            "other": false,
-            "noneIAmFine": false,
-            "newFever": false,
-            "newCoughOrWorseCough": false,
-            "shortnessOfBreathBreathing": false,
-            "lossOrReducedSenseOfTasteOrSmell": false,
-            "fatigue": false,
-            "sneezing": false,
-            "achesPains": false,
-            "runnyNose": false,
-            "chillsNightSweats": false,
-            "soreThroat": false,
-            "diarrhea": false,
-            "headache": false,
-            "nausea": false,
-            "rash": false,
-            "lossOfAppetite": false,
-            "stomachPainCramps": false,
-            "newOrWorseningCough": false,
-            "shortnessOfBreath": false,
-            "gustatoryOrOlfactoryImpairment": false,
-            "achesAndPains": false,
-            "chillsOrNightSweats": false,
-            "appetiteLoss": false,
-            "stomachPainOrCramps": false,
-            "noSymptoms": false
-          },
-          "values": [
-            {
-              "label": "newFever",
-              "value": "newFever",
-              "shortcut": ""
-            },
-            {
-              "label": "newOrWorseningCough",
-              "value": "newOrWorseningCough",
-              "shortcut": ""
-            },
-            {
-              "label": "shortnessOfBreath",
-              "value": "shortnessOfBreath",
-              "shortcut": ""
-            },
-            {
-              "label": "gustatoryOrOlfactoryImpairment",
-              "value": "gustatoryOrOlfactoryImpairment",
-              "shortcut": ""
-            },
-            {
-              "label": "fatigue",
-              "value": "fatigue",
-              "shortcut": ""
-            },
-            {
-              "label": "sneezing",
-              "value": "sneezing",
-              "shortcut": ""
-            },
-            {
-              "label": "achesAndPains",
-              "value": "achesAndPains",
-              "shortcut": ""
-            },
-            {
-              "label": "runnyNose",
-              "value": "runnyNose",
-              "shortcut": ""
-            },
-            {
-              "label": "chillsOrNightSweats",
-              "value": "chillsOrNightSweats",
-              "shortcut": ""
-            },
-            {
-              "label": "soreThroat",
-              "value": "soreThroat",
-              "shortcut": ""
-            },
-            {
-              "label": "diarrhea",
-              "value": "diarrhea",
-              "shortcut": ""
-            },
-            {
-              "label": "headache",
-              "value": "headache",
-              "shortcut": ""
-            },
-            {
-              "label": "nausea",
-              "value": "nausea",
-              "shortcut": ""
-            },
-            {
-              "label": "rash",
-              "value": "rash",
-              "shortcut": ""
-            },
-            {
-              "label": "appetiteLoss",
-              "value": "appetiteLoss",
-              "shortcut": ""
-            },
-            {
-              "label": "stomachPainOrCramps",
-              "value": "stomachPainOrCramps",
-              "shortcut": ""
-            },
-            {
-              "label": "other",
-              "value": "other",
-              "shortcut": ""
-            },
-            {
-              "label": "noSymptoms",
-              "value": "noSymptoms",
-              "shortcut": ""
-            }
-          ],
-          "calculateServer": false,
-          "validate": {
-            "required": true
-          },
-          "key": "whatWereTheSymptomsTheyExperiencedPriorToDeath",
-          "type": "selectboxes",
-          "input": true,
-          "inputType": "checkbox"
-        },
-        {
-          "label": "other",
-          "placeholder": "otherDeceasedSymptoms",
-          "spellcheck": true,
-          "tableView": true,
-          "calculateServer": false,
-          "validate": {
-            "required": true
-          },
-          "key": "otherDeceasedSymptoms",
-          "conditional": {
-            "show": true,
-            "when": "whatWereTheSymptomsTheyExperiencedPriorToDeath",
-            "eq": "other"
-          },
-          "type": "textfield",
-          "input": true
-        },
-        {
-          "label": "deathDate",
-          "format": "yyyy-MM-dd",
-          "tableView": false,
-          "datePicker": {
-            "maxDate": "moment()",
-            "disableWeekends": false,
-            "disableWeekdays": false
-          },
-          "enableTime": false,
-          "calculateServer": false,
-          "validate": {
-            "required": true
-          },
-          "key": "dateOfDeath",
-          "type": "datetime",
-          "input": true,
-          "suffix": "<i ref=\"icon\" class=\"fa fa-calendar\" style=\"\"></i>",
-          "widget": {
-            "type": "calendar",
-            "displayInTimezone": "viewer",
-            "language": "en",
-            "useLocaleSettings": false,
-            "allowInput": true,
-            "mode": "single",
-            "enableTime": false,
-            "noCalendar": false,
-            "format": "yyyy-MM-dd",
-            "hourIncrement": 1,
-            "minuteIncrement": 1,
-            "time_24hr": false,
-            "minDate": null,
-            "disableWeekends": false,
-            "disableWeekdays": false,
-            "maxDate": "moment()"
-          }
-        }
-      ],
       "input": false,
       "tableView": false,
       "breadcrumbClickable": true,
       "buttonSettings": {
         "previous": true,
         "cancel": true,
-        "submit": true
+        "next": true
       },
-      "collapsible": false
+      "collapsible": false,
+      "components": [
+        {
+          "label": "deaths",
+          "openWhenEmpty": true,
+          "disableAddingRemovingRows": false,
+          "hideLabel": true,
+          "tableView": false,
+          "templates": {
+            "header": "<div class=\"row\">\n  To add individuals, click \"Add another\" at the bottom of the form\n</div>"
+          },
+          "modal": false,
+          "calculateServer": false,
+          "key": "deaths",
+          "type": "editgrid",
+          "input": true,
+          "components": [
+            {
+              "label": "sex",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                {
+                  "label": "male",
+                  "value": "male",
+                  "shortcut": ""
+                },
+                {
+                  "label": "female",
+                  "value": "female",
+                  "shortcut": ""
+                }
+              ],
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "sex",
+              "type": "radio",
+              "input": true
+            },
+            {
+              "label": "age",
+              "mask": false,
+              "spellcheck": true,
+              "tableView": false,
+              "delimiter": false,
+              "requireDecimal": false,
+              "inputFormat": "plain",
+              "calculateServer": false,
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 110
+              },
+              "key": "age",
+              "type": "number",
+              "input": true
+            },
+            {
+              "label": "causeOfDeath",
+              "widget": "choicesjs",
+              "tableView": true,
+              "data": {
+                "values": [
+                  {
+                    "label": "deathSugar",
+                    "value": "deathSugar"
+                  },
+                  {
+                    "label": "deathHighBloodPressure",
+                    "value": "deathHighBloodPressure"
+                  },
+                  {
+                    "label": "deathCOVID19",
+                    "value": "deathCOVID19"
+                  },
+                  {
+                    "label": "deathUnknown",
+                    "value": "deathUnknown"
+                  },
+                  {
+                    "label": "other",
+                    "value": "other"
+                  }
+                ]
+              },
+              "selectThreshold": 0.3,
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "causeOfDeath",
+              "type": "select",
+              "indexeddb": {
+                "filter": {}
+              },
+              "input": true
+            },
+            {
+              "label": "comorbidities",
+              "optionsLabelPosition": "right",
+              "tableView": false,
+              "defaultValue": {
+                "": false,
+                "thing1": false,
+                "other": false,
+                "cadaadisDhiigOoSarreeya": false,
+                "sonkorowSonkorow": false,
+                "wadneXanuunAmaXanaaq": false,
+                "oofWareenkaOofwareenkaNeeftaCopd": false,
+                "kansarLiitaAmaDifaac": false,
+                "highBloodPressure": false,
+                "diabetes": false,
+                "heartDiseaseOrIrritability": false,
+                "poorCancerOrImmunity": false,
+                "noComorbidities": false
+              },
+              "values": [
+                {
+                  "label": "highBloodPressure",
+                  "value": "highBloodPressure",
+                  "shortcut": ""
+                },
+                {
+                  "label": "diabetes",
+                  "value": "diabetes",
+                  "shortcut": ""
+                },
+                {
+                  "label": "heartDisease",
+                  "value": "heartDisease",
+                  "shortcut": ""
+                },
+                {
+                  "label": "lungDisease",
+                  "value": "lungDisease",
+                  "shortcut": ""
+                },
+                {
+                  "label": "cancerOrPoorImmunity",
+                  "value": "cancerOrPoorImmunity",
+                  "shortcut": ""
+                },
+                {
+                  "label": "immunocompromised",
+                  "value": "immunocompromised",
+                  "shortcut": ""
+                },
+                {
+                  "label": "noComorbidities",
+                  "value": "noComorbidities",
+                  "shortcut": ""
+                },
+                {
+                  "label": "other",
+                  "value": "other",
+                  "shortcut": ""
+                }
+              ],
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "comorbidities",
+              "type": "selectboxes",
+              "input": true,
+              "inputType": "checkbox"
+            },
+            {
+              "label": "other",
+              "placeholder": "otherDeceasedComorbidities",
+              "spellcheck": true,
+              "tableView": true,
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "otherComorbidities",
+              "conditional": {
+                "show": true,
+                "when": "comorbidities",
+                "eq": "other"
+              },
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "symptomsBeforeDeath",
+              "optionsLabelPosition": "right",
+              "tableView": false,
+              "defaultValue": {
+                "": false,
+                "none": false,
+                "other": false,
+                "noneIAmFine": false,
+                "newFever": false,
+                "newCoughOrWorseCough": false,
+                "shortnessOfBreathBreathing": false,
+                "lossOrReducedSenseOfTasteOrSmell": false,
+                "fatigue": false,
+                "sneezing": false,
+                "achesPains": false,
+                "runnyNose": false,
+                "chillsNightSweats": false,
+                "soreThroat": false,
+                "diarrhea": false,
+                "headache": false,
+                "nausea": false,
+                "rash": false,
+                "lossOfAppetite": false,
+                "stomachPainCramps": false,
+                "newOrWorseningCough": false,
+                "shortnessOfBreath": false,
+                "gustatoryOrOlfactoryImpairment": false,
+                "achesAndPains": false,
+                "chillsOrNightSweats": false,
+                "appetiteLoss": false,
+                "stomachPainOrCramps": false,
+                "noSymptoms": false
+              },
+              "values": [
+                {
+                  "label": "newFever",
+                  "value": "newFever",
+                  "shortcut": ""
+                },
+                {
+                  "label": "newOrWorseningCough",
+                  "value": "newOrWorseningCough",
+                  "shortcut": ""
+                },
+                {
+                  "label": "shortnessOfBreath",
+                  "value": "shortnessOfBreath",
+                  "shortcut": ""
+                },
+                {
+                  "label": "gustatoryOrOlfactoryImpairment",
+                  "value": "gustatoryOrOlfactoryImpairment",
+                  "shortcut": ""
+                },
+                {
+                  "label": "fatigue",
+                  "value": "fatigue",
+                  "shortcut": ""
+                },
+                {
+                  "label": "sneezing",
+                  "value": "sneezing",
+                  "shortcut": ""
+                },
+                {
+                  "label": "achesAndPains",
+                  "value": "achesAndPains",
+                  "shortcut": ""
+                },
+                {
+                  "label": "runnyNose",
+                  "value": "runnyNose",
+                  "shortcut": ""
+                },
+                {
+                  "label": "chillsOrNightSweats",
+                  "value": "chillsOrNightSweats",
+                  "shortcut": ""
+                },
+                {
+                  "label": "soreThroat",
+                  "value": "soreThroat",
+                  "shortcut": ""
+                },
+                {
+                  "label": "diarrhea",
+                  "value": "diarrhea",
+                  "shortcut": ""
+                },
+                {
+                  "label": "headache",
+                  "value": "headache",
+                  "shortcut": ""
+                },
+                {
+                  "label": "nausea",
+                  "value": "nausea",
+                  "shortcut": ""
+                },
+                {
+                  "label": "rash",
+                  "value": "rash",
+                  "shortcut": ""
+                },
+                {
+                  "label": "appetiteLoss",
+                  "value": "appetiteLoss",
+                  "shortcut": ""
+                },
+                {
+                  "label": "stomachPainOrCramps",
+                  "value": "stomachPainOrCramps",
+                  "shortcut": ""
+                },
+                {
+                  "label": "other",
+                  "value": "other",
+                  "shortcut": ""
+                },
+                {
+                  "label": "noSymptoms",
+                  "value": "noSymptoms",
+                  "shortcut": ""
+                }
+              ],
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "symptomsBeforeDeath",
+              "type": "selectboxes",
+              "input": true,
+              "inputType": "checkbox"
+            },
+            {
+              "label": "other",
+              "placeholder": "otherDeceasedSymptoms",
+              "spellcheck": true,
+              "tableView": true,
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "otherSymptoms",
+              "conditional": {
+                "show": true,
+                "when": "symptomsBeforeDeath",
+                "eq": "other"
+              },
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "deathDate",
+              "format": "yyyy-MM-dd",
+              "tableView": false,
+              "datePicker": {
+                "maxDate": "moment()",
+                "disableWeekends": false,
+                "disableWeekdays": false
+              },
+              "enableTime": false,
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "dateOfDeath",
+              "type": "datetime",
+              "input": true,
+              "suffix": "<i ref=\"icon\" class=\"fa fa-calendar\" style=\"\"></i>",
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "language": "en",
+                "useLocaleSettings": false,
+                "allowInput": true,
+                "mode": "single",
+                "enableTime": false,
+                "noCalendar": false,
+                "format": "yyyy-MM-dd",
+                "hourIncrement": 1,
+                "minuteIncrement": 1,
+                "time_24hr": false,
+                "minDate": null,
+                "disableWeekends": false,
+                "disableWeekdays": false,
+                "maxDate": "moment()"
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "revisions": "",
   "_vid": 0,
   "title": "Grave Digger Volunteer Survery Form",
-  "display": "form",
+  "display": "wizard",
   "access": [
     {
       "roles": [
