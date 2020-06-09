@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const graveDiggerSurvey = mongoose.model(
-  "gravediggerSurvey",
+const GravediggerSurvey = mongoose.model(
+  "GravediggerSurvey",
   new mongoose.Schema({
     addedBy: {
       type: mongoose.ObjectId,
@@ -41,31 +41,22 @@ const graveDiggerSurvey = mongoose.model(
       gravediggerEmail: {},
       gravesite: {},
       burialsThatDay: {},
-      deaths: [
-        {
-          ref: {
-            type: mongoose.ObjectId,
-            ref: "gravediggerDeathRecord",
-          },
-        },
-      ],
+      deaths: [mongoose.Types.ObjectId],
     },
   })
 );
 
-const gravediggerDeathRecord = mongoose.model(
-  "gravediggerDeathRecord",
+const GravediggerDeathRecord = mongoose.model(
+  "GravediggerDeathRecord",
   new mongoose.Schema({
     sex: String,
     age: Number,
-    causeOfDeath: String,
     dateOfDeath: String,
-    comorbidities: [String],
-    symptoms: [String],
+    gravesite: String,
+    causeOfDeath: String,
+    comorbidities: Object,
+    symptomsBeforeDeath: Object,
   })
 );
 
-module.exports = {
-  graveDiggerSurvey,
-  gravediggerDeathRecord,
-};
+module.exports = { GravediggerSurvey, GravediggerDeathRecord };
