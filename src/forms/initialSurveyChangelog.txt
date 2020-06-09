@@ -1,7 +1,7 @@
 INITIAL SURVEY CHANGELOG
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-version  |  commit
+version  |  commit (optional)
 
 	* changes
 
