@@ -1,5 +1,3 @@
-const mongoose = require("mongoose");
-
 const HospitalSurveySubmission = require("../../models/hospitalSurveySubmission");
 
 async function hospitalSurveySubmission(
@@ -20,6 +18,8 @@ async function hospitalSurveySubmission(
       ...surveyData,
     },
   });
+
+  await document.validate();
 
   await HospitalSurveySubmission.save(document);
 }

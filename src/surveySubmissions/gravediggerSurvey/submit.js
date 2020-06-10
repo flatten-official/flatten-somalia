@@ -27,7 +27,7 @@ async function submitGravediggerSurvey(
   const deathIDs = recordedDeaths.map((o) => o._id);
 
   // create survey record from submissionInitial models + death record IDs
-  const document = new GravediggerSurveySubmission.model({
+  const submissionDocument = new GravediggerSurveySubmission.model({
     metadata: {
       addedBy: volunteerId,
       teamName: volunteerTeamName,
@@ -43,8 +43,13 @@ async function submitGravediggerSurvey(
     },
   });
 
+  for (const death of recordedDeaths) {
+    await death.validate();
+  }
+  await submissionDocument.validate();
+
   await DeathRecord.insertMany(recordedDeaths);
-  await GravediggerSurveySubmission.save(document);
+  await GravediggerSurveySubmission.save(submissionDocument);
 }
 
 module.exports = { submitGravediggerSurvey };
