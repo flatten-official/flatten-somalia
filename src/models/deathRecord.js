@@ -10,7 +10,9 @@ const model = mongoose.model(
     age: Number,
     sex: String,
     comorbidities: Object,
+    otherComorbidities: String,
     symptomsBeforeDeath: Object,
+    otherSymptomsBeforeDeath: String,
     causeOfDeath: String,
     dateOfDeath: String,
   })
