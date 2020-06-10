@@ -429,7 +429,7 @@
               "validate": {
                 "required": true
               },
-              "key": "otherSymptoms",
+              "key": "otherSymptomsBeforeDeath",
               "conditional": {
                 "show": true,
                 "when": "symptomsBeforeDeath",
