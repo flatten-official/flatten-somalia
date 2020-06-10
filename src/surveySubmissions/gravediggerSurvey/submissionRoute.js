@@ -1,9 +1,9 @@
-const submissionAPI = require("../surveySubmissions/submissionAPI");
+const { submitGravediggerSurvey } = require("./submit");
 
 module.exports = async (req, res) => {
   try {
     if (req.body.perDeath === undefined) req.body.perDeath = [];
-    await submissionAPI.gravediggerSurveySubmission(
+    await submitGravediggerSurvey(
       res.locals.volunteer._id,
       res.locals.volunteer.teamName,
       req.body.schema,
@@ -12,10 +12,11 @@ module.exports = async (req, res) => {
     );
     res.sendStatus(200);
   } catch (e) {
+    console.log(e);
     // TODO fix dealing with errors
     if (e instanceof Error.ValidationError) {
       console.error(e);
-      res.status(400).send("Validation problem with form data.");
+      res.status(400).send("Validation problem with form models.");
     } else throw e;
   }
 };

@@ -7,11 +7,11 @@ const loginRoute = require("./auth/routes/loginRoute");
 const verifyTokenRoute = require("./auth/routes/verifyTokenRoute");
 const logoutRoute = require("./auth/routes/logoutRoute");
 const getAuthRoute = require("./auth/routes/getAuthRoute");
-const submitInitialRoute = require("./submission/submitInitialRoute");
-const submitGravediggerRoute = require("./surveys/submitGravediggerSurveyRoute");
-const submitHospitalRoute = require("./surveys/submitHospitalSurveyRoute");
-const submitFollowUpRoute = require("./submission/submitFollowUpRoute");
-const submitGetNextRoute = require("./submission/submitGetNextRoute");
+const submitInitialRoute = require("./submissionInitial/submitInitialRoute");
+const submitGravediggerRoute = require("./surveySubmissions/gravediggerSurvey/submissionRoute");
+const submitHospitalRoute = require("./surveySubmissions/hospitalSurvey/submissionRoute");
+const submitFollowUpRoute = require("./submissionInitial/submitFollowUpRoute");
+const submitGetNextRoute = require("./submissionInitial/submitGetNextRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
 
 const router = express.Router();

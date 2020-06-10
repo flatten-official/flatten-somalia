@@ -1,13 +1,10 @@
-const { Error } = require("mongoose");
-
+const mongoose = require("mongoose");
+const { GravediggerDeathRecord } = require("../../models/deathRecord");
 const {
   GravediggerSurvey,
-  GravediggerDeathRecord,
-  HospitalSurvey,
-} = require("./models");
-const { definedKeys } = require("./utilities");
+} = require("../../models/gravediggerSurveySubmission");
 
-async function gravediggerSurveySubmission(
+async function submitGravediggerSurvey(
   volunteerId,
   volunteerTeamName,
   schema,
@@ -29,7 +26,7 @@ async function gravediggerSurveySubmission(
     });
   });
 
-  // save death records, then save the submission record
+  // save death records, then save the submissionInitial record
   // nested callbacks since the second request depends on the first
   await GravediggerDeathRecord.insertMany(
     recordedDeaths,
@@ -39,7 +36,7 @@ async function gravediggerSurveySubmission(
         deathIDs.push(o._id);
       });
 
-      // create survey record from submission data + death record IDs
+      // create survey record from submissionInitial models + death record IDs
       const gravediggerSurveryRecord = new GravediggerSurvey({
         addedBy: volunteerId,
         teamName: volunteerTeamName,
@@ -60,25 +57,4 @@ async function gravediggerSurveySubmission(
   );
 }
 
-async function hospitalSurveySubmission(
-  volunteerId,
-  volunteerTeamName,
-  schema,
-  metadata,
-  surveyData
-) {
-  const surveyDocument = new HospitalSurvey({
-    addedBy: volunteerId,
-    teamName: volunteerTeamName,
-    submissionSchema: schema,
-    metadata,
-    surveyData,
-  });
-
-  await surveyDocument.save();
-}
-
-module.exports = {
-  gravediggerSurveySubmission,
-  hospitalSurveySubmission,
-};
+module.exports = { submitGravediggerSurvey };

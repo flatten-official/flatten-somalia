@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
   } catch (e) {
     if (e instanceof Error.ValidationError) {
       console.error(e);
-      res.status(400).send("Validation problem with form data.");
+      res.status(400).send("Validation problem with form models.");
     } else throw e;
   }
 };

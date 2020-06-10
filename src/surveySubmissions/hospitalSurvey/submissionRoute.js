@@ -1,8 +1,8 @@
-const submissionAPI = require("../surveySubmissions/submissionAPI");
+const { hospitalSurveySubmission } = require("./submit");
 
 module.exports = async (req, res) => {
   try {
-    await submissionAPI.hospitalSurveySubmission(
+    await hospitalSurveySubmission(
       res.locals.volunteer._id,
       res.locals.volunteer.teamName,
       req.body.schema,
@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     // TODO fix dealing with errors
     if (e instanceof Error.ValidationError) {
       console.error(e);
-      res.status(400).send("Validation problem with form data.");
+      res.status(400).send("Validation problem with form models.");
     } else throw e;
   }
 };

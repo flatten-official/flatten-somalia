@@ -3,7 +3,7 @@ const util = require("../../testUtils/mongo");
 
 const { login } = require("../../testUtils/requests");
 
-const submissionData = require("../../../src/submission/submissionData");
+const submissionData = require("../../../src/submissionInitial/submissionData");
 const volunteerData = require("../../../src/volunteer/volunteerData");
 
 const sampleSubmission = {
