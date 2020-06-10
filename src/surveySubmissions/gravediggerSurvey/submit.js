@@ -1,5 +1,3 @@
-const mongoose = require("mongoose");
-
 const DeathRecord = require("../../models/deathRecord");
 const GravediggerSurveySubmission = require("../../models/gravediggerSurveySubmission");
 
@@ -26,36 +24,27 @@ async function submitGravediggerSurvey(
     });
   });
 
-  console.log(recordedDeaths);
+  const deathIDs = recordedDeaths.map((o) => o._id);
 
-  // save death records, then save the submissionInitial record
-  // nested callbacks since the second request depends on the first
-  await DeathRecord.model.insertMany(recordedDeaths, (err, deathRecords) => {
-    console.log(err);
-    const deathIDs = [];
-    deathRecords.map((o) => {
-      deathIDs.push(o._id);
-    });
-
-    // create survey record from submissionInitial models + death record IDs
-    const document = new GravediggerSurveySubmission.model({
-      metadata: {
-        addedBy: volunteerId,
-        teamName: volunteerTeamName,
-        ...metadata,
-      },
-      surveyData: {
-        submissionSchema: schema,
-        gravesite: surveyData.gravesite,
-        gravediggerPhoneNumber: surveyData.gravediggerPhoneNumber,
-        gravediggerEmail: surveyData.gravediggerEmail,
-        burialsThatDay: surveyData.burialsThatDay,
-        deaths: deathIDs,
-      },
-    });
-
-    GravediggerSurveySubmission.save(document);
+  // create survey record from submissionInitial models + death record IDs
+  const document = new GravediggerSurveySubmission.model({
+    metadata: {
+      addedBy: volunteerId,
+      teamName: volunteerTeamName,
+      ...metadata,
+    },
+    surveyData: {
+      submissionSchema: schema,
+      gravesite: surveyData.gravesite,
+      gravediggerPhoneNumber: surveyData.gravediggerPhoneNumber,
+      gravediggerEmail: surveyData.gravediggerEmail,
+      burialsThatDay: surveyData.burialsThatDay,
+      deaths: deathIDs,
+    },
   });
+
+  await DeathRecord.insertMany(recordedDeaths);
+  await GravediggerSurveySubmission.save(document);
 }
 
 module.exports = { submitGravediggerSurvey };
