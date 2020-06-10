@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { FormSchema } = require("./types/formSchema");
 const { SubmissionMetadata } = require("./types/submissionMetadata");
 
-const HospitalSurveySubmission = mongoose.model(
+const model = mongoose.model(
   "HospitalSurveySubmission",
   new mongoose.Schema({
     metadata: SubmissionMetadata,
@@ -28,4 +28,8 @@ const HospitalSurveySubmission = mongoose.model(
   })
 );
 
-module.exports = { HospitalSurveySubmission };
+async function save(document) {
+  await document.save();
+}
+
+module.exports = { model, save };

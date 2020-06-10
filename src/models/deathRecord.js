@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const { FormSchema } = require("./types/formSchema");
 
-const DeathRecord = mongoose.model(
+const model = mongoose.model(
   "DeathRecord",
   new mongoose.Schema({
     submissionSchema: FormSchema,
@@ -16,4 +16,8 @@ const DeathRecord = mongoose.model(
   })
 );
 
-module.exports = { DeathRecord };
+async function insertMany(documents) {
+  model.insertMany(documents);
+}
+
+module.exports = { model, insertMany };

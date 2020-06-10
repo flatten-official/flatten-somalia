@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 
-const {
-  HospitalSurveySubmission,
-} = require("../../models/hospitalSurveySubmission");
+const HospitalSurveySubmission = require("../../models/hospitalSurveySubmission");
 
 async function hospitalSurveySubmission(
   volunteerId,
@@ -11,7 +9,7 @@ async function hospitalSurveySubmission(
   metadata,
   surveyData
 ) {
-  const surveyDocument = new HospitalSurveySubmission({
+  const document = new HospitalSurveySubmission.model({
     metadata: {
       addedBy: volunteerId,
       teamName: volunteerTeamName,
@@ -23,7 +21,7 @@ async function hospitalSurveySubmission(
     },
   });
 
-  await surveyDocument.save();
+  await HospitalSurveySubmission.save(document);
 }
 
 module.exports = { hospitalSurveySubmission };
