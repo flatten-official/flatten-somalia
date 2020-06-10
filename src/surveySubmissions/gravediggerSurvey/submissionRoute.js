@@ -2,7 +2,6 @@ const { submitGravediggerSurvey } = require("./submit");
 
 module.exports = async (req, res) => {
   try {
-    if (req.body.perDeath === undefined) req.body.perDeath = [];
     await submitGravediggerSurvey(
       res.locals.volunteer._id,
       res.locals.volunteer.teamName,
