@@ -11,7 +11,7 @@
       "tableView": true,
       "calculateServer": false,
       "validate": { "required": true },
-      "key": "contactPhoneNumber",
+      "key": "hospitalPhoneNumber",
       "type": "phoneNumber",
       "input": true
     },
@@ -22,7 +22,7 @@
       "tableView": true,
       "calculateServer": false,
       "kickbox": { "enabled": true },
-      "key": "contactEmail",
+      "key": "hospitalEmail",
       "type": "email",
       "input": true
     },
