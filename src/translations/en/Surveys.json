@@ -14,7 +14,7 @@
     "loading": "Waiting for location to load."
   },
   "success": "Success!",
-  "returnHomePrompt": "Submit another household",
+  "returnHomePrompt": "Return to homepage.",
   "askToGiveFollowUpId": "Important! Please write this number on a block of wood. Place the block outside of the household.",
   "followupIDReminder": "Don't forget to give them the block with this number!",
   "flattenConsent": "By continuing you agree to Flatten's <1>Privacy Policy</1> and <3>Terms of Service</3>.",
