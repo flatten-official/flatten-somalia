@@ -83,7 +83,6 @@ router.delete("/auth/logout", logoutRoute);
  * @api {post} /volunteer Add volunteer
  * @apiName AddVolunteer
  * @apiGroup Volunteer
- * @apiDescription Unimplemented
  */
 router.post(
   "/volunteer",
@@ -95,7 +94,6 @@ router.post(
  * @api {post} /submit/initial Submit the form for a new household
  * @apiName SubmitFormInitial
  * @apiGroup Submissions
- * @apiDescription Unimplemented
  */
 router.post(
   "/submit/initial",
@@ -107,7 +105,6 @@ router.post(
  * @api {post} /survey/gravedigger Submit a gravedigger survey.
  * @apiName SubmitFormGravedigger
  * @apiGroup Submissions
- * @apiDescription Unimplemented
  */
 router.post(
   "/survey/gravedigger",
@@ -119,7 +116,6 @@ router.post(
  * @api {post} /survey/hospital Submit a hospital survey.
  * @apiName SubmitFormHospital
  * @apiGroup Submissions
- * @apiDescription Unimplemented
  */
 router.post(
   "/survey/hospital",
