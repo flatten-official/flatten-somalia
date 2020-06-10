@@ -1,44 +1,20 @@
 const mongoose = require("mongoose");
 
-const HospitalSurvey = mongoose.model(
-  "HospitalSurvey",
+const { FormSchema } = require("./types/formSchema");
+const { SubmissionMetadata } = require("./types/submissionMetadata");
+
+const HospitalSurveySubmission = mongoose.model(
+  "HospitalSurveySubmission",
   new mongoose.Schema({
-    addedBy: {
-      type: mongoose.ObjectId,
-      required: true,
-      index: true,
-    },
-    teamName: {
-      type: String,
-      required: true,
-      index: true,
-    },
-    submissionSchema: {
-      form: { type: String, index: true, required: true }, // eg. 'somaliaInitialVolunteerSurvey'
-      version: { type: String, index: true, required: true }, // eg. '1.0.0'
-    },
-    metadata: {
-      // contains location etc
-      location: {
-        lat: Number,
-        lng: Number,
-        accuracy: Number,
-        altitude: Number,
-        wasManual: Boolean,
-      },
-      // recorded on the user's browser with JS Date.now()
-      filledOutTimestamp: { type: Number, index: true },
-      timeToComplete: Number, // ms
-      uploadTimestamp: {
-        type: Date,
-        index: true,
-        required: true,
-        default: Date.now,
-      },
-    },
+    metadata: SubmissionMetadata,
     surveyData: {
-      contactPhoneNumber: String,
-      contactEmail: String,
+      submissionSchema: FormSchema,
+      hospitalPhoneNumber: {
+        type: String,
+        required: true,
+        index: true,
+      },
+      hospitalEmail: String,
       newPatients: Number,
       dischargedPatients: Number,
       occupiedHospitalBeds: Number,
@@ -52,4 +28,4 @@ const HospitalSurvey = mongoose.model(
   })
 );
 
-module.exports = { HospitalSurvey };
+module.exports = { HospitalSurveySubmission };

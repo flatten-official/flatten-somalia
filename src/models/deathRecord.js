@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
 
-const GravediggerDeathRecord = mongoose.model(
-  "GravediggerDeathRecord",
+const { FormSchema } = require("./types/formSchema");
+
+const DeathRecord = mongoose.model(
+  "DeathRecord",
   new mongoose.Schema({
-    sex: String,
-    age: Number,
-    dateOfDeath: String,
+    submissionSchema: FormSchema,
     gravesite: String,
-    causeOfDeath: String,
+    age: Number,
+    sex: String,
     comorbidities: Object,
     symptomsBeforeDeath: Object,
+    causeOfDeath: String,
+    dateOfDeath: String,
   })
 );
 
-module.exports = { GravediggerDeathRecord };
+module.exports = { DeathRecord };

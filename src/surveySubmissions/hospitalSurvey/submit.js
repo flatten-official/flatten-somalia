@@ -1,20 +1,26 @@
 const mongoose = require("mongoose");
 
-const { HospitalSurvey } = require("../../models/hospitalSurveySubmission");
+const {
+  HospitalSurveySubmission,
+} = require("../../models/hospitalSurveySubmission");
 
 async function hospitalSurveySubmission(
   volunteerId,
   volunteerTeamName,
-  schema,
+  submissionSchema,
   metadata,
   surveyData
 ) {
-  const surveyDocument = new HospitalSurvey({
-    addedBy: volunteerId,
-    teamName: volunteerTeamName,
-    submissionSchema: schema,
-    metadata,
-    surveyData,
+  const surveyDocument = new HospitalSurveySubmission({
+    metadata: {
+      addedBy: volunteerId,
+      teamName: volunteerTeamName,
+      ...metadata,
+    },
+    surveyData: {
+      submissionSchema,
+      ...surveyData,
+    },
   });
 
   await surveyDocument.save();

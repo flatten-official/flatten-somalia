@@ -11,6 +11,7 @@ module.exports = async (req, res) => {
     );
     res.sendStatus(200);
   } catch (e) {
+    console.log(e);
     // TODO fix dealing with errors
     if (e instanceof Error.ValidationError) {
       console.error(e);
