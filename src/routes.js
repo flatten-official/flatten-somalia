@@ -94,6 +94,16 @@ router.post(
  * @api {post} /submit/initial Submit the form for a new household
  * @apiName SubmitFormInitial
  * @apiGroup Submissions
+ *
+ * @apiParamExample {json} Request-Example:
+ *                  body:
+ *                  {
+ *                    "schema" : { form: <formName>, version: <formVersion> },
+ *                    "metadata": { location: { <location data> }, <timing data...> },
+ *                    "people": [{ <form.io data – individuals page> }],
+ *                    "deaths": [{ <form.io data – deaths page> }],
+ *                    "household": { <form.io data relevant to the household> }
+ *                  }
  */
 router.post(
   "/submit/initial",
@@ -105,6 +115,14 @@ router.post(
  * @api {post} /survey/gravedigger Submit a gravedigger survey.
  * @apiName SubmitFormGravedigger
  * @apiGroup Submissions
+ *
+ * @apiParamExample {json} Request-Example:
+ *                  body:
+ *                  {
+ *                    "schema" : { form: <formName>, version: <formVersion> },
+ *                    "metadata": { location: { <location data> }, <timing data...> },
+ *                    "data": { <form.io survey data> }
+ *                  }
  */
 router.post(
   "/survey/gravedigger",
@@ -116,6 +134,14 @@ router.post(
  * @api {post} /survey/hospital Submit a hospital survey.
  * @apiName SubmitFormHospital
  * @apiGroup Submissions
+ *
+ * @apiParamExample {json} Request-Example:
+ *                  body:
+ *                  {
+ *                    "schema" : { form: <formName>, version: <formVersion> },
+ *                    "metadata": { location: { <location data> }, <timing data...> },
+ *                    "data": { <form.io survey data> }
+ *                  }
  */
 router.post(
   "/survey/hospital",
