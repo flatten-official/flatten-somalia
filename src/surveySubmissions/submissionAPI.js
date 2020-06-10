@@ -16,23 +16,16 @@ async function gravediggerSurveySubmission(
 ) {
   // create array of mongoose death records
   const recordedDeaths = surveyData.deaths.map((o) => {
-    // set freeform entries as the first array element
-    let comorbidities = [o.otherComorbidities];
-    let symptomsBeforeDeath = [o.otherSymptoms];
-    // form.io supplies an object full of booleans, so they are turned into string arrays
-    comorbidities = comorbidities.concat(definedKeys(o.comorbidities));
-    symptomsBeforeDeath = symptomsBeforeDeath.concat(
-      definedKeys(o.symptomsBeforeDeath)
-    );
-
     return new GravediggerDeathRecord({
       sex: o.sex,
       age: o.age,
       causeOfDeath: o.causeOfDeath,
       gravesite: surveyData.gravesite,
       dateOfDeath: o.dateOfDeath,
-      comorbidities,
-      symptomsBeforeDeath,
+      comorbidities: o.comorbidities,
+      // otherComorbidities,
+      symptomsBeforeDeath: o.symptomsBeforeDeath,
+      // otherSymptoms
     });
   });
 
