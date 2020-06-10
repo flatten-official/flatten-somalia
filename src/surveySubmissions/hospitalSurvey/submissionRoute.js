@@ -1,8 +1,8 @@
-const { hospitalSurveySubmission } = require("./submit");
+const { submitHospitalSurvey } = require("./submit");
 
 module.exports = async (req, res) => {
   try {
-    await hospitalSurveySubmission(
+    await submitHospitalSurvey(
       res.locals.volunteer._id,
       res.locals.volunteer.teamName,
       req.body.schema,

@@ -1,6 +1,6 @@
 const HospitalSurveySubmission = require("../../models/hospitalSurveySubmission");
 
-async function hospitalSurveySubmission(
+async function submitHospitalSurvey(
   volunteerId,
   volunteerTeamName,
   submissionSchema,
@@ -24,4 +24,4 @@ async function hospitalSurveySubmission(
   await HospitalSurveySubmission.save(document);
 }
 
-module.exports = { hospitalSurveySubmission };
+module.exports = { submitHospitalSurvey };
