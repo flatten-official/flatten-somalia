@@ -459,7 +459,7 @@
               "validate": {
                 "required": true
               },
-              "key": "deceasedPregnancy",
+              "key": "wasPregnant",
               "conditional": {
                 "show": true,
                 "when": "sex",
