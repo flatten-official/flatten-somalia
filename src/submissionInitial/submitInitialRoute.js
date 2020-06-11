@@ -2,7 +2,6 @@ const submissionApi = require("./submissionAPI");
 const { Error } = require("mongoose");
 
 module.exports = async (req, res) => {
-  console.log(req);
   try {
     if (req.body.people === undefined) req.body.people = [];
     if (req.body.deaths === undefined) req.body.deaths = [];
