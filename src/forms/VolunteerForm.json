@@ -642,7 +642,7 @@
               "input": true
             },
             {
-              "label": "primaryIncomeSource",
+              "label": "primaryNonworkIncomeSource",
               "widget": "choicesjs",
               "tableView": true,
               "data": {
