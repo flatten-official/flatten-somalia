@@ -6,6 +6,7 @@
   "other": "Other",
   "yes": "Yes",
   "no": "No",
+  "Add Another": "Add Another",
   "unknown": "I don't know",
   "error": "Please fix the following errors before submitting.",
   "invalid_date": "{{field}} is not a valid date.",
