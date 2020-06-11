@@ -1,5 +1,5 @@
-const DeathRecord = require("../../models/deathRecord");
-const GravediggerSurveySubmission = require("../../models/gravediggerSurveySubmission");
+const DeathRecord = require("./deathRecord");
+const GravediggerSurveySubmission = require("./gravediggerSurveySubmission");
 
 async function submitGravediggerSurvey(
   volunteerId,

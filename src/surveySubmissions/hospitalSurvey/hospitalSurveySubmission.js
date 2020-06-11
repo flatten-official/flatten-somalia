@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const { FormSchema } = require("./types/formSchema");
-const { SubmissionMetadata } = require("./types/submissionMetadata");
+const { FormSchema } = require("../sharedModels/formSchema");
+const { SubmissionMetadata } = require("../sharedModels/submissionMetadata");
 
 const model = mongoose.model(
   "HospitalSurveySubmission",

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const { FormSchema } = require("./types/formSchema");
+const { FormSchema } = require("../sharedModels/formSchema");
 
 const model = mongoose.model(
   "DeathRecord",

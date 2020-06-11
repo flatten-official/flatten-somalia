@@ -1,4 +1,4 @@
-const HospitalSurveySubmission = require("../../models/hospitalSurveySubmission");
+const HospitalSurveySubmission = require("./hospitalSurveySubmission");
 
 async function submitHospitalSurvey(
   volunteerId,
