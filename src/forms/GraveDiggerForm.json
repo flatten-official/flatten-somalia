@@ -439,6 +439,36 @@
               "input": true
             },
             {
+              "label": "deceasedPregnancy",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                {
+                  "label": "yes",
+                  "value": "yes",
+                  "shortcut": ""
+                },
+                {
+                  "label": "no",
+                  "value": "no",
+                  "shortcut": ""
+                }
+              ],
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "deceasedPregnancy",
+              "conditional": {
+                "show": true,
+                "when": "sex",
+                "eq": "female"
+              },
+              "type": "radio",
+              "input": true
+            },
+            {
               "label": "deathDate",
               "format": "yyyy-MM-dd",
               "tableView": false,
