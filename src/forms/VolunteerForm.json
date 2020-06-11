@@ -2325,7 +2325,7 @@
         },
         {
           "label": "deathGrid",
-          "openWhenEmpty": true,
+          "openWhenEmpty": false,
           "disableAddingRemovingRows": false,
           "hideLabel": true,
           "tableView": false,
@@ -2336,9 +2336,9 @@
           "calculateServer": false,
           "key": "deathGrid",
           "conditional": {
-            "show": false,
+            "show": true,
             "when": "deathsWithinHousehold",
-            "eq": "no"
+            "eq": "yes"
           },
           "type": "editgrid",
           "input": true,
