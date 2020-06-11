@@ -10,7 +10,7 @@ import Types from "./actionTypes";
 const TYPES_ARRAY = Object.values(Types);
 
 /**
- * The reducer function calls this subReducer to actaul modify the current form's state
+ * The reducer function calls this subReducer to actual modify the current form's state
  */
 const subReducer = (state, action) => {
   switch (action.type) {
