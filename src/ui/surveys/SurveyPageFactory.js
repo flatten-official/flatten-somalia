@@ -5,7 +5,6 @@ import { Routes } from "../../config";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Types from "./actionTypes";
-import Loading from "../components/Loading";
 import PropTypes from "prop-types";
 import {
   ConnectedConsent,
@@ -44,7 +43,10 @@ const SurveyPageFactory = ({
     render() {
       const surveyData = this.props.surveyData;
 
-      if (!surveyData) return <Loading />;
+      // Although the surveyData is initialized in the constructor,
+      // the props aren't updated till the second render and therefore, this.props.surveyData is null
+      // on the first render
+      if (!surveyData) return null;
 
       if (!surveyData.consent) return <ConnectedConsent />;
 

@@ -6,10 +6,13 @@
 
 import Types from "./actionTypes";
 
-const INITIAL_SURVEY_STATE = { consent: false };
+// Simply and array of all the possible action types for easy filtering in the reducer
 const TYPES_ARRAY = Object.values(Types);
 
-const subReducer = (state = INITIAL_SURVEY_STATE, action) => {
+/**
+ * The reducer function calls this subReducer to actual modify the current form's state
+ */
+const subReducer = (state, action) => {
   switch (action.type) {
     case Types.SET_FOLLOW_UP_ID:
       return { ...state, followUpId: action.payload };
@@ -21,27 +24,26 @@ const subReducer = (state = INITIAL_SURVEY_STATE, action) => {
       return { ...state, startTime: action.payload };
     case Types.NOTIFY_CONSENT_GIVEN:
       return { ...state, consent: true };
+    case Types.RESTART_SURVEY:
+      return { consent: false };
     default:
       return state;
   }
 };
 
 const reducer = (state = {}, action) => {
+  // If the action is not one of the form actions
+  if (!TYPES_ARRAY.includes(action.type)) return state;
+
   // If action is restart, set the form to the initial setting
-  if (action.type === Types.RESTART_SURVEY) {
-    return {
-      ...state,
-      [action.payload]: INITIAL_SURVEY_STATE,
-      activeSurvey: action.payload,
-    };
-  }
-  // If the action is one of the form actions
-  else if (TYPES_ARRAY.includes(action.type)) {
-    return {
-      ...state,
-      [state.activeSurvey]: subReducer(state[state.activeSurvey], action),
-    };
-  } else return state;
+  const activeSurvey =
+    action.type === Types.RESTART_SURVEY ? action.payload : state.activeSurvey;
+
+  return {
+    ...state,
+    [activeSurvey]: subReducer(state[activeSurvey], action),
+    activeSurvey,
+  };
 };
 
 export default reducer;
