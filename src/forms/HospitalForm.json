@@ -154,7 +154,7 @@
     },
     {
       "type": "button",
-      "label": "Submit",
+      "label": "submit",
       "key": "submit",
       "disableOnInvalid": true,
       "input": true,
@@ -164,7 +164,7 @@
   "controller": "",
   "revisions": "",
   "_vid": 0,
-  "title": "Hospital VolunteerSurvery",
+  "title": "Hospital Volunteer Survey",
   "display": "form",
   "access": [
     {
