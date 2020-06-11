@@ -387,7 +387,7 @@
           "hideLabel": true,
           "tableView": false,
           "templates": {
-            "header": "<div class=\"row\">\n  To add individuals, click \"Add another\" at the bottom of the form\n</div>"
+            "header": "<div class=\"row\">\n  Si aad ugu darto mid kale, dhagsii \"Ku dar\".</div>"
           },
           "modal": false,
           "calculateServer": false,
@@ -2389,7 +2389,7 @@
           "hideLabel": true,
           "tableView": false,
           "templates": {
-            "header": "<div class=\"row\">\n  To add individuals, click \"Add another\" at the bottom of the form\n</div>"
+            "header": "<div class=\"row\">\n  Si aad ugu darto mid kale, dhagsii \"Ku dar\".</div>"
           },
           "modal": false,
           "calculateServer": false,
