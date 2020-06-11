@@ -20,7 +20,7 @@ const model = mongoose.model(
 );
 
 async function insertMany(documents) {
-  model.insertMany(documents);
+  await model.insertMany(documents);
 }
 
 module.exports = { model, insertMany };
