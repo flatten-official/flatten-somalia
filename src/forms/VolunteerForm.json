@@ -1628,6 +1628,36 @@
               "input": true
             },
             {
+              "label": "COVID19TestType",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                {
+                  "label": "bloodTest",
+                  "value": "bloodTest",
+                  "shortcut": ""
+                },
+                {
+                  "label": "nasalTest",
+                  "value": "nasalTest",
+                  "shortcut": ""
+                }
+              ],
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "COVID19TestType",
+              "conditional": {
+                "show": true,
+                "when": "hasBeenTestedForCOVID19",
+                "eq": "yes"
+              },
+              "type": "radio",
+              "input": true
+            },
+            {
               "label": "COVID19testDate",
               "format": "yyyy-MM-dd",
               "tableView": false,
