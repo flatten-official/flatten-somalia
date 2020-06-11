@@ -6,13 +6,17 @@
 
 ## Setup
 
-1. Run `npm install`
+To run this repository you need to run both the frontend (this repository) and the [backend](https://github.com/flatten-official/backend-so).
 
-2. Copy the content of `./src/backend/backend.dev.js` to a new file called `./src/backend/backend.js`
+1. [Get the backend running locally.](https://github.com/flatten-official/backend-so/blob/staging/README.md)
 
-3. To be able to Login ask Martin or Arthur to add you to the volunteer staging database.
+2. Run `npm install`
 
-4. Enable ESLint in your code editor (normally through the ESLint Plugin)
+3. Copy the content of `./src/backend/backend.dev.js` to a new file called `./src/backend/backend.js`
+
+4. To be able to Login ask Martin or Arthur to add you to the volunteer staging database.
+
+5. Enable ESLint in your code editor (normally through the ESLint Plugin)
 
 ## Running locally
 
