@@ -15,6 +15,7 @@ async function submitGravediggerSurvey(
       gravesite: surveyData.gravesite,
       age: deceased.age,
       sex: deceased.sex,
+      wasPregnant: deceased.wasPregnant,
       comorbidities: deceased.comorbidities,
       otherComorbidities: deceased.otherComorbidities,
       symptomsBeforeDeath: deceased.symptomsBeforeDeath,

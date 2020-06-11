@@ -9,6 +9,7 @@ const model = mongoose.model(
     gravesite: String,
     age: Number,
     sex: String,
+    wasPregnant: String,
     comorbidities: Object,
     otherComorbidities: String,
     symptomsBeforeDeath: Object,
