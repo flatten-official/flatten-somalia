@@ -12,7 +12,7 @@ export const Routes = {
   home: "/",
   auth: "/login",
   initialHouseholdSurvey: "/surveys/initialHousehold",
-  graveDiggerSurvey: "/surveys/graveDigger",
+  gravediggerSurvey: "/surveys/gravedigger",
   hospitalSurvey: "/surveys/hospital",
   admin: "/admin",
   success: "/success",
@@ -20,12 +20,12 @@ export const Routes = {
 };
 
 const Schemas = {
-  graveDigger: {
-    form: "graveDigger",
+  gravedigger: {
+    form: "gravediggerSurvey",
     version: "1.0.0",
   },
   hospital: {
-    form: "hospital",
+    form: "hospitalSurvey",
     version: "1.0.0",
   },
   initialHousehold: {
@@ -35,14 +35,14 @@ const Schemas = {
 };
 
 export const Surveys = {
-  graveDigger: {
+  gravedigger: {
     surveyKey: "graveDigger",
     i18nTitleKey: "graveDiggerTitle",
     api: api.graveDiggerSurvey,
     formIOJSON: graveDiggerSurveyJSON,
     onSubmit: defaultSurveySubmitterFactory(
       api.graveDiggerSurvey,
-      Schemas.graveDigger
+      Schemas.gravedigger
     ),
   },
   hospital: {

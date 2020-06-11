@@ -43,8 +43,8 @@ const AppContent = () => {
       />
       <PrivateRoute
         exact
-        path={Routes.graveDiggerSurvey}
-        comp={SurveyPageFactory(Surveys.graveDigger)}
+        path={Routes.gravediggerSurvey}
+        comp={SurveyPageFactory(Surveys.gravedigger)}
         requiredPermission={permissions.submitForms}
       />
       <PrivateRoute

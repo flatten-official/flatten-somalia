@@ -16,8 +16,8 @@ const Home = () => {
       <Button variant="light" size="lg" href={Routes.initialHouseholdSurvey}>
         {tSurvey(Surveys.initialHousehold.i18nTitleKey)}
       </Button>
-      <Button variant="light" size="lg" href={Routes.graveDiggerSurvey}>
-        {tSurvey(Surveys.graveDigger.i18nTitleKey)}
+      <Button variant="light" size="lg" href={Routes.gravediggerSurvey}>
+        {tSurvey(Surveys.gravedigger.i18nTitleKey)}
       </Button>
       <Button variant="light" size="lg" href={Routes.hospitalSurvey}>
         {tSurvey(Surveys.hospital.i18nTitleKey)}
