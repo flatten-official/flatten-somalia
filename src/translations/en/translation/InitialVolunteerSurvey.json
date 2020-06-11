@@ -39,6 +39,7 @@
   "female": "Female",
   "employed": "Do you work?",
   "occupation": "What is your occupation?",
+  "primaryIncomeSource": "What is your main source of income?",
   "educationLevel": "What is your education level?",
   "noEducation": "None",
   "primarySchool": "Primary school",

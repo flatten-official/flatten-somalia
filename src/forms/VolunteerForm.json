@@ -642,6 +642,35 @@
               "input": true
             },
             {
+              "label": "primaryIncomeSource",
+              "widget": "choicesjs",
+              "tableView": true,
+              "data": {
+                "values": [
+                  {
+                    "label": "youtube",
+                    "value": "youtube"
+                  }
+                ]
+              },
+              "selectThreshold": 0.3,
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "primaryIncomeSource",
+              "conditional": {
+                "show": true,
+                "when": "employed",
+                "eq": "no"
+              },
+              "type": "select",
+              "indexeddb": {
+                "filter": {}
+              },
+              "input": true
+            },
+            {
               "label": "educationLevel",
               "widget": "choicesjs",
               "tableView": true,
