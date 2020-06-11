@@ -1,10 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Routes } from "../../config";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Modal, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, AUTH_SUCCESS } from "../../backend/auth/authActions";
+import {
+  checkWillExpireSoon,
+  checkHasExpired,
+} from "../../backend/auth/authApi";
 
 const LanguageDropDown = () => {
   const { t, i18n } = useTranslation("Navbar");
@@ -50,6 +54,37 @@ const Links = () => {
     );
 };
 
+const expiredSelector = () => {
+  const excludeRoutes = [
+    Routes.initialHouseholdSurvey,
+    Routes.graveDiggerSurvey,
+    Routes.hospitalSurvey,
+  ];
+  return (state) =>
+    !(excludeRoutes.indexOf(state.router.location.pathname) > -1) &&
+    checkWillExpireSoon(state.auth);
+};
+
+const ExpireModal = () => {
+  const { t } = useTranslation("Navbar");
+  const show = useSelector(expiredSelector());
+  const dispatch = useDispatch();
+
+  return (
+    <Modal show={show} backdrop="static" keyboard={false}>
+      <Modal.Header>
+        <Modal.Title>{t("expire.header")}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>{t("expire.body")}</Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" onClick={() => dispatch(logout())}>
+          {t("expire.ok")}
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+
 const Header = () => {
   return (
     <Navbar className="header" expand="lg">
@@ -65,6 +100,7 @@ const Header = () => {
         </Nav>
         <LanguageDropDown />
       </Navbar.Collapse>
+      <ExpireModal />
     </Navbar>
   );
 };

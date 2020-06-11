@@ -1,5 +1,18 @@
 import { AUTH_SUCCESS } from "./authActions";
 
+const EXPIRY_WARNING = 2; // hours prior to cookie being removed
+
+export const checkWillExpireSoon = (auth) => {
+  return (
+    auth.status === AUTH_SUCCESS &&
+    new Date(auth.user.expiry) - EXPIRY_WARNING * 60 * 60 * 1000 <= Date.now()
+  );
+};
+
+export const checkHasExpired = (auth) => {
+  return new Date(auth.user.expiry) <= Date.now();
+};
+
 export const permissions = {
   submitForms: "submitForms",
   manageVolunteers: "manageVolunteers",
