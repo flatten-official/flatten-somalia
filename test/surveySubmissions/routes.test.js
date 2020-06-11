@@ -5,6 +5,7 @@ const { login } = require("../testUtils/requests");
 
 const GravediggerSurveySubmission = require("../../src/surveySubmissions/gravediggerSurvey/gravediggerSurveySubmission");
 const DeathRecord = require("../../src/surveySubmissions/gravediggerSurvey/deathRecord");
+const HospitalSurveySubmission = require("../../src/surveySubmissions/hospitalSurvey/hospitalSurveySubmission");
 
 const testData = {
   gravediggerRequestBody: {
@@ -187,6 +188,38 @@ describe("submissions:", () => {
 
       expect(submissionDocuments).toHaveLength(0);
       expect(deathDocuments).toHaveLength(0);
+    });
+  });
+
+  describe("hospital Survey", () => {
+    it("should add submission as expected", async () => {
+      const { agent } = await login(app);
+
+      await agent
+        .post("/survey/hospital")
+        .send(testData.hospitalRequestBody)
+        .set("Content-Type", "application/json")
+        .set("Accept", "application/json")
+        .expect(200);
+
+      const submissionDocuments = await HospitalSurveySubmission.model.find();
+
+      expect(submissionDocuments).toHaveLength(1);
+    });
+
+    it("should fail for a user without the right permissions", async () => {
+      const { agent } = await login(app, { permissions: [] });
+
+      await agent
+        .post("/survey/hospital")
+        .send(testData.hospitalRequestBody)
+        .set("Content-Type", "application/json")
+        .set("Accept", "application/json")
+        .expect(403);
+
+      const submissionDocuments = await HospitalSurveySubmission.model.find();
+
+      expect(submissionDocuments).toHaveLength(0);
     });
   });
 });
