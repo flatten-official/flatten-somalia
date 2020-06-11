@@ -88,7 +88,8 @@ const findVolunteerById = (volunteerId) =>
  * Returns null if volunteer doesn't exist, otherwise returns the volunteer object
  * @return {Promise}
  */
-const findVolunteerByEmail = (email) => Volunteer.findOne({ email: email });
+const findVolunteerByEmail = (email) =>
+  Volunteer.findOne({ email: { $regex: new RegExp(email), $options: "i" } });
 
 module.exports = {
   Volunteer,
