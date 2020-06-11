@@ -1,0 +1,25 @@
+INITIAL SURVEY CHANGELOG
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+version  |  commit (optional)
+
+	* changes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.0.2       ea8a75a152
+
+    * add Shangani district option to:
+        - district (households)
+        - districts visited (individuals)
+
+
+1.0.1       8716397c9f
+
+    * add resident status question, with options:
+        - resident
+        - internally displaced person
+
+
+1.0.0       de6a7b2f35
+
+    * first form version used by volunteers
