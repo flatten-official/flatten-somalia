@@ -2574,7 +2574,7 @@
               "input": true
             },
             {
-              "label": "deceasedSymptoms",
+              "label": "deceasedSymptomsBeforeDeath",
               "optionsLabelPosition": "right",
               "tableView": false,
               "defaultValue": {
