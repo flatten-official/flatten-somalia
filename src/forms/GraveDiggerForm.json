@@ -115,7 +115,7 @@
           "input": true,
           "components": [
             {
-              "label": "sex",
+              "label": "deceasedSex",
               "optionsLabelPosition": "right",
               "inline": false,
               "tableView": false,
@@ -140,7 +140,7 @@
               "input": true
             },
             {
-              "label": "age",
+              "label": "deceasedAge",
               "mask": false,
               "spellcheck": true,
               "tableView": false,
@@ -198,7 +198,7 @@
               "input": true
             },
             {
-              "label": "comorbidities",
+              "label": "deceasedComorbidities",
               "optionsLabelPosition": "right",
               "tableView": false,
               "defaultValue": {
@@ -228,7 +228,7 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "heartDisease",
+                  "label": "heartDiseaseOrIrritability",
                   "value": "heartDisease",
                   "shortcut": ""
                 },
@@ -269,7 +269,7 @@
             },
             {
               "label": "other",
-              "placeholder": "otherDeceasedComorbidities",
+              "placeholder": "otherComorbidities",
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
@@ -286,7 +286,7 @@
               "input": true
             },
             {
-              "label": "symptomsBeforeDeath",
+              "label": "deceasedSymptomsBeforeDeath",
               "optionsLabelPosition": "right",
               "tableView": false,
               "defaultValue": {
@@ -406,7 +406,7 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "noSymptoms",
+                  "label": "none",
                   "value": "noSymptoms",
                   "shortcut": ""
                 }
@@ -422,7 +422,7 @@
             },
             {
               "label": "other",
-              "placeholder": "otherDeceasedSymptoms",
+              "placeholder": "otherSymptoms",
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
