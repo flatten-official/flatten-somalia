@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
-// DO NOT MODIFY, WILL BREAK FOLLOW SYSTEM
+// DO NOT MODIFY, WILL BREAK FOLLOW UP SYSTEM
 const INITIAL_START_DATE = new Date(1590981168000); // Represents a fixed moment in time serving as a reference
 
 function generateFollowUpID(volunteerFriendlyId) {

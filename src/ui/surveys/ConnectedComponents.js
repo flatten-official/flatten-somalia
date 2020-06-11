@@ -1,6 +1,6 @@
 /**
  * This file contains (HOC) components that connect the reusable
- * components (e.g. LocationPicker, ConsentModal) to the surveys Redux store.
+ * components (e.g. LocationPicker, ConsentModal) to the survey's Redux store.
  * This is done because we want separation between the standalone components
  * and the surveys "business logic". The "Connected" components use the
  * normal React-Redux HOC design pattern with mapDispatchToProps and
@@ -16,6 +16,9 @@ import { FollowUpId } from "../components/surveys/FollowUpId";
 const mapDispatchToPropsConsent = (dispatch) => ({
   onConsent: () => {
     dispatch({ type: Types.NOTIFY_CONSENT_GIVEN });
+    /** TODO we're planning to build a more robust timing system that measures from before consent page.
+     * this will then need to be changed
+     */
     dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
   },
 });
