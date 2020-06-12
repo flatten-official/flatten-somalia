@@ -7,9 +7,11 @@ const loginRoute = require("./auth/routes/loginRoute");
 const verifyTokenRoute = require("./auth/routes/verifyTokenRoute");
 const logoutRoute = require("./auth/routes/logoutRoute");
 const getAuthRoute = require("./auth/routes/getAuthRoute");
-const submitInitialRoute = require("./submission/submitInitialRoute");
-const submitFollowUpRoute = require("./submission/submitFollowUpRoute");
-const submitGetNextRoute = require("./submission/submitGetNextRoute");
+const submitInitialRoute = require("./submissionInitial/submitInitialRoute");
+const submitGravediggerRoute = require("./surveys/gravedigger/submissionRoute");
+const submitHospitalRoute = require("./surveys/hospital/submissionRoute");
+const submitFollowUpRoute = require("./submissionInitial/submitFollowUpRoute");
+const submitGetNextRoute = require("./submissionInitial/submitGetNextRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
 
 const router = express.Router();
@@ -81,7 +83,6 @@ router.delete("/auth/logout", logoutRoute);
  * @api {post} /volunteer Add volunteer
  * @apiName AddVolunteer
  * @apiGroup Volunteer
- * @apiDescription Unimplemented
  */
 router.post(
   "/volunteer",
@@ -93,12 +94,59 @@ router.post(
  * @api {post} /submit/initial Submit the form for a new household
  * @apiName SubmitFormInitial
  * @apiGroup Submissions
- * @apiDescription Unimplemented
+ *
+ * @apiParamExample {json} Request-Example:
+ *                  body:
+ *                  {
+ *                    "schema" : { form: <formName>, version: <formVersion> },
+ *                    "metadata": { location: { <location data> }, <timing data...> },
+ *                    "people": [{ <form.io data – individuals page> }],
+ *                    "deaths": [{ <form.io data – deaths page> }],
+ *                    "household": { <form.io data relevant to the household> }
+ *                  }
  */
 router.post(
   "/submit/initial",
   protectedMiddleware([Permissions.submitForms]),
   submitInitialRoute
+);
+
+/**
+ * @api {post} /survey/gravedigger Submit a gravedigger survey.
+ * @apiName SubmitFormGravedigger
+ * @apiGroup Submissions
+ *
+ * @apiParamExample {json} Request-Example:
+ *                  body:
+ *                  {
+ *                    "schema" : { form: <formName>, version: <formVersion> },
+ *                    "metadata": { location: { <location data> }, <timing data...> },
+ *                    "data": { <form.io survey data> }
+ *                  }
+ */
+router.post(
+  "/survey/gravedigger",
+  protectedMiddleware([Permissions.submitForms]),
+  submitGravediggerRoute
+);
+
+/**
+ * @api {post} /survey/hospital Submit a hospital survey.
+ * @apiName SubmitFormHospital
+ * @apiGroup Submissions
+ *
+ * @apiParamExample {json} Request-Example:
+ *                  body:
+ *                  {
+ *                    "schema" : { form: <formName>, version: <formVersion> },
+ *                    "metadata": { location: { <location data> }, <timing data...> },
+ *                    "data": { <form.io survey data> }
+ *                  }
+ */
+router.post(
+  "/survey/hospital",
+  protectedMiddleware([Permissions.submitForms]),
+  submitHospitalRoute
 );
 
 /**
