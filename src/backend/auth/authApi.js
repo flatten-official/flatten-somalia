@@ -9,10 +9,6 @@ export const checkWillExpireSoon = (auth) => {
   );
 };
 
-export const checkHasExpired = (auth) => {
-  return new Date(auth.user.expiry) <= Date.now();
-};
-
 export const permissions = {
   submitForms: "submitForms",
   manageVolunteers: "manageVolunteers",
