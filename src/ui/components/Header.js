@@ -60,6 +60,7 @@ const ExpireModal = () => {
     Routes.initialHouseholdSurvey,
     Routes.graveDiggerSurvey,
     Routes.hospitalSurvey,
+    Routes.success,
   ];
   const show = useSelector(
     (state) =>
