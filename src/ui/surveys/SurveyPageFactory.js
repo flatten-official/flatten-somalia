@@ -93,7 +93,7 @@ const SurveyPageFactory = ({
     });
 
     useEffect(() => {
-      if (shouldWarn === true) {
+      if (shouldWarn) {
         window.onbeforeunload = () => true;
       }
       return () => (window.onbeforeunload = undefined);
