@@ -52,13 +52,11 @@ const SurveyPageFactory = ({
       if (!surveyData.location) return <ConnectedLocationPicker />;
 
       return (
-        <>
-          <Form
-            formioForm={formIOJSON}
-            submitHook={this.submitHook}
-            formioOptions={{ noAlerts: false }}
-          />
-        </>
+        <Form
+          formioForm={formIOJSON}
+          submitHook={this.submitHook}
+          formioOptions={{ noAlerts: false }}
+        />
       );
     }
   }
@@ -91,18 +89,16 @@ const SurveyPageFactory = ({
     // sets it up so that once the user gives consent, they do not navigate away from the survey
     const shouldWarn = useSelector((state) => {
       const activeSurvey = state.surveys[state.surveys.activeSurvey];
-      return activeSurvey !== undefined && activeSurvey.consent === true;
+      return activeSurvey && activeSurvey.consent;
     });
 
     useEffect(() => {
       if (shouldWarn === true) {
+        console.log(`should warn true ${Date.now()}`);
         window.onbeforeunload = () => true;
-      } else {
-        window.onbeforeunload = undefined;
       }
+      return () => (window.onbeforeunload = undefined);
     }, [shouldWarn]);
-    // reset the onbeforereload before unmounting
-    useEffect(() => (window.onbeforeunload = undefined));
 
     return (
       <>
