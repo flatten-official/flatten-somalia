@@ -450,22 +450,22 @@
               "input": true
             },
             {
-                "label": "residenceStatus",
-                "widget": "choicesjs",
-                "tableView": true,
-                "data": {
-                  "values": [
-                    { "label": "resident", "value": "resident" },
-                    { "label": "idp", "value": "idp" }
-                  ]
-                },
-                "selectThreshold": 0.3,
-                "calculateServer": false,
-                "validate": { "required": true },
-                "key": "residenceStatus",
-                "type": "select",
-                "indexeddb": { "filter": {} },
-                "input": true
+              "label": "residenceStatus",
+              "widget": "choicesjs",
+              "tableView": true,
+              "data": {
+                "values": [
+                  { "label": "resident", "value": "resident" },
+                  { "label": "idp", "value": "idp" }
+                ]
+              },
+              "selectThreshold": 0.3,
+              "calculateServer": false,
+              "validate": { "required": true },
+              "key": "residenceStatus",
+              "type": "select",
+              "indexeddb": { "filter": {} },
+              "input": true
             },
             {
               "type": "customText",
@@ -3182,8 +3182,9 @@
           "input": true
         },
         {
-          "type": "followupIDReminder",
+          "type": "customFollowUpId",
           "key": "followUpId",
+          "isReminder": true,
           "protected": true,
           "input": true,
           "tableView": false,

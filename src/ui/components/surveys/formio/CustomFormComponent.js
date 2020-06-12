@@ -19,7 +19,7 @@ const CustomFormIoComponent = (InnerComponent) => {
       // eslint-disable-next-line react/no-render-return-value
       return ReactDOM.render(
         <Provider store={store}>
-          <InnerComponent component={this.component} />
+          <InnerComponent formioDefinition={this.component} />
         </Provider>,
         element
       );

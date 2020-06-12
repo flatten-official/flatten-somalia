@@ -16,7 +16,6 @@ import { ConnectedFollowUpId } from "./ui/surveys/ConnectedComponents";
 
 Components.setComponents({
   customFollowUpId: CustomFormIoComponent(ConnectedFollowUpId),
-  // followupIDReminder: CustomFormIoComponent(FollowUpIdReminder),
   customText: CustomFormIoComponent(TranslatedText),
 });
 

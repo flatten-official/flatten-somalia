@@ -15,6 +15,7 @@ export const FollowUpId = ({
   volunteerFriendlyId,
   followUpId,
   setFollowUpId,
+  formioDefinition,
 }) => {
   useEffect(() => {
     if (!followUpId) setFollowUpId(generateFollowUpID(volunteerFriendlyId));
@@ -24,7 +25,11 @@ export const FollowUpId = ({
 
   return (
     <>
-      <h3>{t("askToGiveFollowUpId")}</h3>
+      <h3>
+        {formioDefinition.isReminder
+          ? t("followupIDReminder")
+          : t("askToGiveFollowUpId")}
+      </h3>
       <h3>{followUpId}</h3>
     </>
   );
@@ -34,4 +39,5 @@ FollowUpId.propTypes = {
   volunteerFriendlyId: PropTypes.number,
   followUpId: PropTypes.string,
   setFollowUpId: PropTypes.func,
+  formioDefinition: PropTypes.object,
 };
