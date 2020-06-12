@@ -322,6 +322,12 @@ describe("submissions:", () => {
         .post("/survey/gravedigger")
         .send(testData.gravediggerBadRequestBody)
         .expect(400);
+
+      const submissionDocuments = await GravediggerSurveySubmission.model.find();
+      const deathDocuments = await DeathRecord.model.find();
+
+      expect(submissionDocuments).toHaveLength(0);
+      expect(deathDocuments).toHaveLength(0);
     });
   });
 
@@ -364,6 +370,10 @@ describe("submissions:", () => {
         .post("/survey/hospital")
         .send(testData.hospitalBadRequestBody)
         .expect(400);
+
+      const submissionDocuments = await HospitalSurveySubmission.model.find();
+
+      expect(submissionDocuments).toHaveLength(0);
     });
   });
 });
