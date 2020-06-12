@@ -1,32 +1,29 @@
 const mongoose = require("mongoose");
 
-const { FormSchema } = require("../sharedModels/formSchema");
-const { SubmissionMetadata } = require("../sharedModels/submissionMetadata");
+const { FormSchema, SubmissionMetadata } = require("../sharedModels");
+const Util = require("../databaseUtil");
 
-const model = mongoose.model(
-  "GravediggerSurveySubmission",
-  new mongoose.Schema({
-    metadata: SubmissionMetadata,
-    surveyData: {
-      submissionSchema: FormSchema,
-      gravesite: {
-        type: String,
-        required: true,
-        index: true,
-      },
-      gravediggerPhoneNumber: String,
-      gravediggerEmail: String,
-      burialsThatDay: {
-        type: Number,
-        required: true,
-      },
-      deaths: [mongoose.Types.ObjectId],
+const model = Util.createModel("GravediggerSurveySubmission", {
+  metadata: SubmissionMetadata,
+  surveyData: {
+    submissionSchema: FormSchema,
+    gravesite: {
+      type: String,
+      required: true,
+      index: true,
     },
-  })
-);
+    gravediggerPhoneNumber: String,
+    gravediggerEmail: String,
+    burialsThatDay: {
+      type: Number,
+      required: true,
+    },
+    deaths: [mongoose.Types.ObjectId],
+  },
+});
 
-async function save(document) {
-  await document.save();
-}
+const create = async (content) => Util.createDocument(model, content);
 
-module.exports = { model, save };
+const save = async (document) => await document.save();
+
+module.exports = { model, save, create };

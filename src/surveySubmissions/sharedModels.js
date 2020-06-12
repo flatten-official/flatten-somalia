@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
 
+const SharedModels = {
+  form: { type: String, index: true, required: true }, // eg. 'somaliaInitialVolunteerSurvey'
+  version: { type: String, index: true, required: true }, // eg. '1.0.0'
+};
+
 const SubmissionMetadata = {
   addedBy: {
     type: mongoose.ObjectId,
@@ -19,7 +24,7 @@ const SubmissionMetadata = {
     wasManual: Boolean,
   },
   // recorded on the user's browser with JS Date.now()
-  filledOutTimestamp: { type: Number, index: true },
+  endTime: { type: Number, index: true },
   timeToComplete: Number, // ms
   uploadTimestamp: {
     type: Date,
@@ -27,6 +32,7 @@ const SubmissionMetadata = {
     required: true,
     default: Date.now,
   },
+  consentGiven: { type: String, required: true },
 };
 
-module.exports = { SubmissionMetadata };
+module.exports = { FormSchema: SharedModels, SubmissionMetadata };

@@ -7,7 +7,7 @@ async function submitHospitalSurvey(
   metadata,
   surveyData
 ) {
-  const document = new HospitalSurveySubmission.model({
+  const document = await HospitalSurveySubmission.create({
     metadata: {
       addedBy: volunteerId,
       teamName: volunteerTeamName,
@@ -18,8 +18,6 @@ async function submitHospitalSurvey(
       ...surveyData,
     },
   });
-
-  await document.validate();
 
   await HospitalSurveySubmission.save(document);
 }

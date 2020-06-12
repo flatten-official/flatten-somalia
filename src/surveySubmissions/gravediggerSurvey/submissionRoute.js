@@ -1,4 +1,5 @@
-const { submitGravediggerSurvey } = require("./submit");
+const { submitGravediggerSurvey } = require("./api");
+const { isValidationTypeError } = require("../databaseUtil");
 
 module.exports = async (req, res) => {
   try {
@@ -11,9 +12,7 @@ module.exports = async (req, res) => {
     );
     res.sendStatus(200);
   } catch (e) {
-    console.log(e);
-    // TODO fix dealing with errors
-    if (e instanceof Error.ValidationError) {
+    if (isValidationTypeError(e)) {
       console.error(e);
       res.status(400).send("Validation problem with form models.");
     } else throw e;

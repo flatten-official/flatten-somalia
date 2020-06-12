@@ -9,26 +9,19 @@ async function submitGravediggerSurvey(
   surveyData
 ) {
   // create array of mongoose death records
-  const deaths = surveyData.deaths.map((deceased) => {
-    return new DeathRecord.model({
-      submissionSchema: schema,
-      gravesite: surveyData.gravesite,
-      age: deceased.age,
-      sex: deceased.sex,
-      wasPregnant: deceased.wasPregnant,
-      comorbidities: deceased.comorbidities,
-      otherComorbidities: deceased.otherComorbidities,
-      symptomsBeforeDeath: deceased.symptomsBeforeDeath,
-      otherSymptomsBeforeDeath: deceased.otherSymptomsBeforeDeath,
-      causeOfDeath: deceased.causeOfDeath,
-      dateOfDeath: deceased.dateOfDeath,
-    });
-  });
+  const deaths = await Promise.all(
+    surveyData.deaths.map((deceased) => {
+      return DeathRecord.create({
+        submissionSchema: schema,
+        gravesite: surveyData.gravesite,
+        ...deceased,
+      });
+    })
+  );
 
   const deathIDs = deaths.map((death) => death._id);
 
-  // create survey record from submissionInitial models + death record IDs
-  const submissionDocument = new GravediggerSurveySubmission.model({
+  const submissionDocument = await GravediggerSurveySubmission.create({
     metadata: {
       addedBy: volunteerId,
       teamName: volunteerTeamName,
@@ -43,11 +36,6 @@ async function submitGravediggerSurvey(
       deaths: deathIDs,
     },
   });
-
-  for (const death of deaths) {
-    await death.validate();
-  }
-  await submissionDocument.validate();
 
   await DeathRecord.insertMany(deaths);
   await GravediggerSurveySubmission.save(submissionDocument);
