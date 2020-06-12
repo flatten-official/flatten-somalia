@@ -94,7 +94,6 @@ const SurveyPageFactory = ({
 
     useEffect(() => {
       if (shouldWarn === true) {
-        console.log(`should warn true ${Date.now()}`);
         window.onbeforeunload = () => true;
       }
       return () => (window.onbeforeunload = undefined);

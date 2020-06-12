@@ -54,20 +54,18 @@ const Links = () => {
     );
 };
 
-const expiredSelector = () => {
+const ExpireModal = () => {
+  const { t } = useTranslation("Navbar");
   const excludeRoutes = [
     Routes.initialHouseholdSurvey,
     Routes.graveDiggerSurvey,
     Routes.hospitalSurvey,
   ];
-  return (state) =>
-    !(excludeRoutes.indexOf(state.router.location.pathname) > -1) &&
-    checkWillExpireSoon(state.auth);
-};
-
-const ExpireModal = () => {
-  const { t } = useTranslation("Navbar");
-  const show = useSelector(expiredSelector());
+  const show = useSelector(
+    (state) =>
+      excludeRoutes.indexOf(state.router.location.pathname) === -1 &&
+      checkWillExpireSoon(state.auth)
+  );
   const dispatch = useDispatch();
 
   return (
