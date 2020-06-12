@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { FormSchema } = require("../sharedModels/formSchema");
 
 const model = mongoose.model(
-  "DeathRecord",
+  "GravediggerDeathRecord",
   new mongoose.Schema({
     submissionSchema: FormSchema,
     gravesite: String,
