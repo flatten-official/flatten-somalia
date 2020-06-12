@@ -104,10 +104,7 @@ const SurveyPageFactory = ({
       <>
         <h3 className="submissionPageTitle">{t(i18nTitleKey)}</h3>
         {/* Protects against route changes in the SPA */}
-        <Prompt
-          message={"Form is in the process of being filled out!"}
-          when={shouldWarn}
-        />
+        <Prompt message={t("navWarning")} when={shouldWarn} />
         <SurveyPageContentConnected />
       </>
     );
