@@ -7,9 +7,7 @@ const isValidationTypeError = (e) =>
 const createDocument = async (model, content) => {
   // create survey record from submissionInitial models + death record IDs
   const submissionDocument = new model(content);
-
   await submissionDocument.validate();
-
   return submissionDocument;
 };
 
