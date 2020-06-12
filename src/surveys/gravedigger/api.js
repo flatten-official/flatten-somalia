@@ -1,5 +1,5 @@
-const DeathRecord = require("./deathRecord");
-const GravediggerSurveySubmission = require("./gravediggerSurveySubmission");
+const DeathRecord = require("./deathRecordData");
+const GravediggerSurveySubmission = require("./submissionData");
 
 async function submitGravediggerSurvey(
   volunteerId,

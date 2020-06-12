@@ -1,5 +1,5 @@
-const { FormSchema, SubmissionMetadata } = require("../sharedModels");
-const Util = require("../databaseUtil");
+const { FormSchema, SubmissionMetadata } = require("../sharedDataSchemas");
+const Util = require("../dataUtil");
 
 const model = Util.createModel("HospitalSurveySubmission", {
   metadata: SubmissionMetadata,

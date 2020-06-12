@@ -1,5 +1,5 @@
 const { submitGravediggerSurvey } = require("./api");
-const { isValidationTypeError } = require("../databaseUtil");
+const { isValidationTypeError } = require("../dataUtil");
 
 module.exports = async (req, res) => {
   try {

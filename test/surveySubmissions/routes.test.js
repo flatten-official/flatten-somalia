@@ -3,9 +3,9 @@ const util = require("../testUtils/mongo");
 
 const { login } = require("../testUtils/requests");
 
-const GravediggerSurveySubmission = require("../../src/surveySubmissions/gravediggerSurvey/gravediggerSurveySubmission");
-const DeathRecord = require("../../src/surveySubmissions/gravediggerSurvey/deathRecord");
-const HospitalSurveySubmission = require("../../src/surveySubmissions/hospitalSurvey/hospitalSurveySubmission");
+const GravediggerSurveySubmission = require("../../src/surveys/gravedigger/submissionData");
+const DeathRecord = require("../../src/surveys/gravedigger/deathRecordData");
+const HospitalSurveySubmission = require("../../src/surveys/hospital/submissionData");
 
 const testData = {
   gravediggerRequestBody: {

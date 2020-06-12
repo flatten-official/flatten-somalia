@@ -1,4 +1,4 @@
-const DeathRecord = require("../../src/surveySubmissions/gravediggerSurvey/deathRecord");
+const DeathRecord = require("../../src/surveys/gravedigger/deathRecordData");
 const util = require("../testUtils/mongo");
 
 describe("database operations", () => {

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const SharedModels = {
+const FormSchema = {
   form: { type: String, index: true, required: true }, // eg. 'somaliaInitialVolunteerSurvey'
   version: { type: String, index: true, required: true }, // eg. '1.0.0'
 };
@@ -35,4 +35,4 @@ const SubmissionMetadata = {
   consentGiven: { type: String, required: true },
 };
 
-module.exports = { FormSchema: SharedModels, SubmissionMetadata };
+module.exports = { FormSchema, SubmissionMetadata };

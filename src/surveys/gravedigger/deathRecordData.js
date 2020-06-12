@@ -1,6 +1,6 @@
-const Util = require("../databaseUtil");
+const Util = require("../dataUtil");
 
-const { FormSchema } = require("../sharedModels");
+const { FormSchema } = require("../sharedDataSchemas");
 
 const model = Util.createModel("GravediggerDeathRecord", {
   submissionSchema: FormSchema,
