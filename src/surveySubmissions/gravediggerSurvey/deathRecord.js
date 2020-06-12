@@ -16,7 +16,11 @@ const model = Util.createModel("GravediggerDeathRecord", {
   dateOfDeath: String,
 });
 
-const create = async (content) => Util.createDocument(model, content);
+const create = async (content) => {
+  const submissionDocument = new model(content);
+  await submissionDocument.validate();
+  return submissionDocument;
+};
 
 const insertMany = async (documents) => await model.insertMany(documents);
 
