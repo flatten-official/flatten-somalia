@@ -15,7 +15,7 @@ describe("database operations", () => {
     });
 
     it("should properly create a document", async () => {
-      const death = new DeathRecord.model({
+      const death = await DeathRecord.create({
         submissionSchema: { form: "graveDigger", version: "1.0.0" },
         gravesite: "qabuurahaJaziira",
         age: 2,
@@ -53,6 +53,7 @@ describe("database operations", () => {
         causeOfDeath: "deathCOVID19",
         dateOfDeath: "2020-06-10T00:00:00-04:00",
       });
+
       await DeathRecord.insertMany([death]);
 
       const allDeathRecords = await DeathRecord.model.find();
