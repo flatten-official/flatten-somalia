@@ -1,8 +1,9 @@
 import Form from "../components/surveys/formio/Form";
-import React from "react";
+import React, { useEffect } from "react";
+import { Prompt } from "react-router-dom";
 import { push } from "connected-react-router";
 import { Routes } from "../../config";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Types from "./actionTypes";
 import PropTypes from "prop-types";
@@ -87,9 +88,24 @@ const SurveyPageFactory = ({
   const SurveyPage = () => {
     const { t } = useTranslation("Surveys");
 
+    // sets it up so that once the user gives consent, they do not navigate away from the survey
+    const shouldWarn = useSelector((state) => {
+      const activeSurvey = state.surveys[state.surveys.activeSurvey];
+      return activeSurvey && activeSurvey.consent;
+    });
+
+    useEffect(() => {
+      if (shouldWarn) {
+        window.onbeforeunload = () => true;
+      }
+      return () => (window.onbeforeunload = undefined);
+    }, [shouldWarn]);
+
     return (
       <>
         <h3 className="submissionPageTitle">{t(i18nTitleKey)}</h3>
+        {/* Protects against route changes in the SPA */}
+        <Prompt message={t("navWarning")} when={shouldWarn} />
         <SurveyPageContentConnected />
       </>
     );
