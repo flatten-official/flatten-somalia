@@ -11,10 +11,18 @@ const getMetadata = (storeData) => {
   };
 };
 
+const preFormatFormio = (formioData) => {
+  Object.keys(formioData).forEach((key) => {
+    if (key.startsWith("exclude-")) delete formioData[key];
+  });
+};
+
 export const defaultSurveySubmitterFactory = (api, schema) => async (
   storeData,
   formioData
 ) => {
+  preFormatFormio(formioData);
+
   const body = {
     metadata: getMetadata(storeData),
     schema,
@@ -28,6 +36,8 @@ export const getInitialHouseholdSubmitter = (schema) => async (
   storeData,
   formioData
 ) => {
+  preFormatFormio(formioData);
+
   const body = {
     household: {
       followUpId: storeData.followUpId,

@@ -155,7 +155,7 @@
     {
       "type": "button",
       "label": "submit",
-      "key": "submit",
+      "key": "exclude-submit",
       "disableOnInvalid": true,
       "input": true,
       "tableView": false
