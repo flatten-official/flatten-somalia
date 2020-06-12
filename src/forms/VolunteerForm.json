@@ -390,7 +390,7 @@
           "hideLabel": true,
           "tableView": false,
           "templates": {
-            "header": "<div class=\"row\">\n  To add individuals, click \"Add another\" at the bottom of the form\n</div>"
+            "header": "<div class=\"row\">\n  Si aad ugu darto mid kale, dhagsii \"Ku dar\".</div>"
           },
           "modal": false,
           "calculateServer": false,
@@ -450,22 +450,22 @@
               "input": true
             },
             {
-                "label": "residenceStatus",
-                "widget": "choicesjs",
-                "tableView": true,
-                "data": {
-                  "values": [
-                    { "label": "resident", "value": "resident" },
-                    { "label": "idp", "value": "idp" }
-                  ]
-                },
-                "selectThreshold": 0.3,
-                "calculateServer": false,
-                "validate": { "required": true },
-                "key": "residenceStatus",
-                "type": "select",
-                "indexeddb": { "filter": {} },
-                "input": true
+              "label": "residenceStatus",
+              "widget": "choicesjs",
+              "tableView": true,
+              "data": {
+                "values": [
+                  { "label": "resident", "value": "resident" },
+                  { "label": "idp", "value": "idp" }
+                ]
+              },
+              "selectThreshold": 0.3,
+              "calculateServer": false,
+              "validate": { "required": true },
+              "key": "residenceStatus",
+              "type": "select",
+              "indexeddb": { "filter": {} },
+              "input": true
             },
             {
               "type": "customText",
@@ -642,6 +642,35 @@
                 "eq": "other"
               },
               "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "primaryNonworkIncomeSource",
+              "widget": "choicesjs",
+              "tableView": true,
+              "data": {
+                "values": [
+                  {
+                    "label": "youtube",
+                    "value": "youtube"
+                  }
+                ]
+              },
+              "selectThreshold": 0.3,
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "primaryIncomeSource",
+              "conditional": {
+                "show": true,
+                "when": "employed",
+                "eq": "no"
+              },
+              "type": "select",
+              "indexeddb": {
+                "filter": {}
+              },
               "input": true
             },
             {
@@ -1330,7 +1359,7 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "heartDisease",
+                  "label": "heartDiseaseOrIrritability",
                   "value": "heartDisease",
                   "shortcut": ""
                 },
@@ -1598,6 +1627,36 @@
                 "required": true
               },
               "key": "hasBeenTestedForCOVID19",
+              "type": "radio",
+              "input": true
+            },
+            {
+              "label": "COVID19TestType",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                {
+                  "label": "bloodTest",
+                  "value": "bloodTest",
+                  "shortcut": ""
+                },
+                {
+                  "label": "nasalTest",
+                  "value": "nasalTest",
+                  "shortcut": ""
+                }
+              ],
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "COVID19TestType",
+              "conditional": {
+                "show": true,
+                "when": "hasBeenTestedForCOVID19",
+                "eq": "yes"
+              },
               "type": "radio",
               "input": true
             },
@@ -2334,20 +2393,20 @@
         },
         {
           "label": "deathGrid",
-          "openWhenEmpty": true,
+          "openWhenEmpty": false,
           "disableAddingRemovingRows": false,
           "hideLabel": true,
           "tableView": false,
           "templates": {
-            "header": "<div class=\"row\">\n  To add individuals, click \"Add another\" at the bottom of the form\n</div>"
+            "header": "<div class=\"row\">\n  Si aad ugu darto mid kale, dhagsii \"Ku dar\".</div>"
           },
           "modal": false,
           "calculateServer": false,
           "key": "deathGrid",
           "conditional": {
-            "show": false,
+            "show": true,
             "when": "deathsWithinHousehold",
-            "eq": "no"
+            "eq": "yes"
           },
           "type": "editgrid",
           "input": true,
@@ -2467,7 +2526,7 @@
                 },
                 {
                   "label": "heartDiseaseOrIrritability",
-                  "value": "heartDiseaseOrIrritability",
+                  "value": "heartDisease",
                   "shortcut": ""
                 },
                 {
@@ -2507,7 +2566,7 @@
             },
             {
               "label": "other",
-              "placeholder": "otherDeceasedComorbidities",
+              "placeholder": "otherComorbidities",
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
@@ -2524,7 +2583,7 @@
               "input": true
             },
             {
-              "label": "deceasedSymptoms",
+              "label": "deceasedSymptomsBeforeDeath",
               "optionsLabelPosition": "right",
               "tableView": false,
               "defaultValue": {
@@ -2644,7 +2703,7 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "noSymptoms",
+                  "label": "none",
                   "value": "noSymptoms",
                   "shortcut": ""
                 }
@@ -2660,7 +2719,7 @@
             },
             {
               "label": "other",
-              "placeholder": "otherDeceasedSymptoms",
+              "placeholder": "otherSymptoms",
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
@@ -2674,6 +2733,36 @@
                 "eq": "other"
               },
               "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "deceasedPregnancy",
+              "optionsLabelPosition": "right",
+              "inline": false,
+              "tableView": false,
+              "values": [
+                {
+                  "label": "yes",
+                  "value": "yes",
+                  "shortcut": ""
+                },
+                {
+                  "label": "no",
+                  "value": "no",
+                  "shortcut": ""
+                }
+              ],
+              "calculateServer": false,
+              "validate": {
+                "required": true
+              },
+              "key": "deceasedPregnancy",
+              "conditional": {
+                "show": true,
+                "when": "deceasedSex",
+                "eq": "female"
+              },
+              "type": "radio",
               "input": true
             },
             {
@@ -3093,8 +3182,9 @@
           "input": true
         },
         {
-          "type": "followupIDReminder",
+          "type": "customFollowUpId",
           "key": "followUpId",
+          "isReminder": true,
           "protected": true,
           "input": true,
           "tableView": false,

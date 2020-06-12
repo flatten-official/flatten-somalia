@@ -5,19 +5,17 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./home/Home";
 import Login from "./login/Login";
-import SubmissionPageContent from "./surveys/householdInitial/HouseholdInitialSurvey";
-import Success from "./surveys/householdInitial/Success";
+import Success from "./surveys/Success";
 import LoginSuccess from "./login/LoginSuccess";
 import Loading from "./components/Loading";
-import { Routes } from "../config";
+import { Routes, Surveys } from "../config";
 import { useDispatch, useSelector } from "react-redux";
 import { permissions } from "../backend/auth/authApi";
 import {
   fetchAuthState,
   AUTH_UNINITIALISED,
 } from "../backend/auth/authActions";
-import GraveDiggerSurveyPage from "./surveys/graveDigger/GraveDiggerSurveyPage";
-import HospitalSurveyPage from "./surveys/hospital/HospitalSurveyPage";
+import SurveyPageFactory from "./surveys/SurveyPageFactory";
 
 const AppContent = () => {
   const dispatch = useDispatch();
@@ -40,19 +38,19 @@ const AppContent = () => {
       <PrivateRoute
         exact
         path={Routes.initialHouseholdSurvey}
-        comp={SubmissionPageContent}
+        comp={SurveyPageFactory(Surveys.initialHousehold)}
         requiredPermission={permissions.submitForms}
       />
       <PrivateRoute
         exact
-        path={Routes.graveDiggerSurvey}
-        comp={GraveDiggerSurveyPage}
+        path={Routes.gravediggerSurvey}
+        comp={SurveyPageFactory(Surveys.gravedigger)}
         requiredPermission={permissions.submitForms}
       />
       <PrivateRoute
         exact
         path={Routes.hospitalSurvey}
-        comp={HospitalSurveyPage}
+        comp={SurveyPageFactory(Surveys.hospital)}
         requiredPermission={permissions.submitForms}
       />
       <Route path={Routes.auth} component={Login} />

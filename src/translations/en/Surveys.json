@@ -1,5 +1,7 @@
 {
-  "title": "Initial Household Survey",
+  "graveDiggerTitle": "Grave Digger Survey",
+  "hospitalTitle": "Hospital Survey",
+  "initialHouseholdTitle": "Initial Household Survey",
   "askForDataRecordingConsent": "Do the people being surveyed consent to recording your questions?",
   "consentGiven": "They did. Start the survey.",
   "followupIDMessage": "If the volunteer doesn't have a phone number to follow-up, give them a block with this number.",
@@ -12,7 +14,7 @@
     "loading": "Waiting for location to load."
   },
   "success": "Success!",
-  "returnHomePrompt": "Submit another household",
+  "returnHomePrompt": "Return to homepage.",
   "askToGiveFollowUpId": "Important! Please write this number on a block of wood. Place the block outside of the household.",
   "followupIDReminder": "Don't forget to give them the block with this number!",
   "flattenConsent": "By continuing you agree to Flatten's <1>Privacy Policy</1> and <3>Terms of Service</3>.",
