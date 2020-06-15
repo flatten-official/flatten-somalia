@@ -16,8 +16,8 @@ import Success from "../components/surveys/Success";
  * @param surveyKey a string representing the form
  * @param i18nTitleKey the i18next key for the form title
  * @param formIOJSON the JSON formIO definition
- * @param enableManualLocation whether the manual location picker should be enabled
  * @param onSubmit called with the form data when the form is submitted
+ * @param options object containing details on specific form (e.g. should we use manual location picker)
  */
 const SurveyPageFactory = ({
   surveyKey,
@@ -51,8 +51,6 @@ const SurveyPageFactory = ({
       if (!surveyData) return null;
 
       if (!surveyData.consent) return <ConnectedConsent />;
-
-      console.log(options.enableManualLocation);
 
       // Use undefined rather than "not" since if location is not found will set to null
       if (surveyData.location === undefined)
