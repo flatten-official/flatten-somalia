@@ -5,7 +5,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./home/Home";
 import Login from "./login/Login";
-import Success from "./surveys/Success";
 import LoginSuccess from "./login/LoginSuccess";
 import Loading from "./components/Loading";
 import { Routes, Surveys } from "../config";
@@ -60,7 +59,6 @@ const AppContent = () => {
         requiredPermission={permissions.manageVolunteers}
       />
       <Route path={Routes.auth} component={Login} />
-      <Route path={Routes.success} component={Success} />
       <Route path={Routes.emailSubmitted} component={LoginSuccess} />
     </div>
   );

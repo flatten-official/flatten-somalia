@@ -1,8 +1,6 @@
 import Form from "../components/surveys/formio/Form";
 import React, { useEffect } from "react";
 import { Prompt } from "react-router-dom";
-import { push } from "connected-react-router";
-import { Routes } from "../../config";
 import { connect, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Types from "./actionTypes";
@@ -11,6 +9,7 @@ import {
   ConnectedConsent,
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
+import Success from "../components/surveys/Success";
 
 /**
  * This function returns a survey page component.
@@ -32,7 +31,7 @@ const SurveyPageFactory = ({
   class SurveyPageContent extends React.Component {
     constructor(props) {
       super(props);
-      this.props.restartForm(); // Reset the form when the component is first loaded
+      this.props.restartSurvey(); // Reset the form when the component is first loaded
     }
 
     /**
@@ -40,7 +39,7 @@ const SurveyPageFactory = ({
      */
     submitHook = async (formIOData) => {
       await onSubmit(this.props.surveyData, formIOData);
-      this.props.redirectToSuccess();
+      this.props.notifyCompleted();
     };
 
     render() {
@@ -57,20 +56,23 @@ const SurveyPageFactory = ({
       if (options.getLocation && !surveyData.location)
         return <ConnectedLocationPicker />;
 
-      return (
-        <Form
-          formioForm={formIOJSON}
-          submitHook={this.submitHook}
-          formioOptions={{ noAlerts: false }}
-        />
-      );
+      if (!surveyData.completed)
+        return (
+          <Form
+            formioForm={formIOJSON}
+            submitHook={this.submitHook}
+            formioOptions={{ noAlerts: false }}
+          />
+        );
+
+      return <Success />;
     }
   }
 
   SurveyPageContent.propTypes = {
     surveyData: PropTypes.object,
-    redirectToSuccess: PropTypes.func,
-    restartForm: PropTypes.func,
+    notifyCompleted: PropTypes.func,
+    restartSurvey: PropTypes.func,
   };
 
   const mapStateToProps = (state) => ({
@@ -78,9 +80,9 @@ const SurveyPageFactory = ({
   });
 
   const mapDispatchToProps = (dispatch) => ({
-    restartForm: () =>
+    restartSurvey: () =>
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
-    redirectToSuccess: () => dispatch(push(Routes.success)),
+    notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
   });
 
   const SurveyPageContentConnected = connect(
@@ -92,23 +94,25 @@ const SurveyPageFactory = ({
   const SurveyPage = () => {
     const { t } = useTranslation("Surveys");
 
-    // sets it up so that once the user gives consent, they do not navigate away from the survey
+    // shouldWarn determines whether the leave page warnings should be enable
     const shouldWarn = useSelector((state) => {
       const activeSurvey = state.surveys[state.surveys.activeSurvey];
-      return activeSurvey && activeSurvey.consent;
+      return activeSurvey && activeSurvey.consent && !activeSurvey.completed;
     });
 
     useEffect(() => {
-      if (shouldWarn) {
-        window.onbeforeunload = () => true;
-      }
-      return () => (window.onbeforeunload = undefined);
+      setRefreshWarning(shouldWarn);
+      return () => setRefreshWarning(false); // return the cleanup function
     }, [shouldWarn]);
+
+    // Show a warning if page is refreshed
+    const setRefreshWarning = (enabled) =>
+      (window.onbeforeunload = enabled ? () => true : undefined);
 
     return (
       <>
         <h3 className="submissionPageTitle">{t(i18nTitleKey)}</h3>
-        {/* Protects against route changes in the SPA */}
+        {/* Displays warning before react router tries to change the page */}
         <Prompt message={t("navWarning")} when={shouldWarn} />
         <SurveyPageContentConnected />
       </>
