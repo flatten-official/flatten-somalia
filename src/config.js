@@ -15,7 +15,6 @@ export const Routes = {
   gravediggerSurvey: "/surveys/gravedigger",
   hospitalSurvey: "/surveys/hospital",
   admin: "/admin",
-  success: "/success",
   emailSubmitted: "/submitted-email",
 };
 
