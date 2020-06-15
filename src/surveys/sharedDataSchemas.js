@@ -5,7 +5,7 @@ const FormSchema = {
   version: { type: String, index: true, required: true }, // eg. '1.0.0'
 };
 
-const SubmissionMetadata = {
+const getSubmissionMetadata = (requireLocation) => ({
   addedBy: {
     type: mongoose.ObjectId,
     required: true,
@@ -17,11 +17,14 @@ const SubmissionMetadata = {
     index: true,
   },
   location: {
-    lat: Number,
-    lng: Number,
-    accuracy: Number,
-    altitude: Number,
-    wasManual: Boolean,
+    type: {
+      lat: Number,
+      lng: Number,
+      accuracy: Number,
+      altitude: Number,
+      wasManual: Boolean,
+    },
+    required: requireLocation,
   },
   // recorded on the user's browser with JS Date.now()
   endTime: { type: Number, index: true },
@@ -33,6 +36,6 @@ const SubmissionMetadata = {
     default: Date.now,
   },
   consentGiven: { type: String, required: true },
-};
+});
 
-module.exports = { FormSchema, SubmissionMetadata };
+module.exports = { FormSchema, getSubmissionMetadata };
