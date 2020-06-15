@@ -4,106 +4,27 @@ const util = require("../testUtils/mongo");
 const { login } = require("../testUtils/requests");
 
 const GravediggerSurveySubmission = require("../../src/surveys/gravedigger/submissionData");
-const DeathRecord = require("../../src/surveys/gravedigger/deathRecordData");
 const HospitalSurveySubmission = require("../../src/surveys/hospital/submissionData");
 
 const testData = {
   gravediggerRequestBody: {
     metadata: {
-      endTime: 1591910816039,
-      timeToComplete: 53522,
+      endTime: 1592230654285,
+      timeToComplete: 11997,
       location: {
-        lat: 43.7813248,
-        lng: -79.35426559999999,
-        accuracy: 1696,
+        lat: 2.045,
+        lng: 45.333,
+        accuracy: null,
         altitude: null,
-        wasManual: false,
+        wasManual: true,
       },
       consentGiven: true,
     },
-    schema: { form: "graveDigger", version: "1.0.0" },
+    schema: { form: "gravediggerSurvey", version: "1.0.0" },
     data: {
-      gravediggerPhoneNumber: "34 44 44 444",
-      gravediggerEmail: "test@test.ca",
-      gravesite: "qabuurahaMacallimNuur",
-      burialsThatDay: 4,
-      deaths: [
-        {
-          sex: "female",
-          causeOfDeath: "other",
-          comorbidities: {
-            highBloodPressure: false,
-            diabetes: true,
-            heartDisease: false,
-            lungDisease: false,
-            cancerOrPoorImmunity: false,
-            immunocompromised: false,
-            noComorbidities: false,
-            other: true,
-          },
-          symptomsBeforeDeath: {
-            newFever: false,
-            newOrWorseningCough: false,
-            shortnessOfBreath: false,
-            gustatoryOrOlfactoryImpairment: false,
-            fatigue: false,
-            sneezing: true,
-            achesAndPains: false,
-            runnyNose: false,
-            chillsOrNightSweats: false,
-            soreThroat: false,
-            diarrhea: false,
-            headache: true,
-            nausea: false,
-            rash: false,
-            appetiteLoss: false,
-            stomachPainOrCramps: false,
-            other: true,
-            noSymptoms: false,
-          },
-          dateOfDeath: "2020-06-09T00:00:00-04:00",
-          wasPregnant: "no",
-          age: 43,
-          otherComorbidities: "the flu",
-          otherSymptomsBeforeDeath: "itchy feet",
-        },
-        {
-          sex: "male",
-          causeOfDeath: "deathCOVID19",
-          comorbidities: {
-            highBloodPressure: false,
-            diabetes: false,
-            heartDisease: false,
-            lungDisease: false,
-            cancerOrPoorImmunity: false,
-            immunocompromised: false,
-            noComorbidities: true,
-            other: false,
-          },
-          symptomsBeforeDeath: {
-            newFever: false,
-            newOrWorseningCough: false,
-            shortnessOfBreath: false,
-            gustatoryOrOlfactoryImpairment: false,
-            fatigue: false,
-            sneezing: false,
-            achesAndPains: false,
-            runnyNose: false,
-            chillsOrNightSweats: false,
-            soreThroat: false,
-            diarrhea: false,
-            headache: false,
-            nausea: false,
-            rash: false,
-            appetiteLoss: false,
-            stomachPainOrCramps: false,
-            other: false,
-            noSymptoms: true,
-          },
-          dateOfDeath: "2020-06-01T00:00:00-04:00",
-          age: 22,
-        },
-      ],
+      gravediggerPhoneNumber: "11 11 11 111",
+      gravesite: "qabuurahaJaziira",
+      burialsThatDay: 2,
     },
   },
   hospitalRequestBody: {
@@ -137,100 +58,22 @@ const testData = {
   },
   gravediggerBadRequestBody: {
     metadata: {
-      endTimed: 1591910816039, // THIS LINE IS CHANGED
-      timeToComplete: 53522,
+      endTimed: 1592230654285, // THIS KEY IS CHANGED
+      timeToComplete: 11997,
       location: {
-        lat: 43.7813248,
-        lng: -79.35426559999999,
-        accuracy: 1696,
+        lat: 2.045,
+        lng: 45.333,
+        accuracy: null,
         altitude: null,
-        wasManual: false,
+        wasManual: true,
       },
       consentGiven: true,
     },
-    schema: { form: "graveDigger", version: "1.0.0" },
+    schema: { form: "gravediggerSurvey", version: "1.0.0" },
     data: {
-      gravediggerPhoneNumber: "34 44 44 444",
-      gravediggerEmail: "test@test.ca",
-      gravesite: "qabuurahaMacallimNuur",
-      burialsThatDay: 4,
-      deaths: [
-        {
-          sex: "female",
-          causeOfDeath: "other",
-          comorbidities: {
-            highBloodPressure: false,
-            diabetes: true,
-            heartDisease: false,
-            lungDisease: false,
-            cancerOrPoorImmunity: false,
-            immunocompromised: false,
-            noComorbidities: false,
-            other: true,
-          },
-          symptomsBeforeDeath: {
-            newFever: false,
-            newOrWorseningCough: false,
-            shortnessOfBreath: false,
-            gustatoryOrOlfactoryImpairment: false,
-            fatigue: false,
-            sneezing: true,
-            achesAndPains: false,
-            runnyNose: false,
-            chillsOrNightSweats: false,
-            soreThroat: false,
-            diarrhea: false,
-            headache: true,
-            nausea: false,
-            rash: false,
-            appetiteLoss: false,
-            stomachPainOrCramps: false,
-            other: true,
-            noSymptoms: false,
-          },
-          dateOfDeath: "2020-06-09T00:00:00-04:00",
-          wasPregnant: "no",
-          age: 43,
-          otherComorbidities: "the flu",
-          otherSymptomsBeforeDeath: "itchy feet",
-        },
-        {
-          sex: "male",
-          causeOfDeath: "deathCOVID19",
-          comorbidities: {
-            highBloodPressure: false,
-            diabetes: false,
-            heartDisease: false,
-            lungDisease: false,
-            cancerOrPoorImmunity: false,
-            immunocompromised: false,
-            noComorbidities: true,
-            other: false,
-          },
-          symptomsBeforeDeath: {
-            newFever: false,
-            newOrWorseningCough: false,
-            shortnessOfBreath: false,
-            gustatoryOrOlfactoryImpairment: false,
-            fatigue: false,
-            sneezing: false,
-            achesAndPains: false,
-            runnyNose: false,
-            chillsOrNightSweats: false,
-            soreThroat: false,
-            diarrhea: false,
-            headache: false,
-            nausea: false,
-            rash: false,
-            appetiteLoss: false,
-            stomachPainOrCramps: false,
-            other: false,
-            noSymptoms: true,
-          },
-          dateOfDeath: "2020-06-01T00:00:00-04:00",
-          age: 22,
-        },
-      ],
+      gravediggerPhoneNumber: "11 11 11 111",
+      gravesite: "qabuurahaJaziira",
+      burialsThatDay: 2,
     },
   },
   hospitalBadRequestBody: {
@@ -286,15 +129,7 @@ describe("submissions:", () => {
         .expect(200);
 
       const submissionDocuments = await GravediggerSurveySubmission.model.find();
-      const deathDocuments = await DeathRecord.model.find();
-
       expect(submissionDocuments).toHaveLength(1);
-      expect(deathDocuments).toHaveLength(2);
-
-      const deathIDs = deathDocuments.map((o) => o.id);
-      for (const deathID of submissionDocuments[0].surveyData.deaths) {
-        expect(deathIDs).toContain(deathID.toString());
-      }
     });
 
     it("should fail for a user without the right permissions", async () => {
@@ -308,10 +143,7 @@ describe("submissions:", () => {
         .expect(403);
 
       const submissionDocuments = await GravediggerSurveySubmission.model.find();
-      const deathDocuments = await DeathRecord.model.find();
-
       expect(submissionDocuments).toHaveLength(0);
-      expect(deathDocuments).toHaveLength(0);
     });
 
     // eslint-disable-next-line jest/expect-expect
@@ -324,10 +156,8 @@ describe("submissions:", () => {
         .expect(400);
 
       const submissionDocuments = await GravediggerSurveySubmission.model.find();
-      const deathDocuments = await DeathRecord.model.find();
 
       expect(submissionDocuments).toHaveLength(0);
-      expect(deathDocuments).toHaveLength(0);
     });
   });
 
