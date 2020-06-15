@@ -16,17 +16,6 @@
       "input": true
     },
     {
-      "label": "email",
-      "placeholder": "Optional",
-      "spellcheck": true,
-      "tableView": true,
-      "calculateServer": false,
-      "kickbox": { "enabled": true },
-      "key": "gravediggerEmail",
-      "type": "email",
-      "input": true
-    },
-    {
       "label": "gravesiteName",
       "widget": "choicesjs",
       "tableView": true,

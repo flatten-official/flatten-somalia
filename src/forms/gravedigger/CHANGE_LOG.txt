@@ -9,4 +9,4 @@ version  |  commit (optional)
 
 1.0.0
 
-    * first form version used by volunteers with no death records page
+    * first form version used by volunteers with no death records page and no email
