@@ -1,5 +1,3 @@
-const mongoose = require("mongoose");
-
 const { FormSchema, SubmissionMetadata } = require("../sharedDataSchemas");
 const Util = require("../dataUtil");
 
@@ -12,13 +10,15 @@ const model = Util.createModel("GravediggerSurveySubmission", {
       required: true,
       index: true,
     },
-    gravediggerPhoneNumber: String,
+    gravediggerPhoneNumber: {
+      type: String,
+      required: true,
+    },
     gravediggerEmail: String,
     burialsThatDay: {
       type: Number,
       required: true,
     },
-    deaths: [mongoose.Types.ObjectId],
   },
 });
 
