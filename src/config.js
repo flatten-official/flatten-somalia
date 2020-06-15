@@ -1,7 +1,7 @@
 import api from "./backend/api/api";
-import graveDiggerSurveyJSON from "./forms/GraveDiggerForm.json";
-import hospitalSurveyJSON from "./forms/HospitalForm.json";
-import initialHouseholdJSON from "./forms/VolunteerForm.json";
+import graveDiggerSurveyJSON from "./forms/gravedigger/form.json";
+import hospitalSurveyJSON from "./forms/hospital/form.json";
+import initialHouseholdJSON from "./forms/initialHousehold/form.json";
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
@@ -25,7 +25,7 @@ const Schemas = {
   },
   hospital: {
     form: "hospitalSurvey",
-    version: "1.0.0",
+    version: "0.1.0",
   },
   initialHousehold: {
     form: "initialSurvey",
