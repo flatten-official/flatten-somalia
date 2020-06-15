@@ -69,7 +69,7 @@ export const Surveys = {
   },
   addVolunteer: {
     surveyKey: "addVolunteer",
-    i18nTitleKey: "addVolunteer",
+    i18nTitleKey: "addVolunteerTitle",
     api: api.addVolunteer,
     formIOJSON: addVolunteerJSON,
     onSubmit: defaultSurveySubmitterFactory(
