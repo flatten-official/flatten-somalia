@@ -1,0 +1,12 @@
+HOSPITAL SURVEY CHANGELOG
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+version  |  commit (optional)
+
+	* changes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+0.1.0
+
+    * released to website however survey is inaccessible (button is grayed out)

@@ -14,6 +14,8 @@ const TYPES_ARRAY = Object.values(Types);
  */
 const subReducer = (state, action) => {
   switch (action.type) {
+    case Types.RESTART_SURVEY:
+      return { consent: false, completed: false };
     case Types.SET_FOLLOW_UP_ID:
       return { ...state, followUpId: action.payload };
     case Types.SET_LOCATION:
@@ -24,8 +26,8 @@ const subReducer = (state, action) => {
       return { ...state, startTime: action.payload };
     case Types.NOTIFY_CONSENT_GIVEN:
       return { ...state, consent: true };
-    case Types.RESTART_SURVEY:
-      return { consent: false };
+    case Types.NOTIFY_COMPLETED_SURVEY:
+      return { ...state, completed: true };
     default:
       return state;
   }

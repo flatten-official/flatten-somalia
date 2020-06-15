@@ -19,7 +19,12 @@ const Home = () => {
       <Button variant="light" size="lg" href={Routes.gravediggerSurvey}>
         {tSurvey(Surveys.gravedigger.i18nTitleKey)}
       </Button>
-      <Button variant="light" size="lg" href={Routes.hospitalSurvey}>
+      <Button
+        disabled={true}
+        variant="light"
+        size="lg"
+        href={Routes.hospitalSurvey}
+      >
         {tSurvey(Surveys.hospital.i18nTitleKey)}
       </Button>
     </>

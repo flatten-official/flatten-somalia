@@ -1,0 +1,12 @@
+GRAVEDIGGER SURVEY CHANGELOG
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+version  |  commit (optional)
+
+	* changes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.0.0
+
+    * first form version used by volunteers with no death records page
