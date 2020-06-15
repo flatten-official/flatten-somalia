@@ -83,71 +83,124 @@
           "label": "district",
           "widget": "choicesjs",
           "tableView": true,
-          "dataSrc": "json",
+          "dataSrc": "values",
           "data": {
             "values": [
               {
-                "label": "",
+                "label": "Yaaqshiid",
+                "value": "Yaaqshiid"
+              },
+              {
+                "label": "Warta-Nabada",
                 "value": ""
+              },
+              {
+                "label": "C/casiis",
+                "value": ""
+              },
+              {
+                "label": "Deyniile",
+                "value": ""
+              },
+              {
+                "label": "Boondheere",
+                "value": ""
+              },
+              {
+                "label": "Wadajir",
+                "value": ""
+              },
+              {
+                "label": "Howl-wadaag",
+                "value": ""
+              },
+              {
+                "label": "Heliwaa",
+                "value": "Heliwaa"
+              },
+              {
+                "label": "Garasbaley",
+                "value": "Garasbaley"
+              },
+              {
+                "label": "Gubadley",
+                "value": "Gubadley"
+              },
+              {
+                "label": "Kaaraan",
+                "value": "Kaaraan"
+              },
+              {
+                "label": "Dharkenley",
+                "value": "Dharkenley"
+              },
+              {
+                "label": "Kaxda",
+                "value": "Kaxda"
+              },
+              {
+                "label": "Shangani",
+                "value": "Shangani"
+              },
+              {
+                "label": "Xamarweyne",
+                "value": "Xamarweyne"
+              },
+              {
+                "label": "Hodan",
+                "value": "Hodan"
+              },
+              {
+                "label": "Shibis",
+                "value": "Shibis"
+              },
+              {
+                "label": "Xamar Jajab",
+                "value": "Xamar Jajab"
+              },
+              {
+                "label": "Waabri",
+                "value": "Waabri"
               }
-            ],
+            ]
+          },
+          "template": "<span>{{ item.label }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "district",
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
             "json": [
               {
-                "name": "Dharkeynley"
+                "name": "Heegan"
               },
               {
-                "name": "Deynille"
+                "name": "Horseed"
               },
               {
-                "name": "Hodan"
+                "name": "Juungal"
               },
               {
-                "name": "Wadajir"
+                "name": "Towfiiq"
               },
               {
-                "name": "Waberi"
+                "name": "Tawakal"
               },
               {
-                "name": "Hawl Wadag"
-              },
-              {
-                "name": "Hamar Jabjab"
-              },
-              {
-                "name": "Wardhigley"
-              },
-              {
-                "name": "Kaxda"
-              },
-              {
-                "name": "Garasbaley"
-              },
-              {
-                "name": "Gubadley"
-              },
-              {
-                "name": "Bondhere"
-              },
-              {
-                "name": "Hamar Weye"
-              },
-              {
-                "name": "Cabdi Caziz"
-              },
-              {
-                "name": "Shibis"
-              },
-              {
-                "name": "Shangani"
-              },
-              {
-                "name": "Yaqshid"
-              },
-              {
-                "name": "Karan"
-              },
-              {
-                "name": "Huriwa"
+                "name": "1da Luulyo"
               }
             ]
           },
@@ -157,7 +210,735 @@
           "validate": {
             "required": true
           },
-          "key": "district",
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Yaaqshiid"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "General Daa’uud"
+              },
+              {
+                "name": "Hanti-wadaag"
+              },
+              {
+                "name": "Horseed"
+              },
+              {
+                "name": "Barwaaqo"
+              },
+              {
+                "name": "Xamar Bile"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Warta-Nabada"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Dhagax buur"
+              },
+              {
+                "name": "Lowya Cadde"
+              },
+              {
+                "name": "Gaarisa"
+              },
+              {
+                "name": "Neero"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "C/casiis"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Ciisa Cabdi"
+              },
+              {
+                "name": "Kordhamac"
+              },
+              {
+                "name": "Halgan"
+              },
+              {
+                "name": "Barwaaqo"
+              },
+              {
+                "name": "Oodweyne"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Deyniile"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Siinaay"
+              },
+              {
+                "name": "Nasiib Buundo"
+              },
+              {
+                "name": "Yuusuf Alkowneyn"
+              },
+              {
+                "name": "Daljirka Dahsoon"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Boondheere"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Xaawo Taako"
+              },
+              {
+                "name": "General Daa’uud"
+              },
+              {
+                "name": "Xalane"
+              },
+              {
+                "name": "Tima Cade"
+              },
+              {
+                "name": "Maxamuud Hilowle"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Wadajir"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Sakhaawadiin"
+              },
+              {
+                "name": "Sayidka"
+              },
+              {
+                "name": "Axmed Gurey"
+              },
+              {
+                "name": "Xaawo Taako"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Howl-wadaag"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Bandarwanaag"
+              },
+              {
+                "name": "Waxar Cadde"
+              },
+              {
+                "name": "Barwaaqo"
+              },
+              {
+                "name": "Ceel Carfiid"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Heliwaa"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Tabeelaha"
+              },
+              {
+                "name": "Foorilow"
+              },
+              {
+                "name": "Baariyow"
+              },
+              {
+                "name": "Geedi Fidhiye"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Garasbaley"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Waaxda 1aad"
+              },
+              {
+                "name": "Waaxda 2aad"
+              },
+              {
+                "name": "Waaxda 3aad"
+              },
+              {
+                "name": "Waaxda 4aad"
+              },
+              {
+                "name": "Waaxda 5aad"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Gubadley"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Faanoole"
+              },
+              {
+                "name": "Jabuuti"
+              },
+              {
+                "name": "Nageyle"
+              },
+              {
+                "name": "Wajeer"
+              },
+              {
+                "name": "Jamhuuriya"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Kaaraan"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Dhamme Yaasiin Cartan"
+              },
+              {
+                "name": "Xanaano Bulsho"
+              },
+              {
+                "name": "Saciid Rooraaye"
+              },
+              {
+                "name": "Dhagax Tuur"
+              },
+              {
+                "name": "Godey"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Dharkenley"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "General Liiq liiqato"
+              },
+              {
+                "name": "Abaadir"
+              },
+              {
+                "name": "Cumar Fiyaasko"
+              },
+              {
+                "name": "Shimbiroole"
+              },
+              {
+                "name": "Siinka Dheer"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Kaxda"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Howd"
+              },
+              {
+                "name": "Mooyaale"
+              },
+              {
+                "name": "Jabuut"
+              },
+              {
+                "name": "Midnimo"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Shangani"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Hilaac"
+              },
+              {
+                "name": "Kacaan"
+              },
+              {
+                "name": "Gobanimo"
+              },
+              {
+                "name": "Horseed"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Xamarweyne"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Axmed Gureey"
+              },
+              {
+                "name": "Kacaan"
+              },
+              {
+                "name": "Oktober"
+              },
+              {
+                "name": "Taleex"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Hodan"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Sakhaawadiin"
+              },
+              {
+                "name": "Axmed Gureey"
+              },
+              {
+                "name": "Xalane"
+              },
+              {
+                "name": "Calasow Dheere"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Shibis"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Gaheyr"
+              },
+              {
+                "name": "Horseed"
+              },
+              {
+                "name": "1da May"
+              },
+              {
+                "name": "General Daa’uud"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Xamar Jajab"
+          },
+          "type": "select",
+          "indexeddb": {
+            "filter": {}
+          },
+          "input": true
+        },
+        {
+          "label": "subdistrict",
+          "widget": "choicesjs",
+          "tableView": true,
+          "dataSrc": "json",
+          "data": {
+            "json": [
+              {
+                "name": "Horseed"
+              },
+              {
+                "name": "Hanti-wadaag"
+              },
+              {
+                "name": "October"
+              },
+              {
+                "name": "Maajo"
+              }
+            ]
+          },
+          "template": "<span>{{ item.name }}</span>",
+          "selectThreshold": 0.3,
+          "calculateServer": false,
+          "validate": {
+            "required": true
+          },
+          "key": "subdistrict",
+          "conditional": {
+            "show": true,
+            "when": "district",
+            "eq": "Waabri"
+          },
           "type": "select",
           "indexeddb": {
             "filter": {}
