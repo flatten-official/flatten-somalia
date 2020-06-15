@@ -90,10 +90,6 @@ const SurveyPageFactory = ({
   const SurveyPage = () => {
     const { t } = useTranslation("Surveys");
 
-    // Show a warning if page is refreshed
-    const setRefreshWarning = (enabled) =>
-      (window.onbeforeunload = enabled ? () => true : undefined);
-
     // shouldWarn determines whether the leave page warnings should be enable
     const shouldWarn = useSelector((state) => {
       const activeSurvey = state.surveys[state.surveys.activeSurvey];
@@ -104,6 +100,10 @@ const SurveyPageFactory = ({
       setRefreshWarning(shouldWarn);
       return () => setRefreshWarning(false); // return the cleanup function
     }, [shouldWarn]);
+
+    // Show a warning if page is refreshed
+    const setRefreshWarning = (enabled) =>
+      (window.onbeforeunload = enabled ? () => true : undefined);
 
     return (
       <>
