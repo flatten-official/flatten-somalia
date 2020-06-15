@@ -38,29 +38,35 @@ export const Surveys = {
     i18nTitleKey: "graveDiggerTitle",
     api: api.graveDiggerSurvey,
     formIOJSON: graveDiggerSurveyJSON,
-    enableManualLocation: false,
     onSubmit: defaultSurveySubmitterFactory(
       api.graveDiggerSurvey,
       Schemas.gravedigger
     ),
+    options: {
+      enableManualLocation: false,
+    },
   },
   hospital: {
     surveyKey: "hospital",
     i18nTitleKey: "hospitalTitle",
     api: api.hospitalSurvey,
     formIOJSON: hospitalSurveyJSON,
-    enableManualLocation: true,
     onSubmit: defaultSurveySubmitterFactory(
       api.hospitalSurvey,
       Schemas.hospital
     ),
+    options: {
+      enableManualLocation: true,
+    },
   },
   initialHousehold: {
     surveyKey: "initialHousehold",
     i18nTitleKey: "initialHouseholdTitle",
     api: api.volunteerForm,
     formIOJSON: initialHouseholdJSON,
-    enableManualLocation: true,
     onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold),
+    options: {
+      enableManualLocation: true,
+    },
   },
 };

@@ -23,8 +23,8 @@ const SurveyPageFactory = ({
   surveyKey,
   i18nTitleKey,
   formIOJSON,
-  enableManualLocation,
   onSubmit,
+  options,
 }) => {
   // Need to use a Class rather than functional components
   // Since the functional component was running into stale closure issues.
@@ -52,9 +52,15 @@ const SurveyPageFactory = ({
 
       if (!surveyData.consent) return <ConnectedConsent />;
 
+      console.log(options.enableManualLocation);
+
       // Use undefined rather than "not" since if location is not found will set to null
       if (surveyData.location === undefined)
-        return <ConnectedLocationPicker enableManual={enableManualLocation} />;
+        return (
+          <ConnectedLocationPicker
+            enableManual={options.enableManualLocation}
+          />
+        );
 
       if (!surveyData.completed)
         return (
