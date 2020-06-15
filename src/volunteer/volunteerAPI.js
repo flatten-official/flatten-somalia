@@ -9,6 +9,7 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   const volunteer = {
     name: newVolunteerData.name,
     email: newVolunteerData.email,
+    teamName: newVolunteerData.teamName,
     addedBy: addedByData["_id"],
     permissions,
     // todo - gender and age
