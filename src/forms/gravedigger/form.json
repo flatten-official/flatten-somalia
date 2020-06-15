@@ -5,7 +5,7 @@
   "owner": "5ec0adf353208fac46755642",
   "components": [
     {
-      "label": "enterPhoneNumber",
+      "label": "enterGravediggerPhoneNumber",
       "inputMask": "99 99 99 999",
       "spellcheck": true,
       "tableView": true,
