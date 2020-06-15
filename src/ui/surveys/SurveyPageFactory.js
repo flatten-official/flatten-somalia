@@ -16,12 +16,14 @@ import Success from "../components/surveys/Success";
  * @param surveyKey a string representing the form
  * @param i18nTitleKey the i18next key for the form title
  * @param formIOJSON the JSON formIO definition
+ * @param enableManualLocation whether the manual location picker should be enabled
  * @param onSubmit called with the form data when the form is submitted
  */
 const SurveyPageFactory = ({
   surveyKey,
   i18nTitleKey,
   formIOJSON,
+  enableManualLocation,
   onSubmit,
 }) => {
   // Need to use a Class rather than functional components
@@ -50,7 +52,9 @@ const SurveyPageFactory = ({
 
       if (!surveyData.consent) return <ConnectedConsent />;
 
-      if (!surveyData.location) return <ConnectedLocationPicker />;
+      // Use undefined rather than "not" since if location is not found will set to null
+      if (surveyData.location === undefined)
+        return <ConnectedLocationPicker enableManual={enableManualLocation} />;
 
       if (!surveyData.completed)
         return (

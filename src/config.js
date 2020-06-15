@@ -7,7 +7,6 @@ import {
   getInitialHouseholdSubmitter,
 } from "./backend/submission";
 
-// todo - fill in all of the routes
 export const Routes = {
   home: "/",
   auth: "/login",
@@ -39,6 +38,7 @@ export const Surveys = {
     i18nTitleKey: "graveDiggerTitle",
     api: api.graveDiggerSurvey,
     formIOJSON: graveDiggerSurveyJSON,
+    enableManualLocation: false,
     onSubmit: defaultSurveySubmitterFactory(
       api.graveDiggerSurvey,
       Schemas.gravedigger
@@ -49,6 +49,7 @@ export const Surveys = {
     i18nTitleKey: "hospitalTitle",
     api: api.hospitalSurvey,
     formIOJSON: hospitalSurveyJSON,
+    enableManualLocation: true,
     onSubmit: defaultSurveySubmitterFactory(
       api.hospitalSurvey,
       Schemas.hospital
@@ -59,6 +60,7 @@ export const Surveys = {
     i18nTitleKey: "initialHouseholdTitle",
     api: api.volunteerForm,
     formIOJSON: initialHouseholdJSON,
+    enableManualLocation: true,
     onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold),
   },
 };
