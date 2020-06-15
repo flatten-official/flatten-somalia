@@ -14,7 +14,6 @@ const model = Util.createModel("GravediggerSurveySubmission", {
       type: String,
       required: true,
     },
-    gravediggerEmail: String,
     burialsThatDay: {
       type: Number,
       required: true,

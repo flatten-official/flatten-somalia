@@ -23,7 +23,6 @@ const testData = {
     schema: { form: "gravediggerSurvey", version: "1.0.0" },
     data: {
       gravediggerPhoneNumber: "11 11 11 111",
-      gravediggerEmail: "",
       gravesite: "qabuurahaJaziira",
       burialsThatDay: 2,
     },
@@ -73,7 +72,6 @@ const testData = {
     schema: { form: "gravediggerSurvey", version: "1.0.0" },
     data: {
       gravediggerPhoneNumber: "11 11 11 111",
-      gravediggerEmail: "",
       gravesite: "qabuurahaJaziira",
       burialsThatDay: 2,
     },

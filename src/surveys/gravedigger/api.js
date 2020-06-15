@@ -17,7 +17,6 @@ async function submitGravediggerSurvey(
       submissionSchema: schema,
       gravesite: surveyData.gravesite,
       gravediggerPhoneNumber: surveyData.gravediggerPhoneNumber,
-      gravediggerEmail: surveyData.gravediggerEmail,
       burialsThatDay: surveyData.burialsThatDay,
     },
   });
