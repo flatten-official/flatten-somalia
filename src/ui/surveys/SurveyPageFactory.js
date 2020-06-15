@@ -17,12 +17,14 @@ import Success from "../components/surveys/Success";
  * @param i18nTitleKey the i18next key for the form title
  * @param formIOJSON the JSON formIO definition
  * @param onSubmit called with the form data when the form is submitted
+ * @param options object containing details on specific form (e.g. should we use manual location picker)
  */
 const SurveyPageFactory = ({
   surveyKey,
   i18nTitleKey,
   formIOJSON,
   onSubmit,
+  options,
 }) => {
   // Need to use a Class rather than functional components
   // Since the functional component was running into stale closure issues.
@@ -50,7 +52,13 @@ const SurveyPageFactory = ({
 
       if (!surveyData.consent) return <ConnectedConsent />;
 
-      if (!surveyData.location) return <ConnectedLocationPicker />;
+      // Use undefined rather than "not" since if location is not found will set to null
+      if (surveyData.location === undefined)
+        return (
+          <ConnectedLocationPicker
+            enableManual={options.enableManualLocation}
+          />
+        );
 
       if (!surveyData.completed)
         return (
