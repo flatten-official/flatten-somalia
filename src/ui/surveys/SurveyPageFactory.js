@@ -24,7 +24,9 @@ const SurveyPageFactory = ({
   i18nTitleKey,
   formIOJSON,
   onSubmit,
+  options,
 }) => {
+  if (options === undefined) options = {};
   // Need to use a Class rather than functional components
   // Since the functional component was running into stale closure issues.
   class SurveyPageContent extends React.Component {
@@ -49,9 +51,11 @@ const SurveyPageFactory = ({
       // on the first render
       if (!surveyData) return null;
 
-      if (!surveyData.consent) return <ConnectedConsent />;
+      if (options.getConsent && !surveyData.consent)
+        return <ConnectedConsent />;
 
-      if (!surveyData.location) return <ConnectedLocationPicker />;
+      if (options.getLocation && !surveyData.location)
+        return <ConnectedLocationPicker />;
 
       return (
         <Form

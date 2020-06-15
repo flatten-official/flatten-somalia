@@ -53,6 +53,12 @@ const AppContent = () => {
         comp={SurveyPageFactory(Surveys.hospital)}
         requiredPermission={permissions.submitForms}
       />
+      <PrivateRoute
+        exact
+        path={Routes.addVolunteer}
+        comp={SurveyPageFactory(Surveys.addVolunteer)}
+        requiredPermission={permissions.manageVolunteers}
+      />
       <Route path={Routes.auth} component={Login} />
       <Route path={Routes.success} component={Success} />
       <Route path={Routes.emailSubmitted} component={LoginSuccess} />

@@ -2,6 +2,7 @@ import api from "./backend/api/api";
 import graveDiggerSurveyJSON from "./forms/GraveDiggerForm.json";
 import hospitalSurveyJSON from "./forms/HospitalForm.json";
 import initialHouseholdJSON from "./forms/VolunteerForm.json";
+import addVolunteerJSON from "./forms/AddVolunteerForm.json";
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
@@ -14,6 +15,7 @@ export const Routes = {
   initialHouseholdSurvey: "/surveys/initialHousehold",
   gravediggerSurvey: "/surveys/gravedigger",
   hospitalSurvey: "/surveys/hospital",
+  addVolunteer: "/surveys/addVolunteer",
   admin: "/admin",
   success: "/success",
   emailSubmitted: "/submitted-email",
@@ -31,6 +33,10 @@ const Schemas = {
   initialHousehold: {
     form: "initialSurvey",
     version: "1.0.3",
+  },
+  addVolunteer: {
+    form: "initialSurvey",
+    version: "1.0.0",
   },
 };
 
@@ -61,5 +67,19 @@ export const Surveys = {
     api: api.volunteerForm,
     formIOJSON: initialHouseholdJSON,
     onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold),
+  },
+  addVolunteer: {
+    surveyKey: "addVolunteer",
+    i18nTitleKey: "addVolunteer",
+    api: api.addVolunteer,
+    formIOJSON: addVolunteerJSON,
+    onSubmit: defaultSurveySubmitterFactory(
+      api.addVolunteer,
+      Schemas.addVolunteer
+    ),
+    options: {
+      getLocation: false,
+      getConsent: false,
+    }
   },
 };
