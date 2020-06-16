@@ -2325,7 +2325,7 @@
               "validate": {
                 "required": true
               },
-              "key": "currentSymptoms1",
+              "key": "currentSymptoms",
               "type": "selectboxes",
               "input": true,
               "inputType": "checkbox"
