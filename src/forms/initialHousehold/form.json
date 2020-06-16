@@ -1933,7 +1933,7 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "other",
+                  "label": "otherSpecify",
                   "value": "other",
                   "shortcut": ""
                 }
@@ -1953,8 +1953,8 @@
               "inputType": "checkbox"
             },
             {
-              "label": "otherReasonsForNotUsingNationalHotline",
-              "placeholder": "otherReason",
+              "label": "otherSpecify",
+              "placeholder": "otherSpecify",
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
