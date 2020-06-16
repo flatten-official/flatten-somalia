@@ -20,7 +20,7 @@ export const Routes = {
 const Schemas = {
   gravedigger: {
     form: "gravediggerSurvey",
-    version: "1.0.0",
+    version: "0.1.0",
   },
   hospital: {
     form: "hospitalSurvey",
