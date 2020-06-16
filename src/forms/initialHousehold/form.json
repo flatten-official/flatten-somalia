@@ -92,27 +92,27 @@
               },
               {
                 "label": "Warta-Nabada",
-                "value": ""
+                "value": "Warta-Nabada"
               },
               {
                 "label": "C/casiis",
-                "value": ""
+                "value": "C/casiis"
               },
               {
                 "label": "Deyniile",
-                "value": ""
+                "value": "Deyniile"
               },
               {
                 "label": "Boondheere",
-                "value": ""
+                "value": "Boondheere"
               },
               {
                 "label": "Wadajir",
-                "value": ""
+                "value": "Wadajir"
               },
               {
                 "label": "Howl-wadaag",
-                "value": ""
+                "value": "Howl-wadaag"
               },
               {
                 "label": "Heliwaa",
@@ -1432,8 +1432,12 @@
               "data": {
                 "values": [
                   {
-                    "label": "youtube",
-                    "value": "youtube"
+                    "label": "familyAbroad",
+                    "value": "familyAbroad"
+                  },
+                  {
+                    "label": "financialAid",
+                    "value": "financialAid"
                   }
                 ]
               },
@@ -2321,7 +2325,7 @@
               "validate": {
                 "required": true
               },
-              "key": "currentSymptoms1",
+              "key": "currentSymptoms",
               "type": "selectboxes",
               "input": true,
               "inputType": "checkbox"
@@ -2797,26 +2801,26 @@
               "input": true
             },
             {
-              "label": "recentTripsOutsideDistricCount",
+              "label": "recentTripsOutsideDistrictCount",
               "widget": "choicesjs",
               "tableView": true,
               "data": {
                 "values": [
                   {
-                    "label": "1-3 Journeys",
-                    "value": "13Journeys"
+                    "label": "1to3",
+                    "value": "1to3"
                   },
                   {
-                    "label": "4-6 Journeys",
-                    "value": "46Journeys"
+                    "label": "4to6",
+                    "value": "4to6"
                   },
                   {
-                    "label": "6-10 Journeys",
-                    "value": "610Journeys"
+                    "label": "6to10",
+                    "value": "6to10"
                   },
                   {
-                    "label": ">10 Journeys",
-                    "value": "10Journeys"
+                    "label": "geq10",
+                    "value": "geq10"
                   }
                 ]
               },
@@ -2825,7 +2829,7 @@
               "validate": {
                 "required": true
               },
-              "key": "recentTripsOutsideDistricCount",
+              "key": "recentTripsOutsideDistrictCount",
               "conditional": {
                 "show": true,
                 "when": "recentTravelOutsideDistrict",
@@ -2874,7 +2878,7 @@
                   "shortcut": ""
                 },
                 {
-                  "label": "other",
+                  "label": "otherSpecify",
                   "value": "other",
                   "shortcut": ""
                 }
@@ -2939,89 +2943,80 @@
               },
               "values": [
                 {
-                  "label": "Dharkeynley",
-                  "value": "dharkeynley",
-                  "shortcut": ""
+                  "label": "Yaaqshiid",
+                  "value": "Yaaqshiid"
                 },
                 {
-                  "label": "Deynille",
-                  "value": "deynille",
-                  "shortcut": ""
+                  "label": "Warta-Nabada",
+                  "value": "Warta-Nabada"
                 },
                 {
-                  "label": "Hodan",
-                  "value": "hodan",
-                  "shortcut": ""
+                  "label": "C/casiis",
+                  "value": "C/casiis"
+                },
+                {
+                  "label": "Deyniile",
+                  "value": "Deyniile"
+                },
+                {
+                  "label": "Boondheere",
+                  "value": "Boondheere"
                 },
                 {
                   "label": "Wadajir",
-                  "value": "wadajir",
-                  "shortcut": ""
+                  "value": "Wadajir"
                 },
                 {
-                  "label": "Waberi",
-                  "value": "waberi",
-                  "shortcut": ""
+                  "label": "Howl-wadaag",
+                  "value": "Howl-wadaag"
                 },
                 {
-                  "label": "Hawl Wadag",
-                  "value": "hawlWadag",
-                  "shortcut": ""
+                  "label": "Heliwaa",
+                  "value": "Heliwaa"
                 },
                 {
-                  "label": "Hamar Jabjab",
-                  "value": "hamarJabjab",
-                  "shortcut": ""
+                  "label": "Garasbaley",
+                  "value": "Garasbaley"
                 },
                 {
-                  "label": "Villa Somalia",
-                  "value": "villaSomalia",
-                  "shortcut": ""
+                  "label": "Gubadley",
+                  "value": "Gubadley"
                 },
                 {
-                  "label": "Wardhigley",
-                  "value": "wardhigley",
-                  "shortcut": ""
+                  "label": "Kaaraan",
+                  "value": "Kaaraan"
                 },
                 {
-                  "label": "Bondhere",
-                  "value": "bondhere",
-                  "shortcut": ""
+                  "label": "Dharkenley",
+                  "value": "Dharkenley"
                 },
                 {
-                  "label": "Hamar Weye",
-                  "value": "hamarWeye",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Cabdi Caziz",
-                  "value": "cabdiCaziz",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Shibis",
-                  "value": "shibis",
-                  "shortcut": ""
+                  "label": "Kaxda",
+                  "value": "Kaxda"
                 },
                 {
                   "label": "Shangani",
-                  "value": "shangani",
-                  "shortcut": ""
+                  "value": "Shangani"
                 },
                 {
-                  "label": "Yaqshid",
-                  "value": "yaqshid",
-                  "shortcut": ""
+                  "label": "Xamarweyne",
+                  "value": "Xamarweyne"
                 },
                 {
-                  "label": "Karan",
-                  "value": "karan",
-                  "shortcut": ""
+                  "label": "Hodan",
+                  "value": "Hodan"
                 },
                 {
-                  "label": "Huriwa",
-                  "value": "huriwa",
-                  "shortcut": ""
+                  "label": "Shibis",
+                  "value": "Shibis"
+                },
+                {
+                  "label": "Xamar Jajab",
+                  "value": "Xamar Jajab"
+                },
+                {
+                  "label": "Waabri",
+                  "value": "Waabri"
                 }
               ],
               "calculateServer": false,

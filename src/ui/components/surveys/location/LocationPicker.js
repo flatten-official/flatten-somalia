@@ -12,7 +12,7 @@ export const LocationObj = (lat, lng, accuracy, altitude, wasManual) => ({
   altitude: altitude,
   wasManual: wasManual,
 });
-export const LocationPicker = ({ onLocationFound }) => {
+export const LocationPicker = ({ onLocationFound, enableManual }) => {
   const STATUS = {
     requested: "LOCATION_REQUESTED",
     failed: "LOCATION_FAILED_AUTO",
@@ -52,6 +52,11 @@ export const LocationPicker = ({ onLocationFound }) => {
     case STATUS.requested:
       return <Loading />;
     case STATUS.failed:
+      if (!enableManual) {
+        onLocationFound(null);
+        return null;
+      }
+
       return (
         <>
           <h4>{t("location.isRequiredPrompt")}</h4>
@@ -69,6 +74,7 @@ export const LocationPicker = ({ onLocationFound }) => {
           </Button>
         </>
       );
+
     case STATUS.manual:
       return (
         <ManualLocationPicker
@@ -81,4 +87,5 @@ export const LocationPicker = ({ onLocationFound }) => {
 
 LocationPicker.propTypes = {
   onLocationFound: PropTypes.func,
+  enableManual: PropTypes.bool,
 };
