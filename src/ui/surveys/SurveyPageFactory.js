@@ -1,6 +1,6 @@
 import Form from "../components/surveys/formio/Form";
 import React, { useEffect } from "react";
-import { Prompt } from "react-router-dom";
+// import { Prompt } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Types from "./actionTypes";
@@ -117,7 +117,7 @@ const SurveyPageFactory = ({
       <>
         <h3 className="submissionPageTitle">{t(i18nTitleKey)}</h3>
         {/* Displays warning before react router tries to change the page */}
-        <Prompt message={t("navWarning")} when={shouldWarn} />
+        {/*<Prompt message={t("navWarning")} when={shouldWarn} /> TODO WARN when translations available*/}
         <SurveyPageContentConnected />
       </>
     );

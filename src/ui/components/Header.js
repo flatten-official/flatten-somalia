@@ -96,7 +96,7 @@ const Header = () => {
         </Nav>
         <LanguageDropDown />
       </Navbar.Collapse>
-      <ExpireModal />
+      {/*<ExpireModal />  TODO ADD EXPIRE MODAL WHEN TRANSLATIONS AVAILABLE */}
     </Navbar>
   );
 };
