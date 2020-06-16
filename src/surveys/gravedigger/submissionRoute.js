@@ -2,7 +2,6 @@ const { submitGravediggerSurvey } = require("./api");
 const { isValidationTypeError } = require("../dataUtil");
 
 module.exports = async (req, res) => {
-  console.log(req.body);
   try {
     await submitGravediggerSurvey(
       res.locals.volunteer._id,
