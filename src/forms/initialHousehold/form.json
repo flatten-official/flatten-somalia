@@ -1388,7 +1388,7 @@
                     "value": "ardayIskool"
                   },
                   {
-                    "label": "other",
+                    "label": "otherSpecify",
                     "value": "other"
                   }
                 ]
@@ -1411,8 +1411,8 @@
               "input": true
             },
             {
-              "label": "other",
-              "placeholder": "otherOccupation",
+              "label": "otherSpecify",
+              "placeholder": "otherSpecify",
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
