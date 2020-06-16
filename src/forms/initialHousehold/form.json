@@ -1752,8 +1752,8 @@
               "inputType": "checkbox"
             },
             {
-              "label": "otherSocialMedia",
-              "placeholder": "otherSocialMedia",
+              "label": "other",
+              "placeholder": "other",
               "spellcheck": true,
               "tableView": true,
               "calculateServer": false,
