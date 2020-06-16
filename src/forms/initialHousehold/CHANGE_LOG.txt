@@ -44,6 +44,16 @@ version  |  commit (optional)
         - recent trips count option
             - "Other" -> "Other (specify)"
 
+    * Translation additions
+        - SO
+            - rent range options
+            - none option
+            - other social media
+            - other reasons for not using hotline
+            - potential contact questions
+            - moneyQuestion
+            - otherOccupation placeholder
+
 1.0.2       ea8a75a152
 
     * add Shangani district option to:
