@@ -2801,26 +2801,26 @@
               "input": true
             },
             {
-              "label": "recentTripsOutsideDistricCount",
+              "label": "recentTripsOutsideDistrictCount",
               "widget": "choicesjs",
               "tableView": true,
               "data": {
                 "values": [
                   {
-                    "label": "1-3 Journeys",
-                    "value": "13Journeys"
+                    "label": "1to3",
+                    "value": "1to3"
                   },
                   {
-                    "label": "4-6 Journeys",
-                    "value": "46Journeys"
+                    "label": "4to6",
+                    "value": "4to6"
                   },
                   {
-                    "label": "6-10 Journeys",
-                    "value": "610Journeys"
+                    "label": "6to10",
+                    "value": "6to10"
                   },
                   {
-                    "label": ">10 Journeys",
-                    "value": "10Journeys"
+                    "label": "geq10",
+                    "value": "geq10"
                   }
                 ]
               },
@@ -2829,7 +2829,7 @@
               "validate": {
                 "required": true
               },
-              "key": "recentTripsOutsideDistricCount",
+              "key": "recentTripsOutsideDistrictCount",
               "conditional": {
                 "show": true,
                 "when": "recentTravelOutsideDistrict",
