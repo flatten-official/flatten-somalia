@@ -2325,7 +2325,7 @@
               "validate": {
                 "required": true
               },
-              "key": "currentSymptoms",
+              "key": "currentSymptoms1",
               "type": "selectboxes",
               "input": true,
               "inputType": "checkbox"
@@ -2808,19 +2808,19 @@
                 "values": [
                   {
                     "label": "1to3",
-                    "value": "1to3"
+                    "value": "13Journeys"
                   },
                   {
                     "label": "4to6",
-                    "value": "4to6"
+                    "value": "46Journeys"
                   },
                   {
                     "label": "6to10",
-                    "value": "6to10"
+                    "value": "610Journeys"
                   },
                   {
                     "label": "geq10",
-                    "value": "geq10"
+                    "value": "10Journeys"
                   }
                 ]
               },
@@ -2829,7 +2829,7 @@
               "validate": {
                 "required": true
               },
-              "key": "recentTripsOutsideDistrictCount",
+              "key": "recentTripsOutsideDistricCount",
               "conditional": {
                 "show": true,
                 "when": "recentTravelOutsideDistrict",
@@ -2927,19 +2927,8 @@
                 "deynille": false,
                 "hodan": false,
                 "wadajir": false,
-                "waberi": false,
-                "hawlWadag": false,
-                "hamarJabjab": false,
-                "villaSomalia": false,
-                "wardhigley": false,
-                "bondhere": false,
-                "hamarWeye": false,
-                "cabdiCaziz": false,
                 "shibis": false,
-                "shangani": false,
-                "yaqshid": false,
-                "karan": false,
-                "huriwa": false
+                "shangani": false
               },
               "values": [
                 {
@@ -2956,7 +2945,7 @@
                 },
                 {
                   "label": "Deyniile",
-                  "value": "Deyniile"
+                  "value": "deyniile"
                 },
                 {
                   "label": "Boondheere",
@@ -2964,7 +2953,7 @@
                 },
                 {
                   "label": "Wadajir",
-                  "value": "Wadajir"
+                  "value": "wadajir"
                 },
                 {
                   "label": "Howl-wadaag",
@@ -2988,7 +2977,7 @@
                 },
                 {
                   "label": "Dharkenley",
-                  "value": "Dharkenley"
+                  "value": "dharkenley"
                 },
                 {
                   "label": "Kaxda",
@@ -3004,11 +2993,11 @@
                 },
                 {
                   "label": "Hodan",
-                  "value": "Hodan"
+                  "value": "hodan"
                 },
                 {
                   "label": "Shibis",
-                  "value": "Shibis"
+                  "value": "shibis"
                 },
                 {
                   "label": "Xamar Jajab",
@@ -3302,7 +3291,7 @@
                 },
                 {
                   "label": "heartDiseaseOrIrritability",
-                  "value": "heartDisease",
+                  "value": "heartDiseaseOrIrritability",
                   "shortcut": ""
                 },
                 {
