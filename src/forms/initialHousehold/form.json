@@ -2932,26 +2932,6 @@
               },
               "values": [
                 {
-                  "label": "Dharkenley",
-                  "value": "dharkenley"
-                },
-                {
-                  "label": "Deyniile",
-                  "value": "deyniile"
-                },
-                {
-                  "label": "Hodan",
-                  "value": "hodan"
-                },
-                {
-                  "label": "Wadajir",
-                  "value": "wadajir"
-                },
-                {
-                  "label": "Shibis",
-                  "value": "shibis"
-                },
-                {
                   "label": "Yaaqshiid",
                   "value": "Yaaqshiid"
                 },
@@ -2964,8 +2944,16 @@
                   "value": "C/casiis"
                 },
                 {
+                  "label": "Deyniile",
+                  "value": "deyniile"
+                },
+                {
                   "label": "Boondheere",
                   "value": "Boondheere"
+                },
+                {
+                  "label": "Wadajir",
+                  "value": "wadajir"
                 },
                 {
                   "label": "Howl-wadaag",
@@ -2988,6 +2976,10 @@
                   "value": "Kaaraan"
                 },
                 {
+                  "label": "Dharkenley",
+                  "value": "dharkenley"
+                },
+                {
                   "label": "Kaxda",
                   "value": "Kaxda"
                 },
@@ -2998,6 +2990,14 @@
                 {
                   "label": "Xamarweyne",
                   "value": "Xamarweyne"
+                },
+                {
+                  "label": "Hodan",
+                  "value": "hodan"
+                },
+                {
+                  "label": "Shibis",
+                  "value": "shibis"
                 },
                 {
                   "label": "Xamar Jajab",
