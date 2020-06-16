@@ -11,7 +11,7 @@
       "tableView": true,
       "calculateServer": false,
       "validate": { "required": true },
-      "key": "enterPhoneNumber",
+      "key": "hospitalPhoneNumber",
       "type": "phoneNumber",
       "input": true
     },
@@ -22,7 +22,7 @@
       "tableView": true,
       "calculateServer": false,
       "kickbox": { "enabled": true },
-      "key": "email",
+      "key": "hospitalEmail",
       "type": "email",
       "input": true
     },
@@ -36,7 +36,7 @@
       "inputFormat": "plain",
       "calculateServer": false,
       "validate": { "required": true, "min": 0 },
-      "key": "numberOfNewPatients",
+      "key": "newPatients",
       "type": "number",
       "input": true
     },
@@ -50,7 +50,7 @@
       "inputFormat": "plain",
       "calculateServer": false,
       "validate": { "required": true, "min": 0 },
-      "key": "numberofDischargedPatients",
+      "key": "dischargedPatients",
       "type": "number",
       "input": true
     },
@@ -64,7 +64,7 @@
       "inputFormat": "plain",
       "calculateServer": false,
       "validate": { "required": true, "min": 0 },
-      "key": "numberOfBedsOccupied",
+      "key": "occupiedHospitalBeds",
       "type": "number",
       "input": true
     },
@@ -78,7 +78,7 @@
       "inputFormat": "plain",
       "calculateServer": false,
       "validate": { "required": true },
-      "key": "numberOfBedsOccupiedInCriticalCare",
+      "key": "occupiedCriticalCareBeds",
       "type": "number",
       "input": true
     },
@@ -92,7 +92,7 @@
       "inputFormat": "plain",
       "calculateServer": false,
       "validate": { "required": true, "min": 0 },
-      "key": "bedAvailable",
+      "key": "availableBeds",
       "type": "number",
       "input": true
     },
@@ -106,7 +106,7 @@
       "inputFormat": "plain",
       "calculateServer": false,
       "validate": { "required": true, "min": 0 },
-      "key": "patientsCurrentlyHospitalized",
+      "key": "hospitalizedPatients",
       "type": "number",
       "input": true
     },
@@ -120,7 +120,7 @@
       "inputFormat": "plain",
       "calculateServer": false,
       "validate": { "required": true, "min": 0 },
-      "key": "confirmedPositiveCovid19",
+      "key": "confirmedCOVID19Cases",
       "type": "number",
       "input": true
     },
@@ -134,7 +134,7 @@
       "inputFormat": "plain",
       "calculateServer": false,
       "validate": { "required": true, "min": 0 },
-      "key": "suspectedCovid19",
+      "key": "suspectedCOVID19Cases",
       "type": "number",
       "input": true
     },
@@ -148,14 +148,14 @@
       "inputFormat": "plain",
       "calculateServer": false,
       "validate": { "required": true, "min": 0 },
-      "key": "negativeCovid19",
+      "key": "negativeCOVID19Cases",
       "type": "number",
       "input": true
     },
     {
       "type": "button",
-      "label": "Submit",
-      "key": "submit",
+      "label": "submit",
+      "key": "exclude-submit",
       "disableOnInvalid": true,
       "input": true,
       "tableView": false
@@ -164,7 +164,7 @@
   "controller": "",
   "revisions": "",
   "_vid": 0,
-  "title": "Hospital VolunteerSurvery",
+  "title": "Hospital Volunteer Survey",
   "display": "form",
   "access": [
     {

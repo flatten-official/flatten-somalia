@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ReactComponent } from "react-formio";
 import { Provider } from "react-redux";
-import store from "../../../store";
+import store from "../../../../store";
 
 /**
  * Returns a FormIoComponent that contains the InnerComponent
@@ -19,7 +19,7 @@ const CustomFormIoComponent = (InnerComponent) => {
       // eslint-disable-next-line react/no-render-return-value
       return ReactDOM.render(
         <Provider store={store}>
-          <InnerComponent component={this.component} />
+          <InnerComponent formioDefinition={this.component} />
         </Provider>,
         element
       );

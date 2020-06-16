@@ -9,14 +9,12 @@ import App from "./ui/App";
 
 import "./i18n";
 import "./styles/styles.scss";
-import CustomFormIoComponent from "./ui/components/formio/CustomFormComponent";
-import FollowUpId from "./ui/surveys/householdInitial/elements/FollowUpId";
-import FollowUpIdReminder from "./ui/surveys/householdInitial/elements/FollowUpIdReminder";
-import TranslatedText from "./ui/components/formio/TranslatedText";
+import CustomFormIoComponent from "./ui/components/surveys/formio/CustomFormComponent";
+import TranslatedText from "./ui/components/surveys/TranslatedText";
+import { ConnectedFollowUpId } from "./ui/surveys/ConnectedComponents";
 
 Components.setComponents({
-  customFollowUpId: CustomFormIoComponent(FollowUpId),
-  followupIDReminder: CustomFormIoComponent(FollowUpIdReminder),
+  customFollowUpId: CustomFormIoComponent(ConnectedFollowUpId),
   customText: CustomFormIoComponent(TranslatedText),
 });
 

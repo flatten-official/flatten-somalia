@@ -11,16 +11,13 @@ import formIOHospitalSurveyEN from "./translations/en/translation/HospitalSurvey
 import formIOVolunteerLoginEN from "./translations/en/translation/VolunteerLogin.json";
 
 // OTHER ENGLISH CONTENT
-import adminEN from "./translations/en/Admin.json";
 import loginEN from "./translations/en/Login.json";
 import footerEN from "./translations/en/Footer.json";
 import homeEN from "./translations/en/Home.json";
 import loadingEN from "./translations/en/Loading.json";
 import navbarEN from "./translations/en/Navbar.json";
-import initialHouseholdSurveyEN from "./translations/en/InitialSurvey.json";
 import formIOCustomTextEN from "./translations/en/FormIoCustomText.json";
-import graveDiggerSurveyEN from "./translations/en/GraveDiggerSurvey.json";
-import hospitalSurveyEN from "./translations/en/HospitalSurvey.json";
+import SurveysEN from "./translations/en/Surveys.json";
 
 // FORMIO CONTENT SOMALI
 import formIOAddVolunteerSO from "./translations/so/translation/AddVolunteer.json";
@@ -32,15 +29,12 @@ import formIOVolunteerLoginSO from "./translations/so/translation/VolunteerLogin
 import formIOCustomTextSO from "./translations/so/FormIoCustomText.json";
 
 // OTHER SOMALI CONTENT
-import adminSO from "./translations/so/Admin.json";
 import loginSO from "./translations/so/Login.json";
 import footerSO from "./translations/so/Footer.json";
 import homeSO from "./translations/so/Home.json";
 import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
-import initialHouseholdSurveySO from "./translations/so/InitialSurvey.json";
-import graveDiggerSurveySO from "./translations/so/GraveDiggerSurvey.json";
-import hospitalSurveySO from "./translations/so/HospitalSurvey.json";
+import SurveysSO from "./translations/so/Surveys.json";
 
 const resources = {
   en: {
@@ -52,16 +46,13 @@ const resources = {
       ...formIOGraveDiggerSurveyEN,
       ...formIOHospitalSurveyEN,
     },
-    Admin: adminEN,
     Login: loginEN,
     Footer: footerEN,
     Home: homeEN,
     Loading: loadingEN,
     Navbar: navbarEN,
-    InitialSurvey: initialHouseholdSurveyEN,
     FormIOCustomText: formIOCustomTextEN,
-    HospitalSurvey: hospitalSurveyEN,
-    GravediggerSurvey: graveDiggerSurveyEN,
+    Surveys: SurveysEN,
   },
   so: {
     translation: {
@@ -72,16 +63,13 @@ const resources = {
       ...formIOGraveDiggerSurveySO,
       ...formIOHospitalSurveySO,
     },
-    Admin: adminSO,
     Login: loginSO,
     Footer: footerSO,
     Home: homeSO,
     Loading: loadingSO,
     Navbar: navbarSO,
-    InitialSurvey: initialHouseholdSurveySO,
     FormIOCustomText: formIOCustomTextSO,
-    HospitalSurvey: hospitalSurveySO,
-    GravediggerSurvey: graveDiggerSurveySO,
+    Surveys: SurveysSO,
   },
 };
 

@@ -1,0 +1,96 @@
+{
+  "_id": "5eda6f9c344729cfebbb0c77",
+  "type": "form",
+  "tags": [],
+  "owner": "5ec0adf353208fac46755642",
+  "components": [
+    {
+      "label": "enterGravediggerPhoneNumber",
+      "inputMask": "99 99 99 999",
+      "spellcheck": true,
+      "tableView": true,
+      "calculateServer": false,
+      "validate": { "required": true },
+      "key": "gravediggerPhoneNumber",
+      "type": "phoneNumber",
+      "input": true
+    },
+    {
+      "label": "gravesiteName",
+      "widget": "choicesjs",
+      "tableView": true,
+      "data": {
+        "values": [
+          {
+            "label": "Qabuuraha Xaaji Cabdi (Barakaad)",
+            "value": "qabuurahaXaajiCabdiBarakaad"
+          },
+          {
+            "label": "Qabuuraha Macallim Nuur",
+            "value": "qabuurahaMacallimNuur"
+          },
+          { "label": "Qabuuraha Jaziira", "value": "qabuurahaJaziira" },
+          {
+            "label": "Qabuuraha Ceel Caade",
+            "value": "qabuurahaCeelCaade"
+          },
+          { "label": "Qabuuraha Kaxda", "value": "qabuurahaKaxda" }
+        ]
+      },
+      "selectThreshold": 0.3,
+      "calculateServer": false,
+      "validate": { "required": true },
+      "key": "gravesite",
+      "type": "select",
+      "indexeddb": { "filter": {} },
+      "input": true
+    },
+    {
+      "label": "numberOfBurialsForDay",
+      "mask": false,
+      "spellcheck": true,
+      "tableView": false,
+      "delimiter": false,
+      "requireDecimal": false,
+      "inputFormat": "plain",
+      "calculateServer": false,
+      "validate": { "required": true },
+      "key": "burialsThatDay",
+      "type": "number",
+      "input": true
+    },
+    {
+      "type": "button",
+      "label": "submit",
+      "key": "exclude-submit",
+      "disableOnInvalid": true,
+      "input": true,
+      "tableView": false
+    }
+  ],
+  "revisions": "",
+  "_vid": 0,
+  "title": "Grave Digger Volunteer Survey Form",
+  "display": "form",
+  "access": [
+    {
+      "roles": [
+        "5ec0c80753208f5aea755795",
+        "5ec0c80753208fac46755796",
+        "5ec0c80753208f19f0755797",
+        "5ed48bebb9eb600b183955f1",
+        "5ed48bebb9eb60cfa83955f2"
+      ],
+      "type": "read_all"
+    }
+  ],
+  "submissionAccess": [],
+  "settings": {},
+  "properties": {},
+  "name": "gravediggerSurvey",
+  "path": "gravediggervolunteersurveryform",
+  "project": "5ec0c80753208f2b4d755794",
+  "created": "2020-06-05T16:15:24.094Z",
+  "modified": "2020-06-05T16:53:22.667Z",
+  "machineName": "yordvlchrlvervl:graveDigger"
+}
