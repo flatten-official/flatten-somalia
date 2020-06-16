@@ -2943,89 +2943,80 @@
               },
               "values": [
                 {
-                  "label": "Dharkeynley",
-                  "value": "dharkeynley",
-                  "shortcut": ""
+                  "label": "Yaaqshiid",
+                  "value": "Yaaqshiid"
                 },
                 {
-                  "label": "Deynille",
-                  "value": "deynille",
-                  "shortcut": ""
+                  "label": "Warta-Nabada",
+                  "value": "Warta-Nabada"
                 },
                 {
-                  "label": "Hodan",
-                  "value": "hodan",
-                  "shortcut": ""
+                  "label": "C/casiis",
+                  "value": "C/casiis"
+                },
+                {
+                  "label": "Deyniile",
+                  "value": "Deyniile"
+                },
+                {
+                  "label": "Boondheere",
+                  "value": "Boondheere"
                 },
                 {
                   "label": "Wadajir",
-                  "value": "wadajir",
-                  "shortcut": ""
+                  "value": "Wadajir"
                 },
                 {
-                  "label": "Waberi",
-                  "value": "waberi",
-                  "shortcut": ""
+                  "label": "Howl-wadaag",
+                  "value": "Howl-wadaag"
                 },
                 {
-                  "label": "Hawl Wadag",
-                  "value": "hawlWadag",
-                  "shortcut": ""
+                  "label": "Heliwaa",
+                  "value": "Heliwaa"
                 },
                 {
-                  "label": "Hamar Jabjab",
-                  "value": "hamarJabjab",
-                  "shortcut": ""
+                  "label": "Garasbaley",
+                  "value": "Garasbaley"
                 },
                 {
-                  "label": "Villa Somalia",
-                  "value": "villaSomalia",
-                  "shortcut": ""
+                  "label": "Gubadley",
+                  "value": "Gubadley"
                 },
                 {
-                  "label": "Wardhigley",
-                  "value": "wardhigley",
-                  "shortcut": ""
+                  "label": "Kaaraan",
+                  "value": "Kaaraan"
                 },
                 {
-                  "label": "Bondhere",
-                  "value": "bondhere",
-                  "shortcut": ""
+                  "label": "Dharkenley",
+                  "value": "Dharkenley"
                 },
                 {
-                  "label": "Hamar Weye",
-                  "value": "hamarWeye",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Cabdi Caziz",
-                  "value": "cabdiCaziz",
-                  "shortcut": ""
-                },
-                {
-                  "label": "Shibis",
-                  "value": "shibis",
-                  "shortcut": ""
+                  "label": "Kaxda",
+                  "value": "Kaxda"
                 },
                 {
                   "label": "Shangani",
-                  "value": "shangani",
-                  "shortcut": ""
+                  "value": "Shangani"
                 },
                 {
-                  "label": "Yaqshid",
-                  "value": "yaqshid",
-                  "shortcut": ""
+                  "label": "Xamarweyne",
+                  "value": "Xamarweyne"
                 },
                 {
-                  "label": "Karan",
-                  "value": "karan",
-                  "shortcut": ""
+                  "label": "Hodan",
+                  "value": "Hodan"
                 },
                 {
-                  "label": "Huriwa",
-                  "value": "huriwa",
-                  "shortcut": ""
+                  "label": "Shibis",
+                  "value": "Shibis"
+                },
+                {
+                  "label": "Xamar Jajab",
+                  "value": "Xamar Jajab"
+                },
+                {
+                  "label": "Waabri",
+                  "value": "Waabri"
                 }
               ],
               "calculateServer": false,
