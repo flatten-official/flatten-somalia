@@ -13,6 +13,7 @@ const submitHospitalRoute = require("./surveys/hospital/submissionRoute");
 const submitFollowUpRoute = require("./submissionInitial/submitFollowUpRoute");
 const submitGetNextRoute = require("./submissionInitial/submitGetNextRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
+const rootRoute = require("./utils/express/root");
 
 const router = express.Router();
 
@@ -21,9 +22,7 @@ const router = express.Router();
  * @apiName GetStatus
  * @apiGroup Root
  */
-router.get("/", (req, res) => {
-  res.status(200).send(`Backend-Somalia online (${process.env.ENVIRONMENT})`);
-});
+router.get("/", rootRoute);
 
 /**
  * @api {post} /auth/login Login
