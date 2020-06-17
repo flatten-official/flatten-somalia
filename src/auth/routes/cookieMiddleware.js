@@ -2,11 +2,10 @@ const { readCookie } = require("../cookieData");
 const { findVolunteerById } = require("../../volunteer/volunteerData");
 
 /**
- * If cookie is invalid, redirects to the /auth page.
- * If cookie is valid, add volunteerId and permissions to res.locals for use by the endpoint.
+ * If cookie is valid, add volunteer and expiry to res.locals for use by the endpoint.
  */
 module.exports = async (req, res, next) => {
-  const cookieID = req.signedCookies.id; // the cookie valuePromise
+  const cookieID = req.signedCookies.id; // the signed cookie "id" stores the cookieID
 
   if (!cookieID) {
     console.log("No cookie found.");

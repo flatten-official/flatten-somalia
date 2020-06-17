@@ -17,7 +17,7 @@ const Submission = mongoose.model(
     },
     people: [
       {
-        // raw submission data (excluding people and death data)
+        // raw submissionInitial models (excluding people and death models)
         data: {
           type: mongoose.Mixed,
           required: true,
@@ -31,7 +31,7 @@ const Submission = mongoose.model(
       },
     ],
     household: {
-      // raw submission data (excluding people and death data)
+      // raw submissionInitial models (excluding people and death models)
       data: {
         type: mongoose.Mixed,
         required: true,
@@ -43,7 +43,7 @@ const Submission = mongoose.model(
         required: true,
       },
     },
-    // form schema version (the thing contained in the data object)
+    // form schema version (the thing contained in the models object)
     submissionSchema: {
       // todo - maybe validate these using enums?
       form: { type: String, index: true, required: true }, // eg. 'somaliaInitialVolunteerSurvey'
@@ -72,8 +72,8 @@ const Submission = mongoose.model(
         default: Date.now,
       },
     },
-    // this is filled in when this submission has been followed up with
-    // submission -> household
+    // this is filled in when this submissionInitial has been followed up with
+    // submissionInitial -> household
     followUp: {
       id: {
         type: mongoose.ObjectId,
@@ -113,7 +113,7 @@ const Person = mongoose.model(
   new mongoose.Schema({
     name: String,
     gender: String,
-    // todo - is there an easy way to query on the latest submission kind
+    // todo - is there an easy way to query on the latest submissionInitial kind
     // or if there is a kind that is death in the list
     alive: {
       type: Boolean,
@@ -209,7 +209,7 @@ async function getVolunteerNextFollowUp(
     },
     {},
     {
-      // get earliest non-followed-up submission first
+      // get earliest non-followed-up submissionInitial first
       sort: { uploadTimestamp: -1 },
     }
   );
@@ -230,7 +230,7 @@ async function getVolunteerNextFollowUp(
   return [next._id, household, people];
 }
 
-// add submission that we followed up with
+// add submissionInitial that we followed up with
 async function createFollowUpSubmisison(submissionId, ...newSubmissionData) {
   const newSubmission = await createSubmission(...newSubmissionData);
 
