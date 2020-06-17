@@ -1,5 +1,6 @@
 const { addVolunteer, Permissions } = require("./volunteerData");
 const { Error } = require("mongoose");
+const volunteerData = require("./volunteerData");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   const permissions = newVolunteerData.permSubmitForms
@@ -28,4 +29,11 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   return [200, "Success"];
 }
 
-module.exports = { addVolunteerAndAuthenticate };
+async function getVolunteerList(userData) {
+  if (Permissions.manageVolunteers in userData.permissions) {
+    return [200, await volunteerData.getVolunteerList()];
+  }
+  return [403, []];
+}
+
+module.exports = { addVolunteerAndAuthenticate, getVolunteerList };

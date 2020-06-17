@@ -91,11 +91,19 @@ const findVolunteerById = (volunteerId) =>
 const findVolunteerByEmail = (email) =>
   Volunteer.findOne({ email: { $regex: new RegExp(email), $options: "i" } });
 
+const getVolunteerList = async () => {
+  const volunteers = await Volunteer.find({});
+  return volunteers.map((v) => {
+    v.email, v.name;
+  });
+};
+
 module.exports = {
   Volunteer,
   addVolunteer,
   findVolunteerById,
   findVolunteerByEmail,
+  getVolunteerList,
   getNextFriendlyId,
   Permissions,
 };

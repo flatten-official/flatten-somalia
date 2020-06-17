@@ -13,6 +13,7 @@ const submitHospitalRoute = require("./surveys/hospital/submissionRoute");
 const submitFollowUpRoute = require("./submissionInitial/submitFollowUpRoute");
 const submitGetNextRoute = require("./submissionInitial/submitGetNextRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
+const listVolunteersRoute = require("./volunteer/listVolunteersRoute");
 
 const router = express.Router();
 
@@ -88,6 +89,17 @@ router.post(
   "/volunteer",
   protectedMiddleware([Permissions.manageVolunteers]),
   addVolunteerRoute
+);
+
+/**
+ * @api {get} /volunteer List volunteers
+ * @apiName AddVolunteer
+ * @apiGroup Volunteer
+ */
+router.get(
+  "/volunteer/list",
+  protectedMiddleware([Permissions.manageVolunteers]),
+  listVolunteersRoute
 );
 
 /**
