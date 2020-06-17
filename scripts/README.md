@@ -1,26 +1,26 @@
 # Scripts
 
-Documentation relating to scripts.
+Scripts allow us to run batch operations on our database. Make sure you know what you're doing since scripts can modify the database in unwanted ways.
 
-Make sure you know what you're doing since scripts can modify the database in unwanted ways.
+## Initial setup
 
-## Running a script on staging
+1. Complete setup steps from the `README.md` in the root directory. This includes running `npm run auth`.
 
-1. Create a .env file with the following content
+2. Create a `.env` file in the root directory with the following content
 
-```
-SCRIPT_NAME=<SCRIPT_NAME>
-ENVIRONMENT=dev
-```
+   ```
+   SCRIPT_NAME=<SCRIPT_NAME>
+   ENVIRONMENT=dev
+   ```
 
-2. Replace `<SCRIPT_NAME>` with one of the possible script names.
-   Check `VALID_SCRIPTS` in `scripts/launch.js` to see all possible script names.
+2. Replace `<SCRIPT_NAME>` with the name of the script you wish to run (e.g. `ADD_VOLUNTEER_BULK`).
+   Check `scripts/scriptPaths.json` for a list all possible script names.
 
 3. Run `npm run script`.
 
 ## Running a script in production
 
-You will need to get a MongoDB URI from Martin to connect to the database.
+You will need to get a MongoDB URI from Martin to connect to the production database.
 
 1. Same as running your script on staging however your `.env` file should be as follows.
 
@@ -30,11 +30,11 @@ ENVIRONMENT=scriptProduction
 MONGO_URI=<MONGO_URI_WITH_PASSWORD>
 ```
 
-2. After running the script :warning: DELETE THE MONGO_URI :warning:. 
+2. After running the script :warning: DELETE MONGO_URI :warning:. MONGO_URI gives read and write access to our entire database. 
 
 ## Create a new script
 
-1. Create a file with the following content in the `scripts` directory:
+1. Create a js file with the following content in the `scripts` directory:
 
    ```
    module.exports.Config = {
@@ -48,4 +48,4 @@ MONGO_URI=<MONGO_URI_WITH_PASSWORD>
    };
    ```
 
-2. Add your script to `VALID_SCRIPTS` in `scripts/launch.js`.
+2. Add your script to `scripts/scriptPaths.json`. You can pick any unique descriptive name.

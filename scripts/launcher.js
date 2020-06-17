@@ -1,16 +1,11 @@
 require("dotenv").config(); // Load .env file
 const { setup, cleanup } = require("../src/index");
 
-const VALID_SCRIPTS = {
-  ADD_VOLUNTEER_BULK: "./addVolunteerBulk",
-  RE_NUMBER_VOLUNTEER_ID: "./reNumberVolunteerIds",
-};
-
 const scriptName = process.env.SCRIPT_NAME;
-const scriptPath = VALID_SCRIPTS[scriptName];
+const scriptPath = require("./scriptPaths.json")[scriptName];
 
 if (!scriptPath)
-  throw "no valid SCRIPT_NAME specified in .env file. Look at scripts/launcher.js for valid script names";
+  throw "no valid SCRIPT_NAME specified in .env file. Look at scripts/scriptPaths.js for valid script names";
 
 console.log(`Starting script: ${scriptName}`);
 

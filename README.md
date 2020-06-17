@@ -6,7 +6,7 @@
 
 ## Setup
 
-1. Ensure an admin has added you to the `Somalia Staging Data Access` group, otherwise you won't have permission to read the database.
+1. Ensure an admin has added you to the `Somalia Staging Data Access` group, otherwise you won't have permission to read the staging database.
 Also ask to be added to the Atlas staging project if you want a GUI to navigate the database.
 
 2. Enable ESLint in your IDE (normally a plugin to install). ESLint is a code linter that checks logic and syntax.
