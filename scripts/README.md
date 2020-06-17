@@ -20,7 +20,9 @@ ENVIRONMENT=dev
 
 ## Running a script in production
 
-Same as running your script on staging however your `.env` file should be as follows.
+You will need to get a MongoDB URI from Martin to connect to the database.
+
+1. Same as running your script on staging however your `.env` file should be as follows.
 
 ```
 SCRIPT_NAME=<SCRIPT_NAME>
@@ -28,7 +30,7 @@ ENVIRONMENT=scriptProduction
 MONGO_URI=<MONGO_URI_WITH_PASSWORD>
 ```
 
-If you do not have the Mongo URI, ask Martin for it.
+2. After running the script :warning: DELETE THE MONGO_URI :warning:. 
 
 ## Create a new script
 
