@@ -21,6 +21,7 @@ const Volunteer = mongoose.model(
       index: true, // Since we search by volunteer email
       unique: true,
       required: true,
+      lowercase: true,
     },
     teamName: {
       type: String,
