@@ -8,6 +8,11 @@ const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
 const { login, TEST_VOLUNTEER } = require("../../testUtils/requests");
+const _ = require("lodash");
+
+const makeVolunteerRequestBody = (data) => {
+  return _.defaults({ data: _.defaults(data, TEST_VOLUNTEER) });
+};
 
 describe("endpoint POST /volunteer", () => {
   let app;
@@ -27,16 +32,15 @@ describe("endpoint POST /volunteer", () => {
       permissions: [Permissions.manageVolunteers],
     });
 
-    console.log(await Volunteer.find());
     const newVolunteerEmail = "new-volunteer@example.ca";
 
-    const res = await agent.post("/volunteer").send({
-      volunteerData: {
+    const res = await agent.post("/volunteer").send(
+      makeVolunteerRequestBody({
         name: "new_name",
         email: newVolunteerEmail,
         permSubmitForms: true,
-      },
-    });
+      })
+    );
 
     let newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
 
@@ -54,6 +58,7 @@ describe("endpoint POST /volunteer", () => {
       friendlyId: 2, // 1 already taken by admin
       permissions: [Permissions.submitForms],
       addedBy: adminVolunteer._id,
+      teamName: "testTeam",
     });
   });
 
@@ -64,7 +69,9 @@ describe("endpoint POST /volunteer", () => {
 
     const newVolunteerEmail = "new-volunteer@example.ca";
 
-    const res = await agent.post("/volunteer").send(TEST_VOLUNTEER);
+    const res = await agent
+      .post("/volunteer")
+      .send(makeVolunteerRequestBody({}));
 
     expect(res.status).toBe(403);
 
@@ -79,14 +86,14 @@ describe("endpoint POST /volunteer", () => {
 
     const newVolunteerEmail = "new-volunteer@example.com";
 
-    const res = await agent.post("/volunteer").send({
-      volunteerData: {
+    const res = await agent.post("/volunteer").send(
+      makeVolunteerRequestBody({
         name: "irrelevant",
         email: newVolunteerEmail,
         permManageVolunteers: true,
         permissions: [Permissions.manageVolunteers],
-      },
-    });
+      })
+    );
 
     expect(res.status).toBe(200);
 
@@ -100,7 +107,7 @@ describe("endpoint POST /volunteer", () => {
     const newVolunteerEmail = "irrelevant@gmail.com";
 
     const res = await request.post("/volunteer").send({
-      volunteerData: {
+      data: {
         name: "irrelevant",
         email: newVolunteerEmail,
       },
@@ -117,12 +124,12 @@ describe("endpoint POST /volunteer", () => {
       permissions: [Permissions.manageVolunteers],
     });
 
-    const res = await agent.post("/volunteer").send({
-      volunteerData: {
+    const res = await agent.post("/volunteer").send(
+      makeVolunteerRequestBody({
         name: "volunteer with same email as admin",
         email: adminVolunteer.email,
-      },
-    });
+      })
+    );
 
     expect(res.status).toBe(400);
   });
@@ -133,9 +140,7 @@ describe("endpoint POST /volunteer", () => {
     });
 
     const res = await agent.post("/volunteer").send({
-      volunteerData: {
-        name: "volunteer with same email as admin",
-      },
+      data: { name: "volunteer with same email as admin" },
     });
 
     expect(res.status).toBe(400);

@@ -95,7 +95,9 @@ const volunteerRegex = async (email) => {
  * @return {Promise}
  */
 const findVolunteerByEmail = async (email) => {
-  return await volunteerRegex(email)[0];
+  const emails = await volunteerRegex(email);
+  // we previously returned null, this maintains the behaviour
+  return emails[0] ? emails[0] : null;
 };
 
 const getVolunteerList = async () => {
