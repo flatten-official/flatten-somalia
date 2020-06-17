@@ -6,7 +6,7 @@
 // TODO Write tests
 module.exports = (requiredPermissions) => async (req, res, next) => {
   if (!res.locals.volunteer) res.sendStatus(401);
-  if (
+  else if (
     requiredPermissions.every((permission) =>
       res.locals.volunteer.permissions.includes(permission)
     )
