@@ -101,8 +101,8 @@ const Household = mongoose.model(
     // the id that is given to volunteers (NOT the ID in the DB), TODO...!!
     followUpId: {
       type: String,
-      required: true,
       index: true,
+      sparse: true,
       unique: true,
     },
   })
