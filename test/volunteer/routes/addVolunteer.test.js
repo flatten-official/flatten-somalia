@@ -1,18 +1,22 @@
 const {
   findVolunteerByEmail,
-  Volunteer,
   Permissions,
 } = require("../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
-const { login, TEST_VOLUNTEER } = require("../../testUtils/requests");
+const { login } = require("../../testUtils/requests");
 const _ = require("lodash");
 
-const makeVolunteerRequestBody = (data) => {
-  return _.defaults({ data: _.defaults(data, TEST_VOLUNTEER) });
-};
+const makeRequestBody = (data) => ({ volunteerData: data });
+
+const GOOD_REQUEST_BODY = makeRequestBody({
+  name: "new_name",
+  email: "new-volunteer@example.ca",
+  teamName: "Flatten",
+  permSubmitForms: true,
+});
 
 describe("endpoint POST /volunteer", () => {
   let app;
@@ -32,17 +36,11 @@ describe("endpoint POST /volunteer", () => {
       permissions: [Permissions.manageVolunteers],
     });
 
-    const newVolunteerEmail = "new-volunteer@example.ca";
+    const res = await agent.post("/volunteer").send(GOOD_REQUEST_BODY);
 
-    const res = await agent.post("/volunteer").send(
-      makeVolunteerRequestBody({
-        name: "new_name",
-        email: newVolunteerEmail,
-        permSubmitForms: true,
-      })
+    let newVolunteer = await findVolunteerByEmail(
+      GOOD_REQUEST_BODY.volunteerData.email
     );
-
-    let newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
 
     expect(res.status).toBe(200);
     expect(newVolunteer).not.toBeNull();
@@ -54,11 +52,11 @@ describe("endpoint POST /volunteer", () => {
 
     expect(newVolunteer).toStrictEqual({
       name: "new_name",
-      email: newVolunteerEmail,
+      email: GOOD_REQUEST_BODY.volunteerData.email,
       friendlyId: 2, // 1 already taken by admin
       permissions: [Permissions.submitForms],
       addedBy: adminVolunteer._id,
-      teamName: "testTeam",
+      teamName: "Flatten",
     });
   });
 
@@ -67,84 +65,73 @@ describe("endpoint POST /volunteer", () => {
       permissions: [Permissions.submitForms],
     });
 
-    const newVolunteerEmail = "new-volunteer@example.ca";
-
-    const res = await agent
-      .post("/volunteer")
-      .send(makeVolunteerRequestBody({}));
-
-    expect(res.status).toBe(403);
-
-    const newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
+    await agent.post("/volunteer").send(GOOD_REQUEST_BODY).expect(403);
+    const newVolunteer = await findVolunteerByEmail(
+      GOOD_REQUEST_BODY.volunteerData.email
+    );
     expect(newVolunteer).toBeNull();
   });
 
-  it("should be unable to create an admin", async () => {
+  it("should not use any incorrect flags such as permManageVolunteers", async () => {
     const { agent } = await login(app, {
       permissions: [Permissions.manageVolunteers],
     });
 
-    const newVolunteerEmail = "new-volunteer@example.com";
+    const badFlags = {
+      permManageVolunteers: true,
+      permissions: [Permissions.manageVolunteers],
+    };
 
-    const res = await agent.post("/volunteer").send(
-      makeVolunteerRequestBody({
-        name: "irrelevant",
-        email: newVolunteerEmail,
-        permManageVolunteers: true,
-        permissions: [Permissions.manageVolunteers],
-      })
+    await agent
+      .post("/volunteer")
+      .send(_.defaultsDeep(makeRequestBody(badFlags), GOOD_REQUEST_BODY))
+      .expect(200);
+
+    const newVolunteer = await findVolunteerByEmail(
+      GOOD_REQUEST_BODY.volunteerData.email
     );
-
-    expect(res.status).toBe(200);
-
-    const newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
     expect(newVolunteer.permissions).not.toContain(
       Permissions.manageVolunteers
     );
   });
 
   it("should fail with 401 when no cookie is provided", async () => {
-    const newVolunteerEmail = "irrelevant@gmail.com";
+    await request.post("/volunteer").send(GOOD_REQUEST_BODY).expect(401);
 
-    const res = await request.post("/volunteer").send({
-      data: {
-        name: "irrelevant",
-        email: newVolunteerEmail,
-      },
-    });
-
-    const newVolunteer = await findVolunteerByEmail(newVolunteerEmail);
-
+    const newVolunteer = await findVolunteerByEmail(
+      GOOD_REQUEST_BODY.volunteerData.email
+    );
     expect(newVolunteer).toBeNull();
-    expect(res.status).toBe(401);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it("should fail with 400 when trying to create a volunteer with an unavailable email address", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, {
       permissions: [Permissions.manageVolunteers],
     });
 
-    const res = await agent.post("/volunteer").send(
-      makeVolunteerRequestBody({
-        name: "volunteer with same email as admin",
-        email: adminVolunteer.email,
-      })
-    );
-
-    expect(res.status).toBe(400);
+    await agent
+      .post("/volunteer")
+      .send(
+        _.defaultsDeep(
+          makeRequestBody({ email: adminVolunteer.email }),
+          GOOD_REQUEST_BODY
+        )
+      )
+      .expect(400);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it("should fail with 400 when trying to create a volunteer without an email", async () => {
     const { agent } = await login(app, {
       permissions: [Permissions.manageVolunteers],
     });
 
-    const res = await agent.post("/volunteer").send({
-      data: { name: "volunteer with same email as admin" },
-    });
-
-    expect(res.status).toBe(400);
+    await agent
+      .post("/volunteer")
+      .send(_.defaultsDeep(makeRequestBody({ email: null }), GOOD_REQUEST_BODY))
+      .expect(400);
   });
 
-  // TODO test for missing email, missing name or invalid permission array. basically too many or missing parameters
+  // TODO test for missing name or invalid permission array. basically too many or missing parameters
 });

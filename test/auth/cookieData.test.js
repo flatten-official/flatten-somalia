@@ -5,9 +5,9 @@ const { calculateExpiryTime } = require("./../../src/utils/time");
 const mongoose = require("mongoose");
 
 describe("cookie database functions", () => {
-  beforeAll(async () => await util.connectToDatabase());
-  afterEach(async () => await util.clearDatabase());
-  afterAll(async () => await util.closeDatabase());
+  beforeAll(() => util.connectToDatabase());
+  afterEach(() => util.clearDatabase());
+  afterAll(() => util.closeDatabase());
 
   it("should write cookie to database", async () => {
     const expiry = calculateExpiryTime(5);
@@ -51,7 +51,7 @@ describe("cookie database functions", () => {
     for (const badCookieData of badCookieDatas) {
       const cookie = new cookieData.Cookie(badCookieData);
       await expect(() => cookie.save()).rejects.toBeInstanceOf(
-        util.ValidationError
+        mongoose.Error.ValidationError
       );
     }
   });

@@ -5,8 +5,6 @@ const { CONNECTION_OPTIONS } = require("./../../src/utils/mongo");
 
 const mongod = new MongoMemoryServer();
 
-const ValidationError = mongoose.Error.ValidationError;
-
 /**
  * Connect to the in-memory database.
  */
@@ -37,7 +35,6 @@ async function clearDatabase() {
 }
 
 module.exports = {
-  ValidationError,
   connectToDatabase,
   clearDatabase,
   closeDatabase,
