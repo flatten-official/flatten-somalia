@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const { createModel } = require("../dataUtil");
-const { getSubmissionMetadata } = require("../sharedDataSchemas");
+const { getSubmissionMetadata, FormSchema } = require("../sharedDataSchemas");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const model = createModel("Submission", {
-  // volunteer who made the submsision
+  // volunteer who made the submission
   addedBy: {
     type: mongoose.ObjectId,
     required: true,
@@ -44,11 +44,7 @@ const model = createModel("Submission", {
     },
   },
   // form schema version (the thing contained in the models object)
-  submissionSchema: {
-    // todo - maybe validate these using enums?
-    form: { type: String, index: true, required: true }, // eg. 'somaliaInitialVolunteerSurvey'
-    version: { type: String, index: true, required: true }, // eg. '1.0'
-  },
+  submissionSchema: FormSchema,
   metadata: getSubmissionMetadata(true, false, false),
   // this is filled in when this submissionInitial has been followed up with
   // submissionInitial -> household
