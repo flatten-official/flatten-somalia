@@ -17,7 +17,9 @@
     "doc": "apidoc -i ./src -o ./docs && open-cli ./docs/index.html",
     "depcheck": "depcheck . --ignores=\"eslint*\" --ignore-dirs=\"coverage,docs\"",
     "lint": "eslint --fix .",
-    "auth": "gcloud auth login && gcloud auth application-default login && gcloud config set project flatten-staging-271921"
+    "auth": "gcloud auth login && gcloud auth application-default login && gcloud config set project flatten-staging-271921",
+    "script": "node scripts/launcher.js",
+    "deploy": "node deployment/createBranchJson.js && gcloud config set project flatten-staging-271921 && gcloud builds submit"
   },
   "dependencies": {
     "@google-cloud/secret-manager": "^2.1.0",
@@ -37,6 +39,8 @@
   },
   "devDependencies": {
     "apidoc": "^0.22.1",
+    "dotenv": "^8.2.0",
+    "branch-name": "^1.0.0",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-jest": "^23.13.1",

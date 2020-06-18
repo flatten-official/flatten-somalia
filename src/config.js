@@ -57,6 +57,11 @@ const environmentSpecificConfig = {
       jwtSecret: "sa6mSrM8cs&70*Dy", // not important since only used in testing
     },
   },
+  scriptProduction: {
+    secrets: {
+      mongoUri: process.env.MONGO_URI,
+    },
+  },
 };
 
 const buildConfig = (customConfig = {}) => {
@@ -64,7 +69,10 @@ const buildConfig = (customConfig = {}) => {
   const environmentConfig = environmentSpecificConfig[process.env.ENVIRONMENT];
 
   if (!environmentConfig)
-    throw `Ensure you properly set the ENVIRONMENT env variable (${process.env.ENVIRONMENT})`;
+    console.log(
+      `Info: No ENVIRONMENT specified, some configs might not be properly initialized.
+      If problems occur ensure you properly set the ENVIRONMENT env variable (${process.env.ENVIRONMENT})`
+    );
 
   return _.defaultsDeep(customConfig, environmentConfig, sharedConfig);
 };
@@ -74,7 +82,7 @@ let Config = buildConfig(); // Set during setup() is called
 const getConfig = () => Config;
 
 const loadSecrets = async () => {
-  if (!getConfig().secretId) return; // Include null check since some scripts override this property to null
+  if (!getConfig().secretId) return; // Don't load secrets if no ID specified
 
   const secretJson = await getJSONSecret(getConfig().secretId);
   for (const key in getConfig().secrets) {
