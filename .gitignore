@@ -5,6 +5,7 @@ coverage
 docs
 .eslintcache
 app.yaml
+branch.json
 
 # macOS system files
 .DS_Store
