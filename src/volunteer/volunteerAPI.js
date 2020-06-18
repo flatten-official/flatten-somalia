@@ -37,4 +37,8 @@ async function getVolunteerList(userData) {
   return [403, []];
 }
 
+async function enableVolunteerById() {}
+
+async function disableVolunteerById() {}
+
 module.exports = { addVolunteerAndAuthenticate, getVolunteerList };

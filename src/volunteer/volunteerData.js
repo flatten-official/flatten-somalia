@@ -5,6 +5,16 @@ const _ = require("lodash");
 const Permissions = {
   manageVolunteers: "manageVolunteers",
   submitForms: "submitForms",
+  // is the user still enabled (allowed to access the system)
+  // todo - add check in the middleware to disable accounts
+  active: "active",
+};
+
+// permission groups used to grant ability to modify particular users.
+// for the moment, just used to allow enable/suspend accounts
+const PermissionGroups = {
+  volunteer: "volunteer",
+  admin: "admin",
 };
 
 Object.freeze(Permissions);
@@ -37,11 +47,24 @@ const Volunteer = mongoose.model(
       type: [
         {
           type: String,
-          enum: [Permissions.manageVolunteers, Permissions.submitForms],
+          enum: [
+            Permissions.manageVolunteers,
+            Permissions.submitForms,
+            Permissions.active,
+          ],
           required: true,
         },
       ],
       required: true,
+    },
+    permissionGroups: {
+      type: [
+        {
+          type: String,
+          enum: [PermissionGroups.volunteer, PermissionGroups.admin],
+          required: true,
+        },
+      ],
     },
     gender: String, // TODO Make enum
     addedBy: mongoose.ObjectId,
@@ -50,7 +73,8 @@ const Volunteer = mongoose.model(
 );
 
 const defaultVolunteer = {
-  permissions: [Permissions.submitForms],
+  permissions: [Permissions.submitForms, Permissions.active],
+  permissionGroups: [Permissions.volunteer],
 };
 
 const getNextFriendlyId = async () => {
@@ -103,6 +127,7 @@ const findVolunteerByEmail = async (email) => {
 const getVolunteerList = async () => {
   const volunteers = await Volunteer.find({});
   return volunteers.map((v) => ({
+    _id: v._id,
     email: v.email,
     name: v.name,
   }));
@@ -117,4 +142,5 @@ module.exports = {
   getVolunteerList,
   getNextFriendlyId,
   Permissions,
+  PermissionGroups,
 };

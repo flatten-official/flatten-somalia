@@ -6,7 +6,11 @@ const {
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
-const { login, makeVolunteerRequestBody } = require("../../testUtils/requests");
+const {
+  login,
+  TEST_ADMIN,
+  makeVolunteerRequestBody,
+} = require("../../testUtils/requests");
 
 const dummyVolunteers = [
   {
@@ -33,9 +37,7 @@ describe("endpoint POST /volunteer", () => {
   afterAll(async () => await util.closeDatabase());
 
   it("should return a correct list of volunteers", async () => {
-    const { agent, volunteer: adminVolunteer } = await login(app, {
-      permissions: [Permissions.manageVolunteers],
-    });
+    const { agent, volunteer: adminVolunteer } = await login(app, TEST_ADMIN);
 
     for (const v of dummyVolunteers) {
       const res = await agent
@@ -52,7 +54,8 @@ describe("endpoint POST /volunteer", () => {
     list = list
       // remove the admin volunteer
       .filter((v) => v.email !== adminVolunteer.email)
-      .sort((v) => v.email);
+      .sort((v) => v.email)
+      .map((v) => ({ ...v, _id: undefined }));
 
     expect(list).toStrictEqual(dummyVolunteers);
   });

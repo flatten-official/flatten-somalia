@@ -1,4 +1,8 @@
-const { addVolunteer } = require("../../src/volunteer/volunteerData");
+const {
+  addVolunteer,
+  Permissions,
+  PermissionGroups,
+} = require("../../src/volunteer/volunteerData");
 const { signToken } = require("../../src/utils/jwt");
 const supertest = require("supertest");
 const _ = require("lodash");
@@ -8,6 +12,14 @@ const TEST_VOLUNTEER = {
   email: "default_email@example.ca",
   addedBy: null,
   teamName: "testTeam",
+  permissionGroups: [PermissionGroups.volunteer],
+};
+
+const TEST_ADMIN = {
+  name: "Dilbert's Boss",
+  email: "admin@example.com",
+  permissions: [Permissions.manageVolunteers, Permissions.active],
+  permissionGroups: [PermissionGroups.admin],
 };
 
 const makeVolunteerRequestBody = (data) => {
@@ -25,6 +37,7 @@ const login = async (app, volunteer = {}) => {
     { email: "default_email2@example.ca" }, // Provide an email to not cause collisions if default is used in test
     TEST_VOLUNTEER
   );
+  console.log(volunteer);
 
   volunteer = await addVolunteer(volunteer);
 
@@ -35,4 +48,9 @@ const login = async (app, volunteer = {}) => {
   return { agent, volunteer };
 };
 
-module.exports = { TEST_VOLUNTEER, makeVolunteerRequestBody, login };
+module.exports = {
+  TEST_VOLUNTEER,
+  TEST_ADMIN,
+  makeVolunteerRequestBody,
+  login,
+};
