@@ -10,6 +10,7 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
     name: newVolunteerData.name,
     email: newVolunteerData.email,
     addedBy: addedByData["_id"],
+    teamName: newVolunteerData.teamName,
     permissions,
     // todo - gender and age
   };
