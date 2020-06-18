@@ -17,12 +17,12 @@ jobs:
       with:
         node-version: '10'
     - run: npm ci
-    - run: npm test
-    - name: Code Climate Coverage Action
+    - name: test with coverage
       uses: paambaati/codeclimate-action@v2.6.0
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
+        coverageCommand: npm test
         coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
       
 
