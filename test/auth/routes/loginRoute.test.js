@@ -12,9 +12,9 @@ const { addVolunteer } = require("../../../src/volunteer/volunteerData");
 const { getConfig } = require("../../../src/config");
 const { TEST_VOLUNTEER } = require("../../testUtils/requests");
 
-let request;
-
 describe("test /auth/login", () => {
+  let request;
+
   beforeAll(async () => {
     await util.connectToDatabase();
     request = supertest(await getApp());
@@ -24,7 +24,7 @@ describe("test /auth/login", () => {
     await util.clearDatabase();
     jest.clearAllMocks();
   });
-  afterAll(async () => await util.closeDatabase());
+  afterAll(() => util.closeDatabase());
 
   it("should return 200 status at /", async () => {
     const res = await request.get("/");
@@ -39,7 +39,7 @@ describe("test /auth/login", () => {
     await request.post("/auth/login").send({ email: "" }).expect(400);
     await request
       .post("/auth/login")
-      .send({ email: '{"$gt": ""}' })
+      .send({ email: '{"$gt": ""}' }) // tests a No-SQL injection attempt
       .expect(422);
   });
 
