@@ -114,8 +114,9 @@ describe("submissions:", () => {
     await util.connectToDatabase();
     app = await getApp();
   });
-  afterEach(async () => await util.clearDatabase());
-  afterAll(async () => await util.closeDatabase());
+
+  afterEach(() => util.clearDatabase());
+  afterAll(() => util.closeDatabase());
 
   describe("gravedigger Survey", () => {
     it("should add submission and deaths as expected", async () => {
@@ -124,8 +125,6 @@ describe("submissions:", () => {
       await agent
         .post("/survey/gravedigger")
         .send(testData.gravediggerRequestBody)
-        .set("Content-Type", "application/json")
-        .set("Accept", "application/json")
         .expect(200);
 
       const submissionDocuments = await GravediggerSurveySubmission.model.find();
@@ -138,8 +137,6 @@ describe("submissions:", () => {
       await agent
         .post("/survey/gravedigger")
         .send(testData.gravediggerRequestBody)
-        .set("Content-Type", "application/json")
-        .set("Accept", "application/json")
         .expect(403);
 
       const submissionDocuments = await GravediggerSurveySubmission.model.find();
@@ -168,8 +165,6 @@ describe("submissions:", () => {
       await agent
         .post("/survey/hospital")
         .send(testData.hospitalRequestBody)
-        .set("Content-Type", "application/json")
-        .set("Accept", "application/json")
         .expect(200);
 
       const submissionDocuments = await HospitalSurveySubmission.model.find();
@@ -183,8 +178,6 @@ describe("submissions:", () => {
       await agent
         .post("/survey/hospital")
         .send(testData.hospitalRequestBody)
-        .set("Content-Type", "application/json")
-        .set("Accept", "application/json")
         .expect(403);
 
       const submissionDocuments = await HospitalSurveySubmission.model.find();

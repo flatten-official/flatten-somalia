@@ -1,41 +1,71 @@
-const volunteerData = require("../../src/volunteer/volunteerData");
+const Volunteer = require("../../src/volunteer/volunteerData");
 const util = require("../testUtils/mongo");
-
-const mongoose = require("mongoose");
-
-const _ = require("lodash");
-const { Volunteer } = require("../../src/volunteer/volunteerData");
 
 const basicVolunteer = {
   name: "Name",
   teamName: "Flatten",
-  friendlyId: "001",
+  email: "example@flatten.ca",
 };
 
-describe("submission database functions", () => {
-  beforeAll(async () => await util.connectToDatabase());
-  afterEach(async () => await util.clearDatabase());
-  afterAll(async () => await util.closeDatabase());
+describe("volunteer database functions", () => {
+  beforeAll(() => util.connectToDatabase());
+  afterEach(() => util.clearDatabase());
+  afterAll(() => util.closeDatabase());
 
-  it("should match submissions correctly", async () => {
-    const volunteer = await volunteerData.addVolunteer(
-      _.defaults(
-        { ...basicVolunteer, email: "lastname@gmail.com" },
-        volunteerData.defaultVolunteer
-      )
+  it("should find the same volunteer as that which was added", async () => {
+    await Volunteer.addVolunteer(basicVolunteer);
+
+    const volunteer = await Volunteer.findVolunteerByEmail(
+      basicVolunteer.email
     );
 
-    const volunteerBad = await volunteerData.addVolunteer(
-      _.defaults(
-        { ...basicVolunteer, email: "firstname.lastname@gmail.com" },
-        volunteerData.defaultVolunteer
-      )
+    // For each field within basic volunteer
+    Object.keys(basicVolunteer).forEach((property) => {
+      expect(volunteer[property]).toStrictEqual(basicVolunteer[property]);
+    });
+  });
+
+  it("should not find volunteer for bad searches", async () => {
+    await Volunteer.addVolunteer(basicVolunteer);
+
+    const goodEmail = basicVolunteer.email;
+
+    const wrongEmails = [
+      "a" + goodEmail,
+      goodEmail + "a",
+      "nonesense@example.ca",
+      goodEmail.slice(0, 2),
+      goodEmail.slice(2),
+      goodEmail.slice(2, 3),
+    ];
+
+    for (const wrongEmail in wrongEmails) {
+      const result = await Volunteer.findVolunteerByEmail(wrongEmail);
+      expect(result).toBeNull();
+    }
+  });
+
+  it("should match the proper email when there's a similar email", async () => {
+    const volunteer = await Volunteer.addVolunteer({
+      ...basicVolunteer,
+      email: "lastname@gmail.com",
+    });
+
+    await Volunteer.addVolunteer({
+      ...basicVolunteer,
+      email: "firstname.lastname@gmail.com",
+    });
+
+    const volunteersFound = await Volunteer.volunteerRegex(
+      "lastname@gmail.com"
     );
 
-    const matches = await volunteerData.volunteerRegex("lastname@gmail.com");
+    expect(volunteersFound).toHaveLength(1);
+    expect(volunteersFound[0]._id).toStrictEqual(volunteer._id);
 
-    expect(matches[0]._id).toStrictEqual(volunteer._id);
-
-    expect(matches).toHaveLength(1);
+    const volunteerFound = await Volunteer.findVolunteerByEmail(
+      "lastname@gmail.com"
+    );
+    expect(volunteerFound._id).toStrictEqual(volunteer._id);
   });
 });
