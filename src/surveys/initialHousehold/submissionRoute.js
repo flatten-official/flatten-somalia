@@ -1,11 +1,11 @@
-const submissionApi = require("./submissionAPI");
-const { Error } = require("mongoose");
+const { isValidationTypeError } = require("../dataUtil");
+const { initialSubmission } = require("./api");
 
 module.exports = async (req, res) => {
   try {
     if (req.body.people === undefined) req.body.people = [];
     if (req.body.deaths === undefined) req.body.deaths = [];
-    await submissionApi.initialSubmission(
+    await initialSubmission(
       res.locals.volunteer._id,
       res.locals.volunteer.teamName,
       req.body.schema,
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
     );
     res.sendStatus(200);
   } catch (e) {
-    if (e instanceof Error.ValidationError) {
+    if (isValidationTypeError(e)) {
       console.error(e);
       res.status(400).send("Validation problem with form models.");
     } else throw e;

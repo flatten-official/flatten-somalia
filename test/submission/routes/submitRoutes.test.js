@@ -3,20 +3,63 @@ const util = require("../../testUtils/mongo");
 
 const { login } = require("../../testUtils/requests");
 
-const submissionData = require("../../../src/submissionInitial/submissionData");
+const Submission = require("../../../src/surveys/initialHousehold/submissionData");
+const Household = require("../../../src/surveys/initialHousehold/householdData");
+const Person = require("../../../src/surveys/initialHousehold/peopleData");
+const mongoose = require("mongoose");
+
 const volunteerData = require("../../../src/volunteer/volunteerData");
 
 const sampleSubmission = {
-  household: {
-    someHouseholdData: "foo",
-    followUpId: "bar-007",
+  metadata: {
+    location: {
+      lat: 50.3,
+      lng: -79.3,
+      accuracy: 1696,
+      altitude: null,
+      wasManual: false,
+    },
+    timeToComplete: 27858,
+    consentGiven: true,
+    uploadTimestamp: Date.now(),
   },
-  people: [{ name: "personA" }, { name: "personB" }],
-  deaths: [{ name: "personC" }],
-  metadata: { filledOutTimestamp: Date.now(), consentGiven: true },
-  schema: {
-    form: "volunteerInitialForm",
-    version: "0.1",
+  followUp: { inProgress: false },
+  addedBy: mongoose.Types.ObjectId("5ecebd24519f2226845d64b0"),
+  teamName: "Flatten",
+  submissionSchema: { form: "initialSurvey", version: "1.0.3" },
+  people: [],
+  household: {
+    data: {
+      followUpId: "5-15559",
+      sharePhoneNumberConsent: "willNotSharePhoneNumber",
+      email: "",
+      district: { name: "Hawl Wadag" },
+      housingType: "tents",
+      deathsWithinHousehold: "no",
+      supportRequiredForCOVID19RiskManagement: {
+        sanitation: false,
+        medicalSupport: false,
+        financial: true,
+        housing: false,
+        noSupport: false,
+        other: false,
+      },
+      householdNeeds: {
+        money: false,
+        sanitation: false,
+        healthcareAccess: false,
+        housingSupport: false,
+        educationalSupport: true,
+        emotionalSupport: false,
+        noHouseholdNeeds: false,
+        other: false,
+      },
+      followupVisitConsent: "no",
+      ownershipType: "own",
+      roomsCount: 1,
+      residentsCount: 1,
+    },
+    ref: mongoose.Types.ObjectId("5ee2b0edbcfd6473c4faa5b6"),
   },
 };
 
@@ -59,9 +102,9 @@ describe("test /auth", () => {
       .set("Accept", "application/json")
       .expect(200);
 
-    const allSubmissions = await submissionData.Submission.find();
-    const allHouseholds = await submissionData.Household.find();
-    const allPeople = await submissionData.Person.find();
+    const allSubmissions = await Submission.model.find();
+    const allHouseholds = await Household.model.find();
+    const allPeople = await Person.model.find();
 
     expect(allSubmissions).toHaveLength(1);
     expect(allHouseholds).toHaveLength(1);
@@ -93,9 +136,9 @@ describe("test /auth", () => {
       .set("Accept", "application/json")
       .expect(403);
 
-    const allSubmissions = await submissionData.Submission.find();
-    const allHouseholds = await submissionData.Household.find();
-    const allPeople = await submissionData.Person.find();
+    const allSubmissions = await Submission.model.find();
+    const allHouseholds = await Household.model.find();
+    const allPeople = await Person.model.find();
 
     expect(allSubmissions).toHaveLength(0);
     expect(allHouseholds).toHaveLength(0);
@@ -112,9 +155,9 @@ describe("test /auth", () => {
       .set("Accept", "application/json")
       .expect(400);
 
-    const allSubmissions = await submissionData.Submission.find();
-    const allHouseholds = await submissionData.Household.find();
-    const allPeople = await submissionData.Person.find();
+    const allSubmissions = await Submission.model.find();
+    const allHouseholds = await Household.model.find();
+    const allPeople = await Person.model.find();
 
     expect(allSubmissions).toHaveLength(0);
     expect(allHouseholds).toHaveLength(0);
