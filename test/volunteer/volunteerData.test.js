@@ -37,5 +37,13 @@ describe("submission database functions", () => {
     expect(matches[0]._id).toStrictEqual(volunteer._id);
 
     expect(matches).toHaveLength(1);
+
+    const findMatches = await volunteerData.findVolunteerByEmail(
+      "lastname@gmail.com"
+    );
+    const findNoMatch = await volunteerData.findVolunteerByEmail("@gmail.com");
+
+    expect(findMatches._id).toStrictEqual(volunteer._id);
+    expect(findNoMatch).toBeNull();
   });
 });
