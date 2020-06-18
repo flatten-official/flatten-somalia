@@ -34,14 +34,12 @@ describe("test /auth/token", () => {
 
   it("should fail with 401 for a token that expires immediately", async () => {
     const volunteer = await addVolunteer(TEST_VOLUNTEER);
-
-    // We test both the good and bad token to make sure it's not the test that is broken
     const badToken = await signToken({ id: volunteer._id }, 0); // 0 minute expiry (already expired)
 
-    const badRes = await request.get("/auth/token?token=" + badToken);
+    const res = await request.get("/auth/token?token=" + badToken);
 
-    expect(badRes.status).toBe(401);
-    expect(badRes.headers["set-cookie"]).toBeUndefined();
+    expect(res.status).toBe(401);
+    expect(res.headers["set-cookie"]).toBeUndefined();
   });
 
   it("should return a cookie & redirect for a valid token", async () => {
