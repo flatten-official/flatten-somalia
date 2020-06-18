@@ -6,20 +6,18 @@ const {
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
-const { login, TEST_VOLUNTEER } = require("../../testUtils/requests");
+const { login, makeVolunteerRequestBody } = require("../../testUtils/requests");
 
 const dummyVolunteers = [
   {
     name: "new_name",
     email: "a1@example.com",
-    permSubmitForms: true,
   },
   {
     name: "new_name2",
     email: "a2@example.com",
-    permSubmitForms: true,
   },
-];
+].sort((v) => v.email);
 
 describe("endpoint POST /volunteer", () => {
   let app;
@@ -40,20 +38,23 @@ describe("endpoint POST /volunteer", () => {
     });
 
     for (const v of dummyVolunteers) {
-      const res = await agent.post("/volunteer").send(v);
+      const res = await agent
+        .post("/volunteer")
+        .send(makeVolunteerRequestBody({ ...v, permSubmitForms: true }));
       expect(res.status).toBe(200);
     }
 
     const res = await agent.get("/volunteer/list").send({});
 
-    const list = res.body();
+    let list = res.body;
 
-    expect(list).toHaveLength(2);
+    expect(list).toHaveLength(2 + 1);
+    list = list
+      // remove the admin volunteer
+      .filter((v) => v.email !== adminVolunteer.email)
+      .sort((v) => v.email);
 
-    expect(list[0].name).toStrictEqual(dummyVolunteers[0].name);
-    expect(list[1].name).toStrictEqual(dummyVolunteers[1].name);
-    expect(list[0].email).toStrictEqual(dummyVolunteers[0].email);
-    expect(list[1].email).toStrictEqual(dummyVolunteers[1].email);
+    expect(list).toStrictEqual(dummyVolunteers);
   });
 
   it("should fail with 403 for missing permissions", async () => {

@@ -10,6 +10,10 @@ const TEST_VOLUNTEER = {
   teamName: "testTeam",
 };
 
+const makeVolunteerRequestBody = (data) => {
+  return _.defaults({ data: _.defaults(data, TEST_VOLUNTEER) });
+};
+
 /**
  * Most importantly returns an agent that stores cookies and can be used to call other endpoints with cookies
  */
@@ -31,4 +35,4 @@ const login = async (app, volunteer = {}) => {
   return { agent, volunteer };
 };
 
-module.exports = { TEST_VOLUNTEER, login };
+module.exports = { TEST_VOLUNTEER, makeVolunteerRequestBody, login };

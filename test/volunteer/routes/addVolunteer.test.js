@@ -7,12 +7,8 @@ const {
 const { getApp } = require("../../../src/app");
 const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
-const { login, TEST_VOLUNTEER } = require("../../testUtils/requests");
+const { login, makeVolunteerRequestBody } = require("../../testUtils/requests");
 const _ = require("lodash");
-
-const makeVolunteerRequestBody = (data) => {
-  return _.defaults({ data: _.defaults(data, TEST_VOLUNTEER) });
-};
 
 describe("endpoint POST /volunteer", () => {
   let app;

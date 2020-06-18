@@ -102,9 +102,10 @@ const findVolunteerByEmail = async (email) => {
 
 const getVolunteerList = async () => {
   const volunteers = await Volunteer.find({});
-  return volunteers.map((v) => {
-    v.email, v.name;
-  });
+  return volunteers.map((v) => ({
+    email: v.email,
+    name: v.name,
+  }));
 };
 
 module.exports = {

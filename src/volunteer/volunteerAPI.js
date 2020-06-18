@@ -31,7 +31,7 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
 }
 
 async function getVolunteerList(userData) {
-  if (Permissions.manageVolunteers in userData.permissions) {
+  if (userData.permissions.indexOf(Permissions.manageVolunteers) > -1) {
     return [200, await volunteerData.getVolunteerList()];
   }
   return [403, []];
