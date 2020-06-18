@@ -65,7 +65,9 @@
       "./test/setup.js"
     ],
     "collectCoverage": true,
-    "coverageReporters": ["lcov"]
+    "coverageReporters": [
+      "lcov"
+    ]
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
