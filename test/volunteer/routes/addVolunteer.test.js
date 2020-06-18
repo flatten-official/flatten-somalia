@@ -1,6 +1,5 @@
 const {
   findVolunteerByEmail,
-  Volunteer,
   Permissions,
 } = require("../../../src/volunteer/volunteerData");
 

@@ -31,27 +31,25 @@ describe("test /auth/login", () => {
     expect(res.status).toBe(200);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it("should return error if invalid emails are passed", async () => {
-    let res = await request.post("/auth/login");
-    expect(res.status).toBe(400);
-
-    res = await request.post("/auth/login").send({ email: "gmail.com" });
-    expect(res.status).toBe(422);
-
-    res = await request.post("/auth/login").send({ email: "" });
-    expect(res.status).toBe(400);
-
-    res = await request.post("/auth/login").send({ email: '{"$gt": ""}' });
-    expect(res.status).toBe(422);
+    await request.post("/auth/login").expect(400);
+    await request.post("/auth/login").send({}).expect(400);
+    await request.post("/auth/login").send({ email: "gmail.com" }).expect(422);
+    await request.post("/auth/login").send({ email: "" }).expect(400);
+    await request
+      .post("/auth/login")
+      .send({ email: '{"$gt": ""}' })
+      .expect(422);
   });
 
   it("should return success if an unknown email is submitted and not send email", async () => {
     await addVolunteer(TEST_VOLUNTEER);
 
-    const res = await request
+    await request
       .post("/auth/login")
-      .send({ email: "bad@gmail.com" });
-    expect(res.status).toBe(200);
+      .send({ email: "bad@gmail.com" })
+      .expect(200);
 
     expect(sendEmailMock).toHaveBeenCalledTimes(0);
   });
@@ -59,11 +57,12 @@ describe("test /auth/login", () => {
   it("should return success if a known email is submitted", async () => {
     await addVolunteer(TEST_VOLUNTEER);
 
-    const res = await request
+    await request
       .post("/auth/login")
-      .send({ email: TEST_VOLUNTEER.email });
+      .send({ email: TEST_VOLUNTEER.email })
+      .expect(200);
 
-    expect(res.status).toBe(200);
+    expect(sendEmailMock).toHaveBeenCalledTimes(1);
   });
 
   it("should send email with the payload being the volunteer id", async () => {

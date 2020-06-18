@@ -26,35 +26,41 @@ describe("test /auth/token", () => {
     await util.clearDatabase();
     jest.clearAllMocks();
   });
-  afterAll(async () => await util.closeDatabase());
 
+  afterAll(() => util.closeDatabase());
+
+  // eslint-disable-next-line jest/expect-expect
   it("should return 400 if token is absent", async () => {
-    const res = await request.get("/auth/token");
-    expect(res.status).toBe(400);
+    await request.get("/auth/token").expect(400);
   });
 
   it("should fail with 401 for an old token", async () => {
-    const res = await request.get("/auth/token?token=" + OLD_TOKEN);
-
-    expect(res.status).toBe(401);
+    const res = await request.get("/auth/token?token=" + OLD_TOKEN).expect(401);
     expect(res.headers["set-cookie"]).toBeUndefined();
   });
 
   it("should fail with 401 for a token that expires immediately", async () => {
     const volunteer = await addVolunteer(TEST_VOLUNTEER);
-    const token = await signToken({ id: volunteer._id }, 0); // 0 minute expiry (already expired)
-    const res = await request.get("/auth/token?token=" + token);
 
-    expect(res.status).toBe(401);
-    expect(res.headers["set-cookie"]).toBeUndefined();
-    expect(await findCookiesByVolunteerEmail(volunteer.email)).toStrictEqual(
-      []
-    );
+    // We test both the good and bad token to make sure it's not the test that is broken
+    const badToken = await signToken({ id: volunteer._id }, 0); // 0 minute expiry (already expired)
+    const validToken = await signToken({ id: volunteer._id }, 10); // 10 minute expiry (already expired)
+
+    const badRes = await request.get("/auth/token?token=" + badToken);
+    const goodRes = await request.get("/auth/token?token=" + validToken);
+
+    expect(badRes.status).toBe(401);
+    expect(goodRes.status).toBe(303);
+
+    expect(badRes.headers["set-cookie"]).toBeUndefined();
+    expect(goodRes.headers["set-cookie"]).not.toBeUndefined();
+
+    expect(await findCookiesByVolunteerEmail(volunteer.email)).toHaveLength(1);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it("should fail with 401 for a bad token", async () => {
-    const res = await request.get("/auth/token?token=" + BAD_TOKEN);
-    expect(res.status).toBe(401);
+    await request.get("/auth/token?token=" + BAD_TOKEN).expect(401);
   });
 
   it("should return a cookie & redirect for a valid token", async () => {
@@ -65,8 +71,6 @@ describe("test /auth/token", () => {
     // cookie should exist
     expect(res.headers["set-cookie"]).not.toBeUndefined();
     expect(res.status).toBe(303);
-    expect(await findCookiesByVolunteerEmail(volunteer.email)).not.toHaveLength(
-      0
-    );
+    expect(await findCookiesByVolunteerEmail(volunteer.email)).toHaveLength(1);
   });
 });

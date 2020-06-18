@@ -55,13 +55,16 @@ const testPeopleInitial = [
   [{ name: "Hello World" }],
 ];
 
+/**
+ * From an array 'all', gets the first element that has 'id'
+ */
 const retrieveById = (all, id) =>
   all.filter((obj) => obj._id.toString() === id.toString())[0];
 
 describe("submission database functions", () => {
-  beforeAll(async () => await util.connectToDatabase());
-  afterEach(async () => await util.clearDatabase());
-  afterAll(async () => await util.closeDatabase());
+  beforeAll(() => util.connectToDatabase());
+  afterEach(() => util.clearDatabase());
+  afterAll(() => util.closeDatabase());
 
   it("should write submission to database", async () => {
     const household = await submissionData.createHousehold(
