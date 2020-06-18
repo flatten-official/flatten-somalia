@@ -1,5 +1,7 @@
 # Flatten.so backend
 
+[![codecov](https://codecov.io/gh/flatten-official/backend-so/branch/master/graph/badge.svg?token=BB5WDU32VP)](https://codecov.io/gh/flatten-official/backend-so)
+
 ## Prerequisites
 
 - Latest version of Node10 [here](https://nodejs.org/en/download/releases/).
