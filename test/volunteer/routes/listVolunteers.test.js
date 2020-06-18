@@ -55,7 +55,7 @@ describe("endpoint POST /volunteer", () => {
       // remove the admin volunteer
       .filter((v) => v.email !== adminVolunteer.email)
       .sort((v) => v.email)
-      .map((v) => ({ ...v, _id: undefined }));
+      .map((v) => ({ name: v.name, email: v.email }));
 
     expect(list).toStrictEqual(dummyVolunteers);
   });

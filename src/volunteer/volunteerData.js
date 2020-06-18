@@ -127,6 +127,7 @@ const findVolunteerByEmail = async (email) => {
 
 const getVolunteerList = async () => {
   const volunteers = await Volunteer.find({});
+  console.log(`Found volunteers: ${volunteers}`);
   return volunteers.map((v) => ({
     _id: v._id,
     email: v.email,

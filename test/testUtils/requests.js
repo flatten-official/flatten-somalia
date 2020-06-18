@@ -37,7 +37,6 @@ const login = async (app, volunteer = {}) => {
     { email: "default_email2@example.ca" }, // Provide an email to not cause collisions if default is used in test
     TEST_VOLUNTEER
   );
-  console.log(volunteer);
 
   volunteer = await addVolunteer(volunteer);
 

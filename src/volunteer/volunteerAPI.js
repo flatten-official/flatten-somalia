@@ -13,6 +13,7 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
     teamName: newVolunteerData.teamName,
     addedBy: addedByData["_id"],
     permissions,
+    permissionGroups: newVolunteerData.permissionGroups,
     // todo - gender and age
   };
 
