@@ -1,6 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+let branchName;
+
+try {
+  branchName = require("../../branch.json").name;
+  // eslint-disable-next-line no-empty
+} catch (e) {}
+
 const Footer = () => {
   const { t } = useTranslation("Footer");
   return (
@@ -9,6 +16,7 @@ const Footer = () => {
       <a href="https://flatten.ca/about-us" className="footerLink">
         Flatten
       </a>
+      {branchName ? ` | Branch: ${branchName}` : ""}
     </footer>
   );
 };
