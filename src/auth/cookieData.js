@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
-const { findVolunteerByEmail } = require("../volunteer/volunteerData");
+const {
+  findVolunteerByEmail,
+  findVolunteerById,
+  Permissions,
+  checkVolunteerActiveById,
+} = require("../volunteer/volunteerData");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Cookie = mongoose.model(
@@ -42,7 +47,10 @@ async function readCookie(cookieID) {
 
   if (!cookie) return null;
 
-  if (Date.now() > cookie.expiry) {
+  if (
+    Date.now() > cookie.expiry ||
+    !checkVolunteerActiveById(cookie.volunteerId)
+  ) {
     await deleteCookie(cookieID);
     return null;
   }

@@ -18,12 +18,10 @@ describe("submission database functions", () => {
   afterAll(async () => await util.closeDatabase());
 
   it("should match submissions correctly", async () => {
-    const volunteer = await volunteerData.addVolunteer(
-      _.defaults(
-        { ...basicVolunteer, email: "lastname@gmail.com" },
-        volunteerData.defaultVolunteer
-      )
-    );
+    const volunteer = await volunteerData.addVolunteer({
+      ...basicVolunteer,
+      email: "lastname@gmail.com",
+    });
 
     const volunteerBad = await volunteerData.addVolunteer(
       _.defaults(

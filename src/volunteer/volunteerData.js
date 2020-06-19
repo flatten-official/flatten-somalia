@@ -75,7 +75,7 @@ const Volunteer = mongoose.model(
 
 const defaultVolunteer = {
   permissions: [Permissions.submitForms, Permissions.active],
-  permissionGroups: [Permissions.volunteer],
+  permissionGroups: [PermissionGroups.volunteer],
 };
 
 const getNextFriendlyId = async () => {
@@ -108,6 +108,11 @@ const addVolunteer = async (newVolunteer) => {
  */
 const findVolunteerById = (volunteerId) =>
   Volunteer.findById(volunteerId).exec(); // exec() required to force return of promise
+
+const checkVolunteerActiveById = async (volunteerId) => {
+  const volunteer = await findVolunteerById(volunteerId);
+  return volunteer.permissions.indexOf(Permissions.active) !== -1;
+};
 
 const volunteerRegex = async (email) => {
   return await Volunteer.find({
@@ -143,6 +148,7 @@ module.exports = {
   findVolunteerByEmail,
   getVolunteerList,
   getNextFriendlyId,
+  checkVolunteerActiveById,
   Permissions,
   PermissionGroups,
 };
