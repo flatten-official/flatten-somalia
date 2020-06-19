@@ -1,6 +1,7 @@
 const Submission = require("./submissionData");
 const Household = require("./householdData");
 const Person = require("./peopleData");
+const { BadInputError } = require("../../utils/errors");
 
 async function initialSubmission(
   volunteerId,
@@ -11,6 +12,9 @@ async function initialSubmission(
   deathsData,
   householdData
 ) {
+  // required because we call householdData.followUpId and otherwise we will crash
+  if (!householdData) throw new BadInputError("Household data not provided");
+
   const household = await Household.create(
     householdData.followUpId,
     householdData.phone,

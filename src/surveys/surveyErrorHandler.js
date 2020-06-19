@@ -1,4 +1,4 @@
-const { isValidationTypeError } = require("./dataUtil");
+const { isValidationTypeError } = require("../utils/errors");
 
 // need to keep unused parameter to force function to be an error handler
 // eslint-disable-next-line no-unused-vars

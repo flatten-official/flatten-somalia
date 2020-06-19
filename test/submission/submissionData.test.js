@@ -18,7 +18,7 @@ const testSubmissions = [
         wasManual: false,
       },
       timeToComplete: 27858,
-      consentGiven: true,
+      consentGiven: "true",
       uploadTimestamp: Date.now(),
     },
     followUp: { inProgress: false },
@@ -257,23 +257,23 @@ describe("submission database functions", () => {
     const retrievedSubmission = all[0];
 
     expect(retrievedSubmission._id).toStrictEqual(submission._id);
-    expect(testSubmissions[0].addedBy).toStrictEqual(
-      retrievedSubmission.addedBy
+    expect(retrievedSubmission.addedBy).toStrictEqual(
+      testSubmissions[0].addedBy
     );
-    expect(testSubmissions[0].submissionSchema.form).toStrictEqual(
-      retrievedSubmission.submissionSchema.form
+    expect(retrievedSubmission.submissionSchema.form).toStrictEqual(
+      testSubmissions[0].submissionSchema.form
     );
-    expect(testSubmissions[0].submissionSchema.version).toStrictEqual(
-      retrievedSubmission.submissionSchema.version
+    expect(retrievedSubmission.submissionSchema.version).toStrictEqual(
+      testSubmissions[0].submissionSchema.version
     );
-    expect(testSubmissions[0].metadata.filledOutTimestamp).toStrictEqual(
-      retrievedSubmission.metadata.filledOutTimestamp
+    expect(retrievedSubmission.metadata.filledOutTimestamp).toStrictEqual(
+      testSubmissions[0].metadata.filledOutTimestamp
     );
-    expect(testSubmissions[0].metadata.timeToComplete).toStrictEqual(
-      retrievedSubmission.metadata.timeToComplete
+    expect(retrievedSubmission.metadata.timeToComplete).toStrictEqual(
+      testSubmissions[0].metadata.timeToComplete
     );
-    expect(testSubmissions[0].metadata.consentGiven).toStrictEqual(
-      retrievedSubmission.metadata.consentGiven
+    expect(retrievedSubmission.metadata.consentGiven).toMatch(
+      testSubmissions[0].metadata.consentGiven
     );
   });
 
