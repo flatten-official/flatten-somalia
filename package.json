@@ -35,7 +35,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.15",
-    "validator": "^13.0.0"
+    "validator": "^13.0.0",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "apidoc": "^0.22.1",
