@@ -14,6 +14,7 @@ const submitFollowUpRoute = require("./submissionInitial/submitFollowUpRoute");
 const submitGetNextRoute = require("./submissionInitial/submitGetNextRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
 const listVolunteersRoute = require("./volunteer/listVolunteersRoute");
+const activateVolunteerRoute = require("./volunteer/activateVolunteerRoute");
 const rootRoute = require("./utils/express/root");
 
 const router = express.Router();
@@ -91,7 +92,7 @@ router.post(
 );
 
 /**
- * @api {get} /volunteer List volunteers
+ * @api {get} /volunteer/list List volunteers
  * @apiName AddVolunteer
  * @apiGroup Volunteer
  */
@@ -99,6 +100,17 @@ router.get(
   "/volunteer/list",
   protectedMiddleware([Permissions.manageVolunteers]),
   listVolunteersRoute
+);
+
+/**
+ * @api {post} /volunteer/activate Activate and deactivate volunteers
+ * @apiName ActivateVolunteers
+ * @apiGroup Volunteer
+ */
+router.post(
+  "/volunteer/activate",
+  protectedMiddleware([Permissions.manageVolunteers]),
+  activateVolunteerRoute
 );
 
 /**

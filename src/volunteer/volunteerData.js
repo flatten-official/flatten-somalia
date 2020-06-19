@@ -140,6 +140,87 @@ const getVolunteerList = async () => {
   }));
 };
 
+const addPermissionById = async (
+  volunteerIdToUpdate,
+  permission,
+  volunteerPermissionGroups
+) => {
+  let success = await performPermissionBasedUpdate(
+    volunteerPermissionGroups,
+    volunteerIdToUpdate,
+    async (volunteerToUpdate) => {
+      if (!volunteerToUpdate.permissions.includes(permission)) {
+        try {
+          volunteerToUpdate.permissions.push(permission);
+          await volunteerToUpdate.save();
+          return true;
+        } catch (e) {
+          console.error(e);
+          return false;
+        }
+      }
+    }
+  );
+  return success;
+};
+
+const removePermissionById = async (
+  volunteerIdToUpdate,
+  permission,
+  volunteerPermissionGroups
+) => {
+  performPermissionBasedUpdate(
+    volunteerPermissionGroups,
+    volunteerIdToUpdate,
+    async (volunteerToUpdate) => {
+      if (volunteerToUpdate.permissions.includes(permission)) {
+        try {
+          volunteerToUpdate.permissions = volunteerToUpdate.permissions.filter(
+            (p) => p !== permission
+          );
+          await volunteerToUpdate.save();
+          return true;
+        } catch (e) {
+          console.error(e);
+          return false;
+        }
+      }
+    }
+  );
+};
+
+/**
+ * Checks whether a volunteer with permission groups groupsA is permitted to modify a volunteer with permission group groupsB.
+ */
+const checkCanUpdate = (groupsA, groupsB) => {
+  return (
+    groupsA.includes(PermissionGroups.admin) &&
+    groupsB.length === 1 &&
+    groupsB[0] === PermissionGroups.volunteer
+  );
+};
+
+/**
+ * Checks if the volunteer with permission groups updaterPermissionGroups can update the volunteer at
+ * toUpdateId based on permission groups. If it can, apply updateFunc.
+ * */
+
+const performPermissionBasedUpdate = async (
+  updaterPermissionGroups,
+  toUpdateId,
+  updateFunc
+) => {
+  const volunteerToUpdate = await Volunteer.findById(toUpdateId);
+  if (
+    volunteerToUpdate &&
+    checkCanUpdate(updaterPermissionGroups, volunteerToUpdate.permissionGroups)
+  ) {
+    return await updateFunc(volunteerToUpdate);
+  }
+
+  return false;
+};
+
 module.exports = {
   Volunteer,
   addVolunteer,
@@ -151,4 +232,6 @@ module.exports = {
   checkVolunteerActiveById,
   Permissions,
   PermissionGroups,
+  addPermissionById,
+  removePermissionById,
 };

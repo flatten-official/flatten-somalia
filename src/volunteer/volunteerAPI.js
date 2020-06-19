@@ -3,9 +3,9 @@ const { Error } = require("mongoose");
 const volunteerData = require("./volunteerData");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
-  const permissions = newVolunteerData.permSubmitForms
-    ? [Permissions.submitForms]
-    : [];
+  const permissions = newVolunteerData.permissions
+    ? [Permissions.submitForms, Permissions.active]
+    : [Permissions.active];
 
   const volunteer = {
     name: newVolunteerData.name,
@@ -38,8 +38,26 @@ async function getVolunteerList(userData) {
   return [403, []];
 }
 
-async function enableVolunteerById() {}
+async function activateVolunteerById(updaterData, toUpdateInfo) {
+  let success;
+  if (toUpdateInfo.activate) {
+    success = volunteerData.addPermissionById(
+      toUpdateInfo.volunteerId,
+      volunteerData.Permissions.active,
+      updaterData.permissionGroups
+    );
+  } else {
+    success = volunteerData.removePermissionById(
+      toUpdateInfo.volunteerId,
+      volunteerData.Permissions.active,
+      updaterData.permissionGroups
+    );
+  }
+  return [success ? 200 : 500, success ? "Success" : "Internal server error."];
+}
 
-async function disableVolunteerById() {}
-
-module.exports = { addVolunteerAndAuthenticate, getVolunteerList };
+module.exports = {
+  addVolunteerAndAuthenticate,
+  getVolunteerList,
+  activateVolunteerById,
+};
