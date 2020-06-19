@@ -86,21 +86,14 @@ describe("test /auth", () => {
     app = await getApp();
   });
 
-  afterEach(async () => {
-    await util.clearDatabase();
-    jest.clearAllMocks();
-  });
-  afterAll(async () => await util.closeDatabase());
+  afterEach(() => util.clearDatabase());
+
+  afterAll(() => util.closeDatabase());
 
   it("should add submissions, people, and households as expected for an initial submission", async () => {
     const { agent } = await login(app);
 
-    await agent
-      .post("/submit/initial")
-      .send(sampleSubmission)
-      .set("Content-Type", "application/json")
-      .set("Accept", "application/json")
-      .expect(200);
+    await agent.post("/submit/initial").send(sampleSubmission).expect(200);
 
     const allSubmissions = await Submission.model.find();
     const allHouseholds = await Household.model.find();
@@ -122,19 +115,13 @@ describe("test /auth", () => {
 
     const allVolunteers = await volunteerData.Volunteer.find();
     expect(allVolunteers).toHaveLength(1);
-
     expect(allVolunteers[0].teamName).toStrictEqual(submission.teamName);
   });
 
   it("should fail for a user without the right permissions", async () => {
     const { agent } = await login(app, { permissions: [] });
 
-    await agent
-      .post("/submit/initial")
-      .send(sampleSubmission)
-      .set("Content-Type", "application/json")
-      .set("Accept", "application/json")
-      .expect(403);
+    await agent.post("/submit/initial").send(sampleSubmission).expect(403);
 
     const allSubmissions = await Submission.model.find();
     const allHouseholds = await Household.model.find();
@@ -151,8 +138,6 @@ describe("test /auth", () => {
     await agent
       .post("/submit/initial")
       .send(sampleSubmissionInvalid)
-      .set("Content-Type", "application/json")
-      .set("Accept", "application/json")
       .expect(400);
 
     const allSubmissions = await Submission.model.find();

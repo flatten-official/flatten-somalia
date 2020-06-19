@@ -206,7 +206,6 @@ const testSubmissions = [
     },
   },
 ];
-
 const testHouseholdData = [
   {
     followUpId: "90210",
@@ -225,9 +224,9 @@ const testPeopleInitial = [
 ];
 
 describe("submission database functions", () => {
-  beforeAll(async () => await util.connectToDatabase());
-  afterEach(async () => await util.clearDatabase());
-  afterAll(async () => await util.closeDatabase());
+  beforeAll(() => util.connectToDatabase());
+  afterEach(() => util.clearDatabase());
+  afterAll(() => util.closeDatabase());
 
   it("should write submission to database", async () => {
     const household = await Household.create(testHouseholdData[0].followUpId);

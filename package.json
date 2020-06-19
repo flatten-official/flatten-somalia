@@ -13,7 +13,7 @@
   "scripts": {
     "start": "node src/launch.js",
     "dev": "nodemon src/launch.js",
-    "test": "jest --runInBand --collect-coverage",
+    "test": "jest --runInBand",
     "doc": "apidoc -i ./src -o ./docs && open-cli ./docs/index.html",
     "depcheck": "depcheck . --ignores=\"eslint*\" --ignore-dirs=\"coverage,docs\"",
     "lint": "eslint --fix .",
@@ -63,6 +63,10 @@
     "testEnvironment": "node",
     "setupFiles": [
       "./test/setup.js"
+    ],
+    "collectCoverage": true,
+    "coverageReporters": [
+      "lcov"
     ]
   },
   "lint-staged": {
