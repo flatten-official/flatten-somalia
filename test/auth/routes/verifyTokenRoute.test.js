@@ -7,16 +7,14 @@ const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
 const { TEST_VOLUNTEER } = require("../../testUtils/requests");
 
-let request;
-
-const BAD_TOKEN =
+const MALFORMED_TOKEN =
   "baaaaaaaaaaaaaaaaaaadTokennnnnnnnnnn.eyJpZCI6IjVlY2ViZDI0NTE5ZjIyMjY4NDVkNjRiMCIsImlhdCI6MTU5MDYwODY3NiwiZXhwIjoxNTkxNTA4Njc2fQ.9XsbPNiybwkZl2M7v3orXk_Imn66vvGflRG267MJ6Ds";
-
-// token used here was signed for a valid email on May 30th and should be expired
-const OLD_TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYzZlOWQwODkwODkwNWIxMDFhM2MzZCIsImlhdCI6MTU5MDgxODk2NiwiZXhwIjoxNTkwODE5ODY2fQ.yWaruFe0mRamjXAHW0lPcbWoOWq4s5InMt7ILjpSsys";
+const INVALID_SIGNATURE_TOKEN =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYzZlOWQwODkwODkwNWIxMDFhM2MzZCIsImlhdCI6MTU5MjM0MDUxNSwiZXhwIjoxNTkyMzQxNDE1fQ.UUqyWSns925CsRrgEbKoFe9Nuxyqv_OJbYQX8rrPIN1";
 
 describe("test /auth/token", () => {
+  let request;
+
   beforeAll(async () => {
     await util.connectToDatabase();
     request = supertest(await getApp());
@@ -26,35 +24,22 @@ describe("test /auth/token", () => {
     await util.clearDatabase();
     jest.clearAllMocks();
   });
-  afterAll(async () => await util.closeDatabase());
 
+  afterAll(() => util.closeDatabase());
+
+  // eslint-disable-next-line jest/expect-expect
   it("should return 400 if token is absent", async () => {
-    const res = await request.get("/auth/token");
-    expect(res.status).toBe(400);
-  });
-
-  it("should fail with 401 for an old token", async () => {
-    const res = await request.get("/auth/token?token=" + OLD_TOKEN);
-
-    expect(res.status).toBe(401);
-    expect(res.headers["set-cookie"]).toBeUndefined();
+    await request.get("/auth/token").expect(400);
   });
 
   it("should fail with 401 for a token that expires immediately", async () => {
     const volunteer = await addVolunteer(TEST_VOLUNTEER);
-    const token = await signToken({ id: volunteer._id }, 0); // 0 minute expiry (already expired)
-    const res = await request.get("/auth/token?token=" + token);
+    const badToken = await signToken({ id: volunteer._id }, 0); // 0 minute expiry (already expired)
+
+    const res = await request.get("/auth/token?token=" + badToken);
 
     expect(res.status).toBe(401);
     expect(res.headers["set-cookie"]).toBeUndefined();
-    expect(await findCookiesByVolunteerEmail(volunteer.email)).toStrictEqual(
-      []
-    );
-  });
-
-  it("should fail with 401 for a bad token", async () => {
-    const res = await request.get("/auth/token?token=" + BAD_TOKEN);
-    expect(res.status).toBe(401);
   });
 
   it("should return a cookie & redirect for a valid token", async () => {
@@ -65,8 +50,18 @@ describe("test /auth/token", () => {
     // cookie should exist
     expect(res.headers["set-cookie"]).not.toBeUndefined();
     expect(res.status).toBe(303);
-    expect(await findCookiesByVolunteerEmail(volunteer.email)).not.toHaveLength(
-      0
-    );
+    expect(await findCookiesByVolunteerEmail(volunteer.email)).toHaveLength(1);
+  });
+
+  // eslint-disable-next-line jest/expect-expect
+  it("should fail with 401 for a malformed token", async () => {
+    await request.get("/auth/token?token=" + MALFORMED_TOKEN).expect(401);
+  });
+
+  // eslint-disable-next-line jest/expect-expect
+  it("should fail with 401 for a token with an invalid signature", async () => {
+    await request
+      .get("/auth/token?token=" + INVALID_SIGNATURE_TOKEN)
+      .expect(401);
   });
 });

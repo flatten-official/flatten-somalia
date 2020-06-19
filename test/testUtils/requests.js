@@ -10,7 +10,6 @@ const _ = require("lodash");
 const TEST_VOLUNTEER = {
   name: "default_name",
   email: "default_email@example.ca",
-  addedBy: null,
   teamName: "testTeam",
   permissionGroups: [PermissionGroups.volunteer],
 };

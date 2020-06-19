@@ -1,12 +1,15 @@
 # Flatten.so backend
 
+<a href="https://codeclimate.com/repos/5eebb93769ce914dc100dcd1/maintainability"><img src="https://api.codeclimate.com/v1/badges/a195459a45a7e562ac07/maintainability" /></a>
+<a href="https://codeclimate.com/repos/5eebb93769ce914dc100dcd1/test_coverage"><img src="https://api.codeclimate.com/v1/badges/a195459a45a7e562ac07/test_coverage" /></a>
+
 ## Prerequisites
 
 - Latest version of Node10 [here](https://nodejs.org/en/download/releases/).
 
 ## Setup
 
-1. Ensure an admin has added you to the `Somalia Staging Data Access` group, otherwise you won't have permission to read the database.
+1. Ensure an admin has added you to the `Somalia Staging Data Access` group, otherwise you won't have permission to read the staging database.
 Also ask to be added to the Atlas staging project if you want a GUI to navigate the database.
 
 2. Enable ESLint in your IDE (normally a plugin to install). ESLint is a code linter that checks logic and syntax.
