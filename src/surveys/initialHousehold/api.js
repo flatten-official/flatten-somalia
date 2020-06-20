@@ -21,19 +21,19 @@ async function initialSubmission(
     householdData.email
   );
 
-  const peopleModel = peopleData.map((o) => {
+  const peopleModel = peopleData.map((person) => {
     return {
-      name: o.name,
-      gender: o.gender,
+      name: person.name,
+      gender: person.gender,
       household: household._id,
       alive: true,
     };
   });
 
-  const deathsModel = deathsData.map((o) => {
+  const deathsModel = deathsData.map((death) => {
     return {
-      name: o.name,
-      gender: o.gender,
+      name: death.name,
+      gender: death.gender,
       household: household._id,
       alive: false,
     };
