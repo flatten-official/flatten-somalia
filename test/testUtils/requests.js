@@ -12,12 +12,13 @@ const TEST_VOLUNTEER = {
 /**
  * Most importantly returns an agent that stores cookies and can be used to call other endpoints with cookies
  */
-const login = async (app, volunteer = {}) => {
+const login = async (app, permissions = [], volunteer = {}) => {
   const agent = supertest.agent(app, {});
 
   volunteer = _.defaults(
     volunteer,
     { email: "default_email2@example.ca" }, // Provide an email to not cause collisions if default is used in test
+    { permissions }, // Use the provided permissions array
     TEST_VOLUNTEER
   );
 

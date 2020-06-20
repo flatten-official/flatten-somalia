@@ -1,6 +1,7 @@
 const {
   findVolunteerByEmail,
   Permissions,
+  Volunteer,
 } = require("../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../src/app");
@@ -8,6 +9,7 @@ const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
 const { login } = require("../../testUtils/requests");
 const _ = require("lodash");
+const { getAllPermissionsExcept } = require("../../testUtils/permissions");
 
 const makeRequestBody = (data) => ({ volunteerData: data });
 
@@ -15,7 +17,7 @@ const GOOD_REQUEST_BODY = makeRequestBody({
   name: "new_name",
   email: "new-volunteer@example.ca",
   teamName: "Flatten",
-  permSubmitForms: true,
+  permissions: [Permissions.submitHouseholdSurvey],
 });
 
 describe("endpoint POST /volunteer", () => {
@@ -32,9 +34,9 @@ describe("endpoint POST /volunteer", () => {
   afterAll(async () => await util.closeDatabase());
 
   it("should add a volunteer upon valid request", async () => {
-    const { agent, volunteer: adminVolunteer } = await login(app, {
-      permissions: [Permissions.manageVolunteers],
-    });
+    const { agent, volunteer: adminVolunteer } = await login(app, [
+      Permissions.manageVolunteers,
+    ]);
 
     const res = await agent.post("/volunteer").send(GOOD_REQUEST_BODY);
 
@@ -54,16 +56,17 @@ describe("endpoint POST /volunteer", () => {
       name: "new_name",
       email: GOOD_REQUEST_BODY.volunteerData.email,
       friendlyId: 2, // 1 already taken by admin
-      permissions: [Permissions.submitForms],
+      permissions: [Permissions.submitHouseholdSurvey],
       addedBy: adminVolunteer._id,
       teamName: "Flatten",
     });
   });
 
   it("should fail with 403 for missing permissions", async () => {
-    const { agent } = await login(app, {
-      permissions: [Permissions.submitForms],
-    });
+    const { agent } = await login(
+      app,
+      getAllPermissionsExcept(Permissions.manageVolunteers)
+    );
 
     await agent.post("/volunteer").send(GOOD_REQUEST_BODY).expect(403);
     const newVolunteer = await findVolunteerByEmail(
@@ -72,27 +75,24 @@ describe("endpoint POST /volunteer", () => {
     expect(newVolunteer).toBeNull();
   });
 
-  it("should not use any incorrect flags such as permManageVolunteers", async () => {
-    const { agent } = await login(app, {
-      permissions: [Permissions.manageVolunteers],
-    });
+  it("should throw 403 if trying to add a restricted permissions", async () => {
+    const { agent } = await login(app, [Permissions.manageVolunteers]);
 
-    const badFlags = {
-      permManageVolunteers: true,
-      permissions: [Permissions.manageVolunteers],
-    };
+    const restrictedPermissions = [Permissions.manageVolunteers];
 
-    await agent
-      .post("/volunteer")
-      .send(_.defaultsDeep(makeRequestBody(badFlags), GOOD_REQUEST_BODY))
-      .expect(200);
+    for (const restrictedPermission of restrictedPermissions) {
+      await agent
+        .post("/volunteer")
+        .send(
+          _.defaultsDeep(
+            makeRequestBody({ permissions: [restrictedPermission] }),
+            GOOD_REQUEST_BODY
+          )
+        )
+        .expect(403);
 
-    const newVolunteer = await findVolunteerByEmail(
-      GOOD_REQUEST_BODY.volunteerData.email
-    );
-    expect(newVolunteer.permissions).not.toContain(
-      Permissions.manageVolunteers
-    );
+      expect(await Volunteer.find()).toHaveLength(1);
+    }
   });
 
   it("should fail with 401 when no cookie is provided", async () => {
@@ -106,9 +106,9 @@ describe("endpoint POST /volunteer", () => {
 
   // eslint-disable-next-line jest/expect-expect
   it("should fail with 400 when trying to create a volunteer with an unavailable email address", async () => {
-    const { agent, volunteer: adminVolunteer } = await login(app, {
-      permissions: [Permissions.manageVolunteers],
-    });
+    const { agent, volunteer: adminVolunteer } = await login(app, [
+      Permissions.manageVolunteers,
+    ]);
 
     await agent
       .post("/volunteer")
@@ -123,9 +123,7 @@ describe("endpoint POST /volunteer", () => {
 
   // eslint-disable-next-line jest/expect-expect
   it("should fail with 400 when trying to create a volunteer without an email", async () => {
-    const { agent } = await login(app, {
-      permissions: [Permissions.manageVolunteers],
-    });
+    const { agent } = await login(app, [Permissions.manageVolunteers]);
 
     await agent
       .post("/volunteer")

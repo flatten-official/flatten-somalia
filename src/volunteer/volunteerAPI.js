@@ -1,32 +1,25 @@
+const { PermissionDeniedError } = require("../utils/errors");
 const { addVolunteer, Permissions } = require("./volunteerData");
-const { Error } = require("mongoose");
+
+// Use ALLOWED_PERMISSIONS rather than BLOCKED/RESTRICTED permissions since we don't want the default to be allowed
+const ALLOWED_PERMISSIONS = [
+  Permissions.submitHospitalSurvey,
+  Permissions.submitGravediggerSurvey,
+  Permissions.submitHouseholdSurvey,
+];
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
-  const permissions = newVolunteerData.permSubmitForms
-    ? [Permissions.submitForms]
-    : [];
-
-  const volunteer = {
-    name: newVolunteerData.name,
-    email: newVolunteerData.email,
-    addedBy: addedByData["_id"],
-    teamName: newVolunteerData.teamName,
-    permissions,
-    // todo - gender and age
-  };
-
-  try {
-    await addVolunteer(volunteer);
-  } catch (e) {
-    console.log(e);
-    if (e.message.indexOf("duplicate key error") !== -1)
-      return [400, "Email is already in use"];
-    else if (e instanceof Error.ValidationError)
-      return [400, "Volunteer data malformed"];
-    else throw e;
+  for (const permission of newVolunteerData.permissions) {
+    if (!ALLOWED_PERMISSIONS.includes(permission))
+      throw new PermissionDeniedError(
+        `You can't create a volunteer with permission: ${permission}`
+      );
   }
 
-  return [200, "Success"];
+  // make sure newVolunteerData is the first element such that it doesn't override any other element (since it's user provided)
+  const volunteer = { ...newVolunteerData, addedBy: addedByData._id };
+
+  await addVolunteer(volunteer);
 }
 
 module.exports = { addVolunteerAndAuthenticate };

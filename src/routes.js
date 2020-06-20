@@ -106,7 +106,7 @@ router.post(
  */
 router.post(
   "/submit/initial",
-  protectedMiddleware([Permissions.submitForms]),
+  protectedMiddleware([Permissions.submitHouseholdSurvey]),
   submitInitialRoute
 );
 
@@ -125,7 +125,7 @@ router.post(
  */
 router.post(
   "/survey/gravedigger",
-  protectedMiddleware([Permissions.submitForms]),
+  protectedMiddleware([Permissions.submitGravediggerSurvey]),
   submitGravediggerRoute
 );
 
@@ -144,7 +144,7 @@ router.post(
  */
 router.post(
   "/survey/hospital",
-  protectedMiddleware([Permissions.submitForms]),
+  protectedMiddleware([Permissions.submitHospitalSurvey]),
   submitHospitalRoute
 );
 
@@ -156,7 +156,7 @@ router.post(
  */
 router.post(
   "/submit/followup",
-  protectedMiddleware([Permissions.submitForms]),
+  protectedMiddleware([Permissions.submitHouseholdSurvey]),
   submitFollowUpRoute
 );
 
@@ -168,7 +168,7 @@ router.post(
  */
 router.post(
   "/submit/next",
-  protectedMiddleware([Permissions.submitForms]),
+  protectedMiddleware([Permissions.submitHouseholdSurvey]),
   submitGetNextRoute
 );
 

@@ -2,9 +2,11 @@ const { getApp } = require("../../src/app");
 const util = require("../testUtils/mongo");
 
 const { login } = require("../testUtils/requests");
+const { getAllPermissionsExcept } = require("../testUtils/permissions");
 
 const GravediggerSurveySubmission = require("../../src/surveys/gravedigger/submissionData");
 const HospitalSurveySubmission = require("../../src/surveys/hospital/submissionData");
+const { Permissions } = require("../../src/volunteer/volunteerData");
 
 const testData = {
   gravediggerRequestBody: {
@@ -120,7 +122,7 @@ describe("submissions:", () => {
 
   describe("gravedigger Survey", () => {
     it("should add submission and deaths as expected", async () => {
-      const { agent } = await login(app);
+      const { agent } = await login(app, [Permissions.submitGravediggerSurvey]);
 
       await agent
         .post("/survey/gravedigger")
@@ -132,7 +134,12 @@ describe("submissions:", () => {
     });
 
     it("should fail for a user without the right permissions", async () => {
-      const { agent } = await login(app, { permissions: [] });
+      // All permissions expect the required one
+      const allPermissionsExceptRequired = Object.values(Permissions).filter(
+        (permission) => permission !== Permissions.submitGravediggerSurvey
+      );
+
+      const { agent } = await login(app, allPermissionsExceptRequired);
 
       await agent
         .post("/survey/gravedigger")
@@ -145,7 +152,7 @@ describe("submissions:", () => {
 
     // eslint-disable-next-line jest/expect-expect
     it("should fail with 400 if body doesn't match schema", async () => {
-      const { agent } = await login(app);
+      const { agent } = await login(app, [Permissions.submitGravediggerSurvey]);
 
       await agent
         .post("/survey/gravedigger")
@@ -160,7 +167,7 @@ describe("submissions:", () => {
 
   describe("hospital Survey", () => {
     it("should add submission as expected", async () => {
-      const { agent } = await login(app);
+      const { agent } = await login(app, [Permissions.submitHospitalSurvey]);
 
       await agent
         .post("/survey/hospital")
@@ -173,7 +180,10 @@ describe("submissions:", () => {
     });
 
     it("should fail for a user without the right permissions", async () => {
-      const { agent } = await login(app, { permissions: [] });
+      const { agent } = await login(
+        app,
+        getAllPermissionsExcept(Permissions.submitHospitalSurvey)
+      );
 
       await agent
         .post("/survey/hospital")
@@ -187,7 +197,7 @@ describe("submissions:", () => {
 
     // eslint-disable-next-line jest/expect-expect
     it("should fail with 400 if body doesn't match schema", async () => {
-      const { agent } = await login(app);
+      const { agent } = await login(app, [Permissions.submitHospitalSurvey]);
 
       await agent
         .post("/survey/hospital")

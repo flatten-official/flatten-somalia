@@ -5,6 +5,7 @@ const { login } = require("../../testUtils/requests");
 
 const submissionData = require("../../../src/submissionInitial/submissionData");
 const volunteerData = require("../../../src/volunteer/volunteerData");
+const { Permissions } = require("../../../src/volunteer/volunteerData");
 
 const sampleSubmission = {
   household: {
@@ -48,7 +49,7 @@ describe("test /auth", () => {
   afterAll(() => util.closeDatabase());
 
   it("should add submissions, people, and households as expected for an initial submission", async () => {
-    const { agent } = await login(app);
+    const { agent } = await login(app, [Permissions.submitHouseholdSurvey]);
 
     await agent.post("/submit/initial").send(sampleSubmission).expect(200);
 
@@ -76,7 +77,7 @@ describe("test /auth", () => {
   });
 
   it("should fail for a user without the right permissions", async () => {
-    const { agent } = await login(app, { permissions: [] });
+    const { agent } = await login(app, []);
 
     await agent.post("/submit/initial").send(sampleSubmission).expect(403);
 
@@ -90,7 +91,7 @@ describe("test /auth", () => {
   });
 
   it("should fail for an invalid submission", async () => {
-    const { agent } = await login(app);
+    const { agent } = await login(app, [Permissions.submitHouseholdSurvey]);
 
     await agent
       .post("/submit/initial")

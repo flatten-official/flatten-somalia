@@ -8,7 +8,7 @@ const VOLUNTEERS = [
   {
     name: "Some name",
     email: "example@gmail.com",
-    permissions: [Permissions.submitForms],
+    permissions: [Permissions.submitHouseholdSurvey],
     teamName: "Flatten", // Use Flatten as the team name for people who's submissions should be ignored
   },
 ];

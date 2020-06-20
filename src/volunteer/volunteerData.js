@@ -4,7 +4,9 @@ const _ = require("lodash");
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Permissions = {
   manageVolunteers: "manageVolunteers",
-  submitForms: "submitForms",
+  submitHouseholdSurvey: "submitForms", // DO NOT RENAME, will not be able to work with data
+  submitGravediggerSurvey: "submitGravediggerSurvey",
+  submitHospitalSurvey: "submitHospitalSurvey",
 };
 
 Object.freeze(Permissions);
@@ -38,7 +40,7 @@ const Volunteer = mongoose.model(
       type: [
         {
           type: String,
-          enum: [Permissions.manageVolunteers, Permissions.submitForms],
+          enum: Object.values(Permissions),
           required: true,
         },
       ],
@@ -49,10 +51,6 @@ const Volunteer = mongoose.model(
     age: Number,
   })
 );
-
-const defaultVolunteer = {
-  permissions: [Permissions.submitForms],
-};
 
 const getNextFriendlyId = async () => {
   const largestVolunteer = await Volunteer.find({}, "friendlyId")
@@ -68,13 +66,12 @@ const getNextFriendlyId = async () => {
  * @return {Promise<*>} the volunteer
  */
 const addVolunteer = async (newVolunteer) => {
-  newVolunteer = _.defaults(
+  const volunteer = _.defaults(
     { friendlyId: await getNextFriendlyId() },
-    newVolunteer,
-    defaultVolunteer
+    newVolunteer
   );
 
-  return new Volunteer(newVolunteer).save(); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
+  return new Volunteer(volunteer).save();
 };
 
 /**
