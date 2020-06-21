@@ -13,19 +13,20 @@ const VOLUNTEERS = [
   },
 ];
 
-module.exports.Config = {
-  useAutoSetup: true,
-};
+module.exports.arguments = [VOLUNTEERS];
 
-module.exports.getConfirmationMessage = () =>
-  `Are you sure you want to add the following volunteers to the database.\n${JSON.stringify(
-    VOLUNTEERS
-  )}`;
+module.exports.useAutoSetup = true;
 
-module.exports.run = async () => {
+module.exports.confirmationMessage = `Are you sure you want to add the following volunteers to the database.\n${JSON.stringify(
+  VOLUNTEERS,
+  null,
+  "  "
+)}\n`;
+
+module.exports.run = async (volunteers) => {
   console.log("Adding volunteers to database...");
 
-  for (const volunteer of VOLUNTEERS) {
+  for (const volunteer of volunteers) {
     await addVolunteer(volunteer);
   }
 };
