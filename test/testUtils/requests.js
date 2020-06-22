@@ -11,7 +11,6 @@ const TEST_VOLUNTEER = {
   name: "default_name",
   email: "default_email@example.ca",
   teamName: "testTeam",
-  permissionGroups: [PermissionGroups.volunteer],
 };
 
 const TEST_ADMIN = {
@@ -19,10 +18,6 @@ const TEST_ADMIN = {
   email: "admin@example.com",
   permissions: [Permissions.manageVolunteers, Permissions.active],
   permissionGroups: [PermissionGroups.admin],
-};
-
-const makeVolunteerRequestBody = (data) => {
-  return _.defaults({ data: _.defaults(data, TEST_VOLUNTEER) });
 };
 
 /**
@@ -49,6 +44,5 @@ const login = async (app, volunteer = {}) => {
 module.exports = {
   TEST_VOLUNTEER,
   TEST_ADMIN,
-  makeVolunteerRequestBody,
   login,
 };

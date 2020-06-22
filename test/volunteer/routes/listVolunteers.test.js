@@ -8,9 +8,14 @@ const util = require("../../testUtils/mongo");
 const supertest = require("supertest");
 const {
   login,
+  TEST_VOLUNTEER,
   TEST_ADMIN,
-  makeVolunteerRequestBody,
 } = require("../../testUtils/requests");
+const _ = require("lodash");
+
+const makeVolunteerRequestBody = (data) => {
+  return _.defaults({ data: _.defaults(data, TEST_VOLUNTEER) });
+};
 
 const dummyVolunteers = [
   {
