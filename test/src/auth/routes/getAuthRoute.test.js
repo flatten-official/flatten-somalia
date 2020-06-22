@@ -1,9 +1,9 @@
-const { getApp } = require("../../../src/app");
-const util = require("../../testUtils/mongo");
+const { getApp } = require("../../../../src/app");
+const util = require("../../../testUtils/mongo");
 const supertest = require("supertest");
 
-const { login } = require("../../testUtils/requests");
-const { Permissions } = require("../../../src/volunteer/volunteerData");
+const { login } = require("../../../testUtils/requests");
+const { Permissions } = require("../../../../src/volunteer/volunteerData");
 
 let request;
 let app;
