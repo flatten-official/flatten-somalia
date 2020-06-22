@@ -1,6 +1,7 @@
 const { addVolunteerAndAuthenticate } = require("./volunteerAPI");
 
 module.exports = async (req, res) => {
+  console.log(req.body);
   const [statusCode, message] = await addVolunteerAndAuthenticate(
     // admin doing the adding
     res.locals.volunteer,

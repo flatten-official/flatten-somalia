@@ -10,7 +10,7 @@ const supertest = require("supertest");
 const { login } = require("../../testUtils/requests");
 const _ = require("lodash");
 
-const makeRequestBody = (data) => ({ volunteerData: data });
+const makeRequestBody = (data) => ({ data });
 
 const GOOD_REQUEST_BODY = makeRequestBody({
   name: "new_name",
@@ -39,23 +39,26 @@ describe("endpoint POST /volunteer", () => {
 
     const res = await agent.post("/volunteer").send(GOOD_REQUEST_BODY);
 
-    let newVolunteer = await findVolunteerByEmail(
-      GOOD_REQUEST_BODY.volunteerData.email
-    );
+    let newVolunteer = await findVolunteerByEmail(GOOD_REQUEST_BODY.data.email);
 
     expect(res.status).toBe(200);
     expect(newVolunteer).not.toBeNull();
 
     // remove properties that aren't used in comparison
     newVolunteer = newVolunteer.toJSON();
+
+    expect(newVolunteer.permissions.sort()).toStrictEqual(
+      [Permissions.submitForms, Permissions.active].sort()
+    );
+    delete newVolunteer.permissions;
+
     delete newVolunteer._id;
     delete newVolunteer.__v;
 
     expect(newVolunteer).toStrictEqual({
       name: "new_name",
-      email: GOOD_REQUEST_BODY.volunteerData.email,
+      email: GOOD_REQUEST_BODY.data.email,
       friendlyId: 2, // 1 already taken by admin
-      permissions: [Permissions.submitForms],
       permissionGroups: [PermissionGroups.volunteer],
       addedBy: adminVolunteer._id,
       teamName: "Flatten",
@@ -69,7 +72,7 @@ describe("endpoint POST /volunteer", () => {
 
     await agent.post("/volunteer").send(GOOD_REQUEST_BODY).expect(403);
     const newVolunteer = await findVolunteerByEmail(
-      GOOD_REQUEST_BODY.volunteerData.email
+      GOOD_REQUEST_BODY.data.email
     );
     expect(newVolunteer).toBeNull();
   });
@@ -90,7 +93,7 @@ describe("endpoint POST /volunteer", () => {
       .expect(200);
 
     const newVolunteer = await findVolunteerByEmail(
-      GOOD_REQUEST_BODY.volunteerData.email
+      GOOD_REQUEST_BODY.data.email
     );
     expect(newVolunteer.permissions).not.toContain(
       Permissions.manageVolunteers
@@ -101,7 +104,7 @@ describe("endpoint POST /volunteer", () => {
     await request.post("/volunteer").send(GOOD_REQUEST_BODY).expect(401);
 
     const newVolunteer = await findVolunteerByEmail(
-      GOOD_REQUEST_BODY.volunteerData.email
+      GOOD_REQUEST_BODY.data.email
     );
     expect(newVolunteer).toBeNull();
   });

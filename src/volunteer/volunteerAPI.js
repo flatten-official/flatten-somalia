@@ -3,9 +3,9 @@ const { Error } = require("mongoose");
 const volunteerData = require("./volunteerData");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
-  const permissions = newVolunteerData.permissions
-    ? [Permissions.submitForms, Permissions.active]
-    : [Permissions.active];
+  const permissions = [Permissions.active];
+  if (newVolunteerData.permSubmitForms)
+    permissions.push(Permissions.submitForms);
 
   const volunteer = {
     name: newVolunteerData.name,
@@ -32,10 +32,7 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
 }
 
 async function getVolunteerList(userData) {
-  if (userData.permissions.indexOf(Permissions.manageVolunteers) > -1) {
-    return [200, await volunteerData.getVolunteerList()];
-  }
-  return [403, []];
+  return [200, await volunteerData.getVolunteerList()];
 }
 
 async function activateVolunteerById(updaterData, toUpdateInfo) {
