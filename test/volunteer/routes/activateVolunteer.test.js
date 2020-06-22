@@ -15,7 +15,9 @@ const {
 } = require("../../testUtils/requests");
 const _ = require("lodash");
 
-const makeRequestBody = (data) => ({ data: {...data, permissions: [Permissions.active] }});
+const makeRequestBody = (data) => ({
+  data: { ...data, permissions: [Permissions.active] },
+});
 
 describe("endpoint POST /volunteer", () => {
   let app;
@@ -30,12 +32,14 @@ describe("endpoint POST /volunteer", () => {
   afterEach(async () => await util.clearDatabase());
   afterAll(async () => await util.closeDatabase());
 
+  // eslint-disable-next-line jest/expect-expect
   it("should add a volunteer upon valid request", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, TEST_ADMIN);
 
     let res = await agent
       .post("/volunteer")
-      .send(makeRequestBody(TEST_VOLUNTEER)).expect(200);
+      .send(makeRequestBody(TEST_VOLUNTEER))
+      .expect(200);
 
     let newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).toContain(Permissions.active);
@@ -57,13 +61,45 @@ describe("endpoint POST /volunteer", () => {
     expect(newVolunteer.permissions).toContain(Permissions.active);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it("should fail with 403 for the wrong permission groups", async () => {
+    const { agent, volunteer: adminVolunteer } = await login(
+      app,
+      _.defaults({ permissionGroups: [PermissionGroups.volunteer] }, TEST_ADMIN)
+    );
+
+    let res = await agent
+      .post("/volunteer")
+      .send(makeRequestBody(TEST_VOLUNTEER))
+      .expect(200);
+
+    const newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
+    expect(newVolunteer.permissions).toContain(Permissions.active);
+
+    res = await agent
+      .post("/volunteer/activate")
+      .send({
+        volunteerId: newVolunteer._id,
+        activate: false,
+      })
+      .expect(403);
   });
 
   // eslint-disable-next-line jest/expect-expect
   it("should fail with 400 when trying to update a volunteer with an id that does not exist", async () => {
+    const { agent, volunteer: adminVolunteer } = await login(app, TEST_ADMIN);
+
+    let res = await agent
+      .post("/volunteer")
+      .send(makeRequestBody(TEST_VOLUNTEER))
+      .expect(200);
+
+    res = await agent
+      .post("/volunteer/activate")
+      .send({
+        volunteerId: "randomidthatdoesnotexist",
+        activate: false,
+      })
+      .expect(400);
   });
-
-
-  // TODO test for missing name or invalid permission array. basically too many or missing parameters*/
 });

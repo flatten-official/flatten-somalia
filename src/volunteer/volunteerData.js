@@ -145,7 +145,7 @@ const addPermissionById = async (
   permission,
   volunteerPermissionGroups
 ) => {
-  const success = await performPermissionBasedUpdate(
+  return await performPermissionBasedUpdate(
     volunteerPermissionGroups,
     volunteerIdToUpdate,
     async (volunteerToUpdate) => {
@@ -153,15 +153,14 @@ const addPermissionById = async (
         try {
           volunteerToUpdate.permissions.push(permission);
           await volunteerToUpdate.save();
-          return true;
         } catch (e) {
           console.error(e);
-          return false;
+          return [500, "Internal server"];
         }
       }
+      return [200, "Success"];
     }
   );
-  return success;
 };
 
 const removePermissionById = async (
@@ -169,7 +168,7 @@ const removePermissionById = async (
   permission,
   volunteerPermissionGroups
 ) => {
-  const success = await performPermissionBasedUpdate(
+  return await performPermissionBasedUpdate(
     volunteerPermissionGroups,
     volunteerIdToUpdate,
     async (volunteerToUpdate) => {
@@ -179,15 +178,14 @@ const removePermissionById = async (
             (p) => p !== permission
           );
           await volunteerToUpdate.save();
-          return true;
         } catch (e) {
           console.error(e);
-          return false;
+          return [500, "Internal server"];
         }
       }
+      return [200, "Success"];
     }
   );
-  return success;
 };
 
 /**
@@ -211,16 +209,19 @@ const performPermissionBasedUpdate = async (
   toUpdateId,
   updateFunc
 ) => {
-  const volunteerToUpdate = await Volunteer.findById(toUpdateId);
-  if (
-    volunteerToUpdate &&
-    checkCanUpdate(updaterPermissionGroups, volunteerToUpdate.permissionGroups)
-  ) {
-    console.log("about to update");
-    return await updateFunc(volunteerToUpdate);
-  }
+  let volunteerToUpdate;
 
-  return false;
+  try {
+    volunteerToUpdate = await Volunteer.findById(toUpdateId);
+  } catch (e) {
+    console.log(`Attempt to change active status of invalid ID: ${toUpdateId}`);
+  }
+  if (!volunteerToUpdate) return [400, "Volunteer not found"];
+  if (
+    !checkCanUpdate(updaterPermissionGroups, volunteerToUpdate.permissionGroups)
+  )
+    return [403, "Wrong permissions"];
+  return await updateFunc(volunteerToUpdate);
 };
 
 module.exports = {

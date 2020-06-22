@@ -39,21 +39,19 @@ async function getVolunteerList(userData) {
 }
 
 async function activateVolunteerById(updaterData, toUpdateInfo) {
-  let success;
   if (toUpdateInfo.activate) {
-    success = await volunteerData.addPermissionById(
+    return await volunteerData.addPermissionById(
       toUpdateInfo.volunteerId,
       volunteerData.Permissions.active,
       updaterData.permissionGroups
     );
   } else {
-    success = await volunteerData.removePermissionById(
+    return await volunteerData.removePermissionById(
       toUpdateInfo.volunteerId,
       volunteerData.Permissions.active,
       updaterData.permissionGroups
     );
   }
-  return [success ? 200 : 500, success ? "Success" : "Internal server error."];
 }
 
 module.exports = {
