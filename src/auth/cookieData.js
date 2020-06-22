@@ -3,7 +3,7 @@ const {
   findVolunteerByEmail,
   findVolunteerById,
   Permissions,
-  checkVolunteerActiveById,
+  checkVolunteerAccessById,
 } = require("../volunteer/volunteerData");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
@@ -49,7 +49,7 @@ async function readCookie(cookieID) {
 
   if (
     Date.now() > cookie.expiry ||
-    !checkVolunteerActiveById(cookie.volunteerId)
+    !checkVolunteerAccessById(cookie.volunteerId)
   ) {
     await deleteCookie(cookieID);
     return null;

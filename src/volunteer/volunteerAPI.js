@@ -3,7 +3,7 @@ const { Error } = require("mongoose");
 const volunteerData = require("./volunteerData");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
-  const permissions = [Permissions.active];
+  const permissions = [Permissions.access];
   if (newVolunteerData.permSubmitForms)
     permissions.push(Permissions.submitForms);
 
@@ -39,13 +39,13 @@ async function activateVolunteerById(updaterData, toUpdateInfo) {
   if (toUpdateInfo.activate) {
     return await volunteerData.addPermissionById(
       toUpdateInfo.volunteerId,
-      volunteerData.Permissions.active,
+      volunteerData.Permissions.access,
       updaterData.permissionGroups
     );
   } else {
     return await volunteerData.removePermissionById(
       toUpdateInfo.volunteerId,
-      volunteerData.Permissions.active,
+      volunteerData.Permissions.access,
       updaterData.permissionGroups
     );
   }

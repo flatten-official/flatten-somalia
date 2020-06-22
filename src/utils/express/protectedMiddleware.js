@@ -6,7 +6,7 @@
 // TODO Write tests
 const { Permissions } = require("../../volunteer/volunteerData");
 module.exports = (requiredPermissions) => async (req, res, next) => {
-  requiredPermissions.push(Permissions.active);
+  requiredPermissions.push(Permissions.access);
   if (!res.locals.volunteer) res.sendStatus(401);
   else if (
     requiredPermissions.every((permission) =>

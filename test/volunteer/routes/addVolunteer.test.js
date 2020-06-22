@@ -34,7 +34,7 @@ describe("endpoint POST /volunteer", () => {
 
   it("should add a volunteer upon valid request", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, {
-      permissions: [Permissions.manageVolunteers, Permissions.active],
+      permissions: [Permissions.manageVolunteers, Permissions.access],
     });
 
     const res = await agent.post("/volunteer").send(GOOD_REQUEST_BODY);
@@ -48,7 +48,7 @@ describe("endpoint POST /volunteer", () => {
     newVolunteer = newVolunteer.toJSON();
 
     expect(newVolunteer.permissions.sort()).toStrictEqual(
-      [Permissions.submitForms, Permissions.active].sort()
+      [Permissions.submitForms, Permissions.access].sort()
     );
     delete newVolunteer.permissions;
 
@@ -67,7 +67,7 @@ describe("endpoint POST /volunteer", () => {
 
   it("should fail with 403 for missing permissions", async () => {
     const { agent } = await login(app, {
-      permissions: [Permissions.submitForms, Permissions.active],
+      permissions: [Permissions.submitForms, Permissions.access],
     });
 
     await agent.post("/volunteer").send(GOOD_REQUEST_BODY).expect(403);
@@ -79,7 +79,7 @@ describe("endpoint POST /volunteer", () => {
 
   it("should not use any incorrect flags such as permManageVolunteers", async () => {
     const { agent } = await login(app, {
-      permissions: [Permissions.manageVolunteers, Permissions.active],
+      permissions: [Permissions.manageVolunteers, Permissions.access],
     });
 
     const badFlags = {
@@ -112,7 +112,7 @@ describe("endpoint POST /volunteer", () => {
   // eslint-disable-next-line jest/expect-expect
   it("should fail with 400 when trying to create a volunteer with an unavailable email address", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, {
-      permissions: [Permissions.manageVolunteers, Permissions.active],
+      permissions: [Permissions.manageVolunteers, Permissions.access],
     });
 
     await agent
@@ -129,7 +129,7 @@ describe("endpoint POST /volunteer", () => {
   // eslint-disable-next-line jest/expect-expect
   it("should fail with 400 when trying to create a volunteer without an email", async () => {
     const { agent } = await login(app, {
-      permissions: [Permissions.manageVolunteers, Permissions.active],
+      permissions: [Permissions.manageVolunteers, Permissions.access],
     });
 
     await agent

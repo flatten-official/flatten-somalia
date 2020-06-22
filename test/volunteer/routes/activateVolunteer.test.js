@@ -16,7 +16,7 @@ const {
 const _ = require("lodash");
 
 const makeRequestBody = (data) => ({
-  data: { ...data, permissions: [Permissions.active] },
+  data: { ...data, permissions: [Permissions.access] },
 });
 
 describe("endpoint POST /volunteer", () => {
@@ -42,7 +42,7 @@ describe("endpoint POST /volunteer", () => {
       .expect(200);
 
     let newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
-    expect(newVolunteer.permissions).toContain(Permissions.active);
+    expect(newVolunteer.permissions).toContain(Permissions.access);
 
     res = await agent.post("/volunteer/activate").send({
       volunteerId: newVolunteer._id,
@@ -50,7 +50,7 @@ describe("endpoint POST /volunteer", () => {
     });
 
     newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
-    expect(newVolunteer.permissions).not.toContain(Permissions.active);
+    expect(newVolunteer.permissions).not.toContain(Permissions.access);
 
     res = await agent.post("/volunteer/activate").send({
       volunteerId: newVolunteer._id,
@@ -58,7 +58,7 @@ describe("endpoint POST /volunteer", () => {
     });
 
     newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
-    expect(newVolunteer.permissions).toContain(Permissions.active);
+    expect(newVolunteer.permissions).toContain(Permissions.access);
   });
 
   // eslint-disable-next-line jest/expect-expect
@@ -74,7 +74,7 @@ describe("endpoint POST /volunteer", () => {
       .expect(200);
 
     const newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
-    expect(newVolunteer.permissions).toContain(Permissions.active);
+    expect(newVolunteer.permissions).toContain(Permissions.access);
 
     res = await agent
       .post("/volunteer/activate")

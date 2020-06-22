@@ -7,7 +7,7 @@ const Permissions = {
   submitForms: "submitForms",
   // is the user still enabled (allowed to access the system)
   // todo - add check in the middleware to disable accounts
-  active: "active",
+  access: "access",
 };
 
 // permission groups used to grant ability to modify particular users.
@@ -52,7 +52,7 @@ const Volunteer = mongoose.model(
           enum: [
             Permissions.manageVolunteers,
             Permissions.submitForms,
-            Permissions.active,
+            Permissions.access,
           ],
           required: true,
         },
@@ -75,7 +75,7 @@ const Volunteer = mongoose.model(
 );
 
 const defaultVolunteer = {
-  permissions: [Permissions.submitForms, Permissions.active],
+  permissions: [Permissions.submitForms, Permissions.access],
   permissionGroups: [PermissionGroups.volunteer],
 };
 
@@ -110,9 +110,9 @@ const addVolunteer = async (newVolunteer) => {
 const findVolunteerById = (volunteerId) =>
   Volunteer.findById(volunteerId).exec(); // exec() required to force return of promise
 
-const checkVolunteerActiveById = async (volunteerId) => {
+const checkVolunteerAccessById = async (volunteerId) => {
   const volunteer = await findVolunteerById(volunteerId);
-  return volunteer.permissions.indexOf(Permissions.active) !== -1;
+  return volunteer.permissions.indexOf(Permissions.access) !== -1;
 };
 
 const volunteerRegex = async (email) => {
@@ -215,7 +215,7 @@ const performPermissionBasedUpdate = async (
   try {
     volunteerToUpdate = await Volunteer.findById(toUpdateId);
   } catch (e) {
-    console.log(`Attempt to change active status of invalid ID: ${toUpdateId}`);
+    console.log(`Attempt to change access status of invalid ID: ${toUpdateId}`);
   }
   if (!volunteerToUpdate) return [400, "Volunteer not found"];
   if (
@@ -233,7 +233,7 @@ module.exports = {
   findVolunteerByEmail,
   getVolunteerList,
   getNextFriendlyId,
-  checkVolunteerActiveById,
+  checkVolunteerAccessById,
   Permissions,
   PermissionGroups,
   addPermissionById,

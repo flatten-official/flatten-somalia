@@ -16,7 +16,7 @@ const TEST_VOLUNTEER = {
 const TEST_ADMIN = {
   name: "Dilbert's Boss",
   email: "admin@example.com",
-  permissions: [Permissions.manageVolunteers, Permissions.active],
+  permissions: [Permissions.manageVolunteers, Permissions.access],
   permissionGroups: [PermissionGroups.admin],
 };
 
