@@ -145,7 +145,7 @@ const addPermissionById = async (
   permission,
   volunteerPermissionGroups
 ) => {
-  let success = await performPermissionBasedUpdate(
+  const success = await performPermissionBasedUpdate(
     volunteerPermissionGroups,
     volunteerIdToUpdate,
     async (volunteerToUpdate) => {
@@ -169,7 +169,7 @@ const removePermissionById = async (
   permission,
   volunteerPermissionGroups
 ) => {
-  performPermissionBasedUpdate(
+  const success = await performPermissionBasedUpdate(
     volunteerPermissionGroups,
     volunteerIdToUpdate,
     async (volunteerToUpdate) => {
@@ -187,6 +187,7 @@ const removePermissionById = async (
       }
     }
   );
+  return success;
 };
 
 /**
@@ -215,6 +216,7 @@ const performPermissionBasedUpdate = async (
     volunteerToUpdate &&
     checkCanUpdate(updaterPermissionGroups, volunteerToUpdate.permissionGroups)
   ) {
+    console.log("about to update");
     return await updateFunc(volunteerToUpdate);
   }
 

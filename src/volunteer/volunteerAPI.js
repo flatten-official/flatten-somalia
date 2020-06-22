@@ -41,13 +41,13 @@ async function getVolunteerList(userData) {
 async function activateVolunteerById(updaterData, toUpdateInfo) {
   let success;
   if (toUpdateInfo.activate) {
-    success = volunteerData.addPermissionById(
+    success = await volunteerData.addPermissionById(
       toUpdateInfo.volunteerId,
       volunteerData.Permissions.active,
       updaterData.permissionGroups
     );
   } else {
-    success = volunteerData.removePermissionById(
+    success = await volunteerData.removePermissionById(
       toUpdateInfo.volunteerId,
       volunteerData.Permissions.active,
       updaterData.permissionGroups
