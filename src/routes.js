@@ -80,6 +80,10 @@ router.get("/auth", getAuthRoute);
  */
 router.delete("/auth/logout", logoutRoute);
 
+// All following routes require access permissions
+router.use(protectedMiddleware([Permissions.access]));
+// PRIVATE ROUTES BELOW
+
 /**
  * @api {post} /volunteer Add volunteer
  * @apiName AddVolunteer
