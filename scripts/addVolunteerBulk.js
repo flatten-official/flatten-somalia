@@ -27,6 +27,12 @@ module.exports.run = async (volunteers) => {
   console.log("Adding volunteers to database...");
 
   for (const volunteer of volunteers) {
-    await addVolunteer(volunteer);
+    try {
+      await addVolunteer(volunteer);
+    } catch (e) {
+      console.log("Failed to add volunteer:");
+      console.log(JSON.stringify(volunteer));
+      throw e;
+    }
   }
 };
