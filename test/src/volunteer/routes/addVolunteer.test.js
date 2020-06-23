@@ -1,12 +1,12 @@
 const {
   findVolunteerByEmail,
   Permissions,
-} = require("../../../src/volunteer/volunteerData");
+} = require("../../../../src/volunteer/volunteerData");
 
-const { getApp } = require("../../../src/app");
-const util = require("../../testUtils/mongo");
+const { getApp } = require("../../../../src/app");
+const util = require("../../../testUtils/mongo");
 const supertest = require("supertest");
-const { login } = require("../../testUtils/requests");
+const { login } = require("../../../testUtils/requests");
 const _ = require("lodash");
 
 const makeRequestBody = (data) => ({ volunteerData: data });
