@@ -16,10 +16,6 @@ const {
 } = require("../../testUtils/requests");
 const _ = require("lodash");
 
-const makeRequestBody = (data) => ({
-  data,
-});
-
 describe("endpoint POST /volunteer/activate", () => {
   let app;
   let request;
@@ -37,7 +33,7 @@ describe("endpoint POST /volunteer/activate", () => {
   it("should add a volunteer upon valid request", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, TEST_ADMIN);
 
-    addVolunteer(TEST_VOLUNTEER);
+    await addVolunteer(TEST_VOLUNTEER);
 
     let newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).toContain(Permissions.access);
@@ -66,7 +62,7 @@ describe("endpoint POST /volunteer/activate", () => {
       _.defaults({ permissionGroups: [PermissionGroups.volunteer] }, TEST_ADMIN)
     );
 
-    addVolunteer(TEST_VOLUNTEER);
+    await addVolunteer(TEST_VOLUNTEER);
 
     const newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).toContain(Permissions.access);
@@ -84,7 +80,7 @@ describe("endpoint POST /volunteer/activate", () => {
   it("should fail with 400 when trying to update a volunteer with an id that does not exist", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, TEST_ADMIN);
 
-    addVolunteer(TEST_VOLUNTEER);
+    await addVolunteer(TEST_VOLUNTEER);
 
     const res = await agent
       .post("/volunteer/activate")
