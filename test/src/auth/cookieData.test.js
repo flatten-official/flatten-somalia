@@ -1,7 +1,4 @@
-const {
-  Volunteer,
-  addVolunteer,
-} = require("../../../src/volunteer/volunteerData");
+const { addVolunteer } = require("../../../src/volunteer/volunteerData");
 const cookieData = require("../../../src/auth/cookieData");
 const util = require("../../testUtils/mongo");
 const { calculateExpiryTime } = require("../../../src/utils/time");

@@ -1,5 +1,4 @@
 const {
-  Volunteer,
   findVolunteerByEmail,
   Permissions,
   PermissionGroups,
@@ -8,7 +7,6 @@ const {
 
 const { getApp } = require("../../../../src/app");
 const util = require("../../../testUtils/mongo");
-const supertest = require("supertest");
 const {
   login,
   TEST_VOLUNTEER,
@@ -18,12 +16,10 @@ const _ = require("lodash");
 
 describe("endpoint POST /volunteer/activate", () => {
   let app;
-  let request;
 
   beforeAll(async () => {
     await util.connectToDatabase();
     app = await getApp();
-    request = supertest(app);
   });
 
   afterEach(() => util.clearDatabase());
@@ -31,14 +27,14 @@ describe("endpoint POST /volunteer/activate", () => {
 
   // eslint-disable-next-line jest/expect-expect
   it("should add a volunteer upon valid request", async () => {
-    const { agent, volunteer: adminVolunteer } = await login(app, TEST_ADMIN);
+    const { agent } = await login(app, TEST_ADMIN);
 
     await addVolunteer(TEST_VOLUNTEER);
 
     let newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).toContain(Permissions.access);
 
-    let res = await agent.post("/volunteer/activate").send({
+    await agent.post("/volunteer/activate").send({
       volunteerId: newVolunteer._id,
       activate: false,
     });
@@ -46,7 +42,7 @@ describe("endpoint POST /volunteer/activate", () => {
     newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).not.toContain(Permissions.access);
 
-    res = await agent.post("/volunteer/activate").send({
+    await agent.post("/volunteer/activate").send({
       volunteerId: newVolunteer._id,
       activate: true,
     });
@@ -57,7 +53,7 @@ describe("endpoint POST /volunteer/activate", () => {
 
   // eslint-disable-next-line jest/expect-expect
   it("should fail with 403 for the wrong permission groups", async () => {
-    const { agent, volunteer: adminVolunteer } = await login(
+    const { agent } = await login(
       app,
       _.defaults({ permissionGroups: [PermissionGroups.volunteer] }, TEST_ADMIN)
     );
@@ -67,7 +63,7 @@ describe("endpoint POST /volunteer/activate", () => {
     const newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).toContain(Permissions.access);
 
-    const res = await agent
+    await agent
       .post("/volunteer/activate")
       .send({
         volunteerId: newVolunteer._id,
@@ -78,11 +74,11 @@ describe("endpoint POST /volunteer/activate", () => {
 
   // eslint-disable-next-line jest/expect-expect
   it("should fail with 400 when trying to update a volunteer with an id that does not exist", async () => {
-    const { agent, volunteer: adminVolunteer } = await login(app, TEST_ADMIN);
+    const { agent } = await login(app, TEST_ADMIN);
 
     await addVolunteer(TEST_VOLUNTEER);
 
-    const res = await agent
+    await agent
       .post("/volunteer/activate")
       .send({
         volunteerId: "randomidthatdoesnotexist",
