@@ -22,31 +22,55 @@ const consoleFormat = format.combine(
   })
 );
 
+const logSeverityLevels = {
+  emergency: 0,
+  alert: 1,
+  critical: 2,
+  error: 3,
+  warning: 4,
+  notice: 5,
+  info: 6,
+  debug: 7,
+};
+
 const inverseColours = {
+  emergency: ["red", "inverse"],
+  alert: ["red", "inverse"],
+  critical: ["red", "inverse"],
   error: ["red", "inverse"],
-  warn: ["yellow", "inverse"],
+  warning: ["yellow", "inverse"],
+  notice: ["green", "inverse"],
   info: ["green", "inverse"],
-  verbose: ["blue", "inverse"],
   debug: ["magenta", "inverse"],
 };
 
 function setup() {
   winston.addColors(inverseColours);
 
-  winston.configure({
+  winston.loggers.add("custom", {
+    levels: logSeverityLevels,
     transports: [
       new transports.Console({
         level: "debug",
         format: consoleFormat,
       }),
-      new StackdriverTransport({
-        level: "debug",
-        format: defaultFormat,
-      }),
+      // new transports.Console({
+      //   level: "debug",
+      //   format: defaultFormat,
+      // }),
+      // new StackdriverTransport({
+      //   levels: logSeverityLevels,
+      //   level: "debug",
+      //   format: defaultFormat,
+      // }),
     ],
   });
 
-  winston.verbose("configured tha logger");
+  getLogger().info("Logger configuration complete.");
 }
 
-module.exports = { setup };
+function getLogger() {
+  return winston.loggers.get("custom");
+}
+
+module.exports = { setup, getLogger };

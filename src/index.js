@@ -3,8 +3,9 @@ const { getApp } = require("./app");
 const { setup: configSetup } = require("./config");
 const { setup: sendGridSetup } = require("./utils/sendGrid");
 const { setup: setupLogger } = require("./winston");
-const log = require("winston");
 const _ = require("lodash");
+
+const { getLogger } = require("./winston");
 
 /**
  * @param options object whose parameters indicate what to setup
@@ -24,11 +25,11 @@ async function setup(options = {}) {
 }
 
 async function startServer() {
-  const port = process.env.PORT || 80;
+  const port = 801;
 
   const app = await getApp();
   app.listen(port, () => {
-    log.verbose(`listening on port ${port}.`);
+    getLogger().notice(`Listening on port ${port}.`, { port });
   });
 }
 
