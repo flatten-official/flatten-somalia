@@ -30,8 +30,7 @@ module.exports.run = async (volunteers) => {
     try {
       await addVolunteer(volunteer);
     } catch (e) {
-      console.log("Failed to add volunteer:");
-      console.log(JSON.stringify(volunteer));
+      console.log(`Failed to add volunteer:\n${JSON.stringify(volunteer)}`);
       throw e;
     }
   }
