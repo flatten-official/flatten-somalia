@@ -1,11 +1,11 @@
 const {
   Volunteer,
   addVolunteer,
-} = require("../../src/volunteer/volunteerData");
-const cookieData = require("../../src/auth/cookieData");
-const util = require("./../testUtils/mongo");
-const { calculateExpiryTime } = require("./../../src/utils/time");
-const { TEST_VOLUNTEER } = require("../testUtils/requests");
+} = require("../../../src/volunteer/volunteerData");
+const cookieData = require("../../../src/auth/cookieData");
+const util = require("../../testUtils/mongo");
+const { calculateExpiryTime } = require("../../../src/utils/time");
+const { TEST_VOLUNTEER } = require("../../testUtils/requests");
 
 const mongoose = require("mongoose");
 

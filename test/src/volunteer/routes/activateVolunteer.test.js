@@ -4,16 +4,16 @@ const {
   Permissions,
   PermissionGroups,
   addVolunteer,
-} = require("../../../src/volunteer/volunteerData");
+} = require("../../../../src/volunteer/volunteerData");
 
-const { getApp } = require("../../../src/app");
-const util = require("../../testUtils/mongo");
+const { getApp } = require("../../../../src/app");
+const util = require("../../../testUtils/mongo");
 const supertest = require("supertest");
 const {
   login,
   TEST_VOLUNTEER,
   TEST_ADMIN,
-} = require("../../testUtils/requests");
+} = require("../../../testUtils/requests");
 const _ = require("lodash");
 
 describe("endpoint POST /volunteer/activate", () => {

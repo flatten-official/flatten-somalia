@@ -13,15 +13,14 @@ const main = async () => {
 
   const Script = require(scriptPath);
 
-  const confirmationPrompt = new Confirm(Script.getConfirmationMessage());
-  const accepted = await confirmationPrompt.run();
+  const accepted = await new Confirm(Script.confirmationMessage).run();
 
   if (!accepted) {
     console.log("Script was cancelled.");
     return;
   }
 
-  if (Script.Config.useAutoSetup) {
+  if (Script.useAutoSetup) {
     await setup({
       config: true,
       database: true,
@@ -29,13 +28,18 @@ const main = async () => {
     });
   }
 
-  await Script.run(); // runs the script
-
-  if (Script.Config.useAutoSetup) await cleanup();
+  try {
+    await Script.run(...Script.arguments); // runs the script
+  } finally {
+    if (Script.useAutoSetup) await cleanup();
+  }
 
   console.log(
     `Done script: ${scriptName}. MANUALLY VERIFY THAT ALL WENT WELL.`
   );
 };
 
-main();
+main().catch((e) => {
+  console.log("Script threw error:");
+  console.error(e);
+});
