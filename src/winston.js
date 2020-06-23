@@ -1,13 +1,20 @@
 const winston = require("winston");
 const { transports, format } = winston;
 
+const defaultFormat = format.combine(format.timestamp(), format.json());
+
 const consoleFormat = format.combine(
   format.colorize(),
   format.timestamp(),
-  format.printf(({ level, message, timestamp }) => {
-    const time = timestamp.split("T")[1].slice(0, 8);
+  format.printf((info) => {
+    const time = info.timestamp.split("T")[1].slice(0, 8);
 
-    return `\u001b[47m\u001b[97m[${time}] \u001b[0m${level + " \t" + message}`;
+    if (info.message === "Incoming request.")
+      info.message = info.method.padEnd(8, " ") + info.path;
+
+    return `\u001b[47m\u001b[97m[${time}] \u001b[0m${
+      info.level + " \t" + info.message
+    }`;
   })
 );
 
@@ -27,6 +34,10 @@ function setup() {
       new transports.Console({
         level: "debug",
         format: consoleFormat,
+      }),
+      new transports.Console({
+        level: "debug",
+        format: defaultFormat,
       }),
     ],
   });
