@@ -1,6 +1,7 @@
 const {
   Volunteer,
   Permissions,
+  addVolunteer,
 } = require("../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../src/app");

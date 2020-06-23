@@ -3,6 +3,7 @@ const {
   findVolunteerByEmail,
   Permissions,
   PermissionGroups,
+  addVolunteer,
 } = require("../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../src/app");
@@ -16,10 +17,10 @@ const {
 const _ = require("lodash");
 
 const makeRequestBody = (data) => ({
-  data: { ...data, permissions: [Permissions.access] },
+  data,
 });
 
-describe("endpoint POST /volunteer", () => {
+describe("endpoint POST /volunteer/activate", () => {
   let app;
   let request;
 
@@ -29,22 +30,19 @@ describe("endpoint POST /volunteer", () => {
     request = supertest(app);
   });
 
-  afterEach(async () => await util.clearDatabase());
-  afterAll(async () => await util.closeDatabase());
+  afterEach(() => util.clearDatabase());
+  afterAll(() => util.closeDatabase());
 
   // eslint-disable-next-line jest/expect-expect
   it("should add a volunteer upon valid request", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, TEST_ADMIN);
 
-    let res = await agent
-      .post("/volunteer")
-      .send(makeRequestBody(TEST_VOLUNTEER))
-      .expect(200);
+    addVolunteer(TEST_VOLUNTEER);
 
     let newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).toContain(Permissions.access);
 
-    res = await agent.post("/volunteer/activate").send({
+    let res = await agent.post("/volunteer/activate").send({
       volunteerId: newVolunteer._id,
       activate: false,
     });
@@ -68,15 +66,12 @@ describe("endpoint POST /volunteer", () => {
       _.defaults({ permissionGroups: [PermissionGroups.volunteer] }, TEST_ADMIN)
     );
 
-    let res = await agent
-      .post("/volunteer")
-      .send(makeRequestBody(TEST_VOLUNTEER))
-      .expect(200);
+    addVolunteer(TEST_VOLUNTEER);
 
     const newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).toContain(Permissions.access);
 
-    res = await agent
+    const res = await agent
       .post("/volunteer/activate")
       .send({
         volunteerId: newVolunteer._id,
@@ -89,12 +84,9 @@ describe("endpoint POST /volunteer", () => {
   it("should fail with 400 when trying to update a volunteer with an id that does not exist", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, TEST_ADMIN);
 
-    let res = await agent
-      .post("/volunteer")
-      .send(makeRequestBody(TEST_VOLUNTEER))
-      .expect(200);
+    addVolunteer(TEST_VOLUNTEER);
 
-    res = await agent
+    const res = await agent
       .post("/volunteer/activate")
       .send({
         volunteerId: "randomidthatdoesnotexist",

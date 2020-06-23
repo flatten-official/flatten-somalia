@@ -132,7 +132,7 @@ const findVolunteerByEmail = async (email) => {
 };
 
 const getVolunteerList = async () => {
-  const volunteers = await Volunteer.find({});
+  const volunteers = await Volunteer.find();
   return volunteers.map((v) => ({
     _id: v._id,
     email: v.email,
@@ -151,13 +151,8 @@ const addPermissionById = async (
     volunteerIdToUpdate,
     async (volunteerToUpdate) => {
       if (!volunteerToUpdate.permissions.includes(permission)) {
-        try {
-          volunteerToUpdate.permissions.push(permission);
-          await volunteerToUpdate.save();
-        } catch (e) {
-          console.error(e);
-          return [500, "Internal server"];
-        }
+        volunteerToUpdate.permissions.push(permission);
+        await volunteerToUpdate.save();
       }
       return [200, "Success"];
     }
@@ -174,15 +169,10 @@ const removePermissionById = async (
     volunteerIdToUpdate,
     async (volunteerToUpdate) => {
       if (volunteerToUpdate.permissions.includes(permission)) {
-        try {
-          volunteerToUpdate.permissions = volunteerToUpdate.permissions.filter(
-            (p) => p !== permission
-          );
-          await volunteerToUpdate.save();
-        } catch (e) {
-          console.error(e);
-          return [500, "Internal server"];
-        }
+        volunteerToUpdate.permissions = volunteerToUpdate.permissions.filter(
+          (p) => p !== permission
+        );
+        await volunteerToUpdate.save();
       }
       return [200, "Success"];
     }
@@ -216,8 +206,9 @@ const performPermissionBasedUpdate = async (
     volunteerToUpdate = await Volunteer.findById(toUpdateId);
   } catch (e) {
     console.log(`Attempt to change access status of invalid ID: ${toUpdateId}`);
+    if (!volunteerToUpdate) return [400, "Volunteer not found"];
   }
-  if (!volunteerToUpdate) return [400, "Volunteer not found"];
+
   if (
     !checkCanUpdate(updaterPermissionGroups, volunteerToUpdate.permissionGroups)
   )

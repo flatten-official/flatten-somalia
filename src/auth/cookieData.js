@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const {
   findVolunteerByEmail,
-  findVolunteerById,
-  Permissions,
   checkVolunteerAccessById,
 } = require("../volunteer/volunteerData");
 
