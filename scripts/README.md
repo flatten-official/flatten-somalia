@@ -42,6 +42,10 @@ MONGO_URI=<MONGO_URI_WITH_PASSWORD>
    // When true you are automatically connected to the database.
      useAutoSetup: true,
    };
+   
+   module.exports.getConfirmationMessage = () => {
+     return "Are you sure you want to run this script"; // Modify accordingly
+   }
 
    module.exports.run = async () => {
      // TODO fill in with code to run

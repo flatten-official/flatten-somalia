@@ -17,7 +17,14 @@ module.exports.Config = {
   useAutoSetup: true,
 };
 
+module.exports.getConfirmationMessage = () =>
+  `Are you sure you want to add the following volunteers to the database.\n${JSON.stringify(
+    VOLUNTEERS
+  )}`;
+
 module.exports.run = async () => {
+  console.log("Adding volunteers to database...");
+
   for (const volunteer of VOLUNTEERS) {
     await addVolunteer(volunteer);
   }
