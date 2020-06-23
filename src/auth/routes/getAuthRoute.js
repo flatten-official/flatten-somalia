@@ -1,6 +1,7 @@
-const log = require("winston");
+const { getLogger } = require("../../winston");
 
 module.exports = (req, res) => {
+  const log = getLogger();
   if (res.locals.volunteer) {
     res.status(200).send({
       permissions: res.locals.volunteer.permissions,

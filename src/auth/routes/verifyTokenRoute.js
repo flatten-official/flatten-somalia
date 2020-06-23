@@ -1,9 +1,10 @@
-const log = require("winston");
+const { getLogger } = require("../../winston");
 const { verifyTokenAndMakeCookie } = require("../verificationAPI");
 const { getConfig } = require("../../config");
 
 // Verifies a token in the request and gives the user a cookie.
 module.exports = async (req, res) => {
+  const log = getLogger();
   const token = req.query.token;
 
   if (!token || typeof token !== "string") {
