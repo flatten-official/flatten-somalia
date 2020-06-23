@@ -112,7 +112,7 @@ const findVolunteerById = (volunteerId) =>
 
 const checkVolunteerAccessById = async (volunteerId) => {
   const volunteer = await findVolunteerById(volunteerId);
-  return volunteer.permissions.indexOf(Permissions.access) !== -1;
+  return volunteer && volunteer.permissions.indexOf(Permissions.access) !== -1;
 };
 
 const volunteerRegex = async (email) => {

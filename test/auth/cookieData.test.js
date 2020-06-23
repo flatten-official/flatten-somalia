@@ -1,6 +1,11 @@
+const {
+  Volunteer,
+  addVolunteer,
+} = require("../../src/volunteer/volunteerData");
 const cookieData = require("../../src/auth/cookieData");
 const util = require("./../testUtils/mongo");
 const { calculateExpiryTime } = require("./../../src/utils/time");
+const { TEST_VOLUNTEER } = require("../testUtils/requests");
 
 const mongoose = require("mongoose");
 
@@ -11,8 +16,8 @@ describe("cookie database functions", () => {
 
   it("should write cookie to database", async () => {
     const expiry = calculateExpiryTime(5);
-    const volunteerID = mongoose.mongo.ObjectId("56cb91bdc3464f14678934ca");
-    const cookieID = await cookieData.writeCookie(expiry, volunteerID);
+    const volunteer = await addVolunteer(TEST_VOLUNTEER);
+    const cookieID = await cookieData.writeCookie(expiry, volunteer._id);
 
     const all = await cookieData.Cookie.find();
     expect(all).toHaveLength(1);
@@ -20,17 +25,17 @@ describe("cookie database functions", () => {
     const retrievedCookie = all[0];
     expect(retrievedCookie._id).toStrictEqual(cookieID);
     expect(retrievedCookie.expiry).toStrictEqual(expiry);
-    expect(retrievedCookie.volunteerId).toStrictEqual(volunteerID);
+    expect(retrievedCookie.volunteerId).toStrictEqual(volunteer._id);
   });
 
   it("should read existing cookie from database", async () => {
     const expiry = calculateExpiryTime(5);
-    const volunteerID = mongoose.mongo.ObjectId("56cb91bdc3464f14678934ca");
-    const cookieID = await cookieData.writeCookie(expiry, volunteerID);
+    const volunteer = await addVolunteer(TEST_VOLUNTEER);
+    const cookieID = await cookieData.writeCookie(expiry, volunteer._id);
 
     const cookieValues = await cookieData.readCookie(cookieID);
 
-    expect(cookieValues.volunteerId).toStrictEqual(volunteerID);
+    expect(cookieValues.volunteerId).toStrictEqual(volunteer._id);
     expect(cookieValues.expiry).toStrictEqual(expiry);
   });
 
