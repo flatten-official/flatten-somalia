@@ -2,6 +2,7 @@ const { cleanupDatabase, setupDatabase } = require("./utils/mongo");
 const { getApp } = require("./app");
 const { setup: configSetup } = require("./config");
 const { setup: sendGridSetup } = require("./utils/sendGrid");
+const { setup: setupLogger } = require("./winston");
 const _ = require("lodash");
 
 /**
@@ -15,6 +16,7 @@ async function setup(options = {}) {
     customConfig: {},
   });
 
+  setupLogger();
   if (options.config) await configSetup(options.customConfig);
   if (options.database) await setupDatabase();
   if (options.sendGrid) sendGridSetup();
