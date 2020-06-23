@@ -3,6 +3,7 @@ const { getApp } = require("./app");
 const { setup: configSetup } = require("./config");
 const { setup: sendGridSetup } = require("./utils/sendGrid");
 const { setup: setupLogger } = require("./winston");
+const log = require("winston");
 const _ = require("lodash");
 
 /**
@@ -27,7 +28,7 @@ async function startServer() {
 
   const app = await getApp();
   app.listen(port, () => {
-    console.log(`listening on port ${port}.`);
+    log.verbose(`listening on port ${port}.`);
   });
 }
 

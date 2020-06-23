@@ -1,4 +1,8 @@
 const winston = require("winston");
+const {
+  LoggingWinston: StackdriverTransport,
+} = require("@google-cloud/logging-winston");
+
 const { transports, format } = winston;
 
 const defaultFormat = format.combine(format.timestamp(), format.json());
@@ -35,7 +39,7 @@ function setup() {
         level: "debug",
         format: consoleFormat,
       }),
-      new transports.Console({
+      new StackdriverTransport({
         level: "debug",
         format: defaultFormat,
       }),
