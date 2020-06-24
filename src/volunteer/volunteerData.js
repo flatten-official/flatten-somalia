@@ -186,13 +186,11 @@ const performPermissionBasedUpdate = async (
   toUpdateId,
   updateFunc
 ) => {
-  let volunteerToUpdate;
+  const volunteerToUpdate = await Volunteer.findById(toUpdateId);
 
-  try {
-    volunteerToUpdate = await Volunteer.findById(toUpdateId);
-  } catch (e) {
-    console.log(`Attempt to change access status of invalid ID: ${toUpdateId}`);
-    if (!volunteerToUpdate) return [400, "Volunteer not found"];
+  if (!volunteerToUpdate) {
+    console.log(`Volunteer with id ${toUpdateId} not found.`);
+    return [400, "Volunteer not found"];
   }
 
   if (!checkCanUpdate(updaterPermissions, volunteerToUpdate.permissionGroups))

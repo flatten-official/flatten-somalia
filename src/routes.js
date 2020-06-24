@@ -1,6 +1,5 @@
 const express = require("express");
 
-const cookieMiddleware = require("./auth/routes/cookieMiddleware");
 const protectedMiddleware = require("./utils/express/protectedMiddleware");
 const { Permissions } = require("./volunteer/volunteerData");
 const loginRoute = require("./auth/routes/loginRoute");

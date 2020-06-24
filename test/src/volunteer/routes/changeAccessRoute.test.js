@@ -84,7 +84,7 @@ describe("endpoint POST /volunteer/changeAccess", () => {
     await agent
       .post("/volunteer/changeAccess")
       .send({
-        volunteerId: "randomidthatdoesnotexist",
+        volunteerId: "5ed68f56daa05f3ea113c7d5", // random id that does not exist
         access: false,
       })
       .expect(400);
