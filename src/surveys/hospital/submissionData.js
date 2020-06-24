@@ -31,4 +31,4 @@ const create = async (content) => {
 
 const saveAsync = (document) => document.save();
 
-module.exports = { model, saveAsync: saveAsync, create };
+module.exports = { model, saveAsync, create };
