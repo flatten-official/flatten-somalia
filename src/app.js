@@ -9,6 +9,7 @@ const { getConfig } = require("./config");
 const routes = require("./routes");
 const appErrorHandler = require("./utils/express/errorHandler");
 const bodySanitizer = require("./utils/express/bodySanitizer");
+const loggerMiddleware = require("./utils/express/loggerMiddleware");
 
 async function getApp() {
   const app = express();
@@ -23,6 +24,7 @@ async function getApp() {
   app.use(cookieParser(getConfig().secrets.cookieSecret));
   app.use(await makeRequestLoggingMiddleware());
   app.use(bodySanitizer);
+  app.use(loggerMiddleware);
   app.use("/", routes);
   app.use(appErrorHandler);
 
