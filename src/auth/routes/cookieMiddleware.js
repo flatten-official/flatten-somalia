@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
   const cookieID = req.signedCookies.id; // the signed cookie "id" stores the cookieID
 
   if (!cookieID) {
-    console.log("No cookie found.");
+    console.log("No cookie found in request.");
     next();
     return;
   }
@@ -16,6 +16,7 @@ module.exports = async (req, res, next) => {
   const cookie = await readCookie(cookieID);
 
   if (!cookie) {
+    console.log("No cookie with such an ID (or cookie expired).");
     next();
     return;
   }

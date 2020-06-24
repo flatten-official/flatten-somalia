@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
-const {
-  findVolunteerByEmail,
-  checkVolunteerAccessById,
-} = require("../volunteer/volunteerData");
+const { findVolunteerByEmail } = require("../volunteer/volunteerData");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Cookie = mongoose.model(
@@ -45,11 +42,7 @@ async function readCookie(cookieID) {
 
   if (!cookie) return null;
 
-  // If the access permission was removed we want to invalidate the cookie.
-  if (
-    Date.now() > cookie.expiry ||
-    !(await checkVolunteerAccessById(cookie.volunteerId))
-  ) {
+  if (Date.now() > cookie.expiry) {
     await deleteCookie(cookieID);
     return null;
   }
