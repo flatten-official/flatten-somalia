@@ -56,7 +56,7 @@ describe("volunteer database functions", () => {
       email: "firstname.lastname@gmail.com",
     });
 
-    const volunteersFound = await Volunteer.volunteerRegex(
+    const volunteersFound = await Volunteer.volunteerRegexAsync(
       "lastname@gmail.com"
     );
 

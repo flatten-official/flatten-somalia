@@ -42,13 +42,13 @@ async function getVolunteerList() {
  */
 function changeVolunteerAccessById(updaterData, toUpdateInfo) {
   if (toUpdateInfo.access) {
-    return volunteerData.addPermissionById(
+    return volunteerData.addPermissionByIdAsync(
       toUpdateInfo.volunteerId,
       volunteerData.Permissions.access,
       updaterData.permissions
     );
   } else {
-    return volunteerData.removePermissionById(
+    return volunteerData.removePermissionByIdAsync(
       toUpdateInfo.volunteerId,
       volunteerData.Permissions.access,
       updaterData.permissions
