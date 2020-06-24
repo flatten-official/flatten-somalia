@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
 
   if (!token || typeof token !== "string") {
     res.status(400).send("No token included.");
-    req.log.warning("Failed: missing token.", { status: 400 });
+    req.log.warning("Failed due to missing token.", { status: 400 });
     return;
   }
 
@@ -34,5 +34,5 @@ module.exports = async (req, res) => {
   });
 
   res.redirect(303, getConfig().urls.frontendHost);
-  req.log.info("Success: issued cookie.", { status: 303 });
+  req.log.info("Successfully issued cookie.", { status: 303 });
 };
