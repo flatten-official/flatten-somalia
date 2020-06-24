@@ -105,11 +105,10 @@ const addVolunteer = async (newVolunteer) => {
 const findVolunteerById = (volunteerId) =>
   Volunteer.findById(volunteerId).exec(); // exec() required to force return of promise
 
-const volunteerRegexAsync = (email) => {
-  return Volunteer.find({
+const volunteerRegexAsync = (email) =>
+  Volunteer.find({
     email: { $regex: new RegExp(`^${email}$`), $options: "i" },
   });
-};
 
 /**
  * Returns null if volunteer doesn't exist, otherwise returns the volunteer object
