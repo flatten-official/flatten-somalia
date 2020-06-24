@@ -1,5 +1,5 @@
-const submissionData = require("../../src/submissionInitial/submissionData");
-const util = require("../testUtils/mongo");
+const submissionData = require("../../../src/submissionInitial/submissionData");
+const util = require("../../testUtils/mongo");
 
 const mongoose = require("mongoose");
 

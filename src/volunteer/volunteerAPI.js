@@ -30,7 +30,7 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   return [200, "Success"];
 }
 
-async function getVolunteerList(userData) {
+async function getVolunteerList() {
   return [200, await volunteerData.getVolunteerList()];
 }
 

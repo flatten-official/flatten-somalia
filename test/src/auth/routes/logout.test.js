@@ -1,8 +1,10 @@
-const { login } = require("../../testUtils/requests");
-const { getApp } = require("../../../src/app");
-const util = require("../../testUtils/mongo");
+const { login } = require("../../../testUtils/requests");
+const { getApp } = require("../../../../src/app");
+const util = require("../../../testUtils/mongo");
 const supertest = require("supertest");
-const { findCookiesByVolunteerEmail } = require("../../../src/auth/cookieData");
+const {
+  findCookiesByVolunteerEmail,
+} = require("../../../../src/auth/cookieData");
 
 describe("test /auth", () => {
   let request;

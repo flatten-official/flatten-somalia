@@ -1,17 +1,12 @@
-const {
-  Volunteer,
-  Permissions,
-  addVolunteer,
-} = require("../../../src/volunteer/volunteerData");
+const { Permissions } = require("../../../../src/volunteer/volunteerData");
 
-const { getApp } = require("../../../src/app");
-const util = require("../../testUtils/mongo");
-const supertest = require("supertest");
+const { getApp } = require("../../../../src/app");
+const util = require("../../../testUtils/mongo");
 const {
   login,
   TEST_VOLUNTEER,
   TEST_ADMIN,
-} = require("../../testUtils/requests");
+} = require("../../../testUtils/requests");
 const _ = require("lodash");
 
 const makeVolunteerRequestBody = (data) => {
@@ -31,12 +26,10 @@ const dummyVolunteers = [
 
 describe("endpoint POST /volunteer", () => {
   let app;
-  let request;
 
   beforeAll(async () => {
     await util.connectToDatabase();
     app = await getApp();
-    request = supertest(app);
   });
 
   afterEach(async () => await util.clearDatabase());
