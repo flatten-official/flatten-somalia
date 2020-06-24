@@ -5,8 +5,12 @@
  */
 // TODO Write tests
 module.exports = (requiredPermissions) => async (req, res, next) => {
-  if (!res.locals.volunteer) res.sendStatus(401);
-  else if (
+  if (!res.locals.volunteer) {
+    res.sendStatus(401);
+    req.log.warning("Tried to access a protected route without login.", {
+      status: 401,
+    });
+  } else if (
     requiredPermissions.every((permission) =>
       res.locals.volunteer.permissions.includes(permission)
     )
@@ -14,5 +18,9 @@ module.exports = (requiredPermissions) => async (req, res, next) => {
     next();
   } else {
     res.sendStatus(403);
+    req.log.warning(
+      "Tried to access a protected route without proper permissions.",
+      { status: 403 }
+    );
   }
 };

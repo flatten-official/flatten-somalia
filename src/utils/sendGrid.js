@@ -3,6 +3,7 @@
 
 const sgMail = require("@sendgrid/mail");
 const { getConfig } = require("../config");
+const { getLogger } = require("../winston");
 
 module.exports.setup = () => {
   sgMail.setApiKey(getConfig().secrets.sendGridApiKey);
@@ -27,7 +28,7 @@ module.exports.sendVerificationEmail = async (email, verification_link) => {
     await sgMail.send(msg);
     return true;
   } catch (e) {
-    console.log("Failed to send email.\n" + e);
+    getLogger().error("Failed to send email.\n", { error: e });
     return false;
   }
 };

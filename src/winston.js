@@ -15,7 +15,10 @@ const messageFormat = format.printf((info) => {
   if (info.method && info.path)
     info.message += info.method.padEnd(8, " ") + info.path;
 
-  if (info.status) info.message += ` Response status: ${info.status}`;
+  if (info.status)
+    info.message = `Response status: ${info.status}. ${info.message}`;
+
+  if (info.error) info.message += ` ${info.error}`;
 });
 
 const defaultFormat = format.combine(
