@@ -174,7 +174,7 @@ const removePermissionById = async (
  */
 const checkCanUpdate = (permsA, groupsB) =>
   permsA.includes(Permissions.manageVolunteers) &&
-  groupsB.length === 1 &&
+  groupsB.length > 0 &&
   groupsB[0] === PermissionGroups.dsu;
 /**
  * Checks if the volunteer with permission groups updaterPermissionGroups can update the volunteer at
