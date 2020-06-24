@@ -4,9 +4,13 @@ const GCPLogging = require("@google-cloud/logging-winston");
 const { transports, format } = winston;
 
 const messageFormat = format.printf((info) => {
-  if (info.httpRequest)
-    info.message =
-      "Done. Logged HTTP request on " + info.httpRequest.requestUrl;
+  if (info.httpRequest) {
+    // exclude token from log, if one is present
+    if (info.httpRequest.requestUrl.indexOf("token?")) {
+      info.httpRequest.requestUrl = info.httpRequest.requestUrl.split("?")[0];
+    }
+    info.message = `Done with HTTP request on ${info.httpRequest.requestUrl}\n`;
+  }
 
   if (info.method && info.path)
     info.message += info.method.padEnd(8, " ") + info.path;
