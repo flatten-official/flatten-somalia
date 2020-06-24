@@ -34,8 +34,8 @@ async function getVolunteerList(userData) {
   return [200, await volunteerData.getVolunteerList()];
 }
 
-async function activateVolunteerById(updaterData, toUpdateInfo) {
-  if (toUpdateInfo.activate) {
+async function changeVolunteerAccessById(updaterData, toUpdateInfo) {
+  if (toUpdateInfo.access) {
     return await volunteerData.addPermissionById(
       toUpdateInfo.volunteerId,
       volunteerData.Permissions.access,
@@ -53,5 +53,5 @@ async function activateVolunteerById(updaterData, toUpdateInfo) {
 module.exports = {
   addVolunteerAndAuthenticate,
   getVolunteerList,
-  activateVolunteerById,
+  changeVolunteerAccessById,
 };

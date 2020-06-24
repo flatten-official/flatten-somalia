@@ -16,7 +16,7 @@ const {
 } = require("../../testUtils/requests");
 const _ = require("lodash");
 
-describe("endpoint POST /volunteer/activate", () => {
+describe("endpoint POST /volunteer/changeAccess", () => {
   let app;
   let request;
 
@@ -38,17 +38,17 @@ describe("endpoint POST /volunteer/activate", () => {
     let newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).toContain(Permissions.access);
 
-    let res = await agent.post("/volunteer/activate").send({
+    let res = await agent.post("/volunteer/changeAccess").send({
       volunteerId: newVolunteer._id,
-      activate: false,
+      access: false,
     });
 
     newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).not.toContain(Permissions.access);
 
-    res = await agent.post("/volunteer/activate").send({
+    res = await agent.post("/volunteer/changeAccess").send({
       volunteerId: newVolunteer._id,
-      activate: true,
+      access: true,
     });
 
     newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
@@ -68,10 +68,10 @@ describe("endpoint POST /volunteer/activate", () => {
     expect(newVolunteer.permissions).toContain(Permissions.access);
 
     const res = await agent
-      .post("/volunteer/activate")
+      .post("/volunteer/changeAccess")
       .send({
         volunteerId: newVolunteer._id,
-        activate: false,
+        access: false,
       })
       .expect(403);
   });
@@ -83,10 +83,10 @@ describe("endpoint POST /volunteer/activate", () => {
     await addVolunteer(TEST_VOLUNTEER);
 
     const res = await agent
-      .post("/volunteer/activate")
+      .post("/volunteer/changeAccess")
       .send({
         volunteerId: "randomidthatdoesnotexist",
-        activate: false,
+        access: false,
       })
       .expect(400);
   });
