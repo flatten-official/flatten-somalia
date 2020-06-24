@@ -7,12 +7,13 @@ const {
 
 const { getApp } = require("../../../../src/app");
 const util = require("../../../testUtils/mongo");
-const {
-  login,
-  TEST_VOLUNTEER,
-  TEST_ADMIN,
-} = require("../../../testUtils/requests");
-const _ = require("lodash");
+const { login } = require("../../../testUtils/requests");
+
+const TEST_VOLUNTEER = {
+  name: "default_name",
+  email: "default_email@example.ca",
+  teamName: "testTeam",
+};
 
 describe("endpoint POST /volunteer/changeAccess", () => {
   let app;
@@ -27,7 +28,10 @@ describe("endpoint POST /volunteer/changeAccess", () => {
 
   // eslint-disable-next-line jest/expect-expect
   it("should add a volunteer upon valid request", async () => {
-    const { agent } = await login(app, TEST_ADMIN);
+    const { agent } = await login(app, {
+      permissions: [Permissions.manageVolunteers, Permissions.access],
+      permissionGroups: [],
+    });
 
     await addVolunteer(TEST_VOLUNTEER);
 
@@ -53,13 +57,10 @@ describe("endpoint POST /volunteer/changeAccess", () => {
 
   // eslint-disable-next-line jest/expect-expect
   it("should fail with 403 for the wrong permission groups", async () => {
-    const { agent } = await login(
-      app,
-      _.defaults(
-        { permissionGroups: [PermissionGroups.dsu], permissions: [] },
-        TEST_ADMIN
-      )
-    );
+    const { agent } = await login(app, {
+      permissionGroups: [PermissionGroups.dsu],
+      permissions: [],
+    });
 
     await addVolunteer(TEST_VOLUNTEER);
 
@@ -77,7 +78,10 @@ describe("endpoint POST /volunteer/changeAccess", () => {
 
   // eslint-disable-next-line jest/expect-expect
   it("should fail with 400 when trying to update a volunteer with an id that does not exist", async () => {
-    const { agent } = await login(app, TEST_ADMIN);
+    const { agent } = await login(app, {
+      permissions: [Permissions.manageVolunteers, Permissions.access],
+      permissionGroups: [],
+    });
 
     await addVolunteer(TEST_VOLUNTEER);
 

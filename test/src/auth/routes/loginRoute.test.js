@@ -10,7 +10,12 @@ const util = require("../../../testUtils/mongo");
 const supertest = require("supertest");
 const { addVolunteer } = require("../../../../src/volunteer/volunteerData");
 const { getConfig } = require("../../../../src/config");
-const { TEST_VOLUNTEER } = require("../../../testUtils/requests");
+
+const TEST_VOLUNTEER = {
+  name: "default_name",
+  email: "default_email@example.ca",
+  teamName: "testTeam",
+};
 
 describe("test /auth/login", () => {
   let request;

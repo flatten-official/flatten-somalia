@@ -2,9 +2,14 @@ const { addVolunteer } = require("../../../src/volunteer/volunteerData");
 const cookieData = require("../../../src/auth/cookieData");
 const util = require("../../testUtils/mongo");
 const { calculateExpiryTime } = require("../../../src/utils/time");
-const { TEST_VOLUNTEER } = require("../../testUtils/requests");
 
 const mongoose = require("mongoose");
+
+const TEST_VOLUNTEER = {
+  name: "default_name",
+  email: "default_email@example.ca",
+  teamName: "testTeam",
+};
 
 describe("cookie database functions", () => {
   beforeAll(() => util.connectToDatabase());

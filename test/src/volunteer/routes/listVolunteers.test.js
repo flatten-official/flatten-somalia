@@ -2,12 +2,14 @@ const { Permissions } = require("../../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../../src/app");
 const util = require("../../../testUtils/mongo");
-const {
-  login,
-  TEST_VOLUNTEER,
-  TEST_ADMIN,
-} = require("../../../testUtils/requests");
+const { login } = require("../../../testUtils/requests");
 const _ = require("lodash");
+
+const TEST_VOLUNTEER = {
+  name: "default_name",
+  email: "default_email@example.ca",
+  teamName: "testTeam",
+};
 
 const makeVolunteerRequestBody = (data) => {
   return _.defaults({ data: _.defaults(data, TEST_VOLUNTEER) });
@@ -36,7 +38,10 @@ describe("endpoint POST /volunteer", () => {
   afterAll(() => util.closeDatabase());
 
   it("should return a correct list of volunteers", async () => {
-    const { agent, volunteer: adminVolunteer } = await login(app, TEST_ADMIN);
+    const { agent, volunteer: adminVolunteer } = await login(app, {
+      permissions: [Permissions.manageVolunteers, Permissions.access],
+      permissionGroups: [],
+    });
 
     for (const v of dummyVolunteers) {
       const res = await agent
