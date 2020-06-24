@@ -39,13 +39,13 @@ async function changeVolunteerAccessById(updaterData, toUpdateInfo) {
     return await volunteerData.addPermissionById(
       toUpdateInfo.volunteerId,
       volunteerData.Permissions.access,
-      updaterData.permissionGroups
+      updaterData.permissions
     );
   } else {
     return await volunteerData.removePermissionById(
       toUpdateInfo.volunteerId,
       volunteerData.Permissions.access,
-      updaterData.permissionGroups
+      updaterData.permissions
     );
   }
 }

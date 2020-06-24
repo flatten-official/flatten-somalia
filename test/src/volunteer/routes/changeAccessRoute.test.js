@@ -55,7 +55,10 @@ describe("endpoint POST /volunteer/changeAccess", () => {
   it("should fail with 403 for the wrong permission groups", async () => {
     const { agent } = await login(
       app,
-      _.defaults({ permissionGroups: [PermissionGroups.volunteer] }, TEST_ADMIN)
+      _.defaults(
+        { permissionGroups: [PermissionGroups.volunteer], permissions: [] },
+        TEST_ADMIN
+      )
     );
 
     await addVolunteer(TEST_VOLUNTEER);

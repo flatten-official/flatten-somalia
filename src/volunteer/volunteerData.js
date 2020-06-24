@@ -14,7 +14,6 @@ const Permissions = {
 // for the moment, just used to allow enable/suspend accounts
 const PermissionGroups = {
   volunteer: "volunteer",
-  admin: "admin",
 };
 
 Object.freeze(Permissions);
@@ -64,7 +63,7 @@ const Volunteer = mongoose.model(
         type: [
           {
             type: String,
-            enum: [PermissionGroups.volunteer, PermissionGroups.admin],
+            enum: [PermissionGroups.volunteer],
           },
         ],
         requried: true,
@@ -147,10 +146,10 @@ const getVolunteerList = async () => {
 const addPermissionById = async (
   volunteerIdToUpdate,
   permission,
-  volunteerPermissionGroups
+  volunteerPermissions
 ) => {
   return await performPermissionBasedUpdate(
-    volunteerPermissionGroups,
+    volunteerPermissions,
     volunteerIdToUpdate,
     async (volunteerToUpdate) => {
       if (!volunteerToUpdate.permissions.includes(permission)) {
@@ -165,10 +164,10 @@ const addPermissionById = async (
 const removePermissionById = async (
   volunteerIdToUpdate,
   permission,
-  volunteerPermissionGroups
+  volunteerPermissions
 ) => {
   return await performPermissionBasedUpdate(
-    volunteerPermissionGroups,
+    volunteerPermissions,
     volunteerIdToUpdate,
     async (volunteerToUpdate) => {
       if (volunteerToUpdate.permissions.includes(permission)) {
@@ -183,23 +182,19 @@ const removePermissionById = async (
 };
 
 /**
- * Checks whether a volunteer with permission groups groupsA is permitted to modify a volunteer with permission group groupsB.
+ * Checks whether a volunteer with permissions permsA is permitted to modify a volunteer with permission group groupsB.
  */
-const checkCanUpdate = (groupsA, groupsB) => {
-  return (
-    groupsA.includes(PermissionGroups.admin) &&
-    groupsB.length === 1 &&
-    groupsB[0] === PermissionGroups.volunteer
-  );
-};
-
+const checkCanUpdate = (permsA, groupsB) =>
+  permsA.includes(Permissions.manageVolunteers) &&
+  groupsB.length === 1 &&
+  groupsB[0] === PermissionGroups.volunteer;
 /**
  * Checks if the volunteer with permission groups updaterPermissionGroups can update the volunteer at
  * toUpdateId based on permission groups. If it can, apply updateFunc.
  * */
 
 const performPermissionBasedUpdate = async (
-  updaterPermissionGroups,
+  updaterPermissions,
   toUpdateId,
   updateFunc
 ) => {
@@ -212,9 +207,7 @@ const performPermissionBasedUpdate = async (
     if (!volunteerToUpdate) return [400, "Volunteer not found"];
   }
 
-  if (
-    !checkCanUpdate(updaterPermissionGroups, volunteerToUpdate.permissionGroups)
-  )
+  if (!checkCanUpdate(updaterPermissions, volunteerToUpdate.permissionGroups))
     return [403, "Wrong permissions"];
   return await updateFunc(volunteerToUpdate);
 };
