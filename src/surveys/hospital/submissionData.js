@@ -29,6 +29,6 @@ const create = async (content) => {
   return submissionDocument;
 };
 
-const save = async (document) => await document.save();
+const saveAsync = (document) => document.save();
 
-module.exports = { model, save, create };
+module.exports = { model, saveAsync: saveAsync, create };

@@ -28,8 +28,8 @@ describe("endpoint POST /volunteer", () => {
     request = supertest(app);
   });
 
-  afterEach(async () => await util.clearDatabase());
-  afterAll(async () => await util.closeDatabase());
+  afterEach(() => util.clearDatabase());
+  afterAll(() => util.closeDatabase());
 
   it("should add a volunteer upon valid request", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, {
