@@ -1,5 +1,4 @@
 const { addVolunteer, Permissions } = require("./volunteerData");
-const { Error } = require("mongoose");
 const volunteerData = require("./volunteerData");
 const { isValidationTypeError } = require("../utils/mongoose");
 
