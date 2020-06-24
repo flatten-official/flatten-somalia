@@ -1,15 +1,8 @@
-const { addVolunteer } = require("../../../src/volunteer/volunteerData");
 const cookieData = require("../../../src/auth/cookieData");
 const util = require("../../testUtils/mongo");
 const { calculateExpiryTime } = require("../../../src/utils/time");
 
 const mongoose = require("mongoose");
-
-const TEST_VOLUNTEER = {
-  name: "default_name",
-  email: "default_email@example.ca",
-  teamName: "testTeam",
-};
 
 describe("cookie database functions", () => {
   beforeAll(() => util.connectToDatabase());
@@ -18,8 +11,8 @@ describe("cookie database functions", () => {
 
   it("should write cookie to database", async () => {
     const expiry = calculateExpiryTime(5);
-    const volunteer = await addVolunteer(TEST_VOLUNTEER);
-    const cookieID = await cookieData.writeCookie(expiry, volunteer._id);
+    const volunteerID = mongoose.mongo.ObjectId("56cb91bdc3464f14678934ca");
+    const cookieID = await cookieData.writeCookie(expiry, volunteerID);
 
     const all = await cookieData.Cookie.find();
     expect(all).toHaveLength(1);
@@ -27,17 +20,17 @@ describe("cookie database functions", () => {
     const retrievedCookie = all[0];
     expect(retrievedCookie._id).toStrictEqual(cookieID);
     expect(retrievedCookie.expiry).toStrictEqual(expiry);
-    expect(retrievedCookie.volunteerId).toStrictEqual(volunteer._id);
+    expect(retrievedCookie.volunteerId).toStrictEqual(volunteerID);
   });
 
   it("should read existing cookie from database", async () => {
     const expiry = calculateExpiryTime(5);
-    const volunteer = await addVolunteer(TEST_VOLUNTEER);
-    const cookieID = await cookieData.writeCookie(expiry, volunteer._id);
+    const volunteerID = mongoose.mongo.ObjectId("56cb91bdc3464f14678934ca");
+    const cookieID = await cookieData.writeCookie(expiry, volunteerID);
 
     const cookieValues = await cookieData.readCookie(cookieID);
 
-    expect(cookieValues.volunteerId).toStrictEqual(volunteer._id);
+    expect(cookieValues.volunteerId).toStrictEqual(volunteerID);
     expect(cookieValues.expiry).toStrictEqual(expiry);
   });
 
