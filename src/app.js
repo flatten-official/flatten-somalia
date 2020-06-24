@@ -4,13 +4,13 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
+const { makeRequestLoggingMiddleware } = require("./winston");
 const { getConfig } = require("./config");
 const routes = require("./routes");
 const appErrorHandler = require("./utils/express/errorHandler");
-const loggerMiddleware = require("./utils/express/loggerMiddleware");
 const bodySanitizer = require("./utils/express/bodySanitizer");
 
-function getApp() {
+async function getApp() {
   const app = express();
 
   app.use(cors({ origin: [getConfig().urls.frontendHost], credentials: true }));
@@ -21,8 +21,8 @@ function getApp() {
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
   app.use(cookieParser(getConfig().secrets.cookieSecret));
+  app.use(await makeRequestLoggingMiddleware());
   app.use(bodySanitizer);
-  app.use(loggerMiddleware);
   app.use("/", routes);
   app.use(appErrorHandler);
 

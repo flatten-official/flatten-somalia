@@ -1,7 +1,5 @@
 const winston = require("winston");
-const {
-  LoggingWinston: StackdriverTransport,
-} = require("@google-cloud/logging-winston");
+const GCPLogging = require("@google-cloud/logging-winston");
 
 const { transports, format } = winston;
 
@@ -13,8 +11,10 @@ const consoleFormat = format.combine(
   format.printf((info) => {
     const time = info.timestamp.split("T")[1].slice(0, 8);
 
-    if (info.message === "Incoming request.")
-      info.message = info.method.padEnd(8, " ") + info.path;
+    if (info.httpRequest)
+      info.message =
+        info.httpRequest.requestMethod.padEnd(8, " ") +
+        info.httpRequest.requestUrl;
 
     return `\u001b[7m\u001b[37m[${time}] \u001b[0m${
       info.level + " \t" + info.message
@@ -50,27 +50,39 @@ function setup() {
   winston.loggers.add("custom", {
     levels: logSeverityLevels,
     transports: [
-      new transports.Console({
-        level: "debug",
-        format: consoleFormat,
-      }),
-      // new transports.Console({
-      //   level: "debug",
-      //   format: defaultFormat,
-      // }),
-      // new StackdriverTransport({
-      //   levels: logSeverityLevels,
-      //   level: "debug",
-      //   format: defaultFormat,
-      // }),
+      makeConsoleTransport("debug"),
+      makeStackdriverTransport("info"),
     ],
   });
 
   getLogger().debug("Logger configuration complete.");
 }
 
+function makeConsoleTransport(level, format) {
+  return new transports.Console({
+    levels: logSeverityLevels,
+    level: level,
+    format: format ? format : consoleFormat,
+  });
+}
+
+function makeStackdriverTransport(level) {
+  return new GCPLogging.LoggingWinston({
+    levels: logSeverityLevels,
+    level,
+    format: defaultFormat,
+  });
+}
+
+async function makeRequestLoggingMiddleware() {
+  return await GCPLogging.express.makeMiddleware(
+    getLogger(),
+    makeStackdriverTransport("info")
+  );
+}
+
 function getLogger() {
   return winston.loggers.get("custom");
 }
 
-module.exports = { setup, getLogger };
+module.exports = { setup, getLogger, makeRequestLoggingMiddleware };
