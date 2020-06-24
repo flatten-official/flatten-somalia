@@ -1,15 +1,13 @@
-const { getLogger } = require("../../winston");
 const { verifyTokenAndMakeCookie } = require("../verificationAPI");
 const { getConfig } = require("../../config");
 
 // Verifies a token in the request and gives the user a cookie.
 module.exports = async (req, res) => {
-  const log = getLogger();
   const token = req.query.token;
 
   if (!token || typeof token !== "string") {
     res.status(400).send("No token included.");
-    log.info("No token was included", { status: 400 });
+    req.log.warning("Failed: missing token.", { status: 400 });
     return;
   }
 
@@ -22,7 +20,7 @@ module.exports = async (req, res) => {
         "Your link is invalid (it might have expired)." +
           "Go to https://v.flatten.org to login again"
       );
-    log.info("Invalid login link.", { status: 410 });
+    req.log.info("Failed to verify token & issue cookie.", { status: 410 });
     return;
   }
 
@@ -36,5 +34,5 @@ module.exports = async (req, res) => {
   });
 
   res.redirect(303, getConfig().urls.frontendHost);
-  log.info("Successfully issued cookie.", { status: 303 });
+  req.log.info("Success: issued cookie.", { status: 303 });
 };
