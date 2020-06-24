@@ -32,8 +32,8 @@ describe("endpoint POST /volunteer", () => {
     app = await getApp();
   });
 
-  afterEach(async () => await util.clearDatabase());
-  afterAll(async () => await util.closeDatabase());
+  afterEach(() => util.clearDatabase());
+  afterAll(() => util.closeDatabase());
 
   it("should return a correct list of volunteers", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, TEST_ADMIN);

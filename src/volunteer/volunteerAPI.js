@@ -40,15 +40,15 @@ async function getVolunteerList() {
  * @param updaterData the volunteer making the change
  * @param toUpdateInfo an object containing two fields, access (True/False) and the volunteer id
  */
-async function changeVolunteerAccessById(updaterData, toUpdateInfo) {
+function changeVolunteerAccessById(updaterData, toUpdateInfo) {
   if (toUpdateInfo.access) {
-    return await volunteerData.addPermissionById(
+    return volunteerData.addPermissionById(
       toUpdateInfo.volunteerId,
       volunteerData.Permissions.access,
       updaterData.permissions
     );
   } else {
-    return await volunteerData.removePermissionById(
+    return volunteerData.removePermissionById(
       toUpdateInfo.volunteerId,
       volunteerData.Permissions.access,
       updaterData.permissions

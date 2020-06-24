@@ -105,8 +105,8 @@ const addVolunteer = async (newVolunteer) => {
 const findVolunteerById = (volunteerId) =>
   Volunteer.findById(volunteerId).exec(); // exec() required to force return of promise
 
-const volunteerRegex = async (email) => {
-  return await Volunteer.find({
+const volunteerRegexAsync = (email) => {
+  return Volunteer.find({
     email: { $regex: new RegExp(`^${email}$`), $options: "i" },
   });
 };
@@ -116,7 +116,7 @@ const volunteerRegex = async (email) => {
  * @return {Promise}
  */
 const findVolunteerByEmail = async (email) => {
-  const emails = await volunteerRegex(email);
+  const emails = await volunteerRegexAsync(email);
   // we previously returned null, this maintains the behaviour
   return emails[0] ? emails[0] : null;
 };
@@ -131,12 +131,12 @@ const getVolunteerList = async () => {
   }));
 };
 
-const addPermissionById = async (
+const addPermissionByIdAsync = (
   volunteerIdToUpdate,
   permission,
   volunteerPermissions
 ) => {
-  return await performPermissionBasedUpdate(
+  return performPermissionBasedUpdateAsync(
     volunteerPermissions,
     volunteerIdToUpdate,
     async (volunteerToUpdate) => {
@@ -149,12 +149,12 @@ const addPermissionById = async (
   );
 };
 
-const removePermissionById = async (
+const removePermissionByIdAsync = (
   volunteerIdToUpdate,
   permission,
   volunteerPermissions
 ) => {
-  return await performPermissionBasedUpdate(
+  return performPermissionBasedUpdateAsync(
     volunteerPermissions,
     volunteerIdToUpdate,
     async (volunteerToUpdate) => {
@@ -176,12 +176,12 @@ const checkCanUpdate = (permsA, groupsB) =>
   permsA.includes(Permissions.manageVolunteers) &&
   groupsB.length > 0 &&
   groupsB[0] === PermissionGroups.dsu;
+
 /**
  * Checks if the volunteer with permission groups updaterPermissionGroups can update the volunteer at
  * toUpdateId based on permission groups. If it can, apply updateFunc.
  * */
-
-const performPermissionBasedUpdate = async (
+const performPermissionBasedUpdateAsync = async (
   updaterPermissions,
   toUpdateId,
   updateFunc
@@ -195,19 +195,19 @@ const performPermissionBasedUpdate = async (
 
   if (!checkCanUpdate(updaterPermissions, volunteerToUpdate.permissionGroups))
     return [403, "Wrong permissions"];
-  return await updateFunc(volunteerToUpdate);
+  return updateFunc(volunteerToUpdate);
 };
 
 module.exports = {
   Volunteer,
   addVolunteer,
   findVolunteerById,
-  volunteerRegex,
+  volunteerRegex: volunteerRegexAsync,
   findVolunteerByEmail,
   getVolunteerList,
   getNextFriendlyId,
   Permissions,
   PermissionGroups,
-  addPermissionById,
-  removePermissionById,
+  addPermissionById: addPermissionByIdAsync,
+  removePermissionById: removePermissionByIdAsync,
 };

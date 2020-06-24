@@ -15,8 +15,8 @@ describe("test /auth", () => {
     request = supertest(app);
   });
 
-  afterEach(async () => await util.clearDatabase());
-  afterAll(async () => await util.closeDatabase());
+  afterEach(() => util.clearDatabase());
+  afterAll(() => util.closeDatabase());
 
   it("should return an empty object when no cookie is provided", async () => {
     const res = await request.get("/auth");

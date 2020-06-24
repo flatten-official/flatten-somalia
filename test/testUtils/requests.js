@@ -1,7 +1,6 @@
 const {
   addVolunteer,
   Permissions,
-  PermissionGroups,
 } = require("../../src/volunteer/volunteerData");
 const { signToken } = require("../../src/utils/jwt");
 const supertest = require("supertest");

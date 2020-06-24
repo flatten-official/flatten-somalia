@@ -20,5 +20,6 @@ module.exports = {
     "no-unused-vars": "warn",
     "prefer-const": "warn",
     "require-await": "warn",
+    "no-return-await": "warn",
   },
 };
