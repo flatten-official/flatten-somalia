@@ -22,56 +22,59 @@ Object.freeze(PermissionGroups);
 
 const Volunteer = mongoose.model(
   "Volunteer",
-  new mongoose.Schema({
-    name: {
-      type: String,
-      required: true,
+  new mongoose.Schema(
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        index: true, // Since we search by volunteer email
+        unique: true,
+        required: true,
+        lowercase: true,
+      },
+      teamName: {
+        type: String,
+        required: true,
+        index: true,
+      },
+      friendlyId: {
+        type: Number,
+        required: true,
+        unique: true,
+        index: true,
+      },
+      permissions: {
+        type: [
+          {
+            type: String,
+            enum: [
+              Permissions.manageVolunteers,
+              Permissions.submitForms,
+              Permissions.access,
+            ],
+            required: true,
+          },
+        ],
+        required: true,
+      },
+      permissionGroups: {
+        type: [
+          {
+            type: String,
+            enum: [PermissionGroups.volunteer, PermissionGroups.admin],
+          },
+        ],
+        requried: true,
+      },
+      gender: String, // TODO Make enum
+      addedBy: mongoose.ObjectId,
+      age: Number,
     },
-    email: {
-      type: String,
-      index: true, // Since we search by volunteer email
-      unique: true,
-      required: true,
-      lowercase: true,
-    },
-    teamName: {
-      type: String,
-      required: true,
-      index: true,
-    },
-    friendlyId: {
-      type: Number,
-      required: true,
-      unique: true,
-      index: true,
-    },
-    permissions: {
-      type: [
-        {
-          type: String,
-          enum: [
-            Permissions.manageVolunteers,
-            Permissions.submitForms,
-            Permissions.access,
-          ],
-          required: true,
-        },
-      ],
-      required: true,
-    },
-    permissionGroups: {
-      type: [
-        {
-          type: String,
-          enum: [PermissionGroups.volunteer, PermissionGroups.admin],
-        },
-      ],
-      requried: true,
-    },
-    gender: String, // TODO Make enum
-    addedBy: mongoose.ObjectId,
-    age: Number,
-  })
+    { strict: "throw" }
+  )
 );
 
 const defaultVolunteer = {
