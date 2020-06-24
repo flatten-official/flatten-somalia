@@ -45,9 +45,10 @@ async function readCookie(cookieID) {
 
   if (!cookie) return null;
 
+  // If the access permission was removed we want to invalidate the cookie.
   if (
     Date.now() > cookie.expiry ||
-    !checkVolunteerAccessById(cookie.volunteerId)
+    !(await checkVolunteerAccessById(cookie.volunteerId))
   ) {
     await deleteCookie(cookieID);
     return null;

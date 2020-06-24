@@ -1,6 +1,7 @@
 const { addVolunteer, Permissions } = require("./volunteerData");
 const { Error } = require("mongoose");
 const volunteerData = require("./volunteerData");
+const { isValidationTypeError } = require("../utils/mongoose");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   const permissions = [Permissions.access];
@@ -19,12 +20,13 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   try {
     await addVolunteer(volunteer);
   } catch (e) {
-    console.log(e);
-    if (e.message.indexOf("duplicate key error") !== -1)
+    if (e.message.indexOf("duplicate key error") !== -1) {
+      console.log(e);
       return [400, "Email is already in use"];
-    else if (e instanceof Error.ValidationError)
+    } else if (isValidationTypeError(e)) {
+      console.log(e);
       return [400, "Volunteer data malformed"];
-    else throw e;
+    } else throw e;
   }
 
   return [200, "Success"];
@@ -34,6 +36,11 @@ async function getVolunteerList() {
   return [200, await volunteerData.getVolunteerList()];
 }
 
+/**
+ *
+ * @param updaterData the volunteer making the change
+ * @param toUpdateInfo an object containing two fields, access (True/False) and the volunteer id
+ */
 async function changeVolunteerAccessById(updaterData, toUpdateInfo) {
   if (toUpdateInfo.access) {
     return await volunteerData.addPermissionById(

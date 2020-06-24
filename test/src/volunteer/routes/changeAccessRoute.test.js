@@ -56,7 +56,7 @@ describe("endpoint POST /volunteer/changeAccess", () => {
     const { agent } = await login(
       app,
       _.defaults(
-        { permissionGroups: [PermissionGroups.volunteer], permissions: [] },
+        { permissionGroups: [PermissionGroups.dsu], permissions: [] },
         TEST_ADMIN
       )
     );

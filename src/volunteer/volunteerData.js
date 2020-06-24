@@ -1,84 +1,77 @@
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const { createModel } = require("../utils/mongoose");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Permissions = {
   manageVolunteers: "manageVolunteers",
   submitForms: "submitForms",
-  // is the user still enabled (allowed to access the system)
-  // todo - add check in the middleware to disable accounts
-  access: "access",
+  access: "access", // is the user still enabled (allowed to access the system)
 };
 
 // permission groups used to grant ability to modify particular users.
 // for the moment, just used to allow enable/suspend accounts
 const PermissionGroups = {
-  volunteer: "volunteer",
+  dsu: "dsu",
 };
 
 Object.freeze(Permissions);
 Object.freeze(PermissionGroups);
 
-const Volunteer = mongoose.model(
-  "Volunteer",
-  new mongoose.Schema(
-    {
-      name: {
+const Volunteer = createModel("Volunteer", {
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    index: true, // Since we search by volunteer email
+    unique: true,
+    required: true,
+    lowercase: true,
+  },
+  teamName: {
+    type: String,
+    required: true,
+    index: true,
+  },
+  friendlyId: {
+    type: Number,
+    required: true,
+    unique: true,
+    index: true,
+  },
+  permissions: {
+    type: [
+      {
         type: String,
-        required: true,
-      },
-      email: {
-        type: String,
-        index: true, // Since we search by volunteer email
-        unique: true,
-        required: true,
-        lowercase: true,
-      },
-      teamName: {
-        type: String,
-        required: true,
-        index: true,
-      },
-      friendlyId: {
-        type: Number,
-        required: true,
-        unique: true,
-        index: true,
-      },
-      permissions: {
-        type: [
-          {
-            type: String,
-            enum: [
-              Permissions.manageVolunteers,
-              Permissions.submitForms,
-              Permissions.access,
-            ],
-            required: true,
-          },
+        enum: [
+          Permissions.manageVolunteers,
+          Permissions.submitForms,
+          Permissions.access,
         ],
         required: true,
       },
-      permissionGroups: {
-        type: [
-          {
-            type: String,
-            enum: [PermissionGroups.volunteer],
-          },
-        ],
-        requried: true,
+    ],
+    required: true,
+  },
+  permissionGroups: {
+    type: [
+      {
+        type: String,
+        enum: [PermissionGroups.dsu],
       },
-      gender: String, // TODO Make enum
-      addedBy: mongoose.ObjectId,
-      age: Number,
-    },
-    { strict: "throw" }
-  )
-);
+    ],
+    required: true,
+  },
+  gender: String, // TODO Make enum
+  addedBy: mongoose.ObjectId,
+  age: Number,
+});
 
 const defaultVolunteer = {
   permissions: [Permissions.submitForms, Permissions.access],
-  permissionGroups: [PermissionGroups.volunteer],
+  permissionGroups: [PermissionGroups.dsu],
 };
 
 const getNextFriendlyId = async () => {
@@ -192,7 +185,7 @@ const removePermissionById = async (
 const checkCanUpdate = (permsA, groupsB) =>
   permsA.includes(Permissions.manageVolunteers) &&
   groupsB.length === 1 &&
-  groupsB[0] === PermissionGroups.volunteer;
+  groupsB[0] === PermissionGroups.dsu;
 /**
  * Checks if the volunteer with permission groups updaterPermissionGroups can update the volunteer at
  * toUpdateId based on permission groups. If it can, apply updateFunc.
