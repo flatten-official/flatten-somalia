@@ -3,18 +3,27 @@ const GCPLogging = require("@google-cloud/logging-winston");
 
 const { transports, format } = winston;
 
-const defaultFormat = format.combine(format.timestamp(), format.json());
+const messageFormat = format.printf((info) => {
+  if (info.httpRequest)
+    info.message =
+      "Done. Logged HTTP request on " + info.httpRequest.requestUrl;
+
+  if (info.method && info.path)
+    info.message += info.method.padEnd(8, " ") + info.path;
+
+  if (info.status) info.message += ` Response status: ${info.status}`;
+});
+
+const defaultFormat = format.combine(
+  format.timestamp(),
+  messageFormat,
+  format.json()
+);
 
 const consoleFormat = format.combine(
   format.colorize(),
-  format.timestamp(),
   format.printf((info) => {
     const time = info.timestamp.split("T")[1].slice(0, 8);
-
-    if (info.httpRequest)
-      info.message =
-        info.httpRequest.requestMethod.padEnd(8, " ") +
-        info.httpRequest.requestUrl;
 
     return `\u001b[7m\u001b[37m[${time}] \u001b[0m${
       info.level + " \t" + info.message
@@ -57,7 +66,6 @@ function makeStackdriverTransport(level) {
   return new GCPLogging.LoggingWinston({
     levels: logSeverityLevels,
     level,
-    format: defaultFormat,
   });
 }
 
@@ -66,6 +74,7 @@ function setup() {
 
   winston.loggers.add("custom", {
     levels: logSeverityLevels,
+    format: defaultFormat,
     transports: [
       makeConsoleTransport("debug"),
       makeStackdriverTransport("info"),
