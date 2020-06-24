@@ -72,19 +72,6 @@ async function initialSubmission(
   await submission.save();
 }
 
-// TODO - decide what the props etc are for this
-async function followUpSubmission(submissionData) {}
-
-async function getFollowUpInfo(volunteerId, district) {
-  const [
-    submissionId,
-    household,
-    people,
-  ] = submissionData.getVolunteerNextFollowUp(volunteerId, district);
-
-  // TODO - return info as the client expects it
-}
-
 module.exports = {
   initialSubmission,
 };

@@ -19,5 +19,7 @@ module.exports = {
     "jest/prefer-expect-assertions": "off",
     "no-unused-vars": "warn",
     "prefer-const": "warn",
+    "require-await": "warn",
+    "no-return-await": "warn",
   },
 };
