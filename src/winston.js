@@ -16,7 +16,7 @@ const consoleFormat = format.combine(
     if (info.message === "Incoming request.")
       info.message = info.method.padEnd(8, " ") + info.path;
 
-    return `\u001b[47m\u001b[97m[${time}] \u001b[0m${
+    return `\u001b[7m\u001b[37m[${time}] \u001b[0m${
       info.level + " \t" + info.message
     }`;
   })
@@ -34,14 +34,14 @@ const logSeverityLevels = {
 };
 
 const inverseColours = {
-  emergency: ["red", "inverse"],
-  alert: ["red", "inverse"],
-  critical: ["red", "inverse"],
-  error: ["red", "inverse"],
-  warning: ["yellow", "inverse"],
-  notice: ["green", "inverse"],
-  info: ["green", "inverse"],
-  debug: ["magenta", "inverse"],
+  emergency: "magenta bold inverse",
+  alert: "magenta inverse",
+  critical: "red bold inverse",
+  error: "red inverse",
+  warning: "yellow inverse",
+  notice: "green inverse",
+  info: "cyan inverse",
+  debug: "blue inverse",
 };
 
 function setup() {
@@ -66,7 +66,7 @@ function setup() {
     ],
   });
 
-  getLogger().info("Logger configuration complete.");
+  getLogger().debug("Logger configuration complete.");
 }
 
 function getLogger() {
