@@ -7,6 +7,7 @@ try {
 }
 
 module.exports = (req, res) => {
+  req.log.info(`Success.`, { status: 200 });
   res
     .status(200)
     .send(
