@@ -9,6 +9,7 @@ const routes = require("./routes");
 const appErrorHandler = require("./utils/express/errorHandler");
 const loggerMiddleware = require("./utils/express/loggerMiddleware");
 const bodySanitizer = require("./utils/express/bodySanitizer");
+const cookieMiddleware = require("./auth/routes/cookieMiddleware");
 
 function getApp() {
   const app = express();
@@ -23,6 +24,7 @@ function getApp() {
   app.use(cookieParser(getConfig().secrets.cookieSecret));
   app.use(bodySanitizer);
   app.use(loggerMiddleware);
+  app.use(cookieMiddleware);
   app.use("/", routes);
   app.use(appErrorHandler);
 
