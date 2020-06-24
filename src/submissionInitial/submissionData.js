@@ -130,11 +130,11 @@ const Person = mongoose.model(
   })
 );
 
-async function createPeople(perPersonData) {
+function createPeople(perPersonData) {
   return perPersonData.map((personData) => new Person(personData));
 }
 
-async function createSubmission(
+function createSubmission(
   submitterId,
   submitterTeamName,
   submissionSchema,
@@ -145,7 +145,7 @@ async function createSubmission(
   householdData
 ) {
   const people = [];
-  for (const [i, _] of Object.entries(peopleIds)) {
+  for (const i of Object.keys(peopleIds)) {
     people.push({
       data: peopleData[i],
       ref: peopleIds[i],
@@ -165,18 +165,18 @@ async function createSubmission(
   });
 }
 
-async function createHousehold(followUpId, phone, email) {
+function createHousehold(followUpId, phone, email) {
   // TODO - handle different kinds of submsisions here
   return new Household({ followUpId, phone, email });
 }
 
-async function setPersonToDead(personId) {
-  await Person.findByIdAndUpdate(personId, {
-    $push: {
-      alive: false,
-    },
-  });
-}
+// async function setPersonToDead(personId) {
+//   await Person.findByIdAndUpdate(personId, {
+//     $push: {
+//       alive: false,
+//     },
+//   });
+// }
 
 async function getVolunteerNextFollowUp(
   // todo - add option to select by district if needed
@@ -241,11 +241,11 @@ async function createFollowUpSubmisison(submissionId, ...newSubmissionData) {
   return newSubmission;
 }
 
-async function cancelVolunteerFollowUp(submissionId) {
-  await Submission.findByIdAndUpdate(submissionId, {
-    followUp: { inProgress: false },
-  });
-}
+// async function cancelVolunteerFollowUp(submissionId) {
+//   await Submission.findByIdAndUpdate(submissionId, {
+//     followUp: { inProgress: false },
+//   });
+// }
 
 module.exports = {
   Submission,
@@ -254,8 +254,6 @@ module.exports = {
   createSubmission,
   createHousehold,
   createPeople,
-  setPersonToDead,
   getVolunteerNextFollowUp,
   createFollowUpSubmisison,
-  cancelVolunteerFollowUp,
 };

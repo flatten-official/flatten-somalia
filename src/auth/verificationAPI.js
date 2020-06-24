@@ -28,7 +28,7 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
     "?token=" +
     token;
 
-  return await sendVerificationEmail(emailAddress, verificationLink);
+  return sendVerificationEmail(emailAddress, verificationLink);
 };
 
 /**

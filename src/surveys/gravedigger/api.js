@@ -21,7 +21,7 @@ async function submitGravediggerSurvey(
     },
   });
 
-  await GravediggerSurveySubmission.save(submissionDocument);
+  await GravediggerSurveySubmission.saveAsync(submissionDocument);
 }
 
 module.exports = { submitGravediggerSurvey };
