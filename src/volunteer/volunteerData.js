@@ -112,6 +112,11 @@ const addVolunteer = async (newVolunteer) => {
 const findVolunteerById = (volunteerId) =>
   Volunteer.findById(volunteerId).exec(); // exec() required to force return of promise
 
+/**
+ * Checks whether a volunteer with a given ID has the access permission, which allows them to use the site.
+ * @param  {ObjectId} volunteerId the id of the volunteer to check access for.
+ * @returns true if the volunteer with volunteerId in the database has access. false otherwise of if they DNE.
+ */
 const checkVolunteerAccessById = async (volunteerId) => {
   const volunteer = await findVolunteerById(volunteerId);
   return volunteer && volunteer.permissions.indexOf(Permissions.access) !== -1;
