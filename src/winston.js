@@ -22,6 +22,7 @@ const consoleFormat = format.combine(
   })
 );
 
+// consistent with GCP severity levels
 const logSeverityLevels = {
   emergency: 0,
   alert: 1,
@@ -44,20 +45,6 @@ const inverseColours = {
   debug: "blue inverse",
 };
 
-function setup() {
-  winston.addColors(inverseColours);
-
-  winston.loggers.add("custom", {
-    levels: logSeverityLevels,
-    transports: [
-      makeConsoleTransport("debug"),
-      makeStackdriverTransport("info"),
-    ],
-  });
-
-  getLogger().debug("Logger configuration complete.");
-}
-
 function makeConsoleTransport(level, format) {
   return new transports.Console({
     levels: logSeverityLevels,
@@ -74,15 +61,38 @@ function makeStackdriverTransport(level) {
   });
 }
 
+function setup() {
+  winston.addColors(inverseColours);
+
+  winston.loggers.add("custom", {
+    levels: logSeverityLevels,
+    transports: [
+      makeConsoleTransport("debug"),
+      makeStackdriverTransport("info"),
+    ],
+  });
+
+  getLogger().debug("Logger configuration complete.");
+}
+
+/* Get the logger used for non-req logs
+ *
+ * Relies on the setup function having been called.
+ */
+function getLogger() {
+  return winston.loggers.get("custom");
+}
+
+/* This middleware enables logging using req.log.info(...),
+ * which allow logs from the same request to be grouped on GCP.
+ *
+ * Relies on the setup function having been called.
+ */
 async function makeRequestLoggingMiddleware() {
   return await GCPLogging.express.makeMiddleware(
     getLogger(),
     makeStackdriverTransport("info")
   );
-}
-
-function getLogger() {
-  return winston.loggers.get("custom");
 }
 
 module.exports = { setup, getLogger, makeRequestLoggingMiddleware };
