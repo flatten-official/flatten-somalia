@@ -1,4 +1,4 @@
-const { cleanupDatabase, setupDatabase } = require("./utils/mongo");
+const { cleanupDatabase, setupDatabase } = require("./utils/mongoConnect");
 const { getApp } = require("./app");
 const { setup: configSetup } = require("./config");
 const { setup: sendGridSetup } = require("./utils/sendGrid");
