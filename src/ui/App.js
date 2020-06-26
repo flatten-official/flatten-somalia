@@ -7,6 +7,7 @@ import Home from "./home/Home";
 import Login from "./login/Login";
 import LoginSuccess from "./login/LoginSuccess";
 import Loading from "./components/Loading";
+import AdminPanel from "./components/AdminPanel";
 import { Routes, Surveys } from "../config";
 import { useDispatch, useSelector } from "react-redux";
 import { permissions } from "../backend/auth/authApi";
@@ -56,6 +57,12 @@ const AppContent = () => {
         exact
         path={Routes.addVolunteer}
         comp={SurveyPageFactory(Surveys.addVolunteer)}
+        requiredPermission={permissions.manageVolunteers}
+      />
+      <PrivateRoute
+        exact
+        path={Routes.admin}
+        comp={AdminPanel}
         requiredPermission={permissions.manageVolunteers}
       />
       <Route path={Routes.auth} component={Login} />

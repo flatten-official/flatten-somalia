@@ -43,6 +43,11 @@ const Home = () => {
           {tSurvey(Surveys.addVolunteer.i18nTitleKey)}
         </Button>
       ) : null}
+      {showAddVolunteers ? (
+        <Button variant="light" size="lg" href={Routes.admin}>
+          Administrate Volunteers
+        </Button>
+      ) : null}
     </>
   );
 };
