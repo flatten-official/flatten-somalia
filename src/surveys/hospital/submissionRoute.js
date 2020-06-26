@@ -1,5 +1,5 @@
 const { submitHospitalSurvey } = require("./api");
-const { isValidationTypeError } = require("../dataUtil");
+const { isValidationTypeError } = require("../../utils/mongoose");
 
 module.exports = async (req, res) => {
   try {

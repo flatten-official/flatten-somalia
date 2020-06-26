@@ -1,54 +1,69 @@
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const { createModel } = require("../utils/mongoose");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Permissions = {
   manageVolunteers: "manageVolunteers",
   submitForms: "submitForms",
+  access: "access", // is the user still enabled (allowed to access the system)
+};
+
+// permission groups used to grant ability to modify particular users.
+// for the moment, just used to allow enable/suspend accounts
+const PermissionGroups = {
+  dsu: "dsu",
 };
 
 Object.freeze(Permissions);
+Object.freeze(PermissionGroups);
 
-const Volunteer = mongoose.model(
-  "Volunteer",
-  new mongoose.Schema({
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      index: true, // Since we search by volunteer email
-      unique: true,
-      required: true,
-      lowercase: true,
-    },
-    teamName: {
-      type: String,
-      required: true,
-      index: true,
-    },
-    friendlyId: {
-      type: Number,
-      required: true,
-      unique: true,
-      index: true,
-    },
-    permissions: {
-      type: [
-        {
-          type: String,
-          enum: [Permissions.manageVolunteers, Permissions.submitForms],
-          required: true,
-        },
-      ],
-      required: true,
-    },
-    gender: String, // TODO Make enum
-    addedBy: mongoose.ObjectId,
-    age: Number,
-  })
-);
+const Volunteer = createModel("Volunteer", {
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    index: true, // Since we search by volunteer email
+    unique: true,
+    required: true,
+    lowercase: true,
+  },
+  teamName: {
+    type: String,
+    required: true,
+    index: true,
+  },
+  friendlyId: {
+    type: Number,
+    required: true,
+    unique: true,
+    index: true,
+  },
+  permissions: {
+    type: [
+      {
+        type: String,
+        enum: Object.values(Permissions),
+        required: true,
+      },
+    ],
+    required: true,
+  },
+  permissionGroups: {
+    type: [
+      {
+        type: String,
+        enum: Object.values(PermissionGroups),
+      },
+    ],
+    required: false, // TODO set to true once everyone has it
+  },
+  gender: String, // TODO Make enum
+  addedBy: mongoose.ObjectId,
+  age: Number,
+});
 
 const defaultVolunteer = {
   permissions: [Permissions.submitForms],
@@ -108,4 +123,5 @@ module.exports = {
   findVolunteerByEmail,
   getNextFriendlyId,
   Permissions,
+  PermissionGroups,
 };
