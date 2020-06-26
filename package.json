@@ -8,7 +8,8 @@
     "depcheck": "depcheck . --ignores=\"eslint-*,babel*,*/webpack,prettier,*sass*,depcheck,font-awesome,formiojs\"",
     "lint": "eslint --fix .",
     "start": "node scripts/start.js",
-    "deploy": "node scripts/createBranchJson.js && gcloud config set project flatten-staging-271921 && gcloud builds submit"
+    "deploy": "node scripts/createBranchJson.js && gcloud config set project flatten-staging-271921 && gcloud builds submit",
+    "auth": "gcloud auth login && gcloud config set project flatten-staging-271921"
   },
   "husky": {
     "hooks": {
