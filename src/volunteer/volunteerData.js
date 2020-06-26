@@ -127,6 +127,8 @@ const getVolunteerList = async () => {
     email: v.email,
     name: v.name,
     teamName: v.teamName,
+    permissions: v.permissions,
+    permissionGroups: v.permissionGroups,
   }));
 };
 

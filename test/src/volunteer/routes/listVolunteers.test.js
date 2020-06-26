@@ -1,4 +1,7 @@
-const { Permissions } = require("../../../../src/volunteer/volunteerData");
+const {
+  Permissions,
+  PermissionGroups,
+} = require("../../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../../src/app");
 const util = require("../../../testUtils/mongo");
@@ -19,10 +22,14 @@ const dummyVolunteers = [
   {
     name: "new_name",
     email: "a1@example.com",
+    permissions: [Permissions.access, Permissions.submitForms],
+    permissionGroups: [PermissionGroups.dsu],
   },
   {
     name: "new_name2",
     email: "a2@example.com",
+    permissions: [Permissions.access, Permissions.submitForms],
+    permissionGroups: [PermissionGroups.dsu],
   },
 ].sort((v) => v.email);
 
@@ -59,9 +66,14 @@ describe("endpoint POST /volunteer", () => {
       // remove the admin volunteer
       .filter((v) => v.email !== adminVolunteer.email)
       .sort((v) => v.email)
-      .map((v) => ({ name: v.name, email: v.email }));
+      .map((v) => ({
+        name: v.name,
+        email: v.email,
+        permissionGroups: v.permissionGroups,
+        permissions: v.permissions,
+      }));
 
-    expect(list).toStrictEqual(dummyVolunteers);
+    expect(dummyVolunteers).toStrictEqual(list);
   });
 
   it("should fail with 403 for missing permissions", async () => {
