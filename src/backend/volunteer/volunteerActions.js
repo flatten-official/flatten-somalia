@@ -9,7 +9,7 @@ export const VOLUNTEER_DISABLED = "VOLUNTEER_DISABLED";
 export const VOLUNTEER_CHANGE_PENDING = "VOLUNTEER_CHANGE_PENDING";
 export const VOLUNTEER_CHANGE_FAILED = "VOLUNTEER_CHANGE_FAILED";
 
-export const fetchVolunteerList = async (dispatch) => {
+export const fetchVolunteerList = () => async (dispatch) => {
   try {
     const res = await backend.request(flattenApi.listVolunteers);
     if (res.status !== 200) {
@@ -22,16 +22,15 @@ export const fetchVolunteerList = async (dispatch) => {
   }
 };
 
-export const changeVolunteerAccess = async (
-  dispatch,
-  volunteerId,
-  newAccessStatus
+export const changeVolunteerAccess = (volunteerId, newAccessStatus) => async (
+  dispatch
 ) => {
   try {
     const res = await backend.request({
       ...flattenApi.changeVolunteerAccess,
       data: { access: newAccessStatus, volunteerId },
     });
+    console.log(res);
     if (res.status !== 200) {
       dispatch({ type: VOLUNTEER_CHANGE_FAILED });
     } else {

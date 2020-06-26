@@ -27,6 +27,7 @@ const volunteerReducer = (
       return { ...state, listStatus: FETCH_LIST_PENDING };
     case FETCH_LIST_SUCCESS:
       return update(state, {
+        listStatus: { $set: FETCH_LIST_SUCCESS },
         list: {
           $set: action.payload.map((o) => ({
             ...o,
