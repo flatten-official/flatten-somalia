@@ -1,12 +1,13 @@
 # Tests for Submissions Collection
 
 ## Requirements:
-- Initial Household form version 1.0.3
 - The account you login with must have access to submit Initial Household Surveys
 - These are test intended for every record that is sent into the submissions collection
 - Every record must pass to these tests, in case of failure contact the DB admin or Martin
 
 ## Steps to getting started:
+1. Run npm run deploy on frontend repository master branch, to deploy the frontend to v.staging.flatten.org.
+2. Run npm run deploy on your feature backend branch, to deploy your changes to api.staging.flatten.org.
 1. Login to initial Flatten's survey portal (https://v.staging.flatten.org)
 3. Contact DB admin or Martin if you cannot login
 4. Once you login, you need to be able to have access to the Initial Household Survey
