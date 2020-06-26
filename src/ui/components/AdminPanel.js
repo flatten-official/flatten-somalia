@@ -22,17 +22,12 @@ const AdminPanel = () => {
     { dataField: "email", text: "Volunteer Email" },
   ];
 
-  console.log(volunteer.status);
-
   if (volunteer.listStatus === FETCH_LIST_PENDING) return <Loading />;
 
   return (
     <>
-      <BootstrapTable
-        keyField="volunteerId"
-        data={volunteer.list}
-        columns={columns}
-      />
+      <h3>Volunteer Management</h3> <br />
+      <BootstrapTable keyField="_id" data={volunteer.list} columns={columns} />
     </>
   );
 };
