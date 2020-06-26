@@ -19,7 +19,7 @@ async function submitHospitalSurvey(
     },
   });
 
-  await HospitalSurveySubmission.save(document);
+  await HospitalSurveySubmission.saveAsync(document);
 }
 
 module.exports = { submitHospitalSurvey };

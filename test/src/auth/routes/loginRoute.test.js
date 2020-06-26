@@ -1,16 +1,16 @@
-const sendGrid = require("../../../src/utils/sendGrid");
-const mocks = require("../../testUtils/mocks");
-const { verifyToken } = require("../../../src/utils/jwt");
+const sendGrid = require("../../../../src/utils/sendGrid");
+const mocks = require("../../../testUtils/mocks");
+const { verifyToken } = require("../../../../src/utils/jwt");
 const sendEmailMock = jest
   .spyOn(sendGrid, "sendVerificationEmail")
   .mockImplementation(mocks.sendVerificationEmail);
 
-const { getApp } = require("../../../src/app");
-const util = require("../../testUtils/mongo");
+const { getApp } = require("../../../../src/app");
+const util = require("../../../testUtils/mongo");
 const supertest = require("supertest");
-const { addVolunteer } = require("../../../src/volunteer/volunteerData");
-const { getConfig } = require("../../../src/config");
-const { TEST_VOLUNTEER } = require("../../testUtils/requests");
+const { addVolunteer } = require("../../../../src/volunteer/volunteerData");
+const { getConfig } = require("../../../../src/config");
+const { TEST_VOLUNTEER } = require("../../../testUtils/requests");
 
 describe("test /auth/login", () => {
   let request;

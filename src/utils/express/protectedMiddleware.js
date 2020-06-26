@@ -4,7 +4,7 @@
  * @return {function(...[*]=)}
  */
 // TODO Write tests
-module.exports = (requiredPermissions) => async (req, res, next) => {
+module.exports = (requiredPermissions) => (req, res, next) => {
   if (!res.locals.volunteer) res.sendStatus(401);
   else if (
     requiredPermissions.every((permission) =>

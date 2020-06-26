@@ -3,16 +3,24 @@ const { setup, cleanup } = require("../src/index");
 
 const scriptName = process.env.SCRIPT_NAME;
 const scriptPath = require("./scriptPaths.json")[scriptName];
+const Confirm = require("prompt-confirm");
 
-if (!scriptPath)
-  throw "no valid SCRIPT_NAME specified in .env file. Look at scripts/scriptPaths.js for valid script names";
+const main = async () => {
+  console.log(`Starting script: ${scriptName}`);
 
-console.log(`Starting script: ${scriptName}`);
+  if (!scriptPath)
+    throw "no valid SCRIPT_NAME specified in .env file. Look at scripts/scriptPaths.js for valid script names";
 
-const runScript = async () => {
   const Script = require(scriptPath);
 
-  if (Script.Config.useAutoSetup) {
+  const accepted = await new Confirm(Script.confirmationMessage).run();
+
+  if (!accepted) {
+    console.log("Script was cancelled.");
+    return;
+  }
+
+  if (Script.useAutoSetup) {
     await setup({
       config: true,
       database: true,
@@ -20,14 +28,18 @@ const runScript = async () => {
     });
   }
 
-  await Script.run(); // runs the script
+  try {
+    await Script.run(...Script.arguments); // runs the script
+  } finally {
+    if (Script.useAutoSetup) await cleanup();
+  }
 
-  if (Script.Config.useAutoSetup) await cleanup();
+  console.log(
+    `Done script: ${scriptName}. MANUALLY VERIFY THAT ALL WENT WELL.`
+  );
 };
 
-runScript()
-  .then(() => console.log(`Done script: ${scriptName}`))
-  .catch((e) => {
-    console.log("Script threw error: ");
-    console.error(e);
-  });
+main().catch((e) => {
+  console.log("Script threw error:");
+  console.error(e);
+});
