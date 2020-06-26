@@ -123,4 +123,5 @@ module.exports = {
   findVolunteerByEmail,
   getNextFriendlyId,
   Permissions,
+  PermissionGroups,
 };
