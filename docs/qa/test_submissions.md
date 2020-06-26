@@ -7,7 +7,7 @@
 - Every record must pass to these tests, in case of failure contact the DB admin or Martin
 
 ## Steps to getting started:
-1. Login to initial Flatten's survey portal (https://v.flatten.org/login)
+1. Login to initial Flatten's survey portal (https://v.staging.flatten.org)
 2. Login using a valid email address added to Flatten's login volunteers database
 3. Contact DB admin or Martin if you cannot login
 4. Once you login, you need to be able to have access to the Initial Household Survey
