@@ -1,7 +1,4 @@
-const { getLogger } = require("../../utils/winston");
-
 module.exports = (req, res) => {
-  const log = getLogger();
   if (res.locals.volunteer) {
     res.status(200).send({
       permissions: res.locals.volunteer.permissions,
@@ -10,7 +7,7 @@ module.exports = (req, res) => {
       friendlyId: res.locals.volunteer.friendlyId,
       teamName: res.locals.volunteer.teamName,
     });
-    log.info(`Token verified for user ${res.locals.volunteer.friendlyId}`, {
+    req.log.info(`Token verified for user ${res.locals.volunteer.friendlyId}`, {
       status: 200,
       userID: res.locals.volunteer.friendlyId,
       permissions: res.locals.volunteer.permissions,
@@ -18,7 +15,7 @@ module.exports = (req, res) => {
   } else {
     // send an empty message signifying that the user is not logged in
     res.status(200).send({});
-    log.info(`User was not logged in.`, {
+    req.log.info(`User was not logged in.`, {
       status: 200,
     });
   }
