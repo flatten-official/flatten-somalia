@@ -1,4 +1,4 @@
-const { getLogger } = require("../../winston");
+const { getLogger } = require("../../utils/winston");
 
 module.exports = (req, res) => {
   const log = getLogger();

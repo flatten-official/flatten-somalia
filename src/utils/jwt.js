@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { getConfig } = require("../config");
-const { getLogger } = require("../winston");
+const { getLogger } = require("./winston");
 
 /**
  * @param jsonPayload json valuePromise

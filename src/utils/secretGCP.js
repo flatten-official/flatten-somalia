@@ -1,5 +1,5 @@
 const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
-const { getLogger } = require("../winston");
+const { getLogger } = require("./winston");
 
 const smClient = new SecretManagerServiceClient();
 

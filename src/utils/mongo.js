@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { CronJob } = require("cron");
 const { removedExpiredCookies } = require("../auth/cookieData");
 const { getConfig } = require("../config");
-const { getLogger } = require("../winston");
+const { getLogger } = require("./winston");
 
 const CONNECTION_OPTIONS = {
   useNewUrlParser: true,

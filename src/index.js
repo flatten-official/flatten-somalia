@@ -2,10 +2,10 @@ const { cleanupDatabase, setupDatabase } = require("./utils/mongo");
 const { getApp } = require("./app");
 const { setup: configSetup } = require("./config");
 const { setup: sendGridSetup } = require("./utils/sendGrid");
-const { setup: setupLogger } = require("./winston");
+const { setup: setupLogger } = require("./utils/winston");
 const _ = require("lodash");
 
-const { getLogger } = require("./winston");
+const { getLogger } = require("./utils/winston");
 
 /**
  * @param options object whose parameters indicate what to setup

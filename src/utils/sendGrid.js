@@ -3,7 +3,7 @@
 
 const sgMail = require("@sendgrid/mail");
 const { getConfig } = require("../config");
-const { getLogger } = require("../winston");
+const { getLogger } = require("./winston");
 
 module.exports.setup = () => {
   sgMail.setApiKey(getConfig().secrets.sendGridApiKey);
