@@ -87,8 +87,6 @@ function setup() {
       makeStackdriverTransport("info"),
     ],
   });
-
-  getLogger().debug("Logger configuration complete.");
 }
 
 /* Get the logger used for non-req logs
@@ -96,7 +94,7 @@ function setup() {
  * Relies on the setup function having been called.
  */
 function getLogger() {
-  return winston.loggers.get("custom");
+  return log;
 }
 
 /* This middleware enables logging using req.log.info(...),
@@ -111,4 +109,8 @@ async function makeRequestLoggingMiddleware() {
   );
 }
 
-module.exports = { setup, getLogger, makeRequestLoggingMiddleware };
+setup();
+const log = winston.loggers.get("custom");
+log.debug("Logger configuration complete.");
+
+module.exports = { getLogger, makeRequestLoggingMiddleware };
