@@ -83,7 +83,7 @@ function setup() {
     levels: logSeverityLevels,
     format: defaultFormat,
     transports: [
-      makeConsoleTransport("debug"),
+      makeConsoleTransport("debug", defaultFormat),
       makeStackdriverTransport("info"),
     ],
   });
