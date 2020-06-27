@@ -1,12 +1,12 @@
 const {
   findVolunteerByEmail,
   Permissions,
-} = require("../../../src/volunteer/volunteerData");
+} = require("../../../../src/volunteer/volunteerData");
 
-const { getApp } = require("../../../src/app");
-const util = require("../../testUtils/mongo");
+const { getApp } = require("../../../../src/app");
+const util = require("../../../testUtils/mongo");
 const supertest = require("supertest");
-const { login } = require("../../testUtils/requests");
+const { login } = require("../../../testUtils/requests");
 const _ = require("lodash");
 
 const makeRequestBody = (data) => ({ volunteerData: data });
@@ -28,8 +28,8 @@ describe("endpoint POST /volunteer", () => {
     request = supertest(app);
   });
 
-  afterEach(async () => await util.clearDatabase());
-  afterAll(async () => await util.closeDatabase());
+  afterEach(() => util.clearDatabase());
+  afterAll(() => util.closeDatabase());
 
   it("should add a volunteer upon valid request", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, {

@@ -24,8 +24,12 @@ async function cleanupDatabase() {
 }
 
 async function connectToDatabase() {
+  const mongoURI = getConfig().secrets.mongoUri;
+
+  if (!mongoURI) throw Error("No connection URI specified");
+
   try {
-    await mongoose.connect(getConfig().secrets.mongoUri, CONNECTION_OPTIONS);
+    await mongoose.connect(mongoURI, CONNECTION_OPTIONS);
   } catch (e) {
     getLogger().emergency("Failed to connect to database.", { error: e });
     throw e;

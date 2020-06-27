@@ -8,8 +8,9 @@ const { makeRequestLoggingMiddleware } = require("./winston");
 const { getConfig } = require("./config");
 const routes = require("./routes");
 const appErrorHandler = require("./utils/express/errorHandler");
-const bodySanitizer = require("./utils/express/bodySanitizer");
 const loggerMiddleware = require("./utils/express/loggerMiddleware");
+const bodySanitizer = require("./utils/express/bodySanitizer");
+const authCookieParser = require("./auth/routes/cookieParser");
 
 async function getApp() {
   const app = express();
@@ -25,6 +26,7 @@ async function getApp() {
   app.use(await makeRequestLoggingMiddleware());
   app.use(bodySanitizer);
   app.use(loggerMiddleware);
+  app.use(authCookieParser);
   app.use("/", routes);
   app.use(appErrorHandler);
 

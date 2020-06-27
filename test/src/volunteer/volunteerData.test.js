@@ -1,5 +1,5 @@
-const Volunteer = require("../../src/volunteer/volunteerData");
-const util = require("../testUtils/mongo");
+const Volunteer = require("../../../src/volunteer/volunteerData");
+const util = require("../../testUtils/mongo");
 
 const basicVolunteer = {
   name: "Name",

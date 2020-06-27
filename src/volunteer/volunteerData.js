@@ -85,18 +85,17 @@ const addVolunteer = async (newVolunteer) => {
 const findVolunteerById = (volunteerId) =>
   Volunteer.findById(volunteerId).exec(); // exec() required to force return of promise
 
-const volunteerRegex = async (email) => {
-  return await Volunteer.find({
+const volunteerRegexAsync = (email) =>
+  Volunteer.find({
     email: { $regex: new RegExp(`^${email}$`), $options: "i" },
   });
-};
 
 /**
  * Returns null if volunteer doesn't exist, otherwise returns the volunteer object
  * @return {Promise}
  */
 const findVolunteerByEmail = async (email) => {
-  const emails = await volunteerRegex(email);
+  const emails = await volunteerRegexAsync(email);
   // we previously returned null, this maintains the behaviour
   return emails[0] ? emails[0] : null;
 };
@@ -105,7 +104,7 @@ module.exports = {
   Volunteer,
   addVolunteer,
   findVolunteerById,
-  volunteerRegex,
+  volunteerRegex: volunteerRegexAsync,
   findVolunteerByEmail,
   getNextFriendlyId,
   Permissions,

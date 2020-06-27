@@ -1,9 +1,9 @@
-const { getApp } = require("../../../src/app");
-const util = require("../../testUtils/mongo");
+const { getApp } = require("../../../../src/app");
+const util = require("../../../testUtils/mongo");
 const supertest = require("supertest");
 
-const { login } = require("../../testUtils/requests");
-const { Permissions } = require("../../../src/volunteer/volunteerData");
+const { login } = require("../../../testUtils/requests");
+const { Permissions } = require("../../../../src/volunteer/volunteerData");
 
 let request;
 let app;
@@ -15,8 +15,8 @@ describe("test /auth", () => {
     request = supertest(app);
   });
 
-  afterEach(async () => await util.clearDatabase());
-  afterAll(async () => await util.closeDatabase());
+  afterEach(() => util.clearDatabase());
+  afterAll(() => util.closeDatabase());
 
   it("should return an empty object when no cookie is provided", async () => {
     const res = await request.get("/auth");
