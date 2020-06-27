@@ -89,14 +89,6 @@ function setup() {
   });
 }
 
-/* Get the logger used for non-req logs
- *
- * Relies on the setup function having been called.
- */
-function getLogger() {
-  return log;
-}
-
 /* This middleware enables logging using req.log.info(...),
  * which allow logs from the same request to be grouped on GCP.
  *
@@ -104,7 +96,7 @@ function getLogger() {
  */
 async function makeRequestLoggingMiddleware() {
   return await GCPLogging.express.makeMiddleware(
-    getLogger(),
+    log,
     makeStackdriverTransport("info")
   );
 }
@@ -113,4 +105,4 @@ setup();
 const log = winston.loggers.get("custom");
 log.debug("Logger configuration complete.");
 
-module.exports = { getLogger, makeRequestLoggingMiddleware };
+module.exports = { log, makeRequestLoggingMiddleware };
