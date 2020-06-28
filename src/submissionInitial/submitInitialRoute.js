@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
   } catch (e) {
     if (e instanceof Error.ValidationError) {
       res.status(400).send("Validation problem with form models. ");
-      log.warning("Failed to submit initial household survey.", {
+      log.error("Failed to submit initial household survey.", {
         error: e,
         status: 400,
       });

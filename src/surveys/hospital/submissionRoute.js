@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   } catch (e) {
     if (isValidationTypeError(e)) {
       res.status(400).send("Validation problem with form models. ");
-      log.warning("Failed to submit hospital survey.", {
+      log.error("Failed to submit hospital survey.", {
         error: e,
         status: 400,
       });

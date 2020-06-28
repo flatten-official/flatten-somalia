@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     log.info("Successfully submitted gravedigger survey.", { status: 200 });
   } catch (e) {
     if (isValidationTypeError(e)) {
-      log.warning("Failed to submit gravedigger survey. ", {
+      log.error("Failed to submit gravedigger survey. ", {
         error: e,
         status: 400,
       });
