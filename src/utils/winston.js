@@ -4,7 +4,7 @@ const { transports, format } = winston;
 
 //region Utilities
 
-/* Format log entries' message property.
+/** Format log entries' message property.
  * Deals with
  *   - removing unwanted information from logs
  *   - displaying metadata, if available, in the message
@@ -138,7 +138,7 @@ setup();
 const log = winston.loggers.get("custom");
 log.debug("Logger configuration complete.");
 
-/* This middleware enables logging using req.log.info(...),
+/** This middleware enables logging using req.log.info(...),
  * which allow logs from the same request to be grouped on GCP.
  *
  * Relies on the setup function having been called.
