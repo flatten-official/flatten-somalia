@@ -1,4 +1,4 @@
-const { createModel } = require("../dataUtil");
+const { createModel } = require("../../utils/mongoose");
 
 const model = createModel("Household", {
   phone: String,

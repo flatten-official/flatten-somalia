@@ -1,13 +1,11 @@
-const { getApp } = require("../../../src/app");
-const util = require("../../testUtils/mongo");
+const { getApp } = require("../../../../src/app");
+const util = require("../../../testUtils/mongo");
 
-const { login } = require("../../testUtils/requests");
+const { login } = require("../../../testUtils/requests");
 
-const Submission = require("../../../src/surveys/initialHousehold/submissionData");
-const Household = require("../../../src/surveys/initialHousehold/householdData");
-const Person = require("../../../src/surveys/initialHousehold/peopleData");
-
-const volunteerData = require("../../../src/volunteer/volunteerData");
+const Submission = require("../../../../src/surveys/initialHousehold/submissionData");
+const Household = require("../../../../src/surveys/initialHousehold/householdData");
+const Person = require("../../../../src/surveys/initialHousehold/peopleData");
 
 const VALID_REQ_BODIES = [
   {

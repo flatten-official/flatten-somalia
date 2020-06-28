@@ -1,4 +1,3 @@
 {
-  "ADD_VOLUNTEER_BULK": "./addVolunteerBulk",
-  "RE_NUMBER_VOLUNTEER_ID": "./reNumberVolunteerIds"
+  "ADD_VOLUNTEER_BULK": "./addVolunteerBulk"
 }

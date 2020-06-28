@@ -1,5 +1,5 @@
 const { FormSchema, getSubmissionMetadata } = require("../sharedDataSchemas");
-const Util = require("../dataUtil");
+const Util = require("../../utils/mongoose");
 
 const model = Util.createModel("GravediggerSurveySubmission", {
   metadata: getSubmissionMetadata(false),
@@ -27,6 +27,6 @@ const create = async (content) => {
   return submissionDocument;
 };
 
-const save = async (document) => await document.save();
+const saveAsync = (document) => document.save();
 
-module.exports = { model, save, create };
+module.exports = { model, saveAsync, create };

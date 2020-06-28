@@ -37,12 +37,17 @@ MONGO_URI=<MONGO_URI_WITH_PASSWORD>
 1. Create a js file with the following content in the `scripts` directory:
 
    ```
-   module.exports.Config = {
    // Set to false if you want to manage setup yourself in run().
    // When true you are automatically connected to the database.
-     useAutoSetup: true,
-   };
+   module.exports.useAutoConfig = true;
+   
+   // Set to something descriptive
+   module.exports.confirmationMessage = "Are you sure you want to run this script";
 
+   // Specify the arguments as an array for the run function (normally the data)
+   module.exports.arguments = [];
+   
+   // Main function. Must be pure, do not access global scope (instead use arguments)
    module.exports.run = async () => {
      // TODO fill in with code to run
    };

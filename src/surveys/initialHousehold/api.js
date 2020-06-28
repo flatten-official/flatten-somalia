@@ -39,7 +39,9 @@ async function initialSubmission(
     };
   });
 
-  const people = await Person.createMany([].concat(peopleModel, deathsModel));
+  const people = await Person.createManyAsync(
+    [].concat(peopleModel, deathsModel)
+  );
 
   const submission = await Submission.create(
     volunteerId,

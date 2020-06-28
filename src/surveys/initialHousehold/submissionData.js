@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { createModel } = require("../dataUtil");
+const { createModel } = require("../../utils/mongoose");
 const { getSubmissionMetadata, FormSchema } = require("../sharedDataSchemas");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
@@ -65,7 +65,7 @@ const model = createModel("Submission", {
   },
 });
 
-async function createSubmission(
+async function create(
   submitterId,
   submitterTeamName,
   submissionSchema,
@@ -173,5 +173,5 @@ async function createSubmission(
 
 module.exports = {
   model,
-  create: createSubmission,
+  create,
 };

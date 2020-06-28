@@ -1,10 +1,10 @@
-const { getApp } = require("../../src/app");
-const util = require("../testUtils/mongo");
+const { getApp } = require("../../../src/app");
+const util = require("../../testUtils/mongo");
 
-const { login } = require("../testUtils/requests");
+const { login } = require("../../testUtils/requests");
 
-const GravediggerSurveySubmission = require("../../src/surveys/gravedigger/submissionData");
-const HospitalSurveySubmission = require("../../src/surveys/hospital/submissionData");
+const GravediggerSurveySubmission = require("../../../src/surveys/gravedigger/submissionData");
+const HospitalSurveySubmission = require("../../../src/surveys/hospital/submissionData");
 
 const testData = {
   gravediggerRequestBody: {

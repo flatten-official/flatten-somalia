@@ -1,7 +1,7 @@
-const util = require("../testUtils/mongo");
-const Submission = require("../../src/surveys/initialHousehold/submissionData");
-const Person = require("../../src/surveys/initialHousehold/peopleData");
-const Household = require("../../src/surveys/initialHousehold/householdData");
+const util = require("../../testUtils/mongo");
+const Submission = require("../../../src/surveys/initialHousehold/submissionData");
+const Person = require("../../../src/surveys/initialHousehold/peopleData");
+const Household = require("../../../src/surveys/initialHousehold/householdData");
 
 const mongoose = require("mongoose");
 
@@ -231,7 +231,7 @@ describe("submission database functions", () => {
   it("should write submission to database", async () => {
     const household = await Household.create(testHouseholdData[0].followUpId);
 
-    const people = await Person.createMany(
+    const people = await Person.createManyAsync(
       testPeopleInitial[0].map((person) => {
         return { ...person, household: household._id };
       })
@@ -302,7 +302,7 @@ describe("submission database functions", () => {
     const household = await Household.create(testHouseholdData[0].followUpId);
     await household.save();
 
-    const people = await Person.createMany(
+    const people = await Person.createManyAsync(
       testPeopleInitial[0].map((person) => {
         return { ...person, household: household._id };
       })

@@ -1,6 +1,5 @@
 const express = require("express");
 
-const cookieMiddleware = require("./auth/routes/cookieMiddleware");
 const protectedMiddleware = require("./utils/express/protectedMiddleware");
 const { Permissions } = require("./volunteer/volunteerData");
 const loginRoute = require("./auth/routes/loginRoute");
@@ -49,8 +48,6 @@ router.post("/auth/login", loginRoute); // if you change route name update tests
  *                  endpoint : /auth/token/token?jjsfsldfsjhg9384uut4rfn.fsfjsdlfks.fjsdkf223
  */
 router.get("/auth/token", verifyTokenRoute);
-
-router.use(cookieMiddleware);
 
 /**
  * @api {get} /auth Get Authentication Info

@@ -1,4 +1,4 @@
-const { createModel } = require("../dataUtil");
+const { createModel } = require("../../utils/mongoose");
 const mongoose = require("mongoose");
 
 const model = createModel("Person", {
@@ -18,7 +18,7 @@ const model = createModel("Person", {
   },
 });
 
-async function createMany(perPersonData) {
+function createManyAsync(perPersonData) {
   return Promise.all(
     perPersonData.map(async (personData) => {
       const person = new model(personData);
@@ -36,4 +36,4 @@ async function createMany(perPersonData) {
 //   });
 // }
 
-module.exports = { model, createMany };
+module.exports = { model, createManyAsync };
