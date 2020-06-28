@@ -40,5 +40,4 @@ const main = async () => {
 
 main().catch((e) => {
   log.error("Script threw error:", { error: e });
-  console.error(e);
 });
