@@ -1,5 +1,6 @@
 const { submitHospitalSurvey } = require("./api");
 const { isValidationTypeError } = require("../../utils/mongoose");
+const { log } = require("../../utils/winston");
 
 module.exports = async (req, res) => {
   try {
@@ -11,11 +12,11 @@ module.exports = async (req, res) => {
       req.body.data
     );
     res.sendStatus(200);
-    req.log.info("Successfully submitted hospital survey.", { status: 200 });
+    log.info("Successfully submitted hospital survey.", { status: 200 });
   } catch (e) {
     if (isValidationTypeError(e)) {
       res.status(400).send("Validation problem with form models. ");
-      req.log.warning("Failed to submit hospital survey.", {
+      log.warning("Failed to submit hospital survey.", {
         error: e,
         status: 400,
       });

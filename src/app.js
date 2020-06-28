@@ -12,7 +12,7 @@ const loggerMiddleware = require("./utils/express/loggerMiddleware");
 const bodySanitizer = require("./utils/express/bodySanitizer");
 const authCookieParser = require("./auth/routes/cookieParser");
 
-async function getApp() {
+function getApp() {
   const app = express();
 
   app.use(cors({ origin: [getConfig().urls.frontendHost], credentials: true }));
@@ -23,7 +23,6 @@ async function getApp() {
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
   app.use(cookieParser(getConfig().secrets.cookieSecret));
-  app.use(await makeRequestLoggingMiddleware());
   app.use(bodySanitizer);
   app.use(loggerMiddleware);
   app.use(authCookieParser);

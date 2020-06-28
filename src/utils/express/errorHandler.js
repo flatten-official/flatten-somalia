@@ -1,7 +1,9 @@
+const { log } = require("../winston");
+
 // Doesn't work without next (4 params are used to indicate an error catcher)
 // eslint-disable-next-line no-unused-vars
 module.exports = (err, req, res) => {
-  req.log.error("An uncaught error occurred while handling the request.", {
+  log.error("An uncaught error occurred while handling the request.", {
     error: err,
   });
   if (process.env.ENVIRONMENT === "dev")

@@ -1,3 +1,5 @@
+const { log } = require("../../utils/winston");
+
 /**
  * A function that returns middleware to protect the route (aka. require certain permissions)
  * @param requiredPermissions array of permission that are required to access this route
@@ -7,7 +9,7 @@
 module.exports = (requiredPermissions) => async (req, res, next) => {
   if (!res.locals.volunteer) {
     res.sendStatus(401);
-    req.log.warning("Tried to access a protected route without login.", {
+    log.warning("Tried to access a protected route without login.", {
       status: 401,
     });
   } else if (
@@ -18,7 +20,7 @@ module.exports = (requiredPermissions) => async (req, res, next) => {
     next();
   } else {
     res.sendStatus(403);
-    req.log.warning(
+    log.warning(
       "Tried to access a protected route without proper permissions.",
       { status: 403 }
     );
