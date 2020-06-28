@@ -83,6 +83,24 @@ function makeStackdriverTransport(level) {
   });
 }
 
+function makeTransports(env = process.env.ENVIRONMENT) {
+  let transports;
+
+  switch (env) {
+    case "production":
+      transports = [makeStackdriverTransport("info")];
+      return;
+    case "staging":
+      transports = [makeStackdriverTransport("debug")];
+      return;
+    case "dev":
+    case "test":
+      transports = [makeConsoleTransport("debug")];
+  }
+
+  return transports;
+}
+
 //endregion
 
 function setup() {
@@ -91,10 +109,7 @@ function setup() {
   winston.loggers.add("custom", {
     levels: logSeverityLevels,
     format: defaultFormat,
-    transports: [
-      makeConsoleTransport("debug"),
-      makeStackdriverTransport("info"),
-    ],
+    transports: makeTransports(),
   });
 }
 

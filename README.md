@@ -38,7 +38,7 @@ Logging is done using the Winston loggers `req.log` and `log`, with the standard
 - `req.log` is for logging related to the current request. Entries from each request will be grouped together in the GCP logs viewer.
 - `log` is for everything else. Import from `src/util/winston`.
 
-NOT IMPLEMENTED: Log statements with severity `debug` aren't logged in production.
+Log statements with severity `debug` aren't logged in production.
 
 ## Additional Tools
 
