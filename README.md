@@ -32,6 +32,14 @@ Navigate to `localhost` in your browser, you should see a message indicating tha
 
 Instead of using environment variables, we use `config.js` as it allows for more flexibility.
 
+### Logging
+
+Logging is done using the Winston loggers `req.log` and `log`, with the standard GCP LogEntry [severity levels](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#logseverity). 
+- `req.log` is for logging related to the current request. Entries from each request will be grouped together in the GCP logs viewer.
+- `log` is for everything else. Import from `src/util/winston`.
+
+NOT IMPLEMENTED: Log statements with severity `debug` aren't logged in production.
+
 ## Additional Tools
 
 The following tools may be very helpful to you, please check them out.
