@@ -14,12 +14,11 @@ module.exports = async (req, res) => {
     req.log.info("Successfully submitted gravedigger survey.", { status: 200 });
   } catch (e) {
     if (isValidationTypeError(e)) {
-      console.error(e);
-      res.status(400).send("Validation problem with form models.");
       req.log.info("Failed to submit gravedigger survey.", {
         error: e,
         status: 400,
       });
+      res.status(400).send("Validation problem with form models.");
     } else throw e;
   }
 };

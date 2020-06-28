@@ -24,9 +24,20 @@ const messageFormat = format.printf((info) => {
 
   if (info.status)
     info.message = `Response status: ${info.status}. ${info.message}`;
-
-  if (info.error) info.message += ` ${info.error}`;
 });
+
+function errorFormat(stack = false) {
+  return format.printf((info) => {
+    if (info.error) {
+      info.message += info.level === "info" ? " Error: " : "";
+      if (stack) {
+        info.message += `\n\u001b[31m${info.error.stack}\u001b[0m`;
+      } else {
+        info.message += `\u001b[31m${info.error}\u001b[0m`;
+      }
+    }
+  });
+}
 
 const defaultFormat = format.combine(
   format.timestamp(),
@@ -35,6 +46,8 @@ const defaultFormat = format.combine(
 );
 
 const consoleFormat = format.combine(
+  defaultFormat,
+  errorFormat(false),
   format.colorize(),
   format.printf((info) => {
     const time = info.timestamp.split("T")[1].slice(0, 8);
@@ -113,7 +126,6 @@ function setup() {
 
   winston.loggers.add("custom", {
     levels: logSeverityLevels,
-    format: defaultFormat,
     exitOnError: false,
     transports: makeTransports(),
   });
