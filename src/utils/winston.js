@@ -73,6 +73,8 @@ function makeConsoleTransport(level, format) {
     levels: logSeverityLevels,
     level: level,
     format: format ? format : consoleFormat,
+    handleExceptions: true,
+    handleRejections: true,
   });
 }
 
@@ -80,6 +82,9 @@ function makeStackdriverTransport(level) {
   return new GCPLogging.LoggingWinston({
     levels: logSeverityLevels,
     level,
+    format: defaultFormat,
+    handleExceptions: true,
+    handleRejections: true,
   });
 }
 
@@ -109,6 +114,7 @@ function setup() {
   winston.loggers.add("custom", {
     levels: logSeverityLevels,
     format: defaultFormat,
+    exitOnError: false,
     transports: makeTransports(),
   });
 }
