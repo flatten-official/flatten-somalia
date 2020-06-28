@@ -23,7 +23,7 @@ async function setup(options = {}) {
 }
 
 async function startServer() {
-  const port = process.env.PORT || 801;
+  const port = process.env.PORT || 80;
 
   const app = await getApp();
   app.listen(port, () => {
