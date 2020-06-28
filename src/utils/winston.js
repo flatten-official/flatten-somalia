@@ -125,10 +125,12 @@ function setup() {
     exitOnError: false,
     transports: makeTransports(),
   });
+
+  return winston.loggers.get("custom");
 }
 
-setup();
-const log = winston.loggers.get("custom");
+const log = setup();
+
 log.debug("Logger configuration complete.");
 
 module.exports = { log };
