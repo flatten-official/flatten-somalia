@@ -1,5 +1,6 @@
 const { addVolunteer, Permissions } = require("./volunteerData");
 const { Error } = require("mongoose");
+const { log } = require("../utils/winston");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   const permissions = newVolunteerData.permSubmitForms
@@ -18,7 +19,7 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   try {
     await addVolunteer(volunteer);
   } catch (e) {
-    console.log(e);
+    log.warning(e);
     if (e.message.indexOf("duplicate key error") !== -1)
       return [400, "Email is already in use"];
     else if (e instanceof Error.ValidationError)
