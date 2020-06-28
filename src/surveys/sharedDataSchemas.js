@@ -56,28 +56,4 @@ const getSubmissionMetadata = (
   return metadata;
 };
 
-// {
-//   // contains location etc
-//   location: {
-//     lat: Number,
-//       lng: Number,
-//       accuracy: Number,
-//       altitude: Number,
-//       wasManual: Boolean,
-//   },
-//   // recorded on the user's browser with JS Date.now()
-//   filledOutTimestamp: { type: Number, index: true },
-//   timeToComplete: Number, // ms
-//     consentGiven: {
-//   type: Boolean,
-//     required: true,
-// },
-//   uploadTimestamp: {
-//     type: Date,
-//       index: true,
-//       required: true,
-//   default: Date.now,
-//   },
-// }
-
 module.exports = { FormSchema, getSubmissionMetadata };
