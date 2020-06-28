@@ -6,8 +6,8 @@
 - Every record must pass to these tests, in case of failure contact the DB admin or Martin
 
 ## Steps to getting started:
-1. Run npm run deploy on frontend repository master branch, to deploy the frontend to v.staging.flatten.org.
-2. Run npm run deploy on your feature backend branch, to deploy your changes to api.staging.flatten.org.
+1. Run `npm run deploy` on frontend repository master branch, to deploy the frontend to v.staging.flatten.org.
+2. Run `npm run deploy` on your feature backend branch, to deploy your changes to api.staging.flatten.org.
 1. Login to initial Flatten's survey portal (https://v.staging.flatten.org)
 3. Contact DB admin or Martin if you cannot login
 4. Once you login, you need to be able to have access to the Initial Household Survey
@@ -15,16 +15,16 @@
 ## List of Tests
 
 ### Test 1:
-- If response to share phone number (key 'sharePhoneNumberConsent') is no (value of 'willNotSharePhoneNumber'), then the follow up ID (key 'customFollowUpId') should exist in the json sent to the submissions collection
+- If response to share phone number (key `sharePhoneNumberConsent`) is no (value of `willNotSharePhoneNumber`), then the follow up ID (key `customFollowUpId`) should exist in the json sent to the submissions collection
 
 ### Test 2:
-- If response to share phone number (key 'sharePhoneNumberConsent') is yes (value of 'consentToSharingPhoneNumber'), then the phone number (key 'phoneNumber') should exist in the json sent to the submissions collection
+- If response to share phone number (key `sharePhoneNumberConsent`) is yes (value of `consentToSharingPhoneNumber`), then the phone number (key `phoneNumber`) should exist in the json sent to the submissions collection
 
 ### Test 3:
-- Every 'household' object must contain a 'data' key
+- Every `household` object must contain a `data` key
 
 ### Test 4:
-- Every object in 'people' array must contain a 'data' key
+- Every object in `people` array must contain a `data` key
 
 ### Test 5:
 - The following keys MUST exist AND contain a value that is not NULL
