@@ -105,21 +105,14 @@ function makeStackdriverTransport(level) {
 }
 
 function makeTransports(env = process.env.ENVIRONMENT) {
-  let transports;
-
   switch (env) {
     case "production":
-      transports = [makeStackdriverTransport("info")];
-      return;
+      return [makeStackdriverTransport("info")];
     case "staging":
-      transports = [makeStackdriverTransport("debug")];
-      return;
-    case "dev":
-    case "test":
-      transports = [makeConsoleTransport("debug")];
+      return [makeStackdriverTransport("debug")];
+    default:
+      return [makeConsoleTransport("debug")];
   }
-
-  return transports;
 }
 
 //endregion
