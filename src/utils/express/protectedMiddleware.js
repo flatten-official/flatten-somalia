@@ -6,7 +6,7 @@ const { log } = require("../../utils/winston");
  * @return {function(...[*]=)}
  */
 // TODO Write tests
-module.exports = (requiredPermissions) => async (req, res, next) => {
+module.exports = (requiredPermissions) => (req, res, next) => {
   if (!res.locals.volunteer) {
     res.sendStatus(401);
     log.warning("Tried to access a protected route without login.", {
