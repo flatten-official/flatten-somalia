@@ -50,6 +50,7 @@ const Volunteer = createModel("Volunteer", {
           Permissions.submitForms,
           Permissions.access,
         ],
+        enum: Object.values(Permissions),
         required: true,
       },
     ],
@@ -59,7 +60,7 @@ const Volunteer = createModel("Volunteer", {
     type: [
       {
         type: String,
-        enum: [PermissionGroups.dsu],
+        enum: Object.values(PermissionGroups),
       },
     ],
     required: true,
