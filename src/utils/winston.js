@@ -19,13 +19,16 @@ const messageFormat = format.printf((info) => {
     info.message = `Done with HTTP request on ${info.httpRequest.requestUrl}\n`;
   }
 
+  // display method & path for incoming requests – used in LoggerMiddleware
   if (info.method && info.path)
     info.message += info.method.padEnd(8, " ") + info.path;
 
+  // display return status for final log entry in submission routes
   if (info.status)
     info.message = `Response status: ${info.status}. ${info.message}`;
 });
 
+// Add error info to the log message.
 function errorFormat(stack = false) {
   return format.printf((info) => {
     if (info.error) {
