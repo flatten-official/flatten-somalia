@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
   const cookie = await readCookie(cookieID);
 
   if (!cookie) {
-    log.log("Invalid cookie id or cookie expired");
+    log.warning("Invalid cookie id or cookie expired");
     next();
     return;
   }
