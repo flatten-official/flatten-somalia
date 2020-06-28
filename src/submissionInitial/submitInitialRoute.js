@@ -15,10 +15,16 @@ module.exports = async (req, res) => {
       req.body.household
     );
     res.sendStatus(200);
+    req.log.info("Successfully submitted initial household survey.", {
+      status: 200,
+    });
   } catch (e) {
     if (e instanceof Error.ValidationError) {
-      console.error(e);
-      res.status(400).send("Validation problem with form models.");
+      res.status(400).send("Validation problem with form models. ");
+      req.log.warning("Failed to submit initial household survey.", {
+        error: e,
+        status: 400,
+      });
     } else throw e;
   }
 };
