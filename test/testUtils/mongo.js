@@ -1,7 +1,7 @@
 // Inspired from https://dev.to/paulasantamaria/testing-node-js-mongoose-with-an-in-memory-database-32np
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
-const { CONNECTION_OPTIONS } = require("./../../src/utils/mongo");
+const { CONNECTION_OPTIONS } = require("../../src/utils/mongoConnect");
 
 const mongod = new MongoMemoryServer();
 
