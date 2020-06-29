@@ -15,10 +15,7 @@ const messageFormat = format.printf((info) => {
   // display return status for final log entry in submission routes
   if (info.status)
     info.message = `Response status: ${info.status}. ${info.message}`;
-});
 
-// Add error info to the log message.
-const errorFormat = format.printf((info) => {
   if (info.error) info.message += "\n" + makeConsoleRed(info.error.stack);
 });
 
@@ -30,7 +27,6 @@ const defaultFormat = format.combine(
 
 const consoleFormat = format.combine(
   defaultFormat,
-  errorFormat,
   format.colorize(),
   format.printf((info) => {
     const time = info.timestamp.split("T")[1].slice(0, 8);
