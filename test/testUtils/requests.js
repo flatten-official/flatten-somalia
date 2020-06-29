@@ -2,6 +2,10 @@ const { addVolunteer } = require("../../src/volunteer/volunteerData");
 const { signToken } = require("../../src/utils/jwt");
 const supertest = require("supertest");
 const _ = require("lodash");
+const {
+  Permissions,
+  PermissionGroups,
+} = require("../../src/volunteer/volunteerData");
 
 /**
  * Most importantly returns an agent that stores cookies and can be used to call other endpoints with cookies
@@ -13,6 +17,8 @@ const login = async (app, volunteer = {}) => {
     name: "default_name",
     email: "default_email2@example.ca",
     teamName: "testTeam",
+    permissions: [Permissions.submitForms, Permissions.access],
+    permissionGroups: [PermissionGroups.dsu],
   });
 
   volunteer = await addVolunteer(volunteer);
