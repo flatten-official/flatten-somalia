@@ -79,6 +79,8 @@ function makeTransports(env = process.env.ENVIRONMENT) {
     case "staging":
       return [makeStackdriverTransport("debug")];
     default:
+      // Uncomment this line to allow for testing with stackdriver logging
+      // return [makeConsoleTransport("debug"), makeStackdriverTransport("debug")];
       return [makeConsoleTransport("debug")];
   }
 }
