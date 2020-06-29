@@ -18,14 +18,13 @@ const messageFormat = format.printf((info) => {
   if (info.error) info.message += "\n" + info.error.stack;
 });
 
-const defaultFormat = format.combine(
+const baseFormat = format.combine(
   format.timestamp(),
   messageFormat,
   format.json()
 );
 
-const consoleFormat = format.combine(
-  defaultFormat,
+const additionalConsoleFormat = format.combine(
   format.colorize(),
   format.printf((info) => {
     const time = info.timestamp.split("T")[1].slice(0, 8);
@@ -60,6 +59,7 @@ const inverseColours = {
 function makeConsoleTransport(level) {
   return new transports.Console({
     levels: logSeverityLevels,
+    format: additionalConsoleFormat,
     level: level,
     handleExceptions: true,
     handleRejections: true,
@@ -83,23 +83,13 @@ function makeTransports(env = process.env.ENVIRONMENT) {
   }
 }
 
-const getFormat = () => {
-  switch (process.env.ENVIRONMENT) {
-    case "production":
-    case "staging":
-      return defaultFormat;
-    default:
-      return consoleFormat;
-  }
-};
-
 //endregion
 
 function setup() {
   winston.addColors(inverseColours);
 
   return winston.createLogger({
-    format: getFormat(),
+    format: baseFormat,
     levels: logSeverityLevels,
     exitOnError: false,
     transports: makeTransports(),
