@@ -15,18 +15,9 @@ const messageFormat = format.printf((info) => {
 });
 
 // Add error info to the log message.
-function errorFormat(stack = false) {
-  return format.printf((info) => {
-    if (info.error) {
-      info.message += info.level === "info" ? " Error: " : "";
-      if (stack) {
-        info.message += `\n\u001b[31m${info.error.stack}\u001b[0m`;
-      } else {
-        info.message += `\u001b[31m${info.error}\u001b[0m`;
-      }
-    }
-  });
-}
+const errorFormat = format.printf((info) => {
+  if (info.error) info.message += `\n\u001b[31m${info.error.stack}\u001b[0m`;
+});
 
 const defaultFormat = format.combine(
   format.timestamp(),
@@ -36,7 +27,7 @@ const defaultFormat = format.combine(
 
 const consoleFormat = format.combine(
   defaultFormat,
-  errorFormat(false),
+  errorFormat,
   format.colorize(),
   format.printf((info) => {
     const time = info.timestamp.split("T")[1].slice(0, 8);
