@@ -4,6 +4,9 @@ const { transports, format } = winston;
 
 //region Utilities
 
+const makeConsoleRed = (message) => `\u001b[31m${message}\u001b[0m`;
+const makeConsoleGrey = (message) => `\u001b[7m\u001b[37m${message}\u001b[0m`;
+
 /** Format log entries' message property.
  * Deals with
  *   - displaying metadata, if available, in the message
@@ -16,7 +19,7 @@ const messageFormat = format.printf((info) => {
 
 // Add error info to the log message.
 const errorFormat = format.printf((info) => {
-  if (info.error) info.message += `\n\u001b[31m${info.error.stack}\u001b[0m`;
+  if (info.error) info.message += "\n" + makeConsoleRed(info.error.stack);
 });
 
 const defaultFormat = format.combine(
@@ -32,9 +35,7 @@ const consoleFormat = format.combine(
   format.printf((info) => {
     const time = info.timestamp.split("T")[1].slice(0, 8);
 
-    return `\u001b[7m\u001b[37m[${time}] \u001b[0m${
-      info.level + " \t" + info.message
-    }`;
+    return makeConsoleGrey(time) + " " + info.level + " \t" + info.message;
   })
 );
 
