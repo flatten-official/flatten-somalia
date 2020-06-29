@@ -4,29 +4,28 @@ const { transports, format } = winston;
 
 //region Utilities
 
-const makeConsoleRed = (message) => `\u001b[31m${message}\u001b[0m`;
 const makeConsoleGrey = (message) => `\u001b[7m\u001b[37m${message}\u001b[0m`;
 
 /** Format log entries' message property.
  * Deals with
  *   - displaying metadata, if available, in the message
  */
-const messageFormat = (colorize) =>
-  format.printf((info) => {
-    // display return status for final log entry in submission routes
-    if (info.status)
-      info.message = `Response status: ${info.status}. ${info.message}`;
+const messageFormat = format.printf((info) => {
+  // display return status for final log entry in submission routes
+  if (info.status)
+    info.message = `Response status: ${info.status}. ${info.message}`;
 
-    if (info.error)
-      info.message +=
-        "\n" + colorize ? makeConsoleRed(info.error.stack) : info.error.stack;
-  });
+  if (info.error) info.message += "\n" + info.error.stack;
+});
 
-const defaultFormat = (colorize) =>
-  format.combine(format.timestamp(), messageFormat(colorize), format.json());
+const defaultFormat = format.combine(
+  format.timestamp(),
+  messageFormat,
+  format.json()
+);
 
 const consoleFormat = format.combine(
-  defaultFormat(true),
+  defaultFormat,
   format.colorize(),
   format.printf((info) => {
     const time = info.timestamp.split("T")[1].slice(0, 8);
@@ -88,7 +87,7 @@ const getFormat = () => {
   switch (process.env.ENVIRONMENT) {
     case "production":
     case "staging":
-      return defaultFormat(false);
+      return defaultFormat;
     default:
       return consoleFormat;
   }
