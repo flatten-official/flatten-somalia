@@ -141,7 +141,13 @@ const addPermissionByIdAsync = (
         volunteerToUpdate.permissions.push(permission);
         await volunteerToUpdate.save();
       }
-      return [200, "Success"];
+      return [
+        200,
+        {
+          _id: volunteerToUpdate._id,
+          permissions: volunteerToUpdate.permissions,
+        },
+      ];
     }
   );
 };
@@ -161,7 +167,13 @@ const removePermissionByIdAsync = (
         );
         await volunteerToUpdate.save();
       }
-      return [200, "Success"];
+      return [
+        200,
+        {
+          _id: volunteerToUpdate._id,
+          permissions: volunteerToUpdate.permissions,
+        },
+      ];
     }
   );
 };
