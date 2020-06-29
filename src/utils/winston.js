@@ -94,13 +94,11 @@ function makeTransports(env = process.env.ENVIRONMENT) {
 function setup() {
   winston.addColors(inverseColours);
 
-  winston.loggers.add("custom", {
+  return winston.createLogger({
     levels: logSeverityLevels,
     exitOnError: false,
     transports: makeTransports(),
   });
-
-  return winston.loggers.get("custom");
 }
 
 const log = setup();
