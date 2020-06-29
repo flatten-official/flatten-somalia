@@ -124,7 +124,7 @@ describe("endpoint POST /volunteer/changeAccess", () => {
   it("should fail with 403 to manage permissions of non-dsu volunteer", async () => {
     const { agent } = await login(app, {
       permissionGroups: [],
-      permissions: [Permissions.manageVolunteers],
+      permissions: [Permissions.manageVolunteers, Permissions.access],
     });
 
     await addVolunteer(_.defaults({ permissionGroups: [] }, TEST_VOLUNTEER));
