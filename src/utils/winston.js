@@ -11,22 +11,22 @@ const makeConsoleGrey = (message) => `\u001b[7m\u001b[37m${message}\u001b[0m`;
  * Deals with
  *   - displaying metadata, if available, in the message
  */
-const messageFormat = format.printf((info) => {
-  // display return status for final log entry in submission routes
-  if (info.status)
-    info.message = `Response status: ${info.status}. ${info.message}`;
+const messageFormat = (colorize) =>
+  format.printf((info) => {
+    // display return status for final log entry in submission routes
+    if (info.status)
+      info.message = `Response status: ${info.status}. ${info.message}`;
 
-  if (info.error) info.message += "\n" + makeConsoleRed(info.error.stack);
-});
+    if (info.error)
+      info.message +=
+        "\n" + colorize ? makeConsoleRed(info.error.stack) : info.error.stack;
+  });
 
-const defaultFormat = format.combine(
-  format.timestamp(),
-  messageFormat,
-  format.json()
-);
+const defaultFormat = (colorize) =>
+  format.combine(format.timestamp(), messageFormat(colorize), format.json());
 
 const consoleFormat = format.combine(
-  defaultFormat,
+  defaultFormat(true),
   format.colorize(),
   format.printf((info) => {
     const time = info.timestamp.split("T")[1].slice(0, 8);
@@ -72,7 +72,7 @@ function makeStackdriverTransport(level) {
   return new GCPLogging.LoggingWinston({
     levels: logSeverityLevels,
     level,
-    format: defaultFormat,
+    format: defaultFormat(false),
     handleExceptions: true,
     handleRejections: true,
   });
