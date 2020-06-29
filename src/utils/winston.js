@@ -68,15 +68,11 @@ function makeConsoleTransport(level, format) {
   });
 }
 
-function makeStackdriverTransport(level) {
-  return new GCPLogging.LoggingWinston({
+const makeStackdriverTransport = (level) =>
+  new GCPLogging.LoggingWinston({
     levels: logSeverityLevels,
     level,
-    format: defaultFormat(false),
-    handleExceptions: true,
-    handleRejections: true,
   });
-}
 
 function makeTransports(env = process.env.ENVIRONMENT) {
   switch (env) {
@@ -85,7 +81,7 @@ function makeTransports(env = process.env.ENVIRONMENT) {
     case "staging":
       return [makeStackdriverTransport("debug")];
     default:
-      return [makeConsoleTransport("debug")];
+      return [makeConsoleTransport("debug"), makeStackdriverTransport("debug")];
   }
 }
 
