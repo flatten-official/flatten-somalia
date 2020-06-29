@@ -22,7 +22,9 @@ module.exports = async (req, res) => {
 
   if (success) {
     res.sendStatus(200);
-    log.info("Successfully sent login email.", { status: 200 });
+    log.info("Successfully sent login email or email invalid.", {
+      status: 200,
+    });
   } else {
     res.status(500).send("We we're unable to send you a login email.");
     log.error("Failed to send login email.", { status: 500 });
