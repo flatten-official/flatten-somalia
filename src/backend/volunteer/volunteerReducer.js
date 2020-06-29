@@ -3,19 +3,21 @@ import {
   FETCH_LIST_SUCCESS,
   FETCH_LIST_FAILED,
   VOLUNTEER_CHANGE_PENDING,
-  VOLUNTEER_ENABLED,
-  VOLUNTEER_DISABLED,
+  VOLUNTEER_CHANGE_SUCCESS,
   VOLUNTEER_CHANGE_FAILED,
   FETCH_LIST_PERMISSION_DENIED,
 } from "./volunteerActions";
 import update from "immutability-helper";
 
 const updateVolunteerStatusById = (state, action) => {
-  if (!action.volunteerId) return { ...state };
+  // todo - handle errors
+  if (!action.payload) return { ...state };
+  console.log(action);
   return update(state, {
     list: {
-      [action.payload.volunteerId]: {
+      [action.payload._id]: {
         status: { $set: action.type },
+        permissions: { $set: action.payload.permissions },
       },
     },
   });
@@ -46,8 +48,7 @@ const volunteerReducer = (
       };
     case VOLUNTEER_CHANGE_PENDING:
     case VOLUNTEER_CHANGE_FAILED:
-    case VOLUNTEER_ENABLED:
-    case VOLUNTEER_DISABLED:
+    case VOLUNTEER_CHANGE_SUCCESS:
       return updateVolunteerStatusById(state, action);
     default:
       return state;
