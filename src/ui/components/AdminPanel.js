@@ -4,6 +4,8 @@ import {
   fetchVolunteerList,
   changeVolunteerAccess,
   FETCH_LIST_PENDING,
+  FETCH_LIST_FAILED,
+  FETCH_LIST_PERMISSION_DENIED,
   VOLUNTEER_CHANGE_FAILED,
 } from "../../backend/volunteer/volunteerActions";
 import { Button } from "react-bootstrap";
@@ -12,27 +14,36 @@ import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Loading from "./Loading";
 
+const enabled = (cell) => cell.permissions.indexOf("access") !== -1;
+
 const AdminPanel = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchVolunteerList());
   }, [dispatch]);
   const volunteer = useSelector((state) => state.volunteer);
+  // why doesn't this print?
+  console.log(volunteer);
 
-  const hasAccessFormatter = (row, cell) => {
-    const enabled = cell.permissions.indexOf("access") !== -1;
-    return <FontAwesomeIcon icon={enabled ? faCheck : faTimes} />;
-  };
+  const hasAccessFormatter = (_, cell, __, volunteerData) => (
+    <FontAwesomeIcon icon={enabled(cell) ? faCheck : faTimes} />
+  );
 
-  const accessButtonFormatter = (row, cell) => {
-    const enabled = cell.permissions.indexOf("access") !== -1;
+  const accessButtonFormatter = (_, cell, __, volunteerData) => {
+    if (cell.listStatus === FETCH_LIST_PENDING) return <Loading />;
+
     return (
-      <Button variant={enabled ? "warning" : "primary"}>
-        {enabled ? "Disable" : "Enable"}
+      // todo - check that the volunteer doesnt update themselves!
+      <Button
+        variant={enabled(cell) ? "warning" : "primary"}
+        onClick={() =>
+          dispatch(changeVolunteerAccess(cell._id, !enabled(cell)))
+        }
+      >
+        {enabled(cell) ? "Disable" : "Enable"}
       </Button>
     );
   };
-
   const columns = [
     { dataField: "name", text: "Volunteer Name" },
     { dataField: "email", text: "Volunteer Email" },
@@ -42,6 +53,7 @@ const AdminPanel = () => {
       isDummyField: true,
       csvExport: false,
       formatter: hasAccessFormatter,
+      formatExtraData: volunteer,
     },
     {
       dataField: "accessButton",
@@ -49,10 +61,17 @@ const AdminPanel = () => {
       isDummyField: true,
       csvExport: false,
       formatter: accessButtonFormatter,
+      formatExtraData: volunteer,
     },
   ];
 
   if (volunteer.listStatus === FETCH_LIST_PENDING) return <Loading />;
+
+  if (volunteer.listStatus === FETCH_LIST_PERMISSION_DENIED)
+    return <h3>Permission denied.</h3>;
+
+  if (volunteer.listStatus === FETCH_LIST_FAILED)
+    return <h3>Error. Try refreshing the page.</h3>;
 
   return (
     <>

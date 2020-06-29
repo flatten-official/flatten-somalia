@@ -6,17 +6,20 @@ import {
   VOLUNTEER_ENABLED,
   VOLUNTEER_DISABLED,
   VOLUNTEER_CHANGE_FAILED,
+  FETCH_LIST_PERMISSION_DENIED,
 } from "./volunteerActions";
 import update from "immutability-helper";
 
-const updateVolunteerStatusById = (state, volunteerId, newStatus) =>
-  update(state, {
+const updateVolunteerStatusById = (state, action) => {
+  if (!action.volunteerId) return { ...state };
+  return update(state, {
     list: {
-      [volunteerId]: {
-        status: { $set: newStatus },
+      [action.payload.volunteerId]: {
+        status: { $set: action.type },
       },
     },
   });
+};
 
 const volunteerReducer = (
   state = { listStatus: FETCH_LIST_PENDING },
@@ -36,19 +39,16 @@ const volunteerReducer = (
         },
       });
     case FETCH_LIST_FAILED:
+    case FETCH_LIST_PERMISSION_DENIED:
       return {
         ...state,
-        listStatus: FETCH_LIST_FAILED,
+        listStatus: action.type,
       };
     case VOLUNTEER_CHANGE_PENDING:
     case VOLUNTEER_CHANGE_FAILED:
     case VOLUNTEER_ENABLED:
     case VOLUNTEER_DISABLED:
-      return updateVolunteerStatusById(
-        state,
-        action.payload.volunteerId,
-        action.type
-      );
+      return updateVolunteerStatusById(state, action);
     default:
       return state;
   }
