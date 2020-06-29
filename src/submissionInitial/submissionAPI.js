@@ -1,4 +1,5 @@
 const submissionData = require("./submissionData");
+const { log } = require("../utils/winston");
 
 const { Error } = require("mongoose");
 
@@ -52,18 +53,22 @@ async function initialSubmission(
   for (const person of people) {
     const validation = person.validateSync();
     if (validation !== undefined) {
-      console.error(validation);
+      log.error("Problem validating a Person. ", { error: validation });
       throw new Error.ValidationError("");
     }
   }
   const householdValidation = household.validateSync();
   if (householdValidation !== undefined) {
-    console.error(householdValidation);
+    log.error("Problem validating a Household. ", {
+      error: householdValidation,
+    });
     throw new Error.ValidationError("");
   }
   const submissionValidation = submission.validateSync();
   if (submissionValidation !== undefined) {
-    console.log(submissionValidation);
+    log.error("Problem validating a Submission. ", {
+      error: submissionValidation,
+    });
     throw new Error.ValidationError("");
   }
 

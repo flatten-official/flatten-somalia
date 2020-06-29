@@ -1,5 +1,6 @@
 const { readCookie } = require("../cookieData");
 const { findVolunteerById } = require("../../volunteer/volunteerData");
+const { log } = require("../../utils/winston");
 
 /**
  * If cookie is valid, add volunteer and expiry to res.locals for use by the endpoint.
@@ -8,6 +9,7 @@ module.exports = async (req, res, next) => {
   const cookieID = req.signedCookies.id; // the signed cookie "id" stores the cookieID
 
   if (!cookieID) {
+    log.debug("No cookie found.");
     next();
     return;
   }
@@ -15,7 +17,7 @@ module.exports = async (req, res, next) => {
   const cookie = await readCookie(cookieID);
 
   if (!cookie) {
-    console.log("Invalid cookie id or cookie expired");
+    log.warning("Invalid cookie id or cookie expired");
     next();
     return;
   }

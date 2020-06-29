@@ -1,5 +1,6 @@
 const submissionApi = require("./submissionAPI");
 const { Error } = require("mongoose");
+const { log } = require("../utils/winston");
 
 module.exports = async (req, res) => {
   try {
@@ -15,10 +16,16 @@ module.exports = async (req, res) => {
       req.body.household
     );
     res.sendStatus(200);
+    log.info("Successfully submitted initial household survey.", {
+      status: 200,
+    });
   } catch (e) {
     if (e instanceof Error.ValidationError) {
-      console.error(e);
-      res.status(400).send("Validation problem with form models.");
+      res.status(400).send("Validation problem with form models. ");
+      log.error("Failed to submit initial household survey.", {
+        error: e,
+        status: 400,
+      });
     } else throw e;
   }
 };
