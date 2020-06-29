@@ -14,9 +14,9 @@ const TEST_VOLUNTEER = {
   teamName: "testTeam",
 };
 
-const makeVolunteerRequestBody = (data) => {
-  return _.defaults({ data: _.defaults(data, TEST_VOLUNTEER) });
-};
+const makeVolunteerRequestBody = (data) => ({
+  data: _.defaults(data, TEST_VOLUNTEER),
+});
 
 const dummyVolunteers = [
   {
