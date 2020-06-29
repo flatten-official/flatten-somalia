@@ -58,11 +58,10 @@ const inverseColours = {
   debug: "blue inverse",
 };
 
-function makeConsoleTransport(level, format) {
+function makeConsoleTransport(level) {
   return new transports.Console({
     levels: logSeverityLevels,
     level: level,
-    format: format ? format : consoleFormat,
     handleExceptions: true,
     handleRejections: true,
   });
@@ -81,9 +80,19 @@ function makeTransports(env = process.env.ENVIRONMENT) {
     case "staging":
       return [makeStackdriverTransport("debug")];
     default:
-      return [makeConsoleTransport("debug"), makeStackdriverTransport("debug")];
+      return [makeConsoleTransport("debug")];
   }
 }
+
+const getFormat = () => {
+  switch (process.env.ENVIRONMENT) {
+    case "production":
+    case "staging":
+      return defaultFormat(false);
+    default:
+      return consoleFormat;
+  }
+};
 
 //endregion
 
@@ -91,6 +100,7 @@ function setup() {
   winston.addColors(inverseColours);
 
   return winston.createLogger({
+    format: getFormat(),
     levels: logSeverityLevels,
     exitOnError: false,
     transports: makeTransports(),
