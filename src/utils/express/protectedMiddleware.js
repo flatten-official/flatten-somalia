@@ -21,7 +21,7 @@ module.exports = (requiredPermissions) => (req, res, next) => {
   } else {
     res.sendStatus(403);
     log.warning(
-      "Tried to access a protected route without proper permissions.",
+      `Tried to access a protected route without proper permissions. Volunteer friendly id: ${res.locals.volunteer.friendlyId}`,
       { status: 403 }
     );
   }
