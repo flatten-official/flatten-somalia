@@ -45,11 +45,6 @@ const Volunteer = createModel("Volunteer", {
     type: [
       {
         type: String,
-        enum: [
-          Permissions.manageVolunteers,
-          Permissions.submitForms,
-          Permissions.access,
-        ],
         enum: Object.values(Permissions),
         required: true,
       },
