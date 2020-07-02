@@ -9,7 +9,8 @@
     "lint": "eslint --fix .",
     "start": "node scripts/start.js",
     "deploy": "node scripts/createBranchJson.js && gcloud config set project flatten-staging-271921 && gcloud builds submit",
-    "auth": "gcloud auth login && gcloud config set project flatten-staging-271921"
+    "auth": "gcloud auth login && gcloud config set project flatten-staging-271921",
+    "serve": "npx serve --single --listen 3000 ./build"
   },
   "husky": {
     "hooks": {

@@ -61,7 +61,7 @@ const ExpireModal = () => {
   ];
   const show = useSelector(
     (state) =>
-      excludeRoutes.indexOf(state.router.location.pathname) === -1 &&
+      !excludeRoutes.includes(state.router.location.pathname) &&
       checkWillExpireSoon(state.auth)
   );
   const dispatch = useDispatch();
@@ -96,7 +96,7 @@ const Header = () => {
         </Nav>
         <LanguageDropDown />
       </Navbar.Collapse>
-      {/*<ExpireModal />  TODO ADD EXPIRE MODAL WHEN TRANSLATIONS AVAILABLE */}
+      <ExpireModal />
     </Navbar>
   );
 };
