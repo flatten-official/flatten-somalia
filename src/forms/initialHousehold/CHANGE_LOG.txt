@@ -6,6 +6,10 @@ version  |  commit (optional)
 	* changes
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.0.4
+    * Add warning if user tries to navigate to another page while filling out form
+    * Force user to log out before starting form if cookie will expire soon (within 70 min)
+
 1.0.3
 
     * Districts & Sub-districts
