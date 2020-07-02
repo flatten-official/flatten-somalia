@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 let branchName;
 
 try {
+  // noinspection JSFileReferences
   branchName = require("../../branch.json").name;
   // eslint-disable-next-line no-empty
 } catch (e) {}
