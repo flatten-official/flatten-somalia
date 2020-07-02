@@ -35,6 +35,9 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 const DEFAULT_PORT = 3000;
 const HOST = "0.0.0.0";
 
+// Creates branch.json
+require("./createBranchJson");
+
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 const { checkBrowsers } = require("react-dev-utils/browsersHelper");
