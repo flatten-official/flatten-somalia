@@ -1,4 +1,6 @@
+const { log } = require("../../utils/winston");
+
 module.exports = (req, res, next) => {
-  console.log(`REQUEST: ${req.method} ${req.path}`);
+  log.debug(`Endpoint hit: /`, { method: req.method, path: req.path });
   next();
 };

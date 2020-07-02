@@ -1,12 +1,13 @@
 require("dotenv").config(); // Load .env file
 const { setup, cleanup } = require("../src/index");
+const { log } = require("../src/utils/winston");
 
 const scriptName = process.env.SCRIPT_NAME;
 const scriptPath = require("./scriptPaths.json")[scriptName];
 const Confirm = require("prompt-confirm");
 
 const main = async () => {
-  console.log(`Starting script: ${scriptName}`);
+  log.info(`Starting script: ${scriptName}`);
 
   if (!scriptPath)
     throw "no valid SCRIPT_NAME specified in .env file. Look at scripts/scriptPaths.js for valid script names";
@@ -16,7 +17,7 @@ const main = async () => {
   const accepted = await new Confirm(Script.confirmationMessage).run();
 
   if (!accepted) {
-    console.log("Script was cancelled.");
+    log.info("Script was cancelled.");
     return;
   }
 
@@ -34,12 +35,9 @@ const main = async () => {
     if (Script.useAutoSetup) await cleanup();
   }
 
-  console.log(
-    `Done script: ${scriptName}. MANUALLY VERIFY THAT ALL WENT WELL.`
-  );
+  log.info(`Done script: ${scriptName}. MANUALLY VERIFY THAT ALL WENT WELL.`);
 };
 
 main().catch((e) => {
-  console.log("Script threw error:");
-  console.error(e);
+  log.error("Script threw error:", { error: e });
 });

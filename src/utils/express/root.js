@@ -1,3 +1,5 @@
+const { log } = require("../../utils/winston");
+
 let branchName;
 
 try {
@@ -7,6 +9,7 @@ try {
 }
 
 module.exports = (req, res) => {
+  log.info(`Success.`, { status: 200 });
   res
     .status(200)
     .send(
