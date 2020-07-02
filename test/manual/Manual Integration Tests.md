@@ -1,4 +1,4 @@
-### Manual Integration Tests
+# Manual Integration Tests
 ## FLATTEN SO
 
 After making frontend or backend changes, refer to the relevant sections here to comprehensively test your work.
@@ -15,7 +15,7 @@ form.io components must be reloaded for translations to show. You don't need to 
 
 ## form.io
 
-# Functionality
+### Functionality
 
 After creating/altering components:
 
