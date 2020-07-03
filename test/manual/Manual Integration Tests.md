@@ -20,34 +20,45 @@ These items should be considered while testing any section.
 
 ## Localization
 
-### 1. Components using localization
+#### 1. Components using localization
+For new or modified site or form* components.
 
-* For all components that you modified, ensure that all text displays properly both in English and Somali.
+-[ ] Text displays properly in English.
+-[ ] Text displays properly in Somali.
 
-form.io components must be reloaded for translations to show. You don't need to reload the page, just navigate to another survey page and back.
+#### 2. Changes to localization system
 
-### 2. Changes to localization system
+-[ ] Localization works as expected in basic site pages.
+    -[ ] Switching language works as expected.
+    -[ ] Text displays properly in English.
+    -[ ] Text displays properly in Somali.
+-[ ] Localization works as expected in forms.
+    -[ ] Switching language works as expected*.
+    -[ ] Text displays properly in English.
+    -[ ] Text displays properly in Somali.
 
-* Ensure that the changes work for basic site pages.
-* Ensure that the forms' localization still works.
+*form.io components must be reloaded for translations to show. You don't need to reload the page, just navigate to another survey page and back.
 
 ## form.io
 
-### Functionality
+### 1. Functionality
 
-After creating/altering form.io components:
+* **All new or modified form.io components**:
 
-* Ensure that required fields are validated by attempting to continue the survey without filling the field.
-* **Editable Components**:
+-[ ] Ensure validation works as expected when attempting to continue the survey without filling out the component.
+
+* **Editable components**: Text fields, number fields, emails, phone numbers, and more.
     * Verify that formatting masks work as expected, for emails and phone numbers for example.
-    * For numerical fields, ensure that min/max settings work as expected by trying values outside the desired range.
-* **Selectable Components**: Click through *every* option.
-    * Options should render as expected in their data types. examples below:
-        * radio
-        * select
-        * checkbox
-    * Options should be selectable.
-    * Check for multiple options being selected when not a checkbox.
+        -[ ] A valid answer is accepted.
+        -[ ] Invalid answers are rejected or blocked. 
+    * For numerical fields, ensure input ranges work properly (if necessary).
+        -[ ] Answers 1 below the lower bound are rejected.
+        -[ ] Answers 1 above the upper bound are rejected.
+        -[ ] Answers on the lower bound are accepted.
+        -[ ] Answers on the upper bound are accepted.
+* **Selectable components**: radio, checkbox, and select dropdowns.
+    -[ ] Ensure every option renders properly by counting available options.
+    -[ ] Ensure every option is selectable by clicking through each one
 
 ## Data Validation
 
@@ -65,17 +76,18 @@ These tests are intended for *every* record written to the DB as a result of eac
 
 ### Initial Household Survey Tests
 
-* Followup Method
-    * If `sharePhoneNumberConsent` is no (value of `"willNotSharePhoneNumber"`), follow up ID (key `customFollowUpId`) should exist.
-    * If `sharePhoneNumberConsent` is yes (value of `"consentToSharingPhoneNumber"`), the phone number (key `phoneNumber`) should exist.
+#### 1. Followup Method
+-[ ] A submission with `sharePhoneNumberConsent = "no"` has a follow-up ID (key `customFollowUpId`).
+-[ ] A submission with `sharePhoneNumberConsent = "yes"` has a phone number (key `phoneNumber`).
 
-* References
-    * Every `household` object must contain a `data` key.
-    * Every object in the `people` array must contain a `data` key.
+#### 2. References
+-[ ] Every submission's `household` object must contain a `data` key.
+-[ ] Every object in the `people` array must contain a `data` key.
 
-* Additional fields
-    * The following keys *must* exist *and* contain a value of the specified type.
+#### 3. Additional fields
+-[ ] The resulting records must conform to the schema described below. 
 
+The following keys *must* exist *and* contain a value of the specified type.
 
 ```
 {
@@ -106,7 +118,7 @@ These tests are intended for *every* record written to the DB as a result of eac
 ```
 
 * Adding household record to household collection:
-    * Every initial household survey must add its household data to the household collection with the following keys and data type specified below:
+    -[ ] Every Household document associated with the submission conforms to the following schema:
 
 ```
 {
@@ -117,8 +129,8 @@ These tests are intended for *every* record written to the DB as a result of eac
 ```
 
 * Adding people records to people collection:
-    * Every initial household survey must add its data from the people array to the people collection with the following keys and data type specified below:
-    * Note: every person in the people array must be added as their own record into the people collection.
+    -[ ] Every individual associated with a submission is added as a document in the People collection. 
+    -[ ] Every People document associated with the submission conforms to the following schema:
 
 ```
 {
@@ -127,5 +139,3 @@ These tests are intended for *every* record written to the DB as a result of eac
     alive: Boolean
 }
 ```
-
-
