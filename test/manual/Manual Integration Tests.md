@@ -39,26 +39,28 @@ For new or modified site or form* components.
 
 *form.io components must be reloaded for translations to show. You don't need to reload the page, just navigate to another survey page and back.
 
-## form.io
+## form.io functionality
 
-### 1. Functionality
-
-* **All new or modified form.io components**:
+#### 1. New or modified form.io components
 
 -[ ] Ensure validation works as expected when attempting to continue the survey without filling out the component.
 
-* **Editable components**: Text fields, number fields, emails, phone numbers, and more.
-    * Verify that formatting masks work as expected, for emails and phone numbers for example.
-        -[ ] A valid answer is accepted.
-        -[ ] Invalid answers are rejected or blocked. 
-    * For numerical fields, ensure input ranges work properly (if necessary).
-        -[ ] Answers 1 below the lower bound are rejected.
-        -[ ] Answers 1 above the upper bound are rejected.
-        -[ ] Answers on the lower bound are accepted.
-        -[ ] Answers on the upper bound are accepted.
-* **Selectable components**: radio, checkbox, and select dropdowns.
-    -[ ] Ensure every option renders properly by counting available options.
-    -[ ] Ensure every option is selectable by clicking through each one
+#### 2. Editable components
+Text fields, number fields, emails, phone numbers, and more.
+
+* Verify that formatting masks work as expected, for emails and phone numbers for example.
+    -[ ] A valid answer is accepted.
+    -[ ] Invalid answers are rejected or blocked. 
+* For numerical fields, ensure input ranges work properly (if necessary).
+    -[ ] Answers 1 below the lower bound are rejected.
+    -[ ] Answers 1 above the upper bound are rejected.
+    -[ ] Answers on the lower bound are accepted.
+    -[ ] Answers on the upper bound are accepted.
+
+#### 3. Selectable components
+Radio, checkbox, and select dropdowns.
+-[ ] Ensure every option renders properly by counting available options.
+-[ ] Ensure every option is selectable by clicking through each one
 
 ## Data Validation
 
