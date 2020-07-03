@@ -1,6 +1,4 @@
-# Title
-
-## Description
+# Description
 
 * Change to component one
     - Details...
@@ -8,7 +6,7 @@
 * Change to component two
     - Details...
 
-## [Manual Integration Tests](../test/manual/Manual Integration Tests.md) completed:
+# [Manual Integration Tests](https://github.com/flatten-official/backend-so/blob/master/test/manual/Manual%20Integration%20Tests.md) completed:
 
 Only complete for components you've modified. Complete just before merging.
 
@@ -33,3 +31,5 @@ Data Validation
 - [ ] Test 3: Additional fields
 
 Other manual tests that you completed
+
+- [ ] ...
