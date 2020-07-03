@@ -1,4 +1,4 @@
-const { isValidationTypeError } = require("../utils/mongoose");
+const { isValidationTypeError } = require("../utils/errors");
 const { log } = require("../utils/winston");
 
 // need to keep unused parameter to force function to be an error handler
