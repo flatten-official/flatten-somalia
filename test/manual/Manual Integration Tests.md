@@ -16,11 +16,13 @@ These items should be considered while testing any section.
 4. Run `npm run deploy` to deploy the target frontend & backend branches to access the staging environments:
     * Frontend: [v.staging.flatten.org](https://v.staging.flatten.org/).
     * Backend: [api.staging.flatten.org](https://api.staging.flatten.org/).
-5. Log in using an account with sufficient permissions to access the features to be tested.
+5. Log into [v.staging.flatten.org](https://v.staging.flatten.org/) using an account with sufficient permissions to access the features to be tested.
 
 ## Localization
 
-* Ensure that all text displays properly both in English and Somali.
+### Test 1
+
+* For all components that you modified, ensure that all text displays properly both in English and Somali.
 
 form.io components must be reloaded for translations to show. You don't need to reload the page, just navigate to another survey page and back.
 
@@ -28,20 +30,15 @@ form.io components must be reloaded for translations to show. You don't need to 
 
 ### Functionality
 
-After creating/altering components:
+After creating/altering form.io components:
 
+* **Editable Components**:
+    * If there's a mask (e.g. phone number), verify that it works.
 * **Selectable Components**: Click through *every* option.
     * Options should render as expected in their data types. examples below:
-        * editgrid (add person, add deceased person)
         * radio
-        * phonenumber
-        * email
         * select
-        * textfield
-        * textarea
-        * number
         * checkbox
-        * calendar
     * Options should be selectable
     * Check for multiple options being selected when not a checkbox
 
