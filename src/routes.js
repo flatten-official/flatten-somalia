@@ -6,11 +6,9 @@ const loginRoute = require("./auth/routes/loginRoute");
 const verifyTokenRoute = require("./auth/routes/verifyTokenRoute");
 const logoutRoute = require("./auth/routes/logoutRoute");
 const getAuthRoute = require("./auth/routes/getAuthRoute");
-const submitInitialRoute = require("./submissionInitial/submitInitialRoute");
+const submitInitialRoute = require("./surveys/initialHousehold/submissionRoute");
 const submitGravediggerRoute = require("./surveys/gravedigger/submissionRoute");
 const submitHospitalRoute = require("./surveys/hospital/submissionRoute");
-const submitFollowUpRoute = require("./submissionInitial/submitFollowUpRoute");
-const submitGetNextRoute = require("./submissionInitial/submitGetNextRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
 const rootRoute = require("./utils/express/root");
 
@@ -143,30 +141,6 @@ router.post(
   "/survey/hospital",
   protectedMiddleware([Permissions.submitForms]),
   submitHospitalRoute
-);
-
-/**
- * @api {post} /submit/followup Submit the form for an existing household from a follow up.
- * @apiName SubmitFormFollowUp
- * @apiGroup Submissions
- * @apiDescription Unimplemented
- */
-router.post(
-  "/submit/followup",
-  protectedMiddleware([Permissions.submitForms]),
-  submitFollowUpRoute
-);
-
-/**
- * @api {get} /submit/next Get the info about the next follow up that this volunteer should do
- * @apiName GetNextFollowUp
- * @apiGroup Submissions
- * @apiDescription Unimplemented
- */
-router.post(
-  "/submit/next",
-  protectedMiddleware([Permissions.submitForms]),
-  submitGetNextRoute
 );
 
 module.exports = router;
