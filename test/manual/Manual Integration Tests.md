@@ -20,11 +20,16 @@ These items should be considered while testing any section.
 
 ## Localization
 
-### Test 1
+### 1. Components using localization
 
 * For all components that you modified, ensure that all text displays properly both in English and Somali.
 
 form.io components must be reloaded for translations to show. You don't need to reload the page, just navigate to another survey page and back.
+
+### 2. Changes to localization system
+
+* Ensure that the changes work for basic site pages.
+* Ensure that the forms' localization still works.
 
 ## form.io
 
@@ -32,8 +37,10 @@ form.io components must be reloaded for translations to show. You don't need to 
 
 After creating/altering form.io components:
 
+* Ensure that required fields are validated by attempting to continue the survey without filling the field.
 * **Editable Components**:
-    * If there's a mask (e.g. phone number), verify that it works.
+    * Verify that formatting masks work as expected, for emails and phone numbers for example.
+    * For numerical fields, ensure that min/max settings work as expected by trying values outside the desired range.
 * **Selectable Components**: Click through *every* option.
     * Options should render as expected in their data types. examples below:
         * radio
