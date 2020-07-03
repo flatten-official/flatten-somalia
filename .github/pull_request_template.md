@@ -5,9 +5,6 @@
 - changes about...
 - changes about...
 
-### Requested reviewers:
-- @username
-
 ### QA Tests completed:
 
 Localization 
