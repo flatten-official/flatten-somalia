@@ -1,6 +1,3 @@
-# QA Testing Pull Request Template
-Please provide as much information as possible below.
-
 ## pull_request_title
 
 ### Pull Request Summary:
