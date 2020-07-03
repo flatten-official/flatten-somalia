@@ -12,7 +12,7 @@ These items should be considered while testing any section.
     * Frontend: https://github.com/flatten-official/flatten-volunteer
     * Backend: https://github.com/flatten-official/backend-so
 2. Run `npm install` for both repos to install package dependencies.
-3. Run `npm run auth` for both repos to authenticate yourself with a valid account that has access to the staging environments.
+3. Run `npm run auth` to authenticate yourself with a valid account that has access to the staging environments.
 4. Run `npm run deploy` to deploy the target frontend & backend branches to access the staging environments:
     * Frontend: [v.staging.flatten.org](https://v.staging.flatten.org/).
     * Backend: [api.staging.flatten.org](https://api.staging.flatten.org/).
@@ -39,20 +39,21 @@ After creating/altering form.io components:
         * radio
         * select
         * checkbox
-    * Options should be selectable
-    * Check for multiple options being selected when not a checkbox
+    * Options should be selectable.
+    * Check for multiple options being selected when not a checkbox.
 
 ## Data Validation
 
 These tests are intended for *every* record written to the DB as a result of each submission.
 
-How to validate data manually:
+### Setup
+
 1. Log into [cloud.mongodb.com](https://cloud.mongodb.com/)
-2. Select `Flatten` as your organization
-3. Select `Somalia Staging Data` as the project
-4. Select `Staging` cluster
-4. Navigate to `Collections` tab
-5. Select the desired collection under the database name `test`
+2. Select `Flatten` as your organization.
+3. Select `Somalia Staging Data` as the project.
+4. Select `Staging` cluster.
+4. Navigate to `Collections` tab.
+5. Select the desired collection under the database name `test`.
 
 
 ### Initial Household Survey Tests
@@ -97,7 +98,7 @@ How to validate data manually:
 }
 ```
 
-* Adding household record to household collection
+* Adding household record to household collection:
     * Every initial household survey must add its household data to the household collection with the following keys and data type specified below:
 
 ```
@@ -108,9 +109,9 @@ How to validate data manually:
 }
 ```
 
-* Adding people records to people collection
+* Adding people records to people collection:
     * Every initial household survey must add its data from the people array to the people collection with the following keys and data type specified below:
-    * Note: every person in the people array must be added as their own record into the people collection
+    * Note: every person in the people array must be added as their own record into the people collection.
 
 ```
 {
