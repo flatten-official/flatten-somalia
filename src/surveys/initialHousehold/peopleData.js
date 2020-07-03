@@ -28,12 +28,4 @@ function createManyAsync(perPersonData) {
   );
 }
 
-// async function setToDead(personId) {
-//   await model.findByIdAndUpdate(personId, {
-//     $push: {
-//       alive: false,
-//     },
-//   });
-// }
-
 module.exports = { model, createManyAsync };
