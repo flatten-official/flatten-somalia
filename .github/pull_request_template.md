@@ -8,14 +8,22 @@
 ### QA Tests completed:
 
 Localization 
-* Test 1: title
-* Test 2: title
+
+[ ] Test 1: title
+
+[ ] Test 2: title
+
 
 Form Functionality
-* Test 1: title
-* Test 2: title
+
+[ ] Test 1: title
+
+[ ] Test 2: title
+
 
 Data Validation 
-* Test 1: title
-* Test 2: title
+
+[ ] Test 1: title
+
+[ ] Test 2: title
 
