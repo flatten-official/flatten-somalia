@@ -12,7 +12,7 @@ These items should be considered while testing any section.
     * Frontend: https://github.com/flatten-official/flatten-volunteer
     * Backend: https://github.com/flatten-official/backend-so
 2. Run `npm install` for both repos to install package dependencies.
-3. Run `npm run auth` to authenticate yourself with a valid account that has access to the staging environments.
+3. Run `npm run auth` on the backend to authenticate yourself with a valid account that has access to the staging environments.
 4. Run `npm run deploy` to deploy the target frontend & backend branches to access the staging environments:
     * Frontend: [v.staging.flatten.org](https://v.staging.flatten.org/).
     * Backend: [api.staging.flatten.org](https://api.staging.flatten.org/).
@@ -62,31 +62,49 @@ Radio, checkbox, and select dropdowns.
 -[ ] Ensure every option renders properly by counting available options.
 -[ ] Ensure every option is selectable by clicking through each one
 
+#### 4. Conditional components
+
+Run this test after making changes to keys or adding conditional components.
+
+-[ ] Verify that all conditional components only appear when expected.
+-[ ] Ensure the component works as expected when it appears.
+
 ## Data Validation
 
 These tests are intended for *every* record written to the DB as a result of each submission.
 
 ### Setup
 
-1. Log into [cloud.mongodb.com](https://cloud.mongodb.com/)
-2. Select `Flatten` as your organization.
-3. Select `Somalia Staging Data` as the project.
-4. Select `Staging` cluster.
-4. Navigate to `Collections` tab.
-5. Select the desired collection under the database name `test`.
+1. Submit the relevant surveys required to complete the following tests.
+2. Log into [cloud.mongodb.com](https://cloud.mongodb.com/)
+3. Select `Flatten` as your organization.
+4. Select `Somalia Staging Data` as the project.
+5. Select `Staging` cluster.
+6. Navigate to `Collections` tab.
+7. Select the desired collection under the database name `test`.
 
 
 ### Initial Household Survey Tests
 
 #### 1. Followup Method
--[ ] A submission with `sharePhoneNumberConsent = "no"` has a follow-up ID (key `customFollowUpId`).
--[ ] A submission with `sharePhoneNumberConsent = "yes"` has a phone number (key `phoneNumber`).
+-[ ] A `submission` document with `sharePhoneNumberConsent = "no"` contains a follow-up ID (key `customFollowUpId`).
+-[ ] A `submission` document with `sharePhoneNumberConsent = "yes"` contains a phone number (key `phoneNumber`).
 
 #### 2. References
--[ ] Every submission's `household` object must contain a `data` key.
--[ ] Every object in the `people` array must contain a `data` key.
+-[ ] Every `submission` document must contain a `household.data` key.
+-[ ] Every element of the `people` array in a `submission` document must contain a `data` key.
 
 #### 3. Additional fields
+
+**When to run test?**
+
+- Modifications to backend submission route
+- Modifications to backend middleware
+- Modifications to frontend form
+- Modifications to frontend metadata
+
+**Test**
+
 -[ ] The resulting records must conform to the schema described below. 
 
 The following keys *must* exist *and* contain a value of the specified type.

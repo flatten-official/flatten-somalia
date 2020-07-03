@@ -1,11 +1,16 @@
-## pull_request_title
+# Title
 
-### Pull Request Summary:
-- changes about...
-- changes about...
-- changes about...
+## Description
 
-### QA Tests completed:
+* Change to component one
+    - Details...
+    
+* Change to component two
+    - Details...
+
+## [Manual Integration Tests](../test/manual/Manual Integration Tests.md) completed:
+
+Only complete for components you've modified. Complete just before merging.
 
 Localization 
 
@@ -18,6 +23,7 @@ Form Functionality
 - [ ] Test 1: Validation
 - [ ] Test 2: Editable components
 - [ ] Test 3: Selectable components
+- [ ] Test 4: Conditional components
 
 
 Data Validation 
@@ -26,3 +32,4 @@ Data Validation
 - [ ] Test 2: References
 - [ ] Test 3: Additional fields
 
+Other manual tests that you completed
