@@ -4,6 +4,8 @@
   "goToInitialSurvey": "Xog Aruunta Xalaadaha COVID-19 Mogadishu",
   "goToGravediggerSurvey": "Sahanka qabri qodaha",
   "goToFollowupSurvey": "La socoto sahan aruurinta qoyska",
-  "nameMessage" : "Magac: {{name}}",
-  "teamNameMessage": "Kooxda: {{teamName}}"
+  "nameMessageTitle" : "Magac:",
+  "nameMessageResponse" : "{{name}}",
+  "teamNameMessageTitle" : "Kooxda:",
+  "teamNameMessageResponse" : "{{teamName}}"
 }
