@@ -82,6 +82,8 @@ body {
   font-size: 32px;
   letter-spacing: 0.75px;
   color: $black;
+  padding-bottom: 10px;
+  padding-top: 30px;
 }
 
 .form {
@@ -91,7 +93,10 @@ body {
 .homePageSelectFormTitle {
   letter-spacing: 0.75px;
   line-height: 0.5;
-  padding: 40px 0 20px;
+  margin: 40px 0 20px;
+  font-size: 26px;
+  display: inline-block;
+  background-color: $background-green;
 }
 
 .map {
@@ -136,6 +141,20 @@ body {
 
 .submissionPageTitle {
   padding: 0 0 15px;
+}
+
+.homePageSubheadingsBlue{
+  color: #4285F4;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.homePageSubheadings{
+  padding-left: 5px;
+  color: $black;
+  text-transform: uppercase;
+  display: inline-block;
 }
 
 .footer {

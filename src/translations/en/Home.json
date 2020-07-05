@@ -4,6 +4,8 @@
   "goToInitialSurvey": "Initial Household Survey",
   "goToGravediggerSurvey": "Gravedigger Survey",
   "goToFollowupSurvey": "Followup Household Survey",
-  "nameMessage" : "Name: {{name}}",
-  "teamNameMessage": "Team: {{teamName}}"
+  "nameMessageTitle" : "Name:",
+  "nameMessageResponse" : "{{name}}",
+  "teamNameMessageTitle" : "Team:",
+  "teamNameMessageResponse" : "{{teamName}}"
 }
