@@ -1,29 +1,17 @@
 import { Trans, useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { setFollowUpId, Types } from "../actions";
 import { Button } from "react-bootstrap";
 import React from "react";
+import PropTypes from "prop-types";
 
-export const Consent = () => {
-  const { t } = useTranslation("InitialSurvey");
-  const dispatch = useDispatch();
-
-  const volunteerFriendlyId = useSelector(
-    (state) => state.auth.user.friendlyId
-  );
-
-  const onConsent = () => {
-    dispatch({ type: Types.NOTIFY_CONSENT_GIVEN });
-    dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
-    dispatch(setFollowUpId(volunteerFriendlyId));
-  };
+export const ConsentModal = ({ onConsent }) => {
+  const { t } = useTranslation("Surveys");
 
   return (
     <>
       {t("braConsent")}
       <br />
       <br />
-      <Trans i18nKey="InitialSurvey:flattenConsent">
+      <Trans i18nKey="Surveys:flattenConsent">
         MissingTranslation {/* Is replaced by i18n*/}
         <a href="https://flatten.ca/privacy-policy">Privacy Policy</a>
         and
@@ -38,4 +26,8 @@ export const Consent = () => {
       </Button>
     </>
   );
+};
+
+ConsentModal.propTypes = {
+  onConsent: PropTypes.func,
 };

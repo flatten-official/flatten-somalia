@@ -1,19 +1,18 @@
-import React, { useRef, useState } from "react";
-import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { Map, Marker, TileLayer } from "react-leaflet";
-import PropTypes from "prop-types";
+import React, { useRef, useState } from "react";
 import { LocationObj } from "./LocationPicker";
+import { Map, Marker, TileLayer } from "react-leaflet";
+import { Button } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const INITIAL_ZOOM = 13;
 const INITIAL_CENTER = [2.045, 45.333];
-
 // TODO round returned values
 /**
  * Component that allows the user to pick their location
  */
 const ManualLocationPicker = ({ onSubmit, onCancel }) => {
-  const { t } = useTranslation("InitialSurvey");
+  const { t } = useTranslation("Surveys");
 
   const [markerPosition, setMarkerPosition] = useState(INITIAL_CENTER);
 
@@ -43,9 +42,9 @@ const ManualLocationPicker = ({ onSubmit, onCancel }) => {
         zoom={INITIAL_ZOOM}
         center={INITIAL_CENTER}
       >
-        <TileLayer // TODO Pick better base layer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        <TileLayer
+          url="https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         <Marker // TODO Style Marker
           position={markerPosition}
@@ -69,5 +68,4 @@ ManualLocationPicker.propTypes = {
   onSubmit: PropTypes.func.isRequired, // Callback called when location is submitted
   onCancel: PropTypes.func.isRequired, // Callback called when operation is cancelled
 };
-
 export default ManualLocationPicker;

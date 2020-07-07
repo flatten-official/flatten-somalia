@@ -1,34 +1,60 @@
 import backend from "./api/backend";
 import flattenApi from "./api/api";
 
-export const submitForm = async (storeData, formioData) => {
+const getMetadata = (storeData) => {
   const endTime = Date.now();
-  const reformattedData = {
+  return {
+    endTime: endTime,
+    timeToComplete: endTime - storeData.startTime,
+    location: storeData.location,
+    consentGiven: storeData.consent,
+  };
+};
+
+const preFormatFormio = (formioData) => {
+  Object.keys(formioData).forEach((key) => {
+    if (key.startsWith("exclude-")) delete formioData[key];
+  });
+};
+
+export const defaultSurveySubmitterFactory = (api, schema) => async (
+  storeData,
+  formioData
+) => {
+  preFormatFormio(formioData);
+
+  const body = {
+    metadata: getMetadata(storeData),
+    schema,
+    data: formioData,
+  };
+
+  await backend.request({ ...api, data: body });
+};
+
+export const getInitialHouseholdSubmitter = (schema) => async (
+  storeData,
+  formioData
+) => {
+  preFormatFormio(formioData);
+
+  const body = {
     household: {
       followUpId: storeData.followUpId,
     },
     people: formioData.personGrid,
     deaths: formioData.deathGrid,
-    metadata: {
-      endTime: endTime,
-      timeToComplete: endTime - storeData.startTime,
-      location: storeData.location,
-      consentGiven: storeData.consent,
-    },
-    schema: {
-      form: "initialSurvey",
-      version: "1.0.0",
-    },
+    metadata: getMetadata(storeData),
+    schema,
   };
 
   Object.entries(formioData).forEach(([k, v]) => {
-    if (!(k === "personGrid" || k === "deathGrid"))
-      reformattedData.household[k] = v;
+    if (!(k === "personGrid" || k === "deathGrid")) body.household[k] = v;
   });
 
   // need to actually add the submission in here!
   await backend.request({
     ...flattenApi.volunteerForm,
-    data: reformattedData,
+    data: body,
   });
 };

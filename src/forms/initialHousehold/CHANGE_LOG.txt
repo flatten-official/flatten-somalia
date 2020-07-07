@@ -1,0 +1,78 @@
+INITIAL SURVEY CHANGELOG
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+version  |  commit (optional)
+
+	* changes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.0.4
+    * Add warning if user tries to navigate to another page while filling out form
+    * Force user to log out before starting form if cookie will expire soon (within 70 min)
+    * Fix manual location submission (map can now load)
+
+1.0.3
+
+    * Districts & Sub-districts
+        - set according to "Name of the Districts and
+          their sub districts" document from Somalia
+        - district options overhauled
+        - added sub-district dropdowns
+
+    * Individual & Deaths editgrids
+        - set "Add another" editgrid prompt to Somali (always)
+        - localize "Add another" button
+
+    * add primary non-work income source question, with options:
+        - family abroad
+        - financial aid
+
+    * add COVID-19 test type, with options:
+        - blood test
+        - nasal/sputum test
+
+    * Deaths editgrid
+        - is now initially closed to get around bug which
+          stopped conditional questions from showing up.
+
+    * add deceased pregnancy question
+
+    * add followupID reminder to final page
+
+    * Label updates
+        - deaths page
+            - symptoms
+            - noSymptoms: "None, i'm fine" -> "None"
+            - otherSymptoms
+            - comorbidities
+            - otherComorbidities
+        - recent trips count option
+            - "Other" -> "Other (specify)"
+
+    * Translation additions
+        - SO
+            - rent range options
+            - none option
+            - other social media
+            - other reasons for not using hotline
+            - potential contact questions
+            - moneyQuestion
+            - otherOccupation placeholder
+
+1.0.2       ea8a75a152
+
+    * add Shangani district option to:
+        - district (households)
+        - districts visited (individuals)
+
+
+1.0.1       8716397c9f
+
+    * add resident status question, with options:
+        - resident
+        - internally displaced person
+
+
+1.0.0       de6a7b2f35
+
+    * first form version used by volunteers

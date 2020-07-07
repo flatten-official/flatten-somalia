@@ -1,12 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Routes } from "../../config";
+import { Routes, Surveys } from "../../config";
 import Button from "react-bootstrap/Button";
 import { useSelector } from "react-redux";
 
 const Home = () => {
   const { t } = useTranslation("Home");
   const authUser = useSelector((state) => state.auth.user);
+  const { t: tSurvey } = useTranslation("Surveys");
 
   return (
     <>
@@ -25,24 +26,24 @@ const Home = () => {
       <br />
       <h5 className="homePageSelectFormTitle">{t("formSelectionPrompt")}</h5>
       <Button variant="light" size="lg" href={Routes.initialHouseholdSurvey}>
-        {t("goToInitialSurvey")}
+        {tSurvey(Surveys.initialHousehold.i18nTitleKey)}
       </Button>
-      <Button variant="light" size="lg" href={Routes.graveDiggerSurvey}>
-        {t("goToGraveDiggerForm")}
+      <Button
+        disabled={true}
+        variant="light"
+        size="lg"
+        href={Routes.gravediggerSurvey}
+      >
+        {tSurvey(Surveys.gravedigger.i18nTitleKey)}
       </Button>
-      <Button variant="light" size="lg" href={Routes.hospitalSurvey}>
-        {t("goToGraveDiggerForm")}
+      <Button
+        disabled={true}
+        variant="light"
+        size="lg"
+        href={Routes.hospitalSurvey}
+      >
+        {tSurvey(Surveys.hospital.i18nTitleKey)}
       </Button>
-      {/*<Button variant="light" size="lg" href={null} disabled="true">*/}
-      {/*  {t("goToGravediggerSurvey")}*/}
-      {/*</Button>*/}
-      {/*/!*TODO there should be a check for if there are follow ups and a notification will show*!/*/}
-      {/*<Button variant="light" size="lg" href={null} disabled="true">*/}
-      {/*  {t("goToFollowupSurvey")}*/}
-      {/*</Button>*/}
-      {/* Don't know if theres a more secure/better way to do this auth.user.permissions.includes(
-            "manageVolunteers"
-          ) && <Link to={null}>{t("goToAddVolunteer")}</Link> */}
     </>
   );
 };
