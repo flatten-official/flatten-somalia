@@ -1,5 +1,5 @@
 const submissionData = require("./submissionData");
-const { log } = require("../utils/winston");
+const { log } = require("../../utils/winston");
 
 const { Error } = require("mongoose");
 

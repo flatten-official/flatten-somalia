@@ -1,6 +1,6 @@
-const submissionApi = require("./submissionAPI");
+const submissionApi = require("./api");
 const { Error } = require("mongoose");
-const { log } = require("../utils/winston");
+const { log } = require("../../utils/winston");
 
 module.exports = async (req, res) => {
   try {
