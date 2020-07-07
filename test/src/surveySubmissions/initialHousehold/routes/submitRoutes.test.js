@@ -1,11 +1,11 @@
-const { getApp } = require("../../../../src/app");
-const util = require("../../../testUtils/mongo");
+const { getApp } = require("../../../../../src/app");
+const util = require("../../../../testUtils/mongo");
 
-const { login } = require("../../../testUtils/requests");
+const { login } = require("../../../../testUtils/requests");
 
-const Submission = require("../../../../src/surveys/initialHousehold/submissionData");
-const Household = require("../../../../src/surveys/initialHousehold/householdData");
-const Person = require("../../../../src/surveys/initialHousehold/peopleData");
+const Submission = require("../../../../../src/surveys/initialHousehold/submissionData");
+const Household = require("../../../../../src/surveys/initialHousehold/householdData");
+const Person = require("../../../../../src/surveys/initialHousehold/peopleData");
 
 const VALID_REQ_BODIES = [
   {
@@ -57,6 +57,7 @@ const VALID_REQ_BODIES = [
   },
   {
     household: {
+      followUpId: "7-26779",
       sharePhoneNumberConsent: "consentToSharingPhoneNumber",
       email: "",
       district: "C/casiis",
@@ -477,6 +478,21 @@ describe("test /auth", () => {
     expect(submission.household.data).toStrictEqual(request.household);
     expect(household.followUpId).toStrictEqual(request.household.followUpId);
     expect(submission.teamName).toStrictEqual(volunteer.teamName);
+  });
+
+  it("should return 409 for two forms with the same follow up id", async () => {
+    const { agent } = await login(app);
+
+    await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(200);
+    await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(409);
+
+    const allSubmissions = await Submission.model.find();
+    const allHouseholds = await Household.model.find();
+    const allPeople = await Person.model.find();
+
+    expect(allSubmissions).toHaveLength(1);
+    expect(allHouseholds).toHaveLength(1);
+    expect(allPeople).toHaveLength(2);
   });
 
   it("should fail for a user without the right permissions", async () => {

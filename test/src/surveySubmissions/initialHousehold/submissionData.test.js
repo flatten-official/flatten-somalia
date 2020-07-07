@@ -1,8 +1,7 @@
-const util = require("../../testUtils/mongo");
-const Submission = require("../../../src/surveys/initialHousehold/submissionData");
-const Person = require("../../../src/surveys/initialHousehold/peopleData");
-const Household = require("../../../src/surveys/initialHousehold/householdData");
-
+const util = require("../../../testUtils/mongo");
+const Submission = require("../../../../src/surveys/initialHousehold/submissionData");
+const Person = require("../../../../src/surveys/initialHousehold/peopleData");
+const Household = require("../../../../src/surveys/initialHousehold/householdData");
 const mongoose = require("mongoose");
 
 const dummyVolunteerId = "56cb91bdc3464f14678934ca";

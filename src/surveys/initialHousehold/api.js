@@ -2,6 +2,7 @@ const Submission = require("./submissionData");
 const Household = require("./householdData");
 const Person = require("./peopleData");
 const { BadInputError } = require("../../utils/errors");
+const { runOpWithinTransaction } = require("../../utils/mongoose");
 
 async function initialSubmission(
   volunteerId,
@@ -54,9 +55,11 @@ async function initialSubmission(
     householdData
   );
 
-  for (const person of people) await person.save();
-  await household.save();
-  await submission.save();
+  await runOpWithinTransaction(async (session) => {
+    for (const person of people) await person.save({ session });
+    await household.save({ session });
+    await submission.save({ session });
+  });
 }
 
 module.exports = { initialSubmission };
