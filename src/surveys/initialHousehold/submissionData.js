@@ -170,83 +170,6 @@ function createHousehold(followUpId, phone, email) {
   return new Household({ followUpId, phone, email });
 }
 
-// async function setPersonToDead(personId) {
-//   await Person.findByIdAndUpdate(personId, {
-//     $push: {
-//       alive: false,
-//     },
-//   });
-// }
-
-async function getVolunteerNextFollowUp(
-  // todo - add option to select by district if needed
-  // todo - add option to not select by volunteer
-  volunteerId,
-  district,
-  minTimeSinceLastSubmission = 6 * 60 * 60 * 1000, // ms
-  followUpTimeout = 24 * 60 * 60 * 1000 // ms
-) {
-  const next = await Submission.findOne(
-    {
-      $and: [
-        {
-          "metadata.uploadTimestamp": {
-            $lt: Date.now() - minTimeSinceLastSubmission,
-          },
-        },
-        { "followUp.id": { $exists: false } },
-        {
-          $or: [
-            { "followUp.inProgress": { $eq: false } },
-            {
-              "followUp.startTime": {
-                $lt: Date.now() - followUpTimeout,
-              },
-            },
-          ],
-        },
-      ],
-    },
-    {},
-    {
-      // get earliest non-followed-up submissionInitial first
-      sort: { uploadTimestamp: -1 },
-    }
-  );
-
-  next.followUp = {
-    inProgress: true,
-    startTime: Date.now(),
-  };
-
-  await next.save();
-
-  // get associated household/people so that we can display metadata
-  const household = await Household.findById(next.household.ref);
-  const people = await Person.find({
-    _id: { $in: next.people.map((o) => o.ref) },
-  });
-
-  return [next._id, household, people];
-}
-
-// add submissionInitial that we followed up with
-async function createFollowUpSubmisison(submissionId, ...newSubmissionData) {
-  const newSubmission = await createSubmission(...newSubmissionData);
-
-  await Submission.findByIdAndUpdate(submissionId, {
-    followUp: { id: newSubmission._id, inProgress: false },
-  });
-
-  return newSubmission;
-}
-
-// async function cancelVolunteerFollowUp(submissionId) {
-//   await Submission.findByIdAndUpdate(submissionId, {
-//     followUp: { inProgress: false },
-//   });
-// }
-
 module.exports = {
   Submission,
   Household,
@@ -254,6 +177,4 @@ module.exports = {
   createSubmission,
   createHousehold,
   createPeople,
-  getVolunteerNextFollowUp,
-  createFollowUpSubmisison,
 };

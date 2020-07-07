@@ -1,10 +1,10 @@
-const { getApp } = require("../../../../src/app");
-const util = require("../../../testUtils/mongo");
+const { getApp } = require("../../../../../src/app");
+const util = require("../../../../testUtils/mongo");
 
-const { login } = require("../../../testUtils/requests");
+const { login } = require("../../../../testUtils/requests");
 
-const submissionData = require("../../../../src/submissionInitial/submissionData");
-const volunteerData = require("../../../../src/volunteer/volunteerData");
+const submissionData = require("../../../../../src/surveys/initialHousehold/submissionData");
+const volunteerData = require("../../../../../src/volunteer/volunteerData");
 
 const sampleSubmission = {
   household: {
@@ -73,6 +73,21 @@ describe("test /auth", () => {
     const allVolunteers = await volunteerData.Volunteer.find();
     expect(allVolunteers).toHaveLength(1);
     expect(allVolunteers[0].teamName).toStrictEqual(submission.teamName);
+  });
+
+  it("should return 409 for two forms with the same follow up id", async () => {
+    const { agent } = await login(app);
+
+    await agent.post("/submit/initial").send(sampleSubmission).expect(200);
+    await agent.post("/submit/initial").send(sampleSubmission).expect(409);
+
+    const allSubmissions = await submissionData.Submission.find();
+    const allHouseholds = await submissionData.Household.find();
+    const allPeople = await submissionData.Person.find();
+
+    expect(allSubmissions).toHaveLength(1);
+    expect(allHouseholds).toHaveLength(1);
+    expect(allPeople).toHaveLength(3);
   });
 
   it("should fail for a user without the right permissions", async () => {
