@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { getConfig } = require("../config");
+const { log } = require("./winston");
 
 /**
  * @param jsonPayload json valuePromise
@@ -15,7 +16,7 @@ module.exports.verifyToken = (token) => {
   try {
     return jwt.verify(token, getConfig().secrets.jwtSecret);
   } catch (e) {
-    console.log("Invalid token." + e);
+    log.warning("Invalid token.", { error: e });
     return null;
   }
 };

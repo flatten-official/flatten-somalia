@@ -21,5 +21,6 @@ module.exports = {
     "prefer-const": "warn",
     "require-await": "warn",
     "no-return-await": "warn",
+    "no-console": "error",
   },
 };

@@ -1,4 +1,5 @@
 const { getJSONSecret } = require("./utils/secretGCP");
+const { log } = require("./utils/winston");
 const _ = require("lodash");
 
 const sharedConfig = {
@@ -69,7 +70,7 @@ const buildConfig = (customConfig = {}) => {
   const environmentConfig = environmentSpecificConfig[process.env.ENVIRONMENT];
 
   if (!environmentConfig)
-    console.log(
+    log.warning(
       `Info: No ENVIRONMENT specified, some configs might not be properly initialized.
       If problems occur ensure you properly set the ENVIRONMENT env variable (${process.env.ENVIRONMENT})`
     );

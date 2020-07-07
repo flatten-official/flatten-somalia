@@ -4,6 +4,8 @@ const { setup: configSetup } = require("./config");
 const { setup: sendGridSetup } = require("./utils/sendGrid");
 const _ = require("lodash");
 
+const { log } = require("./utils/winston");
+
 /**
  * @param options object whose parameters indicate what to setup
  */
@@ -25,7 +27,7 @@ async function startServer() {
 
   const app = await getApp();
   app.listen(port, () => {
-    console.log(`listening on port ${port}.`);
+    log.notice(`Listening on port ${port}.`, { port });
   });
 }
 

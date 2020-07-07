@@ -3,6 +3,7 @@
  */
 
 const { Permissions, addVolunteer } = require("../src/volunteer/volunteerData");
+const { log } = require("../src/utils/winston");
 
 const VOLUNTEERS = [
   {
@@ -24,13 +25,13 @@ module.exports.confirmationMessage = `Are you sure you want to add the following
 )}\n`;
 
 module.exports.run = async (volunteers) => {
-  console.log("Adding volunteers to database...");
+  log.info("Adding volunteers to database...");
 
   for (const volunteer of volunteers) {
     try {
       await addVolunteer(volunteer);
     } catch (e) {
-      console.log(`Failed to add volunteer:\n${JSON.stringify(volunteer)}`);
+      log.error(`Failed to add volunteer:\n${JSON.stringify(volunteer)}`);
       throw e;
     }
   }

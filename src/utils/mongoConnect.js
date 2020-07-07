@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { CronJob } = require("cron");
 const { removedExpiredCookies } = require("../auth/cookieData");
 const { getConfig } = require("../config");
+const { log } = require("./winston");
 
 const CONNECTION_OPTIONS = {
   useNewUrlParser: true,
@@ -19,7 +20,7 @@ async function setupDatabase() {
 async function cleanupDatabase() {
   cleanupCookieJob.stop();
   await mongoose.disconnect();
-  console.log("Disconnected from database");
+  log.notice("Disconnected from database");
 }
 
 async function connectToDatabase() {
@@ -30,11 +31,11 @@ async function connectToDatabase() {
   try {
     await mongoose.connect(mongoURI, CONNECTION_OPTIONS);
   } catch (e) {
-    console.log("Failed to connect to database." + e);
+    log.emergency("Failed to connect to database.", { error: e });
     throw e;
   }
 
-  console.log("Connected to database.");
+  log.notice("Connected to database.");
 }
 
 module.exports = { setupDatabase, cleanupDatabase, CONNECTION_OPTIONS };

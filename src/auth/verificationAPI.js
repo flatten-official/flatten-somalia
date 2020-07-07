@@ -4,6 +4,7 @@ const { findVolunteerByEmail } = require("../volunteer/volunteerData");
 const { verifyToken, signToken } = require("../utils/jwt");
 const { sendVerificationEmail } = require("../utils/sendGrid");
 const { getConfig } = require("../config");
+const { log } = require("../utils/winston");
 
 const COOKIE_LIFE = 1080; // In minutes
 const EMAIL_EXPIRY = 15; // In minutes
@@ -12,15 +13,13 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
   const volunteer = await findVolunteerByEmail(emailAddress);
 
   if (!volunteer) {
-    console.log(`Invalid email: ${emailAddress}`);
+    log.warning(`Invalid email: ${emailAddress}`);
     return true; // Return true to not let user know if email was invalid to not allow guessing emails
   }
 
   const token = await signToken({ id: volunteer._id }, EMAIL_EXPIRY);
 
-  if (getConfig().debug) {
-    console.log(token);
-  }
+  log.debug(token);
 
   const verificationLink =
     getConfig().urls.backendHost +

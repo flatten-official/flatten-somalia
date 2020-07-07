@@ -1,6 +1,7 @@
 const { addVolunteer, Permissions } = require("./volunteerData");
 const volunteerData = require("./volunteerData");
 const { isValidationTypeError } = require("../utils/mongoose");
+const { log } = require("../utils/winston");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   const permissions = [Permissions.access];
@@ -20,10 +21,10 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
     await addVolunteer(volunteer);
   } catch (e) {
     if (e.message.indexOf("duplicate key error") !== -1) {
-      console.log(e);
+      log.error("Duplicate key error", { error: e });
       return [400, "Email is already in use"];
     } else if (isValidationTypeError(e)) {
-      console.log(e);
+      log.error("Volunteer data malformed", { error: e });
       return [400, "Volunteer data malformed"];
     } else throw e;
   }
