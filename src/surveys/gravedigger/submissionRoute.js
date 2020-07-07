@@ -1,5 +1,5 @@
 const { submitGravediggerSurvey } = require("./api");
-const { isValidationTypeError } = require("../../utils/mongoose");
+const { isValidationTypeError } = require("../../utils/errors");
 const { log } = require("../../utils/winston");
 
 module.exports = async (req, res) => {
