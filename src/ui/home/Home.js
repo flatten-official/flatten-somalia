@@ -17,12 +17,12 @@ const Home = () => {
       <h5 className="homePageSubheadingsBlue">{t("nameMessageTitle")}</h5>
       <h5 className="homePageSubheadings">
         {t("nameMessageResponse", { name: authUser.name })}
-      </h5>{" "}
+      </h5>
       <br />
       <h5 className="homePageSubheadingsBlue">{t("teamNameMessageTitle")}</h5>
       <h5 className="homePageSubheadings">
         {t("teamNameMessageResponse", { teamName: authUser.teamName })}
-      </h5>{" "}
+      </h5>
       <br />
       <h5 className="homePageSelectFormTitle">{t("formSelectionPrompt")}</h5>
       <Button variant="light" size="lg" href={Routes.initialHouseholdSurvey}>
