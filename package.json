@@ -19,7 +19,8 @@
     "lint": "eslint --fix .",
     "auth": "gcloud auth login && gcloud auth application-default login && gcloud config set project flatten-staging-271921",
     "script": "node scripts/launcher.js",
-    "deploy": "node deployment/createBranchJson.js && gcloud config set project flatten-staging-271921 && gcloud builds submit"
+    "deploy": "node deployment/createBranchJson.js && gcloud config set project flatten-staging-271921 && gcloud builds submit",
+    "auth-no-browser": "gcloud auth login && gcloud auth application-default login --no-launch-browser && gcloud config set project flatten-staging-271921"
   },
   "dependencies": {
     "@google-cloud/logging-winston": "^3.0.6",
@@ -66,6 +67,9 @@
     "testEnvironment": "node",
     "setupFiles": [
       "./test/setup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./test/setupAfterEnv.js"
     ],
     "collectCoverage": true,
     "coverageReporters": [
