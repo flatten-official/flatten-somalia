@@ -1,4 +1,8 @@
 {
   "welcome": "Welcome, Volunteer!",
-  "formSelectionPrompt": "Select the form you need:"
+  "formSelectionPrompt": "Select the form you need:",
+  "nameMessageTitle" : "Name:",
+  "nameMessageResponse" : "{{name}}",
+  "teamNameMessageTitle" : "Team:",
+  "teamNameMessageResponse" : "{{teamName}}"
 }
