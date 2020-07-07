@@ -8,3 +8,4 @@ src/i18nResources.json
 backend.js
 .eslintcache
 .DS_Store
+src/branch.json

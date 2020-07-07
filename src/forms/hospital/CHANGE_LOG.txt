@@ -9,4 +9,4 @@ version  |  commit (optional)
 
 0.1.0
 
-    * released to website however survey is inaccessible (button is grayed out)
+    * released to website however survey is inaccessible (button is greyed out)
