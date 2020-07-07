@@ -1,5 +1,6 @@
 const submissionData = require("./submissionData");
 const { log } = require("../../utils/winston");
+const { runOpWithinTransaction } = require("../../utils/mongoose");
 
 const { Error } = require("mongoose");
 
@@ -72,9 +73,11 @@ async function initialSubmission(
     throw new Error.ValidationError("");
   }
 
-  for (const person of people) await person.save();
-  await household.save();
-  await submission.save();
+  await runOpWithinTransaction(async (session) => {
+    for (const person of people) await person.save({ session });
+    await household.save({ session });
+    await submission.save({ session });
+  });
 }
 
 module.exports = {

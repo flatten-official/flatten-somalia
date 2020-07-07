@@ -67,6 +67,9 @@
     "setupFiles": [
       "./test/setup.js"
     ],
+    "setupFilesAfterEnv": [
+      "./test/setupAfterEnv.js"
+    ],
     "collectCoverage": true,
     "coverageReporters": [
       "lcov"

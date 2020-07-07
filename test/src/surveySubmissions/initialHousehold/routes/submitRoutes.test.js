@@ -75,6 +75,21 @@ describe("test /auth", () => {
     expect(allVolunteers[0].teamName).toStrictEqual(submission.teamName);
   });
 
+  it("should return 409 for two forms with the same follow up id", async () => {
+    const { agent } = await login(app);
+
+    await agent.post("/submit/initial").send(sampleSubmission).expect(200);
+    await agent.post("/submit/initial").send(sampleSubmission).expect(409);
+
+    const allSubmissions = await submissionData.Submission.find();
+    const allHouseholds = await submissionData.Household.find();
+    const allPeople = await submissionData.Person.find();
+
+    expect(allSubmissions).toHaveLength(1);
+    expect(allHouseholds).toHaveLength(1);
+    expect(allPeople).toHaveLength(3);
+  });
+
   it("should fail for a user without the right permissions", async () => {
     const { agent } = await login(app, { permissions: [] });
 
