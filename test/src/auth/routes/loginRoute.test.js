@@ -8,8 +8,13 @@ const sendEmailMock = jest
 const { getApp } = require("../../../../src/app");
 const util = require("../../../testUtils/mongo");
 const supertest = require("supertest");
-const { addVolunteer } = require("../../../../src/volunteer/volunteerData");
+const {
+  addVolunteer,
+  Permissions,
+} = require("../../../../src/volunteer/volunteerData");
 const { getConfig } = require("../../../../src/config");
+const _ = require("lodash");
+const { getAllPermissionsExcept } = require("../../../testUtils/permissions");
 
 const TEST_VOLUNTEER = {
   name: "default_name",
@@ -54,6 +59,22 @@ describe("test /auth/login", () => {
     await request
       .post("/auth/login")
       .send({ email: "bad@gmail.com" })
+      .expect(200);
+
+    expect(sendEmailMock).toHaveBeenCalledTimes(0);
+  });
+
+  it("should return success if an email of a volunteeer without access permissions is submitted (and not send email)", async () => {
+    await addVolunteer(
+      _.defaults(
+        { permissions: getAllPermissionsExcept(Permissions.access) },
+        TEST_VOLUNTEER
+      )
+    );
+
+    await request
+      .post("/auth/login")
+      .send({ email: TEST_VOLUNTEER.email })
       .expect(200);
 
     expect(sendEmailMock).toHaveBeenCalledTimes(0);
