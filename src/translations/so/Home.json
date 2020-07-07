@@ -1,9 +1,6 @@
 {
   "welcome": "Soo dhawaw. Isxilqaan!",
   "formSelectionPrompt": "Dooro Foomka aad u baahantahay:",
-  "goToInitialSurvey": "Xog Aruunta Xalaadaha COVID-19 Mogadishu",
-  "goToGravediggerSurvey": "Sahanka qabri qodaha",
-  "goToFollowupSurvey": "La socoto sahan aruurinta qoyska",
   "nameMessageTitle" : "Magac:",
   "nameMessageResponse" : "{{name}}",
   "teamNameMessageTitle" : "Kooxda:",
