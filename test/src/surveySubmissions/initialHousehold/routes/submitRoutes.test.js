@@ -1,10 +1,10 @@
-const { getApp } = require("../../../../src/app");
-const util = require("../../../testUtils/mongo");
+const { getApp } = require("../../../../../src/app");
+const util = require("../../../../testUtils/mongo");
 
-const { login } = require("../../../testUtils/requests");
+const { login } = require("../../../../testUtils/requests");
 
-const submissionData = require("../../../../src/surveys/initialHousehold/submissionData");
-const volunteerData = require("../../../../src/volunteer/volunteerData");
+const submissionData = require("../../../../../src/surveys/initialHousehold/submissionData");
+const volunteerData = require("../../../../../src/volunteer/volunteerData");
 
 const sampleSubmission = {
   household: {

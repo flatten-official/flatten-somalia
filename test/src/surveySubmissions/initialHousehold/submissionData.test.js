@@ -1,5 +1,5 @@
-const submissionData = require("../../../src/surveys/initialHousehold/submissionData");
-const util = require("../../testUtils/mongo");
+const submissionData = require("../../../../src/surveys/initialHousehold/submissionData");
+const util = require("../../../testUtils/mongo");
 
 const mongoose = require("mongoose");
 
@@ -54,12 +54,6 @@ const testPeopleInitial = [
   [{ name: "John Doe" }, { name: "Jane Doe" }],
   [{ name: "Hello World" }],
 ];
-
-/**
- * From an array 'all', gets the first element that has 'id'
- */
-const retrieveById = (all, id) =>
-  all.filter((obj) => obj._id.toString() === id.toString())[0];
 
 describe("submission database functions", () => {
   beforeAll(() => util.connectToDatabase());
@@ -165,112 +159,5 @@ describe("submission database functions", () => {
         household._id.toString()
       );
     }
-  });
-
-  it("should handle follow up submissions correctly", async () => {
-    const households = [];
-    const peopleNested = [];
-    const submissionsInitial = [];
-
-    // 1. Create submissions associated with two different households.
-
-    for (const [i, householdData] of Object.entries(testHouseholdData)) {
-      households.push(
-        await submissionData.createHousehold(
-          householdData.followUpId,
-          householdData.phone,
-          householdData.email
-        )
-      );
-
-      await households[i].save();
-      peopleNested.push(
-        await submissionData.createPeople(
-          testPeopleInitial[i].map((o) => {
-            return { ...o, household: households[i]._id };
-          })
-        )
-      );
-      for (const person of peopleNested[i]) await person.save();
-
-      submissionsInitial.push(
-        await submissionData.createSubmission(
-          dummyVolunteerId,
-          "testTeam",
-          testSubmissions[i].submissionSchema,
-          testSubmissions[i].metadata,
-          peopleNested[i].map((obj) => obj._id),
-          testPeopleInitial[i],
-          households[i]._id,
-          householdData
-        )
-      );
-      await submissionsInitial[i].save();
-    }
-
-    // 2. Test that the next follow up submission resolves correctly to the
-    //  first submission, and that the entries within this submission are correct
-    // TODO - make this test query by volunteer id and district
-    // once we decide to support those things in the code
-
-    let [
-      nextId,
-      nextHousehold,
-      nextPeople,
-    ] = await submissionData.getVolunteerNextFollowUp(
-      dummyVolunteerId,
-      "not yet implemented",
-      0
-    );
-
-    expect(nextId).toStrictEqual(submissionsInitial[0]._id);
-    expect(nextHousehold._id).toStrictEqual(households[0]._id);
-    expect(new Set(peopleNested[0].map((o) => o._id.toString()))).toStrictEqual(
-      new Set(nextPeople.map((o) => o._id.toString()))
-    );
-
-    const testPeopleFollowUp = [{ testField: "1" }, { testField: "2" }];
-    const householdFollowUp = { someUpdatedProperty: "hello" };
-
-    // 3. Insert the follow up submission using the interface (assertions below
-    // check that this inserts reference to next submission correctly and resets the flag).
-
-    const newSubmission = await submissionData.createFollowUpSubmisison(
-      nextId,
-      dummyVolunteerId,
-      "testTeam",
-      { form: "volunteerFollowUpForm", version: "0.1" },
-      testSubmissions[0].metadata,
-      peopleNested[0].map((obj) => obj._id),
-      testPeopleFollowUp,
-      households[0]._id,
-      householdFollowUp
-    );
-
-    await newSubmission.save();
-
-    // 4. Test grabbing the next submission to follow up with, specifically
-    // to ensure that we do not end up grabbing the original submission
-    // (meaning dequeuing of the original submission happened correctly).
-
-    [
-      nextId,
-      nextHousehold,
-      nextPeople,
-    ] = await submissionData.getVolunteerNextFollowUp(
-      dummyVolunteerId,
-      "not yet implemented",
-      0
-    );
-
-    expect(nextId).not.toStrictEqual(submissionsInitial[0]._id);
-
-    const all = await submissionData.Submission.find();
-
-    const oldSubmission = retrieveById(all, submissionsInitial[0]._id);
-    expect(oldSubmission.followUp.id.toString()).toStrictEqual(
-      newSubmission._id.toString()
-    );
-    expect(oldSubmission.followUp.inProgress).toBe(false);
   });
 });
