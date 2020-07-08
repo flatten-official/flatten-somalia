@@ -13,9 +13,10 @@ const updateVolunteerStatusById = (state, action) => {
   // todo - handle errors
   if (!action.payload) return { ...state };
   console.log(action);
+  const updateIndex = state.list.findIndex((v) => v._id === action.payload._id);
   return update(state, {
     list: {
-      [action.payload._id]: {
+      [updateIndex]: {
         status: { $set: action.type },
         permissions: { $set: action.payload.permissions },
       },
