@@ -13,10 +13,12 @@ import BootstrapTable from "react-bootstrap-table-next";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Loading from "./Loading";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+const { SearchBar } = Search;
 
 const enabled = (cell) => cell.permissions.indexOf("access") !== -1;
 
-const AdminPanel = () => {
+const AdminPanel = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchVolunteerList());
@@ -76,7 +78,25 @@ const AdminPanel = () => {
   return (
     <>
       <h3>Volunteer Management</h3> <br />
-      <BootstrapTable keyField="_id" data={volunteer.list} columns={columns} />
+      <ToolkitProvider
+        keyField="_id"
+        data={volunteer.list}
+        columns={columns}
+        search
+      >
+        {(props) => (
+          <>
+            <SearchBar {...props.searchProps} />
+            <hr />
+            <BootstrapTable
+              {...props.baseProps}
+              // keyField="_id"
+              // data={volunteer.list}
+              // columns={columns}
+            />
+          </>
+        )}
+      </ToolkitProvider>
     </>
   );
 };
