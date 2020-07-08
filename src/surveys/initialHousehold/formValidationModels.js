@@ -26,19 +26,19 @@ const livingPersonDataModel = {
   primaryInformationSourceOther: {
     type: String,
     required: () => {
-      return this.primaryInformationSource === "other";
+      return this.primaryInformationSource.other;
     },
   },
   socialMedia: {
     type: Object,
     required: () => {
-      return this.primaryInformationSource === "socialMedia";
+      return this.primaryInformationSource.socialMedia;
     },
   },
   otherSocialMedia: {
     type: String,
     required: () => {
-      return this.otherSocialMedia === "other";
+      return this.socialMedia.other;
     },
   },
   COVID19PreventionMeasures: { type: Object, required: true },
@@ -58,7 +58,7 @@ const livingPersonDataModel = {
   otherReasonsForNotUsingNationalHotline: {
     type: String,
     required: () => {
-      return this.reasonsForNotUsingNationalHotline === "other";
+      return this.reasonsForNotUsingNationalHotline.other;
     },
   },
   isPregnant: {
@@ -77,7 +77,7 @@ const livingPersonDataModel = {
   otherDisability: {
     type: String,
     required: () => {
-      return this.disabilityTypes === "other";
+      return this.disabilityTypes.other;
     },
   },
   comorbidities: { type: Object, required: true },
@@ -87,13 +87,13 @@ const livingPersonDataModel = {
   otherSymptoms: {
     type: String,
     required: () => {
-      return this.currentSymptoms1 === "other";
+      return this.currentSymptoms1.other;
     },
   },
   startOfSymptoms: {
     type: String,
     required: () => {
-      return this.currentSymptoms1 !== "noSymptoms";
+      return !this.currentSymptoms1.noSymptoms;
     },
   },
   hasBeenTestedForCOVID19: { type: String, required: true },
@@ -131,7 +131,7 @@ const livingPersonDataModel = {
   other1: {
     type: String,
     required: () => {
-      return this.cityTransportationMethod === "other";
+      return this.cityTransportationMethod.other;
     },
   },
   recentTravelOutsideDistrict: { type: String, required: true },
@@ -151,7 +151,7 @@ const livingPersonDataModel = {
   otherReasonsForTravelOutsideDistrict: {
     type: String,
     required: () => {
-      return this.reasonForTripsOutsideDistrict === "other";
+      return this.reasonForTripsOutsideDistrict.other;
     },
   },
   districtsVisited: {
@@ -164,7 +164,7 @@ const livingPersonDataModel = {
   otherMobilityRestrictions: {
     type: String,
     required: () => {
-      return this.mobilityRestrictions === "other";
+      return this.mobilityRestrictions.other;
     },
   },
 };
