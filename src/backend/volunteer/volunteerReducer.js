@@ -18,7 +18,11 @@ const updateVolunteerStatusById = (state, action) => {
     list: {
       [updateIndex]: {
         status: { $set: action.type },
-        permissions: { $set: action.payload.permissions },
+        permissions: {
+          $set: action.payload.permissions
+            ? action.payload.permissions
+            : state.list[updateIndex].permissions,
+        },
       },
     },
   });

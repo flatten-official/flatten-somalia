@@ -36,7 +36,10 @@ export const changeVolunteerAccess = (volunteerId, newAccessStatus) => async (
       data: { access: newAccessStatus, volunteerId },
     });
     if (res.status !== 200) {
-      dispatch({ type: VOLUNTEER_CHANGE_FAILED });
+      dispatch({
+        type: VOLUNTEER_CHANGE_FAILED,
+        payload: { _id: volunteerId },
+      });
     } else {
       dispatch({
         type: VOLUNTEER_CHANGE_SUCCESS,
@@ -44,6 +47,7 @@ export const changeVolunteerAccess = (volunteerId, newAccessStatus) => async (
       });
     }
   } catch (e) {
-    dispatch({ type: VOLUNTEER_CHANGE_FAILED });
+    console.log(e);
+    dispatch({ type: VOLUNTEER_CHANGE_FAILED, payload: { _id: volunteerId } });
   }
 };
