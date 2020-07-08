@@ -16,6 +16,7 @@ import footerEN from "./translations/en/Footer.json";
 import homeEN from "./translations/en/Home.json";
 import loadingEN from "./translations/en/Loading.json";
 import navbarEN from "./translations/en/Navbar.json";
+import adminpanelEN from "./translations/en/AdminPanel.json";
 import formIOCustomTextEN from "./translations/en/FormIoCustomText.json";
 import SurveysEN from "./translations/en/Surveys.json";
 
@@ -34,6 +35,7 @@ import footerSO from "./translations/so/Footer.json";
 import homeSO from "./translations/so/Home.json";
 import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
+import adminpanelSO from "./translations/so/AdminPanel.json";
 import SurveysSO from "./translations/so/Surveys.json";
 
 const resources = {
@@ -53,6 +55,7 @@ const resources = {
     Navbar: navbarEN,
     FormIOCustomText: formIOCustomTextEN,
     Surveys: SurveysEN,
+    AdminPanel: adminpanelEN,
   },
   so: {
     translation: {
@@ -70,6 +73,7 @@ const resources = {
     Navbar: navbarSO,
     FormIOCustomText: formIOCustomTextSO,
     Surveys: SurveysSO,
+    AdminPanel: adminpanelSO,
   },
 };
 

@@ -1,0 +1,11 @@
+{
+  "title": "Volunteer Management",
+  "enable": "Enable",
+  "disable": "Disable",
+  "table": {
+    "name": "Volunteer Name",
+    "email": "Volunteer Email",
+    "status": "Volunteer Status",
+    "statusButtons": "Enable / Disable Volunteer"
+  }
+}
