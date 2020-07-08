@@ -1,13 +1,23 @@
+function alive(person) {
+  // use alive field if present
+  // otherwise, .age is present for the living, with .deceasedAge for the dead
+  return person.alive ? true : person.sex;
+}
+
+function dead(person) {
+  return !alive(person);
+}
+
 const livingPersonDataModel = {
   alive: { type: Boolean, required: false },
-  age: { type: Number, required: true },
-  sex: { type: String, required: true },
-  residenceStatus: { type: String, required: true },
-  employed: { type: String, required: true },
+  age: { type: Number, required: alive(this) },
+  sex: { type: String, required: alive(this) },
+  residenceStatus: { type: String, required: alive(this) },
+  employed: { type: String, required: alive(this) },
   occupation: {
     type: String,
     required: () => {
-      return this.employed === "yes";
+      return alive(this) && this.employed === "yes";
     },
   },
   // TODO rename key to otherOccupation
@@ -16,188 +26,196 @@ const livingPersonDataModel = {
   primaryIncomeSource: {
     type: String,
     required: () => {
-      return this.employed === "no";
+      return alive(this) && this.employed === "no";
     },
   },
-  educationLevel: { type: Object, required: true },
+  educationLevel: { type: Object, required: alive(this) },
   // TODO get rid of suffix '1'
   monthlyIncome1: { type: String, required: false },
-  COVID19KnowledgeLevel: { type: Object, required: true },
-  primaryInformationSource: { type: Object, required: true },
+  COVID19KnowledgeLevel: { type: Object, required: alive(this) },
+  primaryInformationSource: { type: Object, required: alive(this) },
   primaryInformationSourceOther: {
     type: String,
     required: () => {
-      return this.primaryInformationSource.other;
+      return alive(this) && this.primaryInformationSource.other;
     },
   },
   socialMedia: {
     type: Object,
     required: () => {
-      return this.primaryInformationSource.socialMedia;
+      return alive(this) && this.primaryInformationSource.socialMedia;
     },
   },
   otherSocialMedia: {
     type: String,
     required: () => {
-      return this.socialMedia.other;
+      return alive(this) && this.socialMedia.other;
     },
   },
-  COVID19PreventionMeasures: { type: Object, required: true },
-  nationalHotlineAwareness: { type: String, required: true },
+  COVID19PreventionMeasures: { type: Object, required: alive(this) },
+  nationalHotlineAwareness: { type: String, required: alive(this) },
   nationalHotlineUsage: {
     type: String,
     required: () => {
-      return this.nationalHotlineAwareness === "yes";
+      return alive(this) && this.nationalHotlineAwareness === "yes";
     },
   },
   reasonsForNotUsingNationalHotline: {
     type: Object,
     required: () => {
-      return this.nationalHotlineUsage === "no";
+      return alive(this) && this.nationalHotlineUsage === "no";
     },
   },
   otherReasonsForNotUsingNationalHotline: {
     type: String,
     required: () => {
-      return this.reasonsForNotUsingNationalHotline.other;
+      return alive(this) && this.reasonsForNotUsingNationalHotline.other;
     },
   },
   isPregnant: {
     type: String,
     required: () => {
-      return this.sex === "female";
+      return alive(this) && this.sex === "female";
     },
   },
-  hasDisabilities: { type: String, required: true },
+  hasDisabilities: { type: String, required: alive(this) },
   disabilityTypes: {
     type: Object,
     required: () => {
-      return this.hasDisabilities === "yes";
+      return alive(this) && this.hasDisabilities === "yes";
     },
   },
   otherDisability: {
     type: String,
     required: () => {
-      return this.disabilityTypes.other;
+      return alive(this) && this.disabilityTypes.other;
     },
   },
-  comorbidities: { type: Object, required: true },
+  comorbidities: { type: Object, required: alive(this) },
   otherComorbidities: { type: String, required: false },
   // TODO get rid of suffix '1'
-  currentSymptoms1: { type: Object, required: true },
+  currentSymptoms1: { type: Object, required: alive(this) },
   otherSymptoms: {
     type: String,
     required: () => {
-      return this.currentSymptoms1.other;
+      return alive(this) && this.currentSymptoms1.other;
     },
   },
   startOfSymptoms: {
     type: String,
     required: () => {
-      return !this.currentSymptoms1.noSymptoms;
+      return alive(this) && !this.currentSymptoms1.noSymptoms;
     },
   },
-  hasBeenTestedForCOVID19: { type: String, required: true },
+  hasBeenTestedForCOVID19: { type: String, required: alive(this) },
   COVID19TestType: {
     type: String,
     required: () => {
-      return this.hasBeenTestedForCOVID19 === "yes";
+      return alive(this) && this.hasBeenTestedForCOVID19 === "yes";
     },
   },
   COVID19testDate: {
     type: String,
     required: () => {
-      return this.hasBeenTestedForCOVID19 === "yes";
+      return alive(this) && this.hasBeenTestedForCOVID19 === "yes";
     },
   },
   COVID19TestResult: {
     type: String,
     required: () => {
-      return this.hasBeenTestedForCOVID19 === "yes";
+      return alive(this) && this.hasBeenTestedForCOVID19 === "yes";
     },
   },
   COVID19TestReferenceNumber: { type: Number, required: false },
   // TODO decide whether or not to implement
   // reasonsForNotBeingTested: {type: String, required: },
-  closeContactWithInfectedOrSymptomaticPerson: { type: String, required: true },
+  closeContactWithInfectedOrSymptomaticPerson: {
+    type: String,
+    required: alive(this),
+  },
   potentialContactDate: {
     type: String,
     required: () => {
-      return this.closeContactWithInfectedOrSymptomaticPerson === "yes";
+      return (
+        alive(this) &&
+        this.closeContactWithInfectedOrSymptomaticPerson === "yes"
+      );
     },
   },
   potentialContactAddress: { type: String, required: false },
-  cityTransportationMethod: { type: Object, required: true },
+  cityTransportationMethod: { type: Object, required: alive(this) },
   // TODO rename key to otherMeansOfTransportation
   other1: {
     type: String,
     required: () => {
-      return this.cityTransportationMethod.other;
+      return alive(this) && this.cityTransportationMethod.other;
     },
   },
-  recentTravelOutsideDistrict: { type: String, required: true },
+  recentTravelOutsideDistrict: { type: String, required: alive(this) },
   // TODO fix spelling
   recentTripsOutsideDistricCount: {
     type: String,
     required: () => {
-      return this.recentTravelOutsideDistrict === "yes";
+      return alive(this) && this.recentTravelOutsideDistrict === "yes";
     },
   },
   reasonForTripsOutsideDistrict: {
     type: Object,
     required: () => {
-      return this.recentTravelOutsideDistrict === "yes";
+      return alive(this) && this.recentTravelOutsideDistrict === "yes";
     },
   },
   otherReasonsForTravelOutsideDistrict: {
     type: String,
     required: () => {
-      return this.reasonForTripsOutsideDistrict.other;
+      return alive(this) && this.reasonForTripsOutsideDistrict.other;
     },
   },
   districtsVisited: {
     type: Object,
     required: () => {
-      return this.recentTravelOutsideDistrict === "yes";
+      return alive(this) && this.recentTravelOutsideDistrict === "yes";
     },
   },
-  mobilityRestrictions: { type: Object, required: true },
+  mobilityRestrictions: { type: Object, required: alive(this) },
   otherMobilityRestrictions: {
     type: String,
     required: () => {
-      return this.mobilityRestrictions.other;
+      return alive(this) && this.mobilityRestrictions.other;
     },
   },
 };
 
 const deceasedPersonDataModel = {
   alive: { type: Boolean, required: false },
-  deceasedSex: { type: String, required: true },
-  deceasedAge: { type: Number, required: true },
-  causeOfDeath: { type: String, required: true },
-  deceasedComorbidities: { type: Object, required: true },
+  deceasedAge: { type: Number, required: dead(this) },
+  deceasedSex: { type: String, required: dead(this) },
+  causeOfDeath: { type: String, required: dead(this) },
+  deceasedComorbidities: { type: Object, required: dead(this) },
   otherDeceasedComorbidities: {
     type: String,
     required: () => {
-      return this.deceasedComorbidities.other;
+      return dead(this) && this.deceasedComorbidities.other;
     },
   },
   // TODO rename key to deceasedSymptomsBeforeDeath
   whatWereTheSymptomsTheyExperiencedPriorToDeath: {
     type: Object,
-    required: true,
+    required: dead(this),
   },
   otherDeceasedSymptoms: {
     type: String,
     required: () => {
-      return this.whatWereTheSymptomsTheyExperiencedPriorToDeath.other;
+      return (
+        dead(this) && this.whatWereTheSymptomsTheyExperiencedPriorToDeath.other
+      );
     },
   },
   deceasedPregnancy: {
     type: String,
     required: () => {
-      return this.deceasedSex === "female";
+      return dead(this) && this.deceasedSex === "female";
     },
   },
-  dateOfDeath: { type: String, required: true },
+  dateOfDeath: { type: String, required: dead(this) },
 };
