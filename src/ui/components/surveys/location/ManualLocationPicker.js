@@ -42,9 +42,9 @@ const ManualLocationPicker = ({ onSubmit, onCancel }) => {
         zoom={INITIAL_ZOOM}
         center={INITIAL_CENTER}
       >
-        <TileLayer // TODO Pick better base layer
-          url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        <TileLayer
+          url="https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         <Marker // TODO Style Marker
           position={markerPosition}

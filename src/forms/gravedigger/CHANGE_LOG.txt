@@ -7,6 +7,7 @@ version  |  commit (optional)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1.0.0
+0.1.0
 
-    * first form version used by volunteers with no death records page and no email
+    * released to website however survey is inaccessible (button is greyed out)
+    * no deaths page, no email

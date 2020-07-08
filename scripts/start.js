@@ -35,6 +35,9 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 const DEFAULT_PORT = 3000;
 const HOST = "0.0.0.0";
 
+// Creates branch.json
+require("./createBranchJson");
+
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 const { checkBrowsers } = require("react-dev-utils/browsersHelper");
@@ -52,7 +55,6 @@ checkBrowsers(paths.appPath, isInteractive)
 
     const config = configFactory("development");
     const appName = require(paths.appPackageJson).name;
-    const tscCompileOnError = process.env.TSC_COMPILE_ON_ERROR === "true";
     const urls = prepareUrls("http", HOST, port);
     const devSocket = {
       warnings: (warnings) =>
@@ -66,7 +68,6 @@ checkBrowsers(paths.appPath, isInteractive)
       config,
       devSocket,
       urls,
-      tscCompileOnError,
       webpack,
     });
 
@@ -80,18 +81,6 @@ checkBrowsers(paths.appPath, isInteractive)
       }
       if (isInteractive) {
         clearConsole();
-      }
-
-      // We used to support resolving modules according to `NODE_PATH`.
-      // This now has been deprecated in favor of jsconfig/tsconfig.json
-      // This lets you use absolute paths in imports inside large monorepos:
-      if (process.env.NODE_PATH) {
-        console.log(
-          chalk.yellow(
-            "Setting NODE_PATH to resolve modules absolutely has been deprecated in favor of setting baseUrl in jsconfig.json (or tsconfig.json if you are using TypeScript) and will be removed in a future major release of create-react-app."
-          )
-        );
-        console.log();
       }
 
       console.log(chalk.cyan("Starting the development server...\n"));

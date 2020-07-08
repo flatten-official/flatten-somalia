@@ -22,7 +22,7 @@ export const Routes = {
 const Schemas = {
   gravedigger: {
     form: "gravediggerSurvey",
-    version: "1.0.0",
+    version: "0.1.0",
   },
   hospital: {
     form: "hospitalSurvey",
@@ -30,7 +30,7 @@ const Schemas = {
   },
   initialHousehold: {
     form: "initialSurvey",
-    version: "1.0.3",
+    version: "1.0.4",
   },
   addVolunteer: {
     form: "initialSurvey",
