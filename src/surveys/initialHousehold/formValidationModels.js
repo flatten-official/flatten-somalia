@@ -8,7 +8,7 @@ function dead(person) {
   return !alive(person);
 }
 
-const livingPersonDataModel = {
+const personDataModel = {
   alive: { type: Boolean, required: false },
   age: { type: Number, required: alive(this) },
   sex: { type: String, required: alive(this) },
@@ -184,10 +184,7 @@ const livingPersonDataModel = {
       return alive(this) && this.mobilityRestrictions.other;
     },
   },
-};
-
-const deceasedPersonDataModel = {
-  alive: { type: Boolean, required: false },
+  /* DEAD PERSON FIELDS */
   deceasedAge: { type: Number, required: dead(this) },
   deceasedSex: { type: String, required: dead(this) },
   causeOfDeath: { type: String, required: dead(this) },
