@@ -216,3 +216,73 @@ const personDataModel = {
   },
   dateOfDeath: { type: String, required: dead(this) },
 };
+
+const householdDataModel = {
+  followUpId: { type: String, required: true },
+  deathsWithinHousehold: { type: String, required: true },
+  /* FIRST PAGE */
+  sharePhoneNumberConsent: { type: String, required: true },
+  phoneNumber: {
+    type: String,
+    required: () => {
+      return this.sharePhoneNumberConsent === "consentToSharingPhoneNumber";
+    },
+  },
+  email: { type: String, required: false },
+  district: { type: String, required: true },
+  // TODO possibly make into a string
+  subdistrict: { type: Object, required: true },
+  housingType: { type: String, required: true },
+  // TODO rename to otherHousingType
+  other: { type: String, required: false },
+  ownershipType: { type: String, required: true },
+  // TODO rename to otherOwnershipType
+  other2: { type: String, required: false },
+  rentRange: {
+    type: String,
+    required: () => {
+      return this.ownershipType === "rent";
+    },
+  },
+  roomsCount: { type: Number, required: true },
+  residentsCount: { type: Number, required: true },
+  /* PAGE 4 – HUMANITARIAN */
+  supportRequiredForCOVID19RiskManagement: { type: Object, required: true },
+  otherCOVID19RiskManagementSupports: {
+    type: String,
+    required: () => {
+      return this.supportRequiredForCOVID19RiskManagement.other;
+    },
+  },
+  householdNeeds: { type: Object, required: true },
+  otherHouseholdNeeds: {
+    type: String,
+    required: () => {
+      return this.householdNeeds.other;
+    },
+  },
+  moneyQuestion: {
+    type: Object,
+    required: () => {
+      return this.householdNeeds.money;
+    },
+  },
+  otherMonetaryNeeds: {
+    type: String,
+    required: () => {
+      return this.moneyQuestion.other;
+    },
+  },
+  housingSupportNeeds: {
+    type: Object,
+    required: () => {
+      return this.householdNeeds.housingSupport;
+    },
+  },
+  otherHousingNeeds: {
+    type: String,
+    required: () => {
+      return this.housingSupportNeeds.other;
+    },
+  },
+};
