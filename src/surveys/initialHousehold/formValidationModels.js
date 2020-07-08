@@ -1,4 +1,5 @@
 const livingPersonDataModel = {
+  alive: { type: Boolean, required: false },
   age: { type: Number, required: true },
   sex: { type: String, required: true },
   residenceStatus: { type: String, required: true },
@@ -170,6 +171,7 @@ const livingPersonDataModel = {
 };
 
 const deceasedPersonDataModel = {
+  alive: { type: Boolean, required: false },
   deceasedSex: { type: String, required: true },
   deceasedAge: { type: Number, required: true },
   causeOfDeath: { type: String, required: true },
