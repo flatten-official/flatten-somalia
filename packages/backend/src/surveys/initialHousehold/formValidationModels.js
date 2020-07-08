@@ -1,4 +1,4 @@
-const personDataModel = {
+const livingPersonDataModel = {
   age: { type: Number, required: true },
   sex: { type: String, required: true },
   residenceStatus: { type: String, required: true },
@@ -167,4 +167,35 @@ const personDataModel = {
       return this.mobilityRestrictions === "other";
     },
   },
+};
+
+const deceasedPersonDataModel = {
+  deceasedSex: { type: String, required: true },
+  deceasedAge: { type: Number, required: true },
+  causeOfDeath: { type: String, required: true },
+  deceasedComorbidities: { type: Object, required: true },
+  otherDeceasedComorbidities: {
+    type: String,
+    required: () => {
+      return this.deceasedComorbidities.other;
+    },
+  },
+  // TODO rename key to deceasedSymptomsBeforeDeath
+  whatWereTheSymptomsTheyExperiencedPriorToDeath: {
+    type: Object,
+    required: true,
+  },
+  otherDeceasedSymptoms: {
+    type: String,
+    required: () => {
+      return this.whatWereTheSymptomsTheyExperiencedPriorToDeath.other;
+    },
+  },
+  deceasedPregnancy: {
+    type: String,
+    required: () => {
+      return this.deceasedSex === "female";
+    },
+  },
+  dateOfDeath: { type: String, required: true },
 };
