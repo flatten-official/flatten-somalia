@@ -1,4 +1,4 @@
-const { log } = require("../../utils/winston");
+const { log } = require("../winston");
 
 /**
  * A function that returns middleware to protect the route (aka. require certain permissions)

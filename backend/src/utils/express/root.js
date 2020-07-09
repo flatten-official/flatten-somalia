@@ -1,4 +1,4 @@
-const { log } = require("../../utils/winston");
+const { log } = require("../winston");
 
 let branchName;
 

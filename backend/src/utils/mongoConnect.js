@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("backend/src/utils/mongoose");
 const { CronJob } = require("cron");
 const { removedExpiredCookies } = require("../auth/cookieData");
 const { getConfig } = require("../config");

@@ -1,4 +1,4 @@
-const winston = require("winston");
+const winston = require("backend/src/utils/winston");
 const GCPLogging = require("@google-cloud/logging-winston");
 const { transports, format } = winston;
 

@@ -1,4 +1,4 @@
-const util = require("./../testUtils/mongo");
+const util = require("../testUtils/mongo");
 const Script = require("../../scripts/addVolunteerBulk");
 const { Permissions, Volunteer } = require("../../src/volunteer/volunteerData");
 
