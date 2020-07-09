@@ -57,7 +57,7 @@ const VALID_REQ_BODIES = [
   },
   {
     household: {
-      followUpId: "7-26779",
+      followUpId: "7-26769",
       sharePhoneNumberConsent: "consentToSharingPhoneNumber",
       email: "",
       district: "C/casiis",
