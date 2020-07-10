@@ -1,4 +1,4 @@
-const mongoose = require("backend/src/utils/mongoose");
+const mongoose = require("mongoose");
 
 const createModel = (name, definition) =>
   mongoose.model(name, new mongoose.Schema(definition, { strict: "throw" })); // strict throw doesn't allow extra fields to be silently dropped

@@ -1,5 +1,5 @@
 require("dotenv").config(); // Load .env file
-const { setup, cleanup } = require("../src");
+const { setup, cleanup } = require("../src/index");
 const { log } = require("../src/utils/winston");
 
 const scriptName = process.env.SCRIPT_NAME;
