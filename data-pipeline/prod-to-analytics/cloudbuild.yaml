@@ -4,11 +4,9 @@ steps:
       - functions
       - deploy
       - prod-to-analytic-data-pipeline
-      - --region=eure
-      - --source=./cloud-function-analytics.js
+      - --region=europe-west1
       - --timeout=500
       - --trigger-topic=somalia-prod-to-analytics
-      - --entry-point=main
-      - --runtime nodejs12
+      - --runtime=nodejs10
       - --service-account=prod-to-analytics-pipeline@somalia-prod.iam.gserviceaccount.com
       - --vpc-connector=analytics-data-pipeline

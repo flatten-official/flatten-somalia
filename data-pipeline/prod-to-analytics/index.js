@@ -89,7 +89,7 @@ const createRestoreJob = async (client, snapshotId, fromGroupId, toGroupId) => {
 };
 
 // eslint-disable-next-line no-unused-vars
-exports.main = async (data, context) => {
+exports.function = async (data, context) => {
   // Load the secrets from the secret manager
   const {
     atlasOrgApiPrivateKey,
