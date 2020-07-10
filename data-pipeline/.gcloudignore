@@ -1,11 +1,6 @@
 README.md
 .eslintrc.js
-apidoc.json
 node_modules
-test
-coverage
-docs
-scripts
 .env
 .eslintcache
 .gitignore
