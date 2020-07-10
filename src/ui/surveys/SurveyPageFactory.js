@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import Types from "./actionTypes";
 import PropTypes from "prop-types";
 import {
+  ConnectedStartSurvey,
   ConnectedConsent,
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
@@ -49,6 +50,8 @@ const SurveyPageFactory = ({
       // the props aren't updated till the second render and therefore, this.props.surveyData is null
       // on the first render
       if (!surveyData) return null;
+
+      if (!surveyData.started) return <ConnectedStartSurvey />;
 
       if (!surveyData.consent) return <ConnectedConsent />;
 

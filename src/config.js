@@ -68,5 +68,12 @@ export const Surveys = {
     options: {
       enableManualLocation: true,
     },
+    pageNames: [
+      "basicinfo",
+      "people",
+      "deaths",
+      "socialsurveyquestions",
+      "followupconsent",
+    ],
   },
 };
