@@ -1,8 +1,6 @@
 const DigestFetch = require("digest-fetch");
 const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 
-const smClient = new SecretManagerServiceClient();
-
 const SECRET_ID =
   "projects/915444252630/secrets/prod-to-analytics-cloud-function/versions/latest";
 
@@ -35,6 +33,8 @@ const getCreateRestoreRequest = (fromGroupId, toGroupId, snapshotId) => ({
  * @param secretId the id of the secret in the GCP secret manager (with the version)
  */
 const getJSONSecret = async (secretId) => {
+  const smClient = new SecretManagerServiceClient();
+
   try {
     const [version] = await smClient.accessSecretVersion({ name: secretId });
 
@@ -98,11 +98,15 @@ exports.function = async (data, context) => {
     analyticsProjectGroupId,
   } = await getJSONSecret(SECRET_ID);
 
+  console.log("Got secrets.");
+
   // Create an authentication client
   const client = new DigestFetch(atlasOrgApiPublicKey, atlasOrgApiPrivateKey);
 
   // Get the latest backup (snapshot)
   const snapshotId = await getSnapshotId(client, prodProjectGroupId);
+
+  console.log(`Got latest backup (id :${snapshotId})`);
 
   // Create a restore to the Analytics cluster
   const jobId = await createRestoreJob(
