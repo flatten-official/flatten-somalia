@@ -3,6 +3,8 @@ node_modules
 .eslintcache
 branch.json
 yarn-error.log
+coverage
+build
 
 # macOS system files
 .DS_Store
