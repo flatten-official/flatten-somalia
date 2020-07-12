@@ -5,6 +5,7 @@ branch.json
 yarn-error.log
 coverage
 build
+.env
 
 # macOS system files
 .DS_Store
