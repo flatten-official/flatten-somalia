@@ -1,0 +1,9 @@
+{
+  "name": "db-test-utils",
+  "version": "1.0.0",
+  "dependencies": {
+    "mongodb-memory-server": "^6.6.1",
+    "util-logging": "1.0.0",
+    "backend": "1.0.0"
+  }
+}

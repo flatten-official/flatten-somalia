@@ -1,4 +1,8 @@
 .idea
+node_modules
+.eslintcache
+branch.json
+yarn-error.log
 
 # macOS system files
 .DS_Store

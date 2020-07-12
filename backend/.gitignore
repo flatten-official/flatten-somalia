@@ -1,7 +1,0 @@
-node_modules
-.env
-coverage
-docs
-.eslintcache
-app.yaml
-branch.json

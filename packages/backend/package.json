@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The backend server for flatten.so",
+  "author": "Flatten",
+  "private": true,
+  "dependencies": {
+    "@google-cloud/logging-winston": "^3.0.6",
+    "@google-cloud/secret-manager": "^2.1.0",
+    "@sendgrid/mail": "^7.1.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "cron": "^1.8.2",
+    "depcheck": "^0.9.2",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.9.15",
+    "validator": "^13.0.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "apidoc": "^0.22.1",
+    "db-test-utils": "1.0.0",
+    "dotenv": "^8.2.0",
+    "open-cli": "^6.0.1",
+    "prompt-confirm": "^2.0.4",
+    "supertest": "^4.0.2"
+  }
+}

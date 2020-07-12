@@ -1,9 +1,0 @@
-{
-  "name": "data-pipeline",
-  "version": "1.0.0",
-  "dependencies": {
-    "@google-cloud/secret-manager": "^2.1.0",
-    "digest-fetch": "^1.1.1",
-    "node-fetch": "^2.6.0"
-  }
-}

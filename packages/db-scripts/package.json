@@ -1,0 +1,10 @@
+{
+  "name": "db-scripts",
+  "version": "1.0.0",
+  "main": "src/launcher.js",
+  "dependencies": {
+    "backend": "1.0.0",
+    "db-test-utils": "1.0.0",
+    "util-logging": "1.0.0"
+  }
+}
