@@ -1,5 +1,6 @@
 service: default
-runtime: nodejs10
+runtime: nodejs12
+entrypoint: node ./packages/backend/src/launch.js
 env_variables:
   ENVIRONMENT: production
 vpc_access_connector:

@@ -8,7 +8,14 @@ docs
 README.md
 yarn-error.log
 coverage
-dist
 .env
 .cache
 .DS_Store
+.gitattributes
+packages/db-copy-function
+packages/db-test-utils
+packages/db-scripts
+scripts
+.eslintcache
+.git
+deployment

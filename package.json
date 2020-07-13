@@ -16,12 +16,9 @@
     "depcheck": "depcheck  --ignores=\"eslint*\" --ignore-dirs=\"coverage,docs\"",
     "doc": "apidoc -i src -o ./docs && open-cli ./docs/index.html",
     "test": "jest",
-    "build-backend": "rollup -c && node ./scripts/generatePackageJson.js"
+    "deploy-backend": "gcloud config set project flatten-staging-271921 && gcloud builds submit --config=deployment/backend/cloudbuild.yaml"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^13.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^8.4.0",
     "branch-name": "^1.0.0",
     "depcheck": "^0.9.2",
     "dotenv": "^8.2.0",
@@ -34,8 +31,7 @@
     "lint-staged": "^10.2.6",
     "nodemon": "^2.0.4",
     "open-cli": "^6.0.1",
-    "prettier": "^2.0.5",
-    "rollup": "^2.21.0"
+    "prettier": "^2.0.5"
   },
   "husky": {
     "hooks": {
@@ -62,8 +58,5 @@
     "coverageReporters": [
       "lcov"
     ]
-  },
-  "dependencies": {
-    "http2": "^3.3.7"
   }
 }
