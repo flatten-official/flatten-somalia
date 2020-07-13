@@ -1,5 +1,6 @@
 import backend from "./api/backend";
 import flattenApi from "./api/api";
+import { Surveys } from "../config";
 
 const getMetadata = (storeData) => {
   const endTime = Date.now();
@@ -47,6 +48,14 @@ export const getInitialHouseholdSubmitter = (schema) => async (
     metadata: getMetadata(storeData),
     schema,
   };
+
+  // convert page timings to { pageName: timing }
+  body.metadata.pageTimings = {};
+  for (const [pageNum, timing] of Object.entries(storeData.pageTimings)) {
+    body.metadata.pageTimings[
+      Surveys.initialHousehold.pageNames[pageNum]
+    ] = timing;
+  }
 
   Object.entries(formioData).forEach(([k, v]) => {
     if (!(k === "personGrid" || k === "deathGrid")) body.household[k] = v;

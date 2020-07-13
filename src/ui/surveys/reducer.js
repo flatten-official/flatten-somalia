@@ -15,7 +15,24 @@ const TYPES_ARRAY = Object.values(Types);
 const subReducer = (state, action) => {
   switch (action.type) {
     case Types.RESTART_SURVEY:
-      return { started: false, consent: false, completed: false };
+      return {
+        started: false,
+        consent: false,
+        completed: false,
+        pageTimings: {},
+      };
+    case Types.ADD_PAGE_TIMING:
+      // only update if there is not an existing page timing
+      // (so this will count the first time you go to the next from a page)
+      return !(action.payload.pageNum in state.pageTimings)
+        ? {
+            ...state,
+            pageTimings: {
+              ...state.pageTimings,
+              [action.payload.pageNum]: action.payload.time,
+            },
+          }
+        : { ...state };
     case Types.SET_FOLLOW_UP_ID:
       return { ...state, followUpId: action.payload };
     case Types.SET_LOCATION:

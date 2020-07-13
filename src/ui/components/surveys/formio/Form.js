@@ -2,6 +2,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Form as FormioForm } from "react-formio";
 import PropTypes from "prop-types";
+import Types from "../../../surveys/actionTypes";
+import { useDispatch, useSelector } from "react-redux";
 
 /**
  *
@@ -11,6 +13,7 @@ import PropTypes from "prop-types";
  */
 const Form = ({ formioForm, formioOptions, submitHook }) => {
   const { i18n } = useTranslation();
+  const dispatch = useDispatch();
 
   formioOptions = formioOptions ? formioOptions : {}; // optional prop
 
@@ -26,6 +29,13 @@ const Form = ({ formioForm, formioOptions, submitHook }) => {
     }
   };
 
+  const onNextPage = (info) => {
+    dispatch({
+      type: Types.ADD_PAGE_TIMING,
+      payload: { pageNum: info.page, time: Date.now() },
+    });
+  };
+
   // the form localization should always be consistent with the site's
   formioOptions.i18n = i18n;
   formioOptions.language = i18n.language;
@@ -34,7 +44,11 @@ const Form = ({ formioForm, formioOptions, submitHook }) => {
 
   return (
     <div className="form">
-      <FormioForm options={formioOptions} form={formioForm} />
+      <FormioForm
+        options={formioOptions}
+        form={formioForm}
+        onNextPage={onNextPage}
+      />
     </div>
   );
 };
