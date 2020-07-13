@@ -4,7 +4,6 @@ node_modules
 branch.json
 yarn-error.log
 coverage
-dist
 .env
 .cache
 
