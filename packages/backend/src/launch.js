@@ -1,4 +1,9 @@
-if (process.env.ENVIRONMENT === "dev") require("dotenv").config();
+// Not inline since rollup will not make import package regardless since it's statically typed
+const dotenv = require("dotenv");
+
+if (process.env.ENVIRONMENT === "dev") {
+  dotenv.config();
+}
 
 const { setup, startServer, cleanup } = require("./main");
 

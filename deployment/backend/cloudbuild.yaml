@@ -1,9 +1,14 @@
 steps:
+  - name: node
+    entrypoint: yarn
+  - name: node
+    entrypoint: yarn
+    args: ["build-backend"]
   - name: gcr.io/cloud-builders/gsutil
     # $PROJECT_ID is automatically set by GCloud Build. No need to specify as env var.
     # https://cloud.google.com/cloud-build/docs/configuring-builds/substitute-variable-values
-    args: ["cp", "app.$PROJECT_ID.yaml", "../app.yaml"]
+    args: ["cp", "deployment/backend/app.$PROJECT_ID.yaml", "dist/backend/app.yaml"]
   - name: "gcr.io/cloud-builders/gcloud"
-    dir: ../
+    dir: dist/backend
     args: ["app", "deploy"]
 timeout: "1600s"

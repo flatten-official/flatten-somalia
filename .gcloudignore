@@ -1,12 +1,14 @@
 .idea
 node_modules
-.eslintcache
-branch.json
+.github
+docs
+.eslintrc.js
+.eslintignore
+.gitignore
+README.md
 yarn-error.log
 coverage
 dist
 .env
 .cache
-
-# macOS system files
 .DS_Store

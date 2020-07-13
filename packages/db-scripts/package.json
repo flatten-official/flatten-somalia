@@ -6,5 +6,8 @@
     "backend": "1.0.0",
     "db-test-utils": "1.0.0",
     "util-logging": "1.0.0"
+  },
+  "devDependencies": {
+    "prompt-confirm": "^2.0.4"
   }
 }
