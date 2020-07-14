@@ -2,14 +2,25 @@ import backend from "./api/backend";
 import flattenApi from "./api/api";
 import { Surveys } from "../config";
 
-const getMetadata = (storeData) => {
+const getMetadata = (storeData, pageNames) => {
   const endTime = Date.now();
-  return {
+  const metadata = {
     endTime: endTime,
     timeToComplete: endTime - storeData.startTime,
     location: storeData.location,
     consentGiven: storeData.consent,
   };
+
+  if (pageNames) {
+    metadata.pageTimings = {};
+    for (const [pageNum, timing] of Object.entries(storeData.pageTimings)) {
+      metadata.pageTimings[pageNames[pageNum]] = timing;
+    }
+    metadata.pageTimings["location"] = storeData.locationTime;
+    metadata.pageTimings["start"] = storeData.startTime;
+  }
+
+  return metadata;
 };
 
 const preFormatFormio = (formioData) => {
@@ -45,17 +56,9 @@ export const getInitialHouseholdSubmitter = (schema) => async (
     },
     people: formioData.personGrid,
     deaths: formioData.deathGrid,
-    metadata: getMetadata(storeData),
+    metadata: getMetadata(storeData, Surveys.initialHousehold.pageNames),
     schema,
   };
-
-  // convert page timings to { pageName: timing }
-  body.metadata.pageTimings = {};
-  for (const [pageNum, timing] of Object.entries(storeData.pageTimings)) {
-    body.metadata.pageTimings[
-      Surveys.initialHousehold.pageNames[pageNum]
-    ] = timing;
-  }
 
   Object.entries(formioData).forEach(([k, v]) => {
     if (!(k === "personGrid" || k === "deathGrid")) body.household[k] = v;
