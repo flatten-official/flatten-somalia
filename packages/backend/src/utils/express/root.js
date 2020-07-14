@@ -3,7 +3,7 @@ const { log } = require("util-logging");
 let branchName;
 
 try {
-  // branchName = require("../../../../../branch.json").name;
+  branchName = require("../../../../../branch.json").name;
 } catch (e) {
   branchName = "unspecified";
 }
