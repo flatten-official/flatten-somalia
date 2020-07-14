@@ -2,13 +2,16 @@
   "name": "db-scripts",
   "version": "1.0.0",
   "main": "src/launcher.js",
+  "scripts": {
+    "start": "node src/launcher.js"
+  },
   "dependencies": {
     "backend": "1.0.0",
-    "db-test-utils": "1.0.0",
     "dotenv": "^8.2.0",
     "util-logging": "1.0.0"
   },
   "devDependencies": {
+    "db-test-utils": "1.0.0",
     "prompt-confirm": "^2.0.4"
   }
 }

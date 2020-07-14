@@ -4,6 +4,7 @@
   "description": "The backend server for flatten.so",
   "author": "Flatten",
   "private": true,
+  "main": "src/app.js",
   "scripts": {
     "dev": "nodemon --watch ../ ./src/launch.js",
     "doc": "apidoc -i src -o ../../docs/api-generated && open-cli ../../docs/api-generated/index.html"

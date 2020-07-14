@@ -13,6 +13,11 @@ We use yarn workspaces which all multiple "packages" to exist in the same space.
 
 2. In the root directory, run `yarn` (or `yarn install`) to install the dependencies.
 
+3. Enable ESLint in your IDE (normally a plugin to install). ESLint is a code linter that checks logic and syntax.
+ESLint is configured with Prettier to also enforce a standard formatting.
+
+4. Follow instructions for the specific package you're working in if any (see README's in `packages/`)
+
 ## Available commands
 
 - `yarn dev`: Runs the backend server locally
@@ -32,3 +37,7 @@ We use yarn workspaces which all multiple "packages" to exist in the same space.
 - `yarn workspace backend doc`: Generates and open the backend api docs
 
 - `depcheck [PATH]`: Check for missing or unused dependencies. (e.g. `depcheck ./packages/backend`)
+
+## Logging
+
+Logging is done using the Winston loggers. Add `util-logging` as a dependency and then use `log`. See code and util-logging package for more info.

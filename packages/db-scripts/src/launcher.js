@@ -10,7 +10,9 @@ const main = async () => {
   log.info(`Starting script: ${scriptName}`);
 
   if (!scriptPath)
-    throw "no valid SCRIPT_NAME specified in .env file. Look at scripts/scriptPaths.js for valid script names";
+    throw new Error(
+      "no valid SCRIPT_NAME specified in .env file. Look at scriptPaths.js for valid script names"
+    );
 
   const Script = require(scriptPath);
 

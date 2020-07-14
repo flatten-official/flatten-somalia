@@ -2,11 +2,9 @@
 
 Scripts allow us to run batch operations on our database. Make sure you know what you're doing since scripts can modify the database in unwanted ways.
 
-## Initial setup
+## Setup
 
-1. Complete setup steps from the `README.md` in the root directory. This includes running `npm run auth`.
-
-2. Create a `.env` file in the root directory with the following content
+1. Create a `.env` file in this directory with the following content
 
    ```
    SCRIPT_NAME=<SCRIPT_NAME>
