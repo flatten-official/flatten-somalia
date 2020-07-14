@@ -24,8 +24,6 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 
 - `yarn lint`: Lists ESLint errors and fixes minor ones
 
-- `yarn cloud-func [PATH]`: Simulates running a cloud function but runs it locally. (e.g. `yarn cloud-func packages/db-copy-function`)
-
 - `yarn auth`: Authenticate with Google and set the project to staging
 
 - `yarn auth-no-browser`: Sometimes authentication fails in the browser, this is a workaround.
