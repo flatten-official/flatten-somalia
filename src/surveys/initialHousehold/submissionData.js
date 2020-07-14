@@ -1,5 +1,17 @@
 const mongoose = require("mongoose");
 
+const pages = [
+  // general
+  "start",
+  "location",
+
+  // initial household survey
+  "people",
+  "deaths",
+  "socialsurveyquestions",
+  "followupconsent",
+];
+
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Submission = mongoose.model(
   "Submission",
@@ -61,6 +73,10 @@ const Submission = mongoose.model(
       // recorded on the user's browser with JS Date.now()
       filledOutTimestamp: { type: Number, index: true },
       timeToComplete: Number, // ms
+      pageTimings: pages.reduce((acc, curr) => {
+        acc[curr] = { type: Number };
+        return acc;
+      }, {}),
       consentGiven: {
         type: Boolean,
         required: true,
