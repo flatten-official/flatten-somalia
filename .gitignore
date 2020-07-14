@@ -1,10 +1,11 @@
-.idea
 node_modules
+.env
+.idea
+coverage
 .eslintcache
+app.yaml
 branch.json
 yarn-error.log
-coverage
-.env
 .cache
 
 # macOS system files
