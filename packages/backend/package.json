@@ -4,6 +4,10 @@
   "description": "The backend server for flatten.so",
   "author": "Flatten",
   "private": true,
+  "scripts": {
+    "dev": "nodemon --watch ../ ./src/launch.js",
+    "doc": "apidoc -i src -o ../../docs/api-generated && open-cli ../../docs/api-generated/index.html"
+  },
   "dependencies": {
     "@google-cloud/secret-manager": "^2.1.0",
     "@sendgrid/mail": "^7.1.1",
@@ -24,6 +28,13 @@
   "devDependencies": {
     "apidoc": "^0.22.1",
     "db-test-utils": "1.0.0",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "nodemon": "^2.0.4",
+    "open-cli": "^6.0.1"
+  },
+  "nodemonConfig": {
+    "env": {
+      "ENVIRONMENT": "dev"
+    }
   }
 }

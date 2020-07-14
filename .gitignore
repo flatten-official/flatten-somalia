@@ -1,10 +1,13 @@
 node_modules
 .env
 .idea
+
+# Auto-generated files/folders
 coverage
 .eslintcache
 app.yaml
 branch.json
+docs/api-generated
 yarn-error.log
 .cache
 

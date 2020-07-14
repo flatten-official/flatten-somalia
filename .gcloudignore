@@ -28,3 +28,6 @@ apidoc.json
 # the following line adds everything in .gitignore to this file (even though the line is a comment)
 #!include:.gitignore
 # See https://cloud.google.com/sdk/gcloud/reference/topic/gcloudignore for more documentation about the include pattern
+
+# Include branch.json that was excluded by .gitignore
+!branch.json
