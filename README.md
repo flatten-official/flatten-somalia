@@ -34,7 +34,7 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 
 - `yarn workspace backend doc`: Generates and open the backend api docs
 
-- `depcheck [PATH]`: Check for missing or unused dependencies. (e.g. `depcheck ./packages/backend`)
+- `yarn depcheck [PATH]`: Check for missing or unused dependencies. (e.g. `yarn depcheck ./packages/backend`)
 
 ## Testing
 
