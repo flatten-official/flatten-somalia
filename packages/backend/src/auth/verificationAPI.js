@@ -19,13 +19,13 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
 
   const token = await signToken({ id: volunteer._id }, EMAIL_EXPIRY);
 
-  log.debug(token);
-
   const verificationLink =
     getConfig().urls.backendHost +
     getConfig().urls.emailLink +
     "?token=" +
     token;
+
+  log.debug(verificationLink);
 
   return sendVerificationEmail(emailAddress, verificationLink);
 };

@@ -36,6 +36,16 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 
 - `depcheck [PATH]`: Check for missing or unused dependencies. (e.g. `depcheck ./packages/backend`)
 
+## Testing
+
+If you run into issues while testing try adding the following line to your `.env` file.
+
+```
+DISABLE_TRANSACTIONS=TRUE
+```
+
+This will change the type of mongoDB server used during the test.
+
 ## Logging
 
 Logging is done using the Winston loggers. Add `util-logging` as a dependency and then use `log`. See code and util-logging package for more info.
