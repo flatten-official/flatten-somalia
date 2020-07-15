@@ -7,7 +7,7 @@ coverage
 .eslintcache
 app.yaml
 branch.json
-docs
+docs/api-generated
 yarn-error.log
 .cache
 
