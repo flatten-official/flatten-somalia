@@ -18,5 +18,5 @@ export const StartSurveyModal = ({ onStartSurvey }) => {
 };
 
 StartSurveyModal.propTypes = {
-  onConsent: PropTypes.func,
+  onStartSurvey: PropTypes.func,
 };
