@@ -14,7 +14,8 @@
     "test": "jest",
     "pre-deploy": "node scripts/createBranchJson.js && gcloud config set project flatten-staging-271921",
     "deploy-backend": "yarn pre-deploy && gcloud builds submit --config=deployment/backend/cloudbuild.yaml",
-    "deploy": "yarn deploy-backend"
+    "deploy": "yarn deploy-backend",
+    "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('You must use Yarn to install, not NPM. See README.md')\""
   },
   "devDependencies": {
     "branch-name": "^1.0.0",
