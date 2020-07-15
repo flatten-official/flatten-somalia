@@ -8,15 +8,16 @@ const getMetadata = (storeData, pageNames) => {
     timeToComplete: endTime - storeData.startTime,
     location: storeData.location,
     consentGiven: storeData.consent,
+    pageTimings: {
+      location: storeData.locationTime,
+      startTime: storeData.startTime,
+    },
   };
 
   if (pageNames) {
-    metadata.pageTimings = {};
     for (const [pageNum, timing] of Object.entries(storeData.pageTimings)) {
       metadata.pageTimings[pageNames[pageNum]] = timing;
     }
-    metadata.pageTimings["location"] = storeData.locationTime;
-    metadata.pageTimings["start"] = storeData.startTime;
   }
 
   return metadata;
