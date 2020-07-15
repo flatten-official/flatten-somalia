@@ -1,7 +1,6 @@
+const base = require("./jest.config.base");
+
 module.exports = {
-  testEnvironment: "node",
-  setupFiles: ["./scripts/setupTests.js"],
-  setupFilesAfterEnv: ["./scripts/setupTestsAfterEnv.js"],
-  collectCoverage: true,
-  coverageReporters: ["lcov"],
+  ...base,
+  projects: ["packages/*/jest.config.js"],
 };

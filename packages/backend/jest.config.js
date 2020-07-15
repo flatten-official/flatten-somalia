@@ -1,7 +1,9 @@
+const base = require("../../jest.config.base");
+
+const displayName = require("./package.json").name;
+
 module.exports = {
-  testEnvironment: "node",
-  setupFiles: ["../../scripts/setupTests.js"],
-  setupFilesAfterEnv: ["../../scripts/setupTestsAfterEnv.js"],
-  collectCoverage: true,
-  coverageReporters: ["lcov"],
+  ...base,
+  rootDir: "../../",
+  displayName,
 };
