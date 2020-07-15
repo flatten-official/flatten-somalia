@@ -27,9 +27,7 @@ const createDevServerConfig = require("../config/webpackDevServer.config");
 const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
-  process.exit(1);
-}
+if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) process.exit(1);
 
 // Tools like Cloud9 rely on this.
 const DEFAULT_PORT = 3000;
@@ -75,19 +73,16 @@ const main = async () => {
   const devServer = new WebpackDevServer(compiler, serverConfig);
   // Launch WebpackDevServer.
   devServer.listen(port, HOST, (err) => {
-    if (err) {
-      return console.log(err);
-    }
-    if (isInteractive) {
-      clearConsole();
-    }
+    if (err) return console.log(err);
+
+    if (isInteractive) clearConsole();
 
     console.log(chalk.cyan("Starting the development server...\n"));
     openBrowser(urls.localUrlForBrowser);
   });
 
-  ["SIGINT", "SIGTERM"].forEach(function (sig) {
-    process.on(sig, function () {
+  ["SIGINT", "SIGTERM"].forEach((sig) => {
+    process.on(sig, () => {
       devServer.close();
       process.exit();
     });
@@ -95,7 +90,7 @@ const main = async () => {
 
   if (isInteractive || process.env.CI !== "true") {
     // Gracefully exit when stdin ends
-    process.stdin.on("end", function () {
+    process.stdin.on("end", () => {
       devServer.close();
       process.exit();
     });
@@ -104,8 +99,7 @@ const main = async () => {
 };
 
 main().catch((err) => {
-  if (err && err.message) {
-    console.log(err.message);
-  }
+  if (err && err.message) console.log(err.message);
+
   process.exit(1);
 });
