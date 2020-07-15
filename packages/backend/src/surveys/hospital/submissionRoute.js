@@ -1,5 +1,4 @@
 const { submitHospitalSurvey } = require("./api");
-const { isValidationTypeError } = require("../../utils/errors");
 const { log } = require("util-logging");
 
 module.exports = async (req, res) => {
