@@ -11,6 +11,7 @@ const getMetadata = (storeData, pageNames) => {
     pageTimings: {
       location: storeData.locationTime,
       startTime: storeData.startTime,
+      consentTime: storeData.consentTime,
     },
   };
 
