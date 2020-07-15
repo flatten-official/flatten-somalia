@@ -28,7 +28,7 @@ const Schemas = {
   },
   initialHousehold: {
     form: "initialSurvey",
-    version: "1.0.4",
+    version: "1.0.5",
   },
 };
 
