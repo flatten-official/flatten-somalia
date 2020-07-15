@@ -1,5 +1,6 @@
 const Volunteer = require("../../src/volunteer/volunteerData");
-const util = require("db-test-utils");
+const mongoose = require("mongoose");
+const db = require("db-test-utils")(mongoose);
 
 const basicVolunteer = {
   name: "Name",
@@ -8,9 +9,9 @@ const basicVolunteer = {
 };
 
 describe("volunteer database functions", () => {
-  beforeAll(() => util.connectToDatabase());
-  afterEach(() => util.clearDatabase());
-  afterAll(() => util.closeDatabase());
+  beforeAll(() => db.connect());
+  afterEach(() => db.clear());
+  afterAll(() => db.close());
 
   it("should find the same volunteer as that which was added", async () => {
     await Volunteer.addVolunteer(basicVolunteer);

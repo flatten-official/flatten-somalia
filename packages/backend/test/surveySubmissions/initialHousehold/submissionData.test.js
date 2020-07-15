@@ -1,7 +1,6 @@
 const submissionData = require("../../../src/surveys/initialHousehold/submissionData");
-const util = require("db-test-utils");
-
 const mongoose = require("mongoose");
+const db = require("db-test-utils")(mongoose);
 
 const dummyVolunteerId = "56cb91bdc3464f14678934ca";
 const testSubmissions = [
@@ -56,9 +55,9 @@ const testPeopleInitial = [
 ];
 
 describe("submission database functions", () => {
-  beforeAll(() => util.connectToDatabase());
-  afterEach(() => util.clearDatabase());
-  afterAll(() => util.closeDatabase());
+  beforeAll(() => db.connect());
+  afterEach(() => db.clear());
+  afterAll(() => db.close());
 
   it("should write submission to database", async () => {
     const household = await submissionData.createHousehold(

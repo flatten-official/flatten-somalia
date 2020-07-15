@@ -1,5 +1,4 @@
 // Inspired from https://dev.to/paulasantamaria/testing-node-js-mongoose-with-an-in-memory-database-32np
-const mongoose = require("mongoose");
 const { MongoMemoryReplSet } = require("mongodb-memory-server");
 const { CONNECTION_OPTIONS } = require("backend/src/utils/mongoConnect");
 const { log } = require("util-logging");
@@ -13,7 +12,7 @@ const mongod = new MongoMemoryReplSet({
 /**
  * Connect to the in-memory database.
  */
-async function connectToDatabase() {
+async function connectToDatabase(mongoose) {
   log.debug("Connecting to database...");
   await mongod.waitUntilRunning();
   const uri = await mongod.getUri(DB_NAME);
@@ -29,7 +28,7 @@ async function connectToDatabase() {
 /**
  * Drop database, close the connection and stop mongod.
  */
-async function closeDatabase() {
+async function closeDatabase(mongoose) {
   await mongoose.disconnect();
   await mongod.stop();
 }
@@ -37,7 +36,7 @@ async function closeDatabase() {
 /**
  * Remove all the data for all db collections.
  */
-async function clearDatabase() {
+async function clearDatabase(mongoose) {
   const collections = mongoose.connection.collections;
 
   for (const key in collections) {
@@ -46,14 +45,8 @@ async function clearDatabase() {
   }
 }
 
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
-
-module.exports = {
-  connectToDatabase,
-  clearDatabase,
-  closeDatabase,
-};
+module.exports = (mongoose) => ({
+  connect: () => connectToDatabase(mongoose),
+  clear: () => clearDatabase(mongoose),
+  close: () => closeDatabase(mongoose),
+});

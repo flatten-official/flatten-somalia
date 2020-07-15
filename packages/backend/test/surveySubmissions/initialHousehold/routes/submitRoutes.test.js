@@ -1,5 +1,6 @@
 const { getApp } = require("../../../../src/app");
-const util = require("db-test-utils");
+const mongoose = require("mongoose");
+const db = require("db-test-utils")(mongoose);
 
 const { login } = require("../../../utils/requests");
 
@@ -39,13 +40,13 @@ describe("test /auth", () => {
   let app;
 
   beforeAll(async () => {
-    await util.connectToDatabase();
+    await db.connect();
     app = await getApp();
   });
 
-  afterEach(() => util.clearDatabase());
+  afterEach(() => db.clear());
 
-  afterAll(() => util.closeDatabase());
+  afterAll(() => db.close());
 
   it("should add submissions, people, and households as expected for an initial submission", async () => {
     const { agent } = await login(app);

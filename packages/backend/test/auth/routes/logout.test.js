@@ -1,6 +1,7 @@
 const { login } = require("../../utils/requests");
 const { getApp } = require("../../../src/app");
-const util = require("db-test-utils");
+const mongoose = require("mongoose");
+const db = require("db-test-utils")(mongoose);
 const supertest = require("supertest");
 const { findCookiesByVolunteerEmail } = require("../../../src/auth/cookieData");
 
@@ -9,13 +10,13 @@ describe("test /auth", () => {
   let app;
 
   beforeAll(async () => {
-    await util.connectToDatabase();
+    await db.connect();
     app = await getApp();
     request = supertest(app);
   });
 
-  afterEach(() => util.clearDatabase());
-  afterAll(() => util.closeDatabase());
+  afterEach(() => db.clear());
+  afterAll(() => db.close());
 
   it("should return 204 if the session was ended", async () => {
     const { agent, volunteer } = await login(app);

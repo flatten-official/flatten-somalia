@@ -1,13 +1,12 @@
 const cookieData = require("../../src/auth/cookieData");
-const util = require("db-test-utils");
+const mongoose = require("mongoose");
+const db = require("db-test-utils")(mongoose);
 const { calculateExpiryTime } = require("../../src/utils/time");
 
-const mongoose = require("mongoose");
-
 describe("cookie database functions", () => {
-  beforeAll(() => util.connectToDatabase());
-  afterEach(() => util.clearDatabase());
-  afterAll(() => util.closeDatabase());
+  beforeAll(() => db.connect());
+  afterEach(() => db.clear());
+  afterAll(() => db.close());
 
   it("should write cookie to database", async () => {
     const expiry = calculateExpiryTime(5);

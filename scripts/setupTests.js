@@ -1,2 +1,2 @@
 process.env.ENVIRONMENT = "test";
-process.env.MONGOMS_DEBUG = 1;
+// process.env.MONGOMS_DEBUG = 1;
