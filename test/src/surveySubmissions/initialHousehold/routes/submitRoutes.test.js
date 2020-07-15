@@ -6,6 +6,7 @@ const { login } = require("../../../../testUtils/requests");
 const Submission = require("../../../../../src/surveys/initialHousehold/submissionData");
 const Household = require("../../../../../src/surveys/initialHousehold/householdData");
 const Person = require("../../../../../src/surveys/initialHousehold/peopleData");
+const { testOnlyIf } = require("../../../../testUtils/jest");
 
 const VALID_REQ_BODIES = [
   {
@@ -429,7 +430,7 @@ const INVALID_REQUEST_BODIES = [
   },
 ];
 
-describe("test /auth", () => {
+describe("test /submit", () => {
   let app;
 
   beforeAll(async () => {
@@ -480,8 +481,12 @@ describe("test /auth", () => {
     expect(submission.teamName).toStrictEqual(volunteer.teamName);
   });
 
-  it("should return 409 for two forms with the same follow up id", async () => {
-    const { agent } = await login(app);
+  // This test is disabled if transactions are disabled since the expected behaviour would be different without transactions.
+  /* eslint-disable jest/no-standalone-expect */
+  testOnlyIf(!process.env.DISABLE_TRANSACTIONS)(
+    "should return 409 for two forms with the same follow up id",
+    async () => {
+      const { agent } = await login(app);
 
     await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(200);
     await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(409);
@@ -493,10 +498,13 @@ describe("test /auth", () => {
     expect(allSubmissions).toHaveLength(1);
     expect(allHouseholds).toHaveLength(1);
     expect(allPeople).toHaveLength(2);
-  });
+    }
+  );
 
   it("should fail for a user without the right permissions", async () => {
-    const { agent } = await login(app, { permissions: [] });
+    const { agent } = await login(app, {
+      permissions: [],
+    });
 
     await agent.post("/submit/initial").send(VALID_REQ_BODIES[0]).expect(403);
 
