@@ -20,7 +20,6 @@ apidoc.json
 .eslintignore
 .eslintrc.js
 jest.config.js
-jest.config.base.js
 
 # Ignore all scripts
 /scripts/*

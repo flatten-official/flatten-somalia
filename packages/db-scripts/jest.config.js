@@ -1,9 +1,2 @@
-const base = require("../../jest.config.base");
-
-const displayName = require("./package.json").name;
-
-module.exports = {
-  ...base,
-  rootDir: "../../",
-  displayName,
-};
+const name = require("./package.json").name;
+module.exports = require("../../scripts/createJestConfig")(name);
