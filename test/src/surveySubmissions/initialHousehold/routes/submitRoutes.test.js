@@ -35,7 +35,7 @@ const sampleSubmissionInvalid = {
   },
 };
 
-describe("test /auth", () => {
+describe("test /submit", () => {
   let app;
 
   beforeAll(async () => {
