@@ -19,7 +19,10 @@ async function connectToDatabase() {
   const uri = await mongod.getUri(DB_NAME);
 
   await mongoose.connect(uri, CONNECTION_OPTIONS);
-  await sleep(1000); // Required to avoid connection issues see https://stackoverflow.com/a/54445580/5864903
+  // required to avoid connection issues. see https://stackoverflow.com/a/54329017
+  mongoose.connection.db
+    .admin()
+    .command({ setParameter: 1, maxTransactionLockRequestTimeoutMillis: 5000 });
   log.debug("Connected to database.");
 }
 
