@@ -6,7 +6,7 @@
 * Change to component two
     - Details...
 
-# [Manual Integration Tests](https://github.com/flatten-official/backend-so/blob/master/test/manual/Manual%20Integration%20Tests.md) completed:
+# [Manual Integration Tests](https://github.com/flatten-official/backend-so/blob/master/docs/Manual%20Integration%20Tests.md) completed:
 
 Only complete for components you've modified. Complete just before merging.
 
