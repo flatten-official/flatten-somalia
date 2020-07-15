@@ -1,8 +1,8 @@
-const submissionData = require("./submissionData");
-const { log } = require("util-logging");
+const Submission = require("./submissionData");
+const Household = require("./householdData");
+const Person = require("./peopleData");
+const { BadInputError } = require("../../utils/errors");
 const { runOpWithinTransaction } = require("../../utils/mongoose");
-
-const { Error } = require("mongoose");
 
 async function initialSubmission(
   volunteerId,
@@ -13,34 +13,38 @@ async function initialSubmission(
   deathsData,
   householdData
 ) {
-  const household = await submissionData.createHousehold(
+  // required because (for example) we call householdData.followUpId which will crash if householdData is undefined
+  if (!householdData) throw new BadInputError("Household data not provided");
+
+  const household = await Household.create(
     householdData.followUpId,
     householdData.phone,
     householdData.email
   );
 
-  const peopleModel = peopleData.map((o) => {
+  const peopleModel = peopleData.map((person) => {
     return {
-      name: o.name,
-      gender: o.gender,
+      name: person.name,
+      gender: person.gender,
       household: household._id,
       alive: true,
     };
   });
-  const deathsModel = deathsData.map((o) => {
+
+  const deathsModel = deathsData.map((death) => {
     return {
-      name: o.name,
-      gender: o.gender,
+      name: death.name,
+      gender: death.gender,
       household: household._id,
       alive: false,
     };
   });
 
-  const people = await submissionData.createPeople(
+  const people = await Person.createManyAsync(
     [].concat(peopleModel, deathsModel)
   );
 
-  const submission = await submissionData.createSubmission(
+  const submission = await Submission.create(
     volunteerId,
     volunteerTeamName,
     schema,
@@ -51,28 +55,6 @@ async function initialSubmission(
     householdData
   );
 
-  for (const person of people) {
-    const validation = person.validateSync();
-    if (validation !== undefined) {
-      log.error("Problem validating a Person. ", { error: validation });
-      throw new Error.ValidationError("");
-    }
-  }
-  const householdValidation = household.validateSync();
-  if (householdValidation !== undefined) {
-    log.error("Problem validating a Household. ", {
-      error: householdValidation,
-    });
-    throw new Error.ValidationError("");
-  }
-  const submissionValidation = submission.validateSync();
-  if (submissionValidation !== undefined) {
-    log.error("Problem validating a Submission. ", {
-      error: submissionValidation,
-    });
-    throw new Error.ValidationError("");
-  }
-
   await runOpWithinTransaction(async (session) => {
     for (const person of people) await person.save({ session });
     await household.save({ session });
@@ -80,6 +62,4 @@ async function initialSubmission(
   });
 }
 
-module.exports = {
-  initialSubmission,
-};
+module.exports = { initialSubmission };
