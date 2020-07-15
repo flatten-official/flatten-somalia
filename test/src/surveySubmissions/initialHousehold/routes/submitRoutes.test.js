@@ -488,16 +488,16 @@ describe("test /submit", () => {
     async () => {
       const { agent } = await login(app);
 
-    await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(200);
-    await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(409);
+      await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(200);
+      await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(409);
 
-    const allSubmissions = await Submission.model.find();
-    const allHouseholds = await Household.model.find();
-    const allPeople = await Person.model.find();
+      const allSubmissions = await Submission.model.find();
+      const allHouseholds = await Household.model.find();
+      const allPeople = await Person.model.find();
 
-    expect(allSubmissions).toHaveLength(1);
-    expect(allHouseholds).toHaveLength(1);
-    expect(allPeople).toHaveLength(2);
+      expect(allSubmissions).toHaveLength(1);
+      expect(allHouseholds).toHaveLength(1);
+      expect(allPeople).toHaveLength(2);
     }
   );
 
