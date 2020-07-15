@@ -13,7 +13,7 @@ async function initialSubmission(
   deathsData,
   householdData
 ) {
-  // required because we call householdData.followUpId and otherwise we will crash
+  // required because (for example) we call householdData.followUpId which will crash if householdData is undefined
   if (!householdData) throw new BadInputError("Household data not provided");
 
   const household = await Household.create(
