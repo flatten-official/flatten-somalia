@@ -5,6 +5,7 @@ const { login } = require("../../../../testUtils/requests");
 
 const submissionData = require("../../../../../src/surveys/initialHousehold/submissionData");
 const volunteerData = require("../../../../../src/volunteer/volunteerData");
+const { testOnlyIf } = require("../../../../testUtils/jest");
 
 const sampleSubmission = {
   household: {
@@ -35,7 +36,7 @@ const sampleSubmissionInvalid = {
   },
 };
 
-describe("test /auth", () => {
+describe("test /submit", () => {
   let app;
 
   beforeAll(async () => {
@@ -75,23 +76,30 @@ describe("test /auth", () => {
     expect(allVolunteers[0].teamName).toStrictEqual(submission.teamName);
   });
 
-  it("should return 409 for two forms with the same follow up id", async () => {
-    const { agent } = await login(app);
+  // This test is disabled if transactions are disabled since the expected behaviour would be different without transactions.
+  /* eslint-disable jest/no-standalone-expect */
+  testOnlyIf(!process.env.DISABLE_TRANSACTIONS)(
+    "should return 409 for two forms with the same follow up id",
+    async () => {
+      const { agent } = await login(app);
 
-    await agent.post("/submit/initial").send(sampleSubmission).expect(200);
-    await agent.post("/submit/initial").send(sampleSubmission).expect(409);
+      await agent.post("/submit/initial").send(sampleSubmission).expect(200);
+      await agent.post("/submit/initial").send(sampleSubmission).expect(409);
 
-    const allSubmissions = await submissionData.Submission.find();
-    const allHouseholds = await submissionData.Household.find();
-    const allPeople = await submissionData.Person.find();
+      const allSubmissions = await submissionData.Submission.find();
+      const allHouseholds = await submissionData.Household.find();
+      const allPeople = await submissionData.Person.find();
 
-    expect(allSubmissions).toHaveLength(1);
-    expect(allHouseholds).toHaveLength(1);
-    expect(allPeople).toHaveLength(3);
-  });
+      expect(allSubmissions).toHaveLength(1);
+      expect(allHouseholds).toHaveLength(1);
+      expect(allPeople).toHaveLength(3);
+    }
+  );
 
   it("should fail for a user without the right permissions", async () => {
-    const { agent } = await login(app, { permissions: [] });
+    const { agent } = await login(app, {
+      permissions: [],
+    });
 
     await agent.post("/submit/initial").send(sampleSubmission).expect(403);
 

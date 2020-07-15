@@ -32,6 +32,16 @@ Navigate to `localhost` in your browser, you should see a message indicating tha
 
 Instead of using environment variables, we use `config.js` as it allows for more flexibility.
 
+### Testing
+
+If you run into issues while testing try adding the following line to your `.env` file.
+
+```
+DISABLE_TRANSACTIONS=TRUE
+```
+
+This will change the type of mongoDB server used during the test.
+
 ### Logging
 
 Logging is done using the Winston loggers `req.log` and `log`, with the standard GCP LogEntry [severity levels](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#logseverity). 
