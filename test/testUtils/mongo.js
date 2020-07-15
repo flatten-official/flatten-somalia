@@ -1,29 +1,41 @@
 // Inspired from https://dev.to/paulasantamaria/testing-node-js-mongoose-with-an-in-memory-database-32np
 const mongoose = require("mongoose");
-const { MongoMemoryReplSet } = require("mongodb-memory-server");
+const {
+  MongoMemoryReplSet,
+  MongoMemoryServer,
+} = require("mongodb-memory-server");
 const { CONNECTION_OPTIONS } = require("../../src/utils/mongoConnect");
 const { log } = require("../../src/utils/winston");
 
 const DB_NAME = "test";
+const useReplicaSet = !process.env.DISABLE_TRANSACTIONS;
 
-const mongod = new MongoMemoryReplSet({
-  replSet: { storageEngine: "wiredTiger" }, // https://github.com/nodkz/mongodb-memory-server#replica-set-start
-});
+let mongod;
+
+if (useReplicaSet)
+  mongod = new MongoMemoryReplSet({
+    replSet: { storageEngine: "wiredTiger" }, // https://github.com/nodkz/mongodb-memory-server#replica-set-start
+  });
+else {
+  mongod = new MongoMemoryServer();
+  log.warning("Replica sets are disabled. Some tests may be skipped.");
+}
 
 /**
  * Connect to the in-memory database.
  */
 async function connectToDatabase() {
   log.debug("Connecting to database...");
-  await mongod.waitUntilRunning();
+  if (useReplicaSet) await mongod.waitUntilRunning();
   const uri = await mongod.getUri(DB_NAME);
 
   await mongoose.connect(uri, CONNECTION_OPTIONS);
   // required to avoid connection issues. see https://stackoverflow.com/a/54329017
-  mongoose.connection.db.admin().command({
-    setParameter: 1,
-    maxTransactionLockRequestTimeoutMillis: 5000,
-  });
+  if (useReplicaSet)
+    mongoose.connection.db.admin().command({
+      setParameter: 1,
+      maxTransactionLockRequestTimeoutMillis: 5000,
+    });
   log.debug("Connected to database.");
 }
 
