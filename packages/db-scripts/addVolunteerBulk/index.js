@@ -21,11 +21,11 @@ module.exports.arguments = [VOLUNTEERS];
 
 module.exports.useAutoSetup = true;
 
-module.exports.confirmationMessage = `Are you sure you want to add the following volunteers to the database.\n${JSON.stringify(
+module.exports.confirmationMessage = `${JSON.stringify(
   VOLUNTEERS,
   null,
   "  "
-)}\n`;
+)}\nAre you sure you want to add the above volunteers to the database.`;
 
 module.exports.run = async (volunteers) => {
   log.info("Adding volunteers to database...");

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const db = require("db-test-utils")(mongoose);
-const Script = require("../src/addVolunteerBulk");
+const Script = require("./index");
 const {
   Permissions,
   Volunteer,

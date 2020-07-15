@@ -3,7 +3,7 @@ const { setup, cleanup } = require("backend");
 const { log } = require("util-logging");
 
 const scriptName = process.env.SCRIPT_NAME;
-const scriptPath = require("../scriptPaths.json")[scriptName];
+const scriptPath = require("./scriptPaths.json")[scriptName];
 const Confirm = require("prompt-confirm");
 
 const main = async () => {
