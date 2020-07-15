@@ -25,7 +25,6 @@ async function connectToDatabase() {
     maxTransactionLockRequestTimeoutMillis:
       process.env.MONGOOSE_TRANSACTION_TIMEOUT || 5000,
   });
-  await sleep(process.env.DB_CONNECTION_SLEEP || 0);
   log.debug("Connected to database.");
 }
 
@@ -47,12 +46,6 @@ async function clearDatabase() {
     const collection = collections[key];
     await collection.deleteMany();
   }
-}
-
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
 }
 
 module.exports = {
