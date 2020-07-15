@@ -63,12 +63,17 @@ const SurveyPageFactory = ({
           />
         );
 
+      const onNextPage = (info) => {
+        this.props.recordPageTiming(info.page, Date.now());
+      };
+
       if (!surveyData.completed)
         return (
           <Form
             formioForm={formIOJSON}
             submitHook={this.submitHook}
             formioOptions={{ noAlerts: false }}
+            onNextPage={onNextPage}
           />
         );
 
@@ -80,6 +85,7 @@ const SurveyPageFactory = ({
     surveyData: PropTypes.object,
     notifyCompleted: PropTypes.func,
     restartSurvey: PropTypes.func,
+    recordPageTiming: PropTypes.func,
   };
 
   const mapStateToProps = (state) => ({
@@ -90,6 +96,8 @@ const SurveyPageFactory = ({
     restartSurvey: () =>
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
+    recordPageTiming: (pageNum, time) =>
+      dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
   });
 
   const SurveyPageContentConnected = connect(
