@@ -1,6 +1,5 @@
 import backend from "./api/backend";
 import flattenApi from "./api/api";
-import { Surveys } from "../config";
 
 const getMetadata = (storeData, pageNames) => {
   const endTime = Date.now();
@@ -46,7 +45,8 @@ export const defaultSurveySubmitterFactory = (api, schema) => async (
 
 export const getInitialHouseholdSubmitter = (schema) => async (
   storeData,
-  formioData
+  formioData,
+  pageNames
 ) => {
   preFormatFormio(formioData);
 
@@ -56,7 +56,7 @@ export const getInitialHouseholdSubmitter = (schema) => async (
     },
     people: formioData.personGrid,
     deaths: formioData.deathGrid,
-    metadata: getMetadata(storeData, Surveys.initialHousehold.pageNames),
+    metadata: getMetadata(storeData, pageNames),
     schema,
   };
 

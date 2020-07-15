@@ -64,16 +64,15 @@ export const Surveys = {
     i18nTitleKey: "initialHouseholdTitle",
     api: api.volunteerForm,
     formIOJSON: initialHouseholdJSON,
-    onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold),
-    options: {
-      enableManualLocation: true,
-    },
-    pageNames: [
+    onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold, [
       "basicinfo",
       "people",
       "deaths",
       "socialsurveyquestions",
       "followupconsent",
-    ],
+    ]),
+    options: {
+      enableManualLocation: true,
+    },
   },
 };
