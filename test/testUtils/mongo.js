@@ -20,9 +20,12 @@ async function connectToDatabase() {
 
   await mongoose.connect(uri, CONNECTION_OPTIONS);
   // required to avoid connection issues. see https://stackoverflow.com/a/54329017
-  mongoose.connection.db
-    .admin()
-    .command({ setParameter: 1, maxTransactionLockRequestTimeoutMillis: 5000 });
+  mongoose.connection.db.admin().command({
+    setParameter: 1,
+    maxTransactionLockRequestTimeoutMillis:
+      process.env.MONGOOSE_TRANSACTION_TIMEOUT || 5000,
+  });
+  await sleep(process.env.DB_CONNECTION_SLEEP || 0);
   log.debug("Connected to database.");
 }
 
