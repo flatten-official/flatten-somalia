@@ -11,6 +11,7 @@ const submitGravediggerRoute = require("./surveys/gravedigger/submissionRoute");
 const submitHospitalRoute = require("./surveys/hospital/submissionRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
 const rootRoute = require("./utils/express/root");
+const surveyErrorHandler = require("./surveys/surveyErrorHandler");
 
 const router = express.Router();
 
@@ -102,7 +103,8 @@ router.post(
 router.post(
   "/submit/initial",
   protectedMiddleware([Permissions.submitForms]),
-  submitInitialRoute
+  submitInitialRoute,
+  surveyErrorHandler
 );
 
 /**
@@ -121,7 +123,8 @@ router.post(
 router.post(
   "/survey/gravedigger",
   protectedMiddleware([Permissions.submitForms]),
-  submitGravediggerRoute
+  submitGravediggerRoute,
+  surveyErrorHandler
 );
 
 /**
@@ -140,7 +143,8 @@ router.post(
 router.post(
   "/survey/hospital",
   protectedMiddleware([Permissions.submitForms]),
-  submitHospitalRoute
+  submitHospitalRoute,
+  surveyErrorHandler
 );
 
 module.exports = router;

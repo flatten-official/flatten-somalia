@@ -4,7 +4,7 @@ Scripts allow us to run batch operations on our database. Make sure you know wha
 
 ## Setup
 
-1. Create a `.env` file in this directory with the following content
+1. Create a `.env` file in this directory with the following content:
 
    ```
    SCRIPT_NAME=<SCRIPT_NAME>
