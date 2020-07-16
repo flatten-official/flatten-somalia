@@ -56,6 +56,6 @@ MONGO_URI=<MONGO_URI_WITH_PASSWORD>
 
 3. Add your script to `scriptPaths.json`. Pick any unique descriptive name.
 
-4. Create a `unit.test.js` file and write some unit tests. These tests should be pure and use seed data from within the test.directory
+4. Create a `index.test.js` file and write some unit tests. These tests should be pure and use seed data from within the test.directory
 
 5. Write success tests according to `/docs/Database Script Testing Procedure.md` and follow the testing procedures there.
