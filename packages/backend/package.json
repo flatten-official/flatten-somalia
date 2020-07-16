@@ -23,7 +23,8 @@
     "lodash": "^4.17.15",
     "mongoose": "^5.9.15",
     "validator": "^13.0.0",
-    "util-logging": "1.0.0"
+    "util-logging": "1.0.0",
+    "util-gcp": "1.0.0"
   },
   "devDependencies": {
     "apidoc": "^0.22.1",

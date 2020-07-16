@@ -1,5 +1,5 @@
 const DigestFetch = require("digest-fetch");
-const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
+const { getJSONSecret } = require("util-gcp");
 const { log } = require("util-logging");
 
 const SECRET_ID =
@@ -28,26 +28,6 @@ const getCreateRestoreRequest = (fromGroupId, toGroupId, snapshotId) => ({
     deliveryType: "automated",
   },
 });
-
-/**
- * Retrieve the json file stored in the secret managed
- * @param secretId the id of the secret in the GCP secret manager (with the version)
- */
-const getJSONSecret = async (secretId) => {
-  const smClient = new SecretManagerServiceClient();
-
-  try {
-    const [version] = await smClient.accessSecretVersion({ name: secretId });
-
-    return JSON.parse(version.payload.data.toString());
-  } catch (e) {
-    log.error(
-      `Could not read GCP secret ${secretId}.\n\n1. Check that you have the proper permissions.\n2. Run npm run auth.\n`,
-      { error: e }
-    );
-    throw e;
-  }
-};
 
 /**
  * Gets the snapshotId of the latest completed backup

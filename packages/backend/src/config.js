@@ -1,4 +1,4 @@
-const { getJSONSecret } = require("./utils/secretGCP");
+const { getJSONSecret } = require("util-gcp");
 const { log } = require("util-logging");
 const _ = require("lodash");
 
