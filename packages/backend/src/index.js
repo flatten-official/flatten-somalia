@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const MongoDatabase = require("db-utils/externalDb")(mongoose);
+const MongoDatabase = require("db-utils/externalDb");
 const { getApp } = require("./app");
 const { setup: configSetup, getConfig } = require("./config");
 const { setup: sendGridSetup } = require("./utils/sendGrid");

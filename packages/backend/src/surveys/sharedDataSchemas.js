@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("db-utils");
 
 const FormSchema = {
   form: { type: String, index: true, required: true }, // eg. 'somaliaInitialVolunteerSurvey'

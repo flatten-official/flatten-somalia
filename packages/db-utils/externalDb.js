@@ -1,7 +1,8 @@
 const { log } = require("util-logging");
 const connectionOptions = require("./connectionOptions");
+const mongoose = require("mongoose");
 
-async function disconnect(mongoose) {
+async function disconnect() {
   await mongoose.disconnect();
   log.notice("Disconnected from database");
 }
@@ -19,7 +20,4 @@ async function connect(mongoose, uri) {
   log.notice("Connected to database.");
 }
 
-module.exports = (mongoose) => ({
-  connect: (uri) => connect(mongoose, uri),
-  disconnect: () => disconnect(mongoose),
-});
+module.exports = { connect, disconnect };

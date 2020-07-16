@@ -1,6 +1,6 @@
 const Volunteer = require("../../src/volunteer/volunteerData");
-const mongoose = require("mongoose");
-const db = require("db-utils/inMemoryDb")(mongoose);
+
+const db = require("db-utils/inMemoryDb");
 
 const basicVolunteer = {
   name: "Name",
