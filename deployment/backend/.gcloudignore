@@ -1,0 +1,7 @@
+# This file is used when deploying to App Engine from Cloud Build
+# Most files have already been ignored before uploading to Cloud Build,
+# however we ignore a few more that were only used within the build process
+
+.gcloudignore
+/deployment
+/scripts

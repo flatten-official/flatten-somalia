@@ -1,0 +1,41 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The backend server for flatten.so",
+  "author": "Flatten",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon --watch ../ ./src/launch.js",
+    "doc": "apidoc -i src -o ../../docs/api-generated && open-cli ../../docs/api-generated/index.html"
+  },
+  "dependencies": {
+    "@google-cloud/secret-manager": "^2.1.0",
+    "@sendgrid/mail": "^7.1.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "cron": "^1.8.2",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.9.15",
+    "validator": "^13.0.0",
+    "util-logging": "1.0.0"
+  },
+  "devDependencies": {
+    "apidoc": "^0.22.1",
+    "db-test-utils": "1.0.0",
+    "supertest": "^4.0.2",
+    "nodemon": "^2.0.4",
+    "open-cli": "^6.0.1",
+    "dotenv": "^8.2.0"
+  },
+  "nodemonConfig": {
+    "env": {
+      "ENVIRONMENT": "dev"
+    }
+  }
+}

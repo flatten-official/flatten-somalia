@@ -21,6 +21,14 @@ module.exports = {
     "prefer-const": "warn",
     "require-await": "warn",
     "no-return-await": "warn",
-    "no-console": "error",
+    "no-throw-literal": "error",
   },
+  overrides: [
+    {
+      files: ["packages/**/*.js"],
+      rules: {
+        "no-console": "error", // All packages should be using util-logging not console.log
+      },
+    },
+  ],
 };

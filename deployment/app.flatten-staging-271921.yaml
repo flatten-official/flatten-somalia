@@ -1,4 +1,0 @@
-service: backend-so-staging
-runtime: nodejs10
-env_variables:
-  ENVIRONMENT: staging # Not using NODE_ENV since NODE_ENV is always PROD on App Engine

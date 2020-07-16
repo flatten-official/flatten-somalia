@@ -1,38 +1,42 @@
-# Flatten.so backend
+# Somalia Code
 
 <a href="https://codeclimate.com/repos/5eebb93769ce914dc100dcd1/maintainability"><img src="https://api.codeclimate.com/v1/badges/a195459a45a7e562ac07/maintainability" /></a>
 <a href="https://codeclimate.com/repos/5eebb93769ce914dc100dcd1/test_coverage"><img src="https://api.codeclimate.com/v1/badges/a195459a45a7e562ac07/test_coverage" /></a>
 
-## Prerequisites
+This repository contains the code used in Somalia (except for frontend which will be merged later).
 
-- Latest version of Node10 [here](https://nodejs.org/en/download/releases/).
+We use yarn workspaces which all multiple "packages" to exist in the same space.
 
 ## Setup
 
-1. Ensure an admin has added you to the `Somalia Staging Data Access` group, otherwise you won't have permission to read the staging database.
-Also ask to be added to the Atlas staging project if you want a GUI to navigate the database.
+1. Install NodeJS and [Yarn](https://classic.yarnpkg.com/en/docs/install).
 
-2. Enable ESLint in your IDE (normally a plugin to install). ESLint is a code linter that checks logic and syntax.
-ESLint is configured with Prettier to also enforce a standard formatting. 
+2. In the root directory, run `yarn` (or `yarn install`) to install the dependencies.
 
-3. Run `npm install` to install all the required packages.
+3. Enable ESLint in your IDE (normally a plugin to install). ESLint is a code linter that checks logic and syntax.
+ESLint is configured with Prettier to also enforce a standard formatting.
 
-## Running
+4. Follow instructions for the specific package you're working in if any (see README's in `packages/`)
 
-1. Run `npm run auth` to login through `gcloud`.
+## Available commands
 
-2. Run `npm run dev`. 
-Navigate to `localhost` in your browser, you should see a message indicating that the server is running locally.
+- `yarn dev`: Runs the backend server locally
 
-## Useful commands
+- `yarn lint`: Lists ESLint errors and fixes minor ones
 
-## Development
+- `yarn auth`: Authenticate with Google and set the project to staging
 
-### Using environment variables
+- `yarn auth-no-browser`: Sometimes authentication fails in the browser, this is a workaround.
 
-Instead of using environment variables, we use `config.js` as it allows for more flexibility.
+- `yarn deploy`: Deploys the backend to the staging servers
 
-### Testing
+- `yarn test`: Runs the jest tests
+
+- `yarn workspace backend doc`: Generates and open the backend api docs
+
+- `yarn depcheck [PATH]`: Check for missing or unused dependencies. (e.g. `yarn depcheck ./packages/backend`)
+
+## Testing
 
 If you run into issues while testing try adding the following line to your `.env` file.
 
@@ -42,16 +46,6 @@ DISABLE_TRANSACTIONS=TRUE
 
 This will change the type of mongoDB server used during the test.
 
-### Logging
+## Logging
 
-Logging is done using the Winston loggers `req.log` and `log`, with the standard GCP LogEntry [severity levels](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#logseverity). 
-- `req.log` is for logging related to the current request. Entries from each request will be grouped together in the GCP logs viewer.
-- `log` is for everything else. Import from `src/util/winston`.
-
-Log statements with severity `debug` aren't logged in production.
-
-## Additional Tools
-
-The following tools may be very helpful to you, please check them out.
-
-- [Postman](https://www.postman.com/) to test the different API endpoints.  
+Logging is done using the Winston loggers. Add `util-logging` as a dependency and then use `log`. See code and util-logging package for more info.
