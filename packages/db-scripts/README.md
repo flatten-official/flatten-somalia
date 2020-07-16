@@ -12,9 +12,9 @@ Scripts allow us to run batch operations on our database. Make sure you know wha
    ```
 
 2. Replace `<SCRIPT_NAME>` with the name of the script you wish to run (e.g. `ADD_VOLUNTEER_BULK`).
-   Check `scriptPaths.json` for a list all possible script names.
+   Check `scripts/scriptPaths.json` for a list all possible script names.
 
-3. Run `yarn start` in this directory to run the script. (Or `yarn workspace db-scripts start` in the root directory).
+3. Run `npm run script`.
 
 ## Running a script in production
 
@@ -32,10 +32,7 @@ MONGO_URI=<MONGO_URI_WITH_PASSWORD>
 
 ## Create a new script
 
-1. Create a sub-directory with the name of your script.
-
-2. Create a addVolunteerBulk.js file with the following content in your directory.
-   The .js file contains a function `run()` which executes your script.
+1. Create a js file with the following content in the `scripts` directory:
 
    ```
    // Set to false if you want to manage setup yourself in run().
@@ -45,7 +42,7 @@ MONGO_URI=<MONGO_URI_WITH_PASSWORD>
    // Set to something descriptive
    module.exports.confirmationMessage = "Are you sure you want to run this script";
 
-   // Specify the arguments as an array for the run function (normally the data). This will automatically be passed as arguments to the run function.
+   // Specify the arguments as an array for the run function (normally the data)
    module.exports.arguments = [];
 
    // Main function. Must be pure, do not access global scope (instead use arguments)
@@ -54,8 +51,4 @@ MONGO_URI=<MONGO_URI_WITH_PASSWORD>
    };
    ```
 
-3. Add your script to `scriptPaths.json`. Pick any unique descriptive name.
-
-4. Create a `index.test.js` file and write some unit tests. These tests should be pure and use seed data from within the test.directory
-
-5. Write success tests according to `/docs/Database Script Testing Procedure.md` and follow the testing procedures there.
+2. Add your script to `scripts/scriptPaths.json`. You can pick any unique descriptive name.
