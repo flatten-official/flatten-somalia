@@ -2,7 +2,6 @@
   "name": "db-utils",
   "version": "1.0.0",
   "dependencies": {
-    "backend": "1.0.0",
     "mongodb-memory-server": "^6.6.1",
     "util-logging": "1.0.0"
   }
