@@ -34,7 +34,7 @@ MONGO_URI=<MONGO_URI_WITH_PASSWORD>
 
 1. Create a sub-directory with the name of your script.
 
-2. Create a index.js file with the following content in your directory.
+2. Create a addVolunteerBulk.js file with the following content in your directory.
    The .js file contains a function `run()` which executes your script.
 
    ```

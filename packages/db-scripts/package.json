@@ -1,9 +1,9 @@
 {
   "name": "db-scripts",
   "version": "1.0.0",
-  "main": "launcher.js",
+  "main": "src/launcher.js",
   "scripts": {
-    "start": "node launcher.js"
+    "start": "node src/launcher.js"
   },
   "dependencies": {
     "backend": "1.0.0",
