@@ -8,6 +8,7 @@
   "dependencies": {
     "backend": "1.0.0",
     "dotenv": "^8.2.0",
+    "mongoose": "^5.9.24",
     "util-logging": "1.0.0"
   },
   "devDependencies": {
