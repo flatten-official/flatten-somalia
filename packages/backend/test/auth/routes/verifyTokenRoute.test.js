@@ -3,7 +3,8 @@ const { addVolunteer } = require("../../../src/volunteer/volunteerData");
 const { findCookiesByVolunteerEmail } = require("../../../src/auth/cookieData");
 
 const { getApp } = require("../../../src/app");
-const util = require("db-test-utils");
+const mongoose = require("mongoose");
+const db = require("db-test-utils")(mongoose);
 const supertest = require("supertest");
 const { TEST_VOLUNTEER } = require("../../utils/requests");
 
@@ -16,16 +17,16 @@ describe("test /auth/token", () => {
   let request;
 
   beforeAll(async () => {
-    await util.connectToDatabase();
+    await db.connect();
     request = supertest(await getApp());
   });
 
   afterEach(async () => {
-    await util.clearDatabase();
+    await db.clear();
     jest.clearAllMocks();
   });
 
-  afterAll(() => util.closeDatabase());
+  afterAll(() => db.close());
 
   // eslint-disable-next-line jest/expect-expect
   it("should return 400 if token is absent", async () => {

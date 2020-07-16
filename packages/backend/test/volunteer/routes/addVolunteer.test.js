@@ -4,7 +4,8 @@ const {
 } = require("../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../src/app");
-const util = require("db-test-utils");
+const mongoose = require("mongoose");
+const db = require("db-test-utils")(mongoose);
 const supertest = require("supertest");
 const { login } = require("../../utils/requests");
 const _ = require("lodash");
@@ -23,13 +24,13 @@ describe("endpoint POST /volunteer", () => {
   let request;
 
   beforeAll(async () => {
-    await util.connectToDatabase();
+    await db.connect();
     app = await getApp();
     request = supertest(app);
   });
 
-  afterEach(() => util.clearDatabase());
-  afterAll(() => util.closeDatabase());
+  afterEach(() => db.clear());
+  afterAll(() => db.close());
 
   it("should add a volunteer upon valid request", async () => {
     const { agent, volunteer: adminVolunteer } = await login(app, {

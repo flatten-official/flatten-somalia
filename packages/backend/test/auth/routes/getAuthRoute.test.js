@@ -1,5 +1,6 @@
 const { getApp } = require("../../../src/app");
-const util = require("db-test-utils");
+const mongoose = require("mongoose");
+const db = require("db-test-utils")(mongoose);
 const supertest = require("supertest");
 
 const { login } = require("../../utils/requests");
@@ -10,13 +11,13 @@ let app;
 
 describe("test /auth", () => {
   beforeAll(async () => {
-    await util.connectToDatabase();
+    await db.connect();
     app = await getApp();
     request = supertest(app);
   });
 
-  afterEach(() => util.clearDatabase());
-  afterAll(() => util.closeDatabase());
+  afterEach(() => db.clear());
+  afterAll(() => db.close());
 
   it("should return an empty object when no cookie is provided", async () => {
     const res = await request.get("/auth");

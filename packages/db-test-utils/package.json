@@ -4,7 +4,6 @@
   "dependencies": {
     "backend": "1.0.0",
     "mongodb-memory-server": "^6.6.1",
-    "mongoose": "^5.9.24",
     "util-logging": "1.0.0"
   }
 }

@@ -1,9 +1,9 @@
 const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 const { log } = require("util-logging");
 
-const smClient = new SecretManagerServiceClient();
-
 module.exports.getJSONSecret = async (secretId) => {
+  const smClient = new SecretManagerServiceClient();
+
   try {
     const [version] = await smClient.accessSecretVersion({ name: secretId });
 

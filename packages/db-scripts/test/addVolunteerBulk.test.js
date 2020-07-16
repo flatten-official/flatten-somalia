@@ -1,4 +1,5 @@
-const util = require("db-test-utils");
+const mongoose = require("mongoose");
+const db = require("db-test-utils")(mongoose);
 const Script = require("../src/addVolunteerBulk");
 const {
   Permissions,
@@ -6,9 +7,9 @@ const {
 } = require("backend/src/volunteer/volunteerData");
 
 describe("addVolunteerBulk", () => {
-  beforeAll(() => util.connectToDatabase());
-  afterEach(() => util.clearDatabase());
-  afterAll(() => util.closeDatabase());
+  beforeAll(() => db.connect());
+  afterEach(() => db.clear());
+  afterAll(() => db.close());
 
   it("should add volunteers properly", async () => {
     const volunteers = [

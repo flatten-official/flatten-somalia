@@ -19,6 +19,7 @@ apidoc.json
 # Ignore configuration files
 .eslintignore
 .eslintrc.js
+jest.config.js
 
 # Ignore all scripts
 /scripts/*

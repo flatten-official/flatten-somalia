@@ -1,5 +1,6 @@
 const { getApp } = require("../../src/app");
-const util = require("db-test-utils");
+const mongoose = require("mongoose");
+const db = require("db-test-utils")(mongoose);
 
 const { login } = require("../utils/requests");
 
@@ -111,12 +112,12 @@ describe("submissions:", () => {
   let app;
 
   beforeAll(async () => {
-    await util.connectToDatabase();
+    await db.connect();
     app = await getApp();
   });
 
-  afterEach(() => util.clearDatabase());
-  afterAll(() => util.closeDatabase());
+  afterEach(() => db.clear());
+  afterAll(() => db.close());
 
   describe("gravedigger Survey", () => {
     it("should add submission and deaths as expected", async () => {

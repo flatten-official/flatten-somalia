@@ -6,7 +6,8 @@ const sendEmailMock = jest
   .mockImplementation(mocks.sendVerificationEmail);
 
 const { getApp } = require("../../../src/app");
-const util = require("db-test-utils");
+const mongoose = require("mongoose");
+const db = require("db-test-utils")(mongoose);
 const supertest = require("supertest");
 const { addVolunteer } = require("../../../src/volunteer/volunteerData");
 const { getConfig } = require("../../../src/config");
@@ -16,15 +17,15 @@ describe("test /auth/login", () => {
   let request;
 
   beforeAll(async () => {
-    await util.connectToDatabase();
+    await db.connect();
     request = supertest(await getApp());
   });
 
   afterEach(async () => {
-    await util.clearDatabase();
+    await db.clear();
     jest.clearAllMocks();
   });
-  afterAll(() => util.closeDatabase());
+  afterAll(() => db.close());
 
   it("should return 200 status at /", async () => {
     const res = await request.get("/");
