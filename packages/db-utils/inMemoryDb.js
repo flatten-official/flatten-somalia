@@ -3,7 +3,7 @@ const {
   MongoMemoryReplSet,
   MongoMemoryServer,
 } = require("mongodb-memory-server");
-const { CONNECTION_OPTIONS } = require("backend/src/utils/mongoConnect");
+const connectionOptions = require("./connectionOptions");
 const { log } = require("util-logging");
 
 const DB_NAME = "test";
@@ -28,7 +28,7 @@ async function connectToDatabase(mongoose) {
   if (useReplicaSet) await mongod.waitUntilRunning();
   const uri = await mongod.getUri(DB_NAME);
 
-  await mongoose.connect(uri, CONNECTION_OPTIONS);
+  await mongoose.connect(uri, connectionOptions);
   // required to avoid connection issues. see https://stackoverflow.com/a/54329017
   if (useReplicaSet)
     mongoose.connection.db.admin().command({

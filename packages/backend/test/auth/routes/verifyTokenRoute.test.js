@@ -4,7 +4,7 @@ const { findCookiesByVolunteerEmail } = require("../../../src/auth/cookieData");
 
 const { getApp } = require("../../../src/app");
 const mongoose = require("mongoose");
-const db = require("db-test-utils")(mongoose);
+const db = require("db-utils/inMemoryDb")(mongoose);
 const supertest = require("supertest");
 const { TEST_VOLUNTEER } = require("../../utils/requests");
 

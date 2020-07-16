@@ -1,6 +1,6 @@
 const cookieData = require("../../src/auth/cookieData");
 const mongoose = require("mongoose");
-const db = require("db-test-utils")(mongoose);
+const db = require("db-utils/inMemoryDb")(mongoose);
 const { calculateExpiryTime } = require("../../src/utils/time");
 
 describe("cookie database functions", () => {
