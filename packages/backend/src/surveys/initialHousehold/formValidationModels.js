@@ -13,10 +13,30 @@ function dead(person) {
 const personDataSchema = new mongoose.Schema(
   {
     alive: { type: Boolean, required: false },
-    age: { type: Number, required: alive(this) },
-    sex: { type: String, required: alive(this) },
-    residenceStatus: { type: String, required: alive(this) },
-    employed: { type: String, required: alive(this) },
+    age: {
+      type: Number,
+      required: function () {
+        return alive(this);
+      },
+    },
+    sex: {
+      type: String,
+      required: function () {
+        return alive(this);
+      },
+    },
+    residenceStatus: {
+      type: String,
+      required: function () {
+        return alive(this);
+      },
+    },
+    employed: {
+      type: String,
+      required: function () {
+        return alive(this);
+      },
+    },
     occupation: {
       type: String,
       required: function () {
@@ -32,11 +52,26 @@ const personDataSchema = new mongoose.Schema(
         return alive(this) && this.employed === "no";
       },
     },
-    educationLevel: { type: Object, required: alive(this) },
+    educationLevel: {
+      type: Object,
+      required: function () {
+        return alive(this);
+      },
+    },
     // TODO get rid of suffix '1'
     monthlyIncome1: { type: String, required: false },
-    COVID19KnowledgeLevel: { type: Object, required: alive(this) },
-    primaryInformationSource: { type: Object, required: alive(this) },
+    COVID19KnowledgeLevel: {
+      type: Object,
+      required: function () {
+        return alive(this);
+      },
+    },
+    primaryInformationSource: {
+      type: Object,
+      required: function () {
+        return alive(this);
+      },
+    },
     primaryInformationSourceOther: {
       type: String,
       required: function () {
@@ -63,8 +98,18 @@ const personDataSchema = new mongoose.Schema(
         return alive(this) && this.socialMedia && this.socialMedia.other;
       },
     },
-    COVID19PreventionMeasures: { type: Object, required: alive(this) },
-    nationalHotlineAwareness: { type: String, required: alive(this) },
+    COVID19PreventionMeasures: {
+      type: Object,
+      required: function () {
+        return alive(this);
+      },
+    },
+    nationalHotlineAwareness: {
+      type: String,
+      required: function () {
+        return alive(this);
+      },
+    },
     nationalHotlineUsage: {
       type: String,
       required: function () {
@@ -93,7 +138,12 @@ const personDataSchema = new mongoose.Schema(
         return alive(this) && this.sex === "female";
       },
     },
-    hasDisabilities: { type: String, required: alive(this) },
+    hasDisabilities: {
+      type: String,
+      required: function () {
+        return alive(this);
+      },
+    },
     disabilityTypes: {
       type: Object,
       required: function () {
@@ -108,10 +158,20 @@ const personDataSchema = new mongoose.Schema(
         );
       },
     },
-    comorbidities: { type: Object, required: alive(this) },
+    comorbidities: {
+      type: Object,
+      required: function () {
+        return alive(this);
+      },
+    },
     otherComorbidities: { type: String, required: false },
     // TODO get rid of suffix '1'
-    currentSymptoms1: { type: Object, required: alive(this) },
+    currentSymptoms1: {
+      type: Object,
+      required: function () {
+        return alive(this);
+      },
+    },
     otherSymptoms: {
       type: String,
       required: function () {
@@ -130,7 +190,12 @@ const personDataSchema = new mongoose.Schema(
         );
       },
     },
-    hasBeenTestedForCOVID19: { type: String, required: alive(this) },
+    hasBeenTestedForCOVID19: {
+      type: String,
+      required: function () {
+        return alive(this);
+      },
+    },
     COVID19TestType: {
       type: String,
       required: function () {
@@ -166,7 +231,12 @@ const personDataSchema = new mongoose.Schema(
       },
     },
     potentialContactAddress: { type: String, required: false },
-    cityTransportationMethod: { type: Object, required: alive(this) },
+    cityTransportationMethod: {
+      type: Object,
+      required: function () {
+        return alive(this);
+      },
+    },
     // TODO rename key to otherMeansOfTransportation
     other1: {
       type: String,
@@ -178,7 +248,12 @@ const personDataSchema = new mongoose.Schema(
         );
       },
     },
-    recentTravelOutsideDistrict: { type: String, required: alive(this) },
+    recentTravelOutsideDistrict: {
+      type: String,
+      required: function () {
+        return alive(this);
+      },
+    },
     // TODO fix spelling
     recentTripsOutsideDistricCount: {
       type: String,
@@ -208,7 +283,12 @@ const personDataSchema = new mongoose.Schema(
         return alive(this) && this.recentTravelOutsideDistrict === "yes";
       },
     },
-    mobilityRestrictions: { type: Object, required: alive(this) },
+    mobilityRestrictions: {
+      type: Object,
+      required: function () {
+        return alive(this);
+      },
+    },
     otherMobilityRestrictions: {
       type: String,
       required: function () {
@@ -220,10 +300,30 @@ const personDataSchema = new mongoose.Schema(
       },
     },
     /* DEAD PERSON FIELDS */
-    deceasedAge: { type: Number, required: dead(this) },
-    deceasedSex: { type: String, required: dead(this) },
-    causeOfDeath: { type: String, required: dead(this) },
-    deceasedComorbidities: { type: Object, required: dead(this) },
+    deceasedAge: {
+      type: Number,
+      required: function () {
+        return dead(this);
+      },
+    },
+    deceasedSex: {
+      type: String,
+      required: function () {
+        return dead(this);
+      },
+    },
+    causeOfDeath: {
+      type: String,
+      required: function () {
+        return dead(this);
+      },
+    },
+    deceasedComorbidities: {
+      type: Object,
+      required: function () {
+        return dead(this);
+      },
+    },
     otherDeceasedComorbidities: {
       type: String,
       required: function () {
@@ -237,7 +337,9 @@ const personDataSchema = new mongoose.Schema(
     // TODO rename key to deceasedSymptomsBeforeDeath
     whatWereTheSymptomsTheyExperiencedPriorToDeath: {
       type: Object,
-      required: dead(this),
+      required: function () {
+        return dead(this);
+      },
     },
     otherDeceasedSymptoms: {
       type: String,
