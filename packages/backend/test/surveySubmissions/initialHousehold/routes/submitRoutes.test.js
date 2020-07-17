@@ -1205,10 +1205,6 @@ describe("test /submit", () => {
     const household = allHouseholds[0];
 
     expect(submission.household.ref).toStrictEqual(household._id);
-    // strict equal fails due to undefined field keys present in document
-    expect(JSON.parse(JSON.stringify(submission.household.data))).toStrictEqual(
-      request.household
-    );
     expect(household.followUpId).toStrictEqual(request.household.followUpId);
     expect(submission.teamName).toStrictEqual(volunteer.teamName);
   });
