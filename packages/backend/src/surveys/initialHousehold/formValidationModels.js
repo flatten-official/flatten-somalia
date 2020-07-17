@@ -244,6 +244,18 @@ const personDataModel = {
 
 const householdDataModel = {
   followUpId: { type: String, required: true },
+  followupConsent: {
+    type: String,
+    required: function () {
+      return this.sharePhoneNumberConsent === "consentToSharingPhoneNumber";
+    },
+  },
+  followupVisitConsent: {
+    type: String,
+    required: function () {
+      return this.sharePhoneNumberConsent === "willNotSharePhoneNumber";
+    },
+  },
   deathsWithinHousehold: { type: String, required: true },
   /* FIRST PAGE */
   sharePhoneNumberConsent: { type: String, required: true },
