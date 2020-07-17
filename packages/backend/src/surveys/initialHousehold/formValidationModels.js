@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 function alive(person) {
   // use alive field if present
   // otherwise, .age is present for the living, with .deceasedAge for the dead
-  return person.alive ? true : person.sex;
+  return person.alive != null ? person.alive : person.sex != null;
 }
 
 function dead(person) {
@@ -40,19 +40,27 @@ const personDataSchema = new mongoose.Schema(
     primaryInformationSourceOther: {
       type: String,
       required: function () {
-        return alive(this) && this.primaryInformationSource.other;
+        return (
+          alive(this) &&
+          this.primaryInformationSource &&
+          this.primaryInformationSource.other
+        );
       },
     },
     socialMedia: {
       type: Object,
       required: function () {
-        return alive(this) && this.primaryInformationSource.socialMedia;
+        return (
+          alive(this) &&
+          this.primaryInformationSource &&
+          this.primaryInformationSource.socialMedia
+        );
       },
     },
     otherSocialMedia: {
       type: String,
       required: function () {
-        return alive(this) && this.socialMedia.other;
+        return alive(this) && this.socialMedia && this.socialMedia.other;
       },
     },
     COVID19PreventionMeasures: { type: Object, required: alive(this) },
@@ -72,7 +80,11 @@ const personDataSchema = new mongoose.Schema(
     otherReasonsForNotUsingNationalHotline: {
       type: String,
       required: function () {
-        return alive(this) && this.reasonsForNotUsingNationalHotline.other;
+        return (
+          alive(this) &&
+          this.reasonsForNotUsingNationalHotline &&
+          this.reasonsForNotUsingNationalHotline.other
+        );
       },
     },
     isPregnant: {
@@ -111,7 +123,11 @@ const personDataSchema = new mongoose.Schema(
     startOfSymptoms: {
       type: String,
       required: function () {
-        return alive(this) && !this.currentSymptoms1.noSymptoms;
+        return (
+          alive(this) &&
+          this.currentSymptoms1 &&
+          !this.currentSymptoms1.noSymptoms
+        );
       },
     },
     hasBeenTestedForCOVID19: { type: String, required: alive(this) },
