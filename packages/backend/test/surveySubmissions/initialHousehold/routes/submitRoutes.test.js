@@ -5826,6 +5826,60 @@ describe("test /submit", () => {
     expect(submission.teamName).toStrictEqual(volunteer.teamName);
   });
 
+  it("should add valid metadata", async () => {
+    const { agent } = await login(app);
+    const household = {
+      followUpId: "1",
+      sharePhoneNumberConsent: "willNotSharePhoneNumber",
+      district: "Warta-Nabada",
+      subdistrict: { name: "Hanti-wadaag" },
+      housingType: "villa",
+      ownershipType: "hold",
+      roomsCount: 2,
+      residentsCount: 2,
+      deathsWithinHousehold: "no",
+      supportRequiredForCOVID19RiskManagement: {
+        sanitation: true,
+        medicalSupport: false,
+        financial: false,
+        housing: false,
+        noSupport: false,
+        other: false,
+      },
+      householdNeeds: {
+        money: false,
+        sanitation: false,
+        healthcareAccess: false,
+        housingSupport: false,
+        educationalSupport: false,
+        emotionalSupport: true,
+        noHouseholdNeeds: false,
+        other: false,
+      },
+      followupVisitConsent: "no",
+    };
+
+    for (const metadata of validMetadata) {
+      household.followUpId += "1";
+      await agent
+        .post("/submit/initial")
+        .send({
+          schema: validSchema,
+          metadata,
+          household,
+          people: [],
+          deaths: [],
+        })
+        .expect(200);
+    }
+
+    const allSubmissions = await Submission.model.find();
+    const allHouseholds = await Household.model.find();
+
+    expect(allSubmissions).toHaveLength(validMetadata.length);
+    expect(allHouseholds).toHaveLength(validMetadata.length);
+  });
+
   it("should add valid households", async () => {
     const { agent } = await login(app);
 
@@ -5943,6 +5997,30 @@ describe("test /submit", () => {
 
     const allPeople = await Person.model.find();
     expect(allPeople).toHaveLength(validDeadPeople.length);
+  });
+
+  it("should fail to add invalid metadata", async () => {
+    const { agent } = await login(app);
+
+    await agent
+      .post("/submit/initial")
+      .send({
+        schema: validSchema,
+        metadata: {
+          caphfdasoif: "invalid",
+          ...validMetadata[0],
+        },
+        household: validHouseholdData[0],
+        people: [],
+        deaths: [],
+      })
+      .expect(400);
+
+    const allSubmissions = await Submission.model.find();
+    const allHouseholds = await Household.model.find();
+
+    expect(allSubmissions).toHaveLength(validMetadata.length);
+    expect(allHouseholds).toHaveLength(validMetadata.length);
   });
 
   it("should fail to add invalid households", async () => {
