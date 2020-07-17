@@ -17,9 +17,6 @@ import { FollowUpId } from "../components/surveys/FollowUpId";
 const mapDispatchToPropsConsent = (dispatch) => ({
   onConsent: () => {
     dispatch({ type: Types.NOTIFY_CONSENT_GIVEN });
-    /** TODO we're planning to build a more robust timing system that measures from before consent page.
-     * this will then need to be changed
-     */
     dispatch({ type: Types.SET_CONSENT_TIME, payload: Date.now() });
   },
 });
@@ -27,9 +24,6 @@ const mapDispatchToPropsConsent = (dispatch) => ({
 const mapDispatchToPropsStartSurvey = (dispatch) => ({
   onStartSurvey: () => {
     dispatch({ type: Types.NOTIFY_STARTED });
-    /** TODO we're planning to build a more robust timing system that measures from before consent page.
-     * this will then need to be changed
-     */
     dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
   },
 });

@@ -10,8 +10,8 @@ const getMetadata = (storeData, pageNames) => {
     consentGiven: storeData.consent,
     pageTimings: {
       location: storeData.locationTime,
-      startTime: storeData.startTime,
-      consentTime: storeData.consentTime,
+      start: storeData.startTime,
+      consent: storeData.consentTime,
     },
   };
 
@@ -45,10 +45,9 @@ export const defaultSurveySubmitterFactory = (api, schema) => async (
   await backend.request({ ...api, data: body });
 };
 
-export const getInitialHouseholdSubmitter = (schema) => async (
+export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
   storeData,
-  formioData,
-  pageNames
+  formioData
 ) => {
   preFormatFormio(formioData);
 

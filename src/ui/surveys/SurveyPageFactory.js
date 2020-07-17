@@ -64,7 +64,11 @@ const SurveyPageFactory = ({
         );
 
       const onNextPage = (info) => {
-        this.props.recordPageTiming(info.page, Date.now());
+        this.props.recordPageTiming(
+          this.props.surveyData.pageTimings[info.page],
+          info.page,
+          Date.now()
+        );
       };
 
       if (!surveyData.completed)
@@ -96,8 +100,11 @@ const SurveyPageFactory = ({
     restartSurvey: () =>
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
-    recordPageTiming: (pageNum, time) =>
-      dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
+    recordPageTiming: (currentTiming, pageNum, time) => {
+      if (currentTiming === undefined) {
+        dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } });
+      }
+    },
   });
 
   const SurveyPageContentConnected = connect(
