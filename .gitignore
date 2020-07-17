@@ -1,11 +1,15 @@
 node_modules
 .env
-.idea/
+.idea
+
+# Auto-generated files/folders
 coverage
-docs
 .eslintcache
 app.yaml
 branch.json
+docs/api-generated
+yarn-error.log
+.cache
 
 # macOS system files
 .DS_Store

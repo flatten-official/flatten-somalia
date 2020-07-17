@@ -1,1 +1,0 @@
-process.env.ENVIRONMENT = "test";
