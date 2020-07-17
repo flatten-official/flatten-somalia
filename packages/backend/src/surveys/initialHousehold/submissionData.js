@@ -32,7 +32,6 @@ const model = createModel("Submission", {
     },
   ],
   household: {
-    // raw submissionInitial models (excluding people and death models)
     data: { type: householdDataModel, required: true },
     ref: {
       type: mongoose.ObjectId,
