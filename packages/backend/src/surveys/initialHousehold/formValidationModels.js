@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 function alive(person) {
   // use alive field if present
   // otherwise, .age is present for the living, with .deceasedAge for the dead
@@ -242,89 +244,92 @@ const personDataModel = {
   },
 };
 
-const householdDataModel = {
-  followUpId: { type: String, required: true },
-  followupConsent: {
-    type: String,
-    required: function () {
-      return this.sharePhoneNumberConsent === "consentToSharingPhoneNumber";
+const householdDataSchema = new mongoose.Schema(
+  {
+    followUpId: { type: String, required: true },
+    followupConsent: {
+      type: String,
+      required: function () {
+        return this.sharePhoneNumberConsent === "consentToSharingPhoneNumber";
+      },
+    },
+    followupVisitConsent: {
+      type: String,
+      required: function () {
+        return this.sharePhoneNumberConsent === "willNotSharePhoneNumber";
+      },
+    },
+    deathsWithinHousehold: { type: String, required: true },
+    /* FIRST PAGE */
+    sharePhoneNumberConsent: { type: String, required: true },
+    phoneNumber: {
+      type: String,
+      required: function () {
+        return this.sharePhoneNumberConsent === "consentToSharingPhoneNumber";
+      },
+    },
+    email: { type: String, required: false },
+    district: { type: String, required: true },
+    // TODO possibly make into a string
+    subdistrict: { type: Object, required: true },
+    housingType: { type: String, required: true },
+    // TODO rename to otherHousingType
+    other: { type: String, required: false },
+    ownershipType: { type: String, required: true },
+    // TODO rename to otherOwnershipType
+    other2: { type: String, required: false },
+    rentRange: {
+      type: String,
+      required: function () {
+        return this.ownershipType === "rent";
+      },
+    },
+    roomsCount: { type: Number, required: true },
+    residentsCount: { type: Number, required: true },
+    /* PAGE 4 – HUMANITARIAN */
+    supportRequiredForCOVID19RiskManagement: { type: Object, required: true },
+    otherCOVID19RiskManagementSupports: {
+      type: String,
+      required: function () {
+        return (
+          this.supportRequiredForCOVID19RiskManagement &&
+          this.supportRequiredForCOVID19RiskManagement.other
+        );
+      },
+    },
+    householdNeeds: { type: Object, required: true },
+    otherHouseholdNeeds: {
+      type: String,
+      required: function () {
+        return this.householdNeeds && this.householdNeeds.other;
+      },
+    },
+    moneyQuestion: {
+      type: Object,
+      required: function () {
+        return this.householdNeeds && this.householdNeeds.money;
+      },
+    },
+    otherMonetaryNeeds: {
+      type: String,
+      required: function () {
+        return this.moneyQuestion && this.moneyQuestion.other;
+      },
+    },
+    housingSupportNeeds: {
+      type: Object,
+      required: function () {
+        return this.householdNeeds && this.householdNeeds.housingSupport;
+      },
+    },
+    otherHousingNeeds: {
+      type: String,
+      required: function () {
+        return this.housingSupportNeeds && this.housingSupportNeeds.other;
+      },
     },
   },
-  followupVisitConsent: {
-    type: String,
-    required: function () {
-      return this.sharePhoneNumberConsent === "willNotSharePhoneNumber";
-    },
-  },
-  deathsWithinHousehold: { type: String, required: true },
-  /* FIRST PAGE */
-  sharePhoneNumberConsent: { type: String, required: true },
-  phoneNumber: {
-    type: String,
-    required: function () {
-      return this.sharePhoneNumberConsent === "consentToSharingPhoneNumber";
-    },
-  },
-  email: { type: String, required: false },
-  district: { type: String, required: true },
-  // TODO possibly make into a string
-  subdistrict: { type: Object, required: true },
-  housingType: { type: String, required: true },
-  // TODO rename to otherHousingType
-  other: { type: String, required: false },
-  ownershipType: { type: String, required: true },
-  // TODO rename to otherOwnershipType
-  other2: { type: String, required: false },
-  rentRange: {
-    type: String,
-    required: function () {
-      return this.ownershipType === "rent";
-    },
-  },
-  roomsCount: { type: Number, required: true },
-  residentsCount: { type: Number, required: true },
-  /* PAGE 4 – HUMANITARIAN */
-  supportRequiredForCOVID19RiskManagement: { type: Object, required: true },
-  otherCOVID19RiskManagementSupports: {
-    type: String,
-    required: function () {
-      return (
-        this.supportRequiredForCOVID19RiskManagement &&
-        this.supportRequiredForCOVID19RiskManagement.other
-      );
-    },
-  },
-  householdNeeds: { type: Object, required: true },
-  otherHouseholdNeeds: {
-    type: String,
-    required: function () {
-      return this.householdNeeds && this.householdNeeds.other;
-    },
-  },
-  moneyQuestion: {
-    type: Object,
-    required: function () {
-      return this.householdNeeds && this.householdNeeds.money;
-    },
-  },
-  otherMonetaryNeeds: {
-    type: String,
-    required: function () {
-      return this.moneyQuestion && this.moneyQuestion.other;
-    },
-  },
-  housingSupportNeeds: {
-    type: Object,
-    required: function () {
-      return this.householdNeeds && this.householdNeeds.housingSupport;
-    },
-  },
-  otherHousingNeeds: {
-    type: String,
-    required: function () {
-      return this.housingSupportNeeds && this.housingSupportNeeds.other;
-    },
-  },
-};
+  { strict: "throw" }
+);
 
-module.exports = { personDataModel, householdDataModel };
+module.exports = { personDataModel, householdDataSchema };

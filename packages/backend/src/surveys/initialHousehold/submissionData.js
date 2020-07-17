@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { createModel } = require("../../utils/mongoose");
 const { getSubmissionMetadata, FormSchema } = require("../sharedDataSchemas");
-const { householdDataModel } = require("./formValidationModels");
+const { householdDataSchema } = require("./formValidationModels");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const model = createModel("Submission", {
@@ -32,7 +32,7 @@ const model = createModel("Submission", {
     },
   ],
   household: {
-    data: { type: householdDataModel, required: true },
+    data: { type: householdDataSchema, required: true },
     ref: {
       type: mongoose.ObjectId,
       ref: "Household",
