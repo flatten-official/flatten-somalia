@@ -65,7 +65,7 @@ const SurveyPageFactory = ({
 
       const onNextPage = (info) => {
         // Note: This if statement ensure timings won't update if a time already exists
-        // This ensures going back and forth between pages doesn't overwrite the time the person spent on the initial page
+        // This ensures going back and forth between pages doesn't overwrite the time the person spent on a page initially
         if (this.props.surveyData.pageTimings[info.page] === undefined)
           this.props.recordPageTiming(info.page, Date.now());
       };
