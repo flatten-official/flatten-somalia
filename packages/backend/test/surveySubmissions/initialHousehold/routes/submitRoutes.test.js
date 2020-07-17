@@ -6017,10 +6017,8 @@ describe("test /submit", () => {
       .expect(400);
 
     const allSubmissions = await Submission.model.find();
-    const allHouseholds = await Household.model.find();
 
-    expect(allSubmissions).toHaveLength(validMetadata.length);
-    expect(allHouseholds).toHaveLength(validMetadata.length);
+    expect(allSubmissions).toHaveLength(0);
   });
 
   it("should fail to add invalid households", async () => {
