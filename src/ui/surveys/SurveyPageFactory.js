@@ -64,11 +64,10 @@ const SurveyPageFactory = ({
         );
 
       const onNextPage = (info) => {
-        this.props.recordPageTiming(
-          this.props.surveyData.pageTimings[info.page],
-          info.page,
-          Date.now()
-        );
+        // Note: This if statement ensure timings won't update if a time already exists
+        // This ensures going back and forth between pages doesn't overwrite the time the person spent on the initial page
+        if (this.props.surveyData.pageTimings[info.page] === undefined)
+          this.props.recordPageTiming(info.page, Date.now());
       };
 
       if (!surveyData.completed)
@@ -100,11 +99,8 @@ const SurveyPageFactory = ({
     restartSurvey: () =>
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
-    recordPageTiming: (currentTiming, pageNum, time) => {
-      if (currentTiming === undefined) {
-        dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } });
-      }
-    },
+    recordPageTiming: (pageNum, time) =>
+      dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
   });
 
   const SurveyPageContentConnected = connect(
