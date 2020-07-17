@@ -57,7 +57,7 @@ const VALID_REQ_BODIES = [
       },
       consentGiven: true,
     },
-    schema: { form: "initialSurvey", version: "1.0.3" },
+    schema: { form: "initialSurvey", version: "1.0.4" },
   },
   {
     household: {
@@ -278,7 +278,7 @@ const VALID_REQ_BODIES = [
       },
       consentGiven: true,
     },
-    schema: { form: "initialSurvey", version: "1.0.3" },
+    schema: { form: "initialSurvey", version: "1.0.4" },
   },
 ];
 
