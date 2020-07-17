@@ -10,6 +10,7 @@ function dead(person) {
   return !alive(person);
 }
 
+// Not using arrow functions for required fields since the "this" keyword refers to different objects in arrow functions.
 const personDataSchema = new mongoose.Schema(
   {
     alive: { type: Boolean, required: false },
