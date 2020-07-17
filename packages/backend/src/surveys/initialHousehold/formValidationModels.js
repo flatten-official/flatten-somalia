@@ -10,7 +10,8 @@ function dead(person) {
   return !alive(person);
 }
 
-const personDataModel = {
+// becomes a schema automagically since it's within an array
+const personDataSchema = {
   alive: { type: Boolean, required: false },
   age: { type: Number, required: alive(this) },
   sex: { type: String, required: alive(this) },
@@ -332,4 +333,4 @@ const householdDataSchema = new mongoose.Schema(
   { strict: "throw" }
 );
 
-module.exports = { personDataModel, householdDataSchema };
+module.exports = { personDataSchema, householdDataSchema };
