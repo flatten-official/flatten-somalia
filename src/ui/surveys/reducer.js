@@ -22,8 +22,6 @@ const subReducer = (state, action) => {
         pageTimings: {},
       };
     case Types.ADD_PAGE_TIMING:
-      // only update if there is not an existing page timing
-      // (so this will count the first time you go to the next from a page)
       return {
         ...state,
         pageTimings: {
