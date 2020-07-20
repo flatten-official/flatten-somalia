@@ -1,5 +1,5 @@
 {
-  "name": "copy-prod-to-analytics",
+  "name": "db-copy-function",
   "version": "1.0.0",
   "dependencies": {
     "digest-fetch": "^1.1.1",
