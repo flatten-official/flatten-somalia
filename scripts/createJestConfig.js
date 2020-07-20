@@ -7,5 +7,5 @@ module.exports = (packageName, rootDir = "../../") => ({
   coverageDirectory: "<rootDir>/coverage",
   rootDir, // Defaults to ../../ since packages are stored two levels in from root
   displayName: packageName,
-  roots: [`<rootDir>/packages/${packageName}/test`], // Specifies where to look for test files
+  roots: [`<rootDir>/packages/${packageName}`], // Specifies where to look for test files
 });

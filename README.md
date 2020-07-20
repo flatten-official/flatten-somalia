@@ -36,7 +36,7 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 
 - `yarn workspace backend doc`: Generates and open the backend api docs
 
-- `yarn depcheck [PATH]`: Check for missing or unused dependencies. (e.g. `yarn depcheck ./packages/backend`)
+- `yarn depcheck`: Check for missing or unused dependencies in all packages.
 
 ## Testing
 
@@ -51,3 +51,13 @@ This will change the type of mongoDB server used during the test.
 ## Logging
 
 Logging is done using the Winston loggers. Add `util-logging` as a dependency and then use `log`. See code and util-logging package for more info.
+
+## Mongoose
+
+We use MongoDB and mongoose. To avoid two packages using different versions of mongoose
+(and hence one of the two not being connected to the db), all packages using mongoose should depend on `db-util` and not `mongoose`.
+Always use:
+
+```
+const mongoose = require("db-util");
+```

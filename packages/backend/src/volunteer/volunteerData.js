@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("db-utils");
 const _ = require("lodash");
 const { createModel } = require("../utils/mongoose");
 

@@ -21,14 +21,13 @@
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "mongoose": "^5.9.15",
     "validator": "^13.0.0",
     "util-logging": "1.0.0",
+    "db-utils": "1.0.0",
     "util-gcp": "1.0.0"
   },
   "devDependencies": {
     "apidoc": "^0.22.1",
-    "db-test-utils": "1.0.0",
     "supertest": "^4.0.2",
     "nodemon": "^2.0.4",
     "open-cli": "^6.0.1",

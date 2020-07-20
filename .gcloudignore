@@ -3,7 +3,6 @@
 # Ignore packages not used in production
 /packages/db-copy-function
 /packages/db-scripts
-/packages/db-test-utils
 
 # Ignore all docs
 README.md
