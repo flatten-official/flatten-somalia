@@ -1,4 +1,5 @@
 const { getApp } = require("../../../../src/app");
+const { log } = require("util-logging");
 
 const db = require("db-utils/inMemoryDb");
 
@@ -5762,6 +5763,7 @@ describe("test /submit", () => {
     const { agent } = await login(app);
 
     for (const household of invalidHouseholdData) {
+      log.debug(household.followUpId);
       await agent
         .post("/submit/initial")
         .send({
