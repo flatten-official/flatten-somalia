@@ -1,0 +1,8 @@
+{
+  "name": "util-config",
+  "version": "1.0.0",
+  "dependencies": {
+    "util-gcp": "1.0.0",
+    "lodash": "^4.17.19"
+  }
+}

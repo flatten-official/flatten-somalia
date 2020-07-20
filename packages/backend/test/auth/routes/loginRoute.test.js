@@ -10,7 +10,7 @@ const { getApp } = require("../../../src/app");
 const db = require("db-utils/inMemoryDb");
 const supertest = require("supertest");
 const { addVolunteer } = require("../../../src/volunteer/volunteerData");
-const { getConfig } = require("../../../src/config");
+const { getConfig } = require("util-config");
 const { TEST_VOLUNTEER } = require("../../utils/requests");
 
 describe("test /auth/login", () => {

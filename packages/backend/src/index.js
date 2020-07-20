@@ -2,14 +2,15 @@ if (process.env.ENVIRONMENT === "dev") require("dotenv").config();
 
 const MongoDatabase = require("db-utils/externalDb");
 const { getApp } = require("./app");
-const { setup: configSetup, getConfig } = require("./config");
+const serverConfig = require("./serverConfig");
+const { setup: configSetup, getConfig } = require("util-config");
 const { setup: sendGridSetup } = require("./utils/sendGrid");
 
 const { log } = require("util-logging");
 const removeCookieJob = require("./auth/removeCookieJob");
 
 async function setup() {
-  await configSetup();
+  await configSetup(serverConfig, process.env.ENVIRONMENT);
 
   const mongoUri = getConfig().secrets.mongoUri;
   await MongoDatabase.connect(mongoUri);

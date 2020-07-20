@@ -1,9 +1,12 @@
 require("dotenv").config(); // Load .env file
 const { log } = require("util-logging");
 const MongoDatabase = require("db-utils/externalDb");
-const { setup: configSetup, getConfig } = require("backend/src/config");
+const Config = require("util-config");
+const configFile = require("./config");
 
 const scriptName = process.env.SCRIPT_NAME;
+const environment = process.env.ENVIRONMENT;
+
 const scriptPath = require("../scriptPaths.json")[scriptName];
 const Confirm = require("prompt-confirm");
 
@@ -24,8 +27,8 @@ const main = async () => {
     return;
   }
 
-  await configSetup();
-  await MongoDatabase.connect(getConfig().secrets.mongoUri);
+  await Config.setup(configFile, environment);
+  await MongoDatabase.connect(Config.getConfig().secrets.mongoUri);
 
   await Script.run(...Script.arguments); // runs the script
 
