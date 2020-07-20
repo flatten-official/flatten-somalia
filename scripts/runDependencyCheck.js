@@ -42,22 +42,15 @@ const onScanComplete = (packageName) => (unused) => {
  * @returns {[{name: String, path: String}]}
  */
 function getProjectPackageDirs() {
-  const dirs = [];
-
-  const packagesDirectoryEntries = fs.readdirSync("packages", {
-    withFileTypes: true,
-  });
-
-  for (const entry of packagesDirectoryEntries) {
-    if (entry.isDirectory()) {
-      dirs.push({
-        name: entry.name,
-        path: process.cwd() + "/packages/" + entry.name,
-      });
-    }
-  }
-
-  return dirs;
+  return fs
+    .readdirSync("packages", {
+      withFileTypes: true,
+    })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => ({
+      name: entry.name,
+      path: process.cwd() + "/packages/" + entry.name,
+    }));
 }
 
 const main = () => {
