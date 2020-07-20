@@ -28,7 +28,7 @@ ENVIRONMENT=scriptProduction
 MONGO_URI=<MONGO_URI_WITH_PASSWORD>
 ```
 
-2. After running the script :warning: DELETE MONGO_URI :warning:. MONGO_URI gives read and write access to our entire database. 
+2. After running the script :warning: DELETE MONGO_URI :warning:. MONGO_URI gives read and write access to our entire database.
 
 ## Create a new script
 
@@ -38,13 +38,13 @@ MONGO_URI=<MONGO_URI_WITH_PASSWORD>
    // Set to false if you want to manage setup yourself in run().
    // When true you are automatically connected to the database.
    module.exports.useAutoConfig = true;
-   
+
    // Set to something descriptive
    module.exports.confirmationMessage = "Are you sure you want to run this script";
 
    // Specify the arguments as an array for the run function (normally the data)
    module.exports.arguments = [];
-   
+
    // Main function. Must be pure, do not access global scope (instead use arguments)
    module.exports.run = async () => {
      // TODO fill in with code to run

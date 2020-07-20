@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("db-utils");
 
 class BadInputError extends Error {
   constructor(message) {

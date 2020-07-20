@@ -6,8 +6,8 @@ const sendEmailMock = jest
   .mockImplementation(mocks.sendVerificationEmail);
 
 const { getApp } = require("../../../src/app");
-const mongoose = require("mongoose");
-const db = require("db-test-utils")(mongoose);
+
+const db = require("db-utils/inMemoryDb");
 const supertest = require("supertest");
 const { addVolunteer } = require("../../../src/volunteer/volunteerData");
 const { getConfig } = require("../../../src/config");

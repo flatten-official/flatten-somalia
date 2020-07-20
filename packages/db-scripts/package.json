@@ -12,7 +12,7 @@
     "util-logging": "1.0.0"
   },
   "devDependencies": {
-    "db-test-utils": "1.0.0",
+    "db-utils": "1.0.0",
     "prompt-confirm": "^2.0.4"
   }
 }
