@@ -30,7 +30,7 @@ const loadSecrets = async () => {
 
 const setup = async (
   configFile,
-  environmentName = null,
+  environmentName = process.env.ENVIRONMENT,
   overrideConfig = {}
 ) => {
   Config = _.defaultsDeep(

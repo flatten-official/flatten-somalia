@@ -5,7 +5,6 @@ const Config = require("util-config");
 const configFile = require("./config");
 
 const scriptName = process.env.SCRIPT_NAME;
-const environment = process.env.ENVIRONMENT;
 
 const scriptPath = require("../scriptPaths.json")[scriptName];
 const Confirm = require("prompt-confirm");
@@ -27,7 +26,7 @@ const main = async () => {
     return;
   }
 
-  await Config.setup(configFile, environment);
+  await Config.setup(configFile);
   await MongoDatabase.connect(Config.getConfig().secrets.mongoUri);
 
   await Script.run(...Script.arguments); // runs the script
