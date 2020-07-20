@@ -2,7 +2,7 @@ if (process.env.ENVIRONMENT === "dev") require("dotenv").config();
 
 const MongoDatabase = require("db-utils/externalDb");
 const { getApp } = require("./app");
-const serverConfig = require("./serverConfig");
+const serverConfig = require("./config");
 const { setup: configSetup, getConfig } = require("util-config");
 const { setup: sendGridSetup } = require("./utils/sendGrid");
 
