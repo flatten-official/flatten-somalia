@@ -1,8 +1,10 @@
 const depCheck = require("depcheck");
 const fs = require("fs");
 
+const { log } = require("util-logging");
+
 const printError = (packageName, type, json) => {
-  console.log(
+  log.warning(
     `Package: ${packageName}. ${type}. ${JSON.stringify(json) || ""}`
   );
 };
