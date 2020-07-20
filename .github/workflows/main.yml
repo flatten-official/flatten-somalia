@@ -20,6 +20,8 @@ jobs:
         node-version: '12'
     - name: Install dependencies
       run: yarn install
+    - name: Set environment variable
+      run: echo "::set-env name=DISABLE_TRANSACTIONS::TRUE"
     - name: test with coverage
       uses: paambaati/codeclimate-action@v2.6.0
       env:
