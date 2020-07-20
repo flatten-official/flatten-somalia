@@ -28,7 +28,7 @@ const Schemas = {
   },
   initialHousehold: {
     form: "initialSurvey",
-    version: "1.0.5",
+    version: "1.0.6",
   },
 };
 
@@ -64,7 +64,13 @@ export const Surveys = {
     i18nTitleKey: "initialHouseholdTitle",
     api: api.volunteerForm,
     formIOJSON: initialHouseholdJSON,
-    onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold),
+    onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold, [
+      "basicinfo",
+      "people",
+      "deaths",
+      "socialsurveyquestions",
+      "followupconsent",
+    ]),
     options: {
       enableManualLocation: true,
     },

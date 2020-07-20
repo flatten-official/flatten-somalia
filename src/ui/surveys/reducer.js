@@ -15,15 +15,34 @@ const TYPES_ARRAY = Object.values(Types);
 const subReducer = (state, action) => {
   switch (action.type) {
     case Types.RESTART_SURVEY:
-      return { consent: false, completed: false };
+      return {
+        started: false,
+        consent: false,
+        completed: false,
+        pageTimings: {},
+      };
+    case Types.ADD_PAGE_TIMING:
+      return {
+        ...state,
+        pageTimings: {
+          ...state.pageTimings,
+          [action.payload.pageNum]: action.payload.time,
+        },
+      };
     case Types.SET_FOLLOW_UP_ID:
       return { ...state, followUpId: action.payload };
     case Types.SET_LOCATION:
       return { ...state, location: action.payload };
     case Types.SET_FORMIO_CONTENT:
       return { ...state, formIO: action.payload };
+    case Types.SET_LOCATION_TIME:
+      return { ...state, locationTime: action.payload };
     case Types.SET_START_TIME:
       return { ...state, startTime: action.payload };
+    case Types.NOTIFY_STARTED:
+      return { ...state, started: true };
+    case Types.SET_CONSENT_TIME:
+      return { ...state, consentTime: action.payload };
     case Types.NOTIFY_CONSENT_GIVEN:
       return { ...state, consent: true };
     case Types.NOTIFY_COMPLETED_SURVEY:

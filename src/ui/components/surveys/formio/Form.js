@@ -8,8 +8,9 @@ import PropTypes from "prop-types";
  * @param formioForm the form defintion json
  * @param formioOptions some form options
  * @param submitHook function that is called when the form is submitted
+ * @param onNextPage function that is run when the next page is selected
  */
-const Form = ({ formioForm, formioOptions, submitHook }) => {
+const Form = ({ formioForm, formioOptions, submitHook, onNextPage }) => {
   const { i18n } = useTranslation();
 
   formioOptions = formioOptions ? formioOptions : {}; // optional prop
@@ -34,7 +35,11 @@ const Form = ({ formioForm, formioOptions, submitHook }) => {
 
   return (
     <div className="form">
-      <FormioForm options={formioOptions} form={formioForm} />
+      <FormioForm
+        options={formioOptions}
+        form={formioForm}
+        onNextPage={onNextPage}
+      />
     </div>
   );
 };
@@ -43,6 +48,7 @@ Form.propTypes = {
   formioForm: PropTypes.object.isRequired,
   formioOptions: PropTypes.object,
   submitHook: PropTypes.func,
+  onNextPage: PropTypes.func,
 };
 
 export default Form;

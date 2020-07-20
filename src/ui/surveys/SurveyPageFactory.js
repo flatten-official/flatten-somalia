@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import Types from "./actionTypes";
 import PropTypes from "prop-types";
 import {
+  ConnectedStartSurvey,
   ConnectedConsent,
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
@@ -50,6 +51,8 @@ const SurveyPageFactory = ({
       // on the first render
       if (!surveyData) return null;
 
+      if (!surveyData.started) return <ConnectedStartSurvey />;
+
       if (!surveyData.consent) return <ConnectedConsent />;
 
       // Use undefined rather than "not" since if location is not found will set to null
@@ -60,12 +63,20 @@ const SurveyPageFactory = ({
           />
         );
 
+      const onNextPage = (info) => {
+        // Note: This if statement ensure timings won't update if a time already exists
+        // This ensures going back and forth between pages doesn't overwrite the time the person spent on a page initially
+        if (this.props.surveyData.pageTimings[info.page] === undefined)
+          this.props.recordPageTiming(info.page, Date.now());
+      };
+
       if (!surveyData.completed)
         return (
           <Form
             formioForm={formIOJSON}
             submitHook={this.submitHook}
             formioOptions={{ noAlerts: false }}
+            onNextPage={onNextPage}
           />
         );
 
@@ -77,6 +88,7 @@ const SurveyPageFactory = ({
     surveyData: PropTypes.object,
     notifyCompleted: PropTypes.func,
     restartSurvey: PropTypes.func,
+    recordPageTiming: PropTypes.func,
   };
 
   const mapStateToProps = (state) => ({
@@ -87,6 +99,8 @@ const SurveyPageFactory = ({
     restartSurvey: () =>
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
+    recordPageTiming: (pageNum, time) =>
+      dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
   });
 
   const SurveyPageContentConnected = connect(
