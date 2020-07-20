@@ -42,7 +42,7 @@ const main = () => {
       depCheck(
         process.cwd() + `/packages/${package.name}`,
         {},
-        onScanComplete(package)
+        onScanComplete(package.name)
       );
     }
   }
