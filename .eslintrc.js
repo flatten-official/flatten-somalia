@@ -30,5 +30,11 @@ module.exports = {
         "no-console": "error", // All packages should be using util-logging not console.log
       },
     },
+    {
+      files: ["packages/db-copy-function/*.js"],
+      rules: {
+        "no-console": "off", // Cloud functions can't import the external module
+      },
+    },
   ],
 };

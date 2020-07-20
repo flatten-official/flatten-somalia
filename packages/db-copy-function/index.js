@@ -1,11 +1,24 @@
 const DigestFetch = require("digest-fetch");
-const { getJSONSecret } = require("util-gcp");
-const { log } = require("util-logging");
+const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 
 const SECRET_ID =
   "projects/915444252630/secrets/prod-to-analytics-cloud-function/versions/latest";
 
 const BASE_URL = "https://cloud.mongodb.com/api/atlas/v1.0";
+
+const getJSONSecret = async (secretId) => {
+  const smClient = new SecretManagerServiceClient();
+
+  try {
+    const [version] = await smClient.accessSecretVersion({ name: secretId });
+    return JSON.parse(version.payload.data.toString());
+  } catch (e) {
+    console.log(`Could not read GCP secret ${secretId}.
+       1. Check that you have the proper permissions.
+       2. Run "yarn auth" in the root directory`);
+    throw e;
+  }
+};
 
 /**
  * Returns all the structure required to make a request to retrieve the list of snapshots.
@@ -79,7 +92,7 @@ exports.function = async (data, context) => {
     analyticsProjectGroupId,
   } = await getJSONSecret(SECRET_ID);
 
-  log.info("Got secrets.");
+  console.log("Got secrets.");
 
   // Create an authentication client
   const client = new DigestFetch(atlasOrgApiPublicKey, atlasOrgApiPrivateKey);
@@ -87,7 +100,7 @@ exports.function = async (data, context) => {
   // Get the latest backup (snapshot)
   const snapshotId = await getSnapshotId(client, prodProjectGroupId);
 
-  log.info(`Got latest backup (id :${snapshotId})`);
+  console.log(`Got latest backup (id :${snapshotId})`);
 
   // Create a restore to the Analytics cluster
   const jobId = await createRestoreJob(
@@ -97,5 +110,5 @@ exports.function = async (data, context) => {
     analyticsProjectGroupId
   );
 
-  log.info(`Created restore job with id ${jobId}`);
+  console.log(`Created restore job with id ${jobId}`);
 };

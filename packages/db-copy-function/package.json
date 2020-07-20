@@ -6,7 +6,6 @@
   },
   "dependencies": {
     "digest-fetch": "^1.1.1",
-    "util-logging": "1.0.0",
-    "util-gcp": "1.0.0"
+    "@google-cloud/secret-manager": "^2.1.0"
   }
 }
