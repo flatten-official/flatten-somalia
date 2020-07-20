@@ -1,7 +1,6 @@
 const { getApp } = require("../../../../src/app");
-const mongoose = require("mongoose");
-const db = require("db-test-utils")(mongoose);
-const { log } = require("util-logging");
+
+const db = require("db-utils/inMemoryDb");
 
 const { login } = require("../../../utils/requests");
 

@@ -1,5 +1,5 @@
 const { addVolunteer, Permissions } = require("./volunteerData");
-const { Error } = require("mongoose");
+const { Error } = require("db-utils");
 const { log } = require("util-logging");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
