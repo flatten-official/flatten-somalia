@@ -36,13 +36,13 @@ const main = () => {
   depCheck(process.cwd(), {}, onScanComplete("root"));
 
   const packages = fs.readdirSync("packages", { withFileTypes: true });
-  for (const curPackage of packages) {
+  for (const package of packages) {
     // depcheck expects project folders
-    if (curPackage.isDirectory()) {
+    if (package.isDirectory()) {
       depCheck(
-        process.cwd() + `/packages/${curPackage.name}`,
+        process.cwd() + `/packages/${package.name}`,
         {},
-        onScanComplete(curPackage)
+        onScanComplete(package)
       );
     }
   }
