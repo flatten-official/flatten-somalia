@@ -10,10 +10,8 @@
     "doc": "apidoc -i src -o ../../docs/api-generated && open-cli ../../docs/api-generated/index.html"
   },
   "dependencies": {
-    "@google-cloud/secret-manager": "^2.1.0",
     "@sendgrid/mail": "^7.1.1",
     "body-parser": "^1.19.0",
-    "util-config": "^1.0.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "cron": "^1.8.2",
@@ -23,8 +21,9 @@
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "util-config": "^1.0.0",
     "util-logging": "1.0.0",
-    "util-gcp": "1.0.0"
+    "validator": "^13.1.1"
   },
   "devDependencies": {
     "apidoc": "^0.22.1",
