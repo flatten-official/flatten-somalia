@@ -2,7 +2,9 @@ const depCheck = require("depcheck");
 const fs = require("fs");
 
 const printError = (packageName, type, json) => {
-  console.log(`Package: ${packageName}. ${type}. ${JSON.stringify(json)}`);
+  console.log(
+    `Package: ${packageName}. ${type}. ${JSON.stringify(json) || ""}`
+  );
 };
 
 const onScanComplete = (packageName) => (unused) => {
@@ -20,6 +22,12 @@ const onScanComplete = (packageName) => (unused) => {
 
   if (Object.keys(unused.invalidDirs).length > 0)
     printError(packageName, "could not access/parse dirs", unused.invalidDirs); // directories that cannot access
+
+  if (packageName !== "db-utils" && unused.using.mongoose)
+    printError(
+      packageName,
+      "Should not import mongoose. db-utils should be the only package importing mongoose. See README"
+    );
 };
 
 const main = () => {
