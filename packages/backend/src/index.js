@@ -1,30 +1,21 @@
+if (process.env.ENVIRONMENT === "dev") require("dotenv").config();
+
 const MongoDatabase = require("db-utils/externalDb");
 const { getApp } = require("./app");
 const { setup: configSetup, getConfig } = require("./config");
 const { setup: sendGridSetup } = require("./utils/sendGrid");
-const _ = require("lodash");
 
 const { log } = require("util-logging");
 const removeCookieJob = require("./auth/removeCookieJob");
 
-/**
- * @param options object whose parameters indicate what to setup
- */
-async function setup(options = {}) {
-  options = _.defaults(options, {
-    config: true,
-    database: false,
-    sendGrid: false,
-    customConfig: {},
-  });
+async function setup() {
+  await configSetup();
 
-  if (options.config) await configSetup(options.customConfig);
-  if (options.database) {
-    const mongoUri = getConfig().secrets.mongoUri;
-    await MongoDatabase.connect(mongoUri);
-    removeCookieJob.start();
-  }
-  if (options.sendGrid) sendGridSetup();
+  const mongoUri = getConfig().secrets.mongoUri;
+  await MongoDatabase.connect(mongoUri);
+  removeCookieJob.start();
+
+  sendGridSetup();
 }
 
 async function startServer() {
@@ -37,8 +28,8 @@ async function startServer() {
 }
 
 async function cleanup() {
-  await MongoDatabase.disconnect();
   removeCookieJob.stop();
+  await MongoDatabase.disconnect();
 }
 
-module.exports = { setup, startServer, cleanup };
+setup().then(startServer).finally(cleanup);

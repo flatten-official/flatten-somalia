@@ -1,6 +1,7 @@
 require("dotenv").config(); // Load .env file
-const { setup, cleanup } = require("backend");
 const { log } = require("util-logging");
+const MongoDatabase = require("db-utils/externalDb");
+const { setup: configSetup, getConfig } = require("backend/src/config");
 
 const scriptName = process.env.SCRIPT_NAME;
 const scriptPath = require("../scriptPaths.json")[scriptName];
@@ -23,23 +24,16 @@ const main = async () => {
     return;
   }
 
-  if (Script.useAutoSetup) {
-    await setup({
-      config: true,
-      database: true,
-      sendGrid: false,
-    });
-  }
+  await configSetup();
+  await MongoDatabase.connect(getConfig().secrets.mongoUri);
 
-  try {
-    await Script.run(...Script.arguments); // runs the script
-  } finally {
-    if (Script.useAutoSetup) await cleanup();
-  }
+  await Script.run(...Script.arguments); // runs the script
 
   log.info(`Done script: ${scriptName}. MANUALLY VERIFY THAT ALL WENT WELL.`);
 };
 
-main().catch((e) => {
-  log.error("Script threw error:", { error: e });
-});
+main()
+  .catch((e) => {
+    log.error("Script threw error:", { error: e });
+  })
+  .finally(MongoDatabase.disconnect);

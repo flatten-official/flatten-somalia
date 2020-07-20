@@ -65,7 +65,7 @@ const environmentSpecificConfig = {
   },
 };
 
-const buildConfig = (customConfig = {}) => {
+const buildConfig = (customConfig) => {
   // DON'T USE NODE_ENV because on App Engine it is always prod even in the staging environment
   const environmentConfig = environmentSpecificConfig[process.env.ENVIRONMENT];
 
@@ -97,7 +97,7 @@ const loadSecrets = async () => {
   }
 };
 
-const setup = async (customConfig) => {
+const setup = async (customConfig = {}) => {
   Config = buildConfig(customConfig);
   await loadSecrets();
   Object.freeze(Config);
