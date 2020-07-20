@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("db-utils");
 const { findVolunteerByEmail } = require("../volunteer/volunteerData");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING

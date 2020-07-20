@@ -3,8 +3,9 @@ const {
   MongoMemoryReplSet,
   MongoMemoryServer,
 } = require("mongodb-memory-server");
-const { CONNECTION_OPTIONS } = require("backend/src/utils/mongoConnect");
+const connectionOptions = require("./connectionOptions");
 const { log } = require("util-logging");
+const mongoose = require("mongoose");
 
 const DB_NAME = "test";
 const useReplicaSet = !process.env.DISABLE_TRANSACTIONS;
@@ -23,12 +24,12 @@ else {
 /**
  * Connect to the in-memory database.
  */
-async function connectToDatabase(mongoose) {
+async function connect() {
   log.debug("Connecting to database...");
   if (useReplicaSet) await mongod.waitUntilRunning();
   const uri = await mongod.getUri(DB_NAME);
 
-  await mongoose.connect(uri, CONNECTION_OPTIONS);
+  await mongoose.connect(uri, connectionOptions);
   // required to avoid connection issues. see https://stackoverflow.com/a/54329017
   if (useReplicaSet)
     mongoose.connection.db.admin().command({
@@ -41,7 +42,7 @@ async function connectToDatabase(mongoose) {
 /**
  * Drop database, close the connection and stop mongod.
  */
-async function closeDatabase(mongoose) {
+async function close() {
   await mongoose.disconnect();
   await mongod.stop();
 }
@@ -49,7 +50,7 @@ async function closeDatabase(mongoose) {
 /**
  * Remove all the data for all db collections.
  */
-async function clearDatabase(mongoose) {
+async function clear() {
   const collections = mongoose.connection.collections;
 
   for (const key in collections) {
@@ -58,8 +59,4 @@ async function clearDatabase(mongoose) {
   }
 }
 
-module.exports = (mongoose) => ({
-  connect: () => connectToDatabase(mongoose),
-  clear: () => clearDatabase(mongoose),
-  close: () => closeDatabase(mongoose),
-});
+module.exports = { connect, clear, close };
