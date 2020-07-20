@@ -69,7 +69,11 @@ const main = () => {
   );
 
   for (const packageDir of packageDirs) {
-    depCheck(packageDir.path, {}, onScanComplete(packageDir.name));
+    depCheck(
+      packageDir.path,
+      { ignorePatterns: ["api-generated"] },
+      onScanComplete(packageDir.name)
+    );
   }
 };
 
