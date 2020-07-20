@@ -17,7 +17,7 @@ const getMetadata = (storeData, pageNames) => {
 
   if (pageNames) {
     for (const [pageNum, timing] of Object.entries(storeData.pageTimings)) {
-      metadata.pageTimings[pageNames[pageNum]] = timing;
+      metadata.pageTimings[pageNames[pageNum - 1]] = timing;
     }
   }
 
