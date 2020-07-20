@@ -44,7 +44,6 @@ const onScanComplete = (packageName) => (unused) => {
  * @returns {[{name: String, path: String}]}
  */
 function getProjectPackageDirs() {
-  const cwd = process.cwd();
   const dirs = [];
 
   const packagesDirectoryEntries = fs.readdirSync("packages", {
@@ -55,7 +54,7 @@ function getProjectPackageDirs() {
     if (entry.isDirectory()) {
       dirs.push({
         name: entry.name,
-        path: cwd + "/packages/" + entry.name,
+        path: process.cwd() + "/packages/" + entry.name,
       });
     }
   }
