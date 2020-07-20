@@ -25,7 +25,7 @@ module.exports.confirmationMessage = `${JSON.stringify(
   VOLUNTEERS,
   null,
   "  "
-)}\nAre you sure you want to add the above volunteers to the database.`;
+)}\nAre you sure you want to add the above volunteers to the database?`;
 
 module.exports.run = async (volunteers) => {
   log.info("Adding volunteers to database...");
