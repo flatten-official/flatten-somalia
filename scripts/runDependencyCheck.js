@@ -65,8 +65,9 @@ function getProjectPackageDirs() {
 
 const main = () => {
   // scan root directory, and sub-package directories
-  const packageDirs = [{ name: "root", path: process.cwd() }];
-  packageDirs.concat(getProjectPackageDirs());
+  const packageDirs = [{ name: "root", path: process.cwd() }].concat(
+    getProjectPackageDirs()
+  );
 
   for (const packageDir of packageDirs) {
     depCheck(packageDir.path, {}, onScanComplete(packageDir.name));
