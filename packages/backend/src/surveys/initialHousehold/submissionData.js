@@ -51,6 +51,7 @@ const model = createModel("Submission", {
     "location",
     "consent",
     // initial household survey
+    "basicinfo",
     "people",
     "deaths",
     "socialsurveyquestions",
