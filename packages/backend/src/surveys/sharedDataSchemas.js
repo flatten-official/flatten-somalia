@@ -8,7 +8,8 @@ const FormSchema = {
 const getSubmissionMetadata = (
   requireLocation,
   includeTeamName = true,
-  includeAddedBy = true
+  includeAddedBy = true,
+  pages = []
 ) => {
   let metadata = {
     location: {
@@ -31,6 +32,10 @@ const getSubmissionMetadata = (
       default: Date.now,
     },
     consentGiven: { type: String, required: true },
+    pageTimings: pages.reduce((acc, curr) => {
+      acc[curr] = { type: Number };
+      return acc;
+    }, {}),
   };
 
   if (includeAddedBy)
