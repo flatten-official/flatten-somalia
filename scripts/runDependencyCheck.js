@@ -22,10 +22,14 @@ const onScanComplete = (packageName) => (unused) => {
     printError(packageName, "Missing dependency", unused.missing);
 
   if (Object.keys(unused.invalidFiles).length > 0)
-    printError(packageName, "could'nt access/parse files", unused.invalidFiles);
+    printError(packageName, "couldn't access/parse files", unused.invalidFiles);
 
   if (Object.keys(unused.invalidDirs).length > 0)
-    printError(packageName, "could not access/parse dirs", unused.invalidDirs); // directories that cannot access
+    printError(
+      packageName,
+      "couldn't access/parse directories",
+      unused.invalidDirs
+    ); // directories that cannot access
 
   if (packageName !== "db-utils" && unused.using.mongoose)
     printError(
