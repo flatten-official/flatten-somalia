@@ -41,7 +41,7 @@ const onScanComplete = (packageName) => (unused) => {
 /** Get the names and paths of project package directories to check.
  *  returns names & paths of subdirectories of the `packages` directory
  *
- *  @returns {[{Object}]}
+ * @returns {[{name: String, path: String}]}
  */
 function getProjectPackageDirs() {
   const cwd = process.cwd();
