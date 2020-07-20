@@ -5,7 +5,9 @@ const { log } = require("util-logging");
 
 const printError = (packageName, type, json) => {
   log.warning(
-    `Package: ${packageName}. ${type}. ${JSON.stringify(json) || ""}`
+    `Package \u001b[1m${packageName}\u001b[0m: ${type}. ${
+      JSON.stringify(json) || ""
+    }`
   );
 };
 
