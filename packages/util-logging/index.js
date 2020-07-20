@@ -100,6 +100,4 @@ function setup() {
 
 const log = setup();
 
-log.debug("Logger configuration complete.");
-
 module.exports = { log };
