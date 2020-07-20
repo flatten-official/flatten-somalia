@@ -41,7 +41,18 @@ const model = createModel("Submission", {
   },
   // form schema version (the thing contained in the models object)
   submissionSchema: FormSchema,
-  metadata: getSubmissionMetadata(true, false, false),
+  metadata: getSubmissionMetadata(true, false, false, [
+    // general
+    "start",
+    "location",
+    "consent",
+    // initial household survey
+    "basicinfo",
+    "people",
+    "deaths",
+    "socialsurveyquestions",
+    "followupconsent",
+  ]),
   // this is filled in when this submissionInitial has been followed up with
   // submissionInitial -> household
   followUp: {
