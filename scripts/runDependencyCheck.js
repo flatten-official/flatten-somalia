@@ -38,14 +38,14 @@ const onScanComplete = (packageName) => (unused) => {
     );
 };
 
-/** Get the names and paths of directories to check.
- *  returns the root project package, and subdirectories of the `packages` directory
+/** Get the names and paths of project package directories to check.
+ *  returns names & paths of subdirectories of the `packages` directory
  *
  *  @returns {[{Object}]}
  */
-function getPackages() {
+function getProjectPackageDirs() {
   const cwd = process.cwd();
-  const packages = [{ name: "root", path: cwd }];
+  const dirs = [];
 
   const packagesDirectoryEntries = fs.readdirSync("packages", {
     withFileTypes: true,
@@ -53,19 +53,23 @@ function getPackages() {
 
   for (const entry of packagesDirectoryEntries) {
     if (entry.isDirectory()) {
-      packages.push({
+      dirs.push({
         name: entry.name,
         path: cwd + "/packages/" + entry.name,
       });
     }
   }
 
-  return packages;
+  return dirs;
 }
 
 const main = () => {
-  for (const packageDesc of getPackages()) {
-    depCheck(packageDesc.path, {}, onScanComplete(packageDesc.name));
+  // scan root directory, and sub-package directories
+  const packageDirs = [{ name: "root", path: process.cwd() }];
+  packageDirs.concat(getProjectPackageDirs());
+
+  for (const packageDir of packageDirs) {
+    depCheck(packageDir.path, {}, onScanComplete(packageDir.name));
   }
 };
 
