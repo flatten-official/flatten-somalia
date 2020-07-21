@@ -7,7 +7,7 @@ async function disconnect() {
   log.notice("Disconnected from database");
 }
 
-async function connect(mongoose, uri) {
+async function connect(uri) {
   if (!uri) throw Error("No connection URI specified");
 
   try {
