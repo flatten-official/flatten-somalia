@@ -1,8 +1,4 @@
-module.exports = ({
-  name,
-  rootDir = "../../",
-  setupFileAfterEnv,
-}) => {
+module.exports = ({ name, rootDir = "../../", setupFileAfterEnv }) => {
   const allSetupFileAfterEnv = ["<rootDir>/scripts/setupTestsAfterEnv.js"];
 
   if (setupFileAfterEnv) allSetupFileAfterEnv.push(setupFileAfterEnv);
