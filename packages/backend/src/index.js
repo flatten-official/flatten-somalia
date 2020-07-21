@@ -2,21 +2,21 @@ if (process.env.ENVIRONMENT === "dev") require("dotenv").config();
 
 const MongoDatabase = require("db-utils/externalDb");
 const { getApp } = require("./app");
-const serverConfig = require("./config");
-const { setup: configSetup, getConfig } = require("util-config");
-const { setup: sendGridSetup } = require("./utils/sendGrid");
+const configFile = require("./config");
+const Config = require("util-config");
+const SendGrid = require("./utils/sendGrid");
 
 const { log } = require("util-logging");
 const removeCookieJob = require("./auth/removeCookieJob");
 
 async function setup() {
-  await configSetup(serverConfig);
+  await Config.setup(configFile);
 
-  const mongoUri = getConfig().secrets.mongoUri;
+  const mongoUri = Config.getConfig().secrets.mongoUri;
   await MongoDatabase.connect(mongoUri);
   removeCookieJob.start();
 
-  sendGridSetup();
+  SendGrid.setup();
 }
 
 async function startServer() {
