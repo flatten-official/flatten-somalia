@@ -2,7 +2,7 @@
 // https://github.com/sendgrid/sendgrid-nodejs
 
 const sgMail = require("@sendgrid/mail");
-const { getConfig } = require("../config");
+const { getConfig } = require("util-config");
 const { log } = require("util-logging");
 
 module.exports.setup = () => {

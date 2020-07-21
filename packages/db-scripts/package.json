@@ -2,13 +2,12 @@
   "name": "db-scripts",
   "version": "1.0.0",
   "main": "launcher.js",
-  "scripts": {
-    "start": "node launcher.js"
-  },
   "dependencies": {
     "backend": "1.0.0",
+    "util-config": "^1.0.0",
     "dotenv": "^8.2.0",
-    "util-logging": "1.0.0"
+    "util-logging": "1.0.0",
+    "util-gcp": "1.0.0"
   },
   "devDependencies": {
     "db-utils": "1.0.0",

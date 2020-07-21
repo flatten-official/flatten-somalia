@@ -1,0 +1,21 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - functions
+      - deploy
+      - prod-to-analytic-data-pipeline
+      - --region=europe-west1
+      - --runtime=nodejs10
+      # function is triggered by Pub/Sub
+      - --trigger-topic=somalia-prod-to-analytics
+      # function uses another service account, note that this account requires iam.serviceAccounts.actAs permissions
+      - --service-account=prod-to-analytics-pipeline@somalia-prod.iam.gserviceaccount.com
+      # route all traffic through the vpc connector and cloud NAT
+      - --vpc-connector=prod-to-analytics-func
+      - --egress-settings=all # route "all" traffic through VPC
+      - --ingress-settings=internal-only
+      # Other config
+      - --memory=256MB
+      - --clear-env-vars
+      - --max-instances=1
+      - --timeout=500
