@@ -33,4 +33,9 @@ async function cleanup() {
   await MongoDatabase.disconnect();
 }
 
-setup().then(startServer).finally(cleanup);
+setup()
+  .then(startServer)
+  .catch(async (e) => {
+    log.emergency("Server crashed.", { error: e });
+    await cleanup();
+  });
