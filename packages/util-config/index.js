@@ -1,6 +1,6 @@
 const _ = require("lodash");
 
-let Config;
+let Config = {};
 
 const getEnvironmentConfig = (config, environmentName) => {
   if (!environmentName) return {};
