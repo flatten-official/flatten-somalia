@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "yarn workspace backend dev",
     "lint": "eslint --fix .",
-    "cloud-func": "node scripts/cloudFunctionLauncher.js",
+    "test-cloud-func": "node scripts/cloudFunctionLauncher.js",
     "auth": "gcloud auth login && gcloud auth application-default login && gcloud config set project flatten-staging-271921",
     "auth-no-browser": "gcloud auth login && gcloud auth application-default login --no-launch-browser && gcloud config set project flatten-staging-271921",
     "test": "jest",
