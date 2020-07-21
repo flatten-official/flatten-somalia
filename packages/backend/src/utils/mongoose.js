@@ -1,7 +1,11 @@
 const mongoose = require("db-utils");
 
+// enforce strict: throw to stop extra fields from being silently dropped
+const createSchema = (definition) =>
+  new mongoose.Schema(definition, { strict: "throw" });
+
 const createModel = (name, definition) =>
-  mongoose.model(name, new mongoose.Schema(definition, { strict: "throw" })); // strict throw doesn't allow extra fields to be silently dropped
+  mongoose.model(name, createSchema(definition));
 
 const runOpWithinTransaction = async (operations) => {
   if (process.env.DISABLE_TRANSACTIONS) {
@@ -23,4 +27,4 @@ const runOpWithinTransaction = async (operations) => {
   }
 };
 
-module.exports = { createModel, runOpWithinTransaction };
+module.exports = { createSchema, createModel, runOpWithinTransaction };
