@@ -26,7 +26,8 @@ const main = async () => {
     return;
   }
 
-  await Config.setup(configFile);
+  Config.setup(configFile);
+  await Config.loadSecrets();
   await MongoDatabase.connect(Config.getConfig().secrets.mongoUri);
 
   await Script.run(...Script.arguments); // runs the script

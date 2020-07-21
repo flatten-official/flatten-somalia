@@ -15,6 +15,7 @@ const getEnvironmentConfig = (config, environmentName) => {
 };
 
 const loadSecrets = async () => {
+  if (!Config.secretId) return;
   const secretJson = await getJSONSecret(Config.secretId);
 
   for (const key in Config.secrets) {
@@ -28,7 +29,7 @@ const loadSecrets = async () => {
   }
 };
 
-const setup = async (
+const setup = (
   configFile,
   environmentName = process.env.ENVIRONMENT,
   overrideConfig = {}
@@ -38,13 +39,10 @@ const setup = async (
     getEnvironmentConfig(configFile, environmentName),
     configFile.common
   );
-
-  if (Config.secretId) await loadSecrets();
-
-  Object.freeze(Config);
 };
 
 module.exports = {
   getConfig: () => Config, // We return a function to compute dynamically since it is set lazily
   setup,
+  loadSecrets,
 };

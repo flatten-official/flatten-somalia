@@ -10,8 +10,8 @@ const { log } = require("util-logging");
 const removeCookieJob = require("./auth/removeCookieJob");
 
 async function setup() {
-  await Config.setup(configFile);
-
+  Config.setup(configFile);
+  await Config.loadSecrets();
   const mongoUri = Config.getConfig().secrets.mongoUri;
   await MongoDatabase.connect(mongoUri);
   removeCookieJob.start();

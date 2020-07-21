@@ -1,4 +1,5 @@
 const { log } = require("util-logging");
+const { getConfig } = require("util-config");
 
 let branchName;
 
@@ -13,6 +14,8 @@ module.exports = (req, res) => {
   res
     .status(200)
     .send(
-      `Somalia backend online. Environment: ${process.env.ENVIRONMENT}. Branch: ${branchName}`
+      `Somalia backend online. Environment: ${
+        getConfig().envName
+      }. Branch: ${branchName}`
     );
 };

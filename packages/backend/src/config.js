@@ -15,6 +15,8 @@ module.exports = {
   },
   envSpecific: {
     dev: {
+      sendClientErrors: true,
+      envName: "development",
       secretId:
         "projects/233853318753/secrets/backend-so-config/versions/latest",
       debug: true,
@@ -25,26 +27,34 @@ module.exports = {
       },
     },
     staging: {
+      sendClientErrors: true,
+      envName: "staging",
       secretId:
         "projects/233853318753/secrets/backend-so-config/versions/latest",
       debug: false,
       secureCookies: true,
+      useStackdriver: true,
       urls: {
         frontendHost: "https://v.staging.flatten.org",
         backendHost: "https://api.staging.flatten.org",
       },
     },
     production: {
+      sendClientErrors: false,
+      envName: "production",
       secretId:
         "projects/915444252630/secrets/backend-gae-config-so/versions/latest",
       debug: false,
       secureCookies: true,
+      useStackdriver: true,
       urls: {
         frontendHost: "https://v.flatten.org",
         backendHost: "https://api.flatten.org",
       },
     },
     test: {
+      sendClientErrors: false,
+      envName: "test",
       debug: false,
       secureCookies: false,
       urls: {
