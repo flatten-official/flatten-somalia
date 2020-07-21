@@ -84,25 +84,60 @@ Snapshots allow us to restore the database to a previous state if something trag
 
 This procedure describes end-to-end how to develop, test, merge and deploy a database script.
 
-### Develop
+### Develop a script
 
-1. Follow the "Create a new script" instructions in the README of the `db-scripts` package to develop a script. This includes:
+1. Copy `/packages/db-scripts/template` to `packages/db-scripts/<SCRIPT-NAME>`.
 
-   - Write your script
-   - Write success tests
-   - Write unit tests
-
-2. Write success tests. Success tests will check if the database is in the desired state. They should be run after the script completes.
-   Do not include `.test` in the file extension since we don't want Jest to run these tests automatically (since they aren't pure).
-
-3. Add a unit test that runs the success test
+2. Write the script, unit tests and success tests by filling in the code in your new script directory.
 
 ### Test locally
 
-### Test on dev
+Run the unit tests with jest.
 
-1. Create a snapshot of the staging database before applying your test ().
+### Test on dev database
 
-### Run on
+1. Create a snapshot of the staging database on Atlas before running your test. Name the snapshot appropriately.
+(Clusters -> Staging -> Backup ->  Take Snapshot Now)
+
+2. In a `.env` file in the root add the following line:
+
+```
+ENVIRONMENT=dev
+```
+
+2. Run `yarn scripts packages/db-scripts/<SCRIPT-NAME>` to run the script and its success tests on the development database.
+
+### Test on a copy of production
+
+#### Setup the copy database
+
+1. Make a snapshot of the production database. Name appropriately. (Clusters -> Production -> Backup -> Take Snapshot Now).
+
+2. Once the snapshot is created, restore that snapshot to the test cluster.
+(Backup -> Restore (for the created snapshot) -> Select the testing project and cluster -> Restore)
+
+3. **Temporarily** whitelist your IP address in Atlas for the testing project.
+
+#### Test the script on the copy database
+
+1. Change `.env` to 
+
+```
+ENVIRONMENT=test-db
+```
+
+2. Run `yarn scripts packages/db-scripts/<SCRIPT-NAME>`
 
 ### Run on production
+
+1. Make a snapshot of the production database. Name appropriately. (Clusters -> Production -> Backup -> Take Snapshot Now).
+
+2. **Temporarily** whitelist your IP address in Atlas for the production project.
+
+3. Change `.env` to 
+
+```
+ENVIRONMENT=production
+```
+
+4. Run `yarn scripts packages/db-scripts/<SCRIPT-NAME>`

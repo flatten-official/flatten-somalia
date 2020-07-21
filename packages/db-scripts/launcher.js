@@ -12,16 +12,7 @@ const Confirm = require("prompt-confirm");
 const GCP = require("util-gcp");
 
 const main = async () => {
-  const scriptName = process.env.SCRIPT_NAME;
-
-  const scriptPath = require("./scriptPaths.json")[scriptName];
-
-  if (!scriptPath)
-    throw new Error(
-      "no valid SCRIPT_NAME specified in .env file. Look at scriptPaths.js for valid script names"
-    );
-
-  const Script = require(scriptPath);
+  const Script = require(process.cwd() + "/" + process.argv[2]);
 
   const accepted = await new Confirm(Script.confirmationMessage).run();
 
@@ -33,11 +24,11 @@ const main = async () => {
   await GCP.loadSecretsIntoConfig();
   await MongoDatabase.connect(Config.getConfig().secrets.mongoUri);
 
-  log.info(`Running script: ${scriptName}`);
+  log.info(`Running script.`);
 
   await Script.run(...Script.arguments); // runs the script
 
-  log.info(`Done script: ${scriptName}. MANUALLY VERIFY THAT ALL WENT WELL.`);
+  log.info(`Done script. MANUALLY VERIFY THAT ALL WENT WELL.`);
 };
 
 main()

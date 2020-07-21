@@ -1,9 +1,5 @@
 const { log } = require("util-logging");
 
-// Set to false if you want to manage setup yourself in run().
-// When true you are automatically connected to the database.
-module.exports.useAutoConfig = true;
-
 // Set to something descriptive
 module.exports.confirmationMessage = "Are you sure you want to run this script";
 
