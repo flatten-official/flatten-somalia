@@ -1,17 +1,21 @@
 if (process.env.ENVIRONMENT === "dev") require("dotenv").config();
 
+// region Load the config
+const Config = require("util-config");
+const configFile = require("./config");
+Config.setup(configFile); // Do this first since other imports (e.g. logging) make use of config.
+// endregion
+
 const MongoDatabase = require("db-utils/externalDb");
 const { getApp } = require("./app");
-const configFile = require("./config");
-const Config = require("util-config");
 const SendGrid = require("./utils/sendGrid");
 
 const { log } = require("util-logging");
 const removeCookieJob = require("./auth/removeCookieJob");
+const GCP = require("util-gcp");
 
 async function setup() {
-  Config.setup(configFile);
-  await Config.loadSecrets();
+  await GCP.loadSecretsIntoConfig();
   const mongoUri = Config.getConfig().secrets.mongoUri;
   await MongoDatabase.connect(mongoUri);
   removeCookieJob.start();

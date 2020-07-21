@@ -23,6 +23,7 @@
     "lodash": "^4.17.15",
     "util-config": "^1.0.0",
     "util-logging": "1.0.0",
+    "util-gcp": "1.0.0",
     "validator": "^13.1.1"
   },
   "devDependencies": {

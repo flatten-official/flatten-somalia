@@ -1,4 +1,3 @@
-const { getJSONSecret } = require("util-gcp");
 const _ = require("lodash");
 
 let Config;
@@ -14,21 +13,6 @@ const getEnvironmentConfig = (config, environmentName) => {
   return config.envSpecific[environmentName];
 };
 
-const loadSecrets = async () => {
-  if (!Config.secretId) return;
-  const secretJson = await getJSONSecret(Config.secretId);
-
-  for (const key in Config.secrets) {
-    // eslint-disable-next-line no-prototype-builtins
-    if (Config.secrets.hasOwnProperty(key)) {
-      if (!(key in secretJson))
-        throw Error(`Could not find config secret ${key}`);
-
-      Config.secrets[key] = secretJson[key];
-    }
-  }
-};
-
 const setup = (
   configFile,
   environmentName = process.env.ENVIRONMENT,
@@ -42,7 +26,9 @@ const setup = (
 };
 
 module.exports = {
-  getConfig: () => Config, // We return a function to compute dynamically since it is set lazily
   setup,
-  loadSecrets,
+  setConfig: (newConfig) => {
+    Config = newConfig;
+  },
+  getConfig: () => Config, // We return a function to compute dynamically since it is set lazily
 };

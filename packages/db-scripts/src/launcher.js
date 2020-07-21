@@ -1,16 +1,20 @@
 require("dotenv").config(); // Load .env file
-const { log } = require("util-logging");
-const MongoDatabase = require("db-utils/externalDb");
+
+// region Load the config
 const Config = require("util-config");
 const configFile = require("./config");
+Config.setup(configFile); // Do this first since other imports (e.g. logging) make use of config.
+// endregion
 
-const scriptName = process.env.SCRIPT_NAME;
-
-const scriptPath = require("../scriptPaths.json")[scriptName];
+const { log } = require("util-logging");
+const MongoDatabase = require("db-utils/externalDb");
 const Confirm = require("prompt-confirm");
+const GCP = require("util-gcp");
 
 const main = async () => {
-  log.info(`Starting script: ${scriptName}`);
+  const scriptName = process.env.SCRIPT_NAME;
+
+  const scriptPath = require("../scriptPaths.json")[scriptName];
 
   if (!scriptPath)
     throw new Error(
@@ -26,9 +30,10 @@ const main = async () => {
     return;
   }
 
-  Config.setup(configFile);
-  await Config.loadSecrets();
+  await GCP.loadSecretsIntoConfig();
   await MongoDatabase.connect(Config.getConfig().secrets.mongoUri);
+
+  log.info(`Running script: ${scriptName}`);
 
   await Script.run(...Script.arguments); // runs the script
 
