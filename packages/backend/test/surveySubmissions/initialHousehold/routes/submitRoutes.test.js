@@ -1775,34 +1775,7 @@ describe("test /submit", () => {
   it("should add valid metadata", async () => {
     const { agent } = await login(app);
     const household = {
-      followUpId: "1",
-      sharePhoneNumberConsent: "willNotSharePhoneNumber",
-      district: "Warta-Nabada",
-      subdistrict: { name: "Hanti-wadaag" },
-      housingType: "villa",
-      ownershipType: "hold",
-      roomsCount: 2,
-      residentsCount: 2,
-      deathsWithinHousehold: "no",
-      supportRequiredForCOVID19RiskManagement: {
-        sanitation: true,
-        medicalSupport: false,
-        financial: false,
-        housing: false,
-        noSupport: false,
-        other: false,
-      },
-      householdNeeds: {
-        money: false,
-        sanitation: false,
-        healthcareAccess: false,
-        housingSupport: false,
-        educationalSupport: false,
-        emotionalSupport: true,
-        noHouseholdNeeds: false,
-        other: false,
-      },
-      followupVisitConsent: "no",
+      ...minimumHouseholdData,
     };
 
     for (const metadata of validMetadata) {
@@ -1851,36 +1824,7 @@ describe("test /submit", () => {
 
   it("should add valid living people", async () => {
     const { agent } = await login(app);
-    const household = {
-      followUpId: "1",
-      sharePhoneNumberConsent: "willNotSharePhoneNumber",
-      district: "Warta-Nabada",
-      subdistrict: { name: "Hanti-wadaag" },
-      housingType: "villa",
-      ownershipType: "hold",
-      roomsCount: 2,
-      residentsCount: validLivingPeople.length,
-      deathsWithinHousehold: "no",
-      supportRequiredForCOVID19RiskManagement: {
-        sanitation: true,
-        medicalSupport: false,
-        financial: false,
-        housing: false,
-        noSupport: false,
-        other: false,
-      },
-      householdNeeds: {
-        money: false,
-        sanitation: false,
-        healthcareAccess: false,
-        housingSupport: false,
-        educationalSupport: false,
-        emotionalSupport: true,
-        noHouseholdNeeds: false,
-        other: false,
-      },
-      followupVisitConsent: "no",
-    };
+    const household = minimumHouseholdData;
 
     await agent
       .post("/submit/initial")
@@ -1900,34 +1844,9 @@ describe("test /submit", () => {
   it("should add valid dead people", async () => {
     const { agent } = await login(app);
     const household = {
-      followUpId: "1",
-      sharePhoneNumberConsent: "willNotSharePhoneNumber",
-      district: "Warta-Nabada",
-      subdistrict: { name: "Hanti-wadaag" },
-      housingType: "villa",
-      ownershipType: "hold",
-      roomsCount: 2,
+      ...minimumHouseholdData,
       residentsCount: 0,
       deathsWithinHousehold: "yes",
-      supportRequiredForCOVID19RiskManagement: {
-        sanitation: true,
-        medicalSupport: false,
-        financial: false,
-        housing: false,
-        noSupport: false,
-        other: false,
-      },
-      householdNeeds: {
-        money: false,
-        sanitation: false,
-        healthcareAccess: false,
-        housingSupport: false,
-        educationalSupport: false,
-        emotionalSupport: true,
-        noHouseholdNeeds: false,
-        other: false,
-      },
-      followupVisitConsent: "no",
     };
 
     await agent
@@ -1956,7 +1875,7 @@ describe("test /submit", () => {
           caphfdasoif: "invalid",
           ...validMetadata[0],
         },
-        household: validHouseholdData[0],
+        household: minimumHouseholdData,
         people: [],
         deaths: [],
       })
@@ -1993,36 +1912,7 @@ describe("test /submit", () => {
 
   it("should fail to add invalid living people", async () => {
     const { agent } = await login(app);
-    const household = {
-      followUpId: "1",
-      sharePhoneNumberConsent: "willNotSharePhoneNumber",
-      district: "Warta-Nabada",
-      subdistrict: { name: "Hanti-wadaag" },
-      housingType: "villa",
-      ownershipType: "hold",
-      roomsCount: 2,
-      residentsCount: invalidLivingPeople.length,
-      deathsWithinHousehold: "yes",
-      supportRequiredForCOVID19RiskManagement: {
-        sanitation: true,
-        medicalSupport: false,
-        financial: false,
-        housing: false,
-        noSupport: false,
-        other: false,
-      },
-      householdNeeds: {
-        money: false,
-        sanitation: false,
-        healthcareAccess: false,
-        housingSupport: false,
-        educationalSupport: false,
-        emotionalSupport: true,
-        noHouseholdNeeds: false,
-        other: false,
-      },
-      followupVisitConsent: "no",
-    };
+    const household = minimumHouseholdData;
 
     for (const person of invalidLivingPeople) {
       await agent
@@ -2044,34 +1934,9 @@ describe("test /submit", () => {
   it("should fail to add invalid dead people", async () => {
     const { agent } = await login(app);
     const household = {
-      followUpId: "1",
-      sharePhoneNumberConsent: "willNotSharePhoneNumber",
-      district: "Warta-Nabada",
-      subdistrict: { name: "Hanti-wadaag" },
-      housingType: "villa",
-      ownershipType: "hold",
-      roomsCount: 2,
+      ...minimumHouseholdData,
       residentsCount: 0,
       deathsWithinHousehold: "yes",
-      supportRequiredForCOVID19RiskManagement: {
-        sanitation: true,
-        medicalSupport: false,
-        financial: false,
-        housing: false,
-        noSupport: false,
-        other: false,
-      },
-      householdNeeds: {
-        money: false,
-        sanitation: false,
-        healthcareAccess: false,
-        housingSupport: false,
-        educationalSupport: false,
-        emotionalSupport: true,
-        noHouseholdNeeds: false,
-        other: false,
-      },
-      followupVisitConsent: "no",
     };
 
     await agent
