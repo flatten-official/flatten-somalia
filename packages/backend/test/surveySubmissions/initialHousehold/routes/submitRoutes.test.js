@@ -1490,9 +1490,18 @@ describe("test /submit", () => {
     const allHouseholds = await Household.model.find();
     const allPeople = await Person.model.find();
 
-    expect(allSubmissions).toHaveLength(3);
-    expect(allHouseholds).toHaveLength(3);
-    expect(allPeople).toHaveLength(4);
+    const expectedNumberOfPeople = VALID_REQ_BODIES.reduce(
+      (total, curValue) => {
+        const people = curValue.people || [];
+        const deaths = curValue.deaths || [];
+        return total + people.length + deaths.length;
+      },
+      0
+    );
+
+    expect(allSubmissions).toHaveLength(VALID_REQ_BODIES.length);
+    expect(allHouseholds).toHaveLength(VALID_REQ_BODIES.length);
+    expect(allPeople).toHaveLength(expectedNumberOfPeople);
   });
 
   it("should add submissions properties properly", async () => {
