@@ -13,6 +13,14 @@ const getEnvironmentConfig = (config, environmentName) => {
   return config.envSpecific[environmentName];
 };
 
+/**
+ *  Merges the following configurations with this priority order.
+ *  1. overrideConfig: Any additional config that can be specified at runtime.
+ *  2. environment specific config. Can be found in configFile.envSpecific.
+ *  3. Common or shared config. Can be found in configFile.common.
+ *
+ *  Assigns the merged config to `Config` which is accessible throughout the codebase with getConfig().
+ */
 const setup = (
   configFile,
   environmentName = process.env.ENVIRONMENT,
