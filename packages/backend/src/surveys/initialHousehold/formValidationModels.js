@@ -228,7 +228,7 @@ const personDataSchema = createSchema({
       );
     },
   },
-  potentialContactAddress: { type: String, required: false },
+  potentialContactAddress: { type: Object, required: false },
   cityTransportationMethod: {
     type: Object,
     required: function () {
@@ -364,7 +364,12 @@ const personDataSchema = createSchema({
 });
 
 const householdDataSchema = createSchema({
-  followUpId: { type: String, required: true },
+  followUpId: {
+    type: String,
+    required: function () {
+      return this.sharePhoneNumberConsent === "willNotSharePhoneNumber";
+    },
+  },
   followupConsent: {
     type: String,
     required: function () {
