@@ -24,7 +24,7 @@ jobs:
       uses: paambaati/codeclimate-action@v2.6.0
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        DISABLE_TRANSACTIONS: TRUE
+#        DISABLE_TRANSACTIONS: TRUE
       with:
         coverageCommand: yarn test
         coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
