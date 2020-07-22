@@ -1,13 +1,20 @@
 require("dotenv").config(); // Load .env file
-const { setup, cleanup } = require("backend");
-const { log } = require("util-logging");
 
-const scriptName = process.env.SCRIPT_NAME;
-const scriptPath = require("../scriptPaths.json")[scriptName];
+// region Load the config
+const Config = require("util-config");
+const configFile = require("./config");
+Config.setup(configFile); // Do this first since other imports (e.g. logging) make use of config.
+// endregion
+
+const { log } = require("util-logging");
+const MongoDatabase = require("db-utils/externalDb");
 const Confirm = require("prompt-confirm");
+const GCP = require("util-gcp");
 
 const main = async () => {
-  log.info(`Starting script: ${scriptName}`);
+  const scriptName = process.env.SCRIPT_NAME;
+
+  const scriptPath = require("../scriptPaths.json")[scriptName];
 
   if (!scriptPath)
     throw new Error(
@@ -23,23 +30,18 @@ const main = async () => {
     return;
   }
 
-  if (Script.useAutoSetup) {
-    await setup({
-      config: true,
-      database: true,
-      sendGrid: false,
-    });
-  }
+  await GCP.loadSecretsIntoConfig();
+  await MongoDatabase.connect(Config.getConfig().secrets.mongoUri);
 
-  try {
-    await Script.run(...Script.arguments); // runs the script
-  } finally {
-    if (Script.useAutoSetup) await cleanup();
-  }
+  log.info(`Running script: ${scriptName}`);
+
+  await Script.run(...Script.arguments); // runs the script
 
   log.info(`Done script: ${scriptName}. MANUALLY VERIFY THAT ALL WENT WELL.`);
 };
 
-main().catch((e) => {
-  log.error("Script threw error:", { error: e });
-});
+main()
+  .catch((e) => {
+    log.error("Script threw error:", { error: e });
+  })
+  .finally(MongoDatabase.disconnect);
