@@ -9,6 +9,7 @@ const { testOnlyIf } = require("../../../utils/jest");
 const Submission = require("../../../../src/surveys/initialHousehold/submissionData");
 const Household = require("../../../../src/surveys/initialHousehold/householdData");
 const Person = require("../../../../src/surveys/initialHousehold/peopleData");
+const { sleep } = require("../../../utils/time");
 
 const VALID_REQ_BODIES = [
   {
@@ -1739,6 +1740,10 @@ describe("test /submit", () => {
 
     for (const reqBody of VALID_REQ_BODIES) {
       await agent.post("/submit/initial").send(reqBody).expect(200);
+
+      // Used to avoid "unable to read from a snapshot due to pending collection catalog changes" when using transactions
+      // eslint-disable-next-line jest/no-if
+      if (!process.env.DISABLE_TRANSACTIONS) await sleep(500);
     }
 
     const allSubmissions = await Submission.model.find();
