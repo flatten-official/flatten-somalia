@@ -1,6 +1,6 @@
 const { getApp } = require("../../../../src/app");
 const { log } = require("util-logging");
-const VALID_REQ_BODIES = require("./validSubmissions.json");
+const VALID_REQ_BODIES = require("./validRequestBodies.json");
 
 const db = require("db-utils/inMemoryDb");
 
