@@ -1,5 +1,6 @@
 const { getApp } = require("../../../../src/app");
 const { log } = require("util-logging");
+const VALID_REQ_BODIES = require("./validRequestBodies.json");
 
 const db = require("db-utils/inMemoryDb");
 
@@ -9,277 +10,8 @@ const { testOnlyIf } = require("../../../utils/jest");
 const Submission = require("../../../../src/surveys/initialHousehold/submissionData");
 const Household = require("../../../../src/surveys/initialHousehold/householdData");
 const Person = require("../../../../src/surveys/initialHousehold/peopleData");
+const { sleep } = require("../../../utils/time");
 
-const VALID_REQ_BODIES = [
-  {
-    household: {
-      followUpId: "7-26779",
-      sharePhoneNumberConsent: "willNotSharePhoneNumber",
-      email: "",
-      district: "Warta-Nabada",
-      housingType: "villa",
-      deathsWithinHousehold: "no",
-      supportRequiredForCOVID19RiskManagement: {
-        sanitation: false,
-        medicalSupport: false,
-        financial: true,
-        housing: false,
-        noSupport: false,
-        other: false,
-      },
-      householdNeeds: {
-        money: false,
-        sanitation: false,
-        healthcareAccess: false,
-        housingSupport: false,
-        educationalSupport: true,
-        emotionalSupport: false,
-        noHouseholdNeeds: false,
-        other: false,
-      },
-      followupVisitConsent: "yes",
-      subdistrict: { name: "Hanti-wadaag" },
-      ownershipType: "hold",
-      roomsCount: 2,
-      residentsCount: 2,
-    },
-    people: [],
-    metadata: {
-      endTime: 1592587961275,
-      timeToComplete: 31055,
-      location: {
-        lat: 2.045,
-        lng: 45.333,
-        accuracy: null,
-        altitude: null,
-        wasManual: true,
-      },
-      consentGiven: true,
-    },
-    schema: { form: "initialSurvey", version: "1.0.4" },
-  },
-  {
-    household: {
-      followUpId: "7-26769",
-      sharePhoneNumberConsent: "consentToSharingPhoneNumber",
-      email: "",
-      district: "C/casiis",
-      housingType: "villa",
-      deathsWithinHousehold: "yes",
-      supportRequiredForCOVID19RiskManagement: {
-        sanitation: false,
-        medicalSupport: false,
-        financial: false,
-        housing: false,
-        noSupport: true,
-        other: false,
-      },
-      householdNeeds: {
-        money: true,
-        sanitation: false,
-        healthcareAccess: false,
-        housingSupport: false,
-        educationalSupport: false,
-        emotionalSupport: false,
-        noHouseholdNeeds: false,
-        other: false,
-      },
-      phoneNumber: "11 11 11 111",
-      followupConsent: "yes",
-      subdistrict: { name: "Gaarisa" },
-      ownershipType: "hold",
-      roomsCount: 2,
-      residentsCount: 2,
-      moneyQuestion: {
-        food: true,
-        sanitation: false,
-        SMESupport: false,
-        other: false,
-      },
-    },
-    people: [
-      {
-        sex: "female",
-        residenceStatus: "resident",
-        employed: "no",
-        educationLevel: { name: "university" },
-        monthlyIncome1: "",
-        COVID19KnowledgeLevel: { name: "minimal" },
-        primaryInformationSource: {
-          internet: false,
-          radio: true,
-          television: false,
-          phone: false,
-          newsHotline: false,
-          friendsAndFamily: false,
-          mosques: false,
-          schools: false,
-          traditionalElder: false,
-          socialMedia: false,
-          other: false,
-        },
-        COVID19PreventionMeasures: {
-          frequentHandwashing: false,
-          reduceContacts: true,
-          soughtInformation: false,
-          maskWearking: false,
-          stayingHome: false,
-          respectingCurfew: false,
-          noPreventionMeasures: false,
-        },
-        nationalHotlineAwareness: "yes",
-        hasDisabilities: "yes",
-        comorbidities: {
-          highBloodPressure: false,
-          diabetes: false,
-          heartDisease: true,
-          lungDisease: false,
-          cancerOrPoorImmunity: false,
-          immunocompromised: false,
-          malnutrition: false,
-          noComorbidities: false,
-          other: false,
-        },
-        currentSymptoms1: {
-          newFever: false,
-          newOrWorseningCough: true,
-          shortnessOfBreath: false,
-          gustatoryOrOlfactoryImpairment: false,
-          fatigue: false,
-          sneezing: false,
-          achesAndPains: false,
-          runnyNose: false,
-          chillsOrNightSweats: false,
-          soreThroat: false,
-          diarrhea: false,
-          headache: false,
-          nausea: false,
-          rash: false,
-          appetiteLoss: false,
-          stomachPainOrCramps: false,
-          other: false,
-          noSymptoms: false,
-        },
-        startOfSymptoms: "2020-06-01T00:00:00-04:00",
-        hasBeenTestedForCOVID19: "yes",
-        closeContactWithInfectedOrSymptomaticPerson: "no",
-        cityTransportationMethod: {
-          publicBus: false,
-          driving: false,
-          bajaaj: true,
-          walking: false,
-          cycling: false,
-          other: false,
-        },
-        recentTravelOutsideDistrict: "yes",
-        mobilityRestrictions: {
-          security: false,
-          flooding: true,
-          gatedCommunities: false,
-          checkpoints: false,
-          infrastructure: false,
-          curfews: false,
-          other: false,
-        },
-        age: 2,
-        isPregnant: "yes",
-        primaryIncomeSource: "financialAid",
-        disabilityTypes: {
-          physical: false,
-          learning: true,
-          psychiatric: false,
-          visual: false,
-          hearing: false,
-          other: false,
-        },
-        COVID19TestType: "bloodTest",
-        COVID19testDate: "2020-06-17T00:00:00-04:00",
-        COVID19TestResult: "unknownTestResult",
-        recentTripsOutsideDistricCount: "610Journeys",
-        reasonForTripsOutsideDistrict: {
-          occupational: true,
-          social: false,
-          medical: false,
-          educational: false,
-          other: false,
-        },
-        districtsVisited: {
-          Yaaqshiid: false,
-          "Warta-Nabada": false,
-          "C/casiis": false,
-          deyniile: false,
-          Boondheere: false,
-          wadajir: false,
-          "Howl-wadaag": false,
-          Heliwaa: true,
-          Garasbaley: false,
-          Gubadley: false,
-          Kaaraan: false,
-          dharkenley: false,
-          Kaxda: false,
-          Shangani: false,
-          Xamarweyne: false,
-          hodan: false,
-          shibis: false,
-          "Xamar Jajab": false,
-          Waabri: false,
-        },
-        nationalHotlineUsage: "yes",
-      },
-    ],
-    deaths: [
-      {
-        deceasedSex: "male",
-        causeOfDeath: "deathHighBloodPressure",
-        deceasedComorbidities: {
-          highBloodPressure: false,
-          diabetes: true,
-          heartDiseaseOrIrritability: false,
-          lungDisease: false,
-          cancerOrPoorImmunity: false,
-          immunocompromised: false,
-          noComorbidities: false,
-          other: false,
-        },
-        whatWereTheSymptomsTheyExperiencedPriorToDeath: {
-          newFever: true,
-          newOrWorseningCough: false,
-          shortnessOfBreath: false,
-          gustatoryOrOlfactoryImpairment: false,
-          fatigue: false,
-          sneezing: false,
-          achesAndPains: false,
-          runnyNose: false,
-          chillsOrNightSweats: false,
-          soreThroat: false,
-          diarrhea: false,
-          headache: false,
-          nausea: false,
-          rash: false,
-          appetiteLoss: false,
-          stomachPainOrCramps: false,
-          other: false,
-          noSymptoms: false,
-        },
-        dateOfDeath: "2020-06-16T00:00:00-04:00",
-        deceasedAge: 2,
-      },
-    ],
-    metadata: {
-      endTime: 1592588144839,
-      timeToComplete: 107757,
-      location: {
-        lat: 2.045,
-        lng: 45.333,
-        accuracy: null,
-        altitude: null,
-        wasManual: true,
-      },
-      consentGiven: true,
-    },
-    schema: { form: "initialSurvey", version: "1.0.4" },
-  },
-];
 const INVALID_REQUEST_BODIES = [
   {},
   // MISSING SCHEMA
@@ -617,6 +349,15 @@ const validHouseholdData = [
   {
     ...minimumHouseholdData,
     followUpId: "2",
+    sharePhoneNumberConsent: "consentToSharingPhoneNumber",
+    phoneNumber: "11 11 11 111",
+    followupVisitConsent: undefined,
+    followupConsent: "no",
+  },
+  // minimum + phoneNumber + no follow up id (happens if the followup was never generated)
+  {
+    ...minimumHouseholdData,
+    followUpId: undefined,
     sharePhoneNumberConsent: "consentToSharingPhoneNumber",
     phoneNumber: "11 11 11 111",
     followupVisitConsent: undefined,
@@ -1739,15 +1480,28 @@ describe("test /submit", () => {
 
     for (const reqBody of VALID_REQ_BODIES) {
       await agent.post("/submit/initial").send(reqBody).expect(200);
+
+      // Used to avoid "unable to read from a snapshot due to pending collection catalog changes" when using transactions
+      // eslint-disable-next-line jest/no-if
+      if (!process.env.DISABLE_TRANSACTIONS) await sleep(500);
     }
 
     const allSubmissions = await Submission.model.find();
     const allHouseholds = await Household.model.find();
     const allPeople = await Person.model.find();
 
-    expect(allSubmissions).toHaveLength(2);
-    expect(allHouseholds).toHaveLength(2);
-    expect(allPeople).toHaveLength(2);
+    const expectedNumberOfPeople = VALID_REQ_BODIES.reduce(
+      (total, curValue) => {
+        const people = curValue.people || [];
+        const deaths = curValue.deaths || [];
+        return total + people.length + deaths.length;
+      },
+      0
+    );
+
+    expect(allSubmissions).toHaveLength(VALID_REQ_BODIES.length);
+    expect(allHouseholds).toHaveLength(VALID_REQ_BODIES.length);
+    expect(allPeople).toHaveLength(expectedNumberOfPeople);
   });
 
   it("should add submissions properties properly", async () => {
@@ -1813,6 +1567,10 @@ describe("test /submit", () => {
           deaths: [],
         })
         .expect(200);
+
+      // Used to avoid "unable to read from a snapshot due to pending collection catalog changes" when using transactions
+      // eslint-disable-next-line jest/no-if
+      if (!process.env.DISABLE_TRANSACTIONS) await sleep(1000);
     }
 
     const allSubmissions = await Submission.model.find();
@@ -1884,6 +1642,74 @@ describe("test /submit", () => {
     const allSubmissions = await Submission.model.find();
 
     expect(allSubmissions).toHaveLength(0);
+  });
+
+  it("should fail to add invalid households", async () => {
+    const { agent } = await login(app);
+
+    for (const household of invalidHouseholdData) {
+      log.debug(household.followUpId);
+      await agent
+        .post("/submit/initial")
+        .send({
+          schema: validSchema,
+          metadata: validMetadata[0],
+          household,
+          people: [],
+          deaths: [],
+        })
+        .expect(400);
+    }
+
+    const allSubmissions = await Submission.model.find();
+    const allHouseholds = await Household.model.find();
+
+    expect(allSubmissions).toHaveLength(0);
+    expect(allHouseholds).toHaveLength(0);
+  });
+
+  it("should fail to add invalid living people", async () => {
+    const { agent } = await login(app);
+    const household = minimumHouseholdData;
+
+    for (const person of invalidLivingPeople) {
+      await agent
+        .post("/submit/initial")
+        .send({
+          schema: validSchema,
+          metadata: validMetadata[0],
+          household,
+          people: [person],
+          deaths: [],
+        })
+        .expect(400);
+    }
+
+    const allPeople = await Person.model.find();
+    expect(allPeople).toHaveLength(0);
+  });
+
+  it("should fail to add invalid dead people", async () => {
+    const { agent } = await login(app);
+    const household = {
+      ...minimumHouseholdData,
+      residentsCount: 0,
+      deathsWithinHousehold: "yes",
+    };
+
+    await agent
+      .post("/submit/initial")
+      .send({
+        schema: validSchema,
+        metadata: validMetadata[0],
+        household,
+        people: [],
+        deaths: invalidDeadPeople,
+      })
+      .expect(400);
+
+    const allPeople = await Person.model.find();
+    expect(allPeople).toHaveLength(0);
   });
 
   // This test is disabled if transactions are disabled since the expected behaviour would be different without transactions.
