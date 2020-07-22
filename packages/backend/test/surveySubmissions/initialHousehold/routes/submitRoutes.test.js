@@ -354,6 +354,15 @@ const validHouseholdData = [
     followupVisitConsent: undefined,
     followupConsent: "no",
   },
+  // minimum + phoneNumber + no follow up id (happens if the followup was never generated)
+  {
+    ...minimumHouseholdData,
+    followUpId: undefined,
+    sharePhoneNumberConsent: "consentToSharingPhoneNumber",
+    phoneNumber: "11 11 11 111",
+    followupVisitConsent: undefined,
+    followupConsent: "no",
+  },
   // minimum + email
   {
     ...minimumHouseholdData,
@@ -1549,6 +1558,10 @@ describe("test /submit", () => {
           deaths: [],
         })
         .expect(200);
+
+      // Used to avoid "unable to read from a snapshot due to pending collection catalog changes" when using transactions
+      // eslint-disable-next-line jest/no-if
+      if (!process.env.DISABLE_TRANSACTIONS) await sleep(1000);
     }
 
     const allSubmissions = await Submission.model.find();
