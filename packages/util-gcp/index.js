@@ -20,6 +20,10 @@ const getJSONSecret = async (secretId) => {
   }
 };
 
+/**
+ * If the config has a `secretId` specified,
+ * all variables under the `secrets` property will be replaced by the value in the GCP Secret Manager.
+ */
 const loadSecretsIntoConfig = async () => {
   const config = getConfig();
 
