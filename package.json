@@ -17,7 +17,8 @@
     "deploy-backend": "yarn pre-deploy && gcloud builds submit --config=deployment/backend/cloudbuild.yaml",
     "deploy": "yarn deploy-backend",
     "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('You must use Yarn to install, not NPM. See README.md')\"",
-    "depcheck": "node ./scripts/runDependencyCheck.js"
+    "depcheck": "node ./scripts/runDependencyCheck.js",
+    "scripts": "node packages/db-scripts/src/launcher.js"
   },
   "devDependencies": {
     "branch-name": "^1.0.0",

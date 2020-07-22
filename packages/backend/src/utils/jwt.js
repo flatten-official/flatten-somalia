@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { getConfig } = require("../config");
+const { getConfig } = require("util-config");
 const { log } = require("util-logging");
 
 /**

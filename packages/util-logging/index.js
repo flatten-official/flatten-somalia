@@ -1,6 +1,7 @@
 const winston = require("winston");
 const GCPLogging = require("@google-cloud/logging-winston");
 const { transports, format } = winston;
+const { getConfig } = require("util-config");
 
 //region Utilities
 
@@ -72,18 +73,19 @@ const makeStackdriverTransport = (level) =>
     level,
   });
 
-function makeTransports(env = process.env.ENVIRONMENT) {
-  switch (env) {
-    case "production":
-      return [makeStackdriverTransport("info")];
-    case "staging":
-      return [makeStackdriverTransport("debug")];
-    default:
-      // Uncomment this line to allow for testing with stackdriver logging
-      // return [makeConsoleTransport("debug"), makeStackdriverTransport("debug")];
-      return [makeConsoleTransport("debug")];
-  }
-}
+const makeTransports = () => {
+  // Uncomment this line to allow for testing with stackdriver logging
+  // return [makeConsoleTransport("debug"), makeStackdriverTransport("debug")];
+
+  const minLevel = getConfig().minimumLogLevel || "debug";
+  const useStackdriver = getConfig().useStackdriver || false;
+
+  return [
+    useStackdriver
+      ? makeStackdriverTransport(minLevel)
+      : makeConsoleTransport(minLevel),
+  ];
+};
 
 //endregion
 

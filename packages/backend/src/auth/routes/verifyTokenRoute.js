@@ -1,5 +1,5 @@
 const { verifyTokenAndMakeCookie } = require("../verificationAPI");
-const { getConfig } = require("../../config");
+const { getConfig } = require("util-config");
 const { log } = require("util-logging");
 
 // Verifies a token in the request and gives the user a cookie.
