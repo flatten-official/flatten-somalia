@@ -1,5 +1,5 @@
 service: backend-so-staging
 runtime: nodejs12
-entrypoint: node ./packages/backend/src/launch.js
+entrypoint: node ./packages/backend/src/index.js
 env_variables:
   ENVIRONMENT: staging # Not using NODE_ENV since NODE_ENV is always PROD on App Engine

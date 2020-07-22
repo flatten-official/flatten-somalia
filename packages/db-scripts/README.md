@@ -8,7 +8,7 @@ Scripts allow us to run batch operations on our database. Make sure you know wha
 
    ```
    SCRIPT_NAME=<SCRIPT_NAME>
-   ENVIRONMENT=dev
+   ENVIRONMENT=staging
    ```
 
 2. Replace `<SCRIPT_NAME>` with the name of the script you wish to run (e.g. `ADD_VOLUNTEER_BULK`).
@@ -24,7 +24,7 @@ You will need to get a MongoDB URI from Martin to connect to the production data
 
 ```
 SCRIPT_NAME=<SCRIPT_NAME>
-ENVIRONMENT=scriptProduction
+ENVIRONMENT=production
 MONGO_URI=<MONGO_URI_WITH_PASSWORD>
 ```
 

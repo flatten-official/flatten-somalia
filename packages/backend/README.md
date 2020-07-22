@@ -15,10 +15,10 @@ Also ask to be added to the Atlas staging project if you want a GUI to navigate 
 
 ### Using environment variables
 
-For environment variables that are shared across multipe people / systems or are a common setup,
+For environment variables that are shared across multiple people / systems or are a common setup,
 use `config.js` as it allows for more flexibility.
 
-If an environment variable is specific to you only and should not be commmited (e.g. PORT), specify it in `packages/backend/.env`.
+If an environment variable is specific to you only and should not be commited (e.g. PORT), specify it in `packages/backend/.env`.
 
 ## Additional Tools
 

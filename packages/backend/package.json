@@ -6,7 +6,7 @@
   "private": true,
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon --watch ../ ./src/launch.js",
+    "dev": "nodemon --watch ../",
     "doc": "apidoc -i src -o ../../docs/api-generated && open-cli ../../docs/api-generated/index.html"
   },
   "dependencies": {
@@ -15,22 +15,23 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "cron": "^1.8.2",
+    "db-utils": "1.0.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "validator": "^13.0.0",
+    "util-config": "^1.0.0",
     "util-logging": "1.0.0",
-    "db-utils": "1.0.0",
-    "util-gcp": "1.0.0"
+    "util-gcp": "1.0.0",
+    "validator": "^13.1.1"
   },
   "devDependencies": {
     "apidoc": "^0.22.1",
-    "supertest": "^4.0.2",
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.4",
     "open-cli": "^6.0.1",
-    "dotenv": "^8.2.0"
+    "supertest": "^4.0.2"
   },
   "nodemonConfig": {
     "env": {

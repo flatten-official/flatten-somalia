@@ -3,7 +3,7 @@ const { writeCookie } = require("./cookieData");
 const { findVolunteerByEmail } = require("../volunteer/volunteerData");
 const { verifyToken, signToken } = require("../utils/jwt");
 const { sendVerificationEmail } = require("../utils/sendGrid");
-const { getConfig } = require("../config");
+const { getConfig } = require("util-config");
 const { log } = require("util-logging");
 
 const COOKIE_LIFE = 1080; // In minutes

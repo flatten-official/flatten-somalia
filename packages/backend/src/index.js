@@ -1,30 +1,26 @@
+if (process.env.ENVIRONMENT === "dev") require("dotenv").config();
+
+// region Load the config
+const Config = require("util-config");
+const configFile = require("./config");
+Config.setup(configFile); // Do this first since other imports (e.g. logging) make use of config.
+// endregion
+
 const MongoDatabase = require("db-utils/externalDb");
 const { getApp } = require("./app");
-const { setup: configSetup, getConfig } = require("./config");
-const { setup: sendGridSetup } = require("./utils/sendGrid");
-const _ = require("lodash");
+const SendGrid = require("./utils/sendGrid");
 
 const { log } = require("util-logging");
 const removeCookieJob = require("./auth/removeCookieJob");
+const GCP = require("util-gcp");
 
-/**
- * @param options object whose parameters indicate what to setup
- */
-async function setup(options = {}) {
-  options = _.defaults(options, {
-    config: true,
-    database: false,
-    sendGrid: false,
-    customConfig: {},
-  });
+async function setup() {
+  await GCP.loadSecretsIntoConfig();
+  const mongoUri = Config.getConfig().secrets.mongoUri;
+  await MongoDatabase.connect(mongoUri);
+  removeCookieJob.start();
 
-  if (options.config) await configSetup(options.customConfig);
-  if (options.database) {
-    const mongoUri = getConfig().secrets.mongoUri;
-    await MongoDatabase.connect(mongoUri);
-    removeCookieJob.start();
-  }
-  if (options.sendGrid) sendGridSetup();
+  SendGrid.setup();
 }
 
 async function startServer() {
@@ -37,8 +33,13 @@ async function startServer() {
 }
 
 async function cleanup() {
-  await MongoDatabase.disconnect();
   removeCookieJob.stop();
+  await MongoDatabase.disconnect();
 }
 
-module.exports = { setup, startServer, cleanup };
+setup()
+  .then(startServer)
+  .catch(async (e) => {
+    log.emergency("Server crashed.", { error: e });
+    await cleanup();
+  });
