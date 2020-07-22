@@ -1,7 +1,6 @@
 # This is the ignore file used when uploading this repository to Google Cloud Build
 
-# Ignore packages not used in production
-/packages/db-copy-function
+# Ignore packages that are never deployed (in any environment)
 /packages/db-scripts
 
 # Ignore all docs
