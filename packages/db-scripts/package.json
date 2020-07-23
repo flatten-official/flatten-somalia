@@ -1,7 +1,7 @@
 {
   "name": "db-scripts",
   "version": "1.0.0",
-  "main": "launcher.js",
+  "main": "src/launcher.js",
   "dependencies": {
     "backend": "1.0.0",
     "util-config": "^1.0.0",
