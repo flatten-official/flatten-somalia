@@ -12,8 +12,10 @@ const Confirm = require("prompt-confirm");
 const GCP = require("util-gcp");
 
 const main = async () => {
+  // Get the script
   const Script = require(process.cwd() + "/" + process.argv[2]);
 
+  // Prompt the user
   const accepted = await new Confirm(Script.confirmationMessage).run();
 
   if (!accepted) {
@@ -21,14 +23,23 @@ const main = async () => {
     return;
   }
 
+  // Load the secrets from GCP
   await GCP.loadSecretsIntoConfig();
+
+  // Connect to the database
   await MongoDatabase.connect(Config.getConfig().secrets.mongoUri);
 
   log.info(`Running script.`);
 
+  // Run the script
   await Script.run(...Script.arguments); // runs the script
 
-  log.info(`Done script. MANUALLY VERIFY THAT ALL WENT WELL.`);
+  log.info(`Done running script. Running success tests...`);
+
+  // Run the success tests
+  await Script.successTest(...Script.arguments);
+
+  log.info("Done running success tests");
 };
 
 main()
