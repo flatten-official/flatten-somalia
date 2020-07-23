@@ -8,12 +8,3 @@ export const permissions = {
   submitForms: "submitForms",
   manageVolunteers: "manageVolunteers",
 };
-
-export const hasPermission = (auth, permission) => {
-  try {
-    return auth.user.permissions.includes(permission);
-  } catch (e) {
-    console.error(e);
-    return false;
-  }
-};
