@@ -4,7 +4,7 @@ import { Routes } from "../../config";
 import { Navbar, Nav, NavDropdown, Modal, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, AUTH_SUCCESS } from "../../backend/auth/authActions";
+import { logout, AUTH_AUTHENTICATED } from "../../backend/auth/authActions";
 import { checkWillExpireSoon } from "../../backend/auth/authApi";
 
 const LanguageDropDown = () => {
@@ -32,7 +32,7 @@ const Links = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  if (auth.status === AUTH_SUCCESS)
+  if (auth.status === AUTH_AUTHENTICATED)
     return (
       <>
         <LinkContainer to={Routes.home}>

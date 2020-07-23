@@ -34,6 +34,7 @@ const Schemas = {
 
 export const Surveys = {
   gravedigger: {
+    route: Routes.gravediggerSurvey,
     surveyKey: "graveDigger",
     i18nTitleKey: "graveDiggerTitle",
     api: api.graveDiggerSurvey,
@@ -47,6 +48,7 @@ export const Surveys = {
     },
   },
   hospital: {
+    route: Routes.hospitalSurvey,
     surveyKey: "hospital",
     i18nTitleKey: "hospitalTitle",
     api: api.hospitalSurvey,
@@ -60,6 +62,7 @@ export const Surveys = {
     },
   },
   initialHousehold: {
+    route: Routes.initialHouseholdSurvey,
     surveyKey: "initialHousehold",
     i18nTitleKey: "initialHouseholdTitle",
     api: api.volunteerForm,

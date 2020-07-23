@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
+import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./home/Home";
@@ -11,51 +10,71 @@ import { Routes, Surveys } from "../config";
 import { useDispatch, useSelector } from "react-redux";
 import { permissions } from "../backend/auth/authApi";
 import {
-  fetchAuthState,
+  AUTH_AUTHENTICATED,
+  AUTH_UNAUTHENTICATED,
   AUTH_UNINITIALISED,
+  fetchAuthState,
 } from "../backend/auth/authActions";
 import SurveyPageFactory from "./surveys/SurveyPageFactory";
+import { PrivatePage, PageNotFound } from "./components/BasicPages";
+
+const AuthenticatedAppContent = () => {
+  const getHomePageRoute = () => (
+    <Route
+      exact
+      path={Routes.home}
+      render={() => (
+        <PrivatePage requiredPermission={permissions.submitForms} comp={Home} />
+      )}
+    />
+  );
+
+  const makeSurveyRoute = (survey) => (
+    <Route
+      exact
+      path={survey.route}
+      render={() => (
+        <PrivatePage
+          comp={SurveyPageFactory(survey)}
+          requiredPermission={permissions.submitForms}
+        />
+      )}
+    />
+  );
+
+  return (
+    <div className="container" id="main">
+      <Switch>
+        {getHomePageRoute()}
+        {makeSurveyRoute(Surveys.initialHousehold)}
+        {makeSurveyRoute(Surveys.gravedigger)}
+        {makeSurveyRoute(Surveys.hospital)}
+
+        <Route render={() => <PageNotFound />} />
+      </Switch>
+    </div>
+  );
+};
 
 const AppContent = () => {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+  const authState = useSelector((state) => state.auth.status);
 
+  // On first load, get the app state
   useEffect(() => {
     dispatch(fetchAuthState());
   }, [dispatch]);
 
-  if (auth.status === AUTH_UNINITIALISED) return <Loading />;
-
-  return (
-    <div className="container" id="main">
-      <PrivateRoute
-        exact
-        path={Routes.home}
-        comp={Home}
-        requiredPermission={permissions.submitForms}
-      />
-      <PrivateRoute
-        exact
-        path={Routes.initialHouseholdSurvey}
-        comp={SurveyPageFactory(Surveys.initialHousehold)}
-        requiredPermission={permissions.submitForms}
-      />
-      <PrivateRoute
-        exact
-        path={Routes.gravediggerSurvey}
-        comp={SurveyPageFactory(Surveys.gravedigger)}
-        requiredPermission={permissions.submitForms}
-      />
-      <PrivateRoute
-        exact
-        path={Routes.hospitalSurvey}
-        comp={SurveyPageFactory(Surveys.hospital)}
-        requiredPermission={permissions.submitForms}
-      />
-      <Route path={Routes.auth} component={Login} />
-      <Route path={Routes.emailSubmitted} component={LoginSuccess} />
-    </div>
-  );
+  switch (authState) {
+    case AUTH_UNINITIALISED:
+      return <Loading />;
+    case AUTH_UNAUTHENTICATED:
+      return <Login />;
+    case AUTH_AUTHENTICATED:
+      return <AuthenticatedAppContent />;
+    default:
+      return <PageNotFound />;
+  }
 };
 
 const App = () => (

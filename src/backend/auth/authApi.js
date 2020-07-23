@@ -1,10 +1,10 @@
-import { AUTH_SUCCESS } from "./authActions";
+import { AUTH_AUTHENTICATED } from "./authActions";
 
 const EXPIRY_WARNING = 70; // minutes prior to cookie being removed
 
 export const checkWillExpireSoon = (auth) => {
   return (
-    auth.status === AUTH_SUCCESS &&
+    auth.status === AUTH_AUTHENTICATED &&
     new Date(auth.user.expiry) - EXPIRY_WARNING * 60 * 1000 <= Date.now()
   );
 };
@@ -17,7 +17,8 @@ export const permissions = {
 export const hasPermission = (auth, permission) => {
   try {
     return (
-      auth.status === AUTH_SUCCESS && auth.user.permissions.includes(permission)
+      auth.status === AUTH_AUTHENTICATED &&
+      auth.user.permissions.includes(permission)
     );
   } catch (e) {
     console.error(e);
