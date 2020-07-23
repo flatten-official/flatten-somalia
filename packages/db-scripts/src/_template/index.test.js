@@ -9,17 +9,15 @@ describe("template tests", () => {
 
   // STEP 2. Update test name
   // eslint-disable-next-line jest/expect-expect
-  it("should pass success tests with valid data", async () => {
+  it("should run script as expected", async () => {
     // STEP 3. Populate database with seed data
 
-    // STEP 4. Run the script with your own arguments
-    const someFirstArgument = "someFirstArgument";
-    await Script.run(someFirstArgument);
-
-    await Script.successTest(someFirstArgument);
+    // runs the scripts and tests the results
+    await Script.run(...Script.scriptArguments);
+    await Script.successTest(...Script.scriptArguments);
 
     // STEP 5. Run some other checks on your data.
   });
 
-  // STEP 6. Write unit tests for edge cases, handling failures and bad data
+  // STEP 6. Write unit tests for edge cases, handling failures, bad data and different input data
 });

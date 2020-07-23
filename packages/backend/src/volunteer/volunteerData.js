@@ -82,14 +82,14 @@ const getNextFriendlyId = async () => {
  * Adds a volunteer to the database
  * @return {Promise<*>} the volunteer
  */
-const addVolunteer = async (newVolunteer) => {
+const addVolunteer = async (newVolunteer, session = undefined) => {
   newVolunteer = _.defaults(
     { friendlyId: await getNextFriendlyId() },
     newVolunteer,
     defaultVolunteer
   );
 
-  return new Volunteer(newVolunteer).save(); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
+  return new Volunteer(newVolunteer).save({ session }); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
 };
 
 /**
