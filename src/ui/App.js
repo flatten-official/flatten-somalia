@@ -14,7 +14,7 @@ import {
   fetchAuthState,
 } from "../backend/auth/authActions";
 import SurveyPageFactory from "./surveys/SurveyPageFactory";
-import { PrivatePage } from "./components/BasicPages";
+import PrivatePage from "./components/PrivatePage";
 
 const AuthenticatedAppContent = () => {
   const getHomePageRoute = () => (
