@@ -17,8 +17,14 @@ const Form = ({ formioForm, formioOptions, submitHook, onNextPage }) => {
 
   if (!formioOptions.hooks) formioOptions.hooks = {};
 
-  // add a hook to send the request to the server
-  formioOptions.hooks.beforeSubmit = async (submission, next) => {
+  // there exists 3 submit hooks for formio.
+  // beforeSubmit, customValidation and submit.
+  // beforeSubmit doesn't run the validation so doesn't work
+  // submit tries to submit the form to a formio server (formio doesn't support letting the frontend manage the submission)
+  // therefore, we use customValidation to ensure validation is run but to also manage the submission before formio does
+  // this allows to make our own request to our backend and then redirect to a success page
+  // source code: https://github.com/formio/formio.js/blob/master/src/Webform.js#L1365
+  formioOptions.hooks.customValidation = async (submission, next) => {
     try {
       await submitHook(submission.data);
     } catch (e) {
