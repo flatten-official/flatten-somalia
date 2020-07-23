@@ -32,12 +32,12 @@ const main = async () => {
   log.info(`Running script.`);
 
   // Run the script
-  await Script.run(...Script.arguments); // runs the script
+  await Script.run(...Script.scriptArguments); // runs the script
 
   log.info(`Done running script. Running success tests...`);
 
   // Run the success tests
-  await Script.successTest(...Script.arguments);
+  await Script.successTest(...Script.scriptArguments);
 
   log.info("Done running success tests");
 };
