@@ -1,11 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Routes } from "../../config";
-import { Navbar, Nav, NavDropdown, Modal, Button } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, AUTH_SUCCESS } from "../../backend/auth/authActions";
-import { checkWillExpireSoon } from "../../backend/auth/authApi";
+import { logout, AUTH_AUTHENTICATED } from "../../backend/auth/authActions";
 
 const LanguageDropDown = () => {
   const { t, i18n } = useTranslation("Navbar");
@@ -32,7 +31,7 @@ const Links = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  if (auth.status === AUTH_SUCCESS)
+  if (auth.status === AUTH_AUTHENTICATED)
     return (
       <>
         <LinkContainer to={Routes.home}>
@@ -51,36 +50,6 @@ const Links = () => {
     );
 };
 
-const ExpireModal = () => {
-  const { t } = useTranslation("Navbar");
-  const excludeRoutes = [
-    Routes.initialHouseholdSurvey,
-    Routes.graveDiggerSurvey,
-    Routes.hospitalSurvey,
-    Routes.success,
-  ];
-  const show = useSelector(
-    (state) =>
-      !excludeRoutes.includes(state.router.location.pathname) &&
-      checkWillExpireSoon(state.auth)
-  );
-  const dispatch = useDispatch();
-
-  return (
-    <Modal show={show} backdrop="static" keyboard={false}>
-      <Modal.Header>
-        <Modal.Title>{t("expire.header")}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>{t("expire.body")}</Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={() => dispatch(logout())}>
-          {t("expire.ok")}
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
-};
-
 const Header = () => {
   return (
     <Navbar className="header" expand="lg">
@@ -96,7 +65,6 @@ const Header = () => {
         </Nav>
         <LanguageDropDown />
       </Navbar.Collapse>
-      <ExpireModal />
     </Navbar>
   );
 };

@@ -1,21 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import LoginForm from "./LoginForm";
-import { AUTH_SUCCESS } from "../../backend/auth/authActions";
-import { Redirect } from "react-router-dom";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Routes } from "../../config";
+import LoginSuccess from "./LoginSuccess";
+import backend from "../../backend/api/backend";
+import flattenApi from "../../backend/api/api";
+import Form from "../components/surveys/formio/Form";
+import LoginFormJson from "../../forms/Login.json";
 
 const Login = () => {
   const { t } = useTranslation("Login");
-  const auth = useSelector((state) => state.auth);
-  return auth.status === AUTH_SUCCESS ? (
-    <Redirect to={Routes.home} />
-  ) : (
+  const [didSubmit, setDidSubmit] = useState(false);
+
+  if (didSubmit) return <LoginSuccess />;
+
+  const onSubmit = async (data) => {
+    await backend.request({ ...flattenApi.login, data: { email: data.email } });
+    setDidSubmit(true);
+  };
+
+  return (
     <div>
       <div className="panel-heading card-header"> {t("loginForm.title")} </div>
       <div className="panel-body card-body">
-        <LoginForm />
+        <Form formioForm={LoginFormJson} submitHook={onSubmit} />;
       </div>
     </div>
   );

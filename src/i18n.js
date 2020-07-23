@@ -18,6 +18,7 @@ import loadingEN from "./translations/en/Loading.json";
 import navbarEN from "./translations/en/Navbar.json";
 import formIOCustomTextEN from "./translations/en/FormIoCustomText.json";
 import SurveysEN from "./translations/en/Surveys.json";
+import GeneralEN from "./translations/en/General.json";
 
 // FORMIO CONTENT SOMALI
 import formIOAddVolunteerSO from "./translations/so/translation/AddVolunteer.json";
@@ -35,6 +36,7 @@ import homeSO from "./translations/so/Home.json";
 import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
 import SurveysSO from "./translations/so/Surveys.json";
+import GeneralSO from "./translations/so/General.json";
 
 const resources = {
   en: {
@@ -53,6 +55,7 @@ const resources = {
     Navbar: navbarEN,
     FormIOCustomText: formIOCustomTextEN,
     Surveys: SurveysEN,
+    General: GeneralEN,
   },
   so: {
     translation: {
@@ -70,6 +73,7 @@ const resources = {
     Navbar: navbarSO,
     FormIOCustomText: formIOCustomTextSO,
     Surveys: SurveysSO,
+    General: GeneralSO,
   },
 };
 
