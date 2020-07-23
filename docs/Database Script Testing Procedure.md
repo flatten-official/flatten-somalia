@@ -113,7 +113,7 @@ Run the unit tests with jest.
 ENVIRONMENT=dev
 ```
 
-2. Run `yarn scripts packages/db-scripts/src/<SCRIPT-NAME>` to run the script and its success tests on the development database.
+2. Run `yarn scripts <SCRIPT-NAME>` to run the script and its success tests on the development database.
 
 #### Test on a copy of production
 
@@ -134,7 +134,7 @@ ENVIRONMENT=dev
 ENVIRONMENT=test-db
 ```
 
-2. Run `yarn scripts packages/db-scripts/<SCRIPT-NAME>`
+2. Run `yarn scripts <SCRIPT-NAME>`
 
 ### Merge
 
@@ -156,7 +156,7 @@ Do this after noon since form submissions have ended for the day.
 ENVIRONMENT=production
 ```
 
-4. Run `yarn scripts packages/db-scripts/<SCRIPT-NAME>`
+4. Run `yarn scripts <SCRIPT-NAME>`
 
 If all goes well (no errors thrown) then:
 

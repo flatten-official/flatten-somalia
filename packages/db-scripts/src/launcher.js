@@ -13,7 +13,7 @@ const GCP = require("util-gcp");
 
 const main = async () => {
   // Get the script
-  const Script = require(process.cwd() + "/" + process.argv[2]);
+  const Script = require("./" + process.argv[2]);
 
   // Prompt the user
   const accepted = await new Confirm(Script.confirmationMessage).run();

@@ -38,6 +38,8 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 
 - `yarn depcheck`: Check for missing or unused dependencies in all packages.
 
+- `yarn scripts <SCRIPT-NAME>`: Runs a database script from the `db-scripts` package. `<SCRIPT-NAME>` is the name of the script's directory in `packages/db-scripts/src/`.
+
 ## Testing
 
 If you run into issues while testing try adding the following line to your `.env` file.
