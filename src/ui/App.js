@@ -1,22 +1,20 @@
 import React, { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./home/Home";
 import Login from "./login/Login";
-import LoginSuccess from "./login/LoginSuccess";
 import Loading from "./components/Loading";
 import { Routes, Surveys } from "../config";
 import { useDispatch, useSelector } from "react-redux";
 import { permissions } from "../backend/auth/authApi";
 import {
   AUTH_AUTHENTICATED,
-  AUTH_UNAUTHENTICATED,
   AUTH_UNINITIALISED,
   fetchAuthState,
 } from "../backend/auth/authActions";
 import SurveyPageFactory from "./surveys/SurveyPageFactory";
-import { PrivatePage, PageNotFound } from "./components/BasicPages";
+import { PrivatePage } from "./components/BasicPages";
 
 const AuthenticatedAppContent = () => {
   const getHomePageRoute = () => (
@@ -50,7 +48,7 @@ const AuthenticatedAppContent = () => {
         {makeSurveyRoute(Surveys.gravedigger)}
         {makeSurveyRoute(Surveys.hospital)}
 
-        <Route render={() => <PageNotFound />} />
+        <Redirect from="*" to={Routes.home} />
       </Switch>
     </div>
   );
@@ -68,12 +66,10 @@ const AppContent = () => {
   switch (authState) {
     case AUTH_UNINITIALISED:
       return <Loading />;
-    case AUTH_UNAUTHENTICATED:
-      return <Login />;
     case AUTH_AUTHENTICATED:
       return <AuthenticatedAppContent />;
     default:
-      return <PageNotFound />;
+      return <Login />;
   }
 };
 

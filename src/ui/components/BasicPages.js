@@ -3,16 +3,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { hasPermission } from "../../backend/auth/authApi";
 
-const PageNotFound = () => {
-  const { t } = useTranslation("General");
-
-  return (
-    <>
-      <h2>{t("pageNotFound")}</h2>
-    </>
-  );
-};
-
 const PageRestricted = () => {
   const { t } = useTranslation("General");
 
@@ -30,4 +20,4 @@ const PrivatePage = ({ requiredPermission, comp: Component }) => {
   else return <PageRestricted />;
 };
 
-export { PageNotFound, PageRestricted, PrivatePage };
+export { PageRestricted, PrivatePage };
