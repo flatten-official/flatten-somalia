@@ -6,6 +6,10 @@ steps:
       - prod-to-analytic-data-pipeline
       - --region=europe-west1
       - --runtime=nodejs10
+      # always deploy to production
+      - --project=somalia-prod
+      # specify source file
+      - --source=packages/db-copy-function
       # function is triggered by Pub/Sub
       - --trigger-topic=somalia-prod-to-analytics
       # function uses another service account, note that this account requires iam.serviceAccounts.actAs permissions
