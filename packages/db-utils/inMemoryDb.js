@@ -3,12 +3,10 @@ const {
   MongoMemoryReplSet,
   MongoMemoryServer,
 } = require("mongodb-memory-server");
-const connectionOptions = require("./connectionOptions");
+const { mongoose, connectionOptions, useReplicaSet } = require("./index");
 const { log } = require("util-logging");
-const mongoose = require("mongoose");
 
 const DB_NAME = "test";
-const useReplicaSet = !process.env.DISABLE_TRANSACTIONS;
 
 let mongod;
 

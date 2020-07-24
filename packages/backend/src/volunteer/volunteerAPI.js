@@ -1,5 +1,5 @@
 const { addVolunteer, Permissions } = require("./volunteerData");
-const { Error } = require("db-utils");
+const { mongoose } = require("db-utils");
 const { log } = require("util-logging");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
@@ -22,7 +22,7 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
     if (e.message.indexOf("duplicate key error") !== -1) {
       log.error("Duplicate key error", { error: e });
       return [400, "Email is already in use"];
-    } else if (e instanceof Error.ValidationError) {
+    } else if (e instanceof mongoose.Error.ValidationError) {
       log.error("Volunteer data malformed", { error: e });
       return [400, "Volunteer data malformed"];
     } else throw e;
