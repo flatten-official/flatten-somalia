@@ -13,25 +13,25 @@ const VOLUNTEERS = [
     name: "Some name",
     email: "example@gmail.com",
     permissions: [Permissions.submitForms],
-    teamName: "Flatten", // Use Flatten as the team name for people who's submissions should be ignored
+    teamName: "Flatten",
   },
   {
     name: "Some name",
     email: "example2@gmail.com",
     permissions: [Permissions.submitForms],
-    teamName: "Flatten", // Use Flatten as the team name for people who's submissions should be ignored
+    teamName: "Flatten",
   },
   {
     name: "Some name",
     email: "example3@gmail.com",
     permissions: [Permissions.submitForms],
-    teamName: "Flatten", // Use Flatten as the team name for people who's submissions should be ignored
+    teamName: "Flatten",
   },
   {
     name: "Some name",
     email: "example4@gmail.com",
     permissions: [Permissions.submitForms],
-    teamName: "Flatten", // Use Flatten as the team name for people who's submissions should be ignored
+    teamName: "Flatten",
   },
 ];
 
