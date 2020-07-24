@@ -56,7 +56,7 @@ describe("add volunteer script test", () => {
     await Script.run(VOLUNTEERS);
     await Script.successTest(VOLUNTEERS);
     await expect(Script.run(VOLUNTEERS)).rejects.toThrow(
-      "E11000 duplicate key error collection"
+      "E11000 duplicate key error"
     );
 
     expect(await Volunteer.find()).toHaveLength(VOLUNTEERS.length);
