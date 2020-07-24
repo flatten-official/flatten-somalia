@@ -5,6 +5,9 @@ module.exports = {
     },
   },
   envSpecific: {
+    test: {
+      allowDisableTransactions: true,
+    },
     staging: {
       secretId:
         "projects/233853318753/secrets/backend-so-config/versions/latest",

@@ -43,7 +43,9 @@ const run = async (volunteers) => {
       try {
         await addVolunteer(volunteer, session);
       } catch (e) {
-        log.error(`Failed to add volunteer:\n${JSON.stringify(volunteer)}`);
+        log.error(`Failed to add volunteer:\n${JSON.stringify(volunteer)}`, {
+          error: e,
+        });
         throw e;
       }
     }

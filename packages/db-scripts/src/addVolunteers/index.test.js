@@ -1,4 +1,6 @@
 const db = require("db-utils/inMemoryDb");
+const { useReplicaSet } = require("db-utils");
+const { testOnlyIf } = require("backend/test/utils/jest");
 const Script = require("./index");
 const {
   Permissions,
@@ -13,10 +15,28 @@ const VOLUNTEERS = [
     permissions: [Permissions.submitForms],
     teamName: "Flatten", // Use Flatten as the team name for people who's submissions should be ignored
   },
+  {
+    name: "Some name",
+    email: "example2@gmail.com",
+    permissions: [Permissions.submitForms],
+    teamName: "Flatten", // Use Flatten as the team name for people who's submissions should be ignored
+  },
+  {
+    name: "Some name",
+    email: "example3@gmail.com",
+    permissions: [Permissions.submitForms],
+    teamName: "Flatten", // Use Flatten as the team name for people who's submissions should be ignored
+  },
+  {
+    name: "Some name",
+    email: "example4@gmail.com",
+    permissions: [Permissions.submitForms],
+    teamName: "Flatten", // Use Flatten as the team name for people who's submissions should be ignored
+  },
 ];
 
 // STEP 1. Update block name
-describe("template tests", () => {
+describe("add volunteer script test", () => {
   beforeAll(() => db.connect());
   afterEach(() => db.clear());
   afterAll(() => db.close());
@@ -48,33 +68,40 @@ describe("template tests", () => {
     expect(await Volunteer.find()).toHaveLength(VOLUNTEERS.length);
   });
 
-  it("should not add any volunteers upon failure", async () => {
-    // Populate with seed data
-    const existingVolunteer = {
-      name: "Some name",
-      email: "example2@gmail.com",
-      permissions: [Permissions.submitForms],
-      teamName: "Flatten",
-    };
+  testOnlyIf(useReplicaSet)(
+    "should not add any volunteers upon failure",
+    async () => {
+      /* eslint-disable jest/no-standalone-expect */
 
-    await addVolunteer(existingVolunteer);
+      // Populate with seed data
+      const existingVolunteer = {
+        name: "Some name",
+        email: "someOtherEmail@gmail.com",
+        permissions: [Permissions.submitForms],
+        teamName: "Flatten",
+      };
 
-    // Verify that it was added.
-    expect(await Volunteer.find()).toHaveLength(1);
+      await addVolunteer(existingVolunteer);
 
-    const volunteersToAdd = VOLUNTEERS.concat(existingVolunteer);
+      // Verify that it was added.
+      expect(await Volunteer.find()).toHaveLength(1);
 
-    // Script should fail since one of the volunteers already exists
-    // eslint-disable-next-line jest/require-to-throw-message
-    await expect(Script.run(volunteersToAdd)).rejects.toThrow();
+      const volunteersToAdd = VOLUNTEERS.concat(existingVolunteer);
 
-    // Success test should fail since script didn't add everyone
-    // eslint-disable-next-line jest/require-to-throw-message
-    await expect(Script.successTest(volunteersToAdd)).rejects.toThrow();
+      // Script should fail since one of the volunteers already exists
+      // eslint-disable-next-line jest/require-to-throw-message
+      await expect(Script.run(volunteersToAdd)).rejects.toThrow();
 
-    // Verify that length hasn't changed
-    expect(await Volunteer.find()).toHaveLength(1);
-  });
+      // Success test should fail since script didn't add everyone
+      // eslint-disable-next-line jest/require-to-throw-message
+      await expect(Script.successTest(volunteersToAdd)).rejects.toThrow(
+        "toBeNull" // Error that will be thrown by jest if a value doesn't exist. We can't take a bigger chunk of the error since color codes interfere with the string and we won't get a match
+      );
+
+      // Verify that length hasn't changed
+      expect(await Volunteer.find()).toHaveLength(1);
+    }
+  );
 
   // STEP 6. Write unit tests for edge cases, handling failures, bad data and different input data
 });

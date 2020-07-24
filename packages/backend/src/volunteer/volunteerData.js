@@ -69,8 +69,8 @@ const defaultVolunteer = {
   permissions: [Permissions.submitForms],
 };
 
-const getNextFriendlyId = async () => {
-  const largestVolunteer = await Volunteer.find({}, "friendlyId")
+const getNextFriendlyId = async (session) => {
+  const largestVolunteer = await Volunteer.find({}, "friendlyId", { session })
     .sort({ friendlyId: -1 })
     .limit(1);
   if (largestVolunteer.length === 0 || !largestVolunteer[0].friendlyId)
@@ -84,7 +84,7 @@ const getNextFriendlyId = async () => {
  */
 const addVolunteer = async (newVolunteer, session = undefined) => {
   newVolunteer = _.defaults(
-    { friendlyId: await getNextFriendlyId() },
+    { friendlyId: await getNextFriendlyId(session) },
     newVolunteer,
     defaultVolunteer
   );
