@@ -83,11 +83,11 @@ describe("add volunteer script test", () => {
       const volunteersToAdd = VOLUNTEERS.concat(existingVolunteer);
 
       // Script should fail since one of the volunteers already exists
-      // eslint-disable-next-line jest/require-to-throw-message
-      await expect(Script.run(volunteersToAdd)).rejects.toThrow();
+      await expect(Script.run(volunteersToAdd)).rejects.toThrow(
+        "E11000 duplicate key error collection"
+      );
 
       // Success test should fail since script didn't add everyone
-      // eslint-disable-next-line jest/require-to-throw-message
       await expect(Script.successTest(volunteersToAdd)).rejects.toThrow(
         "toBeNull" // Error that will be thrown by jest if a value doesn't exist. We can't take a bigger chunk of the error since color codes interfere with the string and we won't get a match
       );
