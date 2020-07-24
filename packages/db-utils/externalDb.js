@@ -1,5 +1,5 @@
 const { log } = require("util-logging");
-const connectionOptions = require("./connectionOptions");
+const { connectionOptions } = require("./index");
 const mongoose = require("mongoose");
 
 async function disconnect() {

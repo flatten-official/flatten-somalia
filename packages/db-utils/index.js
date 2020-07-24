@@ -18,4 +18,9 @@ if (process.env.DISABLE_TRANSACTIONS === "true") {
 module.exports = {
   mongoose: require("mongoose"),
   useReplicaSet,
+  connectionOptions: {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  },
 };
