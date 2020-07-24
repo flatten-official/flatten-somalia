@@ -1,4 +1,4 @@
-const { mongoose, useReplicaSet } = require("db-utils");
+const { mongoose, useReplicaSet } = require("util-db");
 
 // enforce strict: throw to stop extra fields from being silently dropped
 const createSchema = (definition) =>

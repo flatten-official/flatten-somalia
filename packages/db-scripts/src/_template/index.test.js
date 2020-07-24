@@ -1,4 +1,4 @@
-const db = require("db-utils/inMemoryDb");
+const db = require("util-db/inMemoryDb");
 const Script = require("./index");
 
 // STEP 1. Update block name

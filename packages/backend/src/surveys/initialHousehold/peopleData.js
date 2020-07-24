@@ -1,5 +1,5 @@
 const { createModel } = require("../../utils/mongoose");
-const { mongoose } = require("db-utils");
+const { mongoose } = require("util-db");
 
 const model = createModel("Person", {
   name: String,

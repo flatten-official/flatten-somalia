@@ -1,5 +1,5 @@
-const db = require("db-utils/inMemoryDb");
-const { useReplicaSet } = require("db-utils");
+const db = require("util-db/inMemoryDb");
+const { useReplicaSet } = require("util-db");
 const { testOnlyIf } = require("backend/test/utils/jest");
 const Script = require("./index");
 const {

@@ -2,8 +2,8 @@ const { getApp } = require("../../../../src/app");
 const { log } = require("util-logging");
 const VALID_REQ_BODIES = require("./validRequestBodies.json");
 
-const db = require("db-utils/inMemoryDb");
-const { useReplicaSet } = require("db-utils");
+const db = require("util-db/inMemoryDb");
+const { useReplicaSet } = require("util-db");
 
 const { login } = require("../../../utils/requests");
 

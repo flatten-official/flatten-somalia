@@ -1,5 +1,5 @@
 const { addVolunteer, Permissions } = require("./volunteerData");
-const { mongoose } = require("db-utils");
+const { mongoose } = require("util-db");
 const { log } = require("util-logging");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
