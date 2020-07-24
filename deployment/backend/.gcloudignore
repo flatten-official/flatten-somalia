@@ -5,3 +5,4 @@
 .gcloudignore
 /deployment
 /scripts
+/packages/db-copy-function
