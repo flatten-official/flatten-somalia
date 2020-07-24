@@ -1,4 +1,4 @@
-const mongoose = require("db-utils");
+const { mongoose, useReplicaSet } = require("db-utils");
 
 // enforce strict: throw to stop extra fields from being silently dropped
 const createSchema = (definition) =>
@@ -8,7 +8,7 @@ const createModel = (name, definition) =>
   mongoose.model(name, createSchema(definition));
 
 const runOpWithinTransaction = async (operations) => {
-  if (process.env.DISABLE_TRANSACTIONS) {
+  if (!useReplicaSet) {
     await operations();
   } else {
     const session = await mongoose.startSession();

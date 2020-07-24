@@ -5,10 +5,9 @@ const {
 } = require("mongodb-memory-server");
 const connectionOptions = require("./connectionOptions");
 const { log } = require("util-logging");
-const mongoose = require("mongoose");
+const { mongoose, useReplicaSet } = require("./index");
 
 const DB_NAME = "test";
-const useReplicaSet = !process.env.DISABLE_TRANSACTIONS;
 
 let mongod;
 

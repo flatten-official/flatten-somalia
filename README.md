@@ -45,7 +45,7 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 If you run into issues while testing try adding the following line to your `.env` file.
 
 ```
-DISABLE_TRANSACTIONS=TRUE
+DISABLE_TRANSACTIONS=true
 ```
 
 This will change the type of mongoDB server used during the test.

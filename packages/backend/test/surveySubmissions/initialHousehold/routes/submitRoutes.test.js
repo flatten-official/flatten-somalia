@@ -3,6 +3,7 @@ const { log } = require("util-logging");
 const VALID_REQ_BODIES = require("./validRequestBodies.json");
 
 const db = require("db-utils/inMemoryDb");
+const { useReplicaSet } = require("db-utils");
 
 const { login } = require("../../../utils/requests");
 
@@ -1483,7 +1484,7 @@ describe("test /submit", () => {
 
       // Used to avoid "unable to read from a snapshot due to pending collection catalog changes" when using transactions
       // eslint-disable-next-line jest/no-if
-      if (!process.env.DISABLE_TRANSACTIONS) await sleep(500);
+      if (useReplicaSet) await sleep(500);
     }
 
     const allSubmissions = await Submission.model.find();
@@ -1570,7 +1571,7 @@ describe("test /submit", () => {
 
       // Used to avoid "unable to read from a snapshot due to pending collection catalog changes" when using transactions
       // eslint-disable-next-line jest/no-if
-      if (!process.env.DISABLE_TRANSACTIONS) await sleep(1000);
+      if (useReplicaSet) await sleep(1000);
     }
 
     const allSubmissions = await Submission.model.find();
@@ -1714,7 +1715,7 @@ describe("test /submit", () => {
 
   // This test is disabled if transactions are disabled since the expected behaviour would be different without transactions.
   /* eslint-disable jest/no-standalone-expect */
-  testOnlyIf(!process.env.DISABLE_TRANSACTIONS)(
+  testOnlyIf(useReplicaSet)(
     "should return 409 for two forms with the same follow up id",
     async () => {
       const { agent } = await login(app);

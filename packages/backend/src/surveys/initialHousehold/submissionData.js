@@ -1,4 +1,4 @@
-const mongoose = require("db-utils");
+const { mongoose } = require("db-utils");
 const { createModel } = require("../../utils/mongoose");
 const { getSubmissionMetadata, FormSchema } = require("../sharedDataSchemas");
 const {
