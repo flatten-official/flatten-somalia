@@ -3,7 +3,7 @@ const {
   MongoMemoryReplSet,
   MongoMemoryServer,
 } = require("mongodb-memory-server");
-const { connectionOptions, mongoose, useReplicaSet } = require("./index");
+const { mongoose, connectionOptions, useReplicaSet } = require("./index");
 const { log } = require("util-logging");
 
 const DB_NAME = "test";
