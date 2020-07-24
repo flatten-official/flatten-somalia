@@ -7,7 +7,7 @@ Config.setup(configFile); // Do this first since other imports (e.g. logging) ma
 // endregion
 
 const { log } = require("util-logging");
-const MongoDatabase = require("db-utils/externalDb");
+const MongoDatabase = require("util-db/externalDb");
 const Confirm = require("prompt-confirm");
 const GCP = require("util-gcp");
 

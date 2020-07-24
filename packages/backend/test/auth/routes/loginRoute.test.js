@@ -7,7 +7,7 @@ const sendEmailMock = jest
 
 const { getApp } = require("../../../src/app");
 
-const db = require("db-utils/inMemoryDb");
+const db = require("util-db/inMemoryDb");
 const supertest = require("supertest");
 const { addVolunteer } = require("../../../src/volunteer/volunteerData");
 const { getConfig } = require("util-config");

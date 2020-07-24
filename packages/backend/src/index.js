@@ -6,7 +6,7 @@ const configFile = require("./config");
 Config.setup(configFile); // Do this first since other imports (e.g. logging) make use of config.
 // endregion
 
-const MongoDatabase = require("db-utils/externalDb");
+const MongoDatabase = require("util-db/externalDb");
 const { getApp } = require("./app");
 const SendGrid = require("./utils/sendGrid");
 
