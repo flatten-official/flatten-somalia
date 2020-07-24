@@ -10,7 +10,7 @@
     "util-gcp": "1.0.0"
   },
   "devDependencies": {
-    "db-utils": "1.0.0",
+    "util-db": "1.0.0",
     "prompt-confirm": "^2.0.4"
   }
 }

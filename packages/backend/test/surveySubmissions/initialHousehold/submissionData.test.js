@@ -1,8 +1,8 @@
 const Submission = require("../../../src/surveys/initialHousehold/submissionData");
 const Person = require("../../../src/surveys/initialHousehold/peopleData");
 const Household = require("../../../src/surveys/initialHousehold/householdData");
-const { mongoose } = require("db-utils");
-const db = require("db-utils/inMemoryDb");
+const { mongoose } = require("util-db");
+const db = require("util-db/inMemoryDb");
 
 const dummyVolunteerId = "56cb91bdc3464f14678934ca";
 

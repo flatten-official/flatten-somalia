@@ -1,7 +1,7 @@
 const { login } = require("../../utils/requests");
 const { getApp } = require("../../../src/app");
 
-const db = require("db-utils/inMemoryDb");
+const db = require("util-db/inMemoryDb");
 const supertest = require("supertest");
 const { findCookiesByVolunteerEmail } = require("../../../src/auth/cookieData");
 

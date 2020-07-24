@@ -5,7 +5,7 @@ const {
 
 const { getApp } = require("../../../src/app");
 
-const db = require("db-utils/inMemoryDb");
+const db = require("util-db/inMemoryDb");
 const supertest = require("supertest");
 const { login } = require("../../utils/requests");
 const _ = require("lodash");

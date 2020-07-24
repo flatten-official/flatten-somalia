@@ -1,4 +1,4 @@
-const db = require("db-utils/inMemoryDb");
+const db = require("util-db/inMemoryDb");
 const Script = require("../src/addVolunteerBulk");
 const {
   Permissions,
