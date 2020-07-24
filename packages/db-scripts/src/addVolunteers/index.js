@@ -29,6 +29,7 @@ const confirmationMessage = `${JSON.stringify(
 const run = async (volunteers) => {
   log.info("Adding volunteers to database...");
 
+  // TODO Refactor to use bulk operation rather than transaction
   await runOpWithinTransaction(async (session) => {
     for (const volunteer of volunteers) {
       try {

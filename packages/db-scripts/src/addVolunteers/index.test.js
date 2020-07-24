@@ -35,22 +35,15 @@ const VOLUNTEERS = [
   },
 ];
 
-// STEP 1. Update block name
 describe("add volunteer script test", () => {
   beforeAll(() => db.connect());
   afterEach(() => db.clear());
   afterAll(() => db.close());
 
-  // STEP 2. Update test name
   // eslint-disable-next-line jest/expect-expect
   it("should add volunteer as expected", async () => {
-    // STEP 3. Populate database with seed data
-
-    // STEP 4. Run the script with your own arguments
     await Script.run(...Script.scriptArguments);
     await Script.successTest(...Script.scriptArguments);
-
-    // STEP 5. Run some other checks on your data.
   });
 
   // eslint-disable-next-line jest/expect-expect
@@ -62,8 +55,9 @@ describe("add volunteer script test", () => {
   it("should fail to add the same volunteer twice", async () => {
     await Script.run(VOLUNTEERS);
     await Script.successTest(VOLUNTEERS);
-    // eslint-disable-next-line jest/require-to-throw-message
-    await expect(Script.run(VOLUNTEERS)).rejects.toThrow();
+    await expect(Script.run(VOLUNTEERS)).rejects.toThrow(
+      "E11000 duplicate key error collection"
+    );
 
     expect(await Volunteer.find()).toHaveLength(VOLUNTEERS.length);
   });
@@ -102,6 +96,4 @@ describe("add volunteer script test", () => {
       expect(await Volunteer.find()).toHaveLength(1);
     }
   );
-
-  // STEP 6. Write unit tests for edge cases, handling failures, bad data and different input data
 });
