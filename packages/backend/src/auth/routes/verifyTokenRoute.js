@@ -14,17 +14,6 @@ module.exports = async (req, res) => {
 
   const tokenContent = await verifyTokenAndMakeCookie(token);
 
-  if (!tokenContent) {
-    res
-      .status(401)
-      .send(
-        "Your link is invalid (it might have expired)." +
-          "Go to https://v.flatten.org to login again"
-      );
-    log.info("Failed to verify token & issue cookie.", { status: 410 });
-    return;
-  }
-
   res.cookie("id", tokenContent.id, {
     expires: tokenContent.expiry,
     // secure cookies not wanted in dev environment

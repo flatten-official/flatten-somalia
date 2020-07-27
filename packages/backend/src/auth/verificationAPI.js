@@ -5,6 +5,7 @@ const { verifyToken, signToken } = require("../utils/jwt");
 const { sendVerificationEmail } = require("../utils/sendGrid");
 const { getConfig } = require("util-config");
 const { log } = require("util-logging");
+const { ApiError } = require("../utils/errors");
 
 const COOKIE_LIFE = 1080; // In minutes
 const EMAIL_EXPIRY = 15; // In minutes
@@ -38,7 +39,14 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
 module.exports.verifyTokenAndMakeCookie = async (tokenValue) => {
   const payload = await verifyToken(tokenValue);
 
-  if (!payload) return null;
+  if (!payload) {
+    log.info("Failed to verify token & issue cookie.", { status: 410 });
+    throw new ApiError(
+      "Your link is invalid (it might have expired)." +
+        "Go to https://v.flatten.org to login again",
+      401
+    );
+  }
 
   const expiry = calculateExpiryTime(COOKIE_LIFE);
   return { id: await writeCookie(expiry, payload.id), expiry };
