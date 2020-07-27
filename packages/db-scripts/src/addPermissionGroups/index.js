@@ -2,6 +2,7 @@ const {
   PermissionGroups,
   Volunteer,
 } = require("backend/src/volunteer/volunteerData");
+const expect = require("expect");
 
 const scriptArguments = [[PermissionGroups.dsu]];
 

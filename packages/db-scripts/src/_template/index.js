@@ -1,4 +1,5 @@
 const { log } = require("util-logging");
+const expect = require("expect");
 
 // STEP 1.
 // If applicable, pass in your data, and any other options to the array.
@@ -20,13 +21,14 @@ const run = async (firstParameter) => {
   log.info(firstParameter);
 };
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line no-unused-vars,require-await
 const successTest = async (firstParameter) => {
   // STEP 4.
-  // Write your success test
+  // Write your success test with the expect package
   //
   // For example,
-  // expect(consoleOutput).toMatch(firstParameter);
+  const consoleOutput = "I will get printed"; // in real life we'd read from console somehow
+  expect(consoleOutput).toMatch(firstParameter);
 };
 
 module.exports = {
