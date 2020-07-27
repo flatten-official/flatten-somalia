@@ -49,9 +49,9 @@ deal with errors elegantly.
 
 The high-level procedure is
 
-1. Make a backup
+1. Make a backup.
 
-2. Run the script on the database
+2. Run the script on the database.
 
 3. Run the success test to verify all went well.
 
@@ -143,7 +143,7 @@ You might need to do this before running tests on the test database if you don't
 
 ### Deploy
 
-**Only once your PR** has been approved **but not merged**, do the following.
+**Only** once your PR has been *approved but **not** merged*, do the following.
 Do this after noon since form submissions have ended for the day.
 
 1. Make a snapshot of the production database. Name appropriately. (Clusters -> Production -> Backup -> Take Snapshot Now).
@@ -160,8 +160,8 @@ ENVIRONMENT=production
 
 If all goes well (no errors thrown) then:
 
-- Manually verify that the data "looks right"
-- Do a few tests on the system for your own sake of mind.
+- Manually verify that the data "looks right".
+- Do a few tests on the system for your own peace of mind.
 - Merge the PR (that has already been approved).
 
 If all does not go well (errors where throw):
