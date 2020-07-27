@@ -83,3 +83,9 @@ to the default exports object.
   },
 ```
 The `enableManualLocation` option determines whether users can manually input location if device location is unavailable.
+
+**1.1.6** Add the survey page to the site in `src/ui/App.js` by adding 
+```
+        {makeSurveyRoute(Surveys.initialBRA)}
+```
+to `AuthenticatedAppContent`, after the other surveys in the `<Switch>` block.
