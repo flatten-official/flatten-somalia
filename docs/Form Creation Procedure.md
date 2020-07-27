@@ -208,3 +208,25 @@ async function submit<formName>(
 module.exports = { submit<formName> };
 
 ```
+
+#### 2.2 Submission Route
+
+Create `src/surveys/<formName>/submissionRoute.js` with
+```
+const { submit<formName> } = require("./api");
+const { log } = require("util-logging");
+
+module.exports = async (req, res) => {
+  await submit<formName>(
+    res.locals.volunteer._id,
+    res.locals.volunteer.teamName,
+    req.body.schema,
+    req.body.metadata,
+    req.body.data
+  );
+  res.sendStatus(200);
+  log.info("Successfully submitted <formTitle>.", { status: 200 });
+};
+
+```
+`<formTitle>` is the pretty, user facing form name.
