@@ -15,6 +15,8 @@ const main = async () => {
   // Get the script
   const Script = require("./" + process.argv[2]);
 
+  log.notice(`Running on environment: ${Config.getConfig().environmentName}`);
+
   // Prompt the user
   const accepted = await new Confirm(Script.confirmationMessage).run();
 
