@@ -123,3 +123,9 @@ The form.io JSON can be created manually, or through the form.io online editor.
 **1.2.3.3** Each option's `value` field becomes its value in the data.
 
 **1.2.3** Refer to the form.io documentation to learn about other options, such as conditional components, input validation, and more.
+
+#### 1.3 Translations
+
+Steps to complete for each language `<lang>`.
+
+**1.3.1** Add the form's title string to `src/translations/<lang>/Surveys.json` with key `<formName>Title`.
