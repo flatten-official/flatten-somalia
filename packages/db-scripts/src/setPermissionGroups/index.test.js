@@ -44,7 +44,7 @@ const OTHER_CASE_DATA = [
   },
 ];
 
-describe("add permission group script", () => {
+describe("set permissionGroup", () => {
   beforeAll(() => db.connect());
   afterEach(() => db.clear());
   afterAll(() => db.close());
@@ -80,7 +80,7 @@ describe("add permission group script", () => {
     }
   });
 
-  it("should run script even with already exisiting permission gorups", async () => {
+  it("should run script even with already existing permission groups", async () => {
     // populate seed data
     for (const vol of OTHER_CASE_DATA) await new Volunteer(vol).save();
 
