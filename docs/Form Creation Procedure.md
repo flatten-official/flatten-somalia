@@ -89,3 +89,9 @@ The `enableManualLocation` option determines whether users can manually input lo
         {makeSurveyRoute(Surveys.initialBRA)}
 ```
 to `AuthenticatedAppContent`, after the other surveys in the `<Switch>` block.
+
+**1.1.7** Add a button to reach the form in `src/ui/home/Home.js` by adding
+```
+      <HomeSurveyButton survey={Surveys.initialBRA} />
+```
+to `home`, after the other surveys.
