@@ -14,7 +14,7 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
 
   if (!volunteer) {
     log.warning(`Invalid email: ${emailAddress}`);
-    return true; // Return true to not let user know if email was invalid to not allow guessing emails
+    return; // Don't throw an API Error to not let user know if email was invalid to not allow guessing emails
   }
 
   const token = await signToken({ id: volunteer._id }, EMAIL_EXPIRY);
@@ -27,7 +27,7 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
 
   log.debug(verificationLink);
 
-  return sendVerificationEmail(emailAddress, verificationLink);
+  await sendVerificationEmail(emailAddress, verificationLink);
 };
 
 /**
