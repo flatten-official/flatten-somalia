@@ -24,6 +24,8 @@ Roughly in order, the steps are as follows:
 
 ## 1 Frontend Setup
 
+Here, paths start in the root frontend directory.
+
 #### 1.1 Frontend Configuration
 
 **1.1.1** Create a short, descriptive variable name for the form `<formName>`.
@@ -143,3 +145,36 @@ import formIO<formName><lang> from "./translations/<lang>/translation/<formName>
       ...formIO<formName><lang>,
 ```
 to the `resources.<lang>.translation` object.
+
+## 2 Backend Setup
+
+Here, paths start in the root backend directory.
+
+#### 2.1 Data Model
+
+**2.1.1** Create `src/surveys/<formName>/submissionData.js` with 
+```
+const { FormSchema, getSubmissionMetadata } = require("../sharedDataSchemas");
+const { createModel } = require("../../utils/mongoose");
+
+const model = createModel("<formName>Submission", {
+  metadata: getSubmissionMetadata(<locationRequired>),
+  surveyData: {
+    submissionSchema: FormSchema,
+    <dataModel>,
+  },
+});
+
+const create = async (content) => {
+  const submissionDocument = new model(content);
+  await submissionDocument.validate();
+  return submissionDocument;
+};
+
+const saveAsync = (document) => document.save();
+
+module.exports = { model, saveAsync, create };
+
+```
+`<locationRequired>` is a boolean.
+`<dataModel>` is the form's data model.
