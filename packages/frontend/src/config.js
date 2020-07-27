@@ -93,7 +93,7 @@ export const Surveys = {
       Schemas.initialBRASurvey
     ),
     options: {
-      enableManualLocation: false,
+      enableManualLocation: true,
     },
   },
 };
