@@ -3,7 +3,151 @@
   "display": "wizard",
   "components": [
     {
-      "type": "panel"
+      "key": "householdInfo",
+      "label": "householdInfo",
+      "type": "panel",
+      "components": [
+        {
+          "key": "sharePhoneNumber",
+          "label": "sharePhoneNumberConsent",
+          "type": "radio",
+          "validate": {
+            "required": true
+          },
+          "values": [
+            {
+              "label": "consentToSharingPhoneNumber",
+              "value": "yes"
+            },
+            {
+              "label": "willNotSharePhoneNumber",
+              "value": "no"
+            }
+          ]
+        },
+        {
+          "key": "phoneNumber",
+          "label": "enterPhoneNumber",
+          "type": "phoneNumber",
+          "validate": {
+            "required": true
+          },
+          "conditional": {
+            "show": true,
+            "when": "sharePhoneNumber",
+            "eq": "yes"
+          },
+          "inputMask": "99 99 99 999"
+        },
+        {
+          "key": "followUpId",
+          "type": "customFollowUpId",
+          "conditional": {
+            "show": true,
+            "when": "sharePhoneNumber",
+            "eq": "no"
+          }
+        },
+        {
+          "key": "district",
+          "label": "district",
+          "type": "select",
+          "dataSrc": "values",
+          "data": {
+            "values": [
+              {
+                "label": "Yaaqshiid",
+                "value": "Yaaqshiid"
+              },
+              {
+                "label": "Warta-Nabada",
+                "value": "Warta-Nabada"
+              },
+              {
+                "label": "C/casiis",
+                "value": "C/casiis"
+              },
+              {
+                "label": "Deyniile",
+                "value": "Deyniile"
+              },
+              {
+                "label": "Boondheere",
+                "value": "Boondheere"
+              },
+              {
+                "label": "Wadajir",
+                "value": "Wadajir"
+              },
+              {
+                "label": "Howl-wadaag",
+                "value": "Howl-wadaag"
+              },
+              {
+                "label": "Heliwaa",
+                "value": "Heliwaa"
+              },
+              {
+                "label": "Garasbaley",
+                "value": "Garasbaley"
+              },
+              {
+                "label": "Gubadley",
+                "value": "Gubadley"
+              },
+              {
+                "label": "Kaaraan",
+                "value": "Kaaraan"
+              },
+              {
+                "label": "Dharkenley",
+                "value": "Dharkenley"
+              },
+              {
+                "label": "Kaxda",
+                "value": "Kaxda"
+              },
+              {
+                "label": "Shangani",
+                "value": "Shangani"
+              },
+              {
+                "label": "Xamarweyne",
+                "value": "Xamarweyne"
+              },
+              {
+                "label": "Hodan",
+                "value": "Hodan"
+              },
+              {
+                "label": "Shibis",
+                "value": "Shibis"
+              },
+              {
+                "label": "Xamar Jajab",
+                "value": "Xamar Jajab"
+              },
+              {
+                "label": "Waabri",
+                "value": "Waabri"
+              }
+            ]
+          },
+          "validate": {
+            "required": true
+          }
+        },
+        {
+          "key": "residentsCount",
+          "label": "residentsCount",
+          "type": "number",
+          "validate": {
+            "required": true,
+            "min": 0,
+            "max": 25
+          }
+        }
+      ]
     }
   ]
 }
