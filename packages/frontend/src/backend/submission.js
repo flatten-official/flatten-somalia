@@ -71,3 +71,22 @@ export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
     data: body,
   });
 };
+
+// todo refactor into one factory with followupID option?
+export const InitialBRASurveySubmitterFactory = (api, schema) => async (
+  storeData,
+  formioData
+) => {
+  preFormatFormio(formioData);
+
+  const body = {
+    metadata: getMetadata(storeData),
+    schema,
+    data: {
+      followUpId: storeData.followUpId,
+      ...formioData,
+    },
+  };
+
+  await backend.request({ ...api, data: body });
+};
