@@ -7,8 +7,8 @@ Adding a new form is as easy as 1, 2, 3, 4, ..., n!
 Roughly in order, the steps are as follows:
 
 * _Frontend Setup_
-  * Create the form.io JSON
   * Create a page for the form
+  * Create the form.io JSON
   * Add tranlsations
 * _Backend Setup_
   * Create the form's data model
@@ -24,7 +24,7 @@ Roughly in order, the steps are as follows:
 
 ## 1. Frontend Setup
 
-##### 1.1 Form Creation
+##### 1.1 Frontend Configuration
 
 **1.1.1** Create a short, descriptive variable name for the form `<formName>`.
 
@@ -107,3 +107,19 @@ to `AuthenticatedAppContent`, after the other surveys in the `<Switch>` block.
       <HomeSurveyButton survey={Surveys.initialBRA} />
 ```
 to `home`, after the other surveys.
+
+#### 1.2 form.io JSON Creation
+
+The form.io JSON can be created manually, or through the form.io online editor.
+
+**1.2.1** Ensure each component has a unique and descriptive `label` field – this is the component's localization key.
+
+**1.2.2** Ensure each component has a unique and descriptive `key` field – this is the component's key in the data model.
+
+**1.2.3.1** Components with selectable answers should specify the answers in a `values` array.
+
+**1.2.3.2** Each option's `label` field becomes its localization key.
+
+**1.2.3.3** Each option's `value` field becomes its value in the data.
+
+**1.2.3** Refer to the form.io documentation to learn about other options, such as conditional components, input validation, and more.
