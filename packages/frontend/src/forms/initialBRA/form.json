@@ -1,28 +1,9 @@
 {
   "type": "form",
-  "title": "Initial BRA Survey",
-  "name": "initialBRASurvey",
-  "path": "initialbrasurvey",
   "display": "wizard",
   "components": [
     {
-      "label": "enterPhoneNumber",
-      "inputMask": "99 99 99 999",
-      "spellcheck": true,
-      "tableView": true,
-      "calculateServer": false,
-      "validate": { "required": true },
-      "key": "hospitalPhoneNumber",
-      "type": "phoneNumber",
-      "input": true
-    },
-    {
-      "type": "button",
-      "label": "submit",
-      "key": "exclude-submit",
-      "disableOnInvalid": true,
-      "input": true,
-      "tableView": false
+      "type": "panel"
     }
   ]
 }
