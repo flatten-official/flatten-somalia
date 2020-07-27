@@ -21,7 +21,7 @@ const run = async (firstParameter) => {
   log.info(firstParameter);
 };
 
-// eslint-disable-next-line no-unused-vars,require-await
+// eslint-disable-next-line require-await
 const successTest = async (firstParameter) => {
   // STEP 4.
   // Write your success test with the expect package
