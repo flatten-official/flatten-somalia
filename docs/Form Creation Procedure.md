@@ -28,7 +28,19 @@ Roughly in order, the steps are as follows:
 
 **1.1.1** Create a short, descriptive variable name for the form `<formName>`.
 
-**1.1.2** Create the form.io JSON file at `src/forms/<formName>/form.json`.
+**1.1.2** Create the form.io JSON file at `src/forms/<formName>/form.json` with at least the following:
+```
+{
+  "type": "form",
+  "display": "wizard",
+  "components": [
+    {
+      "type": "panel"
+    }
+  ]
+}
+```
+This is a bare minimum form.io form, resulting in nothing but Submit and Cancel buttons.
 
 **1.1.3** Create a changelog at `src/forms/<formName>/CHANGE_LOG.txt` with the following:
 ```
