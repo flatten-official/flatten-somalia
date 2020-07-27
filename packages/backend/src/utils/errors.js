@@ -1,15 +1,15 @@
 const { mongoose } = require("util-db");
 
-class BadInputError extends Error {
-  constructor(message) {
+class ApiError extends Error {
+  constructor(message, statusCode) {
     super(message);
-    this.name = "BadInputError";
+    this.name = "ApiError";
+    this.statusCode = statusCode;
   }
 }
 
 const isValidationTypeError = (e) =>
   e instanceof mongoose.Error.ValidationError ||
-  e instanceof mongoose.Error.StrictModeError ||
-  e instanceof BadInputError;
+  e instanceof mongoose.Error.StrictModeError;
 
-module.exports = { BadInputError, isValidationTypeError };
+module.exports = { ApiError, isValidationTypeError };
