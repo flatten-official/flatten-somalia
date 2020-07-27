@@ -2,6 +2,7 @@ import api from "./backend/api/api";
 import graveDiggerSurveyJSON from "./forms/gravedigger/form.json";
 import hospitalSurveyJSON from "./forms/hospital/form.json";
 import initialHouseholdJSON from "./forms/initialHousehold/form.json";
+import initialBRASurveyJSON from "./forms/initialBRA/form.json";
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
@@ -13,6 +14,7 @@ export const Routes = {
   initialHouseholdSurvey: "/surveys/initialHousehold",
   gravediggerSurvey: "/surveys/gravedigger",
   hospitalSurvey: "/surveys/hospital",
+  initialBRASurvey: "/surveys/initialBRA",
 };
 
 const Schemas = {
@@ -27,6 +29,10 @@ const Schemas = {
   initialHousehold: {
     form: "initialSurvey",
     version: "1.0.6",
+  },
+  initialBRASurvey: {
+    form: "initialBRASurvey",
+    version: "0.0.0",
   },
 };
 
@@ -74,6 +80,20 @@ export const Surveys = {
     ]),
     options: {
       enableManualLocation: true,
+    },
+  },
+  initialBRA: {
+    route: Routes.initialBRASurvey,
+    surveyKey: "initialBRASurvey",
+    i18nTitleKey: "initialBRASurvey",
+    api: api.initialBRASurvey,
+    formIOJSON: initialBRASurveyJSON,
+    onSubmit: defaultSurveySubmitterFactory(
+      api.initialBRASurvey,
+      Schemas.initialBRASurvey
+    ),
+    options: {
+      enableManualLocation: false,
     },
   },
 };
