@@ -29,6 +29,7 @@
           "key": "phoneNumber",
           "label": "enterPhoneNumber",
           "type": "phoneNumber",
+          "inputMask": "99 99 99 999",
           "validate": {
             "required": true
           },
@@ -36,8 +37,7 @@
             "show": true,
             "when": "sharePhoneNumber",
             "eq": "yes"
-          },
-          "inputMask": "99 99 99 999"
+          }
         },
         {
           "key": "followUpId",
@@ -52,6 +52,9 @@
           "key": "district",
           "label": "district",
           "type": "select",
+          "validate": {
+            "required": true
+          },
           "dataSrc": "values",
           "data": {
             "values": [
@@ -132,9 +135,6 @@
                 "value": "Waabri"
               }
             ]
-          },
-          "validate": {
-            "required": true
           }
         },
         {
