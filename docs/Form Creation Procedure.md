@@ -211,7 +211,7 @@ module.exports = { submit<formName> };
 
 #### 2.2 Submission Route
 
-Create `src/surveys/<formName>/submissionRoute.js` with
+**2.2.1** Create `src/surveys/<formName>/submissionRoute.js` with
 ```
 const { submit<formName> } = require("./api");
 const { log } = require("util-logging");
@@ -230,3 +230,28 @@ module.exports = async (req, res) => {
 
 ```
 `<formTitle>` is the pretty, user facing form name.
+
+**2.2.2** Add the API route in `src/routes.js` by adding 
+```
+/**
+ * @api {post} /survey/<formName> Submit a <formTitle>.
+ * @apiName SubmitForm<formName>
+ * @apiGroup Submissions
+ *
+ * @apiParamExample {json} Request-Example:
+ *                  body:
+ *                  {
+ *                    "schema" : { form: <formName>, version: <formVersion> },
+ *                    "metadata": { location: { <location data> }, <timing data...> },
+ *                    "data": { <form.io survey data> }
+ *                  }
+ */
+router.post(
+  "/survey/<formName>",
+  protectedMiddleware([Permissions.submitForms]),
+  submitHospitalRoute,
+  surveyErrorHandler
+);
+
+```
+after the other survey submission routes.
