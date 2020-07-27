@@ -5,7 +5,7 @@ const {
 
 const scriptArguments = [[PermissionGroups.dsu]];
 
-const confirmationMessage = `Are you sure you want to add permission group ${PermissionGroups.dsu} to all volunteers`;
+const confirmationMessage = `Are you sure you want to add permission groups [${scriptArguments[0]}] to all volunteers`;
 
 const run = async (permissionGroupToSet) => {
   await Volunteer.updateMany(

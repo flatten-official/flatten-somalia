@@ -15,10 +15,20 @@ const main = async () => {
   // Get the script
   const Script = require("./" + process.argv[2]);
 
+  log.notice(`Starting script: ${process.argv[2]}`);
+
   log.notice(`Running on environment: ${Config.getConfig().environmentName}`);
 
+  // Prompt user about backup
+  let accepted = await new Confirm("Did you create a backup").run();
+
+  if (!accepted) {
+    log.info("Script was cancelled.");
+    return;
+  }
+
   // Prompt the user
-  const accepted = await new Confirm(Script.confirmationMessage).run();
+  accepted = await new Confirm(Script.confirmationMessage).run();
 
   if (!accepted) {
     log.info("Script was cancelled.");
