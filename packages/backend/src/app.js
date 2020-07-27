@@ -6,7 +6,10 @@ const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const { getConfig } = require("util-config");
 const routes = require("./routes");
-const appErrorHandler = require("./utils/express/errorHandler");
+const {
+  uncaughtErrorHandler,
+  apiErrorHandler,
+} = require("./utils/express/errorHandler");
 const loggerMiddleware = require("./utils/express/loggerMiddleware");
 const bodySanitizer = require("./utils/express/bodySanitizer");
 const authCookieParser = require("./auth/routes/cookieParser");
@@ -26,7 +29,8 @@ function getApp() {
   app.use(loggerMiddleware);
   app.use(authCookieParser);
   app.use("/", routes);
-  app.use(appErrorHandler);
+  app.use(apiErrorHandler);
+  app.use(uncaughtErrorHandler);
 
   return app;
 }
