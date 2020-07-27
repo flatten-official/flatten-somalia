@@ -22,7 +22,7 @@ Roughly in order, the steps are as follows:
   * Deploy & test in production
 
 
-## 1. Frontend Setup
+## 1 Frontend Setup
 
 #### 1.1 Frontend Configuration
 
