@@ -1,5 +1,3 @@
-const { mongoose } = require("util-db");
-
 class ApiError extends Error {
   constructor(message, statusCode) {
     super(message);
@@ -8,8 +6,4 @@ class ApiError extends Error {
   }
 }
 
-const isValidationTypeError = (e) =>
-  e instanceof mongoose.Error.ValidationError ||
-  e instanceof mongoose.Error.StrictModeError;
-
-module.exports = { ApiError, isValidationTypeError };
+module.exports = { ApiError };
