@@ -22,7 +22,9 @@ const main = async () => {
   );
 
   // Prompt user about backup
-  let accepted = await new Confirm("Did you create a backup").run();
+  let accepted = await new Confirm(
+    "Did you create a backup (snapshot) of the appropriate database"
+  ).run();
 
   if (!accepted) {
     log.info("Script was cancelled.");
