@@ -15,9 +15,11 @@ const main = async () => {
   // Get the script
   const Script = require("./" + process.argv[2]);
 
-  log.notice(`Starting script: ${process.argv[2]}`);
-
-  log.notice(`Running on environment: ${Config.getConfig().environmentName}`);
+  log.notice(
+    `Starting script ${process.argv[2]} in environment ${
+      Config.getConfig().environmentName
+    }`
+  );
 
   // Prompt user about backup
   let accepted = await new Confirm("Did you create a backup").run();
