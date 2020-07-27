@@ -178,3 +178,33 @@ module.exports = { model, saveAsync, create };
 ```
 `<locationRequired>` is a boolean.
 `<dataModel>` is the form's data model.
+
+**2.1.2** Create `src/surveys/<formName>/api.js` with 
+```
+const <formName>Submission = require("./submissionData");
+
+async function submit<formName>(
+  volunteerId,
+  volunteerTeamName,
+  submissionSchema,
+  metadata,
+  surveyData
+) {
+  const document = await <formName>Submission.create({
+    metadata: {
+      addedBy: volunteerId,
+      teamName: volunteerTeamName,
+      ...metadata,
+    },
+    surveyData: {
+      submissionSchema,
+      ...surveyData,
+    },
+  });
+
+  await <formName>Submission.saveAsync(document);
+}
+
+module.exports = { submit<formName> };
+
+```
