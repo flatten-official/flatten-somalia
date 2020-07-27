@@ -21,22 +21,17 @@ const main = async () => {
     }`
   );
 
-  // Prompt user about backup
-  let accepted = await new Confirm(
-    "Did you create a backup (snapshot) of the appropriate database"
-  ).run();
+  // Prompts to ask the user before continuing
+  const prompts = [
+    "Did you create a backup (snapshot) of the appropriate database",
+    Script.confirmationMessage,
+  ];
 
-  if (!accepted) {
-    log.info("Script was cancelled.");
-    return;
-  }
-
-  // Prompt the user
-  accepted = await new Confirm(Script.confirmationMessage).run();
-
-  if (!accepted) {
-    log.info("Script was cancelled.");
-    return;
+  for (const prompt of prompts) {
+    if (!(await new Confirm(prompt).run())) {
+      log.info("Script was cancelled.");
+      return;
+    }
   }
 
   // Load the secrets from GCP
