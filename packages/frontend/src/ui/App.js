@@ -47,6 +47,7 @@ const AuthenticatedAppContent = () => {
         {makeSurveyRoute(Surveys.initialHousehold)}
         {makeSurveyRoute(Surveys.gravedigger)}
         {makeSurveyRoute(Surveys.hospital)}
+        {makeSurveyRoute(Surveys.initialBRA)}
 
         <Redirect from="*" to={Routes.home} />
       </Switch>
