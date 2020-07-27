@@ -24,7 +24,7 @@ Roughly in order, the steps are as follows:
 
 ## 1. Frontend Setup
 
-##### 1.1 Frontend Configuration
+#### 1.1 Frontend Configuration
 
 **1.1.1** Create a short, descriptive variable name for the form `<formName>`.
 
