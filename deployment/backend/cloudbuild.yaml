@@ -1,0 +1,13 @@
+steps:
+  # STEP 1: Copy proper app.yaml to root
+  - name: gcr.io/cloud-builders/gsutil
+    # $PROJECT_ID is automatically set by GCloud Build. No need to specify as env var.
+    # https://cloud.google.com/cloud-build/docs/configuring-builds/substitute-variable-values
+    args: ["cp", "deployment/backend/app.$PROJECT_ID.yaml", "app.yaml"]
+  # STEP 2: Copy the .gcloudignore to replace the one at the root
+  - name: gcr.io/cloud-builders/gsutil
+    args: ["cp", "deployment/backend/.gcloudignore", ".gcloudignore"]
+  # STEP 3: Deploy!
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy"]
+timeout: "1600s"

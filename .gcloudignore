@@ -1,14 +1,32 @@
+# This is the ignore file used when uploading this repository to Google Cloud Build
+
+# Ignore packages that are never deployed (in any environment)
+/packages/db-scripts
+
+# Ignore all docs
 README.md
-.env.template
-.eslintrc.js
+/docs
 apidoc.json
-node_modules
-test
-coverage
-docs
-.idea
-scripts
-.env
-.eslintcache
+
+# Ignore git files
+.git
+.github
 .gitattributes
 .gitignore
+
+# Ignore configuration files
+.eslintignore
+.eslintrc.js
+jest.config.js
+
+# Ignore all scripts
+/scripts/*
+# Except
+!/scripts/createBranchJson.js
+
+# the following line adds everything in .gitignore to this file (even though the line is a comment)
+#!include:.gitignore
+# See https://cloud.google.com/sdk/gcloud/reference/topic/gcloudignore for more documentation about the include pattern
+
+# Include branch.json that was excluded by .gitignore
+!branch.json

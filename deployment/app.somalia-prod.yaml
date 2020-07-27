@@ -1,6 +1,0 @@
-service: default
-runtime: nodejs10
-env_variables:
-  ENVIRONMENT: production
-vpc_access_connector:
-  name: "projects/somalia-prod/locations/europe-west1/connectors/gae-to-atlas-so-prod"

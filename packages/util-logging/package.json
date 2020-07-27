@@ -1,0 +1,9 @@
+{
+  "name": "util-logging",
+  "version": "1.0.0",
+  "dependencies": {
+    "winston": "^3.3.3",
+    "@google-cloud/logging-winston": "^3.0.6",
+    "util-config": "1.0.0"
+  }
+}
