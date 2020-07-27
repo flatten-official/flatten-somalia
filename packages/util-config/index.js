@@ -29,7 +29,8 @@ const setup = (
   Config = _.defaultsDeep(
     overrideConfig,
     getEnvironmentConfig(configFile, environmentName),
-    configFile.common
+    configFile.common,
+    { environmentName } // Add .environmentName as a value to the configuration
   );
 };
 

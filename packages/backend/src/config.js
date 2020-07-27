@@ -18,7 +18,6 @@ module.exports = {
       minimumLogLevel: "debug",
       useStackdriver: false,
       sendClientErrors: true,
-      envName: "development",
       secretId:
         "projects/233853318753/secrets/backend-so-config/versions/latest",
       debug: true,
@@ -32,7 +31,6 @@ module.exports = {
       minimumLogLevel: "debug",
       useStackdriver: true,
       sendClientErrors: true,
-      envName: "staging",
       secretId:
         "projects/233853318753/secrets/backend-so-config/versions/latest",
       debug: false,
@@ -46,7 +44,6 @@ module.exports = {
       minimumLogLevel: "info",
       useStackdriver: true,
       sendClientErrors: false,
-      envName: "production",
       secretId:
         "projects/915444252630/secrets/backend-gae-config-so/versions/latest",
       debug: false,
@@ -60,9 +57,9 @@ module.exports = {
       minimumLogLevel: "debug",
       useStackdriver: false,
       sendClientErrors: false,
-      envName: "test",
       debug: false,
       secureCookies: false,
+      allowDisableTransactions: true,
       urls: {
         frontendHost: "http://localhost:3000",
         backendHost: "http://localhost",

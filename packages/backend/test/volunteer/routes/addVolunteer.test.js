@@ -48,10 +48,8 @@ describe("endpoint POST /volunteer", () => {
 
     // remove properties that aren't used in comparison
     newVolunteer = newVolunteer.toJSON();
-    delete newVolunteer._id;
-    delete newVolunteer.__v;
 
-    expect(newVolunteer).toStrictEqual({
+    expect(newVolunteer).toMatchObject({
       name: "new_name",
       email: GOOD_REQUEST_BODY.volunteerData.email,
       friendlyId: 2, // 1 already taken by admin

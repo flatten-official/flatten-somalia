@@ -14,10 +14,7 @@ if (useReplicaSet)
   mongod = new MongoMemoryReplSet({
     replSet: { storageEngine: "wiredTiger" }, // https://github.com/nodkz/mongodb-memory-server#replica-set-start
   });
-else {
-  mongod = new MongoMemoryServer();
-  log.warning("Replica sets are disabled. Some tests may be skipped.");
-}
+else mongod = new MongoMemoryServer();
 
 /**
  * Connect to the in-memory database.

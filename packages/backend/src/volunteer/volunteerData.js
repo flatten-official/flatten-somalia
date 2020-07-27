@@ -69,8 +69,8 @@ const defaultVolunteer = {
   permissions: [Permissions.submitForms],
 };
 
-const getNextFriendlyId = async () => {
-  const largestVolunteer = await Volunteer.find({}, "friendlyId")
+const getNextFriendlyId = async (session) => {
+  const largestVolunteer = await Volunteer.find({}, "friendlyId", { session })
     .sort({ friendlyId: -1 })
     .limit(1);
   if (largestVolunteer.length === 0 || !largestVolunteer[0].friendlyId)
@@ -82,14 +82,14 @@ const getNextFriendlyId = async () => {
  * Adds a volunteer to the database
  * @return {Promise<*>} the volunteer
  */
-const addVolunteer = async (newVolunteer) => {
+const addVolunteer = async (newVolunteer, session = undefined) => {
   newVolunteer = _.defaults(
-    { friendlyId: await getNextFriendlyId() },
+    { friendlyId: await getNextFriendlyId(session) },
     newVolunteer,
     defaultVolunteer
   );
 
-  return new Volunteer(newVolunteer).save(); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
+  return new Volunteer(newVolunteer).save({ session }); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
 };
 
 /**
