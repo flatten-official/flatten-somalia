@@ -129,3 +129,17 @@ The form.io JSON can be created manually, or through the form.io online editor.
 Steps to complete for each language `<lang>`.
 
 **1.3.1** Add the form's title string to `src/translations/<lang>/Surveys.json` with key `<formName>Title`.
+
+**1.3.2** Create `src/translations/<lang>/translation/<formName>.json`, and add localization strings for each form.io component.
+The file should contain an empty object `{}` at the very minimum.
+
+**1.3.3** In `src/i18n.js`, import the form.io component translations by adding the following:
+```
+import formIO<formName><lang> from "./translations/<lang>/translation/<formName>.json";
+```
+
+**1.3.4** Add the form.io component translations by adding 
+```
+      ...formIO<formName><lang>,
+```
+to the `resources.<lang>.translation` object.
