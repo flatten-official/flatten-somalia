@@ -147,4 +147,24 @@ router.post(
   surveyErrorHandler
 );
 
+/**
+ * @api {post} /survey/initialBRA Submit an initial BRA survey.
+ * @apiName SubmitForm<formName>
+ * @apiGroup Submissions
+ *
+ * @apiParamExample {json} Request-Example:
+ *                  body:
+ *                  {
+ *                    "schema" : { form: "initialBRASurvey", version: <formVersion> },
+ *                    "metadata": { location: { <location data> }, <timing data...> },
+ *                    "data": { <form.io survey data> }
+ *                  }
+ */
+router.post(
+  "/survey/initialBRA",
+  protectedMiddleware([Permissions.submitForms]),
+  submitHospitalRoute,
+  surveyErrorHandler
+);
+
 module.exports = router;
