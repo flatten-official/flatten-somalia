@@ -1734,9 +1734,7 @@ describe("test /submit", () => {
   );
 
   it("should fail for a user without the right permissions", async () => {
-    const { agent } = await login(app, {
-      permissions: [],
-    });
+    const { agent } = await login(app, []);
 
     await agent.post("/submit/initial").send(VALID_REQ_BODIES[0]).expect(403);
 

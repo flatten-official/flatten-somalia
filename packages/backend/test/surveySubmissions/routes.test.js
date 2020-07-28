@@ -133,7 +133,7 @@ describe("submissions:", () => {
     });
 
     it("should fail for a user without the right permissions", async () => {
-      const { agent } = await login(app, { permissions: [] });
+      const { agent } = await login(app, []);
 
       await agent
         .post("/survey/gravedigger")
@@ -174,7 +174,7 @@ describe("submissions:", () => {
     });
 
     it("should fail for a user without the right permissions", async () => {
-      const { agent } = await login(app, { permissions: [] });
+      const { agent } = await login(app, []);
 
       await agent
         .post("/survey/hospital")

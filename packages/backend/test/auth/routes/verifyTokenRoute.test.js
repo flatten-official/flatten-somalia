@@ -6,7 +6,12 @@ const { getApp } = require("../../../src/app");
 
 const db = require("util-db/inMemoryDb");
 const supertest = require("supertest");
-const { TEST_VOLUNTEER } = require("../../utils/requests");
+
+const TEST_VOLUNTEER = {
+  name: "default_name",
+  email: "default_email@example.ca",
+  teamName: "testTeam",
+};
 
 const MALFORMED_TOKEN =
   "baaaaaaaaaaaaaaaaaaadTokennnnnnnnnnn.eyJpZCI6IjVlY2ViZDI0NTE5ZjIyMjY4NDVkNjRiMCIsImlhdCI6MTU5MDYwODY3NiwiZXhwIjoxNTkxNTA4Njc2fQ.9XsbPNiybwkZl2M7v3orXk_Imn66vvGflRG267MJ6Ds";
