@@ -55,7 +55,7 @@ describe("endpoint POST /volunteer", () => {
       name: "new_name",
       email: GOOD_REQUEST_BODY.volunteerData.email,
       friendlyId: 2, // 1 already taken by admin
-      permissions: [Permissions.submitForms],
+      permissions: [Permissions.submitForms, Permissions.access],
       permissionGroups: [PermissionGroups.dsu],
       addedBy: adminVolunteer._id,
       teamName: "Flatten",
