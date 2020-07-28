@@ -60,10 +60,10 @@ Logging is done using the Winston loggers. Add `util-logging` as a dependency an
 
 We use MongoDB and mongoose. To avoid two packages using different versions of mongoose
 (and hence one of the two not being connected to the db), all packages using mongoose should depend on `db-util` and not `mongoose`.
-Always use:
+`db-util` exports `mongoose` so always use:
 
 ```
-const mongoose = require("db-util");
+const { mongoose } = require("db-util");
 ```
 
 ### Error handling
