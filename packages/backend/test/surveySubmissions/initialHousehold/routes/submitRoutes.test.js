@@ -1754,7 +1754,7 @@ describe("test /submit", () => {
 
     await agentSubmitForms
       .post("/submit/initial")
-      .send(VALID_REQ_BODIES[0])
+      .send(VALID_REQ_BODIES[1])
       .expect(403);
 
     const allSubmissions = await Submission.model.find();
