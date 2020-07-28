@@ -25,7 +25,7 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
     log.warning(
       `Volunteer (${emailAddress}) without access permission tried logging into system.`
     );
-    return true; // Return true to not let user know if email was invalid to not allow guessing emails
+    return; // Don't throw an API Error to not let user know he doesn't have access to not allow guessing emails
   }
 
   const token = await signToken({ id: volunteer._id }, EMAIL_EXPIRY);
