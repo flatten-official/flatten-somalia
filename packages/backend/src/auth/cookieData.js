@@ -16,6 +16,11 @@ const Cookie = mongoose.model(
   })
 );
 
+async function deleteCookieForVolunteer(volunteerId) {
+  const result = await Cookie.deleteMany({ volunteerId });
+
+}
+
 /**
  *
  * @param expiry Date object that represents the token expiry
@@ -61,7 +66,7 @@ async function removedExpiredCookies() {
   await Cookie.deleteMany({ expiry: { $lt: Date.now() } });
 }
 
-async function findCookieByVolunteerEmail(email) {
+async function findCookiesByVolunteerEmail(email) {
   const volunteer = await findVolunteerByEmail(email);
   if (!volunteer) return null;
   return Cookie.find({ volunteerId: volunteer._id });
@@ -73,5 +78,6 @@ module.exports = {
   readCookie,
   removedExpiredCookies,
   deleteCookie,
-  findCookiesByVolunteerEmail: findCookieByVolunteerEmail,
+  findCookiesByVolunteerEmail,
+  deleteCookieForVolunteer,
 };

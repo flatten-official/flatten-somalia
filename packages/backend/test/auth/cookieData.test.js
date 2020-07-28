@@ -89,4 +89,20 @@ describe("cookie database functions", () => {
     const goodCookies = await cookieData.Cookie.find();
     expect(goodCookies).toHaveLength(3);
   });
+
+  it("should delete only cookies for the volunteer with that id", async () => {
+    const firstVolunteerId = "5ed6a4d86a32d24ddcfe4259";
+    const secondVolunteerId = "5dd6a4d86a32d24ddcfe4259";
+    await cookieData.writeCookie(Date.now(), firstVolunteerId);
+    await cookieData.writeCookie(Date.now(), firstVolunteerId);
+    await cookieData.writeCookie(Date.now(), secondVolunteerId);
+
+    expect(await cookieData.Cookie.find()).toHaveLength(3);
+
+    await cookieData.deleteCookieForVolunteer(firstVolunteerId);
+    expect(await cookieData.Cookie.find()).toHaveLength(1);
+
+    await cookieData.deleteCookieForVolunteer(secondVolunteerId);
+    expect(await cookieData.Cookie.find()).toHaveLength(0);
+  });
 });

@@ -1,5 +1,5 @@
 const { calculateExpiryTime } = require("../utils/time");
-const { writeCookie } = require("./cookieData");
+const { writeCookie, deleteCookieForVolunteer } = require("./cookieData");
 const { findVolunteerByEmail } = require("../volunteer/volunteerData");
 const { verifyToken, signToken } = require("../utils/jwt");
 const { sendVerificationEmail } = require("../utils/sendGrid");
@@ -39,6 +39,8 @@ module.exports.verifyTokenAndMakeCookie = async (tokenValue) => {
   const payload = await verifyToken(tokenValue);
 
   if (!payload) return null;
+
+  await deleteCookieForVolunteer(payload.id); // Delete any previous cookies for the volunteer effectively logging them out on other devices
 
   const expiry = calculateExpiryTime(COOKIE_LIFE);
   return { id: await writeCookie(expiry, payload.id), expiry };
