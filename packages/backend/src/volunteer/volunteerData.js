@@ -58,7 +58,6 @@ const Volunteer = createModel("Volunteer", {
         enum: Object.values(PermissionGroups),
       },
     ],
-    default: undefined, // this is to allow us to create a entry with no permissionGroup field (used in the tests)
     required: true,
   },
   gender: String, // TODO Make enum
