@@ -15,12 +15,23 @@ const main = async () => {
   // Get the script
   const Script = require("./" + process.argv[2]);
 
-  // Prompt the user
-  const accepted = await new Confirm(Script.confirmationMessage).run();
+  log.notice(
+    `Starting script ${process.argv[2]} in environment ${
+      Config.getConfig().environmentName
+    }`
+  );
 
-  if (!accepted) {
-    log.info("Script was cancelled.");
-    return;
+  // Prompts to ask the user before continuing
+  const prompts = [
+    "Did you create a backup (snapshot) of the appropriate database",
+    Script.confirmationMessage,
+  ];
+
+  for (const prompt of prompts) {
+    if (!(await new Confirm(prompt).run())) {
+      log.info("Script was cancelled.");
+      return;
+    }
   }
 
   // Load the secrets from GCP
