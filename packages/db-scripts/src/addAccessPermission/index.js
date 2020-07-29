@@ -10,6 +10,7 @@ const scriptArguments = [];
 const confirmationMessage = `Are you sure you want to add ${Permissions.access} to all volunteers`;
 
 const run = async () => {
+  // https://docs.mongodb.com/manual/reference/operator/query/
   const result = await Volunteer.updateMany(
     { permissions: { $not: { $all: [Permissions.access] } } }, // If you don't have permissions.access
     { $push: { permissions: Permissions.access } } // push it onto the list
