@@ -13,11 +13,13 @@ const DisconnectedModal = () => {
   const { t } = useTranslation("Login");
 
   const [accepted, setAccepted] = useState(false);
-  const wasDisconnected = useSelector((state) => state.auth.wasDisconnected);
+  const expectAuthenticated = useSelector(
+    (state) => state.auth.expectAuthenticated
+  );
 
   return (
     <Modal
-      show={wasDisconnected && !accepted}
+      show={expectAuthenticated && !accepted}
       backdrop="static"
       keyboard={false}
     >

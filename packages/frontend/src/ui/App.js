@@ -61,7 +61,7 @@ const AppContent = () => {
 
   // On first load, get the app state
   useEffect(() => {
-    dispatch(fetchAuthState(false));
+    dispatch(fetchAuthState());
   }, [dispatch]);
 
   switch (authState) {
