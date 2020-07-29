@@ -10,7 +10,7 @@ export const AUTH_UNAUTHENTICATED = "AUTH_UNAUTHENTICATED";
 export const SET_AUTHENTICATED = "AUTH_AUTHENTICATED";
 export const SET_UNAUTHENTICATED = "AUTH_UNAUTHENTICATED";
 
-export const fetchAuthState = (currentAuthState) => async (dispatch) => {
+export const fetchAuthState = (wasDisconnectedIfFails) => async (dispatch) => {
   try {
     const res = await backend.request(flattenApi.getAuth);
     // check if the response is empty, indicating failed auth
@@ -21,7 +21,7 @@ export const fetchAuthState = (currentAuthState) => async (dispatch) => {
     ) {
       dispatch({
         type: SET_UNAUTHENTICATED,
-        wasDisconnected: currentAuthState === AUTH_AUTHENTICATED,
+        wasDisconnected: wasDisconnectedIfFails,
       });
     } else {
       dispatch({ type: SET_AUTHENTICATED, payload: res.data });
@@ -29,7 +29,7 @@ export const fetchAuthState = (currentAuthState) => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: SET_UNAUTHENTICATED,
-      wasDisconnected: currentAuthState === AUTH_AUTHENTICATED,
+      wasDisconnected: wasDisconnectedIfFails,
     });
   }
 };

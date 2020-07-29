@@ -35,14 +35,6 @@ const SurveyPageFactory = ({
       this.props.restartSurvey(); // Reset the form when the component is first loaded
     }
 
-    /**
-     * Calls the onSubmit callback and if no error is thrown redirects to submit page
-     */
-    submitHook = async (formIOData) => {
-      await onSubmit(this.props.surveyData, formIOData);
-      this.props.notifyCompleted();
-    };
-
     render() {
       const surveyData = this.props.surveyData;
 
@@ -74,7 +66,7 @@ const SurveyPageFactory = ({
         return (
           <Form
             formioForm={formIOJSON}
-            submitHook={this.submitHook}
+            submitHook={this.props.submitForm}
             formioOptions={{ noAlerts: false }}
             onNextPage={onNextPage}
           />
@@ -86,7 +78,7 @@ const SurveyPageFactory = ({
 
   SurveyPageContent.propTypes = {
     surveyData: PropTypes.object,
-    notifyCompleted: PropTypes.func,
+    submitForm: PropTypes.func,
     restartSurvey: PropTypes.func,
     recordPageTiming: PropTypes.func,
   };
@@ -95,12 +87,13 @@ const SurveyPageFactory = ({
     surveyData: state.surveys[state.surveys.activeSurvey],
   });
 
-  const mapDispatchToProps = (dispatch) => ({
+  const mapDispatchToProps = (dispatch, ownProps) => ({
     restartSurvey: () =>
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
-    notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
+    submitForm: (formIOData) =>
+      dispatch(onSubmit(ownProps.surveyData, formIOData)),
   });
 
   const SurveyPageContentConnected = connect(
