@@ -22,8 +22,8 @@ export const fetchAuthState = () => async (dispatch) => {
     ) {
       dispatch({ type: SET_UNAUTHENTICATED });
     } else {
-      dispatch({ type: SET_EXPECT_AUTHENTICATED, payload: true });
       dispatch({ type: SET_AUTHENTICATED, payload: res.data });
+      dispatch({ type: SET_EXPECT_AUTHENTICATED, payload: true });
     }
   } catch (e) {
     dispatch({ type: SET_UNAUTHENTICATED });
