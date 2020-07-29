@@ -56,7 +56,7 @@ const AuthenticatedAppContent = () => {
 
 const AppContent = () => {
   const dispatch = useDispatch();
-  const authState = useSelector((state) => state.auth.state);
+  const authState = useSelector((state) => state.auth.status);
 
   // On first load, get the app state
   useEffect(() => {

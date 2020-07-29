@@ -9,11 +9,11 @@ import {
 const authReducer = (state = { state: AUTH_UNINITIALISED }, action) => {
   switch (action.type) {
     case SET_AUTHENTICATED:
-      return { ...state, state: AUTH_AUTHENTICATED, user: action.payload };
+      return { ...state, status: AUTH_AUTHENTICATED, user: action.payload };
     case SET_UNAUTHENTICATED:
       return {
         ...state,
-        state: AUTH_UNAUTHENTICATED,
+        status: AUTH_UNAUTHENTICATED,
         user: undefined,
         wasDisconnected: action.wasDisconnected,
       };
