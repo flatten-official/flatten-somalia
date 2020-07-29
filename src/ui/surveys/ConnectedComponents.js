@@ -13,6 +13,7 @@ import { ConsentModal } from "../components/surveys/ConsentModal";
 import { StartSurveyModal } from "../components/surveys/StartSurveyModal";
 import { LocationPicker } from "../components/surveys/location/LocationPicker";
 import { FollowUpId } from "../components/surveys/FollowUpId";
+import { fetchAuthState } from "../../backend/auth/authActions";
 
 const mapDispatchToPropsConsent = (dispatch) => ({
   onConsent: () => {
@@ -23,6 +24,7 @@ const mapDispatchToPropsConsent = (dispatch) => ({
 
 const mapDispatchToPropsStartSurvey = (dispatch) => ({
   onStartSurvey: () => {
+    dispatch(fetchAuthState()); // Verifies that user is still logged in before starting the survey
     dispatch({ type: Types.NOTIFY_STARTED });
     dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
   },
