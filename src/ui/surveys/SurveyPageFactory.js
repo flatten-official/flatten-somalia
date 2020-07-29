@@ -87,13 +87,12 @@ const SurveyPageFactory = ({
     surveyData: state.surveys[state.surveys.activeSurvey],
   });
 
-  const mapDispatchToProps = (dispatch, ownProps) => ({
+  const mapDispatchToProps = (dispatch) => ({
     restartSurvey: () =>
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
-    submitForm: (formIOData) =>
-      dispatch(onSubmit(ownProps.surveyData, formIOData)),
+    submitForm: (formIOData) => dispatch(onSubmit(formIOData)),
   });
 
   const SurveyPageContentConnected = connect(
