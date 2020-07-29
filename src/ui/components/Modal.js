@@ -17,7 +17,7 @@ const MyModal = ({ show, header, body, button, onClick }) => {
           variant="primary"
           onClick={() => {
             setAccepted(true);
-            onClick();
+            if (onClick) onClick();
           }}
         >
           {button || "OK"}
@@ -32,7 +32,7 @@ MyModal.propTypes = {
   header: PropTypes.string,
   body: PropTypes.string,
   button: PropTypes.string,
-  onClick: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default MyModal;
