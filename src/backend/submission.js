@@ -32,6 +32,22 @@ const preFormatFormio = (formioData) => {
   });
 };
 
+export const defaultSurveySubmitterFactory = (api, schema) => async (
+  storeData,
+  formioData,
+  dispatch
+) => {
+  preFormatFormio(formioData);
+
+  const body = {
+    metadata: getMetadata(storeData),
+    schema,
+    data: formioData,
+  };
+
+  await submitSurvey(api, body, dispatch);
+};
+
 export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
   storeData,
   formioData,
@@ -55,22 +71,6 @@ export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
 
   // need to actually add the submission in here!
   await submitSurvey(flattenApi.volunteerForm, body, dispatch);
-};
-
-export const defaultSurveySubmitterFactory = (api, schema) => async (
-  storeData,
-  formioData,
-  dispatch
-) => {
-  preFormatFormio(formioData);
-
-  const body = {
-    metadata: getMetadata(storeData),
-    schema,
-    data: formioData,
-  };
-
-  await submitSurvey(api, body, dispatch);
 };
 
 const submitSurvey = async (api, body, dispatch) => {
