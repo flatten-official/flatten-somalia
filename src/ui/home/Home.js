@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import PropTypes from "prop-types";
-import { Modal } from "react-bootstrap";
+import Modal from "../components/Modal";
 import { checkWillExpireSoon } from "../../backend/auth/authApi";
 import { logout } from "../../backend/auth/authActions";
 
@@ -17,17 +17,12 @@ const ExpireModal = () => {
   const dispatch = useDispatch();
 
   return (
-    <Modal show={show} backdrop="static" keyboard={false}>
-      <Modal.Header>
-        <Modal.Title>{t("expire.header")}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>{t("expire.body")}</Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={() => dispatch(logout())}>
-          {t("expire.ok")}
-        </Button>
-      </Modal.Footer>
-    </Modal>
+    <Modal
+      show={show}
+      header={t("expire.header")}
+      body={t("expire.body")}
+      onClick={() => dispatch(logout())}
+    />
   );
 };
 

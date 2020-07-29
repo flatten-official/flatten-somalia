@@ -5,34 +5,22 @@ import backend from "../../backend/api/backend";
 import flattenApi from "../../backend/api/api";
 import Form from "../components/surveys/formio/Form";
 import LoginFormJson from "../../forms/Login.json";
-import { Modal } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
+import Modal from "../components/Modal";
 import { useSelector } from "react-redux";
 
 const DisconnectedModal = () => {
   const { t } = useTranslation("Login");
 
-  const [accepted, setAccepted] = useState(false);
   const expectAuthenticated = useSelector(
     (state) => state.auth.expectAuthenticated
   );
 
   return (
     <Modal
-      show={expectAuthenticated && !accepted}
-      backdrop="static"
-      keyboard={false}
-    >
-      <Modal.Header>
-        <Modal.Title>{t("disconnectedModal.header")}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>{t("disconnectedModal.body")}</Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={() => setAccepted(true)}>
-          {t("disconnectedModal.ok")}
-        </Button>
-      </Modal.Footer>
-    </Modal>
+      show={expectAuthenticated}
+      header={t("disconnectedModal.header")}
+      body={t("disconnectedModal.body")}
+    />
   );
 };
 
