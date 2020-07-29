@@ -11,6 +11,7 @@ import {
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
 import Success from "../components/surveys/Success";
+import { SET_UNAUTHENTICATED } from "../../backend/auth/authActions";
 
 /**
  * This function returns a survey page component.
@@ -36,7 +37,12 @@ const SurveyPageFactory = ({
     }
 
     render() {
-      const { surveyData, recordPageTiming, dispatch } = this.props;
+      const {
+        surveyData,
+        recordPageTiming,
+        logout,
+        notifyCompleted,
+      } = this.props;
 
       // Although the surveyData is initialized in the constructor,
       // the props aren't updated till the second render and therefore, this.props.surveyData is null
@@ -62,8 +68,16 @@ const SurveyPageFactory = ({
           recordPageTiming(info.page, Date.now());
       };
 
-      const submitHook = (formIOData) =>
-        onSubmit(surveyData, formIOData, dispatch);
+      const submitHook = async (formIOData) => {
+        try {
+          await onSubmit(surveyData, formIOData);
+        } catch (e) {
+          if (e.response && e.response.status === 401) logout();
+          else throw e;
+        }
+
+        notifyCompleted();
+      };
 
       if (!surveyData.completed)
         return (
@@ -81,9 +95,10 @@ const SurveyPageFactory = ({
 
   SurveyPageContent.propTypes = {
     surveyData: PropTypes.object,
-    dispatch: PropTypes.func,
+    notifyCompleted: PropTypes.func,
     restartSurvey: PropTypes.func,
     recordPageTiming: PropTypes.func,
+    logout: PropTypes.func,
   };
 
   const mapStateToProps = (state) => ({
@@ -93,9 +108,11 @@ const SurveyPageFactory = ({
   const mapDispatchToProps = (dispatch) => ({
     restartSurvey: () =>
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
+    notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
-    dispatch, // We include dispatch since it is used by the submit survey
+    logout: () =>
+      dispatch({ type: SET_UNAUTHENTICATED, wasDisconnected: true }),
   });
 
   const SurveyPageContentConnected = connect(
