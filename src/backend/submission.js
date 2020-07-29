@@ -32,30 +32,11 @@ const preFormatFormio = (formioData) => {
   });
 };
 
-export const defaultSurveySubmitterFactory = (api, schema) => (formioData) => (
-  dispatch,
-  getState
+export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
+  storeData,
+  formioData,
+  dispatch
 ) => {
-  const state = getState();
-  const storeData = state.surveys[state.surveys.activeSurvey];
-
-  preFormatFormio(formioData);
-
-  const body = {
-    metadata: getMetadata(storeData),
-    schema,
-    data: formioData,
-  };
-
-  dispatch(submitForm(api, body));
-};
-
-export const getInitialHouseholdSubmitter = (schema, pageNames) => (
-  formioData
-) => (dispatch, getState) => {
-  const state = getState();
-  const storeData = state.surveys[state.surveys.activeSurvey];
-
   preFormatFormio(formioData);
 
   const body = {
@@ -73,15 +54,34 @@ export const getInitialHouseholdSubmitter = (schema, pageNames) => (
   });
 
   // need to actually add the submission in here!
-  dispatch(submitForm(flattenApi.volunteerForm, body));
+  await submitSurvey(flattenApi.volunteerForm, body, dispatch);
 };
 
-const submitForm = (api, body) => async (dispatch) => {
+export const defaultSurveySubmitterFactory = (api, schema) => async (
+  storeData,
+  formioData,
+  dispatch
+) => {
+  preFormatFormio(formioData);
+
+  const body = {
+    metadata: getMetadata(storeData),
+    schema,
+    data: formioData,
+  };
+
+  await submitSurvey(api, body, dispatch);
+};
+
+const submitSurvey = async (api, body, dispatch) => {
   try {
     await backend.request({ ...api, data: body });
-    dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY });
   } catch (e) {
-    if (e.response.status === 401)
+    if (e.response && e.response.status === 401)
       dispatch({ type: SET_UNAUTHENTICATED, wasDisconnected: true });
+
+    throw e;
   }
+
+  dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY });
 };

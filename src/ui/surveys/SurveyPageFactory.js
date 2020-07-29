@@ -36,7 +36,7 @@ const SurveyPageFactory = ({
     }
 
     render() {
-      const surveyData = this.props.surveyData;
+      const { surveyData, recordPageTiming, dispatch } = this.props;
 
       // Although the surveyData is initialized in the constructor,
       // the props aren't updated till the second render and therefore, this.props.surveyData is null
@@ -58,15 +58,18 @@ const SurveyPageFactory = ({
       const onNextPage = (info) => {
         // Note: This if statement ensure timings won't update if a time already exists
         // This ensures going back and forth between pages doesn't overwrite the time the person spent on a page initially
-        if (this.props.surveyData.pageTimings[info.page] === undefined)
-          this.props.recordPageTiming(info.page, Date.now());
+        if (surveyData.pageTimings[info.page] === undefined)
+          recordPageTiming(info.page, Date.now());
       };
+
+      const submitHook = (formIOData) =>
+        onSubmit(surveyData, formIOData, dispatch);
 
       if (!surveyData.completed)
         return (
           <Form
             formioForm={formIOJSON}
-            submitHook={this.props.submitForm}
+            submitHook={submitHook}
             formioOptions={{ noAlerts: false }}
             onNextPage={onNextPage}
           />
@@ -78,7 +81,7 @@ const SurveyPageFactory = ({
 
   SurveyPageContent.propTypes = {
     surveyData: PropTypes.object,
-    submitForm: PropTypes.func,
+    dispatch: PropTypes.func,
     restartSurvey: PropTypes.func,
     recordPageTiming: PropTypes.func,
   };
@@ -92,7 +95,7 @@ const SurveyPageFactory = ({
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
-    submitForm: (formIOData) => dispatch(onSubmit(formIOData)),
+    dispatch, // We include dispatch since it is used by the submit survey
   });
 
   const SurveyPageContentConnected = connect(
