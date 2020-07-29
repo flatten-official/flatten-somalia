@@ -28,10 +28,10 @@ const LanguageDropDown = () => {
 
 const Links = () => {
   const { t } = useTranslation("Navbar");
-  const authState = useSelector((state) => state.auth.state);
+  const authStatus = useSelector((state) => state.auth.status);
   const dispatch = useDispatch();
 
-  if (authState === AUTH_AUTHENTICATED)
+  if (authStatus === AUTH_AUTHENTICATED)
     return (
       <>
         <LinkContainer to={Routes.home}>
