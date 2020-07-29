@@ -6,7 +6,7 @@ import {
   SET_UNAUTHENTICATED,
 } from "./authActions";
 
-const authReducer = (state = { state: AUTH_UNINITIALISED }, action) => {
+const authReducer = (state = { status: AUTH_UNINITIALISED }, action) => {
   switch (action.type) {
     case SET_AUTHENTICATED:
       return { ...state, status: AUTH_AUTHENTICATED, user: action.payload };
