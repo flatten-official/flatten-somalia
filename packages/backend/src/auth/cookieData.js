@@ -17,7 +17,8 @@ const Cookie = mongoose.model(
 );
 
 async function deleteCookieForVolunteer(volunteerId) {
-  await Cookie.deleteMany({ volunteerId });
+  const result = await Cookie.deleteMany({ volunteerId });
+  return result.n;
 }
 
 /**

@@ -40,7 +40,11 @@ module.exports.verifyTokenAndMakeCookie = async (tokenValue) => {
 
   if (!payload) return null;
 
-  await deleteCookieForVolunteer(payload.id); // Delete any previous cookies for the volunteer effectively logging them out on other devices
+  const count = await deleteCookieForVolunteer(payload.id); // Delete any previous cookies for the volunteer effectively logging them out on other devices
+  if (count > 0)
+    log.warning(
+      `Volunteer ${payload.id} was logged out of ${count} browser(s).`
+    );
 
   const expiry = calculateExpiryTime(COOKIE_LIFE);
   return { id: await writeCookie(expiry, payload.id), expiry };
