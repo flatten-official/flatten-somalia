@@ -4,7 +4,7 @@ import { Routes } from "../../config";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, AUTH_AUTHENTICATED } from "../../backend/auth/authActions";
+import { logout } from "../../backend/auth/authActions";
 
 const LanguageDropDown = () => {
   const { t, i18n } = useTranslation("Navbar");
@@ -28,10 +28,10 @@ const LanguageDropDown = () => {
 
 const Links = () => {
   const { t } = useTranslation("Navbar");
-  const { auth } = useSelector((state) => state);
+  const authUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
-  if (auth.status === AUTH_AUTHENTICATED)
+  if (authUser)
     return (
       <>
         <LinkContainer to={Routes.home}>

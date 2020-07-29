@@ -8,11 +8,7 @@ import Loading from "./components/Loading";
 import { Routes, Surveys } from "../config";
 import { useDispatch, useSelector } from "react-redux";
 import { permissions } from "../backend/auth/authApi";
-import {
-  AUTH_AUTHENTICATED,
-  AUTH_UNINITIALISED,
-  fetchAuthState,
-} from "../backend/auth/authActions";
+import { fetchAuthState } from "../backend/auth/authActions";
 import SurveyPageFactory from "./surveys/SurveyPageFactory";
 import PrivatePage from "./components/PrivatePage";
 
@@ -56,21 +52,16 @@ const AuthenticatedAppContent = () => {
 
 const AppContent = () => {
   const dispatch = useDispatch();
-  const authState = useSelector((state) => state.auth.status);
+  const authUser = useSelector((state) => state.auth.user);
 
   // On first load, get the app state
   useEffect(() => {
     dispatch(fetchAuthState());
   }, [dispatch]);
 
-  switch (authState) {
-    case AUTH_UNINITIALISED:
-      return <Loading />;
-    case AUTH_AUTHENTICATED:
-      return <AuthenticatedAppContent />;
-    default:
-      return <Login />;
-  }
+  if (authUser === undefined) return <Loading />;
+  else if (authUser === null) return <Login />;
+  else return <AuthenticatedAppContent />;
 };
 
 const App = () => (
