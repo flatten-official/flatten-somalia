@@ -42,12 +42,7 @@ const Links = () => {
         </Nav.Link>
       </>
     );
-  else
-    return (
-      <LinkContainer to={Routes.auth}>
-        <Nav.Link>{t("links.login")}</Nav.Link>
-      </LinkContainer>
-    );
+  else return null;
 };
 
 const Header = () => {
