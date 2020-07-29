@@ -3,5 +3,10 @@
     "title": "Login"
   },
   "submittedEmailMessage": "If you are a volunteer, you have received an email with a link to login. If \nyou did not, please contact an administrator.",
-  "unauthorized": "Not authorized."
+  "unauthorized": "Not authorized.",
+  "disconnectedModal": {
+    "header": "Uh-oh! You have been disconnected. Please login.",
+    "body": "This could happen if you logged in on another browser or if your session has expired.",
+    "ok": "OK"
+  }
 }
