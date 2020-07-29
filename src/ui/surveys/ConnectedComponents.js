@@ -24,7 +24,7 @@ const mapDispatchToPropsConsent = (dispatch) => ({
 
 const mapDispatchToPropsStartSurvey = (dispatch) => ({
   onStartSurvey: () => {
-    dispatch(fetchAuthState(true)); // Verifies that user is still logged in before starting the survey
+    dispatch(fetchAuthState()); // Verifies that user is still logged in before starting the survey
     dispatch({ type: Types.NOTIFY_STARTED });
     dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
   },
