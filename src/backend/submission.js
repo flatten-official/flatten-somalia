@@ -81,8 +81,7 @@ const submitForm = (api, body) => async (dispatch) => {
     await backend.request({ ...api, data: body });
     dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY });
   } catch (e) {
-    console.error(e);
-    if (e.status === 401)
+    if (e.response.status === 401)
       dispatch({ type: SET_UNAUTHENTICATED, wasDisconnected: true });
   }
 };
