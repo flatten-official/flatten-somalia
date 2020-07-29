@@ -4,6 +4,7 @@
 const sgMail = require("@sendgrid/mail");
 const { getConfig } = require("util-config");
 const { log } = require("util-logging");
+const { ApiError } = require("./errors");
 
 module.exports.setup = () => {
   sgMail.setApiKey(getConfig().secrets.sendGridApiKey);
@@ -29,6 +30,6 @@ module.exports.sendVerificationEmail = async (email, verification_link) => {
     return true;
   } catch (e) {
     log.error("Failed to send email.\n", { error: e });
-    return false;
+    throw new ApiError("We were unable to send you an email.", 500);
   }
 };

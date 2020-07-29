@@ -40,7 +40,9 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 
 - `yarn script <SCRIPT-NAME>`: Runs a database script from the `db-scripts` package. `<SCRIPT-NAME>` is the name of the script's directory in `packages/db-scripts/src/`.
 
-## Testing
+## Technical details
+
+### Testing
 
 If you run into issues while testing try adding the following line to your `.env` file.
 
@@ -50,16 +52,33 @@ DISABLE_TRANSACTIONS=true
 
 This will change the type of mongoDB server used during the test.
 
-## Logging
+### Logging
 
 Logging is done using the Winston loggers. Add `util-logging` as a dependency and then use `log`. See code and util-logging package for more info.
 
-## Mongoose
+### Mongoose
 
 We use MongoDB and mongoose. To avoid two packages using different versions of mongoose
 (and hence one of the two not being connected to the db), all packages using mongoose should depend on `db-util` and not `mongoose`.
-Always use:
+`db-util` exports `mongoose` so always use:
 
 ```
-const mongoose = require("db-util");
+const { mongoose } = require("db-util");
 ```
+
+### Error handling
+
+We have 2 custom API error handlers that you should be aware of when writing API routes.
+
+The first, will catch any error that are instances of `ApiError`. `ApiError` is a custom class specific to our project.
+You are encouraged to use it to respond to API requests with an error code. For example,
+```
+const ApiError = require("./utils/errors");
+
+...
+
+throw new ApiError('the error message to show the user', 401); // will result in the user receiving a 401 error with the specified message
+```
+
+The second error handler will catch any caught errors and send the client a generic "Contact Flatten support, an unplanned error occurred".
+This error handler should only be used for unplanned/uncaught errors.

@@ -1,6 +1,7 @@
 const {
   findVolunteerByEmail,
   Permissions,
+  PermissionGroups,
 } = require("../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../src/app");
@@ -54,7 +55,7 @@ describe("endpoint POST /volunteer", () => {
       email: GOOD_REQUEST_BODY.volunteerData.email,
       friendlyId: 2, // 1 already taken by admin
       permissions: [Permissions.submitForms],
-      permissionGroups: [],
+      permissionGroups: [PermissionGroups.dsu],
       addedBy: adminVolunteer._id,
       teamName: "Flatten",
     });

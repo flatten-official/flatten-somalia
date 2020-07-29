@@ -1,15 +1,13 @@
-const { mongoose } = require("util-db");
-
-class BadInputError extends Error {
-  constructor(message) {
+/**
+ * Dealt with by apiErrorHandler, so should be thrown by API route handlers.
+ * The message and status code are returned by the API and logged.
+ */
+class ApiError extends Error {
+  constructor(message, statusCode) {
     super(message);
-    this.name = "BadInputError";
+    this.name = "ApiError";
+    this.statusCode = statusCode;
   }
 }
 
-const isValidationTypeError = (e) =>
-  e instanceof mongoose.Error.ValidationError ||
-  e instanceof mongoose.Error.StrictModeError ||
-  e instanceof BadInputError;
-
-module.exports = { BadInputError, isValidationTypeError };
+module.exports = { ApiError };

@@ -9,6 +9,7 @@ const {
 } = require("backend/src/volunteer/volunteerData");
 const { log } = require("util-logging");
 const { runOpWithinTransaction } = require("backend/src/utils/mongoose");
+const expect = require("expect");
 
 const VOLUNTEERS = [
   {
