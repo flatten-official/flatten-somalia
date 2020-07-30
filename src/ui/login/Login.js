@@ -29,6 +29,10 @@ const DisconnectedModal = () => {
           body={t("disconnectedModal.body")}
         />
       );
+    case UNAUTHENTICATED_REASONS.expireSoon:
+      return <BaseModal header={t("expire.header")} body={t("expire.body")} />;
+    case UNAUTHENTICATED_REASONS.pageLoad:
+    case UNAUTHENTICATED_REASONS.userDecision:
     default:
       return null;
   }

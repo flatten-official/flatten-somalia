@@ -13,6 +13,9 @@ export const SET_UNAUTHENTICATED = "SET_UNAUTHENTICATED";
 export const UNAUTHENTICATED_REASONS = {
   failedRequest: "FAILED_REQUEST",
   badCookie: "BAD_COOKIE",
+  expireSoon: "EXPIRE_SOON",
+  userDecision: "USER_DECISION",
+  pageLoad: "PAGE_LOAD",
 };
 
 export const fetchAuthState = (reasonIfUnauthenticated) => async (dispatch) => {
@@ -24,23 +27,23 @@ export const fetchAuthState = (reasonIfUnauthenticated) => async (dispatch) => {
       res.status !== 200 ||
       (Object.keys(res.data).length === 0 && res.data.constructor === Object)
     ) {
-      dispatch({ type: SET_UNAUTHENTICATED, payload: reasonIfUnauthenticated });
+      dispatch(logout(false, reasonIfUnauthenticated));
     } else {
       dispatch({ type: SET_AUTHENTICATED, payload: res.data });
     }
   } catch (e) {
-    dispatch({
-      type: SET_UNAUTHENTICATED,
-      payload: UNAUTHENTICATED_REASONS.failedRequest,
-    });
+    dispatch(logout(false, UNAUTHENTICATED_REASONS.failedRequest));
   }
 };
 
-export const logout = () => async (dispatch) => {
-  try {
-    await backend.request(flattenApi.logout);
-    dispatch({ type: SET_UNAUTHENTICATED });
-  } catch (e) {
-    console.error(e);
+export const logout = (sendApiRequest, reason) => async (dispatch) => {
+  if (sendApiRequest) {
+    try {
+      await backend.request(flattenApi.logout);
+    } catch (e) {
+      console.error(e);
+    }
   }
+
+  dispatch({ type: SET_UNAUTHENTICATED, reason });
 };

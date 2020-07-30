@@ -4,7 +4,11 @@ import { Routes } from "../../config";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, AUTH_AUTHENTICATED } from "../../backend/auth/authActions";
+import {
+  logout,
+  AUTH_AUTHENTICATED,
+  UNAUTHENTICATED_REASONS,
+} from "../../backend/auth/authActions";
 
 const LanguageDropDown = () => {
   const { t, i18n } = useTranslation("Navbar");
@@ -38,7 +42,12 @@ const Links = () => {
       <LinkContainer to={Routes.home}>
         <Nav.Link>{t("links.homepage")}</Nav.Link>
       </LinkContainer>
-      <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
+      <Nav.Link
+        className="ml-auto"
+        onClick={() =>
+          dispatch(logout(true, UNAUTHENTICATED_REASONS.userDecision))
+        }
+      >
         {t("links.logout")}
       </Nav.Link>
     </>
