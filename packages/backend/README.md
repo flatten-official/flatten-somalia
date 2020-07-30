@@ -7,8 +7,6 @@ Also ask to be added to the Atlas staging project if you want a GUI to navigate 
 
 ## Running
 
-//Comment on the google cloud auth here @Martin. 
-
 1. Run `yarn auth` to allow your computer to access the staging database and other secrets.
 
 2. Run `yarn dev`.
