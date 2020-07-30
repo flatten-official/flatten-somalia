@@ -14,6 +14,7 @@ import { StartSurveyModal } from "../components/surveys/StartSurveyModal";
 import { LocationPicker } from "../components/surveys/location/LocationPicker";
 import { FollowUpId } from "../components/surveys/FollowUpId";
 import {
+  checkSessionExpiry,
   fetchAuthState,
   UNAUTHENTICATED_CONTEXT,
 } from "../../backend/auth/authActions";
@@ -27,8 +28,12 @@ const mapDispatchToPropsConsent = (dispatch) => ({
 
 const mapDispatchToPropsStartSurvey = (dispatch) => ({
   onStartSurvey: () => {
-    // Verifies that user is still logged in before starting the survey but if request fails don't logout
-    dispatch(fetchAuthState(UNAUTHENTICATED_CONTEXT.badCookie, false));
+    // Verifies that user is still logged in and session won't expire soon before starting the survey but if request fails don't logout
+    dispatch(
+      fetchAuthState(UNAUTHENTICATED_CONTEXT.badCookie, false)
+    ).then(() => dispatch(checkSessionExpiry(70)));
+
+    // Don't wait for authentication to finish before starting survey
     dispatch({ type: Types.NOTIFY_STARTED });
     dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
   },
