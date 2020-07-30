@@ -18,9 +18,10 @@ export const UNAUTHENTICATED_CONTEXT = {
   pageLoad: "PAGE_LOAD",
 };
 
-export const fetchAuthState = (contextIfUnauthenticated) => async (
-  dispatch
-) => {
+export const fetchAuthState = (
+  contextIfUnauthenticated,
+  logoutIfFails
+) => async (dispatch) => {
   try {
     const res = await backend.request(flattenApi.getAuth);
     // check if the response is empty, indicating failed auth
@@ -34,7 +35,9 @@ export const fetchAuthState = (contextIfUnauthenticated) => async (
       dispatch({ type: SET_AUTHENTICATED, payload: res.data });
     }
   } catch (e) {
-    dispatch(logout(false, UNAUTHENTICATED_CONTEXT.failedRequest));
+    console.error(e);
+    if (logoutIfFails)
+      dispatch(logout(false, UNAUTHENTICATED_CONTEXT.failedRequest));
   }
 };
 
