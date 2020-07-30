@@ -28,10 +28,10 @@ const LanguageDropDown = () => {
 
 const Links = () => {
   const { t } = useTranslation("Navbar");
-  const authStatus = useSelector((state) => state.auth.status);
+  const authState = useSelector((state) => state.auth.state);
   const dispatch = useDispatch();
 
-  if (authStatus !== AUTH_AUTHENTICATED) return null;
+  if (authState !== AUTH_AUTHENTICATED) return null;
 
   return (
     <>
