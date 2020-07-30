@@ -5,7 +5,7 @@ import backend from "../../backend/api/backend";
 import flattenApi from "../../backend/api/api";
 import Form from "../components/surveys/formio/Form";
 import LoginFormJson from "../../forms/Login.json";
-import Modal from "../components/Modal";
+import { BaseModal } from "../components/Modal";
 import { useSelector } from "react-redux";
 
 const DisconnectedModal = () => {
@@ -16,7 +16,7 @@ const DisconnectedModal = () => {
   );
 
   return (
-    <Modal
+    <BaseModal
       show={expectAuthenticated}
       header={t("disconnectedModal.header")}
       body={t("disconnectedModal.body")}
