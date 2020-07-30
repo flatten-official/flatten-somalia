@@ -62,7 +62,7 @@ const AppContent = () => {
 
   // On first load, get the auth state
   useEffect(() => {
-    dispatch(fetchAuthState(UNAUTHENTICATED_CONTEXT.pageLoad, true));
+    dispatch(fetchAuthState(UNAUTHENTICATED_CONTEXT.initialPageLoad, true));
   }, [dispatch]);
 
   switch (authState) {
