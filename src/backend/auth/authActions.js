@@ -14,11 +14,11 @@ export const SET_UNAUTHENTICATED = "SET_UNAUTHENTICATED";
  * Different contexts (or reasons) why we might be unauthenticated
  */
 export const UNAUTHENTICATED_CONTEXT = {
-  failedRequest: "FAILED_REQUEST",
-  badCookie: "BAD_COOKIE",
-  expireSoon: "EXPIRE_SOON",
-  userDecision: "USER_DECISION",
-  pageLoad: "PAGE_LOAD",
+  failedRequest: "FAILED_REQUEST", // Normally fetchAuth failed resulting in the user being logged out
+  badCookie: "BAD_COOKIE", // Some other request failed with a 401 resulting in the user being logged out
+  expireSoon: "EXPIRE_SOON", // The cookie was going to expire so we logged the user out early
+  userDecision: "USER_DECISION", // The user decided to log out
+  initialPageLoad: "INITIAL_PAGE_LOAD", // The website was just loaded and the user isn't authenticated
 };
 
 /**

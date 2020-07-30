@@ -33,7 +33,7 @@ const WarningModal = () => {
       return (
         <Modal header={t("expireModal.header")} body={t("expireModal.body")} />
       );
-    case UNAUTHENTICATED_CONTEXT.pageLoad:
+    case UNAUTHENTICATED_CONTEXT.initialPageLoad:
     case UNAUTHENTICATED_CONTEXT.userDecision:
     default:
       return null;
