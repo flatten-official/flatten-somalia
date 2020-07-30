@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   logout,
   AUTH_AUTHENTICATED,
-  UNAUTHENTICATED_REASONS,
+  UNAUTHENTICATED_CONTEXT,
 } from "../../backend/auth/authActions";
 
 const LanguageDropDown = () => {
@@ -45,7 +45,7 @@ const Links = () => {
       <Nav.Link
         className="ml-auto"
         onClick={() =>
-          dispatch(logout(true, UNAUTHENTICATED_REASONS.userDecision))
+          dispatch(logout(true, UNAUTHENTICATED_CONTEXT.userDecision))
         }
       >
         {t("links.logout")}

@@ -15,7 +15,7 @@ import { LocationPicker } from "../components/surveys/location/LocationPicker";
 import { FollowUpId } from "../components/surveys/FollowUpId";
 import {
   fetchAuthState,
-  UNAUTHENTICATED_REASONS,
+  UNAUTHENTICATED_CONTEXT,
 } from "../../backend/auth/authActions";
 
 const mapDispatchToPropsConsent = (dispatch) => ({
@@ -27,7 +27,7 @@ const mapDispatchToPropsConsent = (dispatch) => ({
 
 const mapDispatchToPropsStartSurvey = (dispatch) => ({
   onStartSurvey: () => {
-    dispatch(fetchAuthState(UNAUTHENTICATED_REASONS.badCookie)); // Verifies that user is still logged in before starting the survey
+    dispatch(fetchAuthState(UNAUTHENTICATED_CONTEXT.badCookie)); // Verifies that user is still logged in before starting the survey
     dispatch({ type: Types.NOTIFY_STARTED });
     dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
   },

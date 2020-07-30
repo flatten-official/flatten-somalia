@@ -13,7 +13,7 @@ import {
 import Success from "../components/surveys/Success";
 import {
   logout,
-  UNAUTHENTICATED_REASONS,
+  UNAUTHENTICATED_CONTEXT,
 } from "../../backend/auth/authActions";
 
 /**
@@ -111,7 +111,7 @@ const SurveyPageFactory = ({
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
-    logout: () => dispatch(logout(false, UNAUTHENTICATED_REASONS.badCookie)),
+    logout: () => dispatch(logout(false, UNAUTHENTICATED_CONTEXT.badCookie)),
   });
 
   const SurveyPageContentConnected = connect(

@@ -12,7 +12,7 @@ import {
   AUTH_AUTHENTICATED,
   AUTH_UNINITIALISED,
   fetchAuthState,
-  UNAUTHENTICATED_REASONS,
+  UNAUTHENTICATED_CONTEXT,
 } from "../backend/auth/authActions";
 import SurveyPageFactory from "./surveys/SurveyPageFactory";
 import PrivatePage from "./components/PrivatePage";
@@ -61,7 +61,7 @@ const AppContent = () => {
 
   // On first load, get the app state
   useEffect(() => {
-    dispatch(fetchAuthState(UNAUTHENTICATED_REASONS.pageLoad)); // This runs on page load
+    dispatch(fetchAuthState(UNAUTHENTICATED_CONTEXT.pageLoad)); // This runs on page load
   }, [dispatch]);
 
   switch (authState) {
