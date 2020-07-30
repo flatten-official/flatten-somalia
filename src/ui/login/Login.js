@@ -7,21 +7,31 @@ import Form from "../components/surveys/formio/Form";
 import LoginFormJson from "../../forms/Login.json";
 import { BaseModal } from "../components/Modal";
 import { useSelector } from "react-redux";
+import { UNAUTHENTICATED_REASONS } from "../../backend/auth/authActions";
 
 const DisconnectedModal = () => {
   const { t } = useTranslation("Login");
 
-  const expectAuthenticated = useSelector(
-    (state) => state.auth.expectAuthenticated
-  );
+  const reason = useSelector((state) => state.auth.reason);
 
-  return (
-    <BaseModal
-      show={expectAuthenticated}
-      header={t("disconnectedModal.header")}
-      body={t("disconnectedModal.body")}
-    />
-  );
+  switch (reason) {
+    case UNAUTHENTICATED_REASONS.failedRequest:
+      return (
+        <BaseModal
+          header={t("failedToConnect.header")}
+          body={t("failedToConnect.body")}
+        />
+      );
+    case UNAUTHENTICATED_REASONS.badCookie:
+      return (
+        <BaseModal
+          header={t("disconnectedModal.header")}
+          body={t("disconnectedModal.body")}
+        />
+      );
+    default:
+      return null;
+  }
 };
 
 const Login = () => {

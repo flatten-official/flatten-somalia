@@ -4,7 +4,6 @@ import {
   AUTH_UNAUTHENTICATED,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
-  SET_EXPECT_AUTHENTICATED,
 } from "./authActions";
 
 const authReducer = (state = { state: AUTH_UNINITIALISED }, action) => {
@@ -12,9 +11,12 @@ const authReducer = (state = { state: AUTH_UNINITIALISED }, action) => {
     case SET_AUTHENTICATED:
       return { ...state, state: AUTH_AUTHENTICATED, user: action.payload };
     case SET_UNAUTHENTICATED:
-      return { ...state, state: AUTH_UNAUTHENTICATED, user: undefined };
-    case SET_EXPECT_AUTHENTICATED:
-      return { ...state, expectAuthenticated: action.payload };
+      return {
+        ...state,
+        state: AUTH_UNAUTHENTICATED,
+        user: undefined,
+        reason: action.payload,
+      };
     default:
       return state;
   }

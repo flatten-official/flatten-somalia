@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../backend/auth/authActions";
 
-export const BaseModal = ({ show, header, body, button, onClick }) => {
+export const BaseModal = ({ show = true, header, body, button, onClick }) => {
   const [accepted, setAccepted] = useState(false);
 
   return (
