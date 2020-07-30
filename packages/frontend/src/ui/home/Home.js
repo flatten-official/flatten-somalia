@@ -48,9 +48,10 @@ const Home = () => {
   const authUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
+  // On every render of the home page check the session expiry
   useEffect(() => {
     dispatch(checkSessionExpiry(70));
-  }, [dispatch]);
+  });
 
   return (
     <>
