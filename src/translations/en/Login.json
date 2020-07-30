@@ -6,6 +6,6 @@
   "unauthorized": "Not authorized.",
   "disconnectedModal": {
     "header": "Uh-oh! You have been disconnected. Please login.",
-    "body": "This could happen if you logged in on another browser or if your session has expired."
+    "body": "This could happen if you or someone using your account logged in on another browser."
   }
 }
