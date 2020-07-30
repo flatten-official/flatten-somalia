@@ -5,7 +5,7 @@ import backend from "../../backend/api/backend";
 import flattenApi from "../../backend/api/api";
 import Form from "../components/surveys/formio/Form";
 import LoginFormJson from "../../forms/Login.json";
-import { BaseModal } from "../components/Modal";
+import Modal from "../components/Modal";
 import { useSelector } from "react-redux";
 import { UNAUTHENTICATED_CONTEXT } from "../../backend/auth/authActions";
 
@@ -17,20 +17,20 @@ const DisconnectedModal = () => {
   switch (context) {
     case UNAUTHENTICATED_CONTEXT.failedRequest:
       return (
-        <BaseModal
+        <Modal
           header={t("failedToConnect.header")}
           body={t("failedToConnect.body")}
         />
       );
     case UNAUTHENTICATED_CONTEXT.badCookie:
       return (
-        <BaseModal
+        <Modal
           header={t("disconnectedModal.header")}
           body={t("disconnectedModal.body")}
         />
       );
     case UNAUTHENTICATED_CONTEXT.expireSoon:
-      return <BaseModal header={t("expire.header")} body={t("expire.body")} />;
+      return <Modal header={t("expire.header")} body={t("expire.body")} />;
     case UNAUTHENTICATED_CONTEXT.pageLoad:
     case UNAUTHENTICATED_CONTEXT.userDecision:
     default:
