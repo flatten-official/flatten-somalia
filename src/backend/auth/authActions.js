@@ -18,6 +18,15 @@ export const UNAUTHENTICATED_CONTEXT = {
   pageLoad: "PAGE_LOAD",
 };
 
+export const checkSessionExpiry = (minutes) => (dispatch, getState) => {
+  const expiry = getState().auth.user.expiry;
+
+  const willExpireSoon = new Date(expiry) - minutes * 60 * 1000 <= Date.now();
+
+  if (willExpireSoon)
+    dispatch(logout(true, UNAUTHENTICATED_CONTEXT.expireSoon));
+};
+
 export const fetchAuthState = (
   contextIfUnauthenticated,
   logoutIfFails
