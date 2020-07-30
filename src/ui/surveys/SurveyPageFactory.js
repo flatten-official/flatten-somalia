@@ -43,6 +43,9 @@ const SurveyPageFactory = ({
         this.props.recordPageTiming(info.page, Date.now());
     };
 
+    /**
+     * Calls the onSubmit callback and if no error is thrown, updates the store to direct to the Success component
+     */
     submitHook = async (formIOData) => {
       try {
         await onSubmit(this.props.surveyData, formIOData);
