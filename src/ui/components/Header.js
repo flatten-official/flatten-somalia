@@ -31,18 +31,18 @@ const Links = () => {
   const authStatus = useSelector((state) => state.auth.status);
   const dispatch = useDispatch();
 
-  if (authStatus === AUTH_AUTHENTICATED)
-    return (
-      <>
-        <LinkContainer to={Routes.home}>
-          <Nav.Link>{t("links.homepage")}</Nav.Link>
-        </LinkContainer>
-        <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
-          {t("links.logout")}
-        </Nav.Link>
-      </>
-    );
-  else return null;
+  if (authStatus !== AUTH_AUTHENTICATED) return null;
+
+  return (
+    <>
+      <LinkContainer to={Routes.home}>
+        <Nav.Link>{t("links.homepage")}</Nav.Link>
+      </LinkContainer>
+      <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
+        {t("links.logout")}
+      </Nav.Link>
+    </>
+  );
 };
 
 const Header = () => {
