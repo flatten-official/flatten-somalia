@@ -105,8 +105,7 @@ const SurveyPageFactory = ({
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
-    logout: () =>
-      dispatch({ type: SET_UNAUTHENTICATED, wasDisconnected: true }),
+    logout: () => dispatch({ type: SET_UNAUTHENTICATED }),
   });
 
   const SurveyPageContentConnected = connect(
