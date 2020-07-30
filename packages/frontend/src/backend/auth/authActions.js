@@ -25,7 +25,13 @@ export const UNAUTHENTICATED_CONTEXT = {
  * Check if the cookie will expire in less than "minutes". In which case will log us out
  */
 export const checkSessionExpiry = (minutes) => (dispatch, getState) => {
-  const expiry = getState().auth.user.expiry;
+  const authState = getState().auth;
+
+  // If there isn't even a session this doesn't apply
+  // Check is necessary since this is called after fetchAuth which might fail and leave us unauthenticated
+  if (authState.state === AUTH_UNAUTHENTICATED) return;
+
+  const expiry = authState.user.expiry;
 
   const willExpireSoon = new Date(expiry) - minutes * 60 * 1000 <= Date.now();
 
