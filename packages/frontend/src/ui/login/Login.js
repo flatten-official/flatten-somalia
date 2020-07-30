@@ -9,35 +9,26 @@ import Modal from "../components/Modal";
 import { useSelector } from "react-redux";
 import { UNAUTHENTICATED_CONTEXT } from "../../backend/auth/authActions";
 
+const contextToModalTranslationMapping = {
+  [UNAUTHENTICATED_CONTEXT.failedRequest]: "failedToConnectModal",
+  [UNAUTHENTICATED_CONTEXT.badCookie]: "badCookieModal",
+  [UNAUTHENTICATED_CONTEXT.expireSoon]: "expireModal",
+};
+
 const WarningModal = () => {
   const { t } = useTranslation("Login");
 
+  // Get the context (reason) for why we're unauthenticated
   const context = useSelector((state) => state.auth.unauthenticatedContext);
 
-  switch (context) {
-    case UNAUTHENTICATED_CONTEXT.failedRequest:
-      return (
-        <Modal
-          header={t("failedToConnectModal.header")}
-          body={t("failedToConnectModal.body")}
-        />
-      );
-    case UNAUTHENTICATED_CONTEXT.badCookie:
-      return (
-        <Modal
-          header={t("badCookieModal.header")}
-          body={t("badCookieModal.body")}
-        />
-      );
-    case UNAUTHENTICATED_CONTEXT.expireSoon:
-      return (
-        <Modal header={t("expireModal.header")} body={t("expireModal.body")} />
-      );
-    case UNAUTHENTICATED_CONTEXT.pageLoad:
-    case UNAUTHENTICATED_CONTEXT.userDecision:
-    default:
-      return null;
-  }
+  // Get the mapping to the appropriate modal (if any)
+  const prefix = contextToModalTranslationMapping[context];
+
+  // Not all contexts have a modal
+  if (!prefix) return null;
+
+  // If the context requires a modal return the modal
+  return <Modal header={t(prefix + ".header")} body={t(prefix + ".body")} />;
 };
 
 const Login = () => {
