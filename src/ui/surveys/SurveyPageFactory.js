@@ -43,7 +43,7 @@ const SurveyPageFactory = ({
     };
 
     /**
-     * Calls the onSubmit callback and if no error is thrown, updates the store to direct to the Success component
+     * Submits the survey to the backend and if no error is thrown will then update the Redux store to notify that the survey was completed
      */
     submitHook = async (formIOData) => {
       await onSubmit(this.props.surveyData, formIOData);
