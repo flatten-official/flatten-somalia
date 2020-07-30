@@ -2,8 +2,11 @@ import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../backend/auth/authActions";
 
-const MyModal = ({ show, header, body, button, onClick }) => {
+const BaseModal = ({ show, header, body, button, onClick }) => {
   const [accepted, setAccepted] = useState(false);
 
   return (
@@ -27,7 +30,7 @@ const MyModal = ({ show, header, body, button, onClick }) => {
   );
 };
 
-MyModal.propTypes = {
+BaseModal.propTypes = {
   show: PropTypes.bool,
   header: PropTypes.string,
   body: PropTypes.string,
@@ -35,4 +38,25 @@ MyModal.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default MyModal;
+export const ExpireSoonModal = ({ minutes }) => {
+  const { t } = useTranslation("Navbar");
+
+  // TODO this may miss the expiry since willExpireSoon is only called on first render (afaik).
+  const expiry = useSelector((state) => state.auth.user.expiry);
+  const dispatch = useDispatch();
+
+  const willExpireSoon = new Date(expiry) - minutes * 60 * 1000 <= Date.now();
+
+  return (
+    <Modal
+      show={willExpireSoon}
+      header={t("expire.header")}
+      body={t("expire.body")}
+      onClick={() => dispatch(logout())}
+    />
+  );
+};
+
+ExpireSoonModal.propTypes = {
+  minutes: PropTypes.number,
+};
