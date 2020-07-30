@@ -1,5 +1,12 @@
 # Flatten.so backend
 
+## Prerequisites
+
+* [node.js](https://nodejs.org/)
+  * using [nvm](https://github.com/nvm-sh/nvm) to manage your Node installation(s) is recommended.
+* [yarn](https://yarnpkg.com/) – package manager
+* [gcloud](https://cloud.google.com/sdk/docs/downloads-interactive) – google cloud SDK
+
 ## Setup
 
 1. Ensure an admin has added you to the `Somalia Staging Data Access` group, otherwise you won't have permission to read the staging database.
