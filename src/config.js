@@ -9,7 +9,6 @@ import {
 
 export const Routes = {
   home: "/",
-  auth: "/login",
   initialHouseholdSurvey: "/surveys/initialHousehold",
   gravediggerSurvey: "/surveys/gravedigger",
   hospitalSurvey: "/surveys/hospital",
