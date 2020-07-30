@@ -6,7 +6,7 @@
   "unauthorized": "Not authorized.",
   "badCookieModal": {
     "header": "Uh-oh! Your session is invalid!",
-    "body": "This could happen if you or someone using your account logged in on another browser."
+    "body": "This could happen if you or someone else is using your account on another browser."
   },
   "expireModal": {
     "header": "Uh-oh! Your session has expired!",
