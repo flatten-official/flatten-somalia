@@ -35,8 +35,20 @@ const SurveyPageFactory = ({
       this.props.restartSurvey(); // Reset the form when the component is first loaded
     }
 
+    onNextPage = (info) => {
+      // Note: This if statement ensure timings won't update if a time already exists
+      // This ensures going back and forth between pages doesn't overwrite the time the person spent on a page initially
+      if (this.props.surveyData.pageTimings[info.page] === undefined)
+        this.props.recordPageTiming(info.page, Date.now());
+    };
+
+    submitHook = async (formIOData) => {
+      await onSubmit(this.props.surveyData, formIOData);
+      this.props.notifyCompleted();
+    };
+
     render() {
-      const { surveyData, recordPageTiming, notifyCompleted } = this.props;
+      const { surveyData } = this.props;
 
       // Although the surveyData is initialized in the constructor,
       // the props aren't updated till the second render and therefore, this.props.surveyData is null
@@ -55,25 +67,13 @@ const SurveyPageFactory = ({
           />
         );
 
-      const onNextPage = (info) => {
-        // Note: This if statement ensure timings won't update if a time already exists
-        // This ensures going back and forth between pages doesn't overwrite the time the person spent on a page initially
-        if (surveyData.pageTimings[info.page] === undefined)
-          recordPageTiming(info.page, Date.now());
-      };
-
-      const submitHook = async (formIOData) => {
-        await onSubmit(surveyData, formIOData);
-        notifyCompleted();
-      };
-
       if (!surveyData.completed)
         return (
           <Form
             formioForm={formIOJSON}
-            submitHook={submitHook}
+            submitHook={this.submitHook}
             formioOptions={{ noAlerts: false }}
-            onNextPage={onNextPage}
+            onNextPage={this.onNextPage}
           />
         );
 
