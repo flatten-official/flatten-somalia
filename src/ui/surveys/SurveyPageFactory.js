@@ -11,7 +11,10 @@ import {
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
 import Success from "../components/surveys/Success";
-import { SET_UNAUTHENTICATED } from "../../backend/auth/authActions";
+import {
+  logout,
+  UNAUTHENTICATED_REASONS,
+} from "../../backend/auth/authActions";
 
 /**
  * This function returns a survey page component.
@@ -108,7 +111,7 @@ const SurveyPageFactory = ({
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
-    logout: () => dispatch({ type: SET_UNAUTHENTICATED }),
+    logout: () => dispatch(logout(false, UNAUTHENTICATED_REASONS.badCookie)),
   });
 
   const SurveyPageContentConnected = connect(
