@@ -61,7 +61,6 @@ const AppContent = () => {
 
   // On first load, get the auth state
   useEffect(() => {
-    // will log the user out if the request fails
     dispatch(fetchAuthState(UNAUTHENTICATED_CONTEXT.pageLoad, true));
   }, [dispatch]);
 

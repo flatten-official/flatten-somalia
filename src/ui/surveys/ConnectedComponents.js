@@ -28,10 +28,11 @@ const mapDispatchToPropsConsent = (dispatch) => ({
 
 const mapDispatchToPropsStartSurvey = (dispatch) => ({
   onStartSurvey: () => {
-    // Verifies that user is still logged in and session won't expire soon before starting the survey but if request fails don't logout
+    // Verifies that user is still logged in and that the session won't expire soon before starting the survey.
+    // If the fetchAuthState request fails it won't log the user out
     dispatch(
       fetchAuthState(UNAUTHENTICATED_CONTEXT.badCookie, false)
-    ).then(() => dispatch(checkSessionExpiry(70)));
+    ).then(() => dispatch(checkSessionExpiry(30)));
 
     // Don't wait for authentication to finish before starting survey
     dispatch({ type: Types.NOTIFY_STARTED });

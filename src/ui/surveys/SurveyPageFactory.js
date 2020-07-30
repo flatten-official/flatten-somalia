@@ -53,6 +53,7 @@ const SurveyPageFactory = ({
       try {
         await onSubmit(this.props.surveyData, formIOData);
       } catch (e) {
+        // If error is 401, session is invalid so logout user
         if (e.response && e.response.status === 401) this.props.logout();
         else throw e;
       }
