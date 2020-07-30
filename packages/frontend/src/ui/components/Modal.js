@@ -48,7 +48,7 @@ export const ExpireSoonModal = ({ minutes }) => {
   const willExpireSoon = new Date(expiry) - minutes * 60 * 1000 <= Date.now();
 
   return (
-    <Modal
+    <BaseModal
       show={willExpireSoon}
       header={t("expire.header")}
       body={t("expire.body")}
