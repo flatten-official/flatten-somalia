@@ -28,26 +28,21 @@ const LanguageDropDown = () => {
 
 const Links = () => {
   const { t } = useTranslation("Navbar");
-  const { auth } = useSelector((state) => state);
+  const authState = useSelector((state) => state.auth.state);
   const dispatch = useDispatch();
 
-  if (auth.status === AUTH_AUTHENTICATED)
-    return (
-      <>
-        <LinkContainer to={Routes.home}>
-          <Nav.Link>{t("links.homepage")}</Nav.Link>
-        </LinkContainer>
-        <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
-          {t("links.logout")}
-        </Nav.Link>
-      </>
-    );
-  else
-    return (
-      <LinkContainer to={Routes.auth}>
-        <Nav.Link>{t("links.login")}</Nav.Link>
+  if (authState !== AUTH_AUTHENTICATED) return null;
+
+  return (
+    <>
+      <LinkContainer to={Routes.home}>
+        <Nav.Link>{t("links.homepage")}</Nav.Link>
       </LinkContainer>
-    );
+      <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
+        {t("links.logout")}
+      </Nav.Link>
+    </>
+  );
 };
 
 const Header = () => {
