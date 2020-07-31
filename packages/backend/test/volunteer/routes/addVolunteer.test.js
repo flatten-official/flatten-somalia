@@ -12,7 +12,7 @@ const { login } = require("../../utils/requests");
 const { getAllPermissionsExcept } = require("../../utils/permissions");
 const _ = require("lodash");
 
-const makeRequestBody = (data) => ({ data });
+const makeRequestBody = (data) => ({ volunteerData: data });
 
 const GOOD_REQUEST_BODY = makeRequestBody({
   name: "new_name",
@@ -42,7 +42,9 @@ describe("endpoint POST /volunteer", () => {
 
     const res = await agent.post("/volunteer").send(GOOD_REQUEST_BODY);
 
-    let newVolunteer = await findVolunteerByEmail(GOOD_REQUEST_BODY.data.email);
+    let newVolunteer = await findVolunteerByEmail(
+      GOOD_REQUEST_BODY.volunteerData.email
+    );
 
     expect(res.status).toBe(200);
     expect(newVolunteer).not.toBeNull();
@@ -52,7 +54,7 @@ describe("endpoint POST /volunteer", () => {
 
     expect(newVolunteer).toMatchObject({
       name: "new_name",
-      email: GOOD_REQUEST_BODY.data.email,
+      email: GOOD_REQUEST_BODY.volunteerData.email,
       friendlyId: 2, // 1 already taken by admin
       permissions: [Permissions.access, Permissions.submitForms],
       permissionGroups: [PermissionGroups.dsu],
@@ -69,7 +71,7 @@ describe("endpoint POST /volunteer", () => {
 
     await agent.post("/volunteer").send(GOOD_REQUEST_BODY).expect(403);
     const newVolunteer = await findVolunteerByEmail(
-      GOOD_REQUEST_BODY.volunteerData.email
+      GOOD_REQUEST_BODY.volunteervolunteerData.email
     );
     expect(newVolunteer).toBeNull();
   });
@@ -82,7 +84,7 @@ describe("endpoint POST /volunteer", () => {
 
     await agent.post("/volunteer").send(GOOD_REQUEST_BODY).expect(403);
     const newVolunteer = await findVolunteerByEmail(
-      GOOD_REQUEST_BODY.data.email
+      GOOD_REQUEST_BODY.volunteerData.email
     );
     expect(newVolunteer).toBeNull();
   });
@@ -104,7 +106,7 @@ describe("endpoint POST /volunteer", () => {
       .expect(200);
 
     const newVolunteer = await findVolunteerByEmail(
-      GOOD_REQUEST_BODY.data.email
+      GOOD_REQUEST_BODY.volunteerData.email
     );
     expect(newVolunteer.permissions).not.toContain(
       Permissions.manageVolunteers
@@ -115,7 +117,7 @@ describe("endpoint POST /volunteer", () => {
     await request.post("/volunteer").send(GOOD_REQUEST_BODY).expect(401);
 
     const newVolunteer = await findVolunteerByEmail(
-      GOOD_REQUEST_BODY.data.email
+      GOOD_REQUEST_BODY.volunteerData.email
     );
     expect(newVolunteer).toBeNull();
   });

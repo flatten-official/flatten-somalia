@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
     // admin doing the adding
     res.locals.volunteer,
     // volunteer to be added
-    req.body.data
+    req.body.volunteerData
   );
 
   res.sendStatus(200);
