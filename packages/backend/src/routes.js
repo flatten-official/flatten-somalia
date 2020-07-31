@@ -93,7 +93,7 @@ router.post(
 
 /**
  * @api {get} /volunteer/list List volunteers
- * @apiName AddVolunteer
+ * @apiName ListVolunteers
  * @apiGroup Volunteer
  */
 router.get(
