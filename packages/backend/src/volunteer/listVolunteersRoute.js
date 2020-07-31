@@ -1,7 +1,7 @@
-const { getVolunteerList } = require("./volunteerAPI");
+const { getVolunteerListAsync } = require("./volunteerAPI");
 
 module.exports = async (req, res) => {
-  const [statusCode, message] = await getVolunteerList(res.locals.volunteer);
+  const result = await getVolunteerListAsync(res.locals.volunteer);
 
-  res.status(statusCode).send(message);
+  res.status(200).send(result);
 };

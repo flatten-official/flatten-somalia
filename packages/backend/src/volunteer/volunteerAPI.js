@@ -36,9 +36,7 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   }
 }
 
-async function getVolunteerList() {
-  return [200, await getVolunteerListData()];
-}
+const getVolunteerListAsync = () => getVolunteerListData();
 
 /**
  *
@@ -63,6 +61,6 @@ function changeVolunteerAccessById(updaterData, toUpdateInfo) {
 
 module.exports = {
   addVolunteerAndAuthenticate,
-  getVolunteerList,
+  getVolunteerListAsync,
   changeVolunteerAccessById,
 };

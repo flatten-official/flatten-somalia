@@ -1,6 +1,8 @@
 const { mongoose } = require("util-db");
 const _ = require("lodash");
 const { createModel } = require("../utils/mongoose");
+const { ApiError } = require("../utils/errors");
+const log = require("util-logging");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Permissions = {
@@ -141,13 +143,10 @@ const addPermissionByIdAsync = (
         volunteerToUpdate.permissions.push(permission);
         await volunteerToUpdate.save();
       }
-      return [
-        200,
-        {
-          _id: volunteerToUpdate._id,
-          permissions: volunteerToUpdate.permissions,
-        },
-      ];
+      return {
+        _id: volunteerToUpdate._id,
+        permissions: volunteerToUpdate.permissions,
+      };
     }
   );
 };
@@ -167,13 +166,10 @@ const removePermissionByIdAsync = (
         );
         await volunteerToUpdate.save();
       }
-      return [
-        200,
-        {
-          _id: volunteerToUpdate._id,
-          permissions: volunteerToUpdate.permissions,
-        },
-      ];
+      return {
+        _id: volunteerToUpdate._id,
+        permissions: volunteerToUpdate.permissions,
+      };
     }
   );
 };
@@ -198,12 +194,12 @@ const performPermissionBasedUpdateAsync = async (
   const volunteerToUpdate = await Volunteer.findById(toUpdateId);
 
   if (!volunteerToUpdate) {
-    console.log(`Volunteer with id ${toUpdateId} not found.`);
-    return [400, "Volunteer not found"];
+    log.warning(`Volunteer with id ${toUpdateId} not found.`);
+    throw new ApiError("Volunteer not found", 400);
   }
 
   if (!checkCanUpdate(updaterPermissions, volunteerToUpdate.permissionGroups))
-    return [403, "Wrong permissions"];
+    throw new ApiError("Wrong permissions", 403);
   return updateFunc(volunteerToUpdate);
 };
 
