@@ -66,7 +66,7 @@ describe("test /auth/login", () => {
     expect(sendEmailMock).toHaveBeenCalledTimes(0);
   });
 
-  it("should return success if an email of a volunteeer without access permissions is submitted (and not send email)", async () => {
+  it("should return success if an email of a volunteer without access permissions is submitted (and not send email)", async () => {
     await addVolunteer(
       _.defaults(
         { permissions: getAllPermissionsExcept(Permissions.access) },

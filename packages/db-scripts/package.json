@@ -4,13 +4,14 @@
   "main": "src/launcher.js",
   "dependencies": {
     "backend": "1.0.0",
-    "util-config": "^1.0.0",
     "dotenv": "^8.2.0",
-    "util-logging": "1.0.0",
-    "util-gcp": "1.0.0"
+    "expect": "^26.1.0",
+    "util-config": "^1.0.0",
+    "util-gcp": "1.0.0",
+    "util-logging": "1.0.0"
   },
   "devDependencies": {
-    "util-db": "1.0.0",
-    "prompt-confirm": "^2.0.4"
+    "prompt-confirm": "^2.0.4",
+    "util-db": "1.0.0"
   }
 }

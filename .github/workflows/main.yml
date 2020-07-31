@@ -4,10 +4,11 @@
 name: Node.js CI
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches: [ master ]
-    paths:
-      - 'packages/**' # Run if anything within packages has been modified
 
 jobs:
   test:

@@ -6,9 +6,11 @@ const {
 } = require("./volunteerData");
 const { isValidationTypeError } = require("../utils/mongoose");
 const { log } = require("util-logging");
+const { ApiError } = require("../utils/errors");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   const permissions = [Permissions.access];
+
   if (newVolunteerData.permSubmitForms)
     permissions.push(Permissions.submitForms);
 
@@ -26,14 +28,12 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   } catch (e) {
     if (e.message.indexOf("duplicate key error") !== -1) {
       log.error("Duplicate key error", { error: e });
-      return [400, "Email is already in use"];
+      throw new ApiError("Email is already in use", 400);
     } else if (isValidationTypeError(e)) {
       log.error("Volunteer data malformed", { error: e });
-      return [400, "Volunteer data malformed"];
+      throw new ApiError("Volunteer data malformed", 400);
     } else throw e;
   }
-
-  return [200, "Success"];
 }
 
 async function getVolunteerList() {
