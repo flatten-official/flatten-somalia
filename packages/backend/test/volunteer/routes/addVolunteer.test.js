@@ -71,7 +71,7 @@ describe("endpoint POST /volunteer", () => {
 
     await agent.post("/volunteer").send(GOOD_REQUEST_BODY).expect(403);
     const newVolunteer = await findVolunteerByEmail(
-      GOOD_REQUEST_BODY.volunteervolunteerData.email
+      GOOD_REQUEST_BODY.volunteerData.email
     );
     expect(newVolunteer).toBeNull();
   });
