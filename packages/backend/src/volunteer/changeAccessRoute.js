@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   // TODO ADD validation to body
   const result = await changeVolunteerAccessById(
     res.locals.volunteer,
-    res.body.volunteerId,
+    req.body.volunteerId,
     req.body.access
   );
 
