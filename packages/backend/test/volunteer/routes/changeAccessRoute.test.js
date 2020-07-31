@@ -64,50 +64,14 @@ describe("endpoint POST /volunteer/changeAccess", () => {
   });
 
   // eslint-disable-next-line jest/expect-expect
-  it("should successfully switch access permissions even if in dsu group", async () => {
-    const { agent } = await login(app, [
-      Permissions.manageVolunteers,
-      Permissions.access,
-    ]);
-
-    await addVolunteer(TEST_VOLUNTEER);
-
-    let newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
-    expect(newVolunteer.permissions).toContain(Permissions.access);
-
-    await agent
-      .post("/volunteer/changeAccess")
-      .send({
-        volunteerId: newVolunteer._id,
-        access: false,
-      })
-      .expect(200);
-
-    newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
-    expect(newVolunteer.permissions).not.toContain(Permissions.access);
-
-    await agent
-      .post("/volunteer/changeAccess")
-      .send({
-        volunteerId: newVolunteer._id,
-        access: true,
-      })
-      .expect(200);
-
-    newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
-    expect(newVolunteer.permissions).toContain(Permissions.access);
-  });
-
-  // eslint-disable-next-line jest/expect-expect
   it("should fail with 403 without the manage permissions", async () => {
     const { agent } = await login(
       app,
       getAllPermissionsExcept(Permissions.manageVolunteers)
     );
 
-    await addVolunteer(TEST_VOLUNTEER);
+    const newVolunteer = await addVolunteer(TEST_VOLUNTEER);
 
-    const newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).toContain(Permissions.access);
 
     await agent
@@ -126,9 +90,10 @@ describe("endpoint POST /volunteer/changeAccess", () => {
       Permissions.access,
     ]);
 
-    await addVolunteer(_.defaults({ permissionGroups: [] }, TEST_VOLUNTEER));
+    const newVolunteer = await addVolunteer(
+      _.defaults({ permissionGroups: [] }, TEST_VOLUNTEER)
+    );
 
-    const newVolunteer = await findVolunteerByEmail(TEST_VOLUNTEER.email);
     expect(newVolunteer.permissions).toContain(Permissions.access);
 
     await agent
