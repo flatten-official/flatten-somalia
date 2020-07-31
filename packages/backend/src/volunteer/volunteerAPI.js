@@ -1,19 +1,12 @@
-const { addVolunteer, Permissions } = require("./volunteerData");
-const {
-  addPermissionByIdAsync,
-  getVolunteers,
-  removePermissionByIdAsync,
-  PermissionGroups,
-  findVolunteerById,
-} = require("./volunteerData");
+const Volunteer = require("./volunteerData");
 const { log } = require("util-logging");
 const { ApiError, isValidationError } = require("../utils/errors");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
-  const permissions = [Permissions.access];
+  const permissions = [Volunteer.Permissions.access];
 
   if (newVolunteerData.permSubmitForms)
-    permissions.push(Permissions.submitForms);
+    permissions.push(Volunteer.Permissions.submitForms);
 
   const volunteer = {
     name: newVolunteerData.name,
@@ -25,7 +18,7 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   };
 
   try {
-    await addVolunteer(volunteer);
+    await Volunteer.addVolunteer(volunteer);
   } catch (e) {
     if (e.message.indexOf("duplicate key error") !== -1) {
       log.error("Duplicate key error", { error: e });
@@ -38,7 +31,7 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
 }
 
 const getVolunteerList = async () => {
-  const volunteers = await getVolunteers();
+  const volunteers = await Volunteer.getVolunteers();
 
   return volunteers.map((v) => ({
     _id: v._id,
@@ -57,19 +50,36 @@ const getVolunteerList = async () => {
  * @param giveAccess true or false, determines whether they should have access or not
  */
 async function changeVolunteerAccessById(updaterData, toUpdateId, giveAccess) {
-  const volunteerToUpdate = await findVolunteerById(toUpdateId);
+  const volunteerToUpdate = await Volunteer.findVolunteerById(toUpdateId);
 
   if (!volunteerToUpdate) {
     log.warning(`Volunteer with id ${toUpdateId} not found.`);
     throw new ApiError("Volunteer not found", 400);
   }
 
-  if (!(volunteerToUpdate.permissionGroups[0] === PermissionGroups.dsu))
+  // Can only edit access on DSU volunteers
+  if (
+    !volunteerToUpdate.permissionGroups.includes(Volunteer.PermissionGroups.dsu)
+  )
     throw new ApiError("Wrong permissions", 403);
 
+  let newVolunteer;
+
   if (giveAccess)
-    return addPermissionByIdAsync(Permissions.access, volunteerToUpdate);
-  else return removePermissionByIdAsync(Permissions.access, toUpdateId);
+    newVolunteer = await Volunteer.addPermission(
+      Volunteer.Permissions.access,
+      volunteerToUpdate
+    );
+  else
+    newVolunteer = await Volunteer.removePermission(
+      Volunteer.Permissions.access,
+      volunteerToUpdate
+    );
+
+  return {
+    _id: newVolunteer._id,
+    permissions: newVolunteer.permissions,
+  };
 }
 
 module.exports = {
