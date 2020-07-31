@@ -4,7 +4,7 @@ const { ApiError } = require("../errors");
 
 module.exports.apiErrorHandler = (err, req, res, next) => {
   if (!(err instanceof ApiError)) {
-    next();
+    next(err);
     return;
   }
 
