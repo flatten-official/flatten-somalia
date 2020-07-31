@@ -7,6 +7,7 @@ const { getApp } = require("../../../src/app");
 const db = require("util-db/inMemoryDb");
 const { login } = require("../../utils/requests");
 const _ = require("lodash");
+const { getAllPermissionsExcept } = require("../../utils/permissions");
 
 const TEST_VOLUNTEER = {
   name: "default_name",
@@ -45,10 +46,10 @@ describe("endpoint POST /volunteer", () => {
   afterAll(() => db.close());
 
   it("should return a correct list of volunteers", async () => {
-    const { agent, volunteer: adminVolunteer } = await login(app, {
-      permissions: [Permissions.manageVolunteers, Permissions.access],
-      permissionGroups: [],
-    });
+    const { agent, volunteer: adminVolunteer } = await login(app, [
+      Permissions.manageVolunteers,
+      Permissions.access,
+    ]);
 
     for (const v of dummyVolunteers) {
       const res = await agent
@@ -77,9 +78,10 @@ describe("endpoint POST /volunteer", () => {
   });
 
   it("should fail with 403 for missing permissions", async () => {
-    const { agent } = await login(app, {
-      permissions: [Permissions.submitForms],
-    });
+    const { agent } = await login(
+      app,
+      getAllPermissionsExcept(Permissions.manageVolunteers)
+    );
 
     const res = await agent.get("/volunteer/list").send({});
 
