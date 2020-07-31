@@ -1,8 +1,6 @@
 const { mongoose } = require("util-db");
 const _ = require("lodash");
 const { createModel } = require("../utils/mongoose");
-const { ApiError } = require("../utils/errors");
-const log = require("util-logging");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
 const Permissions = {
@@ -118,89 +116,34 @@ const findVolunteerByEmail = async (email) => {
   return emails[0] ? emails[0] : null;
 };
 
-const getVolunteerList = async () => {
-  const volunteers = await Volunteer.find();
-  return volunteers.map((v) => ({
-    _id: v._id,
-    email: v.email,
-    name: v.name,
-    teamName: v.teamName,
-    permissions: v.permissions,
-    permissionGroups: v.permissionGroups,
-  }));
+const getVolunteers = () => Volunteer.find().exec();
+
+const addPermissionByIdAsync = async (permissionToAdd, volunteerToUpdate) => {
+  if (!volunteerToUpdate.permissions.includes(permissionToAdd)) {
+    volunteerToUpdate.permissions.push(permissionToAdd);
+    await volunteerToUpdate.save();
+  }
+  return {
+    _id: volunteerToUpdate._id,
+    permissions: volunteerToUpdate.permissions,
+  };
 };
 
-const addPermissionByIdAsync = (
-  volunteerIdToUpdate,
-  permission,
-  volunteerPermissions
+const removePermissionByIdAsync = async (
+  permissionToRemove,
+  volunteerToUpdate
 ) => {
-  return performPermissionBasedUpdateAsync(
-    volunteerPermissions,
-    volunteerIdToUpdate,
-    async (volunteerToUpdate) => {
-      if (!volunteerToUpdate.permissions.includes(permission)) {
-        volunteerToUpdate.permissions.push(permission);
-        await volunteerToUpdate.save();
-      }
-      return {
-        _id: volunteerToUpdate._id,
-        permissions: volunteerToUpdate.permissions,
-      };
-    }
-  );
-};
-
-const removePermissionByIdAsync = (
-  volunteerIdToUpdate,
-  permission,
-  volunteerPermissions
-) => {
-  return performPermissionBasedUpdateAsync(
-    volunteerPermissions,
-    volunteerIdToUpdate,
-    async (volunteerToUpdate) => {
-      if (volunteerToUpdate.permissions.includes(permission)) {
-        volunteerToUpdate.permissions = volunteerToUpdate.permissions.filter(
-          (p) => p !== permission
-        );
-        await volunteerToUpdate.save();
-      }
-      return {
-        _id: volunteerToUpdate._id,
-        permissions: volunteerToUpdate.permissions,
-      };
-    }
-  );
-};
-
-/**
- * Checks whether a volunteer with permissions permsA is permitted to modify a volunteer with permission group groupsB.
- */
-const checkCanUpdate = (permsA, groupsB) =>
-  permsA.includes(Permissions.manageVolunteers) &&
-  groupsB.length > 0 &&
-  groupsB[0] === PermissionGroups.dsu;
-
-/**
- * Checks if the volunteer with permission groups updaterPermissionGroups can update the volunteer at
- * toUpdateId based on permission groups. If it can, apply updateFunc.
- * */
-const performPermissionBasedUpdateAsync = async (
-  updaterPermissions,
-  toUpdateId,
-  updateFunc
-) => {
-  const volunteerToUpdate = await Volunteer.findById(toUpdateId);
-
-  if (!volunteerToUpdate) {
-    log.warning(`Volunteer with id ${toUpdateId} not found.`);
-    throw new ApiError("Volunteer not found", 400);
+  if (volunteerToUpdate.permissions.includes(permissionToRemove)) {
+    volunteerToUpdate.permissions = volunteerToUpdate.permissions.filter(
+      (p) => p !== permissionToRemove
+    );
+    await volunteerToUpdate.save();
   }
 
-  if (!checkCanUpdate(updaterPermissions, volunteerToUpdate.permissionGroups))
-    throw new ApiError("Wrong permissions", 403);
-  return updateFunc(volunteerToUpdate);
+  return {
+    _id: volunteerToUpdate._id,
+    permissions: volunteerToUpdate.permissions,
+  };
 };
 
 module.exports = {
@@ -209,7 +152,7 @@ module.exports = {
   findVolunteerById,
   volunteerRegexAsync,
   findVolunteerByEmail,
-  getVolunteerList,
+  getVolunteers,
   getNextFriendlyId,
   Permissions,
   PermissionGroups,

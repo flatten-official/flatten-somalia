@@ -1,8 +1,10 @@
 const { addVolunteer, Permissions } = require("./volunteerData");
 const {
   addPermissionByIdAsync,
-  getVolunteerList: getVolunteerListData,
+  getVolunteers,
   removePermissionByIdAsync,
+  PermissionGroups,
+  findVolunteerById,
 } = require("./volunteerData");
 const { log } = require("util-logging");
 const { ApiError, isValidationError } = require("../utils/errors");
@@ -35,31 +37,43 @@ async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
   }
 }
 
-const getVolunteerListAsync = () => getVolunteerListData();
+const getVolunteerList = async () => {
+  const volunteers = await getVolunteers();
+
+  return volunteers.map((v) => ({
+    _id: v._id,
+    email: v.email,
+    name: v.name,
+    teamName: v.teamName,
+    permissions: v.permissions,
+    permissionGroups: v.permissionGroups,
+  }));
+};
 
 /**
  *
  * @param updaterData the volunteer making the change
- * @param toUpdateInfo an object containing two fields, access (True/False) and the volunteer id
+ * @param toUpdateId the id of the volunteer to update
+ * @param giveAccess true or false, determines whether they should have access or not
  */
-function changeVolunteerAccessById(updaterData, toUpdateInfo) {
-  if (toUpdateInfo.access) {
-    return addPermissionByIdAsync(
-      toUpdateInfo.volunteerId,
-      Permissions.access,
-      updaterData.permissions
-    );
-  } else {
-    return removePermissionByIdAsync(
-      toUpdateInfo.volunteerId,
-      Permissions.access,
-      updaterData.permissions
-    );
+async function changeVolunteerAccessById(updaterData, toUpdateId, giveAccess) {
+  const volunteerToUpdate = await findVolunteerById(toUpdateId);
+
+  if (!volunteerToUpdate) {
+    log.warning(`Volunteer with id ${toUpdateId} not found.`);
+    throw new ApiError("Volunteer not found", 400);
   }
+
+  if (!(volunteerToUpdate.permissionGroups[0] === PermissionGroups.dsu))
+    throw new ApiError("Wrong permissions", 403);
+
+  if (giveAccess)
+    return addPermissionByIdAsync(Permissions.access, volunteerToUpdate);
+  else return removePermissionByIdAsync(Permissions.access, toUpdateId);
 }
 
 module.exports = {
   addVolunteerAndAuthenticate,
-  getVolunteerListAsync,
+  getVolunteerList,
   changeVolunteerAccessById,
 };
