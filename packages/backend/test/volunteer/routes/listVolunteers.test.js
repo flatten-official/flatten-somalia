@@ -1,23 +1,13 @@
 const {
   Permissions,
   PermissionGroups,
+  addVolunteer,
 } = require("../../../src/volunteer/volunteerData");
 
 const { getApp } = require("../../../src/app");
 const db = require("util-db/inMemoryDb");
 const { login } = require("../../utils/requests");
-const _ = require("lodash");
 const { getAllPermissionsExcept } = require("../../utils/permissions");
-
-const TEST_VOLUNTEER = {
-  name: "default_name",
-  email: "default_email@example.ca",
-  teamName: "testTeam",
-};
-
-const makeVolunteerRequestBody = (data) => ({
-  data: _.defaults(data, TEST_VOLUNTEER),
-});
 
 const dummyVolunteers = [
   {
@@ -25,12 +15,14 @@ const dummyVolunteers = [
     email: "a1@example.com",
     permissions: [Permissions.access, Permissions.submitForms],
     permissionGroups: [PermissionGroups.dsu],
+    teamName: "fdsfs",
   },
   {
     name: "new_name2",
     email: "a2@example.com",
     permissions: [Permissions.access, Permissions.submitForms],
     permissionGroups: [PermissionGroups.dsu],
+    teamName: "fdsfaer",
   },
 ].sort((v) => v.email);
 
@@ -51,30 +43,20 @@ describe("endpoint POST /volunteer", () => {
       Permissions.access,
     ]);
 
-    for (const v of dummyVolunteers) {
-      const res = await agent
-        .post("/volunteer")
-        .send(makeVolunteerRequestBody({ ...v, permSubmitForms: true }));
-      expect(res.status).toBe(200);
-    }
+    for (const v of dummyVolunteers) await addVolunteer(v);
 
-    const res = await agent.get("/volunteer/list").send({});
+    const res = await agent.get("/volunteer/list");
 
     let list = res.body;
 
     expect(list).toHaveLength(2 + 1);
-    list = list
-      // remove the admin volunteer
-      .filter((v) => v.email !== adminVolunteer.email)
-      .sort((v) => v.email)
-      .map((v) => ({
-        name: v.name,
-        email: v.email,
-        permissionGroups: v.permissionGroups,
-        permissions: v.permissions,
-      }));
 
-    expect(dummyVolunteers).toStrictEqual(list);
+    // remove the admin volunteer
+    list = list
+      .filter((v) => v.email !== adminVolunteer.email)
+      .sort((v) => v.email);
+
+    expect(list).toMatchObject(dummyVolunteers);
   });
 
   it("should fail with 403 for missing permissions", async () => {
