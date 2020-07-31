@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  await verifyLoginAndSendEmail(emailAddress); // Returns true even if email was wrong
+  await verifyLoginAndSendEmail(emailAddress); // Returns even if email was wrong
 
   res.sendStatus(200);
   log.info("Successfully sent login email or email invalid.", {
