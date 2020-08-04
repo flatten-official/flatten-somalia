@@ -2,7 +2,7 @@ import api from "./backend/api/api";
 import graveDiggerSurveyJSON from "./forms/gravedigger/form.json";
 import hospitalSurveyJSON from "./forms/hospital/form.json";
 import initialHouseholdJSON from "./forms/initialHousehold/form.json";
-import addVolunteerJSON from "./forms/addVolunteerForm/form.json";
+
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
@@ -80,20 +80,6 @@ export const Surveys = {
     ]),
     options: {
       enableManualLocation: true,
-    },
-  },
-  addVolunteer: {
-    surveyKey: "addVolunteer",
-    i18nTitleKey: "addVolunteerTitle",
-    api: api.addVolunteer,
-    formIOJSON: addVolunteerJSON,
-    onSubmit: defaultSurveySubmitterFactory(
-      api.addVolunteer,
-      Schemas.addVolunteer
-    ),
-    options: {
-      getLocation: false,
-      getConsent: false,
     },
   },
 };
