@@ -46,18 +46,18 @@ HomeSurveyButton.propTypes = {
 
 const Home = () => {
   const { t } = useTranslation("Home");
+  const { t: tAdmin } = useTranslation("Admin");
   const authUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-
-  const showAddVolunteers = useSelector(
-    (state) =>
-      state.auth.user.permissions.indexOf(permissions.manageVolunteers) > -1
-  );
 
   // On every render of the home page check the session expiry
   useEffect(() => {
     dispatch(checkSessionExpiry(70));
   });
+
+  const hasManageVolunteerPermission = authUser.permissions.includes(
+    permissions.manageVolunteers
+  );
 
   return (
     <>
@@ -79,10 +79,13 @@ const Home = () => {
       <HomeSurveyButton survey={Surveys.gravedigger} disabled={true} />
       <HomeSurveyButton survey={Surveys.hospital} disabled={true} />
 
-      {showAddVolunteers && (
-        <HomeButton route={Routes.addVolunteer} text={"Add Volunteers"} />
+      {hasManageVolunteerPermission && (
+        <HomeButton
+          route={Routes.addVolunteer}
+          text={tAdmin("addVolunteerTitle")}
+        />
       )}
-      {showAddVolunteers && (
+      {hasManageVolunteerPermission && (
         <HomeButton
           route={Routes.admin}
           text="Administrate Volunteers" /* TODO use translation */
