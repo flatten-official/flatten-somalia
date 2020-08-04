@@ -55,6 +55,10 @@ const Home = () => {
     dispatch(checkSessionExpiry(70));
   });
 
+  const hasManageVolunteerPermission = authUser.permissions.includes(
+    permissions.manageVolunteers
+  );
+
   return (
     <>
       <h3 className="homePageTitle">
@@ -75,7 +79,7 @@ const Home = () => {
       <HomeSurveyButton survey={Surveys.gravedigger} disabled={true} />
       <HomeSurveyButton survey={Surveys.hospital} disabled={true} />
 
-      {authUser.permissions.includes(permissions.manageVolunteers) && (
+      {hasManageVolunteerPermission && (
         <HomeButton
           route={Routes.addVolunteer}
           text={tAdmin("addVolunteerTitle")}
