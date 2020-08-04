@@ -45,15 +45,6 @@
       "input": true
     },
     {
-      "label": "permManageVolunteers",
-      "tableView": false,
-      "calculateServer": false,
-      "key": "permManageVolunteers",
-      "type": "checkbox",
-      "input": true,
-      "defaultValue": false
-    },
-    {
       "label": "submit",
       "showValidations": false,
       "tableView": false,
