@@ -12,7 +12,7 @@ import { Button } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 import { useTranslation } from "react-i18next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 const { SearchBar } = Search;
