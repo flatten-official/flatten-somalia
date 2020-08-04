@@ -1,5 +1,4 @@
-import backend from "../api/backend";
-import flattenApi from "../api/api";
+import endpoints from "../api/endpoints";
 
 // states
 export const AUTH_UNINITIALISED = "AUTH_UNINITIALISED";
@@ -53,7 +52,7 @@ export const fetchAuthState = (
   logoutIfFails
 ) => async (dispatch) => {
   try {
-    const res = await backend.request(flattenApi.getAuth);
+    const res = await endpoints.getAuth();
 
     // check if the response is empty, indicating failed auth
     // TODO make backend return 401 instead of empty object for failed auth
@@ -74,7 +73,7 @@ export const fetchAuthState = (
 export const logout = (sendApiRequest, context) => async (dispatch) => {
   if (sendApiRequest) {
     try {
-      await backend.request(flattenApi.logout);
+      await endpoints.logout();
     } catch (e) {
       console.error(e);
     }

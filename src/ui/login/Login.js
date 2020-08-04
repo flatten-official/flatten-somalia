@@ -1,8 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import LoginSuccess from "./LoginSuccess";
-import backend from "../../backend/api/backend";
-import flattenApi from "../../backend/api/api";
+import endpoints from "../../backend/api/endpoints";
 import Form from "../components/surveys/formio/Form";
 import LoginFormJson from "../../forms/Login.json";
 import Modal from "../components/Modal";
@@ -44,7 +43,7 @@ const Login = () => {
   const { t } = useTranslation("Login");
 
   const onSubmit = async (data) => {
-    await backend.request({ ...flattenApi.login, data: { email: data.email } });
+    await endpoints.login(data.email);
   };
 
   return (

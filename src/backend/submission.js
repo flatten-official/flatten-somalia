@@ -1,5 +1,4 @@
-import backend from "./api/backend";
-import flattenApi from "./api/api";
+import endpoints from "./api/endpoints";
 
 const getMetadata = (storeData, pageNames) => {
   const endTime = Date.now();
@@ -30,7 +29,7 @@ const preFormatFormio = (formioData) => {
   });
 };
 
-export const defaultSurveySubmitterFactory = (api, schema) => async (
+export const defaultSurveySubmitterFactory = (endpoint, schema) => async (
   storeData,
   formioData
 ) => {
@@ -42,7 +41,7 @@ export const defaultSurveySubmitterFactory = (api, schema) => async (
     data: formioData,
   };
 
-  await backend.request({ ...api, data: body });
+  await endpoint(body);
 };
 
 export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
@@ -65,9 +64,5 @@ export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
     if (!(k === "personGrid" || k === "deathGrid")) body.household[k] = v;
   });
 
-  // need to actually add the submission in here!
-  await backend.request({
-    ...flattenApi.volunteerForm,
-    data: body,
-  });
+  await endpoints.submitVolunteerForm(body);
 };
