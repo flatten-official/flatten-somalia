@@ -15,7 +15,7 @@ export const fetchVolunteerList = () => async (dispatch) => {
   } catch (e) {
     // If error is 401, session is invalid so logout user
     if (e.response && e.response.status === 401)
-      logout(false, UNAUTHENTICATED_CONTEXT.badCookie);
+      dispatch(logout(false, UNAUTHENTICATED_CONTEXT.badCookie));
     else {
       console.error(e);
       dispatch({ type: FETCH_LIST_FAILED });
@@ -40,7 +40,7 @@ export const changeAccess = (volunteerId, newAccessStatus) => async (
   } catch (e) {
     // If error is 401, session is invalid so logout user
     if (e.response && e.response.status === 401)
-      logout(false, UNAUTHENTICATED_CONTEXT.badCookie);
+      dispatch(logout(false, UNAUTHENTICATED_CONTEXT.badCookie));
     else {
       console.error(e);
       dispatch({
