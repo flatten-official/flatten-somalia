@@ -10,7 +10,6 @@ import {
   ConnectedConsent,
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
-import Success from "../components/surveys/Success";
 import {
   logout,
   UNAUTHENTICATED_CONTEXT,
@@ -80,17 +79,14 @@ const SurveyPageFactory = ({
           />
         );
 
-      if (!surveyData.completed)
-        return (
-          <Form
-            formioForm={formIOJSON}
-            submitHook={this.submitHook}
-            formioOptions={{ noAlerts: false }}
-            onNextPage={this.onNextPage}
-          />
-        );
-
-      return <Success />;
+      return (
+        <Form
+          formioForm={formIOJSON}
+          submitHook={this.submitHook}
+          formioOptions={{ noAlerts: false }}
+          onNextPage={this.onNextPage}
+        />
+      );
     }
   }
 
@@ -127,7 +123,7 @@ const SurveyPageFactory = ({
     // shouldWarn determines whether the leave page warnings should be enable
     const shouldWarn = useSelector((state) => {
       const activeSurvey = state.surveys[state.surveys.activeSurvey];
-      return activeSurvey && activeSurvey.consent && !activeSurvey.completed;
+      return activeSurvey && activeSurvey.started && !activeSurvey.completed;
     });
 
     useEffect(() => {
