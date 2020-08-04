@@ -73,7 +73,7 @@ const SurveyPageFactory = ({
       if (!surveyData.consent) return <ConnectedConsent />;
 
       // Use undefined rather than "not" since if location is not found will set to null
-      if (options.getLocation && surveyData.location === undefined)
+      if (surveyData.location === undefined)
         return (
           <ConnectedLocationPicker
             enableManual={options.enableManualLocation}
