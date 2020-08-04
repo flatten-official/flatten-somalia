@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Surveys } from "../../config";
+import { Routes, Surveys } from "../../config";
 import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import PropTypes from "prop-types";
 import { checkSessionExpiry } from "../../backend/auth/authActions";
+import { permissions } from "../../backend/auth/authApi";
 
 const HomeButton = ({ route, text, ...options }) => {
   const dispatch = useDispatch();
@@ -48,6 +49,10 @@ const Home = () => {
   const authUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
+  const showAddVolunteers = useSelector((state) =>
+    state.auth.user.permissions.includes(permissions.manageVolunteers)
+  );
+
   // On every render of the home page check the session expiry
   useEffect(() => {
     dispatch(checkSessionExpiry(70));
@@ -72,6 +77,10 @@ const Home = () => {
       <HomeSurveyButton survey={Surveys.initialHousehold} />
       <HomeSurveyButton survey={Surveys.gravedigger} disabled={true} />
       <HomeSurveyButton survey={Surveys.hospital} disabled={true} />
+
+      {showAddVolunteers && (
+        <HomeButton route={Routes.addVolunteer} text={"Add Volunteers"} />
+      )}
     </>
   );
 };

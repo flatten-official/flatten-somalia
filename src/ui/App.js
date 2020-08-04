@@ -16,6 +16,7 @@ import {
 } from "../backend/auth/authActions";
 import SurveyPageFactory from "./surveys/SurveyPageFactory";
 import PrivatePage from "./components/PrivatePage";
+import VolunteerAddPage from "./admin/VolunteerAddPage";
 
 const AuthenticatedAppContent = () => {
   const getHomePageRoute = () => (
@@ -52,6 +53,11 @@ const AuthenticatedAppContent = () => {
         {makeSurveyRoute(Surveys.initialHousehold)}
         {makeSurveyRoute(Surveys.gravedigger)}
         {makeSurveyRoute(Surveys.hospital)}
+        {makePrivateRoute(
+          Routes.addVolunteer,
+          VolunteerAddPage,
+          permissions.manageVolunteers
+        )}
 
         <Redirect from="*" to={Routes.home} />
       </Switch>
