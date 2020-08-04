@@ -1,14 +1,7 @@
 {
-  "_id": "5ec0ca70708f3b99b32b0aee",
-  "type": "form",
-  "tags": ["SOadmins"],
-  "owner": "5ec0cc1f708f3b885e2b0b0e",
   "components": [
     {
       "label": "name",
-      "spellcheck": true,
-      "tableView": true,
-      "calculateServer": false,
       "validate": { "required": true },
       "key": "name",
       "type": "textfield",
@@ -16,9 +9,6 @@
     },
     {
       "label": "teamName",
-      "spellcheck": true,
-      "tableView": true,
-      "calculateServer": false,
       "validate": { "required": true },
       "key": "teamName",
       "type": "textfield",
@@ -26,10 +16,7 @@
     },
     {
       "label": "email",
-      "spellcheck": true,
-      "tableView": true,
-      "calculateServer": false,
-      "validate": { "required": true, "unique": true },
+      "validate": { "required": true },
       "unique": true,
       "key": "email",
       "type": "email",
@@ -37,9 +24,7 @@
     },
     {
       "label": "permSubmitForms",
-      "tableView": false,
       "defaultValue": true,
-      "calculateServer": false,
       "key": "permSubmitForms",
       "type": "checkbox",
       "input": true
@@ -47,21 +32,9 @@
     {
       "label": "submit",
       "showValidations": false,
-      "tableView": false,
       "key": "submit",
       "type": "button",
       "input": true
     }
-  ],
-  "controller": "",
-  "revisions": "",
-  "_vid": 0,
-  "title": "Add Volunteer",
-  "name": "addVolunteer",
-  "path": "addvolunteer",
-  "display": "form",
-  "settings": {},
-  "properties": {},
-  "machineName": "staging-yordvlchrlvervl:addVolunteer",
-  "project": "5ec0c89b708f3b80282b0ad2"
+  ]
 }
