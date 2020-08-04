@@ -20,9 +20,9 @@ const { SearchBar } = Search;
 const checkHasAccess = (cell) => cell.permissions.includes(permissions.access);
 
 /**
- * The enable/disable button, not actually a react component but rather a formatter function
+ * The enable/disable button formatter
  */
-const ButtonCell = (dispatch, t) => (_, cell, __, ___) => {
+const getButtonCellFormatter = (dispatch, t) => (_, cell, __, ___) => {
   const hasAccess = checkHasAccess(cell);
   const { _id, status } = cell;
 
@@ -83,7 +83,7 @@ const AdminPanelContent = () => {
       text: t("table.statusButtons"),
       isDummyField: true,
       csvExport: false,
-      formatter: ButtonCell(dispatch, t),
+      formatter: getButtonCellFormatter(dispatch, t),
       formatExtraData: volunteer,
     },
   ];
