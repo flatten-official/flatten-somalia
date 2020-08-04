@@ -12,6 +12,7 @@ export const fetchVolunteerList = () => async (dispatch) => {
     const res = await endpoints.listVolunteers();
     dispatch({ type: FETCH_LIST_SUCCESS, payload: res.data });
   } catch (e) {
+    console.error(e);
     dispatch({ type: FETCH_LIST_FAILED });
   }
 };
@@ -31,6 +32,7 @@ export const changeAccess = (volunteerId, newAccessStatus) => async (
       payload: res.data,
     });
   } catch (e) {
+    console.error(e);
     dispatch({ type: VOLUNTEER_CHANGE_FAILED, payload: { _id: volunteerId } });
   }
 };
