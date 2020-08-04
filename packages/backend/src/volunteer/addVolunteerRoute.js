@@ -1,4 +1,5 @@
 const { addVolunteerAndAuthenticate } = require("./volunteerAPI");
+const { log } = require("util-logging");
 
 module.exports = async (req, res) => {
   await addVolunteerAndAuthenticate(
@@ -9,4 +10,5 @@ module.exports = async (req, res) => {
   );
 
   res.sendStatus(200);
+  log.info("added volunteer", { status: 200 });
 };
