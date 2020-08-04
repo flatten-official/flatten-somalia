@@ -19,7 +19,7 @@ import navbarEN from "./translations/en/Navbar.json";
 import formIOCustomTextEN from "./translations/en/FormIoCustomText.json";
 import SurveysEN from "./translations/en/Surveys.json";
 import GeneralEN from "./translations/en/General.json";
-import adminPanelEN from "./translations/en/AdminPanel.json";
+import adminPanelEN from "./translations/en/Admin.json";
 
 // FORMIO CONTENT SOMALI
 import formIOAddVolunteerSO from "./translations/so/translation/AddVolunteer.json";
@@ -38,7 +38,7 @@ import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
 import SurveysSO from "./translations/so/Surveys.json";
 import GeneralSO from "./translations/so/General.json";
-import adminPanelSO from "./translations/so/AdminPanel.json";
+import adminPanelSO from "./translations/so/Admin.json";
 
 const resources = {
   en: {
@@ -58,7 +58,7 @@ const resources = {
     FormIOCustomText: formIOCustomTextEN,
     Surveys: SurveysEN,
     General: GeneralEN,
-    AdminPanel: adminPanelEN,
+    Admin: adminPanelEN,
   },
   so: {
     translation: {
@@ -77,7 +77,7 @@ const resources = {
     FormIOCustomText: formIOCustomTextSO,
     Surveys: SurveysSO,
     General: GeneralSO,
-    AdminPanel: adminPanelSO,
+    Admin: adminPanelSO,
   },
 };
 

@@ -1,5 +1,6 @@
 {
-  "title": "Volunteer Management",
+  "addVolunteerTitle": "Add a new volunteer",
+  "managementTitle": "Volunteer Management",
   "enable": "Enable",
   "disable": "Disable",
   "table": {

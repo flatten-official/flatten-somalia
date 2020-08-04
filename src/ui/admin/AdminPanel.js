@@ -63,7 +63,7 @@ const formatAsCheckMark = (_, cell, __, ___) =>
   checkHasAccess(cell) ? <>&#10004;</> : <>&#10006;</>;
 
 const AdminPanelContent = () => {
-  const { t } = useTranslation("AdminPanel");
+  const { t } = useTranslation("Admin");
   const volunteer = useSelector((state) => state.volunteer);
   const dispatch = useDispatch();
 
@@ -118,6 +118,7 @@ const AdminPanelContent = () => {
 const AdminPanel = () => {
   const dispatch = useDispatch();
   const volunteer = useSelector((state) => state.volunteer);
+  const { t } = useTranslation("Admin");
 
   useEffect(() => {
     dispatch(fetchVolunteerList());
@@ -131,7 +132,7 @@ const AdminPanel = () => {
     default:
       return (
         <>
-          <h3>Volunteer Management</h3>
+          <h3>{t("managementTitle")}</h3>
           <br />
           <AdminPanelContent />
         </>
