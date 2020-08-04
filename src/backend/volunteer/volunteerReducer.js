@@ -38,14 +38,7 @@ const volunteerReducer = (
 ) => {
   switch (action.type) {
     case FETCH_LIST_SUCCESS:
-      return {
-        ...state,
-        listStatus: FETCH_LIST_SUCCESS,
-        list: action.payload.map((o) => ({
-          ...o,
-          status: VOLUNTEER_CHANGE_SUCCESS,
-        })),
-      };
+      return { ...state, listStatus: FETCH_LIST_SUCCESS, list: action.payload };
     case FETCH_LIST_FAILED:
     case FETCH_LIST_PENDING:
       return { ...state, listStatus: action.type };
