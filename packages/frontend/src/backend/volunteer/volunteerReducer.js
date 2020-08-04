@@ -5,27 +5,29 @@ import {
   VOLUNTEER_CHANGE_PENDING,
   VOLUNTEER_CHANGE_SUCCESS,
   VOLUNTEER_CHANGE_FAILED,
-  FETCH_LIST_PERMISSION_DENIED,
 } from "./volunteerActions";
 import update from "immutability-helper";
+import { permissions } from "../auth/authApi";
 
+/**
+ * Updates the state of a single volunteer in the list
+ */
 const updateVolunteerStatusById = (state, action) => {
   // todo - handle errors
-  if (!action.payload) return { ...state };
-  console.log(action);
+  if (!action.payload || !action.payload._id)
+    throw new Error("No id specified in VOLUNTEER_CHANGE action payload");
+
   const updateIndex = state.list.findIndex((v) => v._id === action.payload._id);
-  return update(state, {
-    list: {
-      [updateIndex]: {
-        status: { $set: action.type },
-        permissions: {
-          $set: action.payload.permissions
-            ? action.payload.permissions
-            : state.list[updateIndex].permissions,
-        },
-      },
-    },
-  });
+
+  // set the status
+  const operation = { status: { $set: action.type } };
+
+  // set permissions if applicable
+  if (action.payload.permissions)
+    operation[permissions] = { $set: action.payload.permissions };
+
+  // returned the mutated state using the operation
+  return update(state, { list: { [updateIndex]: operation } });
 };
 
 const volunteerReducer = (
@@ -33,24 +35,18 @@ const volunteerReducer = (
   action
 ) => {
   switch (action.type) {
-    case FETCH_LIST_PENDING:
-      return { ...state, listStatus: FETCH_LIST_PENDING };
     case FETCH_LIST_SUCCESS:
-      return update(state, {
-        listStatus: { $set: FETCH_LIST_SUCCESS },
-        list: {
-          $set: action.payload.map((o) => ({
-            ...o,
-            status: FETCH_LIST_SUCCESS,
-          })),
-        },
-      });
-    case FETCH_LIST_FAILED:
-    case FETCH_LIST_PERMISSION_DENIED:
       return {
         ...state,
-        listStatus: action.type,
+        listStatus: FETCH_LIST_SUCCESS,
+        list: action.payload.map((o) => ({
+          ...o,
+          status: FETCH_LIST_SUCCESS,
+        })),
       };
+    case FETCH_LIST_FAILED:
+    case FETCH_LIST_PENDING:
+      return { ...state, listStatus: action.type };
     case VOLUNTEER_CHANGE_PENDING:
     case VOLUNTEER_CHANGE_FAILED:
     case VOLUNTEER_CHANGE_SUCCESS:
