@@ -2,7 +2,6 @@ import api from "./backend/api/api";
 import graveDiggerSurveyJSON from "./forms/gravedigger/form.json";
 import hospitalSurveyJSON from "./forms/hospital/form.json";
 import initialHouseholdJSON from "./forms/initialHousehold/form.json";
-
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
@@ -13,8 +12,8 @@ export const Routes = {
   initialHouseholdSurvey: "/surveys/initialHousehold",
   gravediggerSurvey: "/surveys/gravedigger",
   hospitalSurvey: "/surveys/hospital",
-  addVolunteer: "/surveys/addVolunteer",
-  admin: "/admin",
+  addVolunteer: "/admin/addVolunteer",
+  admin: "/admin/list",
 };
 
 const Schemas = {
@@ -29,10 +28,6 @@ const Schemas = {
   initialHousehold: {
     form: "initialSurvey",
     version: "1.0.6",
-  },
-  addVolunteer: {
-    form: "initialSurvey",
-    version: "1.0.0",
   },
 };
 
