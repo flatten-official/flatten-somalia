@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import Home from "./home/Home";
 import Login from "./login/Login";
 import Loading from "./components/Loading";
-import AdminPanel from "./admin/AdminPanel";
 import { Routes, Surveys } from "../config";
 import { useDispatch, useSelector } from "react-redux";
 import { permissions } from "../backend/auth/authApi";
@@ -18,6 +17,7 @@ import {
 import SurveyPageFactory from "./surveys/SurveyPageFactory";
 import PrivatePage from "./components/PrivatePage";
 import VolunteerAddPage from "./admin/VolunteerAddPage";
+import AdminPanel from "./admin/AdminPanel";
 
 const AuthenticatedAppContent = () => {
   const getHomePageRoute = () => (
