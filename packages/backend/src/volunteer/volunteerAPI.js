@@ -64,7 +64,7 @@ async function changeVolunteerAccessById(updaterData, toUpdateId, giveAccess) {
   if (
     !volunteerToUpdate.permissionGroups.includes(Volunteer.PermissionGroups.dsu)
   )
-    throw new ApiError("Wrong permissions", 403);
+    throw new ApiError("Cannot edit permissions on a non-dsu volunteer.", 403);
 
   let newVolunteer;
 
