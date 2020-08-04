@@ -13,7 +13,7 @@
     "body": "Please click OK to continue."
   },
   "failedToConnectModal": {
-    "header": "Uh-oh!",
-    "body": "We failed to connect to the Flatten server's. Please try again."
+    "header": "Uh-oh! Failed to connect!",
+    "body": "Failed to connect to the Flatten's servers. Please try again."
   }
 }
