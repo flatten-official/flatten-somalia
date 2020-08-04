@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchVolunteerList,
-  changeVolunteerAccess,
+  changeAccess,
   FETCH_LIST_PENDING,
   FETCH_LIST_FAILED,
   VOLUNTEER_CHANGE_PENDING,
@@ -49,7 +49,7 @@ const getButtonCellFormatter = (dispatch, t) => (_, cell, __, ___) => {
     <Button
       variant={getVariant()}
       disabled={isDisabled()}
-      onClick={() => dispatch(changeVolunteerAccess(_id, !hasAccess))}
+      onClick={() => dispatch(changeAccess(_id, !hasAccess))}
     >
       {getContent()}
     </Button>

@@ -1,5 +1,4 @@
-import backend from "../api/backend";
-import flattenApi from "../api/api";
+import { listVolunteers, changeVolunteerAccess } from "./apiActions";
 
 export const FETCH_LIST_PENDING = "FETCH_LIST_PENDING";
 export const FETCH_LIST_SUCCESS = "FETCH_LIST_SUCCESS";
@@ -10,22 +9,19 @@ export const VOLUNTEER_CHANGE_FAILED = "VOLUNTEER_CHANGE_FAILED";
 
 export const fetchVolunteerList = () => async (dispatch) => {
   try {
-    const res = await backend.request(flattenApi.listVolunteers);
+    const res = await listVolunteers();
     dispatch({ type: FETCH_LIST_SUCCESS, payload: res.data });
   } catch (e) {
     dispatch({ type: FETCH_LIST_FAILED });
   }
 };
 
-export const changeVolunteerAccess = (volunteerId, newAccessStatus) => async (
+export const changeAccess = (volunteerId, newAccessStatus) => async (
   dispatch
 ) => {
   dispatch({ type: VOLUNTEER_CHANGE_PENDING, payload: { _id: volunteerId } });
   try {
-    const res = await backend.request({
-      ...flattenApi.changeVolunteerAccess,
-      data: { access: newAccessStatus, volunteerId },
-    });
+    const res = await changeVolunteerAccess(newAccessStatus, volunteerId);
 
     dispatch({
       type: VOLUNTEER_CHANGE_SUCCESS,
