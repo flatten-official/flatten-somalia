@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "../components/surveys/formio/Form";
 import formSchema from "../../forms/addVolunteerForm/form.json";
-import addVolunteer from "../../backend/volunteer/addVolunteer";
+import { addVolunteer } from "../../backend/volunteer/addVolunteer";
 
 const VolunteerAddPage = () => {
   const onSubmit = async (formIoData) => {

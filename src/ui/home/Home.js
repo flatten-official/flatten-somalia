@@ -47,7 +47,6 @@ HomeSurveyButton.propTypes = {
 const Home = () => {
   const { t } = useTranslation("Home");
   const authUser = useSelector((state) => state.auth.user);
-  const { t: tSurvey } = useTranslation("Surveys");
   const dispatch = useDispatch();
 
   const showAddVolunteers = useSelector(
@@ -81,10 +80,7 @@ const Home = () => {
       <HomeSurveyButton survey={Surveys.hospital} disabled={true} />
 
       {showAddVolunteers && (
-        <HomeButton
-          route={Routes.addVolunteer}
-          text={tSurvey(Surveys.addVolunteer.i18nTitleKey)}
-        />
+        <HomeButton route={Routes.addVolunteer} text={"Add Volunteers"} />
       )}
       {showAddVolunteers && (
         <HomeButton
