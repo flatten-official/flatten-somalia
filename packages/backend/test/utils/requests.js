@@ -2,26 +2,37 @@ const { addVolunteer } = require("../../src/volunteer/volunteerData");
 const { signToken } = require("../../src/utils/jwt");
 const supertest = require("supertest");
 const _ = require("lodash");
+const {
+  Permissions,
+  PermissionGroups,
+} = require("../../src/volunteer/volunteerData");
 
-const TEST_VOLUNTEER = {
-  name: "default_name",
-  email: "default_email@example.ca",
-  teamName: "testTeam",
-};
+// Ensures each email is unique by appending a incrementing counter to it
+let emailUniqueIndex = 5135; // Start at a large number to avoid collision
 
 /**
  * Most importantly returns an agent that stores cookies and can be used to call other endpoints with cookies
+ * @param app the superagent app to make requests
+ * @param permissions a list of permissions for the volunteer used during login
+ * @param volunteer fields for the volunteer used during login, overrides permissions parameter
  */
-const login = async (app, volunteer = {}) => {
+const login = async (
+  app,
+  permissions = [Permissions.submitForms, Permissions.access],
+  volunteer = {}
+) => {
   const agent = supertest.agent(app, {});
 
-  volunteer = _.defaults(
-    volunteer,
-    { email: "default_email2@example.ca" }, // Provide an email to not cause collisions if default is used in test
-    TEST_VOLUNTEER
-  );
+  volunteer = _.defaults(volunteer, {
+    name: "default_name",
+    email: `default_email-${emailUniqueIndex}@example.ca`,
+    teamName: "testTeam",
+    permissions,
+    permissionGroups: [PermissionGroups.dsu],
+  });
 
   volunteer = await addVolunteer(volunteer);
+  emailUniqueIndex++;
 
   const token = await signToken({ id: volunteer._id }, 10);
 
@@ -30,4 +41,4 @@ const login = async (app, volunteer = {}) => {
   return { agent, volunteer };
 };
 
-module.exports = { TEST_VOLUNTEER, login };
+module.exports = { login };

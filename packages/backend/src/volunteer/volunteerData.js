@@ -58,8 +58,7 @@ const Volunteer = createModel("Volunteer", {
         enum: Object.values(PermissionGroups),
       },
     ],
-    default: undefined, // this is to allow us to create a entry with no permissionGroup field (used in the tests)
-    required: false, // TODO set to true once everyone has it
+    required: true,
   },
   gender: String, // TODO Make enum
   addedBy: mongoose.ObjectId,
@@ -67,7 +66,7 @@ const Volunteer = createModel("Volunteer", {
 });
 
 const defaultVolunteer = {
-  permissions: [Permissions.submitForms],
+  permissions: [Permissions.submitForms, Permissions.access],
   permissionGroups: [PermissionGroups.dsu],
 };
 
@@ -121,7 +120,7 @@ module.exports = {
   Volunteer,
   addVolunteer,
   findVolunteerById,
-  volunteerRegex: volunteerRegexAsync,
+  volunteerRegexAsync,
   findVolunteerByEmail,
   getNextFriendlyId,
   Permissions,
