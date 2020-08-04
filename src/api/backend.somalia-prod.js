@@ -1,6 +1,1 @@
-import axios from "axios";
-
-export default axios.create({
-  baseURL: "https://api.flatten.org/",
-  withCredentials: true,
-});
+export default "https://api.flatten.org/";
