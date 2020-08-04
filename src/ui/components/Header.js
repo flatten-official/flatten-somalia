@@ -1,11 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Routes } from "../../config";
-import { Navbar, Nav, NavDropdown, Modal, Button } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, AUTH_SUCCESS } from "../../backend/auth/authActions";
-import { checkWillExpireSoon } from "../../backend/auth/authApi";
+import {
+  logout,
+  AUTH_AUTHENTICATED,
+  UNAUTHENTICATED_CONTEXT,
+} from "../../backend/auth/authActions";
 
 const LanguageDropDown = () => {
   const { t, i18n } = useTranslation("Navbar");
@@ -29,55 +32,25 @@ const LanguageDropDown = () => {
 
 const Links = () => {
   const { t } = useTranslation("Navbar");
-  const { auth } = useSelector((state) => state);
+  const authState = useSelector((state) => state.auth.state);
   const dispatch = useDispatch();
 
-  if (auth.status === AUTH_SUCCESS)
-    return (
-      <>
-        <LinkContainer to={Routes.home}>
-          <Nav.Link>{t("links.homepage")}</Nav.Link>
-        </LinkContainer>
-        <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
-          {t("links.logout")}
-        </Nav.Link>
-      </>
-    );
-  else
-    return (
-      <LinkContainer to={Routes.auth}>
-        <Nav.Link>{t("links.login")}</Nav.Link>
-      </LinkContainer>
-    );
-};
-
-const ExpireModal = () => {
-  const { t } = useTranslation("Navbar");
-  const excludeRoutes = [
-    Routes.initialHouseholdSurvey,
-    Routes.graveDiggerSurvey,
-    Routes.hospitalSurvey,
-    Routes.success,
-  ];
-  const show = useSelector(
-    (state) =>
-      !excludeRoutes.includes(state.router.location.pathname) &&
-      checkWillExpireSoon(state.auth)
-  );
-  const dispatch = useDispatch();
+  if (authState !== AUTH_AUTHENTICATED) return null;
 
   return (
-    <Modal show={show} backdrop="static" keyboard={false}>
-      <Modal.Header>
-        <Modal.Title>{t("expire.header")}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>{t("expire.body")}</Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={() => dispatch(logout())}>
-          {t("expire.ok")}
-        </Button>
-      </Modal.Footer>
-    </Modal>
+    <>
+      <LinkContainer to={Routes.home}>
+        <Nav.Link>{t("links.homepage")}</Nav.Link>
+      </LinkContainer>
+      <Nav.Link
+        className="ml-auto"
+        onClick={() =>
+          dispatch(logout(true, UNAUTHENTICATED_CONTEXT.userDecision))
+        }
+      >
+        {t("links.logout")}
+      </Nav.Link>
+    </>
   );
 };
 
@@ -96,7 +69,6 @@ const Header = () => {
         </Nav>
         <LanguageDropDown />
       </Navbar.Collapse>
-      <ExpireModal />
     </Navbar>
   );
 };

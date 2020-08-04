@@ -6,10 +6,15 @@ import { useTranslation } from "react-i18next";
 import Types from "./actionTypes";
 import PropTypes from "prop-types";
 import {
+  ConnectedStartSurvey,
   ConnectedConsent,
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
 import Success from "../components/surveys/Success";
+import {
+  logout,
+  UNAUTHENTICATED_CONTEXT,
+} from "../../backend/auth/authActions";
 
 /**
  * This function returns a survey page component.
@@ -34,24 +39,38 @@ const SurveyPageFactory = ({
       this.props.restartSurvey(); // Reset the form when the component is first loaded
     }
 
+    onNextPage = (info) => {
+      // Note: This if statement ensure timings won't update if a time already exists
+      // This ensures going back and forth between pages doesn't overwrite the time the person spent on a page initially
+      if (this.props.surveyData.pageTimings[info.page] === undefined)
+        this.props.recordPageTiming(info.page, Date.now());
+    };
+
     /**
-     * Calls the onSubmit callback and if no error is thrown redirects to submit page
+     * Submits the survey to the backend and if no error is thrown will then update the Redux store to notify that the survey was completed
      */
     submitHook = async (formIOData) => {
-      await onSubmit(this.props.surveyData, formIOData);
+      try {
+        await onSubmit(this.props.surveyData, formIOData);
+      } catch (e) {
+        // If error is 401, session is invalid so logout user
+        if (e.response && e.response.status === 401) this.props.logout();
+        else throw e;
+      }
       this.props.notifyCompleted();
     };
 
     render() {
-      const surveyData = this.props.surveyData;
+      const { surveyData } = this.props;
 
       // Although the surveyData is initialized in the constructor,
       // the props aren't updated till the second render and therefore, this.props.surveyData is null
       // on the first render
       if (!surveyData) return null;
 
-      if (options.getConsent && !surveyData.consent)
-        return <ConnectedConsent />;
+      if (!surveyData.started) return <ConnectedStartSurvey />;
+
+      if (!surveyData.consent) return <ConnectedConsent />;
 
       // Use undefined rather than "not" since if location is not found will set to null
       if (options.getLocation && surveyData.location === undefined)
@@ -67,6 +86,7 @@ const SurveyPageFactory = ({
             formioForm={formIOJSON}
             submitHook={this.submitHook}
             formioOptions={{ noAlerts: false }}
+            onNextPage={this.onNextPage}
           />
         );
 
@@ -78,6 +98,8 @@ const SurveyPageFactory = ({
     surveyData: PropTypes.object,
     notifyCompleted: PropTypes.func,
     restartSurvey: PropTypes.func,
+    recordPageTiming: PropTypes.func,
+    logout: PropTypes.func,
   };
 
   const mapStateToProps = (state) => ({
@@ -88,6 +110,9 @@ const SurveyPageFactory = ({
     restartSurvey: () =>
       dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
+    recordPageTiming: (pageNum, time) =>
+      dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
+    logout: () => dispatch(logout(false, UNAUTHENTICATED_CONTEXT.badCookie)),
   });
 
   const SurveyPageContentConnected = connect(

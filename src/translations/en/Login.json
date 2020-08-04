@@ -3,5 +3,17 @@
     "title": "Login"
   },
   "submittedEmailMessage": "If you are a volunteer, you have received an email with a link to login. If \nyou did not, please contact an administrator.",
-  "unauthorized": "Not authorized."
+  "unauthorized": "Not authorized.",
+  "badCookieModal": {
+    "header": "Uh-oh! Your session is invalid!",
+    "body": "This could happen if you or someone else is using your account on another browser."
+  },
+  "expireModal": {
+    "header": "Uh-oh! Your session has expired!",
+    "body": "Please click OK to continue."
+  },
+  "failedToConnectModal": {
+    "header": "Uh-oh! Failed to connect!",
+    "body": "Failed to connect to the Flatten's servers. Please try again."
+  }
 }

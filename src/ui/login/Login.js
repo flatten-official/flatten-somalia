@@ -1,23 +1,64 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import LoginForm from "./LoginForm";
-import { AUTH_SUCCESS } from "../../backend/auth/authActions";
-import { Redirect } from "react-router-dom";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Routes } from "../../config";
+import LoginSuccess from "./LoginSuccess";
+import backend from "../../backend/api/backend";
+import flattenApi from "../../backend/api/api";
+import Form from "../components/surveys/formio/Form";
+import LoginFormJson from "../../forms/Login.json";
+import Modal from "../components/Modal";
+import { useSelector } from "react-redux";
+import { UNAUTHENTICATED_CONTEXT } from "../../backend/auth/authActions";
+
+const WarningModal = () => {
+  const { t } = useTranslation("Login");
+
+  const context = useSelector((state) => state.auth.unauthenticatedContext);
+
+  switch (context) {
+    case UNAUTHENTICATED_CONTEXT.failedRequest:
+      return (
+        <Modal
+          header={t("failedToConnectModal.header")}
+          body={t("failedToConnectModal.body")}
+        />
+      );
+    case UNAUTHENTICATED_CONTEXT.badCookie:
+      return (
+        <Modal
+          header={t("badCookieModal.header")}
+          body={t("badCookieModal.body")}
+        />
+      );
+    case UNAUTHENTICATED_CONTEXT.expireSoon:
+      return (
+        <Modal header={t("expireModal.header")} body={t("expireModal.body")} />
+      );
+    case UNAUTHENTICATED_CONTEXT.initialPageLoad:
+    case UNAUTHENTICATED_CONTEXT.userDecision:
+    default:
+      return null;
+  }
+};
 
 const Login = () => {
   const { t } = useTranslation("Login");
-  const auth = useSelector((state) => state.auth);
-  return auth.status === AUTH_SUCCESS ? (
-    <Redirect to={Routes.home} />
-  ) : (
-    <div>
+  const [didSubmit, setDidSubmit] = useState(false);
+
+  if (didSubmit) return <LoginSuccess />;
+
+  const onSubmit = async (data) => {
+    await backend.request({ ...flattenApi.login, data: { email: data.email } });
+    setDidSubmit(true);
+  };
+
+  return (
+    <>
+      <WarningModal />
       <div className="panel-heading card-header"> {t("loginForm.title")} </div>
       <div className="panel-body card-body">
-        <LoginForm />
+        <Form formioForm={LoginFormJson} submitHook={onSubmit} />
       </div>
-    </div>
+    </>
   );
 };
 

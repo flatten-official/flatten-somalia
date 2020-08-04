@@ -10,13 +10,11 @@ import {
 
 export const Routes = {
   home: "/",
-  auth: "/login",
   initialHouseholdSurvey: "/surveys/initialHousehold",
   gravediggerSurvey: "/surveys/gravedigger",
   hospitalSurvey: "/surveys/hospital",
   addVolunteer: "/surveys/addVolunteer",
   admin: "/admin",
-  emailSubmitted: "/submitted-email",
 };
 
 const Schemas = {
@@ -30,7 +28,7 @@ const Schemas = {
   },
   initialHousehold: {
     form: "initialSurvey",
-    version: "1.0.4",
+    version: "1.0.6",
   },
   addVolunteer: {
     form: "initialSurvey",
@@ -40,6 +38,7 @@ const Schemas = {
 
 export const Surveys = {
   gravedigger: {
+    route: Routes.gravediggerSurvey,
     surveyKey: "graveDigger",
     i18nTitleKey: "graveDiggerTitle",
     api: api.graveDiggerSurvey,
@@ -53,6 +52,7 @@ export const Surveys = {
     },
   },
   hospital: {
+    route: Routes.hospitalSurvey,
     surveyKey: "hospital",
     i18nTitleKey: "hospitalTitle",
     api: api.hospitalSurvey,
@@ -66,11 +66,18 @@ export const Surveys = {
     },
   },
   initialHousehold: {
+    route: Routes.initialHouseholdSurvey,
     surveyKey: "initialHousehold",
     i18nTitleKey: "initialHouseholdTitle",
     api: api.volunteerForm,
     formIOJSON: initialHouseholdJSON,
-    onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold),
+    onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold, [
+      "basicinfo",
+      "people",
+      "deaths",
+      "socialsurveyquestions",
+      "followupconsent",
+    ]),
     options: {
       enableManualLocation: true,
     },
@@ -87,6 +94,6 @@ export const Surveys = {
     options: {
       getLocation: false,
       getConsent: false,
-    }
+    },
   },
 };

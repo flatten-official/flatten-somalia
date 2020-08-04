@@ -6,6 +6,11 @@ version  |  commit (optional)
 	* changes
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.0.5
+    * Backend schema changes (https://github.com/flatten-official/backend-so/pull/39)
+    * Use strict mode
+    * Fix metadata fields
+
 1.0.4
     * Add warning if user tries to navigate to another page while filling out form
     * Force user to log out before starting form if cookie will expire soon (within 70 min)

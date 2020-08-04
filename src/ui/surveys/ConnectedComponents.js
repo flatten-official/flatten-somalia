@@ -10,22 +10,41 @@
 import { connect } from "react-redux";
 import Types from "./actionTypes";
 import { ConsentModal } from "../components/surveys/ConsentModal";
+import { StartSurveyModal } from "../components/surveys/StartSurveyModal";
 import { LocationPicker } from "../components/surveys/location/LocationPicker";
 import { FollowUpId } from "../components/surveys/FollowUpId";
+import {
+  checkSessionExpiry,
+  fetchAuthState,
+  UNAUTHENTICATED_CONTEXT,
+} from "../../backend/auth/authActions";
 
 const mapDispatchToPropsConsent = (dispatch) => ({
   onConsent: () => {
     dispatch({ type: Types.NOTIFY_CONSENT_GIVEN });
-    /** TODO we're planning to build a more robust timing system that measures from before consent page.
-     * this will then need to be changed
-     */
+    dispatch({ type: Types.SET_CONSENT_TIME, payload: Date.now() });
+  },
+});
+
+const mapDispatchToPropsStartSurvey = (dispatch) => ({
+  onStartSurvey: () => {
+    // Verifies that user is still logged in and that the session won't expire soon before starting the survey.
+    // If the fetchAuthState request fails it won't log the user out
+    dispatch(
+      fetchAuthState(UNAUTHENTICATED_CONTEXT.badCookie, false)
+    ).then(() => dispatch(checkSessionExpiry(30)));
+
+    // Don't wait for authentication to finish before starting survey
+    dispatch({ type: Types.NOTIFY_STARTED });
     dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
   },
 });
 
 const mapDispatchToPropsLocationPicker = (dispatch) => ({
-  onLocationFound: (location) =>
-    dispatch({ type: Types.SET_LOCATION, payload: location }),
+  onLocationFound: (location) => {
+    dispatch({ type: Types.SET_LOCATION, payload: location });
+    dispatch({ type: Types.SET_LOCATION_TIME, payload: Date.now() });
+  },
 });
 
 const mapStateToPropsFollowUpId = (state) => ({
@@ -37,6 +56,11 @@ const mapDispatchToPropsFollowUpId = (dispatch) => ({
   setFollowUpId: (followUpId) =>
     dispatch({ type: Types.SET_FOLLOW_UP_ID, payload: followUpId }),
 });
+
+export const ConnectedStartSurvey = connect(
+  null,
+  mapDispatchToPropsStartSurvey
+)(StartSurveyModal);
 
 export const ConnectedConsent = connect(
   null,

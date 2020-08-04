@@ -3,5 +3,9 @@
     "title": "Gal"
   },
   "submittedEmailMessage": "Haddii aad tabaruce tahay, waxaad heshay iimayl leh xiriiriye galitaan. Hadaadan sameynin, fadlan la xiriir maamulaha.",
-  "unauthorized": "Lama ogola."
+  "unauthorized": "Lama ogola.",
+  "expireModal": {
+    "header": "Haah! waqtiga wuu kugu dhacay",
+    "body": "fadlan dhag sii OK si aad usii wado"
+  }
 }
