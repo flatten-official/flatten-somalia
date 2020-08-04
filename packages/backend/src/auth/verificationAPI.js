@@ -30,13 +30,15 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
 
   const token = await signToken({ id: volunteer._id }, EMAIL_EXPIRY);
 
+  log.debug(token); // Helpful when debugging in Postman
+
   const verificationLink =
     getConfig().urls.backendHost +
     getConfig().urls.emailLink +
     "?token=" +
     token;
 
-  log.debug(verificationLink);
+  log.debug(verificationLink); // Helpful when trying to logging when developing frontend
 
   await sendVerificationEmail(emailAddress, verificationLink);
 };

@@ -106,6 +106,12 @@ router.get(
  * @api {post} /volunteer/changeAccess Activate and deactivate volunteers
  * @apiName ChangeAccess
  * @apiGroup Volunteer
+ * @apiParamExample {json} Request-Example:
+ *                  body:
+ *                  {
+ *                    "volunteerId" : <volunteerId>,
+ *                    "access": <true or false>,
+ *                  }
  */
 router.post(
   "/volunteer/changeAccess",
