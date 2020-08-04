@@ -122,4 +122,22 @@ describe("endpoint POST /volunteer/changeAccess", () => {
       })
       .expect(400);
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it("should fail with 400 when trying to update your own permissions", async () => {
+    const { agent, volunteer } = await login(app, [
+      Permissions.manageVolunteers,
+      Permissions.access,
+    ]);
+
+    await addVolunteer(TEST_VOLUNTEER);
+
+    await agent
+      .post("/volunteer/changeAccess")
+      .send({
+        volunteerId: volunteer._id.toString(), // random id that does not exist
+        access: false,
+      })
+      .expect(400);
+  });
 });

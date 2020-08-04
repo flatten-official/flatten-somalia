@@ -50,6 +50,9 @@ const getVolunteerList = async () => {
  * @param giveAccess true or false, determines whether they should have access or not
  */
 async function changeVolunteerAccessById(updaterData, toUpdateId, giveAccess) {
+  if (updaterData._id.toString() === toUpdateId)
+    throw new ApiError("Can't update your own permissions", 400);
+
   const volunteerToUpdate = await Volunteer.findVolunteerById(toUpdateId);
 
   if (!volunteerToUpdate) {
