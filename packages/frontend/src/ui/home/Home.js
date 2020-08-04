@@ -46,12 +46,9 @@ HomeSurveyButton.propTypes = {
 
 const Home = () => {
   const { t } = useTranslation("Home");
+  const { t: tAdmin } = useTranslation("Admin");
   const authUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-
-  const showAddVolunteers = useSelector((state) =>
-    state.auth.user.permissions.includes(permissions.manageVolunteers)
-  );
 
   // On every render of the home page check the session expiry
   useEffect(() => {
@@ -79,8 +76,11 @@ const Home = () => {
       <HomeSurveyButton survey={Surveys.gravedigger} disabled={true} />
       <HomeSurveyButton survey={Surveys.hospital} disabled={true} />
 
-      {showAddVolunteers && (
-        <HomeButton route={Routes.addVolunteer} text={"Add Volunteers"} />
+      {authUser.permissions.includes(permissions.manageVolunteers) && (
+        <HomeButton
+          route={Routes.addVolunteer}
+          text={tAdmin("addVolunteerTitle")}
+        />
       )}
     </>
   );
