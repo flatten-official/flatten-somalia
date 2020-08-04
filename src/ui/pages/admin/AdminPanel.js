@@ -7,17 +7,17 @@ import {
   FETCH_LIST_FAILED,
   VOLUNTEER_CHANGE_PENDING,
   VOLUNTEER_CHANGE_FAILED,
-} from "../../backend/volunteer/volunteerActions";
+} from "./actions";
 import { Button } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
-import Loading from "../components/Loading";
+import Loading from "../../components/Loading";
 import { useTranslation } from "react-i18next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import Spinner from "react-bootstrap/Spinner";
-import { permissions } from "../../backend/auth/authApi";
+import { Permissions } from "../../../api/constants";
 const { SearchBar } = Search;
 
-const checkHasAccess = (cell) => cell.permissions.includes(permissions.access);
+const checkHasAccess = (cell) => cell.permissions.includes(Permissions.access);
 
 /**
  * The enable/disable button formatter

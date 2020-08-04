@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Routes, Surveys } from "../../config";
+import { Routes, Surveys } from "../../../config";
 import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import PropTypes from "prop-types";
-import { checkSessionExpiry } from "../../backend/auth/authActions";
-import { permissions } from "../../backend/auth/authApi";
+import { checkSessionExpiry } from "../../auth/authActions";
+import { Permissions } from "../../../api/constants";
 
 const HomeButton = ({ route, text, ...options }) => {
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ const Home = () => {
 
   const showAddVolunteers = useSelector(
     (state) =>
-      state.auth.user.permissions.indexOf(permissions.manageVolunteers) > -1
+      state.auth.user.permissions.indexOf(Permissions.manageVolunteers) > -1
   );
 
   // On every render of the home page check the session expiry

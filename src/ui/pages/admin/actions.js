@@ -1,4 +1,4 @@
-import endpoints from "../api/endpoints";
+import endpoints from "../../../api/endpoints";
 
 export const FETCH_LIST_PENDING = "FETCH_LIST_PENDING";
 export const FETCH_LIST_SUCCESS = "FETCH_LIST_SUCCESS";

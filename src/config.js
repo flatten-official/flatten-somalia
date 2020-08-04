@@ -1,11 +1,11 @@
-import endpoints from "./backend/api/endpoints";
-import graveDiggerSurveyJSON from "./forms/gravedigger/form.json";
-import hospitalSurveyJSON from "./forms/hospital/form.json";
-import initialHouseholdJSON from "./forms/initialHousehold/form.json";
+import endpoints from "./api/endpoints";
+import graveDiggerSurveyJSON from "./forms/surveys/gravedigger/form.json";
+import hospitalSurveyJSON from "./forms/surveys/hospital/form.json";
+import initialHouseholdJSON from "./forms/surveys/initialHousehold/form.json";
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
-} from "./backend/submission";
+} from "./ui/pages/surveys/submission";
 
 export const Routes = {
   home: "/",

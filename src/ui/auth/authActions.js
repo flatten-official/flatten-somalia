@@ -1,4 +1,4 @@
-import endpoints from "../api/endpoints";
+import endpoints from "../../api/endpoints";
 
 // states
 export const AUTH_UNINITIALISED = "AUTH_UNINITIALISED";

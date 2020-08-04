@@ -9,15 +9,15 @@
 
 import { connect } from "react-redux";
 import Types from "./actionTypes";
-import { ConsentModal } from "../components/surveys/ConsentModal";
-import { StartSurveyModal } from "../components/surveys/StartSurveyModal";
-import { LocationPicker } from "../components/surveys/location/LocationPicker";
-import { FollowUpId } from "../components/surveys/FollowUpId";
+import { ConsentModal } from "../../components/surveys/ConsentModal";
+import { StartSurveyModal } from "../../components/surveys/StartSurveyModal";
+import { LocationPicker } from "../../components/surveys/location/LocationPicker";
+import { FollowUpId } from "../../components/surveys/FollowUpId";
 import {
   checkSessionExpiry,
   fetchAuthState,
   UNAUTHENTICATED_CONTEXT,
-} from "../../backend/auth/authActions";
+} from "../../auth/authActions";
 
 const mapDispatchToPropsConsent = (dispatch) => ({
   onConsent: () => {

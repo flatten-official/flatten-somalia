@@ -1,4 +1,4 @@
-import endpoints from "./api/endpoints";
+import endpoints from "../../../api/endpoints";
 
 const getMetadata = (storeData, pageNames) => {
   const endTime = Date.now();

@@ -2,22 +2,22 @@ import React, { useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Home from "./home/Home";
-import Login from "./login/Login";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
 import Loading from "./components/Loading";
 import { Routes, Surveys } from "../config";
 import { useDispatch, useSelector } from "react-redux";
-import { permissions } from "../backend/auth/authApi";
 import {
   AUTH_AUTHENTICATED,
   AUTH_UNINITIALISED,
   fetchAuthState,
   UNAUTHENTICATED_CONTEXT,
-} from "../backend/auth/authActions";
-import SurveyPageFactory from "./surveys/SurveyPageFactory";
+} from "./auth/authActions";
+import SurveyPageFactory from "./pages/surveys/SurveyPageFactory";
 import PrivatePage from "./components/PrivatePage";
-import VolunteerAddPage from "./admin/VolunteerAddPage";
-import AdminPanel from "./admin/AdminPanel";
+import AddVolunteer from "./pages/admin/AddVolunteer";
+import AdminPanel from "./pages/admin/AdminPanel";
+import { Permissions } from "../api/constants";
 
 const AuthenticatedAppContent = () => {
   const getHomePageRoute = () => (
@@ -25,7 +25,7 @@ const AuthenticatedAppContent = () => {
       exact
       path={Routes.home}
       render={() => (
-        <PrivatePage requiredPermission={permissions.submitForms} comp={Home} />
+        <PrivatePage requiredPermission={Permissions.submitForms} comp={Home} />
       )}
     />
   );
@@ -44,7 +44,7 @@ const AuthenticatedAppContent = () => {
     makePrivateRoute(
       survey.route,
       SurveyPageFactory(survey),
-      permissions.submitForms
+      Permissions.submitForms
     );
 
   return (
@@ -56,13 +56,13 @@ const AuthenticatedAppContent = () => {
         {makeSurveyRoute(Surveys.hospital)}
         {makePrivateRoute(
           Routes.addVolunteer,
-          VolunteerAddPage,
-          permissions.manageVolunteers
+          AddVolunteer,
+          Permissions.manageVolunteers
         )}
         {makePrivateRoute(
           Routes.admin,
           AdminPanel,
-          permissions.manageVolunteers
+          Permissions.manageVolunteers
         )}
 
         <Redirect from="*" to={Routes.home} />

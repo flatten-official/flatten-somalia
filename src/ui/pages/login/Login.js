@@ -1,12 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import LoginSuccess from "./LoginSuccess";
-import endpoints from "../../backend/api/endpoints";
-import Form from "../components/surveys/formio/Form";
-import LoginFormJson from "../../forms/Login.json";
-import Modal from "../components/Modal";
+import endpoints from "../../../api/endpoints";
+import Form from "../../components/formio/Form";
+import LoginFormJson from "../../../forms/others/Login.json";
+import Modal from "../../components/Modal";
 import { useSelector } from "react-redux";
-import { UNAUTHENTICATED_CONTEXT } from "../../backend/auth/authActions";
+import { UNAUTHENTICATED_CONTEXT } from "../../auth/authActions";
 
 const WarningModal = () => {
   const { t } = useTranslation("Login");

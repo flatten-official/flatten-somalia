@@ -1,4 +1,4 @@
-import Form from "../components/surveys/formio/Form";
+import Form from "../../components/formio/Form";
 import React, { useEffect } from "react";
 import { Prompt } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
@@ -10,10 +10,7 @@ import {
   ConnectedConsent,
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
-import {
-  logout,
-  UNAUTHENTICATED_CONTEXT,
-} from "../../backend/auth/authActions";
+import { logout, UNAUTHENTICATED_CONTEXT } from "../../auth/authActions";
 
 /**
  * This function returns a survey page component.

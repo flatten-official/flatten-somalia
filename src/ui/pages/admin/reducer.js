@@ -5,7 +5,7 @@ import {
   VOLUNTEER_CHANGE_PENDING,
   VOLUNTEER_CHANGE_SUCCESS,
   VOLUNTEER_CHANGE_FAILED,
-} from "./volunteerActions";
+} from "./actions";
 import update from "immutability-helper";
 
 /**
@@ -25,10 +25,7 @@ const updateVolunteerStatusById = (state, action) => {
   return update(state, { list: { [updateIndex]: operation } });
 };
 
-const volunteerReducer = (
-  state = { listStatus: FETCH_LIST_PENDING },
-  action
-) => {
+const reducer = (state = { listStatus: FETCH_LIST_PENDING }, action) => {
   switch (action.type) {
     case FETCH_LIST_SUCCESS:
       return { ...state, listStatus: FETCH_LIST_SUCCESS, list: action.payload };
@@ -44,4 +41,4 @@ const volunteerReducer = (
   }
 };
 
-export default volunteerReducer;
+export default reducer;
