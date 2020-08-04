@@ -12,7 +12,7 @@ import {
   AUTH_UNINITIALISED,
   fetchAuthState,
   UNAUTHENTICATED_CONTEXT,
-} from "./auth/authActions";
+} from "./auth/actions";
 import SurveyPageFactory from "./pages/surveys/SurveyPageFactory";
 import PrivatePage from "./components/PrivatePage";
 import AddVolunteer from "./pages/admin/AddVolunteer";

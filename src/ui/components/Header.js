@@ -8,7 +8,7 @@ import {
   logout,
   AUTH_AUTHENTICATED,
   UNAUTHENTICATED_CONTEXT,
-} from "../auth/authActions";
+} from "../auth/actions";
 
 const LanguageDropDown = () => {
   const { t, i18n } = useTranslation("Navbar");

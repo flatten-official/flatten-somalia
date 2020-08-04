@@ -17,7 +17,7 @@ import {
   checkSessionExpiry,
   fetchAuthState,
   UNAUTHENTICATED_CONTEXT,
-} from "../../auth/authActions";
+} from "../../auth/actions";
 
 const mapDispatchToPropsConsent = (dispatch) => ({
   onConsent: () => {

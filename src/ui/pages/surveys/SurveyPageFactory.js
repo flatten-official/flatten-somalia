@@ -10,7 +10,7 @@ import {
   ConnectedConsent,
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
-import { logout, UNAUTHENTICATED_CONTEXT } from "../../auth/authActions";
+import { logout, UNAUTHENTICATED_CONTEXT } from "../../auth/actions";
 
 /**
  * This function returns a survey page component.
