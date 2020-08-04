@@ -5,39 +5,68 @@ import {
   changeVolunteerAccess,
   FETCH_LIST_PENDING,
   FETCH_LIST_FAILED,
+  VOLUNTEER_CHANGE_PENDING,
+  VOLUNTEER_CHANGE_FAILED,
 } from "../../backend/volunteer/volunteerActions";
 import { Button } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Loading from "../components/Loading";
 import { useTranslation } from "react-i18next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import Spinner from "react-bootstrap/Spinner";
+import { permissions } from "../../backend/auth/authApi";
 const { SearchBar } = Search;
+
+const checkHasAccess = (cell) => cell.permissions.includes(permissions.access);
+
+/**
+ * The enable/disable button, not actually a react component but rather a formatter function
+ */
+const ButtonCell = (dispatch, t) => (_, cell, __, ___) => {
+  const hasAccess = checkHasAccess(cell);
+  const { _id, status } = cell;
+
+  const getVariant = () => {
+    if (status === VOLUNTEER_CHANGE_FAILED) return "danger";
+    if (hasAccess) return "warning";
+    return "primary";
+  };
+
+  const isDisabled = () => {
+    // todo - check that the volunteer doesnt update themselves
+    return status === VOLUNTEER_CHANGE_FAILED;
+  };
+
+  const getContent = () => {
+    if (status === VOLUNTEER_CHANGE_FAILED) return t("failed");
+    if (status === VOLUNTEER_CHANGE_PENDING)
+      return <Spinner animation="border" />;
+    if (hasAccess) return t("disable");
+    return t("enable");
+  };
+
+  return (
+    <Button
+      variant={getVariant()}
+      disabled={isDisabled()}
+      onClick={() => dispatch(changeVolunteerAccess(_id, !hasAccess))}
+    >
+      {getContent()}
+    </Button>
+  );
+};
+
+/**
+ * returns either a check mark or a cross
+ */
+const formatAsCheckMark = (_, cell, __, ___) =>
+  checkHasAccess(cell) ? <>&#10004;</> : <>&#10006;</>;
 
 const AdminPanelContent = () => {
   const { t } = useTranslation("AdminPanel");
   const volunteer = useSelector((state) => state.volunteer);
   const dispatch = useDispatch();
 
-  const checkHasAccess = (cell) => cell.permissions.indexOf("access") !== -1;
-
-  const hasAccessFormatter = (_, cell, __, ___) => (
-    <FontAwesomeIcon icon={checkHasAccess(cell) ? faCheck : faTimes} />
-  );
-
-  const accessButtonFormatter = (_, cell, __, ___) => {
-    const hasAccess = checkHasAccess(cell);
-    return (
-      // todo - check that the volunteer doesnt update themselves!
-      <Button
-        variant={hasAccess ? "warning" : "primary"}
-        onClick={() => dispatch(changeVolunteerAccess(cell._id, !hasAccess))}
-      >
-        {t(hasAccess ? "disable" : "enable")}
-      </Button>
-    );
-  };
   const columns = [
     { dataField: "name", text: t("table.name") },
     { dataField: "email", text: t("table.email") },
@@ -46,7 +75,7 @@ const AdminPanelContent = () => {
       text: t("table.status"),
       isDummyField: true,
       csvExport: false,
-      formatter: hasAccessFormatter,
+      formatter: formatAsCheckMark,
       formatExtraData: volunteer,
     },
     {
@@ -54,7 +83,7 @@ const AdminPanelContent = () => {
       text: t("table.statusButtons"),
       isDummyField: true,
       csvExport: false,
-      formatter: accessButtonFormatter,
+      formatter: ButtonCell(dispatch, t),
       formatExtraData: volunteer,
     },
   ];
