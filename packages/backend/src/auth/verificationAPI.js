@@ -38,7 +38,7 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
     "?token=" +
     token;
 
-  log.debug(verificationLink); // Helpful when trying to logging when developing frontend
+  log.debug(verificationLink); // Helpful when trying to log in when developing frontend
 
   await sendVerificationEmail(emailAddress, verificationLink);
 };
