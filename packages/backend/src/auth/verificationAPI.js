@@ -1,6 +1,9 @@
 const { calculateExpiryTime } = require("../utils/time");
 const { writeCookie } = require("./cookieData");
-const { findVolunteerByEmail } = require("../volunteer/volunteerData");
+const {
+  findVolunteerByEmail,
+  Permissions,
+} = require("../volunteer/volunteerData");
 const { verifyToken, signToken } = require("../utils/jwt");
 const { sendVerificationEmail } = require("../utils/sendGrid");
 const { getConfig } = require("util-config");
@@ -16,6 +19,13 @@ module.exports.verifyLoginAndSendEmail = async (emailAddress) => {
   if (!volunteer) {
     log.warning(`Invalid email: ${emailAddress}`);
     return; // Don't throw an API Error to not let user know if email was invalid to not allow guessing emails
+  }
+
+  if (!volunteer.permissions.includes(Permissions.access)) {
+    log.warning(
+      `Volunteer (${emailAddress}) without access permission tried logging into system.`
+    );
+    return; // Don't throw an API Error to not let user know he doesn't have access to not allow guessing emails
   }
 
   const token = await signToken({ id: volunteer._id }, EMAIL_EXPIRY);

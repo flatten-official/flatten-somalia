@@ -4,9 +4,10 @@ const { log } = require("util-logging");
 const { ApiError } = require("../utils/errors");
 
 async function addVolunteerAndAuthenticate(addedByData, newVolunteerData) {
-  const permissions = newVolunteerData.permSubmitForms
-    ? [Permissions.submitForms]
-    : [];
+  const permissions = [Permissions.access];
+
+  if (newVolunteerData.permSubmitForms)
+    permissions.push(Permissions.submitForms);
 
   const volunteer = {
     name: newVolunteerData.name,

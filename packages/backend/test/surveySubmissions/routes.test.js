@@ -6,6 +6,8 @@ const { login } = require("../utils/requests");
 
 const GravediggerSurveySubmission = require("../../src/surveys/gravedigger/submissionData");
 const HospitalSurveySubmission = require("../../src/surveys/hospital/submissionData");
+const { getAllPermissionsExcept } = require("../utils/permissions");
+const { Permissions } = require("../../src/volunteer/volunteerData");
 
 const testData = {
   gravediggerRequestBody: {
@@ -133,9 +135,23 @@ describe("submissions:", () => {
     });
 
     it("should fail for a user without the right permissions", async () => {
-      const { agent } = await login(app, { permissions: [] });
+      // create two agents each one missing one of the permissions
+      const { agent: agentAccess } = await login(
+        app,
+        getAllPermissionsExcept(Permissions.access)
+      );
 
-      await agent
+      const { agent: agentSubmitForms } = await login(
+        app,
+        getAllPermissionsExcept(Permissions.submitForms)
+      );
+
+      await agentAccess
+        .post("/survey/gravedigger")
+        .send(testData.gravediggerRequestBody)
+        .expect(403);
+
+      await agentSubmitForms
         .post("/survey/gravedigger")
         .send(testData.gravediggerRequestBody)
         .expect(403);
@@ -174,9 +190,23 @@ describe("submissions:", () => {
     });
 
     it("should fail for a user without the right permissions", async () => {
-      const { agent } = await login(app, { permissions: [] });
+      // create two agents each one missing one of the permissions
+      const { agent: agentAccess } = await login(
+        app,
+        getAllPermissionsExcept(Permissions.access)
+      );
 
-      await agent
+      const { agent: agentSubmitForms } = await login(
+        app,
+        getAllPermissionsExcept(Permissions.submitForms)
+      );
+
+      await agentAccess
+        .post("/survey/hospital")
+        .send(testData.hospitalRequestBody)
+        .expect(403);
+
+      await agentSubmitForms
         .post("/survey/hospital")
         .send(testData.hospitalRequestBody)
         .expect(403);
