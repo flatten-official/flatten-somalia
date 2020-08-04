@@ -86,10 +86,7 @@ const Home = () => {
         />
       )}
       {hasManageVolunteerPermission && (
-        <HomeButton
-          route={Routes.admin}
-          text="Administrate Volunteers" /* TODO use translation */
-        />
+        <HomeButton route={Routes.admin} text={tAdmin("managementTitle")} />
       )}
     </>
   );
