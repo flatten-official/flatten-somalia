@@ -7,12 +7,12 @@ import {
   VOLUNTEER_CHANGE_FAILED,
 } from "./volunteerActions";
 import update from "immutability-helper";
-import { permissions } from "../auth/authApi";
 
 /**
  * Updates the state of a single volunteer in the list
  */
 const updateVolunteerStatusById = (state, action) => {
+  console.log(action);
   // todo - handle errors
   if (!action.payload || !action.payload._id)
     throw new Error("No id specified in VOLUNTEER_CHANGE action payload");
@@ -24,7 +24,9 @@ const updateVolunteerStatusById = (state, action) => {
 
   // set permissions if applicable
   if (action.payload.permissions)
-    operation[permissions] = { $set: action.payload.permissions };
+    operation.permissions = { $set: action.payload.permissions };
+
+  console.log(operation);
 
   // returned the mutated state using the operation
   return update(state, { list: { [updateIndex]: operation } });
