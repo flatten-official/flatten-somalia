@@ -4,10 +4,5 @@
     "logout": "LOG OUT",
     "homepage": "HOME"
   },
-  "language": "LANGUAGE",
-  "expire": {
-    "header": "Uh-oh! Your session has expired!",
-    "body": "Please click OK to continue",
-    "ok": "OK"
-  }
+  "language": "LANGUAGE"
 }

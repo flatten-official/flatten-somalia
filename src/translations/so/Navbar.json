@@ -4,10 +4,5 @@
     "logout": "KABAX",
     "homepage": "BOGGA-HOYGA"
   },
-  "language": "LUQAD",
-  "expire": {
-    "header": "Haah! waqtiga wuu kugu dhacay",
-    "body": "fadlan dhag sii OK si aad usii wado",
-    "ok": "OK"
-  }
+  "language": "LUQAD"
 }

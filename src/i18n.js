@@ -85,6 +85,7 @@ i18n
   .init({
     resources,
     debug: process.env.NODE_ENV === "development",
+    fallbackLng: "en",
   });
 
 export default i18n;

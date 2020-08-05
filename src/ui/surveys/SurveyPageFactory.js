@@ -11,6 +11,10 @@ import {
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
 import Success from "../components/surveys/Success";
+import {
+  logout,
+  UNAUTHENTICATED_CONTEXT,
+} from "../../backend/auth/authActions";
 
 /**
  * This function returns a survey page component.
@@ -46,7 +50,13 @@ const SurveyPageFactory = ({
      * Submits the survey to the backend and if no error is thrown will then update the Redux store to notify that the survey was completed
      */
     submitHook = async (formIOData) => {
-      await onSubmit(this.props.surveyData, formIOData);
+      try {
+        await onSubmit(this.props.surveyData, formIOData);
+      } catch (e) {
+        // If error is 401, session is invalid so logout user
+        if (e.response && e.response.status === 401) this.props.logout();
+        else throw e;
+      }
       this.props.notifyCompleted();
     };
 
@@ -89,6 +99,7 @@ const SurveyPageFactory = ({
     notifyCompleted: PropTypes.func,
     restartSurvey: PropTypes.func,
     recordPageTiming: PropTypes.func,
+    logout: PropTypes.func,
   };
 
   const mapStateToProps = (state) => ({
@@ -101,6 +112,7 @@ const SurveyPageFactory = ({
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
+    logout: () => dispatch(logout(false, UNAUTHENTICATED_CONTEXT.badCookie)),
   });
 
   const SurveyPageContentConnected = connect(

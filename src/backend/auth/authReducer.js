@@ -11,7 +11,12 @@ const authReducer = (state = { state: AUTH_UNINITIALISED }, action) => {
     case SET_AUTHENTICATED:
       return { ...state, state: AUTH_AUTHENTICATED, user: action.payload };
     case SET_UNAUTHENTICATED:
-      return { ...state, state: AUTH_UNAUTHENTICATED, user: undefined };
+      return {
+        ...state,
+        state: AUTH_UNAUTHENTICATED,
+        user: undefined,
+        unauthenticatedContext: action.payload,
+      };
     default:
       return state;
   }

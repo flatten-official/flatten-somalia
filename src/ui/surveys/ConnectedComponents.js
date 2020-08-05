@@ -13,6 +13,11 @@ import { ConsentModal } from "../components/surveys/ConsentModal";
 import { StartSurveyModal } from "../components/surveys/StartSurveyModal";
 import { LocationPicker } from "../components/surveys/location/LocationPicker";
 import { FollowUpId } from "../components/surveys/FollowUpId";
+import {
+  checkSessionExpiry,
+  fetchAuthState,
+  UNAUTHENTICATED_CONTEXT,
+} from "../../backend/auth/authActions";
 
 const mapDispatchToPropsConsent = (dispatch) => ({
   onConsent: () => {
@@ -23,6 +28,13 @@ const mapDispatchToPropsConsent = (dispatch) => ({
 
 const mapDispatchToPropsStartSurvey = (dispatch) => ({
   onStartSurvey: () => {
+    // Verifies that user is still logged in and that the session won't expire soon before starting the survey.
+    // If the fetchAuthState request fails it won't log the user out
+    dispatch(
+      fetchAuthState(UNAUTHENTICATED_CONTEXT.badCookie, false)
+    ).then(() => dispatch(checkSessionExpiry(30)));
+
+    // Don't wait for authentication to finish before starting survey
     dispatch({ type: Types.NOTIFY_STARTED });
     dispatch({ type: Types.SET_START_TIME, payload: Date.now() });
   },

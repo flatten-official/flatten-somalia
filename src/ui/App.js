@@ -12,6 +12,7 @@ import {
   AUTH_AUTHENTICATED,
   AUTH_UNINITIALISED,
   fetchAuthState,
+  UNAUTHENTICATED_CONTEXT,
 } from "../backend/auth/authActions";
 import SurveyPageFactory from "./surveys/SurveyPageFactory";
 import PrivatePage from "./components/PrivatePage";
@@ -58,9 +59,9 @@ const AppContent = () => {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth.state);
 
-  // On first load, get the app state
+  // On first load, get the auth state
   useEffect(() => {
-    dispatch(fetchAuthState());
+    dispatch(fetchAuthState(UNAUTHENTICATED_CONTEXT.initialPageLoad, true));
   }, [dispatch]);
 
   switch (authState) {
