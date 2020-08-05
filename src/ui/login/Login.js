@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import LoginSuccess from "./LoginSuccess";
 import backend from "../../backend/api/backend";
@@ -42,13 +42,9 @@ const WarningModal = () => {
 
 const Login = () => {
   const { t } = useTranslation("Login");
-  const [didSubmit, setDidSubmit] = useState(false);
-
-  if (didSubmit) return <LoginSuccess />;
 
   const onSubmit = async (data) => {
     await backend.request({ ...flattenApi.login, data: { email: data.email } });
-    setDidSubmit(true);
   };
 
   return (
@@ -56,7 +52,11 @@ const Login = () => {
       <WarningModal />
       <div className="panel-heading card-header"> {t("loginForm.title")} </div>
       <div className="panel-body card-body">
-        <Form formioForm={LoginFormJson} submitHook={onSubmit} />
+        <Form
+          formioForm={LoginFormJson}
+          submitHook={onSubmit}
+          SuccessPage={LoginSuccess}
+        />
       </div>
     </>
   );

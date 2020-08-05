@@ -28,18 +28,22 @@ const AuthenticatedAppContent = () => {
     />
   );
 
-  const makeSurveyRoute = (survey) => (
+  const makePrivateRoute = (path, comp, requiredPermission) => (
     <Route
       exact
-      path={survey.route}
+      path={path}
       render={() => (
-        <PrivatePage
-          comp={SurveyPageFactory(survey)}
-          requiredPermission={permissions.submitForms}
-        />
+        <PrivatePage comp={comp} requiredPermission={requiredPermission} />
       )}
     />
   );
+
+  const makeSurveyRoute = (survey) =>
+    makePrivateRoute(
+      survey.route,
+      SurveyPageFactory(survey),
+      permissions.submitForms
+    );
 
   return (
     <div className="container" id="main">
