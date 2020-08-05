@@ -12,6 +12,7 @@ export const Routes = {
   initialHouseholdSurvey: "/surveys/initialHousehold",
   gravediggerSurvey: "/surveys/gravedigger",
   hospitalSurvey: "/surveys/hospital",
+  addVolunteer: "/admin/addVolunteer",
 };
 
 const Schemas = {
