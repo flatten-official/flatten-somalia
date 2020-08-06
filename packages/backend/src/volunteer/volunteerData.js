@@ -116,13 +116,37 @@ const findVolunteerByEmail = async (email) => {
   return emails[0] ? emails[0] : null;
 };
 
+const getVolunteers = () => Volunteer.find().exec();
+
+const addPermission = async (permissionToAdd, volunteerToUpdate) => {
+  if (!volunteerToUpdate.permissions.includes(permissionToAdd)) {
+    volunteerToUpdate.permissions.push(permissionToAdd);
+    await volunteerToUpdate.save();
+  }
+  return volunteerToUpdate;
+};
+
+const removePermission = async (permissionToRemove, volunteerToUpdate) => {
+  if (volunteerToUpdate.permissions.includes(permissionToRemove)) {
+    volunteerToUpdate.permissions = volunteerToUpdate.permissions.filter(
+      (p) => p !== permissionToRemove
+    );
+    await volunteerToUpdate.save();
+  }
+
+  return volunteerToUpdate;
+};
+
 module.exports = {
   Volunteer,
   addVolunteer,
   findVolunteerById,
   volunteerRegexAsync,
   findVolunteerByEmail,
+  getVolunteers,
   getNextFriendlyId,
   Permissions,
   PermissionGroups,
+  addPermission,
+  removePermission,
 };

@@ -10,6 +10,8 @@ const submitInitialRoute = require("./surveys/initialHousehold/submissionRoute")
 const submitGravediggerRoute = require("./surveys/gravedigger/submissionRoute");
 const submitHospitalRoute = require("./surveys/hospital/submissionRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
+const listVolunteersRoute = require("./volunteer/listVolunteersRoute");
+const changeAccessRoute = require("./volunteer/changeAccessRoute");
 const rootRoute = require("./utils/express/root");
 const surveyErrorHandler = require("./surveys/surveyErrorHandler");
 
@@ -87,6 +89,34 @@ router.post(
   "/volunteer",
   protectedMiddleware([Permissions.manageVolunteers]),
   addVolunteerRoute
+);
+
+/**
+ * @api {get} /volunteer/list List volunteers
+ * @apiName ListVolunteers
+ * @apiGroup Volunteer
+ */
+router.get(
+  "/volunteer/list",
+  protectedMiddleware([Permissions.manageVolunteers]),
+  listVolunteersRoute
+);
+
+/**
+ * @api {post} /volunteer/changeAccess Activate and deactivate volunteers
+ * @apiName ChangeAccess
+ * @apiGroup Volunteer
+ * @apiParamExample {json} Request-Example:
+ *                  body:
+ *                  {
+ *                    "volunteerId" : <volunteerId>,
+ *                    "access": <true or false>,
+ *                  }
+ */
+router.post(
+  "/volunteer/changeAccess",
+  protectedMiddleware([Permissions.manageVolunteers]),
+  changeAccessRoute
 );
 
 /**
