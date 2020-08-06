@@ -16,6 +16,11 @@ const Cookie = mongoose.model(
   })
 );
 
+/**
+ * Ends the volunteer's sessions by deleting all their cookies.
+ * @param volunteerId
+ * @return the number of cookies deleted
+ */
 async function deleteCookieForVolunteer(volunteerId) {
   const result = await Cookie.deleteMany({ volunteerId });
   return result.n;
