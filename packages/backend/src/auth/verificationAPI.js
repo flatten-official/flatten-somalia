@@ -1,5 +1,5 @@
 const { calculateExpiryTime } = require("../utils/time");
-const { writeCookie } = require("./cookieData");
+const { writeCookie, deleteCookiesForVolunteer } = require("./cookieData");
 const {
   findVolunteerByEmail,
   Permissions,
@@ -57,6 +57,12 @@ module.exports.verifyTokenAndMakeCookie = async (tokenValue) => {
       401
     );
   }
+
+  const deletedCookiesCount = await deleteCookiesForVolunteer(payload.id); // Delete any previous cookies for the volunteer effectively logging them out on other devices
+  if (deletedCookiesCount > 0)
+    log.info(
+      `Volunteer ${payload.id} was logged out of ${deletedCookiesCount} browser(s).`
+    );
 
   const expiry = calculateExpiryTime(COOKIE_LIFE);
   return { id: await writeCookie(expiry, payload.id), expiry };
