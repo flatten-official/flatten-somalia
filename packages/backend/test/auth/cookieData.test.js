@@ -99,10 +99,10 @@ describe("cookie database functions", () => {
 
     expect(await cookieData.Cookie.find()).toHaveLength(3);
 
-    await cookieData.deleteCookieForVolunteer(firstVolunteerId);
+    await cookieData.deleteCookiesForVolunteer(firstVolunteerId);
     expect(await cookieData.Cookie.find()).toHaveLength(1);
 
-    await cookieData.deleteCookieForVolunteer(secondVolunteerId);
+    await cookieData.deleteCookiesForVolunteer(secondVolunteerId);
     expect(await cookieData.Cookie.find()).toHaveLength(0);
   });
 });

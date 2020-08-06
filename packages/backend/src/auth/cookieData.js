@@ -21,7 +21,7 @@ const Cookie = mongoose.model(
  * @param volunteerId
  * @return the number of cookies deleted
  */
-async function deleteCookieForVolunteer(volunteerId) {
+async function deleteCookiesForVolunteer(volunteerId) {
   const result = await Cookie.deleteMany({ volunteerId });
   return result.n;
 }
@@ -84,5 +84,5 @@ module.exports = {
   removedExpiredCookies,
   deleteCookie,
   findCookiesByVolunteerEmail,
-  deleteCookieForVolunteer,
+  deleteCookiesForVolunteer,
 };
