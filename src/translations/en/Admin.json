@@ -3,6 +3,7 @@
   "managementTitle": "Volunteer Management",
   "enable": "Enable",
   "disable": "Disable",
+  "failed": "Failed",
   "table": {
     "name": "Volunteer Name",
     "email": "Volunteer Email",

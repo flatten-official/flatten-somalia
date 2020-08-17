@@ -3,6 +3,7 @@
   "managementTitle": "Jago maamul",
   "enable": "Awoodsiin/Awooda",
   "disable": "Curyaan/Aan awoodin/Awood ka qaadis",
+  "failed": "Waad ku guuldareesatay",
   "table": {
     "name": "Magaca tabarucaha",
     "email": "Emailka tabarucaha",
