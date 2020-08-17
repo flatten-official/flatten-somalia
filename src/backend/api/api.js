@@ -6,4 +6,6 @@ export default {
   addVolunteer: { method: "POST", url: "/volunteer" },
   graveDiggerSurvey: { method: "POST", url: "/survey/gravedigger" },
   hospitalSurvey: { method: "POST", url: "/survey/hospital" },
+  listVolunteers: { method: "GET", url: "/volunteer/list" },
+  changeVolunteerAccess: { method: "POST", url: "/volunteer/changeAccess" },
 };

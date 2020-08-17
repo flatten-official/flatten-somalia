@@ -59,6 +59,7 @@ const Home = () => {
     permissions.manageVolunteers
   );
 
+  // TODO formSelectionPrompt is now above more than just forms
   return (
     <>
       <h3 className="homePageTitle">
@@ -84,6 +85,9 @@ const Home = () => {
           route={Routes.addVolunteer}
           text={tAdmin("addVolunteerTitle")}
         />
+      )}
+      {hasManageVolunteerPermission && (
+        <HomeButton route={Routes.admin} text={tAdmin("managementTitle")} />
       )}
     </>
   );

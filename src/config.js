@@ -13,6 +13,7 @@ export const Routes = {
   gravediggerSurvey: "/surveys/gravedigger",
   hospitalSurvey: "/surveys/hospital",
   addVolunteer: "/admin/addVolunteer",
+  admin: "/admin/list",
 };
 
 const Schemas = {

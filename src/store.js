@@ -5,6 +5,7 @@ import { createBrowserHistory } from "history";
 import authReducer from "./backend/auth/authReducer";
 import { form, forms, submission, submissions } from "react-formio";
 import surveyReducer from "./ui/surveys/reducer";
+import volunteerReducer from "./backend/volunteer/volunteerReducer";
 
 export const history = createBrowserHistory();
 
@@ -29,6 +30,7 @@ export default createStore(
     forms: forms({ name: "forms", query: { type: "form", tags: "common" } }),
     submission: submission({ name: "submission" }),
     submissions: submissions({ name: "submissions" }),
+    volunteer: volunteerReducer,
   }),
   {},
   composedEnhancers
