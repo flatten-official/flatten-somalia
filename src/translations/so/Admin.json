@@ -1,1 +1,12 @@
-{}
+{
+  "addVolunteerTitle": "Ku darid tabaruce cusub",
+  "managementTitle": "Jago maamul",
+  "enable": "Awoodsiin/Awooda",
+  "disable": "Curyaan/Aan awoodin/Awood ka qaadis",
+  "table": {
+    "name": "Magaca tabarucaha",
+    "email": "Emailka tabarucaha",
+    "status": "Xaalada tabarucaha",
+    "statusButtons": "Awoodsiin/Awood kaqaadis tabruce"
+  }
+}
