@@ -15,7 +15,7 @@ import {
 } from "./auth/actions";
 import SurveyPageFactory from "./pages/surveys/SurveyPageFactory";
 import PrivatePage from "./components/PrivatePage";
-import AddVolunteer from "./pages/admin/AddVolunteer";
+import AddVolunteerPage from "./pages/admin/AddVolunteerPage";
 import AdminPanel from "./pages/admin/AdminPanel";
 import { Permissions } from "../api/constants";
 
@@ -56,7 +56,7 @@ const AuthenticatedAppContent = () => {
         {makeSurveyRoute(Surveys.hospital)}
         {makePrivateRoute(
           Routes.addVolunteer,
-          AddVolunteer,
+          AddVolunteerPage,
           Permissions.manageVolunteers
         )}
         {makePrivateRoute(

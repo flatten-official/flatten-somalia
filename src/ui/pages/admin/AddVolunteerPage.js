@@ -4,7 +4,7 @@ import formSchema from "../../../formDefinitions/others/addVolunteer.json";
 import endpoints from "../../../api/endpoints";
 import { useTranslation } from "react-i18next";
 
-const VolunteerAddPage = () => {
+const AddVolunteerPage = () => {
   const { t } = useTranslation("Admin");
 
   return (
@@ -15,4 +15,4 @@ const VolunteerAddPage = () => {
   );
 };
 
-export default VolunteerAddPage;
+export default AddVolunteerPage;
