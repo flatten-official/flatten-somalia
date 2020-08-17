@@ -3,8 +3,8 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 // FORMIO CONTENT ENGLISH
-import formIOAddVolunteerEN from "./translations/en/translation/AddVolunteer.json";
 import formIODefaultsEN from "./translations/en/translation/Defaults.json";
+import formIOAddVolunteerEN from "./translations/en/translation/AddVolunteer.json";
 import formIOInitialHouseholdSurveyEN from "./translations/en/translation/InitialVolunteerSurvey.json";
 import formIOGraveDiggerSurveyEN from "./translations/en/translation/GravediggerSurvey.json";
 import formIOHospitalSurveyEN from "./translations/en/translation/HospitalSurvey.json";
@@ -25,6 +25,7 @@ import adminEN from "./translations/en/Admin.json";
 // FORMIO CONTENT SOMALI
 import formIOAddVolunteerSO from "./translations/so/translation/AddVolunteer.json";
 import formIODefaultsSO from "./translations/so/translation/Defaults.json";
+import formIOAddVolunteerSO from "./translations/so/translation/AddVolunteer.json";
 import formIOInitialHouseholdSurveySO from "./translations/so/translation/InitialVolunteerSurvey.json";
 import formIOGraveDiggerSurveySO from "./translations/so/translation/GraveDiggerSurvey.json";
 import formIOHospitalSurveySO from "./translations/so/translation/HospitalSurvey.json";
@@ -45,8 +46,8 @@ import adminSO from "./translations/so/Admin.json";
 const resources = {
   en: {
     translation: {
-      ...formIOAddVolunteerEN,
       ...formIODefaultsEN,
+      ...formIOAddVolunteerEN,
       ...formIOInitialHouseholdSurveyEN,
       ...formIOVolunteerLoginEN,
       ...formIOGraveDiggerSurveyEN,
@@ -67,6 +68,7 @@ const resources = {
     translation: {
       ...formIOAddVolunteerSO,
       ...formIODefaultsSO,
+      ...formIOAddVolunteerSO,
       ...formIOInitialHouseholdSurveySO,
       ...formIOVolunteerLoginSO,
       ...formIOGraveDiggerSurveySO,
