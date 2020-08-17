@@ -12,7 +12,7 @@ To run this repository you need to run both the frontend (this repository) and t
 
 2. Run `npm install`
 
-3. Copy the content of `./src/backend/backend.dev.js` to a new file called `./src/backend/backend.js`
+3. Copy the content of `./src/api/backend.dev.js` to a new file called `./src/api/backend.js`
 
 4. To be able to Login ask Martin or Arthur to add you to the volunteer staging database.
 

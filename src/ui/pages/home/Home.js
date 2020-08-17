@@ -46,19 +46,20 @@ HomeSurveyButton.propTypes = {
 
 const Home = () => {
   const { t } = useTranslation("Home");
+  const { t: tAdmin } = useTranslation("Admin");
   const authUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-
-  const showAddVolunteers = useSelector(
-    (state) =>
-      state.auth.user.permissions.indexOf(Permissions.manageVolunteers) > -1
-  );
 
   // On every render of the home page check the session expiry
   useEffect(() => {
     dispatch(checkSessionExpiry(70));
   });
 
+  const hasManageVolunteerPermission = authUser.permissions.includes(
+    Permissions.manageVolunteers
+  );
+
+  // TODO formSelectionPrompt is now above more than just forms
   return (
     <>
       <h3 className="homePageTitle">
@@ -79,14 +80,14 @@ const Home = () => {
       <HomeSurveyButton survey={Surveys.gravedigger} disabled={true} />
       <HomeSurveyButton survey={Surveys.hospital} disabled={true} />
 
-      {showAddVolunteers && (
-        <HomeButton route={Routes.addVolunteer} text={"Add Volunteers"} />
-      )}
-      {showAddVolunteers && (
+      {hasManageVolunteerPermission && (
         <HomeButton
-          route={Routes.admin}
-          text="Administrate Volunteers" /* TODO use translation */
+          route={Routes.addVolunteer}
+          text={tAdmin("addVolunteerTitle")}
         />
+      )}
+      {hasManageVolunteerPermission && (
+        <HomeButton route={Routes.admin} text={tAdmin("managementTitle")} />
       )}
     </>
   );
