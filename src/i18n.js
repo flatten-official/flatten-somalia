@@ -3,8 +3,8 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 // FORMIO CONTENT ENGLISH
-import formIOAddVolunteerEN from "./translations/en/translation/AddVolunteer.json";
 import formIODefaultsEN from "./translations/en/translation/Defaults.json";
+import formIOAddVolunteerEN from "./translations/en/translation/AddVolunteer.json";
 import formIOInitialHouseholdSurveyEN from "./translations/en/translation/InitialVolunteerSurvey.json";
 import formIOGraveDiggerSurveyEN from "./translations/en/translation/GravediggerSurvey.json";
 import formIOHospitalSurveyEN from "./translations/en/translation/HospitalSurvey.json";
@@ -23,6 +23,7 @@ import adminEN from "./translations/en/Admin.json";
 
 // FORMIO CONTENT SOMALI
 import formIODefaultsSO from "./translations/so/translation/Defaults.json";
+import formIOAddVolunteerSO from "./translations/so/translation/AddVolunteer.json";
 import formIOInitialHouseholdSurveySO from "./translations/so/translation/InitialVolunteerSurvey.json";
 import formIOGraveDiggerSurveySO from "./translations/so/translation/GraveDiggerSurvey.json";
 import formIOHospitalSurveySO from "./translations/so/translation/HospitalSurvey.json";
@@ -37,12 +38,13 @@ import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
 import SurveysSO from "./translations/so/Surveys.json";
 import GeneralSO from "./translations/so/General.json";
+import adminSO from "./translations/so/Admin.json";
 
 const resources = {
   en: {
     translation: {
-      ...formIOAddVolunteerEN,
       ...formIODefaultsEN,
+      ...formIOAddVolunteerEN,
       ...formIOInitialHouseholdSurveyEN,
       ...formIOVolunteerLoginEN,
       ...formIOGraveDiggerSurveyEN,
@@ -61,6 +63,7 @@ const resources = {
   so: {
     translation: {
       ...formIODefaultsSO,
+      ...formIOAddVolunteerSO,
       ...formIOInitialHouseholdSurveySO,
       ...formIOVolunteerLoginSO,
       ...formIOGraveDiggerSurveySO,
@@ -74,7 +77,7 @@ const resources = {
     FormIOCustomText: formIOCustomTextSO,
     Surveys: SurveysSO,
     General: GeneralSO,
-    Admin: adminEN, // Even in Somali use the English version
+    Admin: adminSO,
   },
 };
 
