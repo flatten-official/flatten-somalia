@@ -5,7 +5,7 @@ import initialHouseholdJSON from "./formDefinitions/surveys/initialHousehold/for
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
-} from "./ui/pages/surveys/submission";
+} from "./ui/pages/surveys/submitters";
 
 export const Routes = {
   home: "/",
