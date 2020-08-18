@@ -23,7 +23,6 @@ function getApp() {
   app.use(bodyParser.raw());
   app.use(express.json());
   app.use(helmet());
-  app.use(helmet.permittedCrossDomainPolicies());
   app.use(cookieParser(getConfig().secrets.cookieSecret));
   app.use(bodySanitizer);
   app.use(loggerMiddleware);
