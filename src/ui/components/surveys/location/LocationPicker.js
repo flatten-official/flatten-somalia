@@ -45,7 +45,7 @@ export const LocationPicker = ({ onLocationFound, enableManual }) => {
   };
 
   // TODO Cleanup to avoid memory leaks
-  useEffect(getBrowserLocation, []); // Call the function on start
+  useEffect(getBrowserLocation, [STATUS.failed, onLocationFound]); // Call the function on start
 
   // eslint-disable-next-line default-case
   switch (currentStatus) {
