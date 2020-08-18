@@ -12,6 +12,10 @@ module.exports.setup = () => {
 
 /* Sends a verification link to a user given an email and the link. */
 module.exports.sendVerificationEmail = async (email, verification_link) => {
+  // Helpful when trying to log in when developing frontend
+  // Necessary if we're mocking
+  log.debug(`Verification link: ${verification_link}`);
+
   try {
     const msg = {
       to: email,
@@ -26,8 +30,8 @@ module.exports.sendVerificationEmail = async (email, verification_link) => {
       },
     };
 
-    await sgMail.send(msg);
-    return true;
+    // Don't actually send email if we're supposed to mock
+    if (!getConfig().mockSendGrid) await sgMail.send(msg);
   } catch (e) {
     log.error("Failed to send email.\n", { error: e });
     throw new ApiError("We were unable to send you an email.", 500);
