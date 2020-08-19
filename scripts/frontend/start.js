@@ -20,9 +20,9 @@ const {
   prepareUrls,
 } = require("react-dev-utils/WebpackDevServerUtils");
 const openBrowser = require("react-dev-utils/openBrowser");
-const paths = require("../packages/frontend/config/paths");
-const configFactory = require("../packages/frontend/config/webpack.config");
-const createDevServerConfig = require("../packages/frontend/config/webpackDevServer.config");
+const paths = require("./config/paths");
+const configFactory = require("./config/webpack.config");
+const createDevServerConfig = require("./config/webpackDevServer.config");
 
 const isInteractive = process.stdout.isTTY;
 
@@ -34,7 +34,7 @@ const DEFAULT_PORT = 3000;
 const HOST = "0.0.0.0";
 
 // Creates branch.json
-require("./createBranchJson");
+require("../createBranchJson");
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
