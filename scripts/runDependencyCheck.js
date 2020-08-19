@@ -29,7 +29,7 @@ const onScanComplete = (packageName) => (unused) => {
       unused.invalidDirs
     ); // directories that cannot access
 
-  if (packageName !== "db-utils" && unused.using.mongoose)
+  if (packageName !== "util-db" && unused.using.mongoose)
     printError(
       packageName,
       "Should not import mongoose. db-utils should be the only package importing mongoose. See README"
