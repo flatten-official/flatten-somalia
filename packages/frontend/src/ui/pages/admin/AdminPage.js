@@ -62,7 +62,7 @@ const getButtonCellFormatter = (dispatch, t) => (_, cell, __, ___) => {
 const formatAsCheckMark = (_, cell, __, ___) =>
   checkHasAccess(cell) ? <>&#10004;</> : <>&#10006;</>;
 
-const AdminPanelContent = () => {
+const AdminPanel = () => {
   const { t } = useTranslation("Admin");
   const volunteer = useSelector((state) => state.volunteer);
   const dispatch = useDispatch();
@@ -135,7 +135,7 @@ const AdminPage = () => {
         <>
           <h3>{t("managementTitle")}</h3>
           <br />
-          <AdminPanelContent />
+          <AdminPanel />
         </>
       );
   }
