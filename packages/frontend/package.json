@@ -2,10 +2,6 @@
   "name": "frontend",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "build": "node scripts/frontend/build.js",
-    "serve": "serve --single --listen 3000 ./build"
-  },
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.5.2",
@@ -35,8 +31,5 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "seamless-immutable": "^7.1.4"
-  },
-  "devDependencies": {
-    "serve": "^11.3.2"
   }
 }

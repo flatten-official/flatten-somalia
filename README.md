@@ -20,7 +20,7 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 
 ## Available commands
 
-- `yarn dev`: Runs the backend server locally
+- `yarn dev`: Runs the backend server & frontend website locally. Also exists `yarn dev-backend` and `yarn dev-frontend` for running only one of the two.
 
 - `yarn lint`: Lists ESLint errors and fixes minor ones
 
@@ -28,9 +28,7 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 
 - `yarn auth`: Authenticate with Google and set the project to staging
 
-- `yarn auth-no-browser`: Sometimes authentication fails in the browser, this is a workaround.
-
-- `yarn deploy`: Deploys the backend to the staging servers
+- `yarn deploy-both`: Deploys the backend & frontend to the staging servers. Also exists `yarn deploy-backend` & `yarn deploy-frontend`.
 
 - `yarn test`: Runs the jest tests
 
@@ -39,6 +37,10 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 - `yarn depcheck`: Check for missing or unused dependencies in all packages.
 
 - `yarn script <SCRIPT-NAME>`: Runs a database script from the `db-scripts` package. `<SCRIPT-NAME>` is the name of the script's directory in `packages/db-scripts/src/`.
+
+- `yarn build-frontend`: Builds the frontend as it would be when it's deployed.
+
+- `yarn serve-frontend`: Can be run after `yarn build-frontend` to serve the build on `localhost`.
 
 ## Technical details
 
