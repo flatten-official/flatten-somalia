@@ -62,7 +62,16 @@ const main = () => {
   for (const packageDir of packageDirs) {
     depCheck(
       packageDir.path,
-      { ignorePatterns: ["api-generated"] },
+      {
+        ignorePatterns: ["api-generated"],
+        ignoreMatches: [
+          // Used in webpack.config.js
+          "babel-eslint",
+          "sass-loader",
+          "@babel/preset-react",
+          "@babel/plugin-proposal-class-properties",
+        ],
+      },
       onScanComplete(packageDir.name)
     );
   }

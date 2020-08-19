@@ -16,3 +16,6 @@ build
 
 # macOS system files
 .DS_Store
+
+# File on frontend
+packages/frontend/src/api/backend.js
