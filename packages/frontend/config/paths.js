@@ -33,11 +33,11 @@ const resolveModule = (resolveFn, filePath) => {
 module.exports = {
   appPath: resolveApp("."),
   appBuild: resolveApp("build"),
-  appPublic: resolveApp("public"),
-  appHtml: resolveApp("public/index.html"),
-  appIndexJs: resolveModule(resolveApp, "src/index"),
+  appPublic: resolveApp("packages/frontend/public"),
+  appHtml: resolveApp("packages/frontend/public/index.html"),
+  appIndexJs: resolveModule(resolveApp, "packages/frontend/src/index"),
   appPackageJson: resolveApp("package.json"),
-  appSrc: resolveApp("src"),
+  appSrc: resolveApp("packages/frontend/src"),
   appNodeModules: resolveApp("node_modules"),
 };
 
