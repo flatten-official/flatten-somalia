@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import LoginSuccess from "./LoginSuccess";
 import endpoints from "../../../api/endpoints";
 import Form from "../../components/formio/Form";
-import LoginFormJson from "../../../formDefinitions/others/Login.json";
+import LoginFormJson from "../../../formDefinitions/misc/Login.json";
 import Modal from "../../components/Modal";
 import { useSelector } from "react-redux";
 import { UNAUTHENTICATED_CONTEXT } from "../../auth/actions";
