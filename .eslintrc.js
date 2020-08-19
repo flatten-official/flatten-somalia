@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-"use strict";
-
 // Inspired by https://github.com/airbnb/javascript but less opinionated.
 
 // We use eslint-loader so even warnings are very visible.
@@ -200,6 +198,7 @@ module.exports = {
     "prefer-const": "warn",
     "react/prop-types": "warn",
     "react/no-unescaped-entities": "warn",
+    "react/display-name": "warn",
 
     // https://github.com/benmosher/eslint-plugin-import/tree/master/docs/rules
     "import/first": "error",
