@@ -1,0 +1,40 @@
+{
+  "components": [
+    {
+      "label": "name",
+      "validate": { "required": true },
+      "key": "name",
+      "type": "textfield",
+      "input": true
+    },
+    {
+      "label": "teamName",
+      "validate": { "required": true },
+      "key": "teamName",
+      "type": "textfield",
+      "input": true
+    },
+    {
+      "label": "email",
+      "validate": { "required": true },
+      "unique": true,
+      "key": "email",
+      "type": "email",
+      "input": true
+    },
+    {
+      "label": "permSubmitForms",
+      "defaultValue": true,
+      "key": "permSubmitForms",
+      "type": "checkbox",
+      "input": true
+    },
+    {
+      "label": "submit",
+      "showValidations": false,
+      "key": "submit",
+      "type": "button",
+      "input": true
+    }
+  ]
+}

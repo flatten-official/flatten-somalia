@@ -1,0 +1,11 @@
+steps:
+  - name: gcr.io/cloud-builders/gsutil
+    args: ["cp", "packages/frontend/src/api/backend.$PROJECT_ID.js", "packages/frontend/src/api/backend.js"]
+  - name: node
+    entrypoint: "npm"
+    args: ["install", "--production"]
+  - name: node
+    entrypoint: "npm"
+    args: ["run", "build"]
+  - name: gcr.io/$PROJECT_ID/firebase
+    args: ['deploy', '--project=$PROJECT_ID', '--only=hosting']

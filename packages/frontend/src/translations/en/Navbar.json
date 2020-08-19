@@ -1,0 +1,8 @@
+{
+  "links": {
+    "login": "LOG IN",
+    "logout": "LOG OUT",
+    "homepage": "HOME"
+  },
+  "language": "LANGUAGE"
+}

@@ -1,17 +1,35 @@
+const browserPackages = ["packages/frontend/*.js"];
+
 module.exports = {
+  // Stop ESLint from looking for a config files in parent folders
+  root: true,
   env: {
     commonjs: true,
     es6: true,
     node: true,
+    jest: true,
+    browser: true,
   },
-  extends: ["eslint:recommended", "prettier", "plugin:jest/all"],
-  plugins: ["prettier", "jest"],
+  extends: [
+    "eslint:recommended",
+    "prettier",
+    "plugin:jest/all",
+    "plugin:flowtype/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/recommended",
+  ],
+  plugins: [
+    "prettier",
+    "jest",
+    "import",
+    "flowtype",
+    "jsx-a11y",
+    "react",
+    "react-hooks",
+  ],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly",
-  },
-  parserOptions: {
-    ecmaVersion: 11,
   },
   rules: {
     "prettier/prettier": "warn",
@@ -34,6 +52,18 @@ module.exports = {
       files: ["packages/db-copy-function/*.js"],
       rules: {
         "no-console": "off", // Cloud functions can't import the external module
+      },
+    },
+    {
+      // Frontend uses babel-eslint and can use the latest ecma version
+      files: browserPackages,
+      parser: "babel-eslint",
+      parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
       },
     },
   ],
