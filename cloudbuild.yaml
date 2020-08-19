@@ -1,6 +1,6 @@
 steps:
   - name: gcr.io/cloud-builders/gsutil
-    args: ["cp", "src/api/backend.$PROJECT_ID.js", "src/api/backend.js"]
+    args: ["cp", "packages/frontend/src/api/backend.$PROJECT_ID.js", "packages/frontend/src/api/backend.js"]
   - name: node
     entrypoint: "npm"
     args: ["install", "--production"]
