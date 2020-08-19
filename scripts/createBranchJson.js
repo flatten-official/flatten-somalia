@@ -6,7 +6,7 @@ const chalk = require("react-dev-utils/chalk");
 branchName
   .get()
   .then((branchName) => {
-    fs.writeFileSync("src/branch.json", JSON.stringify({ name: branchName }));
+    fs.writeFileSync("branch.json", JSON.stringify({ name: branchName }));
   })
   .catch((e) => {
     chalk.yellow(`Could not determine branch name.\n${e.message}`);

@@ -5,7 +5,7 @@ let branchName;
 
 try {
   // noinspection JSFileReferences
-  branchName = require("../../../branch.json").name;
+  branchName = require("../../../../../../branch.json").name;
   // eslint-disable-next-line no-empty
 } catch (e) {}
 

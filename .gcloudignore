@@ -1,12 +1,6 @@
 README.md
-.idea
-dist
-node_modules
-.firebaserc
-.firebase
-build
-src/i18nResources.json
-src/api/backend.js
-.eslintcache
-.DS_Store
 .git
+
+# the following line adds everything in .gitignore to this file (even though the line is a comment)
+#!include:.gitignore
+# See https://cloud.google.com/sdk/gcloud/reference/topic/gcloudignore for more documentation about the include pattern

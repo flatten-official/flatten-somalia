@@ -2,12 +2,12 @@
   "name": "so-volunteer",
   "version": "0.1.0",
   "private": true,
-  "main": "./scripts/start.js",
+  "main": "scripts/startFrontend.js",
   "scripts": {
-    "build": "node scripts/build.js",
+    "build": "node scripts/buildFrontend.js",
     "depcheck": "depcheck . --ignores=\"eslint-*,babel*,*/webpack,prettier,*sass*,depcheck,font-awesome,formiojs\"",
     "lint": "eslint --fix .",
-    "start": "node scripts/start.js",
+    "start": "node scripts/startFrontend.js",
     "deploy": "node scripts/createBranchJson.js && gcloud config set project flatten-staging-271921 && gcloud builds submit",
     "auth": "gcloud auth login && gcloud config set project flatten-staging-271921",
     "serve": "serve --single --listen 3000 ./build"
