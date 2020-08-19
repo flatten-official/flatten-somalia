@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import React from "react";
 import { useSelector } from "react-redux";
 
-const PrivatePage = ({ requiredPermission, comp: Component }) => {
+const PrivatePageWrapper = ({ requiredPermission, comp: Component }) => {
   const auth = useSelector((state) => state.auth);
   const { t } = useTranslation("General");
 
@@ -15,4 +15,4 @@ const PrivatePage = ({ requiredPermission, comp: Component }) => {
     );
 };
 
-export default PrivatePage;
+export default PrivatePageWrapper;

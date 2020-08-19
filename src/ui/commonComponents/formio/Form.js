@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Form as FormioForm } from "react-formio";
 import PropTypes from "prop-types";
-import Success from "../surveys/Success";
+import Success from "./Success";
 
 /**
  *

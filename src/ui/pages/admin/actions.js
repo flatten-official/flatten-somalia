@@ -1,5 +1,5 @@
 import endpoints from "../../../api/endpoints";
-import { logout, UNAUTHENTICATED_CONTEXT } from "../../auth/actions";
+import { logout, UNAUTHENTICATED_CONTEXT } from "../../appActions";
 
 export const FETCH_LIST_PENDING = "FETCH_LIST_PENDING";
 export const FETCH_LIST_SUCCESS = "FETCH_LIST_SUCCESS";

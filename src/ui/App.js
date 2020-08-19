@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./commonComponents/app/Header";
+import Footer from "./commonComponents/app/Footer";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
-import Loading from "./components/Loading";
+import Loading from "./commonComponents/app/Loading";
 import { Routes, Surveys } from "../config";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,9 +12,9 @@ import {
   AUTH_UNINITIALISED,
   fetchAuthState,
   UNAUTHENTICATED_CONTEXT,
-} from "./auth/actions";
+} from "./appActions";
 import SurveyPageFactory from "./pages/surveys/SurveyPageFactory";
-import PrivatePage from "./components/PrivatePage";
+import PrivatePageWrapper from "./pages/PrivatePageWrapper";
 import AddVolunteerPage from "./pages/admin/AddVolunteerPage";
 import AdminPage from "./pages/admin/AdminPage";
 import { Permissions } from "../api/constants";
@@ -25,7 +25,10 @@ const AuthenticatedAppContent = () => {
       exact
       path={Routes.home}
       render={() => (
-        <PrivatePage requiredPermission={Permissions.submitForms} comp={Home} />
+        <PrivatePageWrapper
+          requiredPermission={Permissions.submitForms}
+          comp={Home}
+        />
       )}
     />
   );
@@ -35,7 +38,10 @@ const AuthenticatedAppContent = () => {
       exact
       path={path}
       render={() => (
-        <PrivatePage comp={comp} requiredPermission={requiredPermission} />
+        <PrivatePageWrapper
+          comp={comp}
+          requiredPermission={requiredPermission}
+        />
       )}
     />
   );

@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import PropTypes from "prop-types";
-import { checkSessionExpiry } from "../../auth/actions";
+import { checkSessionExpiry } from "../../appActions";
 import { Permissions } from "../../../api/constants";
 
 const HomeButton = ({ route, text, ...options }) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../../components/formio/Form";
+import Form from "../../commonComponents/formio/Form";
 import formSchema from "../../../formDefinitions/misc/addVolunteer.json";
 import endpoints from "../../../api/endpoints";
 import { useTranslation } from "react-i18next";

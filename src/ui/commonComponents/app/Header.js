@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Routes } from "../../config";
+import { Routes } from "../../../config";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,7 +8,7 @@ import {
   logout,
   AUTH_AUTHENTICATED,
   UNAUTHENTICATED_CONTEXT,
-} from "../auth/actions";
+} from "../../appActions";
 
 const LanguageDropDown = () => {
   const { t, i18n } = useTranslation("Navbar");
