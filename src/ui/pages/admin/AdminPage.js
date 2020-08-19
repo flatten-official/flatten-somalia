@@ -116,7 +116,7 @@ const AdminPanelContent = () => {
   );
 };
 
-const AdminPanel = () => {
+const AdminPage = () => {
   const dispatch = useDispatch();
   const volunteer = useSelector((state) => state.volunteer);
   const { t } = useTranslation("Admin");
@@ -141,4 +141,4 @@ const AdminPanel = () => {
   }
 };
 
-export default AdminPanel;
+export default AdminPage;
