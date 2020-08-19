@@ -1,4 +1,4 @@
-const browserPackages = ["packages/frontend/*.js"];
+const browserPackages = ["packages/frontend/**/*.js"];
 
 module.exports = {
   // Stop ESLint from looking for a config files in parent folders
@@ -35,11 +35,12 @@ module.exports = {
     "prettier/prettier": "warn",
     "jest/no-hooks": "off",
     "jest/prefer-expect-assertions": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "prefer-const": "warn",
     "require-await": "warn",
     "no-return-await": "warn",
     "no-throw-literal": "error",
+    "react/display-name": "warn",
   },
   overrides: [
     {
@@ -65,6 +66,14 @@ module.exports = {
           jsx: true,
         },
       },
+      rules: {
+        "no-console": "warn", // Console is only a warning for browser
+      },
     },
   ],
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
 };
