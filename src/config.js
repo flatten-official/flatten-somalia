@@ -1,11 +1,11 @@
-import api from "./backend/api/api";
-import graveDiggerSurveyJSON from "./forms/gravedigger/form.json";
-import hospitalSurveyJSON from "./forms/hospital/form.json";
-import initialHouseholdJSON from "./forms/initialHousehold/form.json";
+import endpoints from "./api/endpoints";
+import graveDiggerSurveyJSON from "./formDefinitions/surveys/gravedigger/form.json";
+import hospitalSurveyJSON from "./formDefinitions/surveys/hospital/form.json";
+import initialHouseholdJSON from "./formDefinitions/surveys/initialHousehold/form.json";
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
-} from "./backend/submission";
+} from "./ui/pages/surveys/submitters";
 
 export const Routes = {
   home: "/",
@@ -36,10 +36,10 @@ export const Surveys = {
     route: Routes.gravediggerSurvey,
     surveyKey: "graveDigger",
     i18nTitleKey: "graveDiggerTitle",
-    api: api.graveDiggerSurvey,
+    api: endpoints.submitGraveDiggerSurvey,
     formIOJSON: graveDiggerSurveyJSON,
     onSubmit: defaultSurveySubmitterFactory(
-      api.graveDiggerSurvey,
+      endpoints.submitGraveDiggerSurvey,
       Schemas.gravedigger
     ),
     options: {
@@ -50,10 +50,10 @@ export const Surveys = {
     route: Routes.hospitalSurvey,
     surveyKey: "hospital",
     i18nTitleKey: "hospitalTitle",
-    api: api.hospitalSurvey,
+    api: endpoints.submitHospitalSurvey,
     formIOJSON: hospitalSurveyJSON,
     onSubmit: defaultSurveySubmitterFactory(
-      api.hospitalSurvey,
+      endpoints.submitHospitalSurvey,
       Schemas.hospital
     ),
     options: {
@@ -64,7 +64,7 @@ export const Surveys = {
     route: Routes.initialHouseholdSurvey,
     surveyKey: "initialHousehold",
     i18nTitleKey: "initialHouseholdTitle",
-    api: api.volunteerForm,
+    api: endpoints.submitVolunteerForm,
     formIOJSON: initialHouseholdJSON,
     onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold, [
       "basicinfo",

@@ -2,10 +2,10 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
-import authReducer from "./backend/auth/authReducer";
+import authReducer from "./ui/appReducer";
 import { form, forms, submission, submissions } from "react-formio";
-import surveyReducer from "./ui/surveys/reducer";
-import volunteerReducer from "./backend/volunteer/volunteerReducer";
+import surveyReducer from "./ui/pages/surveys/reducer";
+import volunteerReducer from "./ui/pages/admin/reducer";
 
 export const history = createBrowserHistory();
 

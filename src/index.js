@@ -7,11 +7,11 @@ import { Components } from "formiojs";
 
 import App from "./ui/App";
 
-import "./i18n";
+import "./translations/i18n";
 import "./styles/styles.scss";
-import CustomFormIoComponent from "./ui/components/surveys/formio/CustomFormComponent";
-import TranslatedText from "./ui/components/surveys/TranslatedText";
-import { ConnectedFollowUpId } from "./ui/surveys/ConnectedComponents";
+import CustomFormIoComponent from "./ui/commonComponents/formio/CustomFormComponent";
+import TranslatedText from "./ui/pages/surveys/components/TranslatedText";
+import { ConnectedFollowUpId } from "./ui/pages/surveys/ConnectedComponents";
 
 Components.setComponents({
   customFollowUpId: CustomFormIoComponent(ConnectedFollowUpId),

@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Home from "./home/Home";
-import Login from "./login/Login";
-import Loading from "./components/Loading";
+import Header from "./commonComponents/app/Header";
+import Footer from "./commonComponents/app/Footer";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import Loading from "./commonComponents/app/Loading";
 import { Routes, Surveys } from "../config";
 import { useDispatch, useSelector } from "react-redux";
-import { permissions } from "../backend/auth/authApi";
 import {
   AUTH_AUTHENTICATED,
   AUTH_UNINITIALISED,
   fetchAuthState,
   UNAUTHENTICATED_CONTEXT,
-} from "../backend/auth/authActions";
-import SurveyPageFactory from "./surveys/SurveyPageFactory";
-import PrivatePage from "./components/PrivatePage";
-import VolunteerAddPage from "./admin/VolunteerAddPage";
-import AdminPanel from "./admin/AdminPanel";
+} from "./appActions";
+import SurveyPageFactory from "./pages/surveys/SurveyPageFactory";
+import PrivatePageWrapper from "./pages/PrivatePageWrapper";
+import AddVolunteerPage from "./pages/admin/AddVolunteerPage";
+import AdminPage from "./pages/admin/AdminPage";
+import { Permissions } from "../api/constants";
 
 const AuthenticatedAppContent = () => {
   const getHomePageRoute = () => (
@@ -25,7 +25,10 @@ const AuthenticatedAppContent = () => {
       exact
       path={Routes.home}
       render={() => (
-        <PrivatePage requiredPermission={permissions.submitForms} comp={Home} />
+        <PrivatePageWrapper
+          requiredPermission={Permissions.submitForms}
+          comp={Home}
+        />
       )}
     />
   );
@@ -35,7 +38,10 @@ const AuthenticatedAppContent = () => {
       exact
       path={path}
       render={() => (
-        <PrivatePage comp={comp} requiredPermission={requiredPermission} />
+        <PrivatePageWrapper
+          comp={comp}
+          requiredPermission={requiredPermission}
+        />
       )}
     />
   );
@@ -44,7 +50,7 @@ const AuthenticatedAppContent = () => {
     makePrivateRoute(
       survey.route,
       SurveyPageFactory(survey),
-      permissions.submitForms
+      Permissions.submitForms
     );
 
   return (
@@ -56,13 +62,13 @@ const AuthenticatedAppContent = () => {
         {makeSurveyRoute(Surveys.hospital)}
         {makePrivateRoute(
           Routes.addVolunteer,
-          VolunteerAddPage,
-          permissions.manageVolunteers
+          AddVolunteerPage,
+          Permissions.manageVolunteers
         )}
         {makePrivateRoute(
           Routes.admin,
-          AdminPanel,
-          permissions.manageVolunteers
+          AdminPage,
+          Permissions.manageVolunteers
         )}
 
         <Redirect from="*" to={Routes.home} />
