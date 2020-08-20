@@ -10,7 +10,7 @@
     "dev-frontend": "node scripts/frontend/start.js",
     "dev": "concurrently -k \"yarn dev-backend\" \"yarn dev-frontend\"",
     "build-frontend": "node scripts/frontend/build.js",
-    "serve-frontend": "serve --single --listen 3000 ./build",
+    "serve-frontend": "serve --single --listen 80 ./build",
     "lint": "eslint --fix .",
     "test-cloud-func": "node scripts/cloudFunctionLauncher.js",
     "auth": "gcloud auth login && gcloud auth application-default login && gcloud config set project flatten-staging-271921",

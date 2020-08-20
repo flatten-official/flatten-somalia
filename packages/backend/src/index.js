@@ -24,7 +24,7 @@ async function setup() {
 }
 
 async function startServer() {
-  const port = process.env.PORT || 80;
+  const port = process.env.PORT || 3000;
 
   const app = await getApp();
   app.listen(port, () => {
