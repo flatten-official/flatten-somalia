@@ -6,12 +6,11 @@ import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
 } from "./ui/pages/surveys/submitters";
+import { Surveys as SharedSurveyRefs } from "util-shared-constants";
 
 export const Routes = {
   home: "/",
-  initialHouseholdSurvey: "/surveys/initialHousehold",
-  gravediggerSurvey: "/surveys/gravedigger",
-  hospitalSurvey: "/surveys/hospital",
+  surveyPrefix: "/surveys/",
   addVolunteer: "/admin/addVolunteer",
   admin: "/admin/list",
 };
@@ -33,7 +32,7 @@ const Schemas = {
 
 export const Surveys = {
   gravedigger: {
-    route: Routes.gravediggerSurvey,
+    ...SharedSurveyRefs.gravedigger,
     surveyKey: "graveDigger",
     i18nTitleKey: "graveDiggerTitle",
     api: endpoints.submitGraveDiggerSurvey,
@@ -47,7 +46,7 @@ export const Surveys = {
     },
   },
   hospital: {
-    route: Routes.hospitalSurvey,
+    ...SharedSurveyRefs.hospital,
     surveyKey: "hospital",
     i18nTitleKey: "hospitalTitle",
     api: endpoints.submitHospitalSurvey,
@@ -61,7 +60,7 @@ export const Surveys = {
     },
   },
   initialHousehold: {
-    route: Routes.initialHouseholdSurvey,
+    ...SharedSurveyRefs.initialHousehold,
     surveyKey: "initialHousehold",
     i18nTitleKey: "initialHouseholdTitle",
     api: endpoints.submitVolunteerForm,

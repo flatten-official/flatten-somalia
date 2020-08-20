@@ -48,7 +48,7 @@ const AuthenticatedAppContent = () => {
 
   const makeSurveyRoute = (survey) =>
     makePrivateRoute(
-      survey.route,
+      Routes.surveyPrefix + survey.key,
       SurveyPageFactory(survey),
       Permissions.submitForms
     );

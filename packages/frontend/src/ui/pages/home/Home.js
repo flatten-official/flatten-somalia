@@ -33,7 +33,7 @@ const HomeSurveyButton = ({ survey, ...options }) => {
 
   return (
     <HomeButton
-      route={survey.route}
+      route={Routes.surveyPrefix + survey.key}
       text={t(survey.i18nTitleKey)}
       {...options}
     />
@@ -77,7 +77,7 @@ const Home = () => {
       <br />
       <h5 className="homePageSelectFormTitle">{t("formSelectionPrompt")}</h5>
       <HomeSurveyButton survey={Surveys.initialHousehold} />
-      <HomeSurveyButton survey={Surveys.gravedigger} disabled={true} />
+      <HomeSurveyButton survey={Surveys.gravedigger} disabled={false} />
       <HomeSurveyButton survey={Surveys.hospital} disabled={true} />
 
       {hasManageVolunteerPermission && (
