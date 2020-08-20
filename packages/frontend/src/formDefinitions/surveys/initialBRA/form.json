@@ -256,6 +256,131 @@
           ]
         }
       ]
+    },
+    {
+      "label": "movedOutResidents",
+      "type": "panel",
+      "components": [
+        {
+          "key": "movedOut",
+          "label": "movedOut",
+          "type": "editgrid",
+          "validate": {
+            "minLength": "data.residentsCount;",
+            "custom": "valid = data.movedOutCount === data.movedOut.length;",
+            "customMessage": "The number of individuals who moved out should match the number entered."
+          },
+          "hideLabel": true,
+          "templates": {
+            "header": "<div class=\"row\">\n  FORMER RESIDENTS </div>"
+          },
+          "components": [
+            {
+              "key": "movedOutDate",
+              "label": "movedOutDate",
+              "format": "yyyy-MM-dd",
+              "tableView": false,
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "validate": {
+                "required": true
+              },
+              "type": "datetime",
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            },
+            {
+              "key": "age",
+              "label": "ageQuestion",
+              "type": "number",
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 110
+              }
+            },
+            {
+              "key": "gender",
+              "label": "genderQuestion",
+              "type": "textfield",
+              "validate": {
+                "required": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "deaths",
+      "type": "panel",
+      "components": [
+        {
+          "key": "deaths",
+          "label": "deaths",
+          "type": "editgrid",
+          "validate": {
+            "custom": "valid = data.deathsCount === data.deaths.length;",
+            "customMessage": "The number of deceased individuals should match the number entered."
+          },
+          "hideLabel": true,
+          "templates": {
+            "header": "<div class=\"row\">\n  DECEASED RESIDENTS </div>"
+          },
+          "components": [
+            {
+              "key": "age",
+              "label": "ageQuestion",
+              "type": "number",
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 110
+              }
+            },
+            {
+              "key": "gender",
+              "label": "genderQuestion",
+              "type": "textfield",
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "deathDate",
+              "label": "deathDate",
+              "format": "yyyy-MM-dd",
+              "tableView": false,
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "validate": {
+                "required": true
+              },
+              "type": "datetime",
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }
