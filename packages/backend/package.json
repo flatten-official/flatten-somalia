@@ -20,6 +20,7 @@
     "helmet": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "util-shared-constants": "1.0.0",
     "util-config": "^1.0.0",
     "util-db": "1.0.0",
     "util-gcp": "1.0.0",

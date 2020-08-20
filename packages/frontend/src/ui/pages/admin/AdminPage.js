@@ -14,7 +14,7 @@ import Loading from "../../commonComponents/app/Loading";
 import { useTranslation } from "react-i18next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import Spinner from "react-bootstrap/Spinner";
-import { Permissions } from "../../../api/constants";
+import { Permissions } from "util-shared-constants";
 const { SearchBar } = Search;
 
 const checkHasAccess = (cell) => cell.permissions.includes(Permissions.access);

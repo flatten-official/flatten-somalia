@@ -17,7 +17,7 @@ import SurveyPageFactory from "./pages/surveys/SurveyPageFactory";
 import PrivatePageWrapper from "./pages/PrivatePageWrapper";
 import AddVolunteerPage from "./pages/admin/AddVolunteerPage";
 import AdminPage from "./pages/admin/AdminPage";
-import { Permissions } from "../api/constants";
+import { Permissions } from "util-shared-constants";
 
 const AuthenticatedAppContent = () => {
   const getHomePageRoute = () => (
