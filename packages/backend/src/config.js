@@ -15,6 +15,7 @@ module.exports = {
   },
   envSpecific: {
     dev: {
+      mockSendGrid: true,
       minimumLogLevel: "debug",
       useStackdriver: false,
       sendClientErrors: true,
@@ -28,6 +29,7 @@ module.exports = {
       },
     },
     staging: {
+      mockSendGrid: false,
       minimumLogLevel: "debug",
       useStackdriver: true,
       sendClientErrors: true,
@@ -41,6 +43,7 @@ module.exports = {
       },
     },
     production: {
+      mockSendGrid: false,
       minimumLogLevel: "info",
       useStackdriver: true,
       sendClientErrors: false,
@@ -54,6 +57,7 @@ module.exports = {
       },
     },
     test: {
+      mockSendGrid: true,
       minimumLogLevel: "debug",
       useStackdriver: false,
       sendClientErrors: false,
