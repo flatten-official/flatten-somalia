@@ -1466,7 +1466,7 @@ const invalidDeadPeople = [
   },
 ];
 
-describe("test /submit", () => {
+describe("test /survey/initialHousehold", () => {
   let app;
 
   beforeAll(async () => {
@@ -1482,7 +1482,7 @@ describe("test /submit", () => {
     const { agent } = await login(app);
 
     for (const reqBody of VALID_REQ_BODIES) {
-      await agent.post("/submit/initial").send(reqBody).expect(200);
+      await agent.post("/survey/initialHousehold").send(reqBody).expect(200);
 
       // Used to avoid "unable to read from a snapshot due to pending collection catalog changes" when using transactions
       // eslint-disable-next-line jest/no-if
@@ -1511,7 +1511,7 @@ describe("test /submit", () => {
     const request = VALID_REQ_BODIES[0];
 
     const { agent, volunteer } = await login(app);
-    await agent.post("/submit/initial").send(request).expect(200);
+    await agent.post("/survey/initialHousehold").send(request).expect(200);
 
     const allSubmissions = await Submission.model.find();
     const allHouseholds = await Household.model.find();
@@ -1538,7 +1538,7 @@ describe("test /submit", () => {
     for (const metadata of validMetadata) {
       household.followUpId += "1";
       await agent
-        .post("/submit/initial")
+        .post("/survey/initialHousehold")
         .send({
           schema: validSchema,
           metadata,
@@ -1561,7 +1561,7 @@ describe("test /submit", () => {
 
     for (const household of validHouseholdData) {
       await agent
-        .post("/submit/initial")
+        .post("/survey/initialHousehold")
         .send({
           schema: validSchema,
           metadata: validMetadata[0],
@@ -1588,7 +1588,7 @@ describe("test /submit", () => {
     const household = minimumHouseholdData;
 
     await agent
-      .post("/submit/initial")
+      .post("/survey/initialHousehold")
       .send({
         schema: validSchema,
         metadata: validMetadata[0],
@@ -1611,7 +1611,7 @@ describe("test /submit", () => {
     };
 
     await agent
-      .post("/submit/initial")
+      .post("/survey/initialHousehold")
       .send({
         schema: validSchema,
         metadata: validMetadata[0],
@@ -1629,7 +1629,7 @@ describe("test /submit", () => {
     const { agent } = await login(app);
 
     await agent
-      .post("/submit/initial")
+      .post("/survey/initialHousehold")
       .send({
         schema: validSchema,
         metadata: {
@@ -1653,7 +1653,7 @@ describe("test /submit", () => {
     for (const household of invalidHouseholdData) {
       log.debug(household.followUpId);
       await agent
-        .post("/submit/initial")
+        .post("/survey/initialHousehold")
         .send({
           schema: validSchema,
           metadata: validMetadata[0],
@@ -1677,7 +1677,7 @@ describe("test /submit", () => {
 
     for (const person of invalidLivingPeople) {
       await agent
-        .post("/submit/initial")
+        .post("/survey/initialHousehold")
         .send({
           schema: validSchema,
           metadata: validMetadata[0],
@@ -1701,7 +1701,7 @@ describe("test /submit", () => {
     };
 
     await agent
-      .post("/submit/initial")
+      .post("/survey/initialHousehold")
       .send({
         schema: validSchema,
         metadata: validMetadata[0],
@@ -1722,8 +1722,14 @@ describe("test /submit", () => {
     async () => {
       const { agent } = await login(app);
 
-      await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(200);
-      await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(409);
+      await agent
+        .post("/survey/initialHousehold")
+        .send(VALID_REQ_BODIES[1])
+        .expect(200);
+      await agent
+        .post("/survey/initialHousehold")
+        .send(VALID_REQ_BODIES[1])
+        .expect(409);
 
       const allSubmissions = await Submission.model.find();
       const allHouseholds = await Household.model.find();
@@ -1748,12 +1754,12 @@ describe("test /submit", () => {
     );
 
     await agentAccess
-      .post("/submit/initial")
+      .post("/survey/initialHousehold")
       .send(VALID_REQ_BODIES[0])
       .expect(403);
 
     await agentSubmitForms
-      .post("/submit/initial")
+      .post("/survey/initialHousehold")
       .send(VALID_REQ_BODIES[1])
       .expect(403);
 
@@ -1770,7 +1776,7 @@ describe("test /submit", () => {
     const { agent } = await login(app);
 
     for (const reqBody of INVALID_REQUEST_BODIES) {
-      await agent.post("/submit/initial").send(reqBody).expect(400);
+      await agent.post("/survey/initialHousehold").send(reqBody).expect(400);
     }
 
     const allSubmissions = await Submission.model.find();

@@ -12,11 +12,7 @@ const login = (email) => request("POST", "/auth/login", { data: { email } });
 
 const logout = () => request("DELETE", "/auth/logout");
 
-const submitSurvey = (data, key) => {
-  // TODO remove initialHousehold special case by removing endpoint on backend
-  const url = key === "initialHousehold" ? "/submit/initial" : "/survey/" + key;
-  return request("POST", url, { data });
-};
+const submitSurvey = (data, key) => request("POST", "/survey/" + key, { data });
 
 const addVolunteer = (volunteerData) =>
   request("POST", "/volunteer", { data: { volunteerData } });
