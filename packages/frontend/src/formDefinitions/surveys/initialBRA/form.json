@@ -193,6 +193,69 @@
           }
         }
       ]
+    },
+    {
+      "label": "newborns",
+      "type": "panel",
+      "components": [
+        {
+          "key": "newbornResidents",
+          "label": "newbornResidents",
+          "type": "editgrid",
+          "validate": {
+            "custom": "valid = data.newbornResidents.length == data.birthsCount;",
+            "customMessage": "The number of newborns should match the number of residents in the household."
+          },
+          "openWhenEmpty": false,
+          "hideLabel": true,
+          "templates": {
+            "header": "<div class=\"row\">\n  NEWBORNS </div>"
+          },
+          "components": [
+            {
+              "key": "age",
+              "label": "ageQuestion",
+              "type": "number",
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 110
+              }
+            },
+            {
+              "key": "gender",
+              "label": "genderQuestion",
+              "type": "textfield",
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "birthdate",
+              "label": "birthday",
+              "format": "yyyy-MM-dd",
+              "tableView": false,
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "validate": {
+                "required": true
+              },
+              "type": "datetime",
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }
