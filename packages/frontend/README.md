@@ -1,26 +1,16 @@
-# The Volunteer Form Website
+# Frontend website
 
-## Prerequisites
-
-- Node
+This package contains the website.
 
 ## Setup
 
-To run this repository you need to run both the frontend (this repository) and the [backend](https://github.com/flatten-official/backend-so).
+To test this repository you need to run both the frontend (this package) and the [backend](../backend).
 
-1. [Get the backend running locally.](https://github.com/flatten-official/backend-so/blob/staging/README.md)
+1. [Get the backend running locally.](../backend/README.md)
 
-2. Run `npm install`
+2. Copy the content of `./src/api/backend.dev.js` to a new file called `./src/api/backend.js`
 
-3. Copy the content of `./src/api/backend.dev.js` to a new file called `./src/api/backend.js`
-
-4. To be able to Login ask Martin or Arthur to add you to the volunteer staging database.
-
-5. Enable ESLint in your code editor (normally through the ESLint Plugin)
-
-## Running locally
-
-1. Run `npm run start`
+3. To be able to Login ask Martin or Arthur to add you to the volunteer staging database.
 
 ## Modifying forms
 
