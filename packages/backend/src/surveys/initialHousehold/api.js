@@ -8,11 +8,13 @@ const { log } = require("util-logging");
 async function initialSubmission(
   volunteerId,
   volunteerTeamName,
-  schema,
-  metadata,
-  peopleData,
-  deathsData,
-  householdData
+  {
+    schema,
+    metadata,
+    people: peopleData,
+    deaths: deathsData,
+    household: householdData,
+  }
 ) {
   // required because (for example) we call householdData.followUpId which will crash if householdData is undefined
   if (!householdData) throw new ApiError("Household data not provided", 400);

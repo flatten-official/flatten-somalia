@@ -3,9 +3,7 @@ const GravediggerSurveySubmission = require("./submissionData");
 async function submitGravediggerSurvey(
   volunteerId,
   volunteerTeamName,
-  schema,
-  metadata,
-  surveyData
+  { schema, metadata, data }
 ) {
   const submissionDocument = await GravediggerSurveySubmission.create({
     metadata: {
@@ -15,9 +13,9 @@ async function submitGravediggerSurvey(
     },
     surveyData: {
       submissionSchema: schema,
-      gravesite: surveyData.gravesite,
-      gravediggerPhoneNumber: surveyData.gravediggerPhoneNumber,
-      burialsThatDay: surveyData.burialsThatDay,
+      gravesite: data.gravesite,
+      gravediggerPhoneNumber: data.gravediggerPhoneNumber,
+      burialsThatDay: data.burialsThatDay,
     },
   });
 

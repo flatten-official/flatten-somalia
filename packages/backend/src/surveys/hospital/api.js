@@ -3,9 +3,7 @@ const HospitalSurveySubmission = require("./submissionData");
 async function submitHospitalSurvey(
   volunteerId,
   volunteerTeamName,
-  submissionSchema,
-  metadata,
-  surveyData
+  { schema, metadata, data }
 ) {
   const document = await HospitalSurveySubmission.create({
     metadata: {
@@ -14,8 +12,8 @@ async function submitHospitalSurvey(
       ...metadata,
     },
     surveyData: {
-      submissionSchema,
-      ...surveyData,
+      submissionSchema: schema,
+      ...data,
     },
   });
 
