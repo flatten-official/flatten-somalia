@@ -738,7 +738,7 @@
           "type": "editgrid",
           "validate": {
             "minLength": "data.residentsCount;",
-            "custom": "valid = data.residentsCount - data.movedInCount === data.otherResidents.length;",
+            "custom": "valid = data.residentsCount - data.movedInCount - data.birthsCount === data.otherResidents.length;",
             "customMessage": "The number of individuals should match the number of residents in the household."
           },
           "openWhenEmpty": true,
