@@ -5,22 +5,17 @@ const { submitHospitalSurvey } = require("./hospital/api");
 const { initialSubmission } = require("./initialHousehold/api");
 const { log } = require("util-logging");
 
-const getApi = (key) => {
-  switch (key) {
-    case Surveys.gravedigger.key:
-      return submitGravediggerSurvey;
-    case Surveys.hospital.key:
-      return submitHospitalSurvey;
-    case Surveys.initialHousehold.key:
-      return initialSubmission;
-    default:
-      throw new ApiError("Unknown survey key", 400);
-  }
+const surveyKeyToApiMap = {
+  [Surveys.gravedigger.key]: submitGravediggerSurvey,
+  [Surveys.hospital.key]: submitHospitalSurvey,
+  [Surveys.initialHousehold.key]: initialSubmission,
 };
 
 module.exports = async (req, res) => {
   const key = req.params.key;
-  const submitApi = getApi(key);
+  const submitApi = surveyKeyToApiMap[key];
+
+  if (!submitApi) throw new ApiError("Unknown survey key", 400);
 
   await submitApi(
     res.locals.volunteer._id,
