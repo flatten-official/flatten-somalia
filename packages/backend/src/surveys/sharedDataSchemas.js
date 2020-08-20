@@ -6,7 +6,7 @@ const FormSchema = {
 };
 
 const getSubmissionMetadata = (
-  requireLocation,
+  survey,
   includeTeamName = true,
   includeAddedBy = true,
   pages = []
@@ -20,7 +20,7 @@ const getSubmissionMetadata = (
         altitude: Number,
         wasManual: Boolean,
       },
-      required: requireLocation,
+      required: survey.enableManualLocation, // if manual location is enabled then they must select a location
     },
     // recorded on the user's browser with JS Date.now()
     endTime: { type: Number, index: true },

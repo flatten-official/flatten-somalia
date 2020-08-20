@@ -1,8 +1,9 @@
+const { Surveys } = require("util-shared-constants");
 const { FormSchema, getSubmissionMetadata } = require("../sharedDataSchemas");
 const Util = require("../../utils/mongoose");
 
 const model = Util.createModel("GravediggerSurveySubmission", {
-  metadata: getSubmissionMetadata(false),
+  metadata: getSubmissionMetadata(Surveys.gravedigger),
   surveyData: {
     submissionSchema: FormSchema,
     gravesite: {
