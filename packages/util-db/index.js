@@ -19,8 +19,10 @@ module.exports = {
   mongoose: require("mongoose"),
   useReplicaSet,
   connectionOptions: {
+    // These options are used to opt-out of deprecated features. See https://mongoosejs.com/docs/deprecations.html.
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    useFindAndModify: true,
   },
 };
