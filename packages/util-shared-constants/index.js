@@ -8,12 +8,15 @@ const Permissions = {
 const Surveys = {
   initialHousehold: {
     key: "initialHousehold",
+    enableManualLocation: true,
   },
   hospital: {
     key: "hospital",
+    enableManualLocation: true,
   },
   gravedigger: {
     key: "gravedigger",
+    enableManualLocation: false,
   },
 };
 

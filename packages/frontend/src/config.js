@@ -44,9 +44,6 @@ export const Surveys = {
     api: endpoints.submitHospitalSurvey,
     formIOJSON: hospitalSurveyJSON,
     schema: Schemas.hospital,
-    options: {
-      enableManualLocation: true,
-    },
   },
   initialHousehold: {
     ...SharedSurveyRefs.initialHousehold,
@@ -62,8 +59,5 @@ export const Surveys = {
       "followupconsent",
     ],
     customSubmitBodyFormatter: initialHouseholdSubmitBodyFormatter,
-    options: {
-      enableManualLocation: true,
-    },
   },
 };
