@@ -2,10 +2,7 @@ import endpoints from "./api/endpoints";
 import graveDiggerSurveyJSON from "./formDefinitions/surveys/gravedigger/form.json";
 import hospitalSurveyJSON from "./formDefinitions/surveys/hospital/form.json";
 import initialHouseholdJSON from "./formDefinitions/surveys/initialHousehold/form.json";
-import {
-  defaultSurveySubmitterFactory,
-  getInitialHouseholdSubmitter,
-} from "./ui/pages/surveys/submitters";
+import { initialHouseholdSubmitBodyFormatter } from "./ui/pages/surveys/submitHelpers";
 import { Surveys as SharedSurveyRefs } from "util-shared-constants";
 
 export const Routes = {
@@ -36,10 +33,7 @@ export const Surveys = {
     i18nTitleKey: "graveDiggerTitle",
     api: endpoints.submitGraveDiggerSurvey,
     formIOJSON: graveDiggerSurveyJSON,
-    onSubmit: defaultSurveySubmitterFactory(
-      endpoints.submitGraveDiggerSurvey,
-      Schemas.gravedigger
-    ),
+    schema: Schemas.gravedigger,
     options: {
       enableManualLocation: false,
     },
@@ -49,10 +43,7 @@ export const Surveys = {
     i18nTitleKey: "hospitalTitle",
     api: endpoints.submitHospitalSurvey,
     formIOJSON: hospitalSurveyJSON,
-    onSubmit: defaultSurveySubmitterFactory(
-      endpoints.submitHospitalSurvey,
-      Schemas.hospital
-    ),
+    schema: Schemas.hospital,
     options: {
       enableManualLocation: true,
     },
@@ -62,13 +53,15 @@ export const Surveys = {
     i18nTitleKey: "initialHouseholdTitle",
     api: endpoints.submitVolunteerForm,
     formIOJSON: initialHouseholdJSON,
-    onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold, [
+    schema: Schemas.initialHousehold,
+    pageNames: [
       "basicinfo",
       "people",
       "deaths",
       "socialsurveyquestions",
       "followupconsent",
-    ]),
+    ],
+    customSubmitBodyFormatter: initialHouseholdSubmitBodyFormatter,
     options: {
       enableManualLocation: true,
     },

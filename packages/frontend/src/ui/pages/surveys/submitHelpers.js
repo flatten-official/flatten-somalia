@@ -1,5 +1,3 @@
-import endpoints from "../../../api/endpoints";
-
 const getMetadata = (storeData, pageNames) => {
   const endTime = Date.now();
   const metadata = {
@@ -23,33 +21,29 @@ const getMetadata = (storeData, pageNames) => {
   return metadata;
 };
 
-const preFormatFormio = (formioData) => {
+export const preFormatFormio = (formioData) => {
   Object.keys(formioData).forEach((key) => {
     if (key.startsWith("exclude-")) delete formioData[key];
   });
 };
 
-export const defaultSurveySubmitterFactory = (endpoint, schema) => async (
+export const defaultSubmitBodyFormatter = (
+  schema,
   storeData,
-  formioData
-) => {
-  preFormatFormio(formioData);
+  formioData,
+  pageNames
+) => ({
+  metadata: getMetadata(storeData, pageNames),
+  schema,
+  data: formioData,
+});
 
-  const body = {
-    metadata: getMetadata(storeData),
-    schema,
-    data: formioData,
-  };
-
-  await endpoint(body);
-};
-
-export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
+export const initialHouseholdSubmitBodyFormatter = (
+  schema,
   storeData,
-  formioData
+  formioData,
+  pageNames
 ) => {
-  preFormatFormio(formioData);
-
   const body = {
     household: {
       followUpId: storeData.followUpId,
@@ -64,5 +58,5 @@ export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
     if (!(k === "personGrid" || k === "deathGrid")) body.household[k] = v;
   });
 
-  await endpoints.submitVolunteerForm(body);
+  return body;
 };

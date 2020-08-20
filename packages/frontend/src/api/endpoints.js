@@ -12,17 +12,14 @@ const login = (email) => request("POST", "/auth/login", { data: { email } });
 
 const logout = () => request("DELETE", "/auth/logout");
 
-const submitVolunteerForm = (data) =>
-  request("POST", "/submit/initial", { data });
+const submitSurvey = (data, key) => {
+  // TODO remove initialHousehold special case by removing endpoint on backend
+  const url = key === "initialHousehold" ? "/submit/initial" : "/survey/" + key;
+  return request("POST", url, { data });
+};
 
 const addVolunteer = (volunteerData) =>
   request("POST", "/volunteer", { data: { volunteerData } });
-
-const submitGraveDiggerSurvey = (data) =>
-  request("POST", "/survey/gravedigger", { data });
-
-const submitHospitalSurvey = (data) =>
-  request("POST", "/survey/hospital", { data });
 
 const listVolunteers = () => request("GET", "/volunteer/list");
 
@@ -33,10 +30,8 @@ export default {
   getAuth,
   login,
   logout,
-  submitVolunteerForm,
+  submitSurvey,
   addVolunteer,
-  submitGraveDiggerSurvey,
-  submitHospitalSurvey,
   listVolunteers,
   changeVolunteerAccess,
 };

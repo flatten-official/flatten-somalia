@@ -11,21 +11,26 @@ import {
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
 import { logout, UNAUTHENTICATED_CONTEXT } from "../../appActions";
+import { preFormatFormio } from "./submitHelpers";
+import endpoints from "../../../api/endpoints";
+import { defaultSubmitBodyFormatter } from "./submitHelpers";
 
 /**
  * This function returns a survey page component.
  * @param key a string representing the survey
  * @param i18nTitleKey the i18next key for the form title
  * @param formIOJSON the JSON formIO definition
- * @param onSubmit called with the form data when the form is submitted
+ * @param buildSubmissionBody called with the form data when the form is submitted
  * @param options object containing details on specific form (e.g. should we use manual location picker)
  */
 const SurveyPageFactory = ({
   key,
   i18nTitleKey,
   formIOJSON,
-  onSubmit,
+  customSubmitBodyFormatter,
   options,
+  schema,
+  pageNames,
 }) => {
   // Need to use a Class rather than functional components
   // Since the functional component was running into stale closure issues.
@@ -47,7 +52,20 @@ const SurveyPageFactory = ({
      */
     submitHook = async (formIOData) => {
       try {
-        await onSubmit(this.props.surveyData, formIOData);
+        preFormatFormio(formIOData);
+
+        const bodyFormatterArgs = [
+          schema,
+          this.props.surveyData,
+          formIOData,
+          pageNames,
+        ];
+
+        const body = customSubmitBodyFormatter
+          ? customSubmitBodyFormatter(...bodyFormatterArgs)
+          : defaultSubmitBodyFormatter(...bodyFormatterArgs);
+
+        await endpoints.submitSurvey(body, key);
       } catch (e) {
         // If error is 401, session is invalid so logout user
         if (e.response && e.response.status === 401) this.props.logout();
