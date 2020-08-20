@@ -258,6 +258,932 @@
       ]
     },
     {
+      "label": "movedIn",
+      "type": "panel",
+      "components": [
+        {
+          "key": "movedInResidents",
+          "label": "movedInResidents",
+          "type": "editgrid",
+          "validate": {
+            "custom": "valid = data.movedInCount === data.movedInResidents.length;",
+            "customMessage": "The number of new residents entered should match the number specified."
+          },
+          "hideLabel": true,
+          "templates": {
+            "header": "<div class=\"row\">\n  NEW RESIDENTS </div>"
+          },
+          "components": [
+            {
+              "key": "movedInDate",
+              "label": "movedInDate",
+              "format": "yyyy-MM-dd",
+              "tableView": false,
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "validate": {
+                "required": true
+              },
+              "type": "datetime",
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            },
+            {
+              "key": "age",
+              "label": "ageQuestion",
+              "type": "number",
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 110
+              }
+            },
+            {
+              "key": "gender",
+              "label": "genderQuestion",
+              "type": "textfield",
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "employed",
+              "label": "employmentQuestion",
+              "type": "radio",
+              "validate": {
+                "required": true
+              },
+              "values": [
+                {
+                  "label": "yes",
+                  "value": "yes"
+                },
+                {
+                  "label": "no",
+                  "value": "no"
+                }
+              ]
+            },
+            {
+              "key": "occupation",
+              "label": "occupationQuestion",
+              "type": "select",
+              "validate": {
+                "required": true
+              },
+              "conditional": {
+                "show": true,
+                "when": "employed",
+                "eq": "yes"
+              },
+              "data": {
+                "values": [
+                  {
+                    "label": "Koronto Yaqaan",
+                    "value": "korontoYaqaan"
+                  },
+                  {
+                    "label": "Fuundi",
+                    "value": "fuundi"
+                  },
+                  {
+                    "label": "Faryaamo",
+                    "value": "faryaamo"
+                  },
+                  {
+                    "label": "Feeroole ( Ninka Guryaha Shubo)",
+                    "value": "feerooleNinkaGuryahaShubo"
+                  },
+                  {
+                    "label": "Makaaniko (Gawaarida ninka Sameeyo)",
+                    "value": "makaanikoGawaaridaNinkaSameeyo"
+                  },
+                  {
+                    "label": "Tubiiste",
+                    "value": "tubiiste"
+                  },
+                  {
+                    "label": "Xamaali (Muruq Maal)",
+                    "value": "xamaaliMuruqMaal"
+                  },
+                  {
+                    "label": "Rinjiile",
+                    "value": "rinjiile"
+                  },
+                  {
+                    "label": "Farsama yaqaan dabka gawaarida",
+                    "value": "farsamaYaqaanDabkaGawaarida"
+                  },
+                  {
+                    "label": "Caseeye ",
+                    "value": "caseeye"
+                  },
+                  {
+                    "label": "Kooke (Kuwa Cunada kariyo)",
+                    "value": "kookeKuwaCunadaKariyo"
+                  },
+                  {
+                    "label": "Kabalyeeri",
+                    "value": "kabalyeeri"
+                  },
+                  {
+                    "label": "Timajare",
+                    "value": "timajare"
+                  },
+                  {
+                    "label": "Kalkaaliye ",
+                    "value": "kalkaaliye"
+                  },
+                  {
+                    "label": "Doctor",
+                    "value": "doctor"
+                  },
+                  {
+                    "label": "Engineer",
+                    "value": "engineer"
+                  },
+                  {
+                    "label": "Umuliso",
+                    "value": "umuliso"
+                  },
+                  {
+                    "label": "Macalin School",
+                    "value": "macalinSchool"
+                  },
+                  {
+                    "label": "Prof",
+                    "value": "prof"
+                  },
+                  {
+                    "label": "Shaqale dowladeed",
+                    "value": "shaqaleDowladeed"
+                  },
+                  {
+                    "label": "Shaqaale hey,adeed",
+                    "value": "shaqaaleHeyAdeed"
+                  },
+                  {
+                    "label": "Shaqaale ganacsi",
+                    "value": "shaqaaleGanacsi"
+                  },
+                  {
+                    "label": "Ganacsade",
+                    "value": "ganacsade"
+                  },
+                  {
+                    "label": "Arday jamacadeed",
+                    "value": "ardayJamacadeed"
+                  },
+                  {
+                    "label": "Arday iskool",
+                    "value": "ardayIskool"
+                  },
+                  {
+                    "label": "otherSpecify",
+                    "value": "other"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "primaryIncomeSource",
+              "label": "primaryIncomeSourceQuestion",
+              "type": "select",
+              "validate": {
+                "required": true
+              },
+              "conditional": {
+                "show": true,
+                "when": "employed",
+                "eq": "no"
+              },
+              "data": {
+                "values": [
+                  {
+                    "label": "occupation",
+                    "value": "occupation"
+                  },
+                  {
+                    "label": "familyAbroad",
+                    "value": "familyAbroad"
+                  },
+                  {
+                    "label": "financialAid",
+                    "value": "financialAid"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "educationLevel",
+              "label": "educationLevelQuestion",
+              "type": "select",
+              "validate": {
+                "required": true
+              },
+              "dataSrc": "values",
+              "data": {
+                "values": [
+                  {
+                    "label": "none",
+                    "value": "none"
+                  },
+                  {
+                    "label": "primarySchool",
+                    "value": "primarySchool"
+                  },
+                  {
+                    "label": "secondarySchool",
+                    "value": "secondarySchool"
+                  },
+                  {
+                    "label": "university",
+                    "value": "university"
+                  },
+                  {
+                    "label": "islamicStudies",
+                    "value": "islamicStudies"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "monthlyIncome",
+              "label": "monthlyIncomeQuestion",
+              "type": "select",
+              "data": {
+                "values": [
+                  {
+                    "label": "0to99",
+                    "value": "0to99"
+                  },
+                  {
+                    "label": "100to499",
+                    "value": "100to499"
+                  },
+                  {
+                    "label": "500to999",
+                    "value": "500to999"
+                  },
+                  {
+                    "label": "1000to1999",
+                    "value": "1000to1999"
+                  },
+                  {
+                    "label": "2000to4999",
+                    "value": "2000to4999"
+                  },
+                  {
+                    "label": "5000to9999",
+                    "value": "5000to9999"
+                  },
+                  {
+                    "label": "10000to14999",
+                    "value": "10000to14999"
+                  },
+                  {
+                    "label": "15000to19999",
+                    "value": "15000to19999"
+                  },
+                  {
+                    "label": "over20000",
+                    "value": "over20000"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "customText",
+              "key": "customTextSocioeconomicSection",
+              "i18nKey": "healthSection"
+            },
+            {
+              "key": "comorbidities",
+              "type": "selectboxes",
+              "label": "comorbidities",
+              "values": [
+                {
+                  "label": "comorbidity.substanceAbuse",
+                  "value": "substanceAbuse"
+                },
+                {
+                  "label": "comorbidity.anaemia",
+                  "value": "anaemia"
+                },
+                {
+                  "label": "comorbidity.asthma",
+                  "value": "asthma"
+                },
+                {
+                  "label": "comorbidity.nervousSystemCondition",
+                  "value": "nervousSystemCondition"
+                },
+                {
+                  "label": "comorbidity.cancer",
+                  "value": "cancer"
+                },
+                {
+                  "label": "comorbidity.diabetes",
+                  "value": "diabetes"
+                },
+                {
+                  "label": "comorbidity.cardiac",
+                  "value": "cardiac"
+                },
+                {
+                  "label": "comorbidity.hepatitisOrChronicLiverCondition",
+                  "value": "hepatitisOrChronicLiverCondition"
+                },
+                {
+                  "label": "comorbidity.HIV",
+                  "value": "HIV"
+                },
+                {
+                  "label": "comorbidity.hypertension",
+                  "value": "hypertension"
+                },
+                {
+                  "label": "comorbidity.mentalHealthCondition",
+                  "value": "mentalHealthCondition"
+                },
+                {
+                  "label": "comorbidity.stroke",
+                  "value": "stroke"
+                },
+                {
+                  "label": "comorbidity.tuberculosis",
+                  "value": "tuberculosis"
+                },
+                {
+                  "label": "comorbidity.pulmonaryCondition",
+                  "value": "pulmonaryCondition"
+                },
+                {
+                  "label": "comorbidity.immuneImpairment",
+                  "value": "immuneImpairment"
+                },
+                {
+                  "label": "comorbidity.none",
+                  "value": "none"
+                }
+              ],
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "formerSymptoms",
+              "label": "formerSymptoms",
+              "type": "selectboxes",
+              "values": [
+                {
+                  "label": "symptom.abdominalPain",
+                  "value": "abdominalPain"
+                },
+                {
+                  "label": "symptom.cough",
+                  "value": "cough"
+                },
+                {
+                  "label": "symptom.chills",
+                  "value": "chills"
+                },
+                {
+                  "label": "symptom.fever",
+                  "value": "fever"
+                },
+                {
+                  "label": "symptom.olfactoryImpairment",
+                  "value": "olfactoryImpairment"
+                },
+                {
+                  "label": "symptom.gustatoryImpairment",
+                  "value": "gustatoryImpairment"
+                },
+                {
+                  "label": "symptom.nausea",
+                  "value": "nausea"
+                },
+                {
+                  "label": "symptom.shortnessOfBreath",
+                  "value": "shortnessOfBreath"
+                }
+              ],
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "currentSymptoms",
+              "label": "formerSymptoms",
+              "type": "selectboxes",
+              "values": [
+                {
+                  "label": "symptom.abdominalPain",
+                  "value": "abdominalPain"
+                },
+                {
+                  "label": "symptom.cough",
+                  "value": "cough"
+                },
+                {
+                  "label": "symptom.chills",
+                  "value": "chills"
+                },
+                {
+                  "label": "symptom.fever",
+                  "value": "fever"
+                },
+                {
+                  "label": "symptom.olfactoryImpairment",
+                  "value": "olfactoryImpairment"
+                },
+                {
+                  "label": "symptom.gustatoryImpairment",
+                  "value": "gustatoryImpairment"
+                },
+                {
+                  "label": "symptom.nausea",
+                  "value": "nausea"
+                },
+                {
+                  "label": "symptom.shortnessOfBreath",
+                  "value": "shortnessOfBreath"
+                }
+              ],
+              "validate": {
+                "required": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "longtimeResidents",
+      "type": "panel",
+      "components": [
+        {
+          "key": "otherResidents",
+          "label": "otherResidents",
+          "type": "editgrid",
+          "validate": {
+            "minLength": "data.residentsCount;",
+            "custom": "valid = data.residentsCount - data.movedInCount === data.otherResidents.length;",
+            "customMessage": "The number of individuals should match the number of residents in the household."
+          },
+          "openWhenEmpty": true,
+          "hideLabel": true,
+          "templates": {
+            "header": "<div class=\"row\">\n  INDIVIDUALS </div>"
+          },
+          "components": [
+            {
+              "type": "customText",
+              "key": "customTextSocioeconomicSection",
+              "i18nKey": "socioeconomicSection"
+            },
+            {
+              "key": "age",
+              "label": "ageQuestion",
+              "type": "number",
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 110
+              }
+            },
+            {
+              "key": "gender",
+              "label": "genderQuestion",
+              "type": "textfield",
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "employed",
+              "label": "employmentQuestion",
+              "type": "radio",
+              "validate": {
+                "required": true
+              },
+              "values": [
+                {
+                  "label": "yes",
+                  "value": "yes"
+                },
+                {
+                  "label": "no",
+                  "value": "no"
+                }
+              ]
+            },
+            {
+              "key": "occupation",
+              "label": "occupationQuestion",
+              "type": "select",
+              "validate": {
+                "required": true
+              },
+              "conditional": {
+                "show": true,
+                "when": "employed",
+                "eq": "yes"
+              },
+              "data": {
+                "values": [
+                  {
+                    "label": "Koronto Yaqaan",
+                    "value": "korontoYaqaan"
+                  },
+                  {
+                    "label": "Fuundi",
+                    "value": "fuundi"
+                  },
+                  {
+                    "label": "Faryaamo",
+                    "value": "faryaamo"
+                  },
+                  {
+                    "label": "Feeroole ( Ninka Guryaha Shubo)",
+                    "value": "feerooleNinkaGuryahaShubo"
+                  },
+                  {
+                    "label": "Makaaniko (Gawaarida ninka Sameeyo)",
+                    "value": "makaanikoGawaaridaNinkaSameeyo"
+                  },
+                  {
+                    "label": "Tubiiste",
+                    "value": "tubiiste"
+                  },
+                  {
+                    "label": "Xamaali (Muruq Maal)",
+                    "value": "xamaaliMuruqMaal"
+                  },
+                  {
+                    "label": "Rinjiile",
+                    "value": "rinjiile"
+                  },
+                  {
+                    "label": "Farsama yaqaan dabka gawaarida",
+                    "value": "farsamaYaqaanDabkaGawaarida"
+                  },
+                  {
+                    "label": "Caseeye ",
+                    "value": "caseeye"
+                  },
+                  {
+                    "label": "Kooke (Kuwa Cunada kariyo)",
+                    "value": "kookeKuwaCunadaKariyo"
+                  },
+                  {
+                    "label": "Kabalyeeri",
+                    "value": "kabalyeeri"
+                  },
+                  {
+                    "label": "Timajare",
+                    "value": "timajare"
+                  },
+                  {
+                    "label": "Kalkaaliye ",
+                    "value": "kalkaaliye"
+                  },
+                  {
+                    "label": "Doctor",
+                    "value": "doctor"
+                  },
+                  {
+                    "label": "Engineer",
+                    "value": "engineer"
+                  },
+                  {
+                    "label": "Umuliso",
+                    "value": "umuliso"
+                  },
+                  {
+                    "label": "Macalin School",
+                    "value": "macalinSchool"
+                  },
+                  {
+                    "label": "Prof",
+                    "value": "prof"
+                  },
+                  {
+                    "label": "Shaqale dowladeed",
+                    "value": "shaqaleDowladeed"
+                  },
+                  {
+                    "label": "Shaqaale hey,adeed",
+                    "value": "shaqaaleHeyAdeed"
+                  },
+                  {
+                    "label": "Shaqaale ganacsi",
+                    "value": "shaqaaleGanacsi"
+                  },
+                  {
+                    "label": "Ganacsade",
+                    "value": "ganacsade"
+                  },
+                  {
+                    "label": "Arday jamacadeed",
+                    "value": "ardayJamacadeed"
+                  },
+                  {
+                    "label": "Arday iskool",
+                    "value": "ardayIskool"
+                  },
+                  {
+                    "label": "otherSpecify",
+                    "value": "other"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "primaryIncomeSource",
+              "label": "primaryIncomeSourceQuestion",
+              "type": "select",
+              "validate": {
+                "required": true
+              },
+              "conditional": {
+                "show": true,
+                "when": "employed",
+                "eq": "no"
+              },
+              "data": {
+                "values": [
+                  {
+                    "label": "occupation",
+                    "value": "occupation"
+                  },
+                  {
+                    "label": "familyAbroad",
+                    "value": "familyAbroad"
+                  },
+                  {
+                    "label": "financialAid",
+                    "value": "financialAid"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "educationLevel",
+              "label": "educationLevelQuestion",
+              "type": "select",
+              "validate": {
+                "required": true
+              },
+              "dataSrc": "values",
+              "data": {
+                "values": [
+                  {
+                    "label": "none",
+                    "value": "none"
+                  },
+                  {
+                    "label": "primarySchool",
+                    "value": "primarySchool"
+                  },
+                  {
+                    "label": "secondarySchool",
+                    "value": "secondarySchool"
+                  },
+                  {
+                    "label": "university",
+                    "value": "university"
+                  },
+                  {
+                    "label": "islamicStudies",
+                    "value": "islamicStudies"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "monthlyIncome",
+              "label": "monthlyIncomeQuestion",
+              "type": "select",
+              "data": {
+                "values": [
+                  {
+                    "label": "0to99",
+                    "value": "0to99"
+                  },
+                  {
+                    "label": "100to499",
+                    "value": "100to499"
+                  },
+                  {
+                    "label": "500to999",
+                    "value": "500to999"
+                  },
+                  {
+                    "label": "1000to1999",
+                    "value": "1000to1999"
+                  },
+                  {
+                    "label": "2000to4999",
+                    "value": "2000to4999"
+                  },
+                  {
+                    "label": "5000to9999",
+                    "value": "5000to9999"
+                  },
+                  {
+                    "label": "10000to14999",
+                    "value": "10000to14999"
+                  },
+                  {
+                    "label": "15000to19999",
+                    "value": "15000to19999"
+                  },
+                  {
+                    "label": "over20000",
+                    "value": "over20000"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "customText",
+              "key": "customTextSocioeconomicSection",
+              "i18nKey": "healthSection"
+            },
+            {
+              "key": "comorbidities",
+              "type": "selectboxes",
+              "label": "comorbidities",
+              "values": [
+                {
+                  "label": "comorbidity.substanceAbuse",
+                  "value": "substanceAbuse"
+                },
+                {
+                  "label": "comorbidity.anaemia",
+                  "value": "anaemia"
+                },
+                {
+                  "label": "comorbidity.asthma",
+                  "value": "asthma"
+                },
+                {
+                  "label": "comorbidity.nervousSystemCondition",
+                  "value": "nervousSystemCondition"
+                },
+                {
+                  "label": "comorbidity.cancer",
+                  "value": "cancer"
+                },
+                {
+                  "label": "comorbidity.diabetes",
+                  "value": "diabetes"
+                },
+                {
+                  "label": "comorbidity.cardiac",
+                  "value": "cardiac"
+                },
+                {
+                  "label": "comorbidity.hepatitisOrChronicLiverCondition",
+                  "value": "hepatitisOrChronicLiverCondition"
+                },
+                {
+                  "label": "comorbidity.HIV",
+                  "value": "HIV"
+                },
+                {
+                  "label": "comorbidity.hypertension",
+                  "value": "hypertension"
+                },
+                {
+                  "label": "comorbidity.mentalHealthCondition",
+                  "value": "mentalHealthCondition"
+                },
+                {
+                  "label": "comorbidity.stroke",
+                  "value": "stroke"
+                },
+                {
+                  "label": "comorbidity.tuberculosis",
+                  "value": "tuberculosis"
+                },
+                {
+                  "label": "comorbidity.pulmonaryCondition",
+                  "value": "pulmonaryCondition"
+                },
+                {
+                  "label": "comorbidity.immuneImpairment",
+                  "value": "immuneImpairment"
+                },
+                {
+                  "label": "comorbidity.none",
+                  "value": "none"
+                }
+              ],
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "formerSymptoms",
+              "label": "formerSymptoms",
+              "type": "selectboxes",
+              "values": [
+                {
+                  "label": "symptom.abdominalPain",
+                  "value": "abdominalPain"
+                },
+                {
+                  "label": "symptom.cough",
+                  "value": "cough"
+                },
+                {
+                  "label": "symptom.chills",
+                  "value": "chills"
+                },
+                {
+                  "label": "symptom.fever",
+                  "value": "fever"
+                },
+                {
+                  "label": "symptom.olfactoryImpairment",
+                  "value": "olfactoryImpairment"
+                },
+                {
+                  "label": "symptom.gustatoryImpairment",
+                  "value": "gustatoryImpairment"
+                },
+                {
+                  "label": "symptom.nausea",
+                  "value": "nausea"
+                },
+                {
+                  "label": "symptom.shortnessOfBreath",
+                  "value": "shortnessOfBreath"
+                }
+              ],
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "currentSymptoms",
+              "label": "formerSymptoms",
+              "type": "selectboxes",
+              "values": [
+                {
+                  "label": "symptom.abdominalPain",
+                  "value": "abdominalPain"
+                },
+                {
+                  "label": "symptom.cough",
+                  "value": "cough"
+                },
+                {
+                  "label": "symptom.chills",
+                  "value": "chills"
+                },
+                {
+                  "label": "symptom.fever",
+                  "value": "fever"
+                },
+                {
+                  "label": "symptom.olfactoryImpairment",
+                  "value": "olfactoryImpairment"
+                },
+                {
+                  "label": "symptom.gustatoryImpairment",
+                  "value": "gustatoryImpairment"
+                },
+                {
+                  "label": "symptom.nausea",
+                  "value": "nausea"
+                },
+                {
+                  "label": "symptom.shortnessOfBreath",
+                  "value": "shortnessOfBreath"
+                }
+              ],
+              "validate": {
+                "required": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "label": "movedOutResidents",
       "type": "panel",
       "components": [
