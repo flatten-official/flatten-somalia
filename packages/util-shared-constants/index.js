@@ -9,6 +9,13 @@ const Surveys = {
   initialHousehold: {
     key: "initialHousehold",
     enableManualLocation: true,
+    customPageNames: [
+      "basicinfo",
+      "people",
+      "deaths",
+      "socialsurveyquestions",
+      "followupconsent",
+    ],
   },
   hospital: {
     key: "hospital",

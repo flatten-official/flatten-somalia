@@ -51,13 +51,6 @@ export const Surveys = {
     api: endpoints.submitVolunteerForm,
     formIOJSON: initialHouseholdJSON,
     schema: Schemas.initialHousehold,
-    pageNames: [
-      "basicinfo",
-      "people",
-      "deaths",
-      "socialsurveyquestions",
-      "followupconsent",
-    ],
     customSubmitBodyFormatter: initialHouseholdSubmitBodyFormatter,
   },
 };

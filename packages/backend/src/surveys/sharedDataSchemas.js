@@ -5,13 +5,21 @@ const FormSchema = {
   version: { type: String, index: true, required: true }, // eg. '1.0.0'
 };
 
+const DEFAULT_PAGE_NAMES = ["start", "consent", "location"];
+
+const getPageTimingsSchema = (customPageNames = []) => {
+  const schema = {};
+  for (const name of DEFAULT_PAGE_NAMES.concat(customPageNames))
+    schema[name] = Number;
+  return schema;
+};
+
 const getSubmissionMetadata = (
   survey,
   includeTeamName = true,
-  includeAddedBy = true,
-  pages = []
+  includeAddedBy = true
 ) => {
-  let metadata = {
+  const metadata = {
     location: {
       type: {
         lat: Number,
@@ -32,30 +40,21 @@ const getSubmissionMetadata = (
       default: Date.now,
     },
     consentGiven: { type: String, required: true },
-    pageTimings: pages.reduce((acc, curr) => {
-      acc[curr] = { type: Number };
-      return acc;
-    }, {}),
+    pageTimings: getPageTimingsSchema(survey.customPageNames),
   };
 
   if (includeAddedBy)
-    metadata = {
-      ...metadata,
-      addedBy: {
-        type: mongoose.ObjectId,
-        required: true,
-        index: true,
-      },
+    metadata.addedBy = {
+      type: mongoose.ObjectId,
+      required: true,
+      index: true,
     };
 
   if (includeTeamName)
-    metadata = {
-      ...metadata,
-      teamName: {
-        type: String,
-        required: true,
-        index: true,
-      },
+    metadata.teamName = {
+      type: String,
+      required: true,
+      index: true,
     };
 
   return metadata;

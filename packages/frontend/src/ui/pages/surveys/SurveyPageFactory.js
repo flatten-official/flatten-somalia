@@ -30,7 +30,7 @@ const SurveyPageFactory = ({
   customSubmitBodyFormatter,
   enableManualLocation,
   schema,
-  pageNames,
+  customPageNames,
 }) => {
   // Need to use a Class rather than functional components
   // Since the functional component was running into stale closure issues.
@@ -58,7 +58,7 @@ const SurveyPageFactory = ({
           schema,
           this.props.surveyData,
           formIOData,
-          pageNames,
+          customPageNames,
         ];
 
         const body = customSubmitBodyFormatter
