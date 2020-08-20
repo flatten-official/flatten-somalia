@@ -14,14 +14,14 @@ import { logout, UNAUTHENTICATED_CONTEXT } from "../../appActions";
 
 /**
  * This function returns a survey page component.
- * @param surveyKey a string representing the form
+ * @param key a string representing the survey
  * @param i18nTitleKey the i18next key for the form title
  * @param formIOJSON the JSON formIO definition
  * @param onSubmit called with the form data when the form is submitted
  * @param options object containing details on specific form (e.g. should we use manual location picker)
  */
 const SurveyPageFactory = ({
-  surveyKey,
+  key,
   i18nTitleKey,
   formIOJSON,
   onSubmit,
@@ -100,8 +100,7 @@ const SurveyPageFactory = ({
   });
 
   const mapDispatchToProps = (dispatch) => ({
-    restartSurvey: () =>
-      dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
+    restartSurvey: () => dispatch({ type: Types.RESTART_SURVEY, payload: key }),
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),

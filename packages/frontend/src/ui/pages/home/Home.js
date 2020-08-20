@@ -77,7 +77,7 @@ const Home = () => {
       <br />
       <h5 className="homePageSelectFormTitle">{t("formSelectionPrompt")}</h5>
       <HomeSurveyButton survey={Surveys.initialHousehold} />
-      <HomeSurveyButton survey={Surveys.gravedigger} disabled={false} />
+      <HomeSurveyButton survey={Surveys.gravedigger} disabled={true} />
       <HomeSurveyButton survey={Surveys.hospital} disabled={true} />
 
       {hasManageVolunteerPermission && (

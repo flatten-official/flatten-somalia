@@ -33,7 +33,6 @@ const Schemas = {
 export const Surveys = {
   gravedigger: {
     ...SharedSurveyRefs.gravedigger,
-    surveyKey: "graveDigger",
     i18nTitleKey: "graveDiggerTitle",
     api: endpoints.submitGraveDiggerSurvey,
     formIOJSON: graveDiggerSurveyJSON,
@@ -47,7 +46,6 @@ export const Surveys = {
   },
   hospital: {
     ...SharedSurveyRefs.hospital,
-    surveyKey: "hospital",
     i18nTitleKey: "hospitalTitle",
     api: endpoints.submitHospitalSurvey,
     formIOJSON: hospitalSurveyJSON,
@@ -61,7 +59,6 @@ export const Surveys = {
   },
   initialHousehold: {
     ...SharedSurveyRefs.initialHousehold,
-    surveyKey: "initialHousehold",
     i18nTitleKey: "initialHouseholdTitle",
     api: endpoints.submitVolunteerForm,
     formIOJSON: initialHouseholdJSON,
