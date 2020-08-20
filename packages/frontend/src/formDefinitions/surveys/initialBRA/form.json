@@ -138,6 +138,11 @@
           }
         },
         {
+          "i18nKey": "RESIDENTS",
+          "type": "customText",
+          "key": "customTextEResidentsSection"
+        },
+        {
           "key": "residentsCount",
           "label": "residentsCount",
           "type": "number",
@@ -146,294 +151,46 @@
             "min": 0,
             "max": 25
           }
-        }
-      ]
-    },
-    {
-      "key": "individuals",
-      "label": "individuals",
-      "type": "panel",
-      "components": [
+        },
         {
-          "key": "personGrid",
-          "label": "personGrid",
-          "type": "editgrid",
-          "openWhenEmpty": true,
-          "hideLabel": true,
-          "templates": {
-            "header": "<div class=\"row\">\n  Si aad ugu darto mid kale, dhagsii \"Ku dar\".</div>"
-          },
-          "components": [
-            {
-              "type": "customText",
-              "key": "customTextSocioeconomicSection",
-              "i18nKey": "SocioeconomicSection"
-            },
-            {
-              "key": "age",
-              "label": "ageQuestion",
-              "type": "number",
-              "validate": {
-                "required": true,
-                "min": 0,
-                "max": 110
-              }
-            },
-            {
-              "key": "gender",
-              "label": "genderQuestion",
-              "type": "textfield",
-              "validate": {
-                "required": true
-              }
-            },
-            {
-              "key": "employed",
-              "label": "employmentQuestion",
-              "type": "radio",
-              "validate": {
-                "required": true
-              },
-              "values": [
-                {
-                  "label": "yes",
-                  "value": "yes"
-                },
-                {
-                  "label": "no",
-                  "value": "no"
-                }
-              ]
-            },
-            {
-              "key": "occupation",
-              "label": "occupationQuestion",
-              "type": "select",
-              "validate": {
-                "required": true
-              },
-              "conditional": {
-                "show": true,
-                "when": "employed",
-                "eq": "yes"
-              },
-              "data": {
-                "values": [
-                  {
-                    "label": "Koronto Yaqaan",
-                    "value": "korontoYaqaan"
-                  },
-                  {
-                    "label": "Fuundi",
-                    "value": "fuundi"
-                  },
-                  {
-                    "label": "Faryaamo",
-                    "value": "faryaamo"
-                  },
-                  {
-                    "label": "Feeroole ( Ninka Guryaha Shubo)",
-                    "value": "feerooleNinkaGuryahaShubo"
-                  },
-                  {
-                    "label": "Makaaniko (Gawaarida ninka Sameeyo)",
-                    "value": "makaanikoGawaaridaNinkaSameeyo"
-                  },
-                  {
-                    "label": "Tubiiste",
-                    "value": "tubiiste"
-                  },
-                  {
-                    "label": "Xamaali (Muruq Maal)",
-                    "value": "xamaaliMuruqMaal"
-                  },
-                  {
-                    "label": "Rinjiile",
-                    "value": "rinjiile"
-                  },
-                  {
-                    "label": "Farsama yaqaan dabka gawaarida",
-                    "value": "farsamaYaqaanDabkaGawaarida"
-                  },
-                  {
-                    "label": "Caseeye ",
-                    "value": "caseeye"
-                  },
-                  {
-                    "label": "Kooke (Kuwa Cunada kariyo)",
-                    "value": "kookeKuwaCunadaKariyo"
-                  },
-                  {
-                    "label": "Kabalyeeri",
-                    "value": "kabalyeeri"
-                  },
-                  {
-                    "label": "Timajare",
-                    "value": "timajare"
-                  },
-                  {
-                    "label": "Kalkaaliye ",
-                    "value": "kalkaaliye"
-                  },
-                  {
-                    "label": "Doctor",
-                    "value": "doctor"
-                  },
-                  {
-                    "label": "Engineer",
-                    "value": "engineer"
-                  },
-                  {
-                    "label": "Umuliso",
-                    "value": "umuliso"
-                  },
-                  {
-                    "label": "Macalin School",
-                    "value": "macalinSchool"
-                  },
-                  {
-                    "label": "Prof",
-                    "value": "prof"
-                  },
-                  {
-                    "label": "Shaqale dowladeed",
-                    "value": "shaqaleDowladeed"
-                  },
-                  {
-                    "label": "Shaqaale hey,adeed",
-                    "value": "shaqaaleHeyAdeed"
-                  },
-                  {
-                    "label": "Shaqaale ganacsi",
-                    "value": "shaqaaleGanacsi"
-                  },
-                  {
-                    "label": "Ganacsade",
-                    "value": "ganacsade"
-                  },
-                  {
-                    "label": "Arday jamacadeed",
-                    "value": "ardayJamacadeed"
-                  },
-                  {
-                    "label": "Arday iskool",
-                    "value": "ardayIskool"
-                  },
-                  {
-                    "label": "otherSpecify",
-                    "value": "other"
-                  }
-                ]
-              }
-            },
-            {
-              "key": "primaryIncomeSource",
-              "label": "primaryIncomeSourceQuestion",
-              "type": "select",
-              "validate": {
-                "required": true
-              },
-              "conditional": {
-                "show": true,
-                "when": "employed",
-                "eq": "no"
-              },
-              "data": {
-                "values": [
-                  {
-                    "label": "occupation",
-                    "value": "occupation"
-                  },
-                  {
-                    "label": "familyAbroad",
-                    "value": "familyAbroad"
-                  },
-                  {
-                    "label": "financialAid",
-                    "value": "financialAid"
-                  }
-                ]
-              }
-            },
-            {
-              "key": "educationLevel",
-              "label": "educationLevelQuestion",
-              "type": "select",
-              "validate": {
-                "required": true
-              },
-              "dataSrc": "values",
-              "data": {
-                "values": [
-                  {
-                    "label": "none",
-                    "value": "none"
-                  },
-                  {
-                    "label": "primarySchool",
-                    "value": "primarySchool"
-                  },
-                  {
-                    "label": "secondarySchool",
-                    "value": "secondarySchool"
-                  },
-                  {
-                    "label": "university",
-                    "value": "university"
-                  },
-                  {
-                    "label": "islamicStudies",
-                    "value": "islamicStudies"
-                  }
-                ]
-              }
-            },
-            {
-              "key": "monthlyIncome",
-              "label": "monthlyIncomeQuestion",
-              "type": "select",
-              "data": {
-                "values": [
-                  {
-                    "label": "0to99",
-                    "value": "0to99"
-                  },
-                  {
-                    "label": "100to499",
-                    "value": "100to499"
-                  },
-                  {
-                    "label": "500to999",
-                    "value": "500to999"
-                  },
-                  {
-                    "label": "1000to1999",
-                    "value": "1000to1999"
-                  },
-                  {
-                    "label": "2000to4999",
-                    "value": "2000to4999"
-                  },
-                  {
-                    "label": "5000to9999",
-                    "value": "5000to9999"
-                  },
-                  {
-                    "label": "10000to14999",
-                    "value": "10000to14999"
-                  },
-                  {
-                    "label": "15000to19999",
-                    "value": "15000to19999"
-                  },
-                  {
-                    "label": "over20000",
-                    "value": "over20000"
-                  }
-                ]
-              }
-            }
-          ]
+          "key": "birthsCount",
+          "label": "birthsCount",
+          "type": "number",
+          "validate": {
+            "required": true,
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "key": "movedInCount",
+          "label": "movedInCount",
+          "type": "number",
+          "validate": {
+            "required": true,
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "key": "movedOutCount",
+          "label": "movedOutCount",
+          "type": "number",
+          "validate": {
+            "required": true,
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "key": "deathsCount",
+          "label": "deathsCount",
+          "type": "number",
+          "validate": {
+            "required": true,
+            "min": 0,
+            "max": 25
+          }
         }
       ]
     }
