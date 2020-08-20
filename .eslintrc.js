@@ -1,46 +1,32 @@
 const browserPackages = ["packages/frontend/**/*.js"];
+const cloudFunctions = ["packages/db-copy-function/*.js"];
 
 module.exports = {
-  // Stop ESLint from looking for a config files in parent folders
-  root: true,
+  root: true, // Stop ESLint from looking for a config files in parent folders
   env: {
     commonjs: true,
     es6: true,
     node: true,
     jest: true,
-    browser: true,
   },
+  plugins: ["prettier", "jest", "import", "jsx-a11y", "react", "react-hooks"],
   extends: [
     "eslint:recommended",
-    "prettier",
-    "plugin:jest/all",
-    "plugin:flowtype/recommended",
+    "plugin:jest/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
+    "prettier", // must be last to override other formatting rules https://github.com/prettier/eslint-config-prettier#installation
+    "prettier/react",
   ],
-  plugins: [
-    "prettier",
-    "jest",
-    "import",
-    "flowtype",
-    "jsx-a11y",
-    "react",
-    "react-hooks",
-  ],
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
-  },
+  parserOptions: { ecmaVersion: 2018 }, // Node 10 has almost full support for ECMA 2018 see https://node.green/
   rules: {
     "prettier/prettier": "warn",
-    "jest/no-hooks": "off",
-    "jest/prefer-expect-assertions": "off",
-    "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }], // Don't warn for vars starting with _
     "prefer-const": "warn",
     "require-await": "warn",
     "no-return-await": "warn",
     "no-throw-literal": "error",
-    "react/display-name": "warn",
+    "react/display-name": "warn", // Downgrade from error
   },
   overrides: [
     {
@@ -50,9 +36,9 @@ module.exports = {
       },
     },
     {
-      files: ["packages/db-copy-function/*.js"],
+      files: cloudFunctions,
       rules: {
-        "no-console": "off", // Cloud functions can't import the external module
+        "no-console": "off", // Cloud functions can't import workspace dependencies
       },
     },
     {
@@ -60,11 +46,15 @@ module.exports = {
       files: browserPackages,
       parser: "babel-eslint",
       parserOptions: {
-        ecmaVersion: 2018,
         sourceType: "module",
+        ecmaVersion: 2020,
         ecmaFeatures: {
           jsx: true,
         },
+      },
+      env: {
+        browser: true,
+        es6: true,
       },
       rules: {
         "no-console": "warn", // Console is only a warning for browser
