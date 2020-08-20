@@ -1,5 +1,6 @@
 # Somalia Code
 
+![backend-tests](https://github.com/flatten-official/flatten-somalia/workflows/Node.js%20CI/badge.svg)
 <a href="https://codeclimate.com/repos/5eebb93769ce914dc100dcd1/maintainability"><img src="https://api.codeclimate.com/v1/badges/a195459a45a7e562ac07/maintainability" /></a>
 <a href="https://codeclimate.com/repos/5eebb93769ce914dc100dcd1/test_coverage"><img src="https://api.codeclimate.com/v1/badges/a195459a45a7e562ac07/test_coverage" /></a>
 
