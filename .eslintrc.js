@@ -48,6 +48,7 @@ module.exports = {
       files: cloudFunctions,
       rules: {
         "no-console": "off", // Cloud functions can't import workspace dependencies
+        "workspaces/no-cross-imports": "warn", // Cloud functions must be contained within a single file so can't import from another workspace
       },
     },
     {
