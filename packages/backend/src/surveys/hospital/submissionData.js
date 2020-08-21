@@ -24,12 +24,4 @@ const model = Util.createModel("HospitalSurveySubmission", {
   },
 });
 
-const create = async (content) => {
-  const submissionDocument = new model(content);
-  await submissionDocument.validate();
-  return submissionDocument;
-};
-
-const saveAsync = (document) => document.save();
-
-module.exports = { model, saveAsync, create };
+module.exports = { model };
