@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
   const key = req.params.key;
   const surveyConfig = SurveysByKey[key];
 
-  if (!surveyConfig) throw new ApiError("Unknown survey key", 400);
+  if (!surveyConfig) throw new ApiError(`Unknown survey key: ${key}`, 400);
 
   await surveyConfig.api(
     res.locals.volunteer._id,
