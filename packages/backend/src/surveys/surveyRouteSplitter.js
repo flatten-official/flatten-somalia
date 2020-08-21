@@ -1,23 +1,14 @@
-const { Surveys } = require("util-shared-constants");
+const { SurveysByKey } = require("./config");
 const { ApiError } = require("../utils/errors");
-const { submitGravediggerSurvey } = require("./gravedigger/api");
-const { submitHospitalSurvey } = require("./hospital/api");
-const { initialSubmission } = require("./initialHousehold/api");
 const { log } = require("util-logging");
-
-const surveyKeyToApiMap = {
-  [Surveys.gravedigger.key]: submitGravediggerSurvey,
-  [Surveys.hospital.key]: submitHospitalSurvey,
-  [Surveys.initialHousehold.key]: initialSubmission,
-};
 
 module.exports = async (req, res) => {
   const key = req.params.key;
-  const submitApi = surveyKeyToApiMap[key];
+  const surveyConfig = SurveysByKey[key];
 
-  if (!submitApi) throw new ApiError("Unknown survey key", 400);
+  if (!surveyConfig) throw new ApiError("Unknown survey key", 400);
 
-  await submitApi(
+  await surveyConfig.api(
     res.locals.volunteer._id,
     res.locals.volunteer.teamName,
     req.body
