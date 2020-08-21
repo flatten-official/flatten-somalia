@@ -14,9 +14,10 @@ module.exports = (dataModel) => async (
     metadata: {
       addedBy: volunteerId,
       teamName: volunteerTeamName,
+      submissionSchema: schema,
       ...metadata,
     },
-    surveyData: { submissionSchema: schema, ...data },
+    surveyData: data,
   });
 
   await submissionDocument.validate();

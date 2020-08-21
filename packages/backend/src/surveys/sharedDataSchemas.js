@@ -40,7 +40,7 @@ const getSubmissionMetadata = (survey) => {
   };
 
   // The initialHousehold survey specifies these properties outside of the metadata hence why we have a flag to disable this
-  if (!survey.noTeamNameAndAddedByInMetadata)
+  if (!survey.legacyMetadata)
     metadata = {
       ...metadata,
       addedBy: {
@@ -53,6 +53,7 @@ const getSubmissionMetadata = (survey) => {
         required: true,
         index: true,
       },
+      submissionSchema: FormSchema,
     };
 
   return metadata;
