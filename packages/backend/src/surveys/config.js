@@ -1,15 +1,17 @@
-const { Surveys: SharedSurveys } = require("util-shared-constants");
+const { Surveys: SharedSurveysConfig } = require("util-shared-constants");
 
 const Surveys = {
   initialHousehold: {
-    ...SharedSurveys.initialHousehold,
+    ...SharedSurveysConfig.initialHousehold,
     legacyMetadata: true, // This property is due to an old definition of the metadata schema
   },
   gravedigger: {
-    ...SharedSurveys.gravedigger,
+    ...SharedSurveysConfig.gravedigger,
+    collectionName: "GravediggerSurveySubmission",
   },
   hospital: {
-    ...SharedSurveys.hospital,
+    ...SharedSurveysConfig.hospital,
+    collectionName: "HospitalSurveySubmission",
   },
 };
 

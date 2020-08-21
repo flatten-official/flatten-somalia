@@ -1,9 +1,9 @@
 const { Surveys } = require("./config");
 const { ApiError } = require("../utils/errors");
-const defaultApiFactory = require("./defaultApiFactory");
-const { model: gravediggerModel } = require("./gravedigger/submissionData");
+const defaultApiFactory = require("./defaultSurveyFactory/apiFactory");
+const gravediggerModel = require("./gravedigger/model");
+const hospitalModel = require("./hospital/model");
 const { initialSubmission } = require("./initialHousehold/api");
-const { model: hospitalModel } = require("./hospital/submissionData");
 const { log } = require("util-logging");
 
 // Mapping can't be moved to config due to circular dependency (config -> api -> schema -> config)

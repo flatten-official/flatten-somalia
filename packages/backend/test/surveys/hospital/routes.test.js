@@ -1,7 +1,7 @@
 const { getApp } = require("../../../src/app");
 const db = require("util-db/inMemoryDb");
 const { login } = require("../../utils/requests");
-const HospitalSurveySubmission = require("../../../src/surveys/hospital/submissionData");
+const HospitalSurveySubmission = require("../../../src/surveys/hospital/model");
 
 const testData = {
   hospitalRequestBody: {
