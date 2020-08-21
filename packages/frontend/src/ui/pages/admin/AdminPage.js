@@ -22,6 +22,8 @@ const checkHasAccess = (cell) => cell.permissions.includes(Permissions.access);
 /**
  * The enable/disable button formatter
  */
+// suppress warning as it's not a component but a formatter
+// eslint-disable-next-line react/display-name
 const getButtonCellFormatter = (dispatch, t) => (_, cell, __, ___) => {
   const hasAccess = checkHasAccess(cell);
   const { _id, status } = cell;
