@@ -1,12 +1,7 @@
 const { getApp } = require("../../../src/app");
-
 const db = require("util-db/inMemoryDb");
-
 const { login } = require("../../utils/requests");
-
 const GravediggerSurveySubmission = require("../../../src/surveys/gravedigger/submissionData");
-const { getAllPermissionsExcept } = require("../../utils/permissions");
-const { Permissions } = require("../../../src/volunteer/volunteerData");
 
 const testData = {
   gravediggerRequestBody: {
@@ -72,32 +67,6 @@ describe("gravedigger survey", () => {
 
     const submissionDocuments = await GravediggerSurveySubmission.model.find();
     expect(submissionDocuments).toHaveLength(1);
-  });
-
-  it("should fail for a user without the right permissions", async () => {
-    // create two agents each one missing one of the permissions
-    const { agent: agentAccess } = await login(
-      app,
-      getAllPermissionsExcept(Permissions.access)
-    );
-
-    const { agent: agentSubmitForms } = await login(
-      app,
-      getAllPermissionsExcept(Permissions.submitForms)
-    );
-
-    await agentAccess
-      .post("/survey/gravedigger")
-      .send(testData.gravediggerRequestBody)
-      .expect(403);
-
-    await agentSubmitForms
-      .post("/survey/gravedigger")
-      .send(testData.gravediggerRequestBody)
-      .expect(403);
-
-    const submissionDocuments = await GravediggerSurveySubmission.model.find();
-    expect(submissionDocuments).toHaveLength(0);
   });
 
   // eslint-disable-next-line jest/expect-expect

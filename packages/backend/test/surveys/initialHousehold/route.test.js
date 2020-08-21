@@ -12,8 +12,6 @@ const Submission = require("../../../src/surveys/initialHousehold/submissionData
 const Household = require("../../../src/surveys/initialHousehold/householdData");
 const Person = require("../../../src/surveys/initialHousehold/peopleData");
 const { sleep } = require("../../utils/time");
-const { getAllPermissionsExcept } = require("../../utils/permissions");
-const { Permissions } = require("../../../src/volunteer/volunteerData");
 
 const INVALID_REQUEST_BODIES = [
   {},
@@ -1740,37 +1738,6 @@ describe("test /survey/initialHousehold", () => {
       expect(allPeople).toHaveLength(2);
     }
   );
-
-  it("should fail for a user without access or submitForm permissions", async () => {
-    // create two agents each one missing one of the permissions
-    const { agent: agentAccess } = await login(
-      app,
-      getAllPermissionsExcept(Permissions.access)
-    );
-
-    const { agent: agentSubmitForms } = await login(
-      app,
-      getAllPermissionsExcept(Permissions.submitForms)
-    );
-
-    await agentAccess
-      .post("/survey/initialHousehold")
-      .send(VALID_REQ_BODIES[0])
-      .expect(403);
-
-    await agentSubmitForms
-      .post("/survey/initialHousehold")
-      .send(VALID_REQ_BODIES[1])
-      .expect(403);
-
-    const allSubmissions = await Submission.model.find();
-    const allHouseholds = await Household.model.find();
-    const allPeople = await Person.model.find();
-
-    expect(allSubmissions).toHaveLength(0);
-    expect(allHouseholds).toHaveLength(0);
-    expect(allPeople).toHaveLength(0);
-  });
 
   it("should fail for an invalid submission", async () => {
     const { agent } = await login(app);
