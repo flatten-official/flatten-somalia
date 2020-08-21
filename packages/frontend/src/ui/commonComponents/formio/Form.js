@@ -38,6 +38,8 @@ const Form = ({
       await submitHook(submission.data);
       setSubmitted(true);
     } catch (e) {
+      // suppress warning as it can be useful even in production to debug such errors
+      // eslint-disable-next-line no-console
       console.error(e);
       next(e);
     }

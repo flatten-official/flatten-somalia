@@ -9,12 +9,21 @@ module.exports = {
     node: true,
     jest: true,
   },
-  plugins: ["prettier", "jest", "import", "jsx-a11y", "react", "react-hooks"],
+  plugins: [
+    "prettier",
+    "jest",
+    "import",
+    "jsx-a11y",
+    "react",
+    "react-hooks",
+    "workspaces",
+  ],
   extends: [
     "eslint:recommended",
     "plugin:jest/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
+    "plugin:workspaces/recommended",
     "prettier", // must be last to override other formatting rules https://github.com/prettier/eslint-config-prettier#installation
     "prettier/react",
   ],
@@ -39,6 +48,7 @@ module.exports = {
       files: cloudFunctions,
       rules: {
         "no-console": "off", // Cloud functions can't import workspace dependencies
+        "workspaces/no-cross-imports": "warn", // Cloud functions must be contained within a single file so can't import from another workspace
       },
     },
     {

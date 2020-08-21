@@ -1,4 +1,6 @@
 import axios from "axios";
+// (incorrectly flagged because of name collision)
+// eslint-disable-next-line workspaces/require-dependency
 import backend from "./backend";
 
 const axiosClient = axios.create({ baseURL: backend, withCredentials: true });
