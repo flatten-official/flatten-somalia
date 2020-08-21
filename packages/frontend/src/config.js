@@ -31,24 +31,18 @@ export const Surveys = {
   gravedigger: {
     ...SharedSurveyRefs.gravedigger,
     i18nTitleKey: "graveDiggerTitle",
-    api: endpoints.submitGraveDiggerSurvey,
     formIOJSON: graveDiggerSurveyJSON,
     schema: Schemas.gravedigger,
-    options: {
-      enableManualLocation: false,
-    },
   },
   hospital: {
     ...SharedSurveyRefs.hospital,
     i18nTitleKey: "hospitalTitle",
-    api: endpoints.submitHospitalSurvey,
     formIOJSON: hospitalSurveyJSON,
     schema: Schemas.hospital,
   },
   initialHousehold: {
     ...SharedSurveyRefs.initialHousehold,
     i18nTitleKey: "initialHouseholdTitle",
-    api: endpoints.submitVolunteerForm,
     formIOJSON: initialHouseholdJSON,
     schema: Schemas.initialHousehold,
     customSubmitBodyFormatter: initialHouseholdSubmitBodyFormatter,
