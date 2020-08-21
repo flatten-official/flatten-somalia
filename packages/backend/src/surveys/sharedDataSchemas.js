@@ -14,12 +14,8 @@ const getPageTimingsSchema = (customPageNames = []) => {
   return schema;
 };
 
-const getSubmissionMetadata = (
-  survey,
-  includeTeamName = true,
-  includeAddedBy = true
-) => {
-  const metadata = {
+const getSubmissionMetadata = (survey) => {
+  let metadata = {
     location: {
       type: {
         lat: Number,
@@ -43,18 +39,20 @@ const getSubmissionMetadata = (
     pageTimings: getPageTimingsSchema(survey.customPageNames),
   };
 
-  if (includeAddedBy)
-    metadata.addedBy = {
-      type: mongoose.ObjectId,
-      required: true,
-      index: true,
-    };
-
-  if (includeTeamName)
-    metadata.teamName = {
-      type: String,
-      required: true,
-      index: true,
+  // The initialHousehold survey specifies these properties outside of the metadata hence why we have a flag to disable this
+  if (!survey.noTeamNameAndAddedByInMetadata)
+    metadata = {
+      ...metadata,
+      addedBy: {
+        type: mongoose.ObjectId,
+        required: true,
+        index: true,
+      },
+      teamName: {
+        type: String,
+        required: true,
+        index: true,
+      },
     };
 
   return metadata;

@@ -1,6 +1,6 @@
 const { FormSchema, getSubmissionMetadata } = require("../sharedDataSchemas");
 const Util = require("../../utils/mongoose");
-const { Surveys } = require("util-shared-constants");
+const { Surveys } = require("../config");
 
 const model = Util.createModel("HospitalSurveySubmission", {
   metadata: getSubmissionMetadata(Surveys.hospital),

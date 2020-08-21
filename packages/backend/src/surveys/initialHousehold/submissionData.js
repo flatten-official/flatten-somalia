@@ -1,4 +1,4 @@
-const { Surveys } = require("util-shared-constants");
+const { Surveys } = require("../config");
 const { mongoose } = require("util-db");
 const { createModel } = require("../../utils/mongoose");
 const { getSubmissionMetadata, FormSchema } = require("../sharedDataSchemas");
@@ -42,7 +42,7 @@ const model = createModel("Submission", {
   },
   // form schema version (the thing contained in the models object)
   submissionSchema: FormSchema,
-  metadata: getSubmissionMetadata(Surveys.initialHousehold, false, false),
+  metadata: getSubmissionMetadata(Surveys.initialHousehold),
   // this is filled in when this submissionInitial has been followed up with
   // submissionInitial -> household
   followUp: {

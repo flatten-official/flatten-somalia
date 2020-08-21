@@ -1,4 +1,4 @@
-const { Surveys } = require("util-shared-constants");
+const { Surveys } = require("../config");
 const { FormSchema, getSubmissionMetadata } = require("../sharedDataSchemas");
 const Util = require("../../utils/mongoose");
 
