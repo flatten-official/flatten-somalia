@@ -27,23 +27,25 @@ const Schemas = {
 };
 
 export const Surveys = {
-  gravedigger: {
-    ...SharedSurveyRefs.gravedigger,
-    i18nTitleKey: "graveDiggerTitle",
-    formIOJSON: graveDiggerSurveyJSON,
-    schema: Schemas.gravedigger,
-  },
-  hospital: {
-    ...SharedSurveyRefs.hospital,
-    i18nTitleKey: "hospitalTitle",
-    formIOJSON: hospitalSurveyJSON,
-    schema: Schemas.hospital,
-  },
   initialHousehold: {
     ...SharedSurveyRefs.initialHousehold,
     i18nTitleKey: "initialHouseholdTitle",
     formIOJSON: initialHouseholdJSON,
     schema: Schemas.initialHousehold,
     customSubmitBodyFormatter: initialHouseholdSubmitBodyFormatter,
+  },
+  gravedigger: {
+    ...SharedSurveyRefs.gravedigger,
+    i18nTitleKey: "graveDiggerTitle",
+    formIOJSON: graveDiggerSurveyJSON,
+    schema: Schemas.gravedigger,
+    disabled: true,
+  },
+  hospital: {
+    ...SharedSurveyRefs.hospital,
+    i18nTitleKey: "hospitalTitle",
+    formIOJSON: hospitalSurveyJSON,
+    schema: Schemas.hospital,
+    disabled: true,
   },
 };

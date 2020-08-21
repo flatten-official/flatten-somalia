@@ -33,7 +33,7 @@ const AuthenticatedAppContent = () => {
     />
   );
 
-  const makePrivateRoute = (path, comp, requiredPermission) => (
+  const makePrivateRoute = (path, comp, requiredPermission, key) => (
     <Route
       exact
       path={path}
@@ -41,6 +41,7 @@ const AuthenticatedAppContent = () => {
         <PrivatePageWrapper
           comp={comp}
           requiredPermission={requiredPermission}
+          key={key}
         />
       )}
     />
@@ -50,16 +51,18 @@ const AuthenticatedAppContent = () => {
     makePrivateRoute(
       Routes.surveyPrefix + survey.key,
       SurveyPageFactory(survey),
-      Permissions.submitForms
+      Permissions.submitForms,
+      survey.key
     );
 
   return (
     <div className="container" id="main">
       <Switch>
         {getHomePageRoute()}
-        {makeSurveyRoute(Surveys.initialHousehold)}
-        {makeSurveyRoute(Surveys.gravedigger)}
-        {makeSurveyRoute(Surveys.hospital)}
+        {
+          // Make a route for each survey
+          Object.values(Surveys).map((survey) => makeSurveyRoute(survey))
+        }
         {makePrivateRoute(
           Routes.addVolunteer,
           AddVolunteerPage,

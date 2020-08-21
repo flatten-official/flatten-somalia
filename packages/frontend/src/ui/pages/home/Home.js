@@ -28,25 +28,10 @@ HomeButton.propTypes = {
   text: PropTypes.string,
 };
 
-const HomeSurveyButton = ({ survey, ...options }) => {
-  const { t } = useTranslation("Surveys");
-
-  return (
-    <HomeButton
-      route={Routes.surveyPrefix + survey.key}
-      text={t(survey.i18nTitleKey)}
-      {...options}
-    />
-  );
-};
-
-HomeSurveyButton.propTypes = {
-  survey: PropTypes.object,
-};
-
 const Home = () => {
   const { t } = useTranslation("Home");
   const { t: tAdmin } = useTranslation("Admin");
+  const { t: tSurveys } = useTranslation("Surveys");
   const authUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
@@ -76,10 +61,17 @@ const Home = () => {
       </h5>
       <br />
       <h5 className="homePageSelectFormTitle">{t("formSelectionPrompt")}</h5>
-      <HomeSurveyButton survey={Surveys.initialHousehold} />
-      <HomeSurveyButton survey={Surveys.gravedigger} disabled={true} />
-      <HomeSurveyButton survey={Surveys.hospital} disabled={true} />
-
+      {
+        // Make a survey button for each survey
+        Object.values(Surveys).map((survey) => (
+          <HomeButton
+            key={survey.key}
+            route={Routes.surveyPrefix + survey.key}
+            text={tSurveys(survey.i18nTitleKey)}
+            disabled={survey.disabled}
+          />
+        ))
+      }
       {hasManageVolunteerPermission && (
         <HomeButton
           route={Routes.addVolunteer}
