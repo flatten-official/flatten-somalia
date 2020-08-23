@@ -203,8 +203,7 @@
           "label": "<h3>newbornResidents</h3>",
           "type": "editgrid",
           "validate": {
-            "custom": "valid = data.newbornResidents.length == data.birthsCount;",
-            "customMessage": "The number of newborns should match the number of residents in the household."
+            "custom": "valid = data.newbornResidents.length == data.birthsCount ? true : data.newbornResidents.length + ' / ' + data.birthsCount;"
           },
           "openWhenEmpty": false,
           "hideLabel": false,
