@@ -3,7 +3,8 @@
     "householdResidents": null,
     "adults": null,
     "newborns": null,
-    "deaths": null
+    "deaths": null,
+    "contactTracing": null
   },
   "question": {
     "residentsCount": null,
