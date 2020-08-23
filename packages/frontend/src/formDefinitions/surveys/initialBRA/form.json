@@ -276,6 +276,32 @@
           },
           "components": [
             {
+              "key": "status",
+              "label": "question.sectionStatus",
+              "type": "radio",
+              "validate": {
+                "required": true
+              },
+              "values": [
+                {
+                  "label": "resident.sectionConsentGiven",
+                  "value": "consentGiven"
+                },
+                {
+                  "label": "resident.sectionConsentDenied",
+                  "value": "consentDenied"
+                },
+                {
+                  "label": "resident.sectionConsentGiven",
+                  "value": "completedByProxy"
+                },
+                {
+                  "label": "resident.sectionCompletedByProxy",
+                  "value": "unavailable"
+                }
+              ]
+            },
+            {
               "key": "isLongtimeResident",
               "label": "question.isLongtimeResident",
               "type": "radio",

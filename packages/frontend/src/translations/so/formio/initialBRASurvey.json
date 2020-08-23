@@ -13,6 +13,14 @@
     "movedOutCount": null,
     "deathsCount": null
   },
+  "resident": {
+    "longTerm": null,
+    "movedIn": null,
+    "sectionConsentGiven": null,
+    "sectionConsentDenied": null,
+    "sectionCompletedByProxy": null,
+    "unavailable": null
+  },
   "symptom": {
     "abdominalPain": null,
     "cough": null,
