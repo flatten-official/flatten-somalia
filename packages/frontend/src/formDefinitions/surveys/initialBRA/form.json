@@ -200,16 +200,16 @@
       "components": [
         {
           "key": "newbornResidents",
-          "label": "newbornResidents",
+          "label": "<h3>newbornResidents</h3>",
           "type": "editgrid",
           "validate": {
             "custom": "valid = data.newbornResidents.length == data.birthsCount;",
             "customMessage": "The number of newborns should match the number of residents in the household."
           },
           "openWhenEmpty": false,
-          "hideLabel": true,
+          "hideLabel": false,
           "templates": {
-            "header": "<div class=\"row\">\n  NEWBORNS </div>"
+            "header": "<div class=\"row\">To add another, click '+ Ku dar'.<br>To change the required number of newborns, go to the first page.</div>"
           },
           "components": [
             {
