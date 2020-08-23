@@ -23,6 +23,16 @@
     "nausea": null,
     "shortnessOfBreath": null
   },
+  "symptomOnset": {
+    "abdominalPain": null,
+    "cough": null,
+    "chills": null,
+    "fever": null,
+    "olfactoryImpairment": null,
+    "gustatoryImpairment": null,
+    "nausea": null,
+    "shortnessOfBreath": null
+  },
   "comorbidity": {
     "substanceAbuse": null,
     "anaemia": null,
