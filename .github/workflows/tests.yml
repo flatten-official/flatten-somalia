@@ -23,7 +23,7 @@ jobs:
     - name: Run ESLint
       run: eslint .
     - name: Run tests
-      uses: yarn test
+      run: yarn test
       env:
         DISABLE_TRANSACTIONS: TRUE
     - name: Upload code coverage to Code Climate
