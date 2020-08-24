@@ -5,7 +5,7 @@
   "dependencies": {
     "backend": "1.0.0",
     "dotenv": "^8.2.0",
-    "expect": "^26.1.0",
+    "expect": "^26.4.1",
     "util-config": "^1.0.0",
     "util-gcp": "1.0.0",
     "util-logging": "1.0.0"

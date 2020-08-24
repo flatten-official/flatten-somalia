@@ -22,7 +22,7 @@ We use yarn workspaces which allow multiple "packages" to exist in the same repo
 
 - `yarn auth`: Authenticate with Google and set the project to staging. Required to run the backend server.
 
-- `yarn dev`: Runs the backend server & frontend website locally. Also exists `yarn dev-backend` and `yarn dev-frontend` for running only one of the two.
+- `yarn dev`: Runs the backend server & frontend website locally. To run them individually, use `yarn dev-backend` or `yarn dev-frontend`.
 
 - `yarn lint`: Lists ESLint errors and fixes minor ones.
 

@@ -10,7 +10,7 @@
     "doc": "apidoc -i src -o ../../docs/api-generated && open-cli ../../docs/api-generated/index.html"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.1.1",
+    "@sendgrid/mail": "^7.2.4",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
