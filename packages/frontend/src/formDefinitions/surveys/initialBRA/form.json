@@ -208,7 +208,7 @@
           "openWhenEmpty": false,
           "hideLabel": false,
           "templates": {
-            "header": "<div class=\"row\">To add another, click '+ Ku dar'.<br>To change the required number of newborns, go to the first page.</div>"
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the required number of newborns, go to the first page.</div>"
           },
           "components": [
             {
@@ -265,13 +265,12 @@
           "type": "editgrid",
           "validate": {
             "minLength": "data.residentsCount;",
-            "custom": "valid = data.residentsCount - data.birthsCount === data.adults.length;",
-            "customMessage": "The number of individuals should match the number of residents in the household."
+            "custom": "let longtimers = data.adults.filter(o => o.isLongtimeResident === 'yes').length; let newResidents = data.adults.length - longtimers; console.log(longtimers); valid = data.residentsCount - data.birthsCount === longtimers && data.movedInCount === newResidents ? true : longtimers + ' / ' + (data.residentsCount - data.birthsCount - data.movedInCount) + ' longtime residents,    ' + newResidents + ' / ' + data.movedInCount + ' new residents.';"
           },
           "openWhenEmpty": true,
           "hideLabel": true,
           "templates": {
-            "header": "<div class=\"row\">\n INDIVIDUALS </div>"
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of longtime or new residents, go to the first page.</div>"
           },
           "components": [
             {
@@ -968,12 +967,11 @@
           "type": "editgrid",
           "validate": {
             "minLength": "data.residentsCount;",
-            "custom": "valid = data.movedOutCount === data.movedOut.length;",
-            "customMessage": "The number of individuals who moved out should match the number entered."
+            "custom": "valid = data.movedOutCount === data.movedOut.length ? true : data.movedOut.length + ' / ' + data.movedOutCount;"
           },
           "hideLabel": true,
           "templates": {
-            "header": "<div class=\"row\">\n  FORMER RESIDENTS </div>"
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of residents having moved out, go to the first page.</div>"
           },
           "components": [
             {
@@ -1030,12 +1028,11 @@
           "label": "deaths",
           "type": "editgrid",
           "validate": {
-            "custom": "valid = data.deathsCount === data.deaths.length;",
-            "customMessage": "The number of deceased individuals should match the number entered."
+            "custom": "valid = data.deathsCount === data.deaths.length ? true : data.deaths.length + ' / ' + data.deathsCount;"
           },
           "hideLabel": true,
           "templates": {
-            "header": "<div class=\"row\">\n  DECEASED RESIDENTS </div>"
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of deaths, go to the first page.</div>"
           },
           "components": [
             {
