@@ -10,7 +10,7 @@ To test this repository you need to run both the frontend (this package) and the
 
 2. Copy the content of `./src/api/backend.dev.js` to a new file called `./src/api/backend.js`
 
-3. To be able to Login ask Martin or Arthur to add you to the volunteer staging database.
+3. To be able to Login ask Arthur, Martin, or Philip-Nicolas to add you to the volunteer staging database.
 
 ## Modifying forms
 
