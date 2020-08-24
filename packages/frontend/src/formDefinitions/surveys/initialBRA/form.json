@@ -290,11 +290,11 @@
                   "value": "consentDenied"
                 },
                 {
-                  "label": "resident.sectionConsentGiven",
+                  "label": "resident.sectionCompletedByProxy",
                   "value": "completedByProxy"
                 },
                 {
-                  "label": "resident.sectionCompletedByProxy",
+                  "label": "resident.unavailable",
                   "value": "unavailable"
                 }
               ]
