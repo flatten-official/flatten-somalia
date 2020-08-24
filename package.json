@@ -12,6 +12,7 @@
     "build-frontend": "node scripts/frontend/build.js",
     "serve-frontend": "serve --single --listen 80 ./build",
     "lint": "eslint --fix .",
+    "lint-no-fix": "eslint .",
     "test-cloud-func": "node scripts/cloudFunctionLauncher.js",
     "auth": "gcloud auth login && gcloud auth application-default login && gcloud config set project flatten-staging-271921",
     "test": "jest",

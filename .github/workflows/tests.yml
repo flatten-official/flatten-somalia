@@ -21,7 +21,7 @@ jobs:
     - name: Install packages
       run: yarn install
     - name: Run ESLint
-      run: eslint .
+      run: yarn lint-no-fix
     - name: Run tests
       run: yarn test
       env:
