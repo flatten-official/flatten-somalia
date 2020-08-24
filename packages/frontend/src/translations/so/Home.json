@@ -1,0 +1,8 @@
+{
+  "welcome": "Soo dhawaw. Isxilqaan!",
+  "formSelectionPrompt": "Dooro Foomka aad u baahantahay:",
+  "nameMessageTitle" : "Magac:",
+  "nameMessageResponse" : "{{name}}",
+  "teamNameMessageTitle" : "Kooxda:",
+  "teamNameMessageResponse" : "{{teamName}}"
+}

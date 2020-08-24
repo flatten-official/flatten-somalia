@@ -4,9 +4,9 @@
 <a href="https://codeclimate.com/repos/5eebb93769ce914dc100dcd1/maintainability"><img src="https://api.codeclimate.com/v1/badges/a195459a45a7e562ac07/maintainability" /></a>
 <a href="https://codeclimate.com/repos/5eebb93769ce914dc100dcd1/test_coverage"><img src="https://api.codeclimate.com/v1/badges/a195459a45a7e562ac07/test_coverage" /></a>
 
-This repository contains the code used in Somalia (except for frontend which will be merged later).
+This repository contains the code used in Somalia.
 
-We use yarn workspaces which all multiple "packages" to exist in the same space.
+We use yarn workspaces which allow multiple "packages" to exist in the same repository.
 
 ## Setup
 
@@ -14,24 +14,21 @@ We use yarn workspaces which all multiple "packages" to exist in the same space.
 
 2. In the root directory, run `yarn` (or `yarn install`) to install the dependencies.
 
-3. Enable ESLint in your IDE (normally a plugin to install). ESLint is a code linter that checks logic and syntax.
-ESLint is configured with Prettier to also enforce a standard formatting.
+3. Enable ESLint in your IDE (normally a plugin to install). ESLint is a code linter that checks logic, syntax & formatting.
 
 4. Follow instructions for the specific package you're working in if any (see README's in `packages/`)
 
 ## Available commands
 
-- `yarn dev`: Runs the backend server locally
+- `yarn auth`: Authenticate with Google and set the project to staging. Required to run the backend server.
 
-- `yarn lint`: Lists ESLint errors and fixes minor ones
+- `yarn dev`: Runs the backend server & frontend website locally. To run them individually, use `yarn dev-backend` or `yarn dev-frontend`.
+
+- `yarn lint`: Lists ESLint errors and fixes minor ones.
 
 - `yarn test-cloud-func [PATH]`: Simulates running a cloud function but runs it locally. (e.g. `yarn cloud-func packages/db-copy-function`)
 
-- `yarn auth`: Authenticate with Google and set the project to staging
-
-- `yarn auth-no-browser`: Sometimes authentication fails in the browser, this is a workaround.
-
-- `yarn deploy`: Deploys the backend to the staging servers
+- `yarn deploy-both`: Deploys the backend & frontend to the staging servers. Also exists `yarn deploy-backend` & `yarn deploy-frontend`.
 
 - `yarn test`: Runs the jest tests
 
@@ -40,6 +37,10 @@ ESLint is configured with Prettier to also enforce a standard formatting.
 - `yarn depcheck`: Check for missing or unused dependencies in all packages.
 
 - `yarn script <SCRIPT-NAME>`: Runs a database script from the `db-scripts` package. `<SCRIPT-NAME>` is the name of the script's directory in `packages/db-scripts/src/`.
+
+- `yarn build-frontend`: Builds the frontend as it would be when it's deployed.
+
+- `yarn serve-frontend`: Can be run after `yarn build-frontend` to serve the build on `localhost`.
 
 ## Technical details
 

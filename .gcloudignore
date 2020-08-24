@@ -23,6 +23,7 @@ jest.config.js
 /scripts/*
 # Except
 !/scripts/createBranchJson.js
+!/scripts/frontend
 
 # the following line adds everything in .gitignore to this file (even though the line is a comment)
 #!include:.gitignore

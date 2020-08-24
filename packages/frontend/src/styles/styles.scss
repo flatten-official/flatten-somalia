@@ -1,0 +1,184 @@
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #868e96;
+$gray-700: #495057;
+$gray-800: #373a3c;
+$gray-900: #212529;
+$black: #000;
+
+$blue: #2780e3;
+$indigo: #6610f2;
+$purple: #613d7c;
+$pink: #e83e8c;
+$red: #ff0039;
+$orange: #f2661f;
+$yellow: #bed32b;
+$green: #3fb618;
+$teal: #20c997;
+$cyan: #9954bb;
+$lightblue: lighten($blue, 20%);
+
+$primary: $blue;
+$secondary: $orange;
+$success: $green;
+$info: $lightblue;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-800;
+
+$background-green: #ebf6ee;
+
+$content-width: 800px; // the max width of the main content
+
+// TODO Switch to @use
+// https://sass-lang.com/documentation/at-rules/import#main-content
+@import "../../../../node_modules/bootswatch/dist/flatly/variables";
+@import "../../../../node_modules/bootstrap/scss/bootstrap";
+@import "../../../../node_modules/bootswatch/dist/flatly/bootswatch";
+$fa-font-path: "../fonts";
+@import "../../../../node_modules/formiojs/dist/formio.full.css";
+
+// Applies to all
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+.app {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh; // Min height 100% of view height (effectively pushes the footer to the bottom of the page)
+}
+
+.appContent {
+  flex: 1; // Makes content auto expand to fill the page (i.e. footer is pushed to the bottom)
+  width: $content-width; // Fix width allows margin auto, on smaller devices with is 100vm (see below)
+  padding: 30px 10px; // 10px margin really only affects mobile
+  margin: 0 auto; // Center element in page
+  text-align: center; // By default center text
+}
+
+@media only screen and (max-width: $content-width) {
+  .appContent {
+    width: 100vw; // smaller than 800px set the width to the screen
+  }
+}
+
+.header {
+  background-color: $background-green;
+  padding: 10px;
+}
+
+.wordmark {
+  letter-spacing: 0.75px;
+  padding: 5px 30px 0 5%; // 5px top cause for some reason it looks offset without.
+}
+
+.homePageTitle {
+  font-size: 32px;
+  letter-spacing: 0.75px;
+  color: $black;
+  padding-bottom: 10px;
+  padding-top: 30px;
+}
+
+.form {
+  text-align: left; // Reset to default alignment for forms
+}
+
+.homePageSelectFormTitle {
+  letter-spacing: 0.75px;
+  margin: 40px 0 20px;
+  font-size: 26px;
+  display: inline-block;
+}
+
+.map {
+  height: 70vh;
+  margin: 30px 0;
+}
+
+.btn-light {
+  background-color: #f5f3f2;
+}
+
+.btn-lg {
+  font-size: 22px;
+  margin: 5px 15%;
+  padding: 10px 30px;
+  width: 70%;
+}
+
+.btn-sm {
+  font-size: 18px;
+  margin: 3px 8%;
+  padding: 5px 15px;
+  width: 40%;
+}
+
+.btn-light:hover {
+  background-color: #bbccee;
+}
+
+.btn-light:disabled {
+  color: #b1b1b1;
+  background-color: #faf6f6;
+}
+
+.locationPickerButtons {
+  text-align: right;
+}
+
+.locationPickerCancel {
+  margin: 0 10px 0 0; // 10px spacing between buttons
+}
+
+.submissionPageTitle {
+  padding: 0 0 15px;
+}
+
+.homePageSubheadingsBlue{
+  color: #4285F4;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.homePageSubheadings{
+  padding-left: 5px;
+  color: $black;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.footer {
+  padding: 15px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.footerLink {
+  color: black;
+  text-decoration: underline;
+}
+
+.footerLink:hover {
+  color: $blue;
+}
+
+.spinner {
+  margin: 10px auto;
+}
+
+.spinnerText {
+  margin: auto;
+}
+
+// Hide the form wizard navigation
+[id^="wizard-"][id$="-header"] {
+  display: none;
+}
