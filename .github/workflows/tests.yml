@@ -31,6 +31,7 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
+        coverageCommand: "echo -" # A useless command since the coverage is already generated in the previous steps.
         coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
       
 
