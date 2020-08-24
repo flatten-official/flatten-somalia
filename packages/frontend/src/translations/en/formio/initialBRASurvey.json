@@ -11,7 +11,8 @@
     "birthsCount": null,
     "movedInCount": null,
     "movedOutCount": null,
-    "deathsCount": null
+    "deathsCount": null,
+    "sectionStatus": null
   },
   "resident": {
     "longTerm": null,
