@@ -5,6 +5,8 @@ Throughout the process you can use existing surveys (often in sister directories
 
 ## Step 1: Add to `util-shared-constants`
 
+### Step 1a: Add to the configuration
+
 `util-shared-constants` contains survey definitions that are shared between the frontend and the backend.
 
 Add your survey to the `util-shared-constants` package in the `Surveys` object of `index.js`.
@@ -15,6 +17,7 @@ Example:
 const Surveys = {
   myNewSurvey: {
     key: "uniqueKey",
+    version: "1.0.0",
     enableManualLocation: false,
     customPageNames: ["start", "mainInfo"],
   },
@@ -26,6 +29,8 @@ Configuration parameters:
 - `key`: The key is used heavily throughout the code (e.g. API route, Redux store, URL).
   Make sure to use a unique key that isn't used in the other objects.
 
+- `version`: The current version of the survey. Should be changed whenever the survey changes.
+
 - `enableManualLocation`: If true, a location is required.
   The user will be prompted to select a location on a map
   if their device can't retrieve their location automatically.
@@ -36,6 +41,11 @@ Configuration parameters:
   the time the user spends on each page will be recorded in the database (under `metadata.pageTimings`).
   Don't include a name for the last page as that is simply the time when the form is submitted.
 
+### Step 1b: Create a change log
+
+In `util-shared-constants/surveyChangeLogs` create a file that will record the changes made to the survey.
+Ensure your version matches what you specified in step 1a. Use the other change logs as reference.
+
 ## Step 2: Add to `frontend`
 
 ### Step 2a: Add the FormIO survey definition
@@ -45,9 +55,7 @@ Many parameters can be excluded from the schema as we don't use FormIO's backend
 When building the JSON survey definition, your best course of action is taking examples from the existing surveys.
 You can also reference FormIO's wiki linked above.
 
-Once you have the JSON survey definition, create a folder in `src/formDefinitions/surveys` and add your JSON file to that folder.
-
-Then also add a `CHANGELOG.md` in that folder to keep track of changes to the form definition.
+Once you have the JSON survey definition, add it to `src/formDefinitions/surveys`.
 
 ### Step 2b: Add to the configuration
 
@@ -58,36 +66,22 @@ For example:
 ```javascript
 const myNewSurveyFormIOJSONDefinition = require("path to json from step 2a");
 
-const Schemas = {
-  myNewSurvey: {
-    form: "myNewSurvey",
-    version: "1.0.0", // should match version in CHANGELOG.txt
-  },
-};
-
 export const Surveys = {
   myNewSurvey: {
     ...SharedSurveyRefs.myNewSurvey, // This line is required so that all the shared config from step 1 are available to the frontend package
     i18nTitleKey: "myNewSurveyTitle",
     formIOJSON: myNewSurveyFormIOJSONDefinition,
-    schema: Schemas.myNewSurvey,
     // customSubmitBodyFormatter: (schema, storeData, formioData, pageNames) =>
     //   requestBody,
   },
 };
 ```
 
-Schema parameters:
-
-- `form`: A string that isn't passed on to the database, supposedly to help with identifying surveys.
-  This hasn't shown any practical use and may be removed in the future.
-- `version`: The current version of the survey. Should be changed whenever the survey changes.
 
 Survey parameters:
 
 - `i18nTitleKey`: The translation key for the title of the survey
 - `formIOJSON`: The JSON file defined in step 2a.
-- `schema`: The schema object defined just above.
 - `customSubmitBodyFormatter`: An optional function that allows you to specify
   your own behaviour for the data that is passed to the API.
   This can be used to change the shape of the data or include custom data in your submission request.
