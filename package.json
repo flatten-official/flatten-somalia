@@ -8,7 +8,7 @@
   "scripts": {
     "dev-backend": "yarn workspace backend dev",
     "dev-frontend": "node scripts/frontend/start.js",
-    "dev": "concurrently -k \"yarn dev-backend\" \"yarn dev-frontend\"",
+    "dev": "concurrently -k -i \"yarn dev-backend\" \"yarn dev-frontend\"",
     "build-frontend": "node scripts/frontend/build.js",
     "serve-frontend": "serve --single --listen 80 ./build",
     "lint": "eslint --fix .",
