@@ -22,6 +22,7 @@ import { defaultSubmitBodyFormatter } from "./submitHelpers";
  * @param formIOJSON the JSON formIO definition
  * @param buildSubmissionBody called with the form data when the form is submitted
  * @param enableManualLocation should we use manual location picker
+ * @param version the version of the form
  */
 const SurveyPageFactory = ({
   key,
@@ -29,7 +30,7 @@ const SurveyPageFactory = ({
   formIOJSON,
   customSubmitBodyFormatter,
   enableManualLocation,
-  schema,
+  version,
   customPageNames,
 }) => {
   // Need to use a Class rather than functional components
@@ -55,7 +56,7 @@ const SurveyPageFactory = ({
         preFormatFormio(formIOData);
 
         const bodyFormatterArgs = [
-          schema,
+          version,
           this.props.surveyData,
           formIOData,
           customPageNames,

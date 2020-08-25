@@ -8,6 +8,7 @@ const Permissions = {
 const Surveys = {
   initialHousehold: {
     key: "initialHousehold",
+    version: "1.0.7",
     enableManualLocation: true,
     customPageNames: [
       "basicinfo",
@@ -19,10 +20,12 @@ const Surveys = {
   },
   hospital: {
     key: "hospital",
+    version: "0.1.0",
     enableManualLocation: true,
   },
   gravedigger: {
     key: "gravedigger",
+    version: "0.1.0",
     enableManualLocation: false,
   },
 };

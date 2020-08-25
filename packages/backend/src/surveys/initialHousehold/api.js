@@ -8,13 +8,7 @@ const { log } = require("util-logging");
 async function initialSubmission(
   volunteerId,
   volunteerTeamName,
-  {
-    schema,
-    metadata,
-    people: peopleData,
-    deaths: deathsData,
-    household: householdData,
-  }
+  { metadata, people: peopleData, deaths: deathsData, household: householdData }
 ) {
   // required because (for example) we call householdData.followUpId which will crash if householdData is undefined
   if (!householdData) throw new ApiError("Household data not provided", 400);
@@ -53,7 +47,6 @@ async function initialSubmission(
   const submission = await Submission.create(
     volunteerId,
     volunteerTeamName,
-    schema,
     metadata,
     people.map((person) => person._id),
     [].concat(peopleData, deathsData),

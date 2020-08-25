@@ -1,10 +1,5 @@
 const { mongoose } = require("util-db");
 
-const FormSchema = {
-  form: { type: String, index: true, required: true }, // eg. 'somaliaInitialVolunteerSurvey'
-  version: { type: String, index: true, required: true }, // eg. '1.0.0'
-};
-
 const DEFAULT_PAGE_NAMES = ["start", "consent", "location"];
 
 const getPageTimingsSchema = (customPageNames = []) => {
@@ -37,6 +32,7 @@ const getSubmissionMetadata = (survey) => {
     },
     consentGiven: { type: String, required: true },
     pageTimings: getPageTimingsSchema(survey.customPageNames),
+    version: { type: String, index: true, required: true },
   };
 
   // The initialHousehold survey specifies these properties outside of the metadata hence why we have a flag to disable this
@@ -53,10 +49,9 @@ const getSubmissionMetadata = (survey) => {
         required: true,
         index: true,
       },
-      submissionSchema: FormSchema,
     };
 
   return metadata;
 };
 
-module.exports = { FormSchema, getSubmissionMetadata };
+module.exports = { getSubmissionMetadata };

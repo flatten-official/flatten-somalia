@@ -1,6 +1,7 @@
-const getMetadata = (storeData, pageNames) => {
+const getMetadata = (version, storeData, pageNames) => {
   const endTime = Date.now();
   const metadata = {
+    version,
     endTime: endTime,
     timeToComplete: endTime - storeData.startTime,
     location: storeData.location,
@@ -28,18 +29,17 @@ export const preFormatFormio = (formioData) => {
 };
 
 export const defaultSubmitBodyFormatter = (
-  schema,
+  version,
   storeData,
   formioData,
   pageNames
 ) => ({
-  metadata: getMetadata(storeData, pageNames),
-  schema,
+  metadata: getMetadata(version, storeData, pageNames),
   data: formioData,
 });
 
 export const initialHouseholdSubmitBodyFormatter = (
-  schema,
+  version,
   storeData,
   formioData,
   pageNames
@@ -50,8 +50,7 @@ export const initialHouseholdSubmitBodyFormatter = (
     },
     people: formioData.personGrid,
     deaths: formioData.deathGrid,
-    metadata: getMetadata(storeData, pageNames),
-    schema,
+    metadata: getMetadata(version, storeData, pageNames),
   };
 
   Object.entries(formioData).forEach(([k, v]) => {

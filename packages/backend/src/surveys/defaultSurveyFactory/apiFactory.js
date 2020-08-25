@@ -7,14 +7,13 @@ module.exports = (dataModel) => async (
   requestBody
 ) => {
   // Read the default body
-  const { schema, metadata, data } = requestBody;
+  const { metadata, data } = requestBody;
 
   // Create a standard document from the provided model
   const submissionDocument = new dataModel({
     metadata: {
       addedBy: volunteerId,
       teamName: volunteerTeamName,
-      submissionSchema: schema,
       ...metadata,
     },
     surveyData: data,
