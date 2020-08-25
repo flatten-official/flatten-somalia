@@ -30,7 +30,7 @@ const isInteractive = process.stdout.isTTY;
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) process.exit(1);
 
 // Tools like Cloud9 rely on this.
-const DEFAULT_PORT = 80;
+const DEFAULT_PORT = 3000;
 const HOST = "0.0.0.0";
 
 // Creates branch.json

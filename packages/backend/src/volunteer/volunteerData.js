@@ -1,9 +1,13 @@
 const { mongoose } = require("util-db");
 const _ = require("lodash");
 const { createModel } = require("../utils/mongoose");
-const { Permissions } = require("util-shared-constants");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
+const Permissions = {
+  manageVolunteers: "manageVolunteers",
+  submitForms: "submitForms",
+  access: "access", // is the user still enabled (allowed to access the system)
+};
 
 // permission groups used to grant ability to modify particular users.
 // for the moment, just used to allow enable/suspend accounts
@@ -11,6 +15,7 @@ const PermissionGroups = {
   dsu: "dsu",
 };
 
+Object.freeze(Permissions);
 Object.freeze(PermissionGroups);
 
 const Volunteer = createModel("Volunteer", {

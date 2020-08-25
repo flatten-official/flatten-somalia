@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import PropTypes from "prop-types";
 import { checkSessionExpiry } from "../../appActions";
-import { Permissions } from "util-shared-constants";
+import { Permissions } from "../../../api/constants";
 
 const HomeButton = ({ route, text, ...options }) => {
   const dispatch = useDispatch();

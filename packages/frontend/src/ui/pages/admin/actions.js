@@ -17,8 +17,6 @@ export const fetchVolunteerList = () => async (dispatch) => {
     if (e.response && e.response.status === 401)
       dispatch(logout(false, UNAUTHENTICATED_CONTEXT.badCookie));
     else {
-      // suppress warning as it can be useful even in production to debug such errors
-      // eslint-disable-next-line no-console
       console.error(e);
       dispatch({ type: FETCH_LIST_FAILED });
     }
@@ -44,8 +42,6 @@ export const changeAccess = (volunteerId, newAccessStatus) => async (
     if (e.response && e.response.status === 401)
       dispatch(logout(false, UNAUTHENTICATED_CONTEXT.badCookie));
     else {
-      // suppress warning as it can be useful even in production to debug such errors
-      // eslint-disable-next-line no-console
       console.error(e);
       dispatch({
         type: VOLUNTEER_CHANGE_FAILED,

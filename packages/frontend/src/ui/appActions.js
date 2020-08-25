@@ -59,8 +59,6 @@ export const fetchAuthState = (
     if (isEmptyObject(res)) dispatch(logout(false, contextIfUnauthenticated));
     else dispatch({ type: SET_AUTHENTICATED, payload: res.data });
   } catch (e) {
-    // suppress warning as it can be useful even in production to debug such errors
-    // eslint-disable-next-line no-console
     console.error(e);
     if (logoutIfFails)
       dispatch(logout(false, UNAUTHENTICATED_CONTEXT.failedRequest));
@@ -77,8 +75,6 @@ export const logout = (sendApiRequest, context) => async (dispatch) => {
     try {
       await endpoints.logout();
     } catch (e) {
-      // suppress warning as it can be useful even in production to debug such errors
-      // eslint-disable-next-line no-console
       console.error(e);
     }
   }

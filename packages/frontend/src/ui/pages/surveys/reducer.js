@@ -56,16 +56,14 @@ const reducer = (state = {}, action) => {
   // If the action is not one of the form actions
   if (!TYPES_ARRAY.includes(action.type)) return state;
 
-  // If action is restart, the key of the new survey is in the payload, otherwise it hasn't changed
-  const activeSurveyKey =
-    action.type === Types.RESTART_SURVEY
-      ? action.payload
-      : state.activeSurveyKey;
+  // If action is restart, set the form to the initial setting
+  const activeSurvey =
+    action.type === Types.RESTART_SURVEY ? action.payload : state.activeSurvey;
 
   return {
     ...state,
-    [activeSurveyKey]: subReducer(state[activeSurveyKey], action),
-    activeSurveyKey,
+    [activeSurvey]: subReducer(state[activeSurvey], action),
+    activeSurvey,
   };
 };
 

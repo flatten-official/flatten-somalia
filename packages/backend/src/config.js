@@ -24,8 +24,8 @@ module.exports = {
       debug: true,
       secureCookies: false,
       urls: {
-        frontendHost: "http://localhost",
-        backendHost: "http://localhost:3000",
+        frontendHost: "http://localhost:3000",
+        backendHost: "http://localhost",
       },
     },
     staging: {
@@ -65,8 +65,8 @@ module.exports = {
       secureCookies: false,
       allowDisableTransactions: true,
       urls: {
-        frontendHost: "http://localhost",
-        backendHost: "http://localhost:3000",
+        frontendHost: "http://localhost:3000",
+        backendHost: "http://localhost",
       },
       secrets: {
         cookieSecret: "8H!5bf2fKOB18*Aq", // not important since only used in testing

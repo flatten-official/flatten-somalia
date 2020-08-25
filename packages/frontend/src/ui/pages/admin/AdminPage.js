@@ -14,7 +14,7 @@ import Loading from "../../commonComponents/app/Loading";
 import { useTranslation } from "react-i18next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import Spinner from "react-bootstrap/Spinner";
-import { Permissions } from "util-shared-constants";
+import { Permissions } from "../../../api/constants";
 const { SearchBar } = Search;
 
 const checkHasAccess = (cell) => cell.permissions.includes(Permissions.access);
@@ -22,8 +22,6 @@ const checkHasAccess = (cell) => cell.permissions.includes(Permissions.access);
 /**
  * The enable/disable button formatter
  */
-// suppress warning as it's not a component but a formatter
-// eslint-disable-next-line react/display-name
 const getButtonCellFormatter = (dispatch, t) => (_, cell, __, ___) => {
   const hasAccess = checkHasAccess(cell);
   const { _id, status } = cell;

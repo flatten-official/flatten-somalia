@@ -96,7 +96,7 @@ const SurveyPageFactory = ({
   };
 
   const mapStateToProps = (state) => ({
-    surveyData: state.surveys[state.surveys.activeSurveyKey],
+    surveyData: state.surveys[state.surveys.activeSurvey],
   });
 
   const mapDispatchToProps = (dispatch) => ({
@@ -119,8 +119,8 @@ const SurveyPageFactory = ({
 
     // shouldWarn determines whether the leave page warnings should be enable
     const shouldWarn = useSelector((state) => {
-      const survey = state.surveys[state.surveys.activeSurveyKey];
-      return survey && survey.started && !survey.completed;
+      const activeSurvey = state.surveys[state.surveys.activeSurvey];
+      return activeSurvey && activeSurvey.started && !activeSurvey.completed;
     });
 
     useEffect(() => {
