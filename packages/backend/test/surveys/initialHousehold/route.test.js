@@ -76,8 +76,8 @@ const INVALID_REQUEST_BODIES = [
         wasManual: true,
       },
       consentGiven: true,
+      version: "1.0.3",
     },
-    schema: { form: "initialSurvey", version: "1.0.3" },
   },
   // MISSING CONSENT
   {
@@ -123,8 +123,8 @@ const INVALID_REQUEST_BODIES = [
         altitude: null,
         wasManual: true,
       },
+      version: "1.0.3",
     },
-    schema: { form: "initialSurvey", version: "1.0.3" },
   },
   // missing metadata
   {
@@ -160,13 +160,13 @@ const INVALID_REQUEST_BODIES = [
       residentsCount: 2,
     },
     people: [],
-    schema: { form: "initialSurvey", version: "1.0.3" },
+    version: "1.0.3",
   },
 ];
 
-const validSchema = { form: "initialSurvey", version: "1.0.4" };
 const validMetadata = [
   {
+    version: "1.0.4",
     endTime: 1592588144839,
     timeToComplete: 107757,
     location: {
@@ -179,6 +179,7 @@ const validMetadata = [
     consentGiven: true,
   },
   {
+    version: "1.0.4",
     endTime: 1592587961275,
     timeToComplete: 31055,
     location: {
@@ -1538,7 +1539,6 @@ describe("test /survey/initialHousehold", () => {
       await agent
         .post("/survey/initialHousehold")
         .send({
-          schema: validSchema,
           metadata,
           household,
           people: [],
@@ -1561,7 +1561,6 @@ describe("test /survey/initialHousehold", () => {
       await agent
         .post("/survey/initialHousehold")
         .send({
-          schema: validSchema,
           metadata: validMetadata[0],
           household,
           people: [],
@@ -1588,7 +1587,6 @@ describe("test /survey/initialHousehold", () => {
     await agent
       .post("/survey/initialHousehold")
       .send({
-        schema: validSchema,
         metadata: validMetadata[0],
         household,
         people: validLivingPeople,
@@ -1611,7 +1609,6 @@ describe("test /survey/initialHousehold", () => {
     await agent
       .post("/survey/initialHousehold")
       .send({
-        schema: validSchema,
         metadata: validMetadata[0],
         household,
         people: [],
@@ -1629,7 +1626,6 @@ describe("test /survey/initialHousehold", () => {
     await agent
       .post("/survey/initialHousehold")
       .send({
-        schema: validSchema,
         metadata: {
           caphfdasoif: "invalid",
           ...validMetadata[0],
@@ -1653,7 +1649,6 @@ describe("test /survey/initialHousehold", () => {
       await agent
         .post("/survey/initialHousehold")
         .send({
-          schema: validSchema,
           metadata: validMetadata[0],
           household,
           people: [],
@@ -1677,7 +1672,6 @@ describe("test /survey/initialHousehold", () => {
       await agent
         .post("/survey/initialHousehold")
         .send({
-          schema: validSchema,
           metadata: validMetadata[0],
           household,
           people: [person],
@@ -1701,7 +1695,6 @@ describe("test /survey/initialHousehold", () => {
     await agent
       .post("/survey/initialHousehold")
       .send({
-        schema: validSchema,
         metadata: validMetadata[0],
         household,
         people: [],

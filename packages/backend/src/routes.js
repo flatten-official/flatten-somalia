@@ -125,7 +125,6 @@ router.post(
  * @apiParamExample {json} Request-Example:
  *                  body:
  *                  {
- *                    "schema" : { form: <formName>, version: <formVersion> },
  *                    "metadata": { location: { <location data> }, <timing data...> },
  *                    ...otherData
  *                  }

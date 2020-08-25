@@ -1,7 +1,7 @@
 const { getApp } = require("../../../src/app");
 const db = require("util-db/inMemoryDb");
 const { login } = require("../../utils/requests");
-const HospitalSurveySubmission = require("../../../src/surveys/hospital/model");
+const HospitalSurveyModel = require("../../../src/surveys/hospital/model");
 
 const testData = {
   hospitalRequestBody: {
@@ -16,8 +16,8 @@ const testData = {
         wasManual: false,
       },
       consentGiven: true,
+      version: "1.0.0",
     },
-    schema: { form: "hospital", version: "1.0.0" },
     data: {
       hospitalPhoneNumber: "11 11 11 111",
       hospitalEmail: "test@test.ca",
@@ -45,8 +45,8 @@ const testData = {
         wasManual: false,
       },
       consentGiven: true,
+      version: "1.0.0",
     },
-    schema: { form: "hospital", version: "1.0.0" },
     data: {
       hospitalPhoneNumber: "11 11 11 111",
       hospitalEmail: "test@test.ca",
@@ -83,7 +83,7 @@ describe("hospital survey submissions", () => {
       .send(testData.hospitalRequestBody)
       .expect(200);
 
-    const submissionDocuments = await HospitalSurveySubmission.model.find();
+    const submissionDocuments = await HospitalSurveyModel.find();
 
     expect(submissionDocuments).toHaveLength(1);
   });
@@ -97,7 +97,7 @@ describe("hospital survey submissions", () => {
       .send(testData.hospitalBadRequestBody)
       .expect(400);
 
-    const submissionDocuments = await HospitalSurveySubmission.model.find();
+    const submissionDocuments = await HospitalSurveyModel.find();
 
     expect(submissionDocuments).toHaveLength(0);
   });

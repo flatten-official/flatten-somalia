@@ -1,7 +1,7 @@
 const { getApp } = require("../../../src/app");
 const db = require("util-db/inMemoryDb");
 const { login } = require("../../utils/requests");
-const GravediggerSurveySubmission = require("../../../src/surveys/gravedigger/model");
+const GravediggerSurveySubmissionModel = require("../../../src/surveys/gravedigger/model");
 
 const testData = {
   gravediggerRequestBody: {
@@ -16,8 +16,8 @@ const testData = {
         wasManual: true,
       },
       consentGiven: true,
+      version: "1.0.0",
     },
-    schema: { form: "gravediggerSurvey", version: "1.0.0" },
     data: {
       gravediggerPhoneNumber: "11 11 11 111",
       gravesite: "qabuurahaJaziira",
@@ -36,8 +36,8 @@ const testData = {
         wasManual: true,
       },
       consentGiven: true,
+      version: "1.0.0",
     },
-    schema: { form: "gravediggerSurvey", version: "1.0.0" },
     data: {
       gravediggerPhoneNumber: "11 11 11 111",
       gravesite: "qabuurahaJaziira",
@@ -65,7 +65,7 @@ describe("gravedigger survey", () => {
       .send(testData.gravediggerRequestBody)
       .expect(200);
 
-    const submissionDocuments = await GravediggerSurveySubmission.model.find();
+    const submissionDocuments = await GravediggerSurveySubmissionModel.find();
     expect(submissionDocuments).toHaveLength(1);
   });
 
@@ -78,7 +78,7 @@ describe("gravedigger survey", () => {
       .send(testData.gravediggerBadRequestBody)
       .expect(400);
 
-    const submissionDocuments = await GravediggerSurveySubmission.model.find();
+    const submissionDocuments = await GravediggerSurveySubmissionModel.find();
 
     expect(submissionDocuments).toHaveLength(0);
   });

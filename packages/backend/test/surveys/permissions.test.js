@@ -27,7 +27,7 @@ describe("survey permissions", () => {
       Permissions.access,
     ]);
 
-    await agent.post(endpoint).expect(500); // fail for non permission reasons (missing body)
+    await agent.post(endpoint).expect(400); // fail for non permission reasons (missing body)
   });
 
   // eslint-disable-next-line jest/expect-expect

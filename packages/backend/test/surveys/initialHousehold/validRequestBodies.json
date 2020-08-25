@@ -42,9 +42,9 @@
         "altitude": null,
         "wasManual": true
       },
-      "consentGiven": true
-    },
-    "schema": { "form": "initialSurvey", "version": "1.0.4" }
+      "consentGiven": true,
+      "version": "1.0.4"
+    }
   },
   {
     "household": {
@@ -263,9 +263,9 @@
         "altitude": null,
         "wasManual": true
       },
-      "consentGiven": true
-    },
-    "schema": { "form": "initialSurvey", "version": "1.0.4" }
+      "consentGiven": true,
+      "version": "1.0.4"
+    }
   },
 
   {
@@ -521,9 +521,9 @@
         "people": 1595424524622,
         "deaths": 1595424540357,
         "socialsurveyquestions": 1595424615892
-      }
-    },
-    "schema": { "form": "initialSurvey", "version": "1.0.6" }
+      },
+      "version": "1.0.6"
+    }
   },
   {
     "household": {
@@ -909,8 +909,8 @@
         "people": 1595435565042,
         "deaths": 1595435624286,
         "socialsurveyquestions": 1595435648054
-      }
-    },
-    "schema": { "form": "initialSurvey", "version": "1.0.6" }
+      },
+      "version": "1.0.6"
+    }
   }
 ]
