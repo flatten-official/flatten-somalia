@@ -49,7 +49,7 @@ const mapDispatchToPropsLocationPicker = (dispatch) => ({
 
 const mapStateToPropsFollowUpId = (state) => ({
   volunteerFriendlyId: state.auth.user.friendlyId,
-  followUpId: state.surveys[state.surveys.activeSurvey].followUpId,
+  followUpId: state.surveys[state.surveys.activeSurveyKey].followUpId,
 });
 
 const mapDispatchToPropsFollowUpId = (dispatch) => ({

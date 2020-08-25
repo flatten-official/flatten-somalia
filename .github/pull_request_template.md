@@ -1,35 +1,14 @@
-# Description
+# Summary
 
-* Change to component one
-    - Details...
-    
-* Change to component two
-    - Details...
+<!--Enter a one line summary of the PR-->
 
-# [Manual Integration Tests](https://github.com/flatten-official/backend-so/blob/master/docs/Manual%20Integration%20Tests.md) completed:
+This PR...
 
-Only complete for components you've modified. Complete just before merging.
+# Details
 
-Localization 
+<!--Dive into your changes-->
 
-- [ ] Test 1: Components using localization
-- [ ] Test 2: Changes to localization system
+# Manual Tests (as of #<!-- Enter commit number -->)
 
-
-Form Functionality
-
-- [ ] Test 1: Validation
-- [ ] Test 2: Editable components
-- [ ] Test 3: Selectable components
-- [ ] Test 4: Conditional components
-
-
-Data Validation 
-
-- [ ] Test 1: Followup Method
-- [ ] Test 2: References
-- [ ] Test 3: Additional fields
-
-Other manual tests that you completed
-
-- [ ] ...
+<!--List the manual tests you've complete in a checklist.
+Also make use of the manual tests in "docs/Manual Integration Tests.md"-->

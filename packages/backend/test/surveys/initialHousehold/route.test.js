@@ -1,19 +1,19 @@
-const { getApp } = require("../../../../src/app");
+const { getApp } = require("../../../src/app");
 const { log } = require("util-logging");
 const VALID_REQ_BODIES = require("./validRequestBodies.json");
 
 const db = require("util-db/inMemoryDb");
 const { useReplicaSet } = require("util-db");
 
-const { login } = require("../../../utils/requests");
+const { login } = require("../../utils/requests");
 
-const { testOnlyIf } = require("../../../utils/jest");
-const Submission = require("../../../../src/surveys/initialHousehold/submissionData");
-const Household = require("../../../../src/surveys/initialHousehold/householdData");
-const Person = require("../../../../src/surveys/initialHousehold/peopleData");
-const { sleep } = require("../../../utils/time");
-const { getAllPermissionsExcept } = require("../../../utils/permissions");
-const { Permissions } = require("../../../../src/volunteer/volunteerData");
+const { testOnlyIf } = require("../../utils/jest");
+const Submission = require("../../../src/surveys/initialHousehold/submissionData");
+const Household = require("../../../src/surveys/initialHousehold/householdData");
+const Person = require("../../../src/surveys/initialHousehold/peopleData");
+const { sleep } = require("../../utils/time");
+const { getAllPermissionsExcept } = require("../../utils/permissions");
+const { Permissions } = require("../../../src/volunteer/volunteerData");
 
 const INVALID_REQUEST_BODIES = [
   {},
