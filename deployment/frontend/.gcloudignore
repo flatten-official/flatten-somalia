@@ -5,9 +5,10 @@
 /packages/db-scripts
 
 # Ignore all docs
-README.md
+*.md
 /docs
 apidoc.json
+LICENSE
 
 # Ignore git files
 .git
