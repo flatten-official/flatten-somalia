@@ -21,6 +21,9 @@ LICENSE
 .eslintrc.js
 jest.config.js
 
+# Ignore test files
+*.test.js
+
 # Ignore all scripts
 /scripts/*
 # Except
