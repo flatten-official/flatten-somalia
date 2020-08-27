@@ -1,6 +1,7 @@
 import graveDiggerSurveyJSON from "./formDefinitions/surveys/gravedigger.json";
 import hospitalSurveyJSON from "./formDefinitions/surveys/hospital.json";
 import initialHouseholdJSON from "./formDefinitions/surveys/initialHousehold.json";
+import research_1JSON from "./formDefinitions/surveys/research_1.json";
 import { initialHouseholdSubmitBodyFormatter } from "./ui/pages/surveys/submitHelpers";
 import { Surveys as SharedSurveyRefs } from "util-shared-constants";
 
@@ -29,5 +30,10 @@ export const Surveys = {
     i18nTitleKey: "hospitalTitle",
     formIOJSON: hospitalSurveyJSON,
     disabled: true,
+  },
+  research_1: {
+    ...SharedSurveyRefs.research_1,
+    i18nTitleKey: "research1Title",
+    formIOJSON: research_1JSON,
   },
 };

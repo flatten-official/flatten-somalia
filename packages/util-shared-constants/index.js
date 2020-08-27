@@ -28,6 +28,11 @@ const Surveys = {
     version: "0.1.0",
     enableManualLocation: false,
   },
+  research_1: {
+    key: "research-1",
+    version: "1.0.0",
+    enableManualLocation: true,
+  },
 };
 
 Object.freeze(Permissions);

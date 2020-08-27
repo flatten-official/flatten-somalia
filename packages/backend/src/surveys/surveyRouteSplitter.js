@@ -3,6 +3,7 @@ const { ApiError } = require("../utils/errors");
 const defaultApiFactory = require("./defaultSurveyFactory/apiFactory");
 const gravediggerModel = require("./models/gravedigger");
 const hospitalModel = require("./models/hospital");
+const research_1Model = require("./models/research_1");
 const { initialSubmission } = require("./initialHousehold/api");
 const { log } = require("util-logging");
 
@@ -11,6 +12,7 @@ const surveyKeyToApiMap = {
   [Surveys.gravedigger.key]: defaultApiFactory(gravediggerModel),
   [Surveys.hospital.key]: defaultApiFactory(hospitalModel),
   [Surveys.initialHousehold.key]: initialSubmission,
+  [Surveys.research_1.key]: defaultApiFactory(research_1Model),
 };
 
 module.exports = async (req, res) => {

@@ -13,6 +13,10 @@ const Surveys = {
     ...SharedSurveysConfig.hospital,
     collectionName: "HospitalSurveySubmission",
   },
+  research_1: {
+    ...SharedSurveysConfig.research_1,
+    collectionName: "ResearchSurvey",
+  },
 };
 
 module.exports = { Surveys };

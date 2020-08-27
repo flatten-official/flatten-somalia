@@ -1,0 +1,1084 @@
+{
+  "type": "form",
+  "display": "wizard",
+  "components": [
+    {
+      "key": "householdInfo",
+      "label": "householdInfo",
+      "type": "panel",
+      "components": [
+        {
+          "key": "sharePhoneNumber",
+          "label": "sharePhoneNumberConsent",
+          "type": "radio",
+          "validate": {
+            "required": true
+          },
+          "values": [
+            {
+              "label": "consentToSharingPhoneNumber",
+              "value": "yes"
+            },
+            {
+              "label": "willNotSharePhoneNumber",
+              "value": "no"
+            }
+          ]
+        },
+        {
+          "key": "phoneNumber",
+          "label": "enterPhoneNumber",
+          "type": "phoneNumber",
+          "inputMask": "99 99 99 999",
+          "validate": {
+            "required": true
+          },
+          "conditional": {
+            "show": true,
+            "when": "sharePhoneNumber",
+            "eq": "yes"
+          }
+        },
+        {
+          "key": "followUpId",
+          "type": "customFollowUpId",
+          "conditional": {
+            "show": true,
+            "when": "sharePhoneNumber",
+            "eq": "no"
+          }
+        },
+        {
+          "key": "district",
+          "label": "district",
+          "type": "select",
+          "validate": {
+            "required": true
+          },
+          "dataSrc": "values",
+          "data": {
+            "values": [
+              {
+                "label": "Yaaqshiid",
+                "value": "Yaaqshiid"
+              },
+              {
+                "label": "Warta-Nabada",
+                "value": "Warta-Nabada"
+              },
+              {
+                "label": "C/casiis",
+                "value": "C/casiis"
+              },
+              {
+                "label": "Deyniile",
+                "value": "Deyniile"
+              },
+              {
+                "label": "Boondheere",
+                "value": "Boondheere"
+              },
+              {
+                "label": "Wadajir",
+                "value": "Wadajir"
+              },
+              {
+                "label": "Howl-wadaag",
+                "value": "Howl-wadaag"
+              },
+              {
+                "label": "Heliwaa",
+                "value": "Heliwaa"
+              },
+              {
+                "label": "Garasbaley",
+                "value": "Garasbaley"
+              },
+              {
+                "label": "Gubadley",
+                "value": "Gubadley"
+              },
+              {
+                "label": "Kaaraan",
+                "value": "Kaaraan"
+              },
+              {
+                "label": "Dharkenley",
+                "value": "Dharkenley"
+              },
+              {
+                "label": "Kaxda",
+                "value": "Kaxda"
+              },
+              {
+                "label": "Shangani",
+                "value": "Shangani"
+              },
+              {
+                "label": "Xamarweyne",
+                "value": "Xamarweyne"
+              },
+              {
+                "label": "Hodan",
+                "value": "Hodan"
+              },
+              {
+                "label": "Shibis",
+                "value": "Shibis"
+              },
+              {
+                "label": "Xamar Jajab",
+                "value": "Xamar Jajab"
+              },
+              {
+                "label": "Waabri",
+                "value": "Waabri"
+              }
+            ]
+          }
+        },
+        {
+          "i18nKey": "RESIDENTS",
+          "type": "customText",
+          "key": "customTextEResidentsSection"
+        },
+        {
+          "key": "residentsCount",
+          "label": "residentsCount",
+          "type": "number",
+          "validate": {
+            "required": true,
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "key": "birthsCount",
+          "label": "birthsCount",
+          "type": "number",
+          "validate": {
+            "required": true,
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "key": "movedInCount",
+          "label": "movedInCount",
+          "type": "number",
+          "validate": {
+            "required": true,
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "key": "movedOutCount",
+          "label": "movedOutCount",
+          "type": "number",
+          "validate": {
+            "required": true,
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "key": "deathsCount",
+          "label": "deathsCount",
+          "type": "number",
+          "validate": {
+            "required": true,
+            "min": 0,
+            "max": 25
+          }
+        }
+      ]
+    },
+    {
+      "label": "newborns",
+      "type": "panel",
+      "components": [
+        {
+          "key": "newbornResidents",
+          "label": "<h3>newbornResidents</h3>",
+          "type": "editgrid",
+          "validate": {
+            "custom": "valid = data.newbornResidents.length == data.birthsCount ? true : data.newbornResidents.length + ' / ' + data.birthsCount;"
+          },
+          "openWhenEmpty": false,
+          "hideLabel": false,
+          "templates": {
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the required number of newborns, go to the first page.</div>"
+          },
+          "components": [
+            {
+              "key": "age",
+              "label": "ageQuestion",
+              "type": "number",
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 110
+              }
+            },
+            {
+              "key": "gender",
+              "label": "genderQuestion",
+              "type": "textfield",
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "birthdate",
+              "label": "birthday",
+              "type": "datetime",
+              "format": "yyyy-MM-dd",
+              "validate": {
+                "required": true
+              },
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "adults",
+      "type": "panel",
+      "components": [
+        {
+          "key": "adults",
+          "label": "adults",
+          "type": "editgrid",
+          "validate": {
+            "minLength": "data.residentsCount;",
+            "custom": "let longtimers = data.adults.filter(o => o.isLongtimeResident === 'yes').length; let newResidents = data.adults.length - longtimers; console.log(longtimers); valid = data.residentsCount - data.birthsCount === longtimers && data.movedInCount === newResidents ? true : longtimers + ' / ' + (data.residentsCount - data.birthsCount - data.movedInCount) + ' longtime residents,    ' + newResidents + ' / ' + data.movedInCount + ' new residents.';"
+          },
+          "openWhenEmpty": true,
+          "hideLabel": true,
+          "templates": {
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of longtime or new residents, go to the first page.</div>"
+          },
+          "components": [
+            {
+              "key": "status",
+              "label": "question.sectionStatus",
+              "type": "radio",
+              "validate": {
+                "required": true
+              },
+              "values": [
+                {
+                  "label": "resident.sectionConsentGiven",
+                  "value": "consentGiven"
+                },
+                {
+                  "label": "resident.sectionConsentDenied",
+                  "value": "consentDenied"
+                },
+                {
+                  "label": "resident.sectionCompletedByProxy",
+                  "value": "completedByProxy"
+                },
+                {
+                  "label": "resident.unavailable",
+                  "value": "unavailable"
+                }
+              ]
+            },
+            {
+              "key": "isLongtimeResident",
+              "label": "question.isLongtimeResident",
+              "type": "radio",
+              "validate": {
+                "required": true
+              },
+              "values": [
+                {
+                  "label": "resident.longTerm",
+                  "value": "yes"
+                },
+                {
+                  "label": "resident.movedIn",
+                  "value": "no"
+                }
+              ]
+            },
+            {
+              "key": "movedInDate",
+              "label": "question.movedInDate",
+              "format": "yyyy-MM-dd",
+              "tableView": false,
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "validate": {
+                "required": true
+              },
+              "conditional": {
+                "when": "isLongTimeResident",
+                "eq": "yes",
+                "show": true
+              },
+              "type": "datetime",
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            },
+            {
+              "type": "customText",
+              "key": "customTextSocioeconomicSection",
+              "i18nKey": "socioeconomicSection"
+            },
+            {
+              "key": "age",
+              "label": "ageQuestion",
+              "type": "number",
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 110
+              }
+            },
+            {
+              "key": "gender",
+              "label": "genderQuestion",
+              "type": "textfield",
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "employed",
+              "label": "employmentQuestion",
+              "type": "radio",
+              "validate": {
+                "required": true
+              },
+              "values": [
+                {
+                  "label": "yes",
+                  "value": "yes"
+                },
+                {
+                  "label": "no",
+                  "value": "no"
+                }
+              ]
+            },
+            {
+              "key": "occupation",
+              "label": "occupationQuestion",
+              "type": "select",
+              "validate": {
+                "required": true
+              },
+              "conditional": {
+                "show": true,
+                "when": "employed",
+                "eq": "yes"
+              },
+              "data": {
+                "values": [
+                  {
+                    "label": "Koronto Yaqaan",
+                    "value": "korontoYaqaan"
+                  },
+                  {
+                    "label": "Fuundi",
+                    "value": "fuundi"
+                  },
+                  {
+                    "label": "Faryaamo",
+                    "value": "faryaamo"
+                  },
+                  {
+                    "label": "Feeroole ( Ninka Guryaha Shubo)",
+                    "value": "feerooleNinkaGuryahaShubo"
+                  },
+                  {
+                    "label": "Makaaniko (Gawaarida ninka Sameeyo)",
+                    "value": "makaanikoGawaaridaNinkaSameeyo"
+                  },
+                  {
+                    "label": "Tubiiste",
+                    "value": "tubiiste"
+                  },
+                  {
+                    "label": "Xamaali (Muruq Maal)",
+                    "value": "xamaaliMuruqMaal"
+                  },
+                  {
+                    "label": "Rinjiile",
+                    "value": "rinjiile"
+                  },
+                  {
+                    "label": "Farsama yaqaan dabka gawaarida",
+                    "value": "farsamaYaqaanDabkaGawaarida"
+                  },
+                  {
+                    "label": "Caseeye ",
+                    "value": "caseeye"
+                  },
+                  {
+                    "label": "Kooke (Kuwa Cunada kariyo)",
+                    "value": "kookeKuwaCunadaKariyo"
+                  },
+                  {
+                    "label": "Kabalyeeri",
+                    "value": "kabalyeeri"
+                  },
+                  {
+                    "label": "Timajare",
+                    "value": "timajare"
+                  },
+                  {
+                    "label": "Kalkaaliye ",
+                    "value": "kalkaaliye"
+                  },
+                  {
+                    "label": "Doctor",
+                    "value": "doctor"
+                  },
+                  {
+                    "label": "Engineer",
+                    "value": "engineer"
+                  },
+                  {
+                    "label": "Umuliso",
+                    "value": "umuliso"
+                  },
+                  {
+                    "label": "Macalin School",
+                    "value": "macalinSchool"
+                  },
+                  {
+                    "label": "Prof",
+                    "value": "prof"
+                  },
+                  {
+                    "label": "Shaqale dowladeed",
+                    "value": "shaqaleDowladeed"
+                  },
+                  {
+                    "label": "Shaqaale hey,adeed",
+                    "value": "shaqaaleHeyAdeed"
+                  },
+                  {
+                    "label": "Shaqaale ganacsi",
+                    "value": "shaqaaleGanacsi"
+                  },
+                  {
+                    "label": "Ganacsade",
+                    "value": "ganacsade"
+                  },
+                  {
+                    "label": "Arday jamacadeed",
+                    "value": "ardayJamacadeed"
+                  },
+                  {
+                    "label": "Arday iskool",
+                    "value": "ardayIskool"
+                  },
+                  {
+                    "label": "otherSpecify",
+                    "value": "other"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "primaryIncomeSource",
+              "label": "primaryIncomeSourceQuestion",
+              "type": "select",
+              "validate": {
+                "required": true
+              },
+              "conditional": {
+                "show": true,
+                "when": "employed",
+                "eq": "no"
+              },
+              "data": {
+                "values": [
+                  {
+                    "label": "occupation",
+                    "value": "occupation"
+                  },
+                  {
+                    "label": "familyAbroad",
+                    "value": "familyAbroad"
+                  },
+                  {
+                    "label": "financialAid",
+                    "value": "financialAid"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "educationLevel",
+              "label": "educationLevelQuestion",
+              "type": "select",
+              "validate": {
+                "required": true
+              },
+              "dataSrc": "values",
+              "data": {
+                "values": [
+                  {
+                    "label": "none",
+                    "value": "none"
+                  },
+                  {
+                    "label": "primarySchool",
+                    "value": "primarySchool"
+                  },
+                  {
+                    "label": "secondarySchool",
+                    "value": "secondarySchool"
+                  },
+                  {
+                    "label": "university",
+                    "value": "university"
+                  },
+                  {
+                    "label": "islamicStudies",
+                    "value": "islamicStudies"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "monthlyIncome",
+              "label": "monthlyIncomeQuestion",
+              "type": "select",
+              "data": {
+                "values": [
+                  {
+                    "label": "0to99",
+                    "value": "0to99"
+                  },
+                  {
+                    "label": "100to499",
+                    "value": "100to499"
+                  },
+                  {
+                    "label": "500to999",
+                    "value": "500to999"
+                  },
+                  {
+                    "label": "1000to1999",
+                    "value": "1000to1999"
+                  },
+                  {
+                    "label": "2000to4999",
+                    "value": "2000to4999"
+                  },
+                  {
+                    "label": "5000to9999",
+                    "value": "5000to9999"
+                  },
+                  {
+                    "label": "10000to14999",
+                    "value": "10000to14999"
+                  },
+                  {
+                    "label": "15000to19999",
+                    "value": "15000to19999"
+                  },
+                  {
+                    "label": "over20000",
+                    "value": "over20000"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "customText",
+              "key": "customTextSocioeconomicSection",
+              "i18nKey": "healthSection"
+            },
+            {
+              "key": "comorbidities",
+              "type": "selectboxes",
+              "label": "comorbidities",
+              "values": [
+                {
+                  "label": "comorbidity.substanceAbuse",
+                  "value": "substanceAbuse"
+                },
+                {
+                  "label": "comorbidity.anaemia",
+                  "value": "anaemia"
+                },
+                {
+                  "label": "comorbidity.asthma",
+                  "value": "asthma"
+                },
+                {
+                  "label": "comorbidity.nervousSystemCondition",
+                  "value": "nervousSystemCondition"
+                },
+                {
+                  "label": "comorbidity.cancer",
+                  "value": "cancer"
+                },
+                {
+                  "label": "comorbidity.diabetes",
+                  "value": "diabetes"
+                },
+                {
+                  "label": "comorbidity.cardiac",
+                  "value": "cardiac"
+                },
+                {
+                  "label": "comorbidity.hepatitisOrChronicLiverCondition",
+                  "value": "hepatitisOrChronicLiverCondition"
+                },
+                {
+                  "label": "comorbidity.HIV",
+                  "value": "HIV"
+                },
+                {
+                  "label": "comorbidity.hypertension",
+                  "value": "hypertension"
+                },
+                {
+                  "label": "comorbidity.mentalHealthCondition",
+                  "value": "mentalHealthCondition"
+                },
+                {
+                  "label": "comorbidity.stroke",
+                  "value": "stroke"
+                },
+                {
+                  "label": "comorbidity.tuberculosis",
+                  "value": "tuberculosis"
+                },
+                {
+                  "label": "comorbidity.pulmonaryCondition",
+                  "value": "pulmonaryCondition"
+                },
+                {
+                  "label": "comorbidity.immuneImpairment",
+                  "value": "immuneImpairment"
+                },
+                {
+                  "label": "comorbidity.none",
+                  "value": "none"
+                }
+              ],
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "formerSymptoms",
+              "label": "formerSymptoms",
+              "type": "selectboxes",
+              "values": [
+                {
+                  "label": "symptom.abdominalPain",
+                  "value": "abdominalPain"
+                },
+                {
+                  "label": "symptom.cough",
+                  "value": "cough"
+                },
+                {
+                  "label": "symptom.chills",
+                  "value": "chills"
+                },
+                {
+                  "label": "symptom.fever",
+                  "value": "fever"
+                },
+                {
+                  "label": "symptom.olfactoryImpairment",
+                  "value": "olfactoryImpairment"
+                },
+                {
+                  "label": "symptom.gustatoryImpairment",
+                  "value": "gustatoryImpairment"
+                },
+                {
+                  "label": "symptom.nausea",
+                  "value": "nausea"
+                },
+                {
+                  "label": "symptom.shortnessOfBreath",
+                  "value": "shortnessOfBreath"
+                }
+              ],
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "currentSymptoms",
+              "label": "formerSymptoms",
+              "type": "selectboxes",
+              "values": [
+                {
+                  "label": "symptom.abdominalPain",
+                  "value": "abdominalPain"
+                },
+                {
+                  "label": "symptom.cough",
+                  "value": "cough"
+                },
+                {
+                  "label": "symptom.chills",
+                  "value": "chills"
+                },
+                {
+                  "label": "symptom.fever",
+                  "value": "fever"
+                },
+                {
+                  "label": "symptom.olfactoryImpairment",
+                  "value": "olfactoryImpairment"
+                },
+                {
+                  "label": "symptom.gustatoryImpairment",
+                  "value": "gustatoryImpairment"
+                },
+                {
+                  "label": "symptom.nausea",
+                  "value": "nausea"
+                },
+                {
+                  "label": "symptom.shortnessOfBreath",
+                  "value": "shortnessOfBreath"
+                }
+              ],
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "abdominalPainOnset",
+              "label": "symptomOnset.abdominalPain",
+              "type": "datetime",
+              "format": "yyyy-MM-dd",
+              "validate": {
+                "required": true
+              },
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            },
+            {
+              "key": "coughOnset",
+              "label": "symptomOnset.cough",
+              "type": "datetime",
+              "format": "yyyy-MM-dd",
+              "validate": {
+                "required": true
+              },
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            },
+            {
+              "key": "chillsOnset",
+              "label": "symptomOnset.chills",
+              "type": "datetime",
+              "format": "yyyy-MM-dd",
+              "validate": {
+                "required": true
+              },
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            },
+            {
+              "key": "feverOnset",
+              "label": "symptomOnset.fever",
+              "type": "datetime",
+              "format": "yyyy-MM-dd",
+              "validate": {
+                "required": true
+              },
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            },
+            {
+              "key": "olfactoryImpairmentOnset",
+              "label": "symptomOnset.olfactoryImpairment",
+              "type": "datetime",
+              "format": "yyyy-MM-dd",
+              "validate": {
+                "required": true
+              },
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            },
+            {
+              "key": "gustatoryImpairmentOnset",
+              "label": "symptomOnset.gustatoryImpairment",
+              "type": "datetime",
+              "format": "yyyy-MM-dd",
+              "validate": {
+                "required": true
+              },
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            },
+            {
+              "key": "nauseaOnset",
+              "label": "symptomOnset.nausea",
+              "type": "datetime",
+              "format": "yyyy-MM-dd",
+              "validate": {
+                "required": true
+              },
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            },
+            {
+              "key": "shortnessOfBreathOnset",
+              "label": "symptomOnset.shortnessOfBreath",
+              "type": "datetime",
+              "format": "yyyy-MM-dd",
+              "validate": {
+                "required": true
+              },
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "movedOutResidents",
+      "type": "panel",
+      "components": [
+        {
+          "key": "movedOut",
+          "label": "movedOut",
+          "type": "editgrid",
+          "validate": {
+            "minLength": "data.residentsCount;",
+            "custom": "valid = data.movedOutCount === data.movedOut.length ? true : data.movedOut.length + ' / ' + data.movedOutCount;"
+          },
+          "hideLabel": true,
+          "templates": {
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of residents having moved out, go to the first page.</div>"
+          },
+          "components": [
+            {
+              "key": "movedOutDate",
+              "label": "movedOutDate",
+              "format": "yyyy-MM-dd",
+              "tableView": false,
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "validate": {
+                "required": true
+              },
+              "type": "datetime",
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            },
+            {
+              "key": "age",
+              "label": "ageQuestion",
+              "type": "number",
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 110
+              }
+            },
+            {
+              "key": "gender",
+              "label": "genderQuestion",
+              "type": "textfield",
+              "validate": {
+                "required": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "deaths",
+      "type": "panel",
+      "components": [
+        {
+          "key": "deaths",
+          "label": "deaths",
+          "type": "editgrid",
+          "validate": {
+            "custom": "valid = data.deathsCount === data.deaths.length ? true : data.deaths.length + ' / ' + data.deathsCount;"
+          },
+          "hideLabel": true,
+          "templates": {
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of deaths, go to the first page.</div>"
+          },
+          "components": [
+            {
+              "key": "age",
+              "label": "ageQuestion",
+              "type": "number",
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 110
+              }
+            },
+            {
+              "key": "gender",
+              "label": "genderQuestion",
+              "type": "textfield",
+              "validate": {
+                "required": true
+              }
+            },
+            {
+              "key": "deathDate",
+              "label": "deathDate",
+              "format": "yyyy-MM-dd",
+              "tableView": false,
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2019-10-1"
+              },
+              "validate": {
+                "required": true
+              },
+              "type": "datetime",
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "minDate": "2019-10-1",
+                "maxDate": "moment()"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

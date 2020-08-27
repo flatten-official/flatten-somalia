@@ -1,0 +1,67 @@
+{
+  "header": {
+    "householdResidents": null,
+    "adults": null,
+    "newborns": null,
+    "deaths": null,
+    "contactTracing": null
+  },
+  "question": {
+    "residentsCount": null,
+    "birthsCount": null,
+    "movedInCount": null,
+    "movedOutCount": null,
+    "deathsCount": null,
+    "sectionStatus": null
+  },
+  "resident": {
+    "longTerm": null,
+    "movedIn": null,
+    "sectionConsentGiven": null,
+    "sectionConsentDenied": null,
+    "sectionCompletedByProxy": null,
+    "unavailable": null
+  },
+  "symptom": {
+    "abdominalPain": null,
+    "cough": null,
+    "chills": null,
+    "fever": null,
+    "olfactoryImpairment": null,
+    "gustatoryImpairment": null,
+    "nausea": null,
+    "shortnessOfBreath": null
+  },
+  "symptomOnset": {
+    "abdominalPain": null,
+    "cough": null,
+    "chills": null,
+    "fever": null,
+    "olfactoryImpairment": null,
+    "gustatoryImpairment": null,
+    "nausea": null,
+    "shortnessOfBreath": null
+  },
+  "comorbidity": {
+    "substanceAbuse": null,
+    "anaemia": null,
+    "asthma": null,
+    "nervousSystemCondition": null,
+    "cancer": null,
+    "diabetes": null,
+    "cardiac": null,
+    "hepatitisOrChronicLiverCondition": null,
+    "HIV": null,
+    "hypertension": null,
+    "mentalHealthCondition": null,
+    "stroke": null,
+    "tuberculosis": null,
+    "pulmonaryCondition": null,
+    "immuneImpairment": null,
+    "none": null
+  },
+  "warning": {
+    "tooManyEntries": null,
+    "tooFewEntries": null
+  }
+}

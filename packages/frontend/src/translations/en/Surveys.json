@@ -1,6 +1,7 @@
 {
   "graveDiggerTitle": "Grave Digger Survey",
   "hospitalTitle": "Hospital Survey",
+  "research1Title": "Research Survey",
   "initialHouseholdTitle": "Initial Household Survey",
   "askForDataRecordingConsent": "Do the people being surveyed consent to recording your questions?",
   "consentGiven": "They did. Start the survey.",
