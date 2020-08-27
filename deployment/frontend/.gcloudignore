@@ -1,5 +1,5 @@
-# This file is used when deploying to App Engine from Cloud Build
-# This file contains all the contents of the root .gcloudignore as well as some file that aren't required for the backend
+# This file is used when deploying to Firebase from Cloud Build
+# This file contains all the contents of the root .gcloudignore as well as some file that aren't required for the frontend
 
 # Ignore packages that are never deployed (in any environment)
 /packages/db-scripts
@@ -41,6 +41,10 @@ jest.config.js
 /deployment
 /scripts
 
-# Don't need these packages on app engine
+# Don't need these packages to Firebase
+/packages/backend
 /packages/db-copy-function
-/packages/frontend
+/packages/util-config
+/packages/util-db
+/packages/util-gcp
+/packages/util-logging
