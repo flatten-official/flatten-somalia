@@ -4,6 +4,7 @@
 const sgMail = require("@sendgrid/mail");
 const { getConfig } = require("util-config");
 const { log } = require("util-logging");
+const { ApiError } = require("./errors");
 
 module.exports.setup = () => {
   sgMail.setApiKey(getConfig().secrets.sendGridApiKey);
@@ -25,10 +26,15 @@ module.exports.sendVerificationEmail = async (email, verification_link) => {
       },
     };
 
-    await sgMail.send(msg);
-    return true;
+    // Don't actually send email if we're supposed to mock
+    if (!getConfig().mockSendGrid) await sgMail.send(msg);
+    // Helpful when trying to log in when developing frontend
+    else
+      log.debug(
+        `Instead of sending email, here's the link: ${verification_link}`
+      );
   } catch (e) {
     log.error("Failed to send email.\n", { error: e });
-    return false;
+    throw new ApiError("We were unable to send you an email.", 500);
   }
 };

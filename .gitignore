@@ -10,6 +10,12 @@ branch.json
 docs/api-generated
 yarn-error.log
 .cache
+build
+.firebaserc
+.firebase
 
 # macOS system files
 .DS_Store
+
+# File on frontend
+packages/frontend/src/api/backend.js

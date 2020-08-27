@@ -2,53 +2,5 @@
 
 Scripts allow us to run batch operations on our database. Make sure you know what you're doing since scripts can modify the database in unwanted ways.
 
-## Setup
+For information on how to write, test and deploy scripts, read the doc [Database Script Testing Procedure](https://github.com/flatten-official/flatten-somalia/blob/master/docs/Database%20Script%20Testing%20Procedure.md).
 
-1. Create a `.env` file in this directory with the following content:
-
-   ```
-   SCRIPT_NAME=<SCRIPT_NAME>
-   ENVIRONMENT=staging
-   ```
-
-2. Replace `<SCRIPT_NAME>` with the name of the script you wish to run (e.g. `ADD_VOLUNTEER_BULK`).
-   Check `scripts/scriptPaths.json` for a list all possible script names.
-
-3. Run `npm run script`.
-
-## Running a script in production
-
-You will need to get a MongoDB URI from Martin to connect to the production database.
-
-1. Same as running your script on staging however your `.env` file should be as follows.
-
-```
-SCRIPT_NAME=<SCRIPT_NAME>
-ENVIRONMENT=production
-MONGO_URI=<MONGO_URI_WITH_PASSWORD>
-```
-
-2. After running the script :warning: DELETE MONGO_URI :warning:. MONGO_URI gives read and write access to our entire database.
-
-## Create a new script
-
-1. Create a js file with the following content in the `scripts` directory:
-
-   ```
-   // Set to false if you want to manage setup yourself in run().
-   // When true you are automatically connected to the database.
-   module.exports.useAutoConfig = true;
-
-   // Set to something descriptive
-   module.exports.confirmationMessage = "Are you sure you want to run this script";
-
-   // Specify the arguments as an array for the run function (normally the data)
-   module.exports.arguments = [];
-
-   // Main function. Must be pure, do not access global scope (instead use arguments)
-   module.exports.run = async () => {
-     // TODO fill in with code to run
-   };
-   ```
-
-2. Add your script to `scripts/scriptPaths.json`. You can pick any unique descriptive name.

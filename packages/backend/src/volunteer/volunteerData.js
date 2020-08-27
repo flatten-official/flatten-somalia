@@ -1,13 +1,9 @@
 const { mongoose } = require("util-db");
 const _ = require("lodash");
 const { createModel } = require("../utils/mongoose");
+const { Permissions } = require("util-shared-constants");
 
 // DO NOT MODIFY SCHEMA/MODEL UNLESS YOU KNOW WHAT YOU'RE DOING
-const Permissions = {
-  manageVolunteers: "manageVolunteers",
-  submitForms: "submitForms",
-  access: "access", // is the user still enabled (allowed to access the system)
-};
 
 // permission groups used to grant ability to modify particular users.
 // for the moment, just used to allow enable/suspend accounts
@@ -15,7 +11,6 @@ const PermissionGroups = {
   dsu: "dsu",
 };
 
-Object.freeze(Permissions);
 Object.freeze(PermissionGroups);
 
 const Volunteer = createModel("Volunteer", {
@@ -58,7 +53,7 @@ const Volunteer = createModel("Volunteer", {
         enum: Object.values(PermissionGroups),
       },
     ],
-    required: false, // TODO set to true once everyone has it
+    required: true,
   },
   gender: String, // TODO Make enum
   addedBy: mongoose.ObjectId,
@@ -66,11 +61,12 @@ const Volunteer = createModel("Volunteer", {
 });
 
 const defaultVolunteer = {
-  permissions: [Permissions.submitForms],
+  permissions: [Permissions.submitForms, Permissions.access],
+  permissionGroups: [PermissionGroups.dsu],
 };
 
-const getNextFriendlyId = async () => {
-  const largestVolunteer = await Volunteer.find({}, "friendlyId")
+const getNextFriendlyId = async (session) => {
+  const largestVolunteer = await Volunteer.find({}, "friendlyId", { session })
     .sort({ friendlyId: -1 })
     .limit(1);
   if (largestVolunteer.length === 0 || !largestVolunteer[0].friendlyId)
@@ -82,14 +78,14 @@ const getNextFriendlyId = async () => {
  * Adds a volunteer to the database
  * @return {Promise<*>} the volunteer
  */
-const addVolunteer = async (newVolunteer) => {
+const addVolunteer = async (newVolunteer, session = undefined) => {
   newVolunteer = _.defaults(
-    { friendlyId: await getNextFriendlyId() },
+    { friendlyId: await getNextFriendlyId(session) },
     newVolunteer,
     defaultVolunteer
   );
 
-  return new Volunteer(newVolunteer).save(); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
+  return new Volunteer(newVolunteer).save({ session }); // TODO Deal with validation errors (e.g. two volunteers with identical emails)
 };
 
 /**
@@ -115,13 +111,37 @@ const findVolunteerByEmail = async (email) => {
   return emails[0] ? emails[0] : null;
 };
 
+const getVolunteers = () => Volunteer.find().exec();
+
+const addPermission = async (permissionToAdd, volunteerToUpdate) => {
+  if (!volunteerToUpdate.permissions.includes(permissionToAdd)) {
+    volunteerToUpdate.permissions.push(permissionToAdd);
+    await volunteerToUpdate.save();
+  }
+  return volunteerToUpdate;
+};
+
+const removePermission = async (permissionToRemove, volunteerToUpdate) => {
+  if (volunteerToUpdate.permissions.includes(permissionToRemove)) {
+    volunteerToUpdate.permissions = volunteerToUpdate.permissions.filter(
+      (p) => p !== permissionToRemove
+    );
+    await volunteerToUpdate.save();
+  }
+
+  return volunteerToUpdate;
+};
+
 module.exports = {
   Volunteer,
   addVolunteer,
   findVolunteerById,
-  volunteerRegex: volunteerRegexAsync,
+  volunteerRegexAsync,
   findVolunteerByEmail,
+  getVolunteers,
   getNextFriendlyId,
   Permissions,
   PermissionGroups,
+  addPermission,
+  removePermission,
 };

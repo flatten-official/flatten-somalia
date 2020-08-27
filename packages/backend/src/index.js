@@ -24,7 +24,7 @@ async function setup() {
 }
 
 async function startServer() {
-  const port = process.env.PORT || 80;
+  const port = process.env.PORT || 3000; // Must use variable PORT for compatibility with App Engine
 
   const app = await getApp();
   app.listen(port, () => {

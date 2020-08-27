@@ -1,7 +1,7 @@
 const Submission = require("./submissionData");
 const Household = require("./householdData");
 const Person = require("./peopleData");
-const { BadInputError } = require("../../utils/errors");
+const { ApiError } = require("../../utils/errors");
 const { runOpWithinTransaction } = require("../../utils/mongoose");
 
 async function initialSubmission(
@@ -14,7 +14,7 @@ async function initialSubmission(
   householdData
 ) {
   // required because (for example) we call householdData.followUpId which will crash if householdData is undefined
-  if (!householdData) throw new BadInputError("Household data not provided");
+  if (!householdData) throw new ApiError("Household data not provided", 400);
 
   const household = await Household.create(
     householdData.followUpId,

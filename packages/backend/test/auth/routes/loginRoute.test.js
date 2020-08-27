@@ -9,9 +9,20 @@ const { getApp } = require("../../../src/app");
 
 const db = require("util-db/inMemoryDb");
 const supertest = require("supertest");
-const { addVolunteer } = require("../../../src/volunteer/volunteerData");
+const {
+  addVolunteer,
+  Permissions,
+} = require("../../../src/volunteer/volunteerData");
+const _ = require("lodash");
+const { getAllPermissionsExcept } = require("../../utils/permissions");
+
+const TEST_VOLUNTEER = {
+  name: "default_name",
+  email: "default_email@example.ca",
+  teamName: "testTeam",
+};
+
 const { getConfig } = require("util-config");
-const { TEST_VOLUNTEER } = require("../../utils/requests");
 
 describe("test /auth/login", () => {
   let request;
@@ -50,6 +61,22 @@ describe("test /auth/login", () => {
     await request
       .post("/auth/login")
       .send({ email: "bad@gmail.com" })
+      .expect(200);
+
+    expect(sendEmailMock).toHaveBeenCalledTimes(0);
+  });
+
+  it("should return success if an email of a volunteer without access permissions is submitted (and not send email)", async () => {
+    await addVolunteer(
+      _.defaults(
+        { permissions: getAllPermissionsExcept(Permissions.access) },
+        TEST_VOLUNTEER
+      )
+    );
+
+    await request
+      .post("/auth/login")
+      .send({ email: TEST_VOLUNTEER.email })
       .expect(200);
 
     expect(sendEmailMock).toHaveBeenCalledTimes(0);

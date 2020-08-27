@@ -12,32 +12,45 @@ const Confirm = require("prompt-confirm");
 const GCP = require("util-gcp");
 
 const main = async () => {
-  const scriptName = process.env.SCRIPT_NAME;
+  // Get the script
+  const Script = require("./" + process.argv[2]);
 
-  const scriptPath = require("../scriptPaths.json")[scriptName];
+  log.notice(
+    `Starting script ${process.argv[2]} in environment ${
+      Config.getConfig().environmentName
+    }`
+  );
 
-  if (!scriptPath)
-    throw new Error(
-      "no valid SCRIPT_NAME specified in .env file. Look at scriptPaths.js for valid script names"
-    );
+  // Prompts to ask the user before continuing
+  const prompts = [
+    "Did you create a backup (snapshot) of the appropriate database",
+    Script.confirmationMessage,
+  ];
 
-  const Script = require(scriptPath);
-
-  const accepted = await new Confirm(Script.confirmationMessage).run();
-
-  if (!accepted) {
-    log.info("Script was cancelled.");
-    return;
+  for (const prompt of prompts) {
+    if (!(await new Confirm(prompt).run())) {
+      log.info("Script was cancelled.");
+      return;
+    }
   }
 
+  // Load the secrets from GCP
   await GCP.loadSecretsIntoConfig();
+
+  // Connect to the database
   await MongoDatabase.connect(Config.getConfig().secrets.mongoUri);
 
-  log.info(`Running script: ${scriptName}`);
+  log.info(`Running script.`);
 
-  await Script.run(...Script.arguments); // runs the script
+  // Run the script
+  await Script.run(...Script.scriptArguments); // runs the script
 
-  log.info(`Done script: ${scriptName}. MANUALLY VERIFY THAT ALL WENT WELL.`);
+  log.info(`Done running script. Running success tests...`);
+
+  // Run the success tests
+  await Script.successTest(...Script.scriptArguments);
+
+  log.info("Done running success tests");
 };
 
 main()

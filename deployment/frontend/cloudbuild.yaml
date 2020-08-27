@@ -1,0 +1,15 @@
+steps:
+  - name: google/cloud-sdk:alpine
+    entrypoint: gsutil
+    args: ["cp", "packages/frontend/src/api/backend.$PROJECT_ID.js", "packages/frontend/src/api/backend.js"]
+  - name: google/cloud-sdk:alpine
+    entrypoint: gsutil
+    args: ["cp", "deployment/frontend/firebase.json", "firebase.json"]
+  - name: node:alpine
+    entrypoint: "yarn"
+    args: ["install"]
+  - name: node:alpine
+    entrypoint: "yarn"
+    args: ["build-frontend"]
+  - name: gcr.io/$PROJECT_ID/firebase
+    args: ['deploy', '--project=$PROJECT_ID', '--only=hosting']

@@ -15,7 +15,7 @@ module.exports = (req, res) => {
     .status(200)
     .send(
       `Somalia backend online. Environment: ${
-        getConfig().envName
+        getConfig().environmentName
       }. Branch: ${branchName}`
     );
 };

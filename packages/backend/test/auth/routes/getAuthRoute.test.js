@@ -36,7 +36,10 @@ describe("test /auth", () => {
     expect(Object.keys(res.body)).toHaveLength(5);
     expect(res.body.name).toBe(volunteer.name);
     // expected value set in volunteerData.js
-    expect(res.body.permissions).toMatchObject([Permissions.submitForms]);
+    expect(res.body.permissions).toMatchObject([
+      Permissions.submitForms,
+      Permissions.access,
+    ]);
     // expiry field should exist
     expect(res.body.expiry).not.toBeNull();
     // Should have a friendly id field
