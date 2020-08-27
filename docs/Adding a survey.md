@@ -130,8 +130,8 @@ The easiest way to define a model is to use `src/surveys/defaultSurveyFactory/da
 This file provides a function that will generate a model in the default format.
 The default format stores all the data in a single collection.
 
-To make use of the default model factory create a folder in `src/surveys` and add a file `model.js` to that folder.
-`model.js` should contain the Mongoose Schema for the FormIO content. Something like this:
+To make use of the default model factory create a `myNewSurvey.js` file in `src/surveys/models`.
+`myNewSurvey.js` should contain the Mongoose Schema for the FormIO content. Something like this:
 
 ```javascript
 const { Surveys } = require("../config");

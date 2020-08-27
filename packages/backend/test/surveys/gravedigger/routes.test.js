@@ -1,7 +1,7 @@
 const { getApp } = require("../../../src/app");
 const db = require("util-db/inMemoryDb");
 const { login } = require("../../utils/requests");
-const GravediggerSurveySubmissionModel = require("../../../src/surveys/gravedigger/model");
+const GravediggerSurveySubmissionModel = require("../../../src/surveys/models/gravedigger");
 
 const testData = {
   gravediggerRequestBody: {

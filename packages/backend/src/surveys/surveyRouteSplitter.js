@@ -1,8 +1,8 @@
 const { Surveys } = require("./config");
 const { ApiError } = require("../utils/errors");
 const defaultApiFactory = require("./defaultSurveyFactory/apiFactory");
-const gravediggerModel = require("./gravedigger/model");
-const hospitalModel = require("./hospital/model");
+const gravediggerModel = require("./models/gravedigger");
+const hospitalModel = require("./models/hospital");
 const { initialSubmission } = require("./initialHousehold/api");
 const { log } = require("util-logging");
 
