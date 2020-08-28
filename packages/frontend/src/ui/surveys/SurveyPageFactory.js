@@ -11,6 +11,7 @@ import {
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
 import Success from "../components/surveys/Success";
+import { SET_UNAUTHENTICATED } from "../../backend/auth/authActions";
 
 /**
  * This function returns a survey page component.
@@ -35,23 +36,13 @@ const SurveyPageFactory = ({
       this.props.restartSurvey(); // Reset the form when the component is first loaded
     }
 
-    onNextPage = (info) => {
-      // Note: This if statement ensure timings won't update if a time already exists
-      // This ensures going back and forth between pages doesn't overwrite the time the person spent on a page initially
-      if (this.props.surveyData.pageTimings[info.page] === undefined)
-        this.props.recordPageTiming(info.page, Date.now());
-    };
-
-    /**
-     * Submits the survey to the backend and if no error is thrown will then update the Redux store to notify that the survey was completed
-     */
-    submitHook = async (formIOData) => {
-      await onSubmit(this.props.surveyData, formIOData);
-      this.props.notifyCompleted();
-    };
-
     render() {
-      const { surveyData } = this.props;
+      const {
+        surveyData,
+        recordPageTiming,
+        logout,
+        notifyCompleted,
+      } = this.props;
 
       // Although the surveyData is initialized in the constructor,
       // the props aren't updated till the second render and therefore, this.props.surveyData is null
@@ -69,6 +60,24 @@ const SurveyPageFactory = ({
             enableManual={options.enableManualLocation}
           />
         );
+
+      const onNextPage = (info) => {
+        // Note: This if statement ensure timings won't update if a time already exists
+        // This ensures going back and forth between pages doesn't overwrite the time the person spent on a page initially
+        if (surveyData.pageTimings[info.page] === undefined)
+          recordPageTiming(info.page, Date.now());
+      };
+
+      const submitHook = async (formIOData) => {
+        try {
+          await onSubmit(surveyData, formIOData);
+        } catch (e) {
+          if (e.response && e.response.status === 401) logout();
+          else throw e;
+        }
+
+        notifyCompleted();
+      };
 
       if (!surveyData.completed)
         return (
@@ -89,6 +98,7 @@ const SurveyPageFactory = ({
     notifyCompleted: PropTypes.func,
     restartSurvey: PropTypes.func,
     recordPageTiming: PropTypes.func,
+    logout: PropTypes.func,
   };
 
   const mapStateToProps = (state) => ({
@@ -103,6 +113,8 @@ const SurveyPageFactory = ({
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
     submitForm: (formIOData) =>
       dispatch(onSubmit(this.props, formIOData)),
+    logout: () =>
+      dispatch({ type: SET_UNAUTHENTICATED, wasDisconnected: true }),
   });
 
   const SurveyPageContentConnected = connect(
