@@ -3,6 +3,7 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
 import authReducer from "./backend/auth/authReducer";
+import volunteerReducer from "./backend/volunteer/volunteerReducer";
 import { form, forms, submission, submissions } from "react-formio";
 import surveyReducer from "./ui/surveys/reducer";
 
@@ -29,6 +30,7 @@ export default createStore(
     forms: forms({ name: "forms", query: { type: "form", tags: "common" } }),
     submission: submission({ name: "submission" }),
     submissions: submissions({ name: "submissions" }),
+    volunteer: volunteerReducer,
   }),
   {},
   composedEnhancers
