@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const MyModal = ({ show, header, body, button, onClick }) => {
+export const BaseModal = ({ show = true, header, body, button, onClick }) => {
   const [accepted, setAccepted] = useState(false);
 
   return (
@@ -27,12 +27,33 @@ const MyModal = ({ show, header, body, button, onClick }) => {
   );
 };
 
-MyModal.propTypes = {
-  show: PropTypes.bool,
-  header: PropTypes.string,
-  body: PropTypes.string,
-  button: PropTypes.string,
-  onClick: PropTypes.func,
+BaseModal.propTypes = {
+    show: PropTypes.bool,
+    header: PropTypes.string,
+    body: PropTypes.string,
+    button: PropTypes.string,
+    onClick: PropTypes.func,
 };
 
-export default MyModal;
+export const ExpireSoonModal = ({ minutes }) => {
+  const { t } = useTranslation("Navbar");
+
+  // TODO this may miss the expiry since willExpireSoon is only called on first render (afaik).
+  const expiry = useSelector((state) => state.auth.user.expiry);
+  const dispatch = useDispatch();
+
+  const willExpireSoon = new Date(expiry) - minutes * 60 * 1000 <= Date.now();
+
+  return (
+    <BaseModal
+      show={willExpireSoon}
+      header={t("expire.header")}
+      body={t("expire.body")}
+      onClick={() => dispatch(logout())}
+    />
+  );
+};
+
+ExpireSoonModal.propTypes = {
+  minutes: PropTypes.number,
+};

@@ -37,6 +37,7 @@ const Login = () => {
 
   return (
     <>
+      <DisconnectedModal />
       <div className="panel-heading card-header"> {t("loginForm.title")} </div>
       <div className="panel-body card-body">
         <Form formioForm={LoginFormJson} submitHook={onSubmit} />
