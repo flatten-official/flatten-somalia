@@ -23,7 +23,6 @@ import GeneralEN from "./translations/en/General.json";
 import adminEN from "./translations/en/Admin.json";
 
 // FORMIO CONTENT SOMALI
-import formIOAddVolunteerSO from "./translations/so/translation/AddVolunteer.json";
 import formIODefaultsSO from "./translations/so/translation/Defaults.json";
 import formIOInitialHouseholdSurveySO from "./translations/so/translation/InitialVolunteerSurvey.json";
 import formIOGraveDiggerSurveySO from "./translations/so/translation/GraveDiggerSurvey.json";
@@ -40,7 +39,6 @@ import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
 import SurveysSO from "./translations/so/Surveys.json";
 import GeneralSO from "./translations/so/General.json";
-import adminSO from "./translations/so/Admin.json";
 
 const resources = {
   en: {
@@ -65,7 +63,6 @@ const resources = {
   },
   so: {
     translation: {
-      ...formIOAddVolunteerSO,
       ...formIODefaultsSO,
       ...formIOInitialHouseholdSurveySO,
       ...formIOVolunteerLoginSO,
@@ -81,7 +78,7 @@ const resources = {
     FormIOCustomText: formIOCustomTextSO,
     Surveys: SurveysSO,
     General: GeneralSO,
-    Admin: adminSO,
+    Admin: adminEN, // Even in Somali use the English version
   },
 };
 
