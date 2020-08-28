@@ -101,6 +101,8 @@ const SurveyPageFactory = ({
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
+    submitForm: (formIOData) =>
+      dispatch(onSubmit(this.props, formIOData)),
   });
 
   const SurveyPageContentConnected = connect(

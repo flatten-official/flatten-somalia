@@ -1,5 +1,7 @@
 import backend from "./api/backend";
 import flattenApi from "./api/api";
+import { SET_UNAUTHENTICATED } from "./auth/authActions";
+import Types from "../ui/surveys/actionTypes";
 
 const getMetadata = (storeData, pageNames) => {
   const endTime = Date.now();
@@ -30,10 +32,10 @@ const preFormatFormio = (formioData) => {
   });
 };
 
-export const defaultSurveySubmitterFactory = (api, schema) => async (
+export const defaultSurveySubmitterFactory = (api, schema) => (
   storeData,
   formioData
-) => {
+) => (dispatch) => {
   preFormatFormio(formioData);
 
   const body = {
@@ -42,13 +44,13 @@ export const defaultSurveySubmitterFactory = (api, schema) => async (
     data: formioData,
   };
 
-  await backend.request({ ...api, data: body });
+  dispatch(submitForm(api, body));
 };
 
-export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
+export const getInitialHouseholdSubmitter = (schema, pageNames) => (
   storeData,
   formioData
-) => {
+) => (dispatch) => {
   preFormatFormio(formioData);
 
   const body = {
@@ -66,10 +68,14 @@ export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
   });
 
   // need to actually add the submission in here!
-  await backend.request({
-    ...flattenApi.volunteerForm,
-    data: body,
-  });
+  dispatch(submitForm(flattenApi.volunteerForm, body));
+};
+
+const submitForm = (api, body) => async (dispatch) => {
+  const result = await backend.request({ ...api, data: body });
+  if (result.status === 401)
+    dispatch({ type: SET_UNAUTHENTICATED, wasDisconnected: true });
+  else dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY });
 };
 
 // todo refactor into one factory with followupID option?
