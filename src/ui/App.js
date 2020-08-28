@@ -1,76 +1,93 @@
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./home/Home";
 import Login from "./login/Login";
-import Success from "./surveys/Success";
-import LoginSuccess from "./login/LoginSuccess";
 import Loading from "./components/Loading";
 import AdminPanel from "./admin/AdminPanel";
 import { Routes, Surveys } from "../config";
 import { useDispatch, useSelector } from "react-redux";
 import { permissions } from "../backend/auth/authApi";
 import {
-  fetchAuthState,
+  AUTH_AUTHENTICATED,
   AUTH_UNINITIALISED,
+  fetchAuthState,
+  UNAUTHENTICATED_CONTEXT,
 } from "../backend/auth/authActions";
 import SurveyPageFactory from "./surveys/SurveyPageFactory";
+import PrivatePage from "./components/PrivatePage";
+import VolunteerAddPage from "./admin/VolunteerAddPage";
 
-const AppContent = () => {
-  const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+const AuthenticatedAppContent = () => {
+  const getHomePageRoute = () => (
+    <Route
+      exact
+      path={Routes.home}
+      render={() => (
+        <PrivatePage requiredPermission={permissions.submitForms} comp={Home} />
+      )}
+    />
+  );
 
-  useEffect(() => {
-    dispatch(fetchAuthState());
-  }, [dispatch]);
+  const makePrivateRoute = (path, comp, requiredPermission) => (
+    <Route
+      exact
+      path={path}
+      render={() => (
+        <PrivatePage comp={comp} requiredPermission={requiredPermission} />
+      )}
+    />
+  );
 
-  if (auth.status === AUTH_UNINITIALISED) return <Loading />;
+  const makeSurveyRoute = (survey) =>
+    makePrivateRoute(
+      survey.route,
+      SurveyPageFactory(survey),
+      permissions.submitForms
+    );
 
   return (
     <div className="container" id="main">
-      <PrivateRoute
-        exact
-        path={Routes.home}
-        comp={Home}
-        requiredPermission={permissions.submitForms}
-      />
-      <PrivateRoute
-        exact
-        path={Routes.initialHouseholdSurvey}
-        comp={SurveyPageFactory(Surveys.initialHousehold)}
-        requiredPermission={permissions.submitForms}
-      />
-      <PrivateRoute
-        exact
-        path={Routes.gravediggerSurvey}
-        comp={SurveyPageFactory(Surveys.gravedigger)}
-        requiredPermission={permissions.submitForms}
-      />
-      <PrivateRoute
-        exact
-        path={Routes.hospitalSurvey}
-        comp={SurveyPageFactory(Surveys.hospital)}
-        requiredPermission={permissions.submitForms}
-      />
-      <PrivateRoute
-        exact
-        path={Routes.addVolunteer}
-        comp={SurveyPageFactory(Surveys.addVolunteer)}
-        requiredPermission={permissions.manageVolunteers}
-      />
-      <PrivateRoute
-        exact
-        path={Routes.admin}
-        comp={AdminPanel}
-        requiredPermission={permissions.manageVolunteers}
-      />
-      <Route path={Routes.auth} component={Login} />
-      <Route path={Routes.success} component={Success} />
-      <Route path={Routes.emailSubmitted} component={LoginSuccess} />
+      <Switch>
+        {getHomePageRoute()}
+        {makeSurveyRoute(Surveys.initialHousehold)}
+        {makeSurveyRoute(Surveys.gravedigger)}
+        {makeSurveyRoute(Surveys.hospital)}
+        {makePrivateRoute(
+          Routes.addVolunteer,
+          VolunteerAddPage,
+          permissions.manageVolunteers
+        )}
+        {makePrivateRoute(
+          Routes.admin,
+          AdminPanel,
+          permissions.manageVolunteers
+        )}
+
+        <Redirect from="*" to={Routes.home} />
+      </Switch>
     </div>
   );
+};
+
+const AppContent = () => {
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.auth.state);
+
+  // On first load, get the auth state
+  useEffect(() => {
+    dispatch(fetchAuthState(UNAUTHENTICATED_CONTEXT.initialPageLoad, true));
+  }, [dispatch]);
+
+  switch (authState) {
+    case AUTH_UNINITIALISED:
+      return <Loading />;
+    case AUTH_AUTHENTICATED:
+      return <AuthenticatedAppContent />;
+    default:
+      return <Login />;
+  }
 };
 
 const App = () => (
