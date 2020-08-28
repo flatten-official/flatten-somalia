@@ -113,8 +113,7 @@ const SurveyPageFactory = ({
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
     submitForm: (formIOData) =>
       dispatch(onSubmit(this.props, formIOData)),
-    logout: () =>
-      dispatch({ type: SET_UNAUTHENTICATED, wasDisconnected: true }),
+    logout: () => dispatch({ type: SET_UNAUTHENTICATED }),
   });
 
   const SurveyPageContentConnected = connect(
