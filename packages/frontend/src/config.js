@@ -15,6 +15,7 @@ export const Routes = {
   gravediggerSurvey: "/surveys/gravedigger",
   hospitalSurvey: "/surveys/hospital",
   initialBRASurvey: "/surveys/initialBRA",
+  addVolunteer: "/admin/addVolunteer",
 };
 
 const Schemas = {

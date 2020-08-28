@@ -38,7 +38,7 @@ const Form = ({
       await submitHook(submission.data);
       setSubmitted(true);
     } catch (e) {
-      console.error(e);
+      console.log(e);
       next(e);
     }
   };

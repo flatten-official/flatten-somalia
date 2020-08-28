@@ -16,6 +16,7 @@ import {
 } from "../backend/auth/authActions";
 import SurveyPageFactory from "./surveys/SurveyPageFactory";
 import PrivatePage from "./components/PrivatePage";
+import VolunteerAddPage from "./admin/VolunteerAddPage";
 
 const AuthenticatedAppContent = () => {
   const getHomePageRoute = () => (
@@ -53,6 +54,11 @@ const AuthenticatedAppContent = () => {
         {makeSurveyRoute(Surveys.gravedigger)}
         {makeSurveyRoute(Surveys.hospital)}
         {makeSurveyRoute(Surveys.initialBRA)}
+        {makePrivateRoute(
+          Routes.addVolunteer,
+          VolunteerAddPage,
+          permissions.manageVolunteers
+        )}
 
         <Redirect from="*" to={Routes.home} />
       </Switch>
@@ -62,7 +68,7 @@ const AuthenticatedAppContent = () => {
 
 const AppContent = () => {
   const dispatch = useDispatch();
-  const authState = useSelector((state) => state.auth.status);
+  const authState = useSelector((state) => state.auth.state);
 
   // On first load, get the auth state
   useEffect(() => {
