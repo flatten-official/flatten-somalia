@@ -6,7 +6,7 @@ import Form from "../../components/formio/Form";
 import LoginFormJson from "../../../formDefinitions/others/Login.json";
 import Modal from "../../components/Modal";
 import { useSelector } from "react-redux";
-import { UNAUTHENTICATED_CONTEXT } from "../../auth/authActions";
+import { UNAUTHENTICATED_CONTEXT } from "../../auth/actions";
 
 const WarningModal = () => {
   const { t } = useTranslation("Login");
