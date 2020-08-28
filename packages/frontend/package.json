@@ -2,14 +2,14 @@
   "name": "so-volunteer",
   "version": "0.1.0",
   "private": true,
-  "main": "./scripts/start.js",
+  "main": "../../scripts/frontend/start.js",
   "scripts": {
-    "build": "node scripts/build.js",
-    "depcheck": "depcheck . --ignores=\"eslint-*,babel*,*/webpack,prettier,*sass*,depcheck,font-awesome,formiojs\"",
-    "lint": "eslint --fix .",
-    "start": "node scripts/start.js",
-    "deploy": "node scripts/createBranchJson.js && gcloud config set project flatten-staging-271921 && gcloud builds submit",
-    "auth": "gcloud auth login && gcloud config set project flatten-staging-271921",
+    "build": "node ../../scripts/frontend/build.js",
+    "depcheck": "../../node_modules/.bin/depcheck . --ignores=\\\"eslint-*,babel*,*/webpack,prettier,*sass*,depcheck,font-awesome,formiojs\\\"",
+    "lint": "../../node_modules/.bin/eslint --fix .",
+    "start": "node ../../scripts/frontend/start.js",
+    "deploy": "node ../../scripts/createBranchJson.js && gcloud config set project flatten-staging-271921 && gcloud builds submit",
+    "auth": "gcloud auth login && gcloud ../../scripts/frontend/config set project flatten-staging-271921",
     "serve": "npx serve --single --listen 3000 ./build"
   },
   "husky": {

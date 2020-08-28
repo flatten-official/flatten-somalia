@@ -4,8 +4,8 @@ node_modules
 .firebaserc
 .firebase
 build
-src/i18nResources.json
+packages/frontend/src/i18nResources.json
 backend.js
 .eslintcache
 .DS_Store
-src/branch.json
+packages/frontend/src/branch.json

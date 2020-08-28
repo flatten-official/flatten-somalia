@@ -37,11 +37,11 @@ $content-width: 800px; // the max width of the main content
 
 // TODO Switch to @use
 // https://sass-lang.com/documentation/at-rules/import#main-content
-@import "../../node_modules/bootswatch/dist/flatly/variables";
-@import "../../node_modules/bootstrap/scss/bootstrap";
-@import "../../node_modules/bootswatch/dist/flatly/bootswatch";
+@import "../../../../node_modules/bootswatch/dist/flatly/variables";
+@import "../../../../node_modules/bootstrap/scss/bootstrap";
+@import "../../../../node_modules/bootswatch/dist/flatly/bootswatch";
 $fa-font-path: "../fonts";
-@import "../../node_modules/formiojs/dist/formio.full.css";
+@import "../../../../node_modules/formiojs/dist/formio.full.css";
 
 // Applies to all
 body {
