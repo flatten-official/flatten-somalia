@@ -4,8 +4,16 @@
   },
   "submittedEmailMessage": "If you are a volunteer, you have received an email with a link to login. If \nyou did not, please contact an administrator.",
   "unauthorized": "Not authorized.",
-  "disconnectedModal": {
-    "header": "Uh-oh! You have been disconnected. Please login.",
+  "badCookieModal": {
+    "header": "Uh-oh! Your session is invalid!",
     "body": "This could happen if you or someone using your account logged in on another browser."
+  },
+  "expireModal": {
+    "header": "Uh-oh! Your session has expired!",
+    "body": "Please click OK to continue."
+  },
+  "failedToConnectModal": {
+    "header": "Uh-oh!",
+    "body": "We failed to connect to the Flatten server's. Please try again."
   }
 }

@@ -9,7 +9,7 @@ import Modal from "../components/Modal";
 import { useSelector } from "react-redux";
 import { UNAUTHENTICATED_CONTEXT } from "../../backend/auth/authActions";
 
-const DisconnectedModal = () => {
+const WarningModal = () => {
   const { t } = useTranslation("Login");
 
   const context = useSelector((state) => state.auth.unauthenticatedContext);
@@ -18,19 +18,21 @@ const DisconnectedModal = () => {
     case UNAUTHENTICATED_CONTEXT.failedRequest:
       return (
         <Modal
-          header={t("failedToConnect.header")}
-          body={t("failedToConnect.body")}
+          header={t("failedToConnectModal.header")}
+          body={t("failedToConnectModal.body")}
         />
       );
     case UNAUTHENTICATED_CONTEXT.badCookie:
       return (
         <Modal
-          header={t("disconnectedModal.header")}
-          body={t("disconnectedModal.body")}
+          header={t("badCookieModal.header")}
+          body={t("badCookieModal.body")}
         />
       );
     case UNAUTHENTICATED_CONTEXT.expireSoon:
-      return <Modal header={t("expire.header")} body={t("expire.body")} />;
+      return (
+        <Modal header={t("expireModal.header")} body={t("expireModal.body")} />
+      );
     case UNAUTHENTICATED_CONTEXT.pageLoad:
     case UNAUTHENTICATED_CONTEXT.userDecision:
     default:
@@ -51,7 +53,7 @@ const Login = () => {
 
   return (
     <>
-      <DisconnectedModal />
+      <WarningModal />
       <div className="panel-heading card-header"> {t("loginForm.title")} </div>
       <div className="panel-body card-body">
         <Form formioForm={LoginFormJson} submitHook={onSubmit} />
