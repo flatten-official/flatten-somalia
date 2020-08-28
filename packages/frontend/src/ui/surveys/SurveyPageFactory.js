@@ -11,7 +11,10 @@ import {
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
 import Success from "../components/surveys/Success";
-import { SET_UNAUTHENTICATED } from "../../backend/auth/authActions";
+import {
+  logout,
+  UNAUTHENTICATED_REASONS,
+} from "../../backend/auth/authActions";
 
 /**
  * This function returns a survey page component.
@@ -36,13 +39,28 @@ const SurveyPageFactory = ({
       this.props.restartSurvey(); // Reset the form when the component is first loaded
     }
 
+    onNextPage = (info) => {
+      // Note: This if statement ensure timings won't update if a time already exists
+      // This ensures going back and forth between pages doesn't overwrite the time the person spent on a page initially
+      if (this.props.surveyData.pageTimings[info.page] === undefined)
+        this.props.recordPageTiming(info.page, Date.now());
+    };
+
+    /**
+     * Calls the onSubmit callback and if no error is thrown, updates the store to direct to the Success component
+     */
+    submitHook = async (formIOData) => {
+      try {
+        await onSubmit(this.props.surveyData, formIOData);
+      } catch (e) {
+        if (e.response && e.response.status === 401) this.props.logout();
+        else throw e;
+      }
+      this.props.notifyCompleted();
+    };
+
     render() {
-      const {
-        surveyData,
-        recordPageTiming,
-        logout,
-        notifyCompleted,
-      } = this.props;
+      const { surveyData } = this.props;
 
       // Although the surveyData is initialized in the constructor,
       // the props aren't updated till the second render and therefore, this.props.surveyData is null
@@ -60,24 +78,6 @@ const SurveyPageFactory = ({
             enableManual={options.enableManualLocation}
           />
         );
-
-      const onNextPage = (info) => {
-        // Note: This if statement ensure timings won't update if a time already exists
-        // This ensures going back and forth between pages doesn't overwrite the time the person spent on a page initially
-        if (surveyData.pageTimings[info.page] === undefined)
-          recordPageTiming(info.page, Date.now());
-      };
-
-      const submitHook = async (formIOData) => {
-        try {
-          await onSubmit(surveyData, formIOData);
-        } catch (e) {
-          if (e.response && e.response.status === 401) logout();
-          else throw e;
-        }
-
-        notifyCompleted();
-      };
 
       if (!surveyData.completed)
         return (
@@ -111,9 +111,7 @@ const SurveyPageFactory = ({
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
-    submitForm: (formIOData) =>
-      dispatch(onSubmit(this.props, formIOData)),
-    logout: () => dispatch({ type: SET_UNAUTHENTICATED }),
+    logout: () => dispatch(logout(false, UNAUTHENTICATED_REASONS.badCookie)),
   });
 
   const SurveyPageContentConnected = connect(
