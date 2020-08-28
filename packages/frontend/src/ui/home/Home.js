@@ -5,26 +5,7 @@ import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import PropTypes from "prop-types";
-import Modal from "../components/Modal";
-import { checkWillExpireSoon } from "../../backend/auth/authApi";
-import { logout } from "../../backend/auth/authActions";
-
-const ExpireModal = () => {
-  const { t } = useTranslation("Navbar");
-
-  // TODO this will calculate expiry on each state update, this is not ideal and may also miss the expiry modal.
-  const show = useSelector((state) => checkWillExpireSoon(state.auth));
-  const dispatch = useDispatch();
-
-  return (
-    <Modal
-      show={show}
-      header={t("expire.header")}
-      body={t("expire.body")}
-      onClick={() => dispatch(logout())}
-    />
-  );
-};
+import { useExpireSoonCheck } from "../util/customHooks";
 
 const HomeButton = ({ route, text, ...options }) => {
   const dispatch = useDispatch();
@@ -66,6 +47,8 @@ const Home = () => {
   const { t } = useTranslation("Home");
   const authUser = useSelector((state) => state.auth.user);
 
+  useExpireSoonCheck(70);
+
   return (
     <>
       <h3 className="homePageTitle">
@@ -86,7 +69,6 @@ const Home = () => {
       <HomeSurveyButton survey={Surveys.initialBRA} />
       <HomeSurveyButton survey={Surveys.gravedigger} disabled={true} />
       <HomeSurveyButton survey={Surveys.hospital} disabled={true} />
-      <ExpireModal />
     </>
   );
 };
