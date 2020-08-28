@@ -4,7 +4,7 @@ import { Routes } from "../../config";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../backend/auth/authActions";
+import { logout, AUTH_AUTHENTICATED } from "../../backend/auth/authActions";
 
 const LanguageDropDown = () => {
   const { t, i18n } = useTranslation("Navbar");
@@ -28,21 +28,10 @@ const LanguageDropDown = () => {
 
 const Links = () => {
   const { t } = useTranslation("Navbar");
-<<<<<<< HEAD:packages/frontend/src/ui/components/Header.js
   const authState = useSelector((state) => state.auth.state);
   const dispatch = useDispatch();
 
-  if (authState !== AUTH_AUTHENTICATED) return null;
-
-  return (
-    <>
-      <LinkContainer to={Routes.home}>
-        <Nav.Link>{t("links.homepage")}</Nav.Link>
-=======
-  const authUser = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
-
-  if (authUser)
+  if (authState === AUTH_AUTHENTICATED)
     return (
       <>
         <LinkContainer to={Routes.home}>
@@ -57,13 +46,8 @@ const Links = () => {
     return (
       <LinkContainer to={Routes.auth}>
         <Nav.Link>{t("links.login")}</Nav.Link>
->>>>>>> 8097dac... Simplify auth and add modal code:src/ui/components/Header.js
       </LinkContainer>
-      <Nav.Link className="ml-auto" onClick={() => dispatch(logout())}>
-        {t("links.logout")}
-      </Nav.Link>
-    </>
-  );
+    );
 };
 
 const Header = () => {

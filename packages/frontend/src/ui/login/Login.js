@@ -47,10 +47,6 @@ const Login = () => {
 
   return (
     <>
-<<<<<<< HEAD:packages/frontend/src/ui/login/Login.js
-=======
-      <DisconnectedModal />
->>>>>>> 8097dac... Simplify auth and add modal code:src/ui/login/Login.js
       <div className="panel-heading card-header"> {t("loginForm.title")} </div>
       <div className="panel-body card-body">
         <Form formioForm={LoginFormJson} submitHook={onSubmit} />

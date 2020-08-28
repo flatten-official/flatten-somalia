@@ -1,17 +1,22 @@
 import {
-  AUTH_DISCONNECT,
-  AUTH_SET_AUTHENTICATED,
-  AUTH_SET_UNAUTHENTICATED,
+  AUTH_AUTHENTICATED,
+  AUTH_UNINITIALISED,
+  AUTH_UNAUTHENTICATED,
+  SET_AUTHENTICATED,
+  SET_UNAUTHENTICATED,
 } from "./authActions";
 
-const authReducer = (state = {}, action) => {
+const authReducer = (state = { state: AUTH_UNINITIALISED }, action) => {
   switch (action.type) {
-    case AUTH_SET_AUTHENTICATED:
-      return { ...state, user: action.payload };
-    case AUTH_SET_UNAUTHENTICATED:
-      return { ...state, user: null, wasDisconnected: false };
-    case AUTH_DISCONNECT:
-      return { ...state, user: null, wasDisconnected: true };
+    case SET_AUTHENTICATED:
+      return { ...state, state: AUTH_AUTHENTICATED, user: action.payload };
+    case SET_UNAUTHENTICATED:
+      return {
+        ...state,
+        state: AUTH_UNAUTHENTICATED,
+        user: undefined,
+        wasDisconnected: action.wasDisconnected,
+      };
     default:
       return state;
   }
