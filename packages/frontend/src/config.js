@@ -2,9 +2,11 @@ import endpoints from "./api/endpoints";
 import graveDiggerSurveyJSON from "./formDefinitions/surveys/gravedigger/form.json";
 import hospitalSurveyJSON from "./formDefinitions/surveys/hospital/form.json";
 import initialHouseholdJSON from "./formDefinitions/surveys/initialHousehold/form.json";
+import initialBRASurveyJSON from "./formDefinitions/surveys/initialBRA/form.json";
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
+  InitialBRASurveySubmitterFactory,
 } from "./ui/pages/surveys/submitters";
 
 export const Routes = {
@@ -12,6 +14,7 @@ export const Routes = {
   initialHouseholdSurvey: "/surveys/initialHousehold",
   gravediggerSurvey: "/surveys/gravedigger",
   hospitalSurvey: "/surveys/hospital",
+  initialBRASurvey: "/surveys/initialBRA",
   addVolunteer: "/admin/addVolunteer",
   admin: "/admin/list",
 };
@@ -28,6 +31,10 @@ const Schemas = {
   initialHousehold: {
     form: "initialSurvey",
     version: "1.0.6",
+  },
+  initialBRASurvey: {
+    form: "initialBRASurvey",
+    version: "0.0.0",
   },
 };
 
@@ -73,6 +80,20 @@ export const Surveys = {
       "socialsurveyquestions",
       "followupconsent",
     ]),
+    options: {
+      enableManualLocation: true,
+    },
+  },
+  initialBRA: {
+    route: Routes.initialBRASurvey,
+    surveyKey: "initialBRASurvey",
+    i18nTitleKey: "initialBRASurveyTitle",
+    api: endpoints.initialBRASurvey,
+    formIOJSON: initialBRASurveyJSON,
+    onSubmit: InitialBRASurveySubmitterFactory(
+      endpoints.initialBRASurvey,
+      Schemas.initialBRASurvey
+    ),
     options: {
       enableManualLocation: true,
     },

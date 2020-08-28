@@ -8,6 +8,7 @@ import formIOAddVolunteerEN from "./en/formio/AddVolunteer.json";
 import formIOInitialHouseholdSurveyEN from "./en/formio/InitialVolunteerSurvey.json";
 import formIOGraveDiggerSurveyEN from "./en/formio/GravediggerSurvey.json";
 import formIOHospitalSurveyEN from "./en/formio/HospitalSurvey.json";
+import formIOinitialBRASurveyEN from "./en/formio/initialBRASurvey.json";
 import formIOVolunteerLoginEN from "./en/formio/VolunteerLogin.json";
 
 // OTHER ENGLISH CONTENT
@@ -27,8 +28,8 @@ import formIOAddVolunteerSO from "./so/formio/AddVolunteer.json";
 import formIOInitialHouseholdSurveySO from "./so/formio/InitialVolunteerSurvey.json";
 import formIOGraveDiggerSurveySO from "./so/formio/GraveDiggerSurvey.json";
 import formIOHospitalSurveySO from "./so/formio/HospitalSurvey.json";
+import formIOinitialBRASurveySO from "./so/formio/initialBRASurvey.json";
 import formIOVolunteerLoginSO from "./so/formio/VolunteerLogin.json";
-import formIOCustomTextSO from "./so/FormIoCustomText.json";
 
 // OTHER SOMALI CONTENT
 import loginSO from "./so/Login.json";
@@ -36,6 +37,7 @@ import footerSO from "./so/Footer.json";
 import homeSO from "./so/Home.json";
 import loadingSO from "./so/Loading.json";
 import navbarSO from "./so/Navbar.json";
+import formIOCustomTextSO from "./so/FormIoCustomText.json";
 import SurveysSO from "./so/Surveys.json";
 import GeneralSO from "./so/General.json";
 import adminSO from "./so/Admin.json";
@@ -49,6 +51,7 @@ const resources = {
       ...formIOVolunteerLoginEN,
       ...formIOGraveDiggerSurveyEN,
       ...formIOHospitalSurveyEN,
+      ...formIOinitialBRASurveyEN,
     },
     Login: loginEN,
     Footer: footerEN,
@@ -62,12 +65,14 @@ const resources = {
   },
   so: {
     translation: {
+      ...formIOAddVolunteerSO,
       ...formIODefaultsSO,
       ...formIOAddVolunteerSO,
       ...formIOInitialHouseholdSurveySO,
       ...formIOVolunteerLoginSO,
       ...formIOGraveDiggerSurveySO,
       ...formIOHospitalSurveySO,
+      ...formIOinitialBRASurveySO,
     },
     Login: loginSO,
     Footer: footerSO,
