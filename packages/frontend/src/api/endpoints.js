@@ -1,7 +1,10 @@
-import backend from "./endpoints";
+import axios from "axios";
+import backend from "./backend";
+
+const axiosClient = axios.create({ baseURL: backend, withCredentials: true });
 
 const request = (method, url, options) =>
-  backend.request({ method, url, ...options });
+  axiosClient.request({ method, url, ...options });
 
 const getAuth = () => request("GET", "/auth");
 
