@@ -1,5 +1,6 @@
 {
   "addVolunteer": "Add a new volunteer",
   "name": "Name",
-  "permSubmitForms": "Allow this volunteer to submit forms"
+  "permSubmitForms": "Allow this volunteer to submit forms",
+  "permManageVolunteers": "Allow this volunteer to manage volunteers"
 }

@@ -1,4 +1,9 @@
 {
+  "title": "Add Volunteer",
+  "name": "addVolunteer",
+  "type": "form",
+  "display": "form",
+  "path": "addvolunteer",
   "components": [
     {
       "label": "name",
@@ -16,7 +21,7 @@
     },
     {
       "label": "email",
-      "validate": { "required": true },
+      "validate": { "required": true, "unique": true  },
       "unique": true,
       "key": "email",
       "type": "email",
@@ -28,6 +33,12 @@
       "key": "permSubmitForms",
       "type": "checkbox",
       "input": true
+    },
+    {
+      "label": "permManageVolunteers",
+      "tableView": false,
+      "key": "permManageVolunteers",
+      "type": "checkbox"
     },
     {
       "label": "submit",

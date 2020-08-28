@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "../components/surveys/formio/Form";
-import formSchema from "../../forms/addVolunteerForm/form.json";
+import formSchema from "../../formDefinitions/addVolunteer/form.json";
 import addVolunteer from "../../backend/volunteer/addVolunteer";
 
 const VolunteerAddPage = () => {

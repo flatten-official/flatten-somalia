@@ -4,7 +4,7 @@ import LoginSuccess from "./LoginSuccess";
 import backend from "../../backend/api/backend";
 import flattenApi from "../../backend/api/api";
 import Form from "../components/surveys/formio/Form";
-import LoginFormJson from "../../forms/Login.json";
+import LoginFormJson from "../../formDefinitions/Login.json";
 import Modal from "../components/Modal";
 import { useSelector } from "react-redux";
 import { UNAUTHENTICATED_CONTEXT } from "../../backend/auth/authActions";

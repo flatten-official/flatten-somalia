@@ -1,8 +1,8 @@
 import api from "./backend/api/api";
-import graveDiggerSurveyJSON from "./forms/gravedigger/form.json";
-import hospitalSurveyJSON from "./forms/hospital/form.json";
-import initialHouseholdJSON from "./forms/initialHousehold/form.json";
-import initialBRASurveyJSON from "./forms/initialBRA/form.json";
+import graveDiggerSurveyJSON from "./formDefinitions/gravedigger/form.json";
+import hospitalSurveyJSON from "./formDefinitions/hospital/form.json";
+import initialHouseholdJSON from "./formDefinitions/initialHousehold/form.json";
+import initialBRASurveyJSON from "./formDefinitions/initialBRA/form.json";
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
@@ -16,6 +16,7 @@ export const Routes = {
   hospitalSurvey: "/surveys/hospital",
   initialBRASurvey: "/surveys/initialBRA",
   addVolunteer: "/admin/addVolunteer",
+  admin: "/admin",
 };
 
 const Schemas = {
