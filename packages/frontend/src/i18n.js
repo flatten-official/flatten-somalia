@@ -61,7 +61,7 @@ const resources = {
     FormIOCustomText: formIOCustomTextEN,
     Surveys: SurveysEN,
     General: GeneralEN,
-    AdminPanel: adminEN,
+    Admin: adminEN,
   },
   so: {
     translation: {
@@ -81,7 +81,7 @@ const resources = {
     FormIOCustomText: formIOCustomTextSO,
     Surveys: SurveysSO,
     General: GeneralSO,
-    AdminPanel: adminSO,
+    Admin: adminSO,
   },
 };
 
