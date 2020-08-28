@@ -7,7 +7,7 @@ import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
   InitialBRASurveySubmitterFactory,
-} from "./ui/pages/surveys/submission";
+} from "./ui/pages/surveys/submitters";
 
 export const Routes = {
   home: "/",
