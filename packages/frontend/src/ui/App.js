@@ -16,7 +16,7 @@ import {
 import SurveyPageFactory from "./pages/surveys/SurveyPageFactory";
 import PrivatePage from "./components/PrivatePage";
 import AddVolunteerPage from "./pages/admin/AddVolunteerPage";
-import AdminPanel from "./pages/admin/AdminPanel";
+import AdminPage from "./pages/admin/AdminPage";
 import { Permissions } from "../api/constants";
 
 const AuthenticatedAppContent = () => {
@@ -62,7 +62,7 @@ const AuthenticatedAppContent = () => {
         )}
         {makePrivateRoute(
           Routes.admin,
-          AdminPanel,
+          AdminPage,
           Permissions.manageVolunteers
         )}
 
