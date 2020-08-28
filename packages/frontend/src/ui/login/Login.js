@@ -7,32 +7,32 @@ import Form from "../components/surveys/formio/Form";
 import LoginFormJson from "../../forms/Login.json";
 import { BaseModal } from "../components/Modal";
 import { useSelector } from "react-redux";
-import { UNAUTHENTICATED_REASONS } from "../../backend/auth/authActions";
+import { UNAUTHENTICATED_CONTEXT } from "../../backend/auth/authActions";
 
 const DisconnectedModal = () => {
   const { t } = useTranslation("Login");
 
-  const reason = useSelector((state) => state.auth.reason);
+  const context = useSelector((state) => state.auth.unauthenticatedContext);
 
-  switch (reason) {
-    case UNAUTHENTICATED_REASONS.failedRequest:
+  switch (context) {
+    case UNAUTHENTICATED_CONTEXT.failedRequest:
       return (
         <BaseModal
           header={t("failedToConnect.header")}
           body={t("failedToConnect.body")}
         />
       );
-    case UNAUTHENTICATED_REASONS.badCookie:
+    case UNAUTHENTICATED_CONTEXT.badCookie:
       return (
         <BaseModal
           header={t("disconnectedModal.header")}
           body={t("disconnectedModal.body")}
         />
       );
-    case UNAUTHENTICATED_REASONS.expireSoon:
+    case UNAUTHENTICATED_CONTEXT.expireSoon:
       return <BaseModal header={t("expire.header")} body={t("expire.body")} />;
-    case UNAUTHENTICATED_REASONS.pageLoad:
-    case UNAUTHENTICATED_REASONS.userDecision:
+    case UNAUTHENTICATED_CONTEXT.pageLoad:
+    case UNAUTHENTICATED_CONTEXT.userDecision:
     default:
       return null;
   }

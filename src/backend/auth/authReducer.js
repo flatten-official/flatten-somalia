@@ -7,12 +7,17 @@ import {
   SET_EXPECT_AUTHENTICATED,
 } from "./authActions";
 
-const authReducer = (state = { status: AUTH_UNINITIALISED }, action) => {
+const authReducer = (state = { state: AUTH_UNINITIALISED }, action) => {
   switch (action.type) {
     case SET_AUTHENTICATED:
-      return { ...state, status: AUTH_AUTHENTICATED, user: action.payload };
+      return { ...state, state: AUTH_AUTHENTICATED, user: action.payload };
     case SET_UNAUTHENTICATED:
-      return { ...state, status: AUTH_UNAUTHENTICATED, user: undefined };
+      return {
+        ...state,
+        state: AUTH_UNAUTHENTICATED,
+        user: undefined,
+        unauthenticatedContext: action.payload,
+      };
     case SET_EXPECT_AUTHENTICATED:
       return { ...state, expectAuthenticated: action.payload };
     default:
