@@ -30,6 +30,7 @@ const SurveyPageFactory = ({
   onSubmit,
   options,
 }) => {
+  if (options === undefined) options = {};
   // Need to use a Class rather than functional components
   // Since the functional component was running into stale closure issues.
   class SurveyPageContent extends React.Component {
