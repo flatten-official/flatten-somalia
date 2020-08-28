@@ -1,14 +1,18 @@
 import React from "react";
-import Form from "../../components/formio/Form";
-import formSchema from "../../../forms/others/addVolunteer.json";
+import Form from "../../commonComponents/formio/Form";
+import formSchema from "../../../formDefinitions/others/addVolunteer.json";
 import endpoints from "../../../api/endpoints";
+import { useTranslation } from "react-i18next";
 
 const AddVolunteer = () => {
-  const onSubmit = async (formIoData) => {
-    await endpoints.addVolunteer(formIoData);
-  };
+  const { t } = useTranslation("Admin");
 
-  return <Form formioForm={formSchema} submitHook={onSubmit} />;
+  return (
+    <>
+      <h3>{t("addVolunteerTitle")}</h3>
+      <Form formioForm={formSchema} submitHook={endpoints.addVolunteer} />
+    </>
+  );
 };
 
 export default AddVolunteer;

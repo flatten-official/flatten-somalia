@@ -1,8 +1,8 @@
 import endpoints from "./api/endpoints";
-import graveDiggerSurveyJSON from "./formDefinitions/gravedigger/form.json";
-import hospitalSurveyJSON from "./formDefinitions/hospital/form.json";
-import initialHouseholdJSON from "./formDefinitions/initialHousehold/form.json";
-import initialBRASurveyJSON from "./formDefinitions/initialBRA/form.json";
+import graveDiggerSurveyJSON from "./formDefinitions/surveys/gravedigger/form.json";
+import hospitalSurveyJSON from "./formDefinitions/surveys/hospital/form.json";
+import initialHouseholdJSON from "./formDefinitions/surveys/initialHousehold/form.json";
+import initialBRASurveyJSON from "./formDefinitions/surveys/initialBRA/form.json";
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
