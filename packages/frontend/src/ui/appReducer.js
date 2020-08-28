@@ -4,7 +4,7 @@ import {
   AUTH_UNAUTHENTICATED,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
-} from "./actions";
+} from "./appActions";
 
 const authReducer = (state = { state: AUTH_UNINITIALISED }, action) => {
   switch (action.type) {

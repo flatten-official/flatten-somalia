@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import React, { useEffect, useState } from "react";
-import Loading from "../../Loading";
+import Loading from "../../../../commonComponents/app/Loading";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import ManualLocationPicker from "./ManualLocationPicker";
