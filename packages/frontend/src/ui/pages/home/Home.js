@@ -46,6 +46,7 @@ HomeSurveyButton.propTypes = {
 
 const Home = () => {
   const { t } = useTranslation("Home");
+  const { t: tAdmin } = useTranslation("Admin");
   const authUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
@@ -83,11 +84,8 @@ const Home = () => {
         <HomeButton route={Routes.addVolunteer} text={"Add Volunteers"} />
       )}
       {showAddVolunteers && (
-        <HomeButton
-          route={Routes.admin}
-          text="Administrate Volunteers" /* TODO use translation */
-        />
-      )}
+          <HomeButton route={Routes.admin} text={tAdmin("managementTitle")} />
+      )}Π
     </>
   );
 };
