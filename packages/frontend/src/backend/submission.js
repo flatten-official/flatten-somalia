@@ -66,10 +66,7 @@ export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
   });
 
   // need to actually add the submission in here!
-  await backend.request({
-    ...flattenApi.volunteerForm,
-    data: body,
-  });
+  await backend.request({ ...flattenApi.volunteerForm, data: body });
 };
 
 // todo refactor into one factory with followupID option?

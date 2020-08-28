@@ -18,12 +18,12 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="panel-heading card-header"> {t("loginForm.title")} </div>
       <div className="panel-body card-body">
-        <Form formioForm={LoginFormJson} submitHook={onSubmit} />;
+        <Form formioForm={LoginFormJson} submitHook={onSubmit} />
       </div>
-    </div>
+    </>
   );
 };
 
