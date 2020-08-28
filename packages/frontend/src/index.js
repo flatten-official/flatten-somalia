@@ -9,9 +9,9 @@ import App from "./ui/App";
 
 import "./i18n";
 import "./styles/styles.scss";
-import CustomFormIoComponent from "./ui/components/surveys/formio/CustomFormComponent";
+import CustomFormIoComponent from "./ui/components/formio/CustomFormComponent";
 import TranslatedText from "./ui/components/surveys/TranslatedText";
-import { ConnectedFollowUpId } from "./ui/surveys/ConnectedComponents";
+import { ConnectedFollowUpId } from "./ui/pages/surveys/ConnectedComponents";
 
 Components.setComponents({
   customFollowUpId: CustomFormIoComponent(ConnectedFollowUpId),

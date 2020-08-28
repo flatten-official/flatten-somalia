@@ -1,4 +1,4 @@
-import api from "./backend/api/api";
+import endpoints from "./api/endpoints";
 import graveDiggerSurveyJSON from "./formDefinitions/gravedigger/form.json";
 import hospitalSurveyJSON from "./formDefinitions/hospital/form.json";
 import initialHouseholdJSON from "./formDefinitions/initialHousehold/form.json";
@@ -7,7 +7,7 @@ import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
   InitialBRASurveySubmitterFactory,
-} from "./backend/submission";
+} from "./ui/pages/surveys/submission";
 
 export const Routes = {
   home: "/",
@@ -16,7 +16,7 @@ export const Routes = {
   hospitalSurvey: "/surveys/hospital",
   initialBRASurvey: "/surveys/initialBRA",
   addVolunteer: "/admin/addVolunteer",
-  admin: "/admin",
+  admin: "/admin/list",
 };
 
 const Schemas = {
@@ -43,10 +43,10 @@ export const Surveys = {
     route: Routes.gravediggerSurvey,
     surveyKey: "graveDigger",
     i18nTitleKey: "graveDiggerTitle",
-    api: api.graveDiggerSurvey,
+    api: endpoints.submitGraveDiggerSurvey,
     formIOJSON: graveDiggerSurveyJSON,
     onSubmit: defaultSurveySubmitterFactory(
-      api.graveDiggerSurvey,
+      endpoints.submitGraveDiggerSurvey,
       Schemas.gravedigger
     ),
     options: {
@@ -57,10 +57,10 @@ export const Surveys = {
     route: Routes.hospitalSurvey,
     surveyKey: "hospital",
     i18nTitleKey: "hospitalTitle",
-    api: api.hospitalSurvey,
+    api: endpoints.submitHospitalSurvey,
     formIOJSON: hospitalSurveyJSON,
     onSubmit: defaultSurveySubmitterFactory(
-      api.hospitalSurvey,
+      endpoints.submitHospitalSurvey,
       Schemas.hospital
     ),
     options: {
@@ -71,7 +71,7 @@ export const Surveys = {
     route: Routes.initialHouseholdSurvey,
     surveyKey: "initialHousehold",
     i18nTitleKey: "initialHouseholdTitle",
-    api: api.volunteerForm,
+    api: endpoints.submitVolunteerForm,
     formIOJSON: initialHouseholdJSON,
     onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold, [
       "basicinfo",
@@ -88,10 +88,10 @@ export const Surveys = {
     route: Routes.initialBRASurvey,
     surveyKey: "initialBRASurvey",
     i18nTitleKey: "initialBRASurveyTitle",
-    api: api.initialBRASurvey,
+    api: endpoints.initialBRASurvey,
     formIOJSON: initialBRASurveyJSON,
     onSubmit: InitialBRASurveySubmitterFactory(
-      api.initialBRASurvey,
+      endpoints.initialBRASurvey,
       Schemas.initialBRASurvey
     ),
     options: {

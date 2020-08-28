@@ -2,10 +2,10 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
-import authReducer from "./backend/auth/authReducer";
+import authReducer from "./ui/auth/authReducer";
 import { form, forms, submission, submissions } from "react-formio";
-import surveyReducer from "./ui/surveys/reducer";
-import volunteerReducer from "./backend/volunteer/volunteerReducer";
+import surveyReducer from "./ui/pages/surveys/reducer";
+import reducer from "./ui/pages/admin/reducer";
 
 export const history = createBrowserHistory();
 
@@ -30,7 +30,7 @@ export default createStore(
     forms: forms({ name: "forms", query: { type: "form", tags: "common" } }),
     submission: submission({ name: "submission" }),
     submissions: submissions({ name: "submissions" }),
-    volunteer: volunteerReducer,
+    volunteer: reducer,
   }),
   {},
   composedEnhancers
