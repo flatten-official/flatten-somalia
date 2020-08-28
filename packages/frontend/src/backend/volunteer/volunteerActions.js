@@ -20,6 +20,7 @@ export const fetchVolunteerList = () => async (dispatch) => {
 export const changeVolunteerAccess = (volunteerId, newAccessStatus) => async (
   dispatch
 ) => {
+  dispatch({ type: VOLUNTEER_CHANGE_PENDING, payload: { _id: volunteerId } });
   try {
     const res = await backend.request({
       ...flattenApi.changeVolunteerAccess,

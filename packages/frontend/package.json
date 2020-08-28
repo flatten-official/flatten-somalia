@@ -39,10 +39,6 @@
   },
   "dependencies": {
     "@babel/core": "7.9.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.29",
-    "@fortawesome/free-regular-svg-icons": "^5.13.1",
-    "@fortawesome/free-solid-svg-icons": "^5.13.1",
-    "@fortawesome/react-fontawesome": "^0.1.11",
     "@svgr/webpack": "4.3.3",
     "axios": "^0.19.2",
     "babel-eslint": "10.1.0",

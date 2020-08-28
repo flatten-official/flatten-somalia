@@ -43,7 +43,7 @@ const volunteerReducer = (
         listStatus: FETCH_LIST_SUCCESS,
         list: action.payload.map((o) => ({
           ...o,
-          status: FETCH_LIST_SUCCESS,
+          status: VOLUNTEER_CHANGE_SUCCESS,
         })),
       };
     case FETCH_LIST_FAILED:
