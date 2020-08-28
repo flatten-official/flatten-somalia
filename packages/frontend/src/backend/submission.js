@@ -32,10 +32,13 @@ const preFormatFormio = (formioData) => {
   });
 };
 
-export const defaultSurveySubmitterFactory = (api, schema) => (
-  storeData,
-  formioData
-) => (dispatch) => {
+export const defaultSurveySubmitterFactory = (api, schema) => (formioData) => (
+  dispatch,
+  getState
+) => {
+  const state = getState();
+  const storeData = state.surveys[state.surveys.activeSurvey];
+
   preFormatFormio(formioData);
 
   const body = {
@@ -48,9 +51,11 @@ export const defaultSurveySubmitterFactory = (api, schema) => (
 };
 
 export const getInitialHouseholdSubmitter = (schema, pageNames) => (
-  storeData,
   formioData
-) => (dispatch) => {
+) => (dispatch, getState) => {
+  const state = getState();
+  const storeData = state.surveys[state.surveys.activeSurvey];
+
   preFormatFormio(formioData);
 
   const body = {
@@ -72,10 +77,14 @@ export const getInitialHouseholdSubmitter = (schema, pageNames) => (
 };
 
 const submitForm = (api, body) => async (dispatch) => {
-  const result = await backend.request({ ...api, data: body });
-  if (result.status === 401)
-    dispatch({ type: SET_UNAUTHENTICATED, wasDisconnected: true });
-  else dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY });
+  try {
+    await backend.request({ ...api, data: body });
+    dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY });
+  } catch (e) {
+    console.error(e);
+    if (e.status === 401)
+      dispatch({ type: SET_UNAUTHENTICATED, wasDisconnected: true });
+  }
 };
 
 // todo refactor into one factory with followupID option?
