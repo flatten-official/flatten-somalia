@@ -97,6 +97,7 @@ const AdminPanelContent = () => {
     >
       {(props) => (
         <>
+          {/* TODO localize search placeholder */}
           {/* eslint-disable-next-line react/prop-types */}
           <SearchBar {...props.searchProps} />
           <hr />

@@ -81,7 +81,10 @@ const Home = () => {
       <HomeSurveyButton survey={Surveys.hospital} disabled={true} />
 
       {showAddVolunteers && (
-        <HomeButton route={Routes.addVolunteer} text={"Add Volunteers"} />
+        <HomeButton
+          route={Routes.addVolunteer}
+          text={tAdmin("addVolunteerTitle")}
+        />
       )}
       {showAddVolunteers && (
           <HomeButton route={Routes.admin} text={tAdmin("managementTitle")} />
