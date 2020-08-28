@@ -8,8 +8,8 @@ import formIODefaultsEN from "./translations/en/translation/Defaults.json";
 import formIOInitialHouseholdSurveyEN from "./translations/en/translation/InitialVolunteerSurvey.json";
 import formIOGraveDiggerSurveyEN from "./translations/en/translation/GravediggerSurvey.json";
 import formIOHospitalSurveyEN from "./translations/en/translation/HospitalSurvey.json";
-import formIOVolunteerLoginEN from "./translations/en/translation/VolunteerLogin.json";
 import formIOinitialBRASurveyEN from "./translations/en/translation/initialBRASurvey.json";
+import formIOVolunteerLoginEN from "./translations/en/translation/VolunteerLogin.json";
 
 // OTHER ENGLISH CONTENT
 import loginEN from "./translations/en/Login.json";
@@ -17,18 +17,20 @@ import footerEN from "./translations/en/Footer.json";
 import homeEN from "./translations/en/Home.json";
 import loadingEN from "./translations/en/Loading.json";
 import navbarEN from "./translations/en/Navbar.json";
+import adminpanelEN from "./translations/en/AdminPanel.json";
 import formIOCustomTextEN from "./translations/en/FormIoCustomText.json";
 import SurveysEN from "./translations/en/Surveys.json";
 import GeneralEN from "./translations/en/General.json";
 import adminEN from "./translations/en/Admin.json";
 
 // FORMIO CONTENT SOMALI
+import formIOAddVolunteerSO from "./translations/so/translation/AddVolunteer.json";
 import formIODefaultsSO from "./translations/so/translation/Defaults.json";
 import formIOInitialHouseholdSurveySO from "./translations/so/translation/InitialVolunteerSurvey.json";
 import formIOGraveDiggerSurveySO from "./translations/so/translation/GraveDiggerSurvey.json";
 import formIOHospitalSurveySO from "./translations/so/translation/HospitalSurvey.json";
-import formIOVolunteerLoginSO from "./translations/so/translation/VolunteerLogin.json";
 import formIOinitialBRASurveySO from "./translations/en/translation/initialBRASurvey.json";
+import formIOVolunteerLoginSO from "./translations/so/translation/VolunteerLogin.json";
 import formIOCustomTextSO from "./translations/so/FormIoCustomText.json";
 
 // OTHER SOMALI CONTENT
@@ -37,6 +39,7 @@ import footerSO from "./translations/so/Footer.json";
 import homeSO from "./translations/so/Home.json";
 import loadingSO from "./translations/so/Loading.json";
 import navbarSO from "./translations/so/Navbar.json";
+import adminpanelSO from "./translations/so/AdminPanel.json";
 import SurveysSO from "./translations/so/Surveys.json";
 import GeneralSO from "./translations/so/General.json";
 
@@ -60,9 +63,11 @@ const resources = {
     Surveys: SurveysEN,
     General: GeneralEN,
     Admin: adminEN,
+    AdminPanel: adminpanelEN,
   },
   so: {
     translation: {
+      ...formIOAddVolunteerSO,
       ...formIODefaultsSO,
       ...formIOInitialHouseholdSurveySO,
       ...formIOVolunteerLoginSO,
@@ -79,6 +84,7 @@ const resources = {
     Surveys: SurveysSO,
     General: GeneralSO,
     Admin: adminEN, // Even in Somali use the English version
+    AdminPanel: adminpanelSO,
   },
 };
 

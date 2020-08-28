@@ -13,12 +13,14 @@ import BootstrapTable from "react-bootstrap-table-next";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Loading from "./Loading";
+import { useTranslation } from "react-i18next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 const { SearchBar } = Search;
 
 const enabled = (cell) => cell.permissions.indexOf("access") !== -1;
 
 const AdminPanel = (props) => {
+  const { t } = useTranslation("AdminPanel");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchVolunteerList());
@@ -42,16 +44,16 @@ const AdminPanel = (props) => {
           dispatch(changeVolunteerAccess(cell._id, !enabled(cell)))
         }
       >
-        {enabled(cell) ? "Disable" : "Enable"}
+        {enabled(cell) ? t("disable") : t("enable")}
       </Button>
     );
   };
   const columns = [
-    { dataField: "name", text: "Volunteer Name" },
-    { dataField: "email", text: "Volunteer Email" },
+    { dataField: "name", text: t("table.name") },
+    { dataField: "email", text: t("table.email") },
     {
       dataField: "hasAccess",
-      text: "Volunteer Status",
+      text: t("table.status"),
       isDummyField: true,
       csvExport: false,
       formatter: hasAccessFormatter,
@@ -59,7 +61,7 @@ const AdminPanel = (props) => {
     },
     {
       dataField: "accessButton",
-      text: "Enable/Disable Volunteer",
+      text: t("table.statusButtons"),
       isDummyField: true,
       csvExport: false,
       formatter: accessButtonFormatter,
