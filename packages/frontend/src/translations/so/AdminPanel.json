@@ -1,0 +1,12 @@
+{
+  "addVolunteerTitle": null,
+  "title": null,
+  "enable": null,
+  "disable": null,
+  "table": {
+    "name": null,
+    "email": null,
+    "status": null,
+    "statusButtons": null
+  }
+}
