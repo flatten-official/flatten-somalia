@@ -951,6 +951,11 @@
                   "key": "contactTracingDate",
                   "label": "question.adult.contactTracingDate",
                   "type": "datetime",
+                  "conditional": {
+                    "show": false,
+                    "when": "recentContactsSpokenCount",
+                    "eq": 0
+                  },
                   "validate": {
                     "required": true
                   },
@@ -973,6 +978,11 @@
                   "key": "contacts",
                   "label": "contact info",
                   "type": "editgrid",
+                  "conditional": {
+                    "show": false,
+                    "when": "recentContactsSpokenCount",
+                    "eq": 0
+                  },
                   "validate": {
                     "required": false
                   },
