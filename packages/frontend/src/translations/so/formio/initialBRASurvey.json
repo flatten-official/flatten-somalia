@@ -9,7 +9,6 @@
   },
   "body": {
     "neonateDeathsPrompt": "Dhimashada dhalaanka cusub.",
-    "recentContactsInfo": "Hada waxan ku waydiinayaa in aad xasuusato cidii aad is aragteen shalayto,laga bilaabo markii aad kacday shalayto, ilaa maanta, is arag waxan uga jeedna qofka aad kulanteen ama is waydaarsateen ugu yaraan kalmado hadal ah.",
     "contactTracingInfo": "Waxan imika ku waydiinaya astaamaha qof kasta oo aad is aragteensida da,da iyo jinsiga sido kale waxan ku waydiinayaa in is aragiinu ahaa mid taabasho ah, sida gacan qaad, salaan laab qabasho ah, dhunkasho ama in aad wadaagtaan weel cunto oo qof kasta afkiisa gaadha."
   },
   "question": {
@@ -36,7 +35,7 @@
       "monthlyIncome": "Waa maxay dakhligaaga bishii?",
       "symptoms": "Calaamad ma isku aragtay?",
       "comorbidities": "Cudur raaga/sooyaalka?",
-      "recentContactsSpokenCount": "Taabasho amma la kulmid:",
+      "recentContactsSpokenCount": "Hada waxan ku waydiinayaa in aad xasuusato cidii aad is aragteen shalayto, laga bilaabo markii aad kacday shalayto, ilaa maanta, is arag waxan uga jeedna qofka aad kulanteen ama is waydaarsateen ugu yaraan kalmado hadal ah.<br><br>Taabasho amma la kulmid:",
       "contactTracingDate": "Xaqiiiji taariikhta aad is aragteen si aan u qoro.",
       "recentContactsSeenCount": "Ma qiyaasi karta tirada dadka aad la kulantay shalay, waa kuwii aad la kulantay lakin aanad la hadlin? Shalayto"
     },

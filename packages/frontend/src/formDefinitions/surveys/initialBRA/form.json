@@ -1012,7 +1012,7 @@
                 },
                 {
                   "key": "contacts",
-                  "label": "contact info",
+                  "label": "body.contactTracingInfo",
                   "type": "editgrid",
                   "conditional": {
                     "show": false,
@@ -1023,7 +1023,7 @@
                     "required": false
                   },
                   "openWhenEmpty": false,
-                  "hideLabel": true,
+                  "hideLabel": false,
                   "templates": {
                     "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\"</div>"
                   },

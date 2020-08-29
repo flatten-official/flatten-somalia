@@ -9,7 +9,6 @@
   },
   "body": {
     "neonateDeathsPrompt": "Probe for neonate deaths.",
-    "recentContactsInfo": "For each resident we will now ask you to remember who you have been in contact with yesterday, between the time of waking up yesterday and the time of waking up today. A contact is someone who you met in person and with who you exchanged at least a few words.",
     "contactTracingInfo": "We will now ask you some characteristics for each contact, such as their age and sex. We also ask whether contact was physical or not. A physical contact includes hand shaking, embracing, kissing, and also sharing a glass or utensil that is passed from mouth to mouth."
   },
   "question": {
@@ -36,7 +35,7 @@
       "monthlyIncome": "What is your monthly income?",
       "symptoms": "This year, have you or are you experiencing any of the following symptoms?",
       "comorbidities": "Has a health professional diagnosed you with any of the following conditions?",
-      "recentContactsSpokenCount": "Enter number of contacts:",
+      "recentContactsSpokenCount": "For each resident we will now ask you to remember who you have been in contact with yesterday, between the time of waking up yesterday and the time of waking up today. A contact is someone who you met in person and with who you exchanged at least a few words.<br><br>Enter number of contacts:",
       "contactTracingDate": "Confirm the date for which contacts are recorded.",
       "recentContactsSeenCount": "Could you estimate the total number of other contacts, i.e. those who you met but with who you did not speak, yesterday?"
     },
