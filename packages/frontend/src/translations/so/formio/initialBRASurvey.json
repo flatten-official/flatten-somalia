@@ -20,9 +20,9 @@
     "movedOutCount": "Tirada xubnaha guriga ka guurtay?",
     "deathsCount": "Tirada dhimashada guriga?",
     "newborn": {
-      "age": null,
-      "gender": null,
-      "birthdate": null
+      "age": "Da':",
+      "gender": "Jinsi:",
+      "birthdate": "Taariiqda dhalasha:"
     },
     "adult": {
       "sectionStatus": "Helida ogalashaha deganayaasha?",

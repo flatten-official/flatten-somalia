@@ -20,9 +20,9 @@
     "movedOutCount": "How many individuals have moved out of this household?",
     "deathsCount": "How many deaths occurred in this household?",
     "newborn": {
-      "age": null,
-      "gender": null,
-      "birthdate": null
+      "age": "Age:",
+      "gender": "Gender:",
+      "birthdate": "Birthdate:"
     },
     "adult": {
       "sectionStatus": "Is this resident available and consenting to fill out this section?",
