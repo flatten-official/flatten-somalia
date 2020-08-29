@@ -34,24 +34,24 @@
     "unavailable": "The resident is unavailable."
   },
   "symptom": {
-    "abdominalPain": null,
-    "cough": null,
-    "chills": null,
-    "fever": null,
-    "olfactoryImpairment": null,
-    "gustatoryImpairment": null,
-    "nausea": null,
-    "shortnessOfBreath": null
+    "abdominalPain": "Abdominal pain/tummy ache",
+    "cough": "Cough that was new and persistent",
+    "chills": "Chills (feeling too cold)",
+    "fever": "Fever (feeling too hot)",
+    "olfactoryImpairment": "Loss of sense of smell",
+    "gustatoryImpairment": "Loss of sense of taste",
+    "nausea": "Nausea and/or vomiting",
+    "shortnessOfBreath": "Shortness of breath affecting normal activities"
   },
   "symptomOnset": {
-    "abdominalPain": null,
-    "cough": null,
-    "chills": null,
-    "fever": null,
-    "olfactoryImpairment": null,
-    "gustatoryImpairment": null,
-    "nausea": null,
-    "shortnessOfBreath": null
+    "abdominalPain": "When did the abdominal pain start?",
+    "cough": "When did the cough start?",
+    "chills": "When did the chills start?",
+    "fever": "When did the fever start?",
+    "olfactoryImpairment": "When did the loss of sense of smell start?",
+    "gustatoryImpairment": "When did the loss of sense of taste start?",
+    "nausea": "When did the nausea or vomiting start?",
+    "shortnessOfBreath": "When did the shortness of breath start?"
   },
   "comorbidity": {
     "substanceAbuse": null,

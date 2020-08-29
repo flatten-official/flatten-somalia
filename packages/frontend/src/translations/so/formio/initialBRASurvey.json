@@ -34,24 +34,24 @@
     "unavailable": "Deganaha aan la heli karin."
   },
   "symptom": {
-    "abdominalPain": null,
-    "cough": null,
-    "chills": null,
-    "fever": null,
-    "olfactoryImpairment": null,
-    "gustatoryImpairment": null,
-    "nausea": null,
-    "shortnessOfBreath": null
+    "abdominalPain": "Calool xanuun",
+    "cough": "Qunfac so laalaabta",
+    "chills": "Jarees",
+    "fever": "Qandho/xumad",
+    "olfactoryImpairment": "Ur la'aan",
+    "gustatoryImpairment": "Dhadhan la'aan",
+    "nausea": "Lalabo ama matag",
+    "shortnessOfBreath": "Neefsashada oo dhibta"
   },
   "symptomOnset": {
-    "abdominalPain": null,
-    "cough": null,
-    "chills": null,
-    "fever": null,
-    "olfactoryImpairment": null,
-    "gustatoryImpairment": null,
-    "nausea": null,
-    "shortnessOfBreath": null
+    "abdominalPain": "Waqtigee calool xanuunka kugu bilawday?",
+    "cough": "Waqtigee qunfaca bilawday?",
+    "chills": "Waqtigee jareeska bilawday?",
+    "fever": "Waqtigee qandhada/xumada bilawday?",
+    "olfactoryImpairment": "Waqtigee dareeenka urka weyday?",
+    "gustatoryImpairment": "Waqtigee dareenka dhadhanka weyday?",
+    "nausea": "Waqtigee lalabada iyo mataga bilawday?",
+    "shortnessOfBreath": "Waqtigee in neefta ku dhibto bilawday?"
   },
   "comorbidity": {
     "substanceAbuse": null,
