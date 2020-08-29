@@ -334,7 +334,7 @@
               ]
             },
             {
-              "conditional":{
+              "conditional": {
                 "show": true,
                 "when": "status",
                 "eq": "consentGiven"
@@ -433,108 +433,996 @@
                   "data": {
                     "values": [
                       {
-                        "label": "Koronto Yaqaan",
-                        "value": "korontoYaqaan"
+                        "label": "school student",
+                        "value": "school student"
                       },
                       {
-                        "label": "Fuundi",
-                        "value": "fuundi"
+                        "label": "Arday iskuul",
+                        "value": "school student"
                       },
                       {
-                        "label": "Faryaamo",
-                        "value": "faryaamo"
+                        "label": "university/college student",
+                        "value": "university/college student"
                       },
                       {
-                        "label": "Feeroole ( Ninka Guryaha Shubo)",
-                        "value": "feerooleNinkaGuryahaShubo"
+                        "label": "Arday jaamacadeed",
+                        "value": "university/college student"
                       },
                       {
-                        "label": "Makaaniko (Gawaarida ninka Sameeyo)",
-                        "value": "makaanikoGawaaridaNinkaSameeyo"
+                        "label": "shoe shiner / Boot polisher",
+                        "value": "shoe shiner / Boot polisher"
                       },
                       {
-                        "label": "Tubiiste",
-                        "value": "tubiiste"
-                      },
-                      {
-                        "label": "Xamaali (Muruq Maal)",
-                        "value": "xamaaliMuruqMaal"
-                      },
-                      {
-                        "label": "Rinjiile",
-                        "value": "rinjiile"
-                      },
-                      {
-                        "label": "Farsama yaqaan dabka gawaarida",
-                        "value": "farsamaYaqaanDabkaGawaarida"
-                      },
-                      {
-                        "label": "Caseeye ",
-                        "value": "caseeye"
-                      },
-                      {
-                        "label": "Kooke (Kuwa Cunada kariyo)",
-                        "value": "kookeKuwaCunadaKariyo"
-                      },
-                      {
-                        "label": "Kabalyeeri",
-                        "value": "kabalyeeri"
-                      },
-                      {
-                        "label": "Timajare",
-                        "value": "timajare"
-                      },
-                      {
-                        "label": "Kalkaaliye ",
-                        "value": "kalkaaliye"
+                        "label": "Caseeye",
+                        "value": "shoe shiner / Boot polisher"
                       },
                       {
                         "label": "Doctor",
-                        "value": "doctor"
+                        "value": "Doctor"
+                      },
+                      {
+                        "label": "Dhaqtar",
+                        "value": "Doctor"
                       },
                       {
                         "label": "Engineer",
-                        "value": "engineer"
+                        "value": "Engineer"
                       },
                       {
-                        "label": "Umuliso",
-                        "value": "umuliso"
+                        "label": "Injineer",
+                        "value": "Engineer"
                       },
                       {
-                        "label": "Macalin School",
-                        "value": "macalinSchool"
+                        "label": "Auto electrician",
+                        "value": "Auto electrician"
                       },
                       {
-                        "label": "Prof",
-                        "value": "prof"
+                        "label": "Farsamayaqaan Dabka gawaarida",
+                        "value": "Auto electrician"
                       },
                       {
-                        "label": "Shaqale dowladeed",
-                        "value": "shaqaleDowladeed"
+                        "label": "carpenter",
+                        "value": "carpenter"
                       },
                       {
-                        "label": "Shaqaale hey,adeed",
-                        "value": "shaqaaleHeyAdeed"
+                        "label": "Faryaamo",
+                        "value": "carpenter"
                       },
                       {
-                        "label": "Shaqaale ganacsi",
-                        "value": "shaqaaleGanacsi"
+                        "label": "presser/iron man",
+                        "value": "presser/iron man"
+                      },
+                      {
+                        "label": "Feeroole",
+                        "value": "presser/iron man"
+                      },
+                      {
+                        "label": "Mason",
+                        "value": "Mason"
+                      },
+                      {
+                        "label": "Fundi",
+                        "value": "Mason"
+                      },
+                      {
+                        "label": "Businessperson",
+                        "value": "Businessperson"
                       },
                       {
                         "label": "Ganacsade",
-                        "value": "ganacsade"
+                        "value": "Businessperson"
                       },
                       {
-                        "label": "Arday jamacadeed",
-                        "value": "ardayJamacadeed"
+                        "label": "waiter",
+                        "value": "waiter"
                       },
                       {
-                        "label": "Arday iskool",
-                        "value": "ardayIskool"
+                        "label": "Kabalyeeri",
+                        "value": "waiter"
                       },
                       {
-                        "label": "otherSpecify",
-                        "value": "other"
+                        "label": "Nurse",
+                        "value": "Nurse"
+                      },
+                      {
+                        "label": "Kalkaaliye",
+                        "value": "Nurse"
+                      },
+                      {
+                        "label": "Cook",
+                        "value": "Cook"
+                      },
+                      {
+                        "label": "Kooke",
+                        "value": "Cook"
+                      },
+                      {
+                        "label": "Electrician",
+                        "value": "Electrician"
+                      },
+                      {
+                        "label": "Koronto yaqaan",
+                        "value": "Electrician"
+                      },
+                      {
+                        "label": "Macalin school",
+                        "value": "school teacher"
+                      },
+                      {
+                        "label": "mechanic",
+                        "value": "mechanic"
+                      },
+                      {
+                        "label": "Makaaniko",
+                        "value": "mechanic"
+                      },
+                      {
+                        "label": "wax kale",
+                        "value": "wax kale"
+                      },
+                      {
+                        "label": "Other",
+                        "value": "wax kale"
+                      },
+                      {
+                        "label": "Professor",
+                        "value": "Professor"
+                      },
+                      {
+                        "label": "Prof",
+                        "value": "Professor"
+                      },
+                      {
+                        "label": "painter",
+                        "value": "painter"
+                      },
+                      {
+                        "label": "Rinjiile",
+                        "value": "painter"
+                      },
+                      {
+                        "label": "Business employee",
+                        "value": "Business employee"
+                      },
+                      {
+                        "label": "Shaqaale ganacsi",
+                        "value": "Business employee"
+                      },
+                      {
+                        "label": "organization employee",
+                        "value": "organization employee"
+                      },
+                      {
+                        "label": "Shaqaale Hay’adeed",
+                        "value": "organization employee"
+                      },
+                      {
+                        "label": "civil servant",
+                        "value": "civil servant"
+                      },
+                      {
+                        "label": "Shaqaale dowladeed",
+                        "value": "civil servant"
+                      },
+                      {
+                        "label": "barber",
+                        "value": "barber"
+                      },
+                      {
+                        "label": "Timajare",
+                        "value": "barber"
+                      },
+                      {
+                        "label": "plumber",
+                        "value": "plumber"
+                      },
+                      {
+                        "label": "Tubiiste",
+                        "value": "plumber"
+                      },
+                      {
+                        "label": "midwife",
+                        "value": "midwife"
+                      },
+                      {
+                        "label": "Umuliso",
+                        "value": "midwife"
+                      },
+                      {
+                        "label": "carrier / Casual labor",
+                        "value": "carrier / Casual labor"
+                      },
+                      {
+                        "label": "Xamaali/ Muruqmaal",
+                        "value": "carrier / Casual labor"
+                      },
+                      {
+                        "label": "Cloth cleaner/laundry",
+                        "value": "Cloth cleaner/laundry"
+                      },
+                      {
+                        "label": "Dhardhaqid/labadaanyo",
+                        "value": "Cloth cleaner/laundry"
+                      },
+                      {
+                        "label": "Unemployed",
+                        "value": "Unemployed"
+                      },
+                      {
+                        "label": "Ma shaqeeyo/ilmahega ibiilo/",
+                        "value": "Unemployed"
+                      },
+                      {
+                        "label": "Airport staff/worker",
+                        "value": "Airport staff/worker"
+                      },
+                      {
+                        "label": "Alaboorka ayuu kashaqeya",
+                        "value": "Airport staff/worker"
+                      },
+                      {
+                        "label": "Social welfare",
+                        "value": "Social welfare"
+                      },
+                      {
+                        "label": "Arimaha bulshada/ururka haweenka",
+                        "value": "Social welfare"
+                      },
+                      {
+                        "label": "artist",
+                        "value": "artist"
+                      },
+                      {
+                        "label": "Farshaxanyaqaan",
+                        "value": "artist"
+                      },
+                      {
+                        "label": "Askari dowladeed",
+                        "value": "soldier"
+                      },
+                      {
+                        "label": "Askariyad",
+                        "value": "soldier"
+                      },
+                      {
+                        "label": "Askeri",
+                        "value": "soldier"
+                      },
+                      {
+                        "label": "soldier",
+                        "value": "soldier"
+                      },
+                      {
+                        "label": "Ciidan",
+                        "value": "soldier"
+                      },
+                      {
+                        "label": "boolis",
+                        "value": "police"
+                      },
+                      {
+                        "label": "police",
+                        "value": "police"
+                      },
+                      {
+                        "label": "bolis",
+                        "value": "police"
+                      },
+                      {
+                        "label": "tv ayuu u shaqeeyaa",
+                        "value": "TV staff/worker"
+                      },
+                      {
+                        "label": "TV staff/worker",
+                        "value": "TV staff/worker"
+                      },
+                      {
+                        "label": "tv u shaqaysaa",
+                        "value": "TV staff/worker"
+                      },
+                      {
+                        "label": "Babur wadit",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "Darawal baabuur",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "Darawal caasi",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "Darawal taxi",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "Darawal gaari",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "Darwal bas",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "wade gaari dadweyne(PL)",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "Basaska dad weynah",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "Bajajle Darwal bajaajle",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "darwal mooto",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "driver",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "bajaj wade",
+                        "value": "driver"
+                      },
+                      {
+                        "label": "Bacadle",
+                        "value": "clothes shop"
+                      },
+                      {
+                        "label": "Bacadlo",
+                        "value": "clothes shop"
+                      },
+                      {
+                        "label": "carwo ayaan gadaa",
+                        "value": "clothes shop"
+                      },
+                      {
+                        "label": "carwo",
+                        "value": "clothes shop"
+                      },
+                      {
+                        "label": "clothes shop",
+                        "value": "clothes shop"
+                      },
+                      {
+                        "label": "Carwo gadaa",
+                        "value": "clothes shop"
+                      },
+                      {
+                        "label": "Bajiyo iyo sanbuus gada",
+                        "value": "street food venders"
+                      },
+                      {
+                        "label": "Sanbuus an dubaa",
+                        "value": "street food venders"
+                      },
+                      {
+                        "label": "sanbuusley",
+                        "value": "street food venders"
+                      },
+                      {
+                        "label": "Biyool",
+                        "value": "street food venders"
+                      },
+                      {
+                        "label": "street food venders",
+                        "value": "street food venders"
+                      },
+                      {
+                        "label": "cabitaanle",
+                        "value": "street food venders"
+                      },
+                      {
+                        "label": "bare jaamacad",
+                        "value": "university lecturer"
+                      },
+                      {
+                        "label": "university lecturer",
+                        "value": "university lecturer"
+                      },
+                      {
+                        "label": "Macalin jaamacadeed",
+                        "value": "university lecturer"
+                      },
+                      {
+                        "label": "Bukiyeer",
+                        "value": "salon"
+                      },
+                      {
+                        "label": "bukuyeer",
+                        "value": "salon"
+                      },
+                      {
+                        "label": "qurxink ta dumarka",
+                        "value": "salon"
+                      },
+                      {
+                        "label": "salon",
+                        "value": "salon"
+                      },
+                      {
+                        "label": "cilaansaar",
+                        "value": "salon"
+                      },
+                      {
+                        "label": "Booyaaso",
+                        "value": "housemaid/maid"
+                      },
+                      {
+                        "label": "Shaqaale guri",
+                        "value": "housemaid/maid"
+                      },
+                      {
+                        "label": "cid kala u shaqeeso",
+                        "value": "housemaid/maid"
+                      },
+                      {
+                        "label": "housemaid/maid",
+                        "value": "housemaid/maid"
+                      },
+                      {
+                        "label": "jaariyad",
+                        "value": "housemaid/maid"
+                      },
+                      {
+                        "label": "Dalaal",
+                        "value": "broker"
+                      },
+                      {
+                        "label": "dalaal guri",
+                        "value": "broker"
+                      },
+                      {
+                        "label": "broker",
+                        "value": "broker"
+                      },
+                      {
+                        "label": "dulaal",
+                        "value": "broker"
+                      },
+                      {
+                        "label": "Dawaare",
+                        "value": "tailor"
+                      },
+                      {
+                        "label": "Dawaarle",
+                        "value": "tailor"
+                      },
+                      {
+                        "label": "Harqaan",
+                        "value": "tailor"
+                      },
+                      {
+                        "label": "Harqaanle",
+                        "value": "tailor"
+                      },
+                      {
+                        "label": "tailor",
+                        "value": "tailor"
+                      },
+                      {
+                        "label": "Sharqaanle",
+                        "value": "tailor"
+                      },
+                      {
+                        "label": "Nadaafada",
+                        "value": "cleaner"
+                      },
+                      {
+                        "label": "Nadafada ka shaqeysa",
+                        "value": "cleaner"
+                      },
+                      {
+                        "label": "Nadiifiye",
+                        "value": "cleaner"
+                      },
+                      {
+                        "label": "cleaner",
+                        "value": "cleaner"
+                      },
+                      {
+                        "label": "dhulxaaqe",
+                        "value": "cleaner"
+                      },
+                      {
+                        "label": "Dukaan",
+                        "value": "shopkeeper"
+                      },
+                      {
+                        "label": "Dukaanle",
+                        "value": "shopkeeper"
+                      },
+                      {
+                        "label": "Dukaanleey",
+                        "value": "shopkeeper"
+                      },
+                      {
+                        "label": "Dukan",
+                        "value": "shopkeeper"
+                      },
+                      {
+                        "label": "Dukan yar",
+                        "value": "shopkeeper"
+                      },
+                      {
+                        "label": "shopkeeper",
+                        "value": "shopkeeper"
+                      },
+                      {
+                        "label": "Dukaan xafadeed",
+                        "value": "shopkeeper"
+                      },
+                      {
+                        "label": "midka tikidka jara",
+                        "value": "travel agency staff"
+                      },
+                      {
+                        "label": "travel agency staff",
+                        "value": "travel agency staff"
+                      },
+                      {
+                        "label": "Shirkadaha dulimadka",
+                        "value": "travel agency staff"
+                      },
+                      {
+                        "label": "Fanaan",
+                        "value": "singer"
+                      },
+                      {
+                        "label": "singer",
+                        "value": "singer"
+                      },
+                      {
+                        "label": "fanaanad",
+                        "value": "singer"
+                      },
+                      {
+                        "label": "chemist",
+                        "value": "chemist"
+                      },
+                      {
+                        "label": "Farmashiiste",
+                        "value": "chemist"
+                      },
+                      {
+                        "label": "Handcart",
+                        "value": "Handcart"
+                      },
+                      {
+                        "label": "Gaari gacan",
+                        "value": "Handcart"
+                      },
+                      {
+                        "label": "Guri jogto",
+                        "value": "Housewife"
+                      },
+                      {
+                        "label": "Guri joog",
+                        "value": "Housewife"
+                      },
+                      {
+                        "label": "ninkeda ayaa biilo",
+                        "value": "Housewife"
+                      },
+                      {
+                        "label": "Housewife",
+                        "value": "Housewife"
+                      },
+                      {
+                        "label": "Guriga ayey wax ka qabataa",
+                        "value": "Housewife"
+                      },
+                      {
+                        "label": "gas station worker",
+                        "value": "gas station worker"
+                      },
+                      {
+                        "label": "Goomiiste",
+                        "value": "gas station worker"
+                      },
+                      {
+                        "label": "Hilibka ayaan gadaa",
+                        "value": "butchery"
+                      },
+                      {
+                        "label": "Hilible",
+                        "value": "butchery"
+                      },
+                      {
+                        "label": "Hilibleey",
+                        "value": "butchery"
+                      },
+                      {
+                        "label": "Hilibley",
+                        "value": "butchery"
+                      },
+                      {
+                        "label": "butchery",
+                        "value": "butchery"
+                      },
+                      {
+                        "label": "kawaanle",
+                        "value": "butchery"
+                      },
+                      {
+                        "label": "volunteer",
+                        "value": "volunteer"
+                      },
+                      {
+                        "label": "Iskaa wax u qabso",
+                        "value": "volunteer"
+                      },
+                      {
+                        "label": "Kaluumesato",
+                        "value": "fisher man/fishery"
+                      },
+                      {
+                        "label": "Kaluumeysi",
+                        "value": "fisher man/fishery"
+                      },
+                      {
+                        "label": "fisher man/fishery",
+                        "value": "fisher man/fishery"
+                      },
+                      {
+                        "label": "malaay dabato",
+                        "value": "fisher man/fishery"
+                      },
+                      {
+                        "label": "Khudaaarta",
+                        "value": "vegetable seller"
+                      },
+                      {
+                        "label": "Khudaar",
+                        "value": "vegetable seller"
+                      },
+                      {
+                        "label": "Khudaarlay",
+                        "value": "vegetable seller"
+                      },
+                      {
+                        "label": "Khudaarley",
+                        "value": "vegetable seller"
+                      },
+                      {
+                        "label": "miis yaanyo",
+                        "value": "vegetable seller"
+                      },
+                      {
+                        "label": "vegetable seller",
+                        "value": "vegetable seller"
+                      },
+                      {
+                        "label": "miis",
+                        "value": "vegetable seller"
+                      },
+                      {
+                        "label": "car washer",
+                        "value": "car washer"
+                      },
+                      {
+                        "label": "Labaajo",
+                        "value": "car washer"
+                      },
+                      {
+                        "label": "maamule jaamacad",
+                        "value": "school principal/university admin"
+                      },
+                      {
+                        "label": "school principal/university admin",
+                        "value": "school principal/university admin"
+                      },
+                      {
+                        "label": "maamule iskuul",
+                        "value": "school principal/university admin"
+                      },
+                      {
+                        "label": "Macalin iskuul",
+                        "value": "school teacher"
+                      },
+                      {
+                        "label": "bare iskuul",
+                        "value": "school teacher"
+                      },
+                      {
+                        "label": "school teacher",
+                        "value": "school teacher"
+                      },
+                      {
+                        "label": "macalimad",
+                        "value": "school teacher"
+                      },
+                      {
+                        "label": "Macalin dugsi",
+                        "value": "Quran/Koran teacher"
+                      },
+                      {
+                        "label": "macalin dugsi Quran",
+                        "value": "Quran/Koran teacher"
+                      },
+                      {
+                        "label": "Quran/Koran teacher",
+                        "value": "Quran/Koran teacher"
+                      },
+                      {
+                        "label": "madarasa",
+                        "value": "Quran/Koran teacher"
+                      },
+                      {
+                        "label": "comedian",
+                        "value": "comedian"
+                      },
+                      {
+                        "label": "Majaajileste",
+                        "value": "comedian"
+                      },
+                      {
+                        "label": "Tiles operator",
+                        "value": "Tiles operator"
+                      },
+                      {
+                        "label": "Mutuneeliiste",
+                        "value": "Tiles operator"
+                      },
+                      {
+                        "label": "Caanoleey",
+                        "value": "milkman/mailwoman"
+                      },
+                      {
+                        "label": "caano ay gadaa",
+                        "value": "milkman/mailwoman"
+                      },
+                      {
+                        "label": "caano gedid",
+                        "value": "milkman/mailwoman"
+                      },
+                      {
+                        "label": "caano gadaow",
+                        "value": "milkman/mailwoman"
+                      },
+                      {
+                        "label": "milkman/mailwoman",
+                        "value": "milkman/mailwoman"
+                      },
+                      {
+                        "label": "caanoley",
+                        "value": "milkman/mailwoman"
+                      },
+                      {
+                        "label": "Oday dhaqameed",
+                        "value": "community elder"
+                      },
+                      {
+                        "label": "Oday dhaqameyd",
+                        "value": "community elder"
+                      },
+                      {
+                        "label": "community elder",
+                        "value": "community elder"
+                      },
+                      {
+                        "label": "Oday dhaqmeed",
+                        "value": "community elder"
+                      },
+                      {
+                        "label": "Physotherapist",
+                        "value": "Physiotherapist"
+                      },
+                      {
+                        "label": "Physiotherapist",
+                        "value": "Physiotherapist"
+                      },
+                      {
+                        "label": "Malin jimcse",
+                        "value": "Physiotherapist"
+                      },
+                      {
+                        "label": "Firewood collector",
+                        "value": "Firewood collector"
+                      },
+                      {
+                        "label": "Qoryo jabis/qoryo gure",
+                        "value": "Firewood collector"
+                      },
+                      {
+                        "label": "Ribotar",
+                        "value": "radio staff/reporter"
+                      },
+                      {
+                        "label": "journalist",
+                        "value": "radio staff/reporter"
+                      },
+                      {
+                        "label": "Shaqale idacad",
+                        "value": "radio staff/reporter"
+                      },
+                      {
+                        "label": "radio staff/reporter",
+                        "value": "radio staff/reporter"
+                      },
+                      {
+                        "label": "warbahinta madaxa bananv",
+                        "value": "radio staff/reporter"
+                      },
+                      {
+                        "label": "baker",
+                        "value": "baker"
+                      },
+                      {
+                        "label": "Rooile(rootile)",
+                        "value": "baker"
+                      },
+                      {
+                        "label": "money  exchanger",
+                        "value": "money  exchanger"
+                      },
+                      {
+                        "label": "Sarifle",
+                        "value": "money  exchanger"
+                      },
+                      {
+                        "label": "printing staff",
+                        "value": "printing staff"
+                      },
+                      {
+                        "label": "Shaqaale daabacaad",
+                        "value": "printing staff"
+                      },
+                      {
+                        "label": "Shaqaale shirkad",
+                        "value": "company staff"
+                      },
+                      {
+                        "label": "company staff",
+                        "value": "company staff"
+                      },
+                      {
+                        "label": "shaqaalo shirkadeed",
+                        "value": "company staff"
+                      },
+                      {
+                        "label": "Shaqaale caafimaad",
+                        "value": "health workers"
+                      },
+                      {
+                        "label": "health workers",
+                        "value": "health workers"
+                      },
+                      {
+                        "label": "Mch",
+                        "value": "health workers"
+                      },
+                      {
+                        "label": "Shidaal",
+                        "value": "fuel seller"
+                      },
+                      {
+                        "label": "Shidaal ama basiin",
+                        "value": "fuel seller"
+                      },
+                      {
+                        "label": "fuel seller",
+                        "value": "fuel seller"
+                      },
+                      {
+                        "label": "shidaal ayaan ibiyaa",
+                        "value": "fuel seller"
+                      },
+                      {
+                        "label": "Tuugsade",
+                        "value": "bagger"
+                      },
+                      {
+                        "label": "Tuugsi",
+                        "value": "bagger"
+                      },
+                      {
+                        "label": "bagger",
+                        "value": "bagger"
+                      },
+                      {
+                        "label": "wey tuugsataa",
+                        "value": "bagger"
+                      },
+                      {
+                        "label": "translator",
+                        "value": "translator"
+                      },
+                      {
+                        "label": "Turjumaan",
+                        "value": "translator"
+                      },
+                      {
+                        "label": "poultry man",
+                        "value": "poultry man"
+                      },
+                      {
+                        "label": "ukunta ka ganacsataa",
+                        "value": "poultry man"
+                      },
+                      {
+                        "label": "Waardiye",
+                        "value": "Guard/security"
+                      },
+                      {
+                        "label": "Guard/security",
+                        "value": "Guard/security"
+                      },
+                      {
+                        "label": "Waardiye mehrad",
+                        "value": "Guard/security"
+                      },
+                      {
+                        "label": "xoola dhaqasho",
+                        "value": "herdsman/livestock keeper"
+                      },
+                      {
+                        "label": "Xoola qumis",
+                        "value": "herdsman/livestock keeper"
+                      },
+                      {
+                        "label": "xoola raac",
+                        "value": "herdsman/livestock keeper"
+                      },
+                      {
+                        "label": "Xoolaaleey",
+                        "value": "herdsman/livestock keeper"
+                      },
+                      {
+                        "label": "herdsman/livestock keeper",
+                        "value": "herdsman/livestock keeper"
+                      },
+                      {
+                        "label": "xooladhaqato",
+                        "value": "herdsman/livestock keeper"
+                      },
+                      {
+                        "label": "Jeweler",
+                        "value": "jeweler"
+                      },
+                      {
+                        "label": "Dahablaha (dahab iibisaa)",
+                        "value": "jeweler"
+                      },
+                      {
+                        "label": "Farsamada moobeelad",
+                        "value": "mobile repairer/maintainer"
+                      },
+                      {
+                        "label": "mobile repairer/maintainer",
+                        "value": "mobile repairer/maintainer"
+                      },
+                      {
+                        "label": "Sameynta mobelada",
+                        "value": "mobile repairer/maintainer"
+                      },
+                      {
+                        "label": "Jaad",
+                        "value": "khat seller"
+                      },
+                      {
+                        "label": "jaad iibin",
+                        "value": "khat seller"
+                      },
+                      {
+                        "label": "Jaadle",
+                        "value": "khat seller"
+                      },
+                      {
+                        "label": "jaadley",
+                        "value": "khat seller"
+                      },
+                      {
+                        "label": "Khat seller",
+                        "value": "khat seller"
+                      },
+                      {
+                        "label": "kanacsi qaadka",
+                        "value": "khat seller"
                       }
                     ]
                   }
@@ -776,7 +1664,7 @@
                   "type": "datetime",
                   "format": "yyyy-MM-dd",
                   "conditional": {
-                    "show":true,
+                    "show": true,
                     "when": "symptoms",
                     "eq": "abdominalPain"
                   },
