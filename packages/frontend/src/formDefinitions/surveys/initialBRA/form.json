@@ -1066,6 +1066,14 @@
                   ]
                 },
                 {
+                  "key": "location",
+                  "label": "question.contact.location",
+                  "type": "textfield",
+                  "validate": {
+                    "required": true
+                  }
+                },
+                {
                   "key": "frequency",
                   "label": "question.contact.frequency",
                   "type": "radio",

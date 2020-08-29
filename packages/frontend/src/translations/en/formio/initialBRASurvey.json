@@ -21,6 +21,7 @@
       "gender": "Gender of contact:",
       "type": "Select contact type:",
       "relationship": "Select relationship type:",
+      "location": "Where did the contact take place?",
       "frequency": "Select frequency of contact:",
       "duration": "Select duration of contact:"
     }
