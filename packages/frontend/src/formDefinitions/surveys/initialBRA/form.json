@@ -304,688 +304,66 @@
               ]
             },
             {
-              "key": "isLongtimeResident",
-              "label": "question.adult.isLongtimeResident",
-              "type": "radio",
-              "validate": {
-                "required": true
-              },
-              "values": [
-                {
-                  "label": "resident.longTerm",
-                  "value": "yes"
-                },
-                {
-                  "label": "resident.movedIn",
-                  "value": "no"
-                }
-              ]
-            },
-            {
-              "key": "movedInDate",
-              "label": "question.adult.movedInDate",
-              "format": "yyyy-MM-dd",
-              "tableView": false,
-              "datePicker": {
-                "maxDate": "moment()",
-                "minDate": "2019-10-1"
-              },
-              "validate": {
-                "required": true
-              },
-              "conditional": {
-                "when": "isLongTimeResident",
-                "eq": "yes",
-                "show": true
-              },
-              "type": "datetime",
-              "widget": {
-                "type": "calendar",
-                "displayInTimezone": "viewer",
-                "useLocaleSettings": true,
-                "format": "yyyy-MM-dd",
-                "time_24hr": true,
-                "minDate": "2019-10-1",
-                "maxDate": "moment()"
-              }
-            },
-            {
-              "type": "customText",
-              "key": "customTextSocioeconomicSection",
-              "i18nKey": "socioeconomicSection"
-            },
-            {
-              "key": "age",
-              "label": "question.adult.age",
-              "type": "number",
-              "validate": {
-                "required": true,
-                "min": 0,
-                "max": 110
-              }
-            },
-            {
-              "key": "gender",
-              "label": "question.adult.gender",
-              "type": "radio",
-              "validate": {
-                "required": true
-              },
-              "values": [
-                {
-                  "label": "male",
-                  "value": "male"
-                },
-                {
-                  "label": "female",
-                  "value": "female"
-                }
-              ]
-            },
-            {
-              "key": "employed",
-              "label": "question.adult.employed",
-              "type": "radio",
-              "validate": {
-                "required": true
-              },
-              "values": [
-                {
-                  "label": "yes",
-                  "value": "yes"
-                },
-                {
-                  "label": "no",
-                  "value": "no"
-                }
-              ]
-            },
-            {
-              "key": "occupation",
-              "label": "question.adult.occupation",
-              "type": "select",
-              "validate": {
-                "required": true
-              },
-              "conditional": {
+              "conditional":{
                 "show": true,
-                "when": "employed",
-                "eq": "yes"
-              },
-              "data": {
-                "values": [
-                  {
-                    "label": "Koronto Yaqaan",
-                    "value": "korontoYaqaan"
-                  },
-                  {
-                    "label": "Fuundi",
-                    "value": "fuundi"
-                  },
-                  {
-                    "label": "Faryaamo",
-                    "value": "faryaamo"
-                  },
-                  {
-                    "label": "Feeroole ( Ninka Guryaha Shubo)",
-                    "value": "feerooleNinkaGuryahaShubo"
-                  },
-                  {
-                    "label": "Makaaniko (Gawaarida ninka Sameeyo)",
-                    "value": "makaanikoGawaaridaNinkaSameeyo"
-                  },
-                  {
-                    "label": "Tubiiste",
-                    "value": "tubiiste"
-                  },
-                  {
-                    "label": "Xamaali (Muruq Maal)",
-                    "value": "xamaaliMuruqMaal"
-                  },
-                  {
-                    "label": "Rinjiile",
-                    "value": "rinjiile"
-                  },
-                  {
-                    "label": "Farsama yaqaan dabka gawaarida",
-                    "value": "farsamaYaqaanDabkaGawaarida"
-                  },
-                  {
-                    "label": "Caseeye ",
-                    "value": "caseeye"
-                  },
-                  {
-                    "label": "Kooke (Kuwa Cunada kariyo)",
-                    "value": "kookeKuwaCunadaKariyo"
-                  },
-                  {
-                    "label": "Kabalyeeri",
-                    "value": "kabalyeeri"
-                  },
-                  {
-                    "label": "Timajare",
-                    "value": "timajare"
-                  },
-                  {
-                    "label": "Kalkaaliye ",
-                    "value": "kalkaaliye"
-                  },
-                  {
-                    "label": "Doctor",
-                    "value": "doctor"
-                  },
-                  {
-                    "label": "Engineer",
-                    "value": "engineer"
-                  },
-                  {
-                    "label": "Umuliso",
-                    "value": "umuliso"
-                  },
-                  {
-                    "label": "Macalin School",
-                    "value": "macalinSchool"
-                  },
-                  {
-                    "label": "Prof",
-                    "value": "prof"
-                  },
-                  {
-                    "label": "Shaqale dowladeed",
-                    "value": "shaqaleDowladeed"
-                  },
-                  {
-                    "label": "Shaqaale hey,adeed",
-                    "value": "shaqaaleHeyAdeed"
-                  },
-                  {
-                    "label": "Shaqaale ganacsi",
-                    "value": "shaqaaleGanacsi"
-                  },
-                  {
-                    "label": "Ganacsade",
-                    "value": "ganacsade"
-                  },
-                  {
-                    "label": "Arday jamacadeed",
-                    "value": "ardayJamacadeed"
-                  },
-                  {
-                    "label": "Arday iskool",
-                    "value": "ardayIskool"
-                  },
-                  {
-                    "label": "otherSpecify",
-                    "value": "other"
-                  }
-                ]
-              }
-            },
-            {
-              "key": "primaryIncomeSource",
-              "label": "question.adult.primaryIncomeSource",
-              "type": "select",
-              "validate": {
-                "required": true
-              },
-              "conditional": {
-                "show": true,
-                "when": "employed",
-                "eq": "no"
-              },
-              "data": {
-                "values": [
-                  {
-                    "label": "occupation",
-                    "value": "occupation"
-                  },
-                  {
-                    "label": "familyAbroad",
-                    "value": "familyAbroad"
-                  },
-                  {
-                    "label": "financialAid",
-                    "value": "financialAid"
-                  }
-                ]
-              }
-            },
-            {
-              "key": "educationLevel",
-              "label": "question.adult.educationLevel",
-              "type": "select",
-              "validate": {
-                "required": true
-              },
-              "dataSrc": "values",
-              "data": {
-                "values": [
-                  {
-                    "label": "none",
-                    "value": "none"
-                  },
-                  {
-                    "label": "primarySchool",
-                    "value": "primarySchool"
-                  },
-                  {
-                    "label": "secondarySchool",
-                    "value": "secondarySchool"
-                  },
-                  {
-                    "label": "university",
-                    "value": "university"
-                  },
-                  {
-                    "label": "islamicStudies",
-                    "value": "islamicStudies"
-                  }
-                ]
-              }
-            },
-            {
-              "key": "monthlyIncome",
-              "label": "question.adult.monthlyIncome",
-              "type": "select",
-              "data": {
-                "values": [
-                  {
-                    "label": "0to99",
-                    "value": "0to99"
-                  },
-                  {
-                    "label": "100to499",
-                    "value": "100to499"
-                  },
-                  {
-                    "label": "500to999",
-                    "value": "500to999"
-                  },
-                  {
-                    "label": "1000to1999",
-                    "value": "1000to1999"
-                  },
-                  {
-                    "label": "2000to4999",
-                    "value": "2000to4999"
-                  },
-                  {
-                    "label": "5000to9999",
-                    "value": "5000to9999"
-                  },
-                  {
-                    "label": "10000to14999",
-                    "value": "10000to14999"
-                  },
-                  {
-                    "label": "15000to19999",
-                    "value": "15000to19999"
-                  },
-                  {
-                    "label": "over20000",
-                    "value": "over20000"
-                  }
-                ]
-              }
-            },
-            {
-              "type": "customText",
-              "key": "customTextSocioeconomicSection",
-              "i18nKey": "healthSection"
-            },
-            {
-              "key": "comorbidities",
-              "type": "selectboxes",
-              "label": "question.adult.comorbidities",
-              "values": [
-                {
-                  "label": "comorbidity.substanceAbuse",
-                  "value": "substanceAbuse"
-                },
-                {
-                  "label": "comorbidity.anaemia",
-                  "value": "anaemia"
-                },
-                {
-                  "label": "comorbidity.asthma",
-                  "value": "asthma"
-                },
-                {
-                  "label": "comorbidity.nervousSystemCondition",
-                  "value": "nervousSystemCondition"
-                },
-                {
-                  "label": "comorbidity.cancer",
-                  "value": "cancer"
-                },
-                {
-                  "label": "comorbidity.diabetes",
-                  "value": "diabetes"
-                },
-                {
-                  "label": "comorbidity.cardiac",
-                  "value": "cardiac"
-                },
-                {
-                  "label": "comorbidity.hepatitisOrChronicLiverCondition",
-                  "value": "hepatitisOrChronicLiverCondition"
-                },
-                {
-                  "label": "comorbidity.HIV",
-                  "value": "HIV"
-                },
-                {
-                  "label": "comorbidity.hypertension",
-                  "value": "hypertension"
-                },
-                {
-                  "label": "comorbidity.mentalHealthCondition",
-                  "value": "mentalHealthCondition"
-                },
-                {
-                  "label": "comorbidity.stroke",
-                  "value": "stroke"
-                },
-                {
-                  "label": "comorbidity.tuberculosis",
-                  "value": "tuberculosis"
-                },
-                {
-                  "label": "comorbidity.pulmonaryCondition",
-                  "value": "pulmonaryCondition"
-                },
-                {
-                  "label": "comorbidity.immuneImpairment",
-                  "value": "immuneImpairment"
-                },
-                {
-                  "label": "comorbidity.none",
-                  "value": "none"
-                }
-              ],
-              "validate": {
-                "required": true
-              }
-            },
-            {
-              "key": "symptoms",
-              "label": "question.adult.symptoms",
-              "type": "selectboxes",
-              "values": [
-                {
-                  "label": "symptom.abdominalPain",
-                  "value": "abdominalPain"
-                },
-                {
-                  "label": "symptom.cough",
-                  "value": "cough"
-                },
-                {
-                  "label": "symptom.chills",
-                  "value": "chills"
-                },
-                {
-                  "label": "symptom.fever",
-                  "value": "fever"
-                },
-                {
-                  "label": "symptom.olfactoryImpairment",
-                  "value": "olfactoryImpairment"
-                },
-                {
-                  "label": "symptom.gustatoryImpairment",
-                  "value": "gustatoryImpairment"
-                },
-                {
-                  "label": "symptom.nausea",
-                  "value": "nausea"
-                },
-                {
-                  "label": "symptom.shortnessOfBreath",
-                  "value": "shortnessOfBreath"
-                }
-              ],
-              "validate": {
-                "required": true
-              }
-            },
-            {
-              "key": "abdominalPainOnset",
-              "label": "symptomOnset.abdominalPain",
-              "type": "datetime",
-              "format": "yyyy-MM-dd",
-              "validate": {
-                "required": true
-              },
-              "datePicker": {
-                "maxDate": "moment()",
-                "minDate": "2019-10-1"
-              },
-              "widget": {
-                "type": "calendar",
-                "displayInTimezone": "viewer",
-                "useLocaleSettings": true,
-                "format": "yyyy-MM-dd",
-                "time_24hr": true,
-                "minDate": "2019-10-1",
-                "maxDate": "moment()"
-              }
-            },
-            {
-              "key": "coughOnset",
-              "label": "symptomOnset.cough",
-              "type": "datetime",
-              "format": "yyyy-MM-dd",
-              "validate": {
-                "required": true
-              },
-              "datePicker": {
-                "maxDate": "moment()",
-                "minDate": "2019-10-1"
-              },
-              "widget": {
-                "type": "calendar",
-                "displayInTimezone": "viewer",
-                "useLocaleSettings": true,
-                "format": "yyyy-MM-dd",
-                "time_24hr": true,
-                "minDate": "2019-10-1",
-                "maxDate": "moment()"
-              }
-            },
-            {
-              "key": "chillsOnset",
-              "label": "symptomOnset.chills",
-              "type": "datetime",
-              "format": "yyyy-MM-dd",
-              "validate": {
-                "required": true
-              },
-              "datePicker": {
-                "maxDate": "moment()",
-                "minDate": "2019-10-1"
-              },
-              "widget": {
-                "type": "calendar",
-                "displayInTimezone": "viewer",
-                "useLocaleSettings": true,
-                "format": "yyyy-MM-dd",
-                "time_24hr": true,
-                "minDate": "2019-10-1",
-                "maxDate": "moment()"
-              }
-            },
-            {
-              "key": "feverOnset",
-              "label": "symptomOnset.fever",
-              "type": "datetime",
-              "format": "yyyy-MM-dd",
-              "validate": {
-                "required": true
-              },
-              "datePicker": {
-                "maxDate": "moment()",
-                "minDate": "2019-10-1"
-              },
-              "widget": {
-                "type": "calendar",
-                "displayInTimezone": "viewer",
-                "useLocaleSettings": true,
-                "format": "yyyy-MM-dd",
-                "time_24hr": true,
-                "minDate": "2019-10-1",
-                "maxDate": "moment()"
-              }
-            },
-            {
-              "key": "olfactoryImpairmentOnset",
-              "label": "symptomOnset.olfactoryImpairment",
-              "type": "datetime",
-              "format": "yyyy-MM-dd",
-              "validate": {
-                "required": true
-              },
-              "datePicker": {
-                "maxDate": "moment()",
-                "minDate": "2019-10-1"
-              },
-              "widget": {
-                "type": "calendar",
-                "displayInTimezone": "viewer",
-                "useLocaleSettings": true,
-                "format": "yyyy-MM-dd",
-                "time_24hr": true,
-                "minDate": "2019-10-1",
-                "maxDate": "moment()"
-              }
-            },
-            {
-              "key": "gustatoryImpairmentOnset",
-              "label": "symptomOnset.gustatoryImpairment",
-              "type": "datetime",
-              "format": "yyyy-MM-dd",
-              "validate": {
-                "required": true
-              },
-              "datePicker": {
-                "maxDate": "moment()",
-                "minDate": "2019-10-1"
-              },
-              "widget": {
-                "type": "calendar",
-                "displayInTimezone": "viewer",
-                "useLocaleSettings": true,
-                "format": "yyyy-MM-dd",
-                "time_24hr": true,
-                "minDate": "2019-10-1",
-                "maxDate": "moment()"
-              }
-            },
-            {
-              "key": "nauseaOnset",
-              "label": "symptomOnset.nausea",
-              "type": "datetime",
-              "format": "yyyy-MM-dd",
-              "validate": {
-                "required": true
-              },
-              "datePicker": {
-                "maxDate": "moment()",
-                "minDate": "2019-10-1"
-              },
-              "widget": {
-                "type": "calendar",
-                "displayInTimezone": "viewer",
-                "useLocaleSettings": true,
-                "format": "yyyy-MM-dd",
-                "time_24hr": true,
-                "minDate": "2019-10-1",
-                "maxDate": "moment()"
-              }
-            },
-            {
-              "key": "shortnessOfBreathOnset",
-              "label": "symptomOnset.shortnessOfBreath",
-              "type": "datetime",
-              "format": "yyyy-MM-dd",
-              "validate": {
-                "required": true
-              },
-              "datePicker": {
-                "maxDate": "moment()",
-                "minDate": "2019-10-1"
-              },
-              "widget": {
-                "type": "calendar",
-                "displayInTimezone": "viewer",
-                "useLocaleSettings": true,
-                "format": "yyyy-MM-dd",
-                "time_24hr": true,
-                "minDate": "2019-10-1",
-                "maxDate": "moment()"
-              }
-            },
-            {
-              "type": "customText",
-              "key": "customTextContactTracingSection",
-              "i18nKey": "header.contactTracing"
-            },
-            {
-              "key": "recentContactsSpokenCount",
-              "label": "question.adult.recentContactsSpokenCount",
-              "type": "number",
-              "validate": {
-                "required": true,
-                "min": 0,
-                "max": 25
-              }
-            },
-            {
-              "key": "contactTracingDate",
-              "label": "question.adult.contactTracingDate",
-              "type": "datetime",
-              "format": "yyyy-MM-dd",
-              "validate": {
-                "required": true
-              },
-              "datePicker": {
-                "maxDate": "moment()",
-                "minDate": "2020-8-1"
-              },
-              "widget": {
-                "type": "calendar",
-                "displayInTimezone": "viewer",
-                "useLocaleSettings": true,
-                "format": "yyyy-MM-dd",
-                "time_24hr": true,
-                "maxDate": "moment()",
-                "minDate": "2020-8-1"
-              }
-            },
-            {
-              "key": "contacts",
-              "label": "contact info",
-              "type": "editgrid",
-              "validate": {
-                "required": false
-              },
-              "openWhenEmpty": false,
-              "hideLabel": true,
-              "templates": {
-                "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\"</div>"
+                "when": "status",
+                "eq": "consentGiven"
               },
               "components": [
                 {
-                  "key": "name",
-                  "label": "question.contact.name",
-                  "type": "textfield",
+                  "key": "isLongtimeResident",
+                  "label": "question.adult.isLongtimeResident",
+                  "type": "radio",
                   "validate": {
                     "required": true
+                  },
+                  "values": [
+                    {
+                      "label": "resident.longTerm",
+                      "value": "yes"
+                    },
+                    {
+                      "label": "resident.movedIn",
+                      "value": "no"
+                    }
+                  ]
+                },
+                {
+                  "key": "movedInDate",
+                  "label": "question.adult.movedInDate",
+                  "format": "yyyy-MM-dd",
+                  "tableView": false,
+                  "datePicker": {
+                    "maxDate": "moment()",
+                    "minDate": "2019-10-1"
+                  },
+                  "validate": {
+                    "required": true
+                  },
+                  "conditional": {
+                    "when": "isLongTimeResident",
+                    "eq": "yes",
+                    "show": true
+                  },
+                  "type": "datetime",
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "useLocaleSettings": true,
+                    "format": "yyyy-MM-dd",
+                    "time_24hr": true,
+                    "minDate": "2019-10-1",
+                    "maxDate": "moment()"
                   }
                 },
                 {
+                  "type": "customText",
+                  "key": "customTextSocioeconomicSection",
+                  "i18nKey": "socioeconomicSection"
+                },
+                {
                   "key": "age",
-                  "label": "question.contact.age",
+                  "label": "question.adult.age",
                   "type": "number",
                   "validate": {
                     "required": true,
@@ -995,7 +373,7 @@
                 },
                 {
                   "key": "gender",
-                  "label": "question.contact.gender",
+                  "label": "question.adult.gender",
                   "type": "radio",
                   "validate": {
                     "required": true
@@ -1012,140 +390,771 @@
                   ]
                 },
                 {
-                  "key": "type",
-                  "label": "question.contact.type",
+                  "key": "employed",
+                  "label": "question.adult.employed",
                   "type": "radio",
                   "validate": {
                     "required": true
                   },
                   "values": [
                     {
-                      "label": "contact.type.physical",
-                      "value": "physical"
+                      "label": "yes",
+                      "value": "yes"
                     },
                     {
-                      "label": "contact.type.nonphysical",
-                      "value": "nonphysical"
+                      "label": "no",
+                      "value": "no"
                     }
                   ]
                 },
                 {
-                  "key": "relationship",
-                  "label": "question.contact.relationship",
-                  "type": "radio",
+                  "key": "occupation",
+                  "label": "question.adult.occupation",
+                  "type": "select",
                   "validate": {
                     "required": true
                   },
-                  "values": [
-                    {
-                      "label": "contact.relationship.householdMember",
-                      "value": "householdMember"
-                    },
-                    {
-                      "label": "contact.relationship.outsideRelative",
-                      "value": "outsideRelative"
-                    },
-                    {
-                      "label": "contact.relationship.colleague",
-                      "value": "colleague"
-                    },
-                    {
-                      "label": "contact.relationship.friend",
-                      "value": "friend"
-                    },
-                    {
-                      "label": "contact.relationship.other",
-                      "value": "other"
-                    }
-                  ]
+                  "conditional": {
+                    "show": true,
+                    "when": "employed",
+                    "eq": "yes"
+                  },
+                  "data": {
+                    "values": [
+                      {
+                        "label": "Koronto Yaqaan",
+                        "value": "korontoYaqaan"
+                      },
+                      {
+                        "label": "Fuundi",
+                        "value": "fuundi"
+                      },
+                      {
+                        "label": "Faryaamo",
+                        "value": "faryaamo"
+                      },
+                      {
+                        "label": "Feeroole ( Ninka Guryaha Shubo)",
+                        "value": "feerooleNinkaGuryahaShubo"
+                      },
+                      {
+                        "label": "Makaaniko (Gawaarida ninka Sameeyo)",
+                        "value": "makaanikoGawaaridaNinkaSameeyo"
+                      },
+                      {
+                        "label": "Tubiiste",
+                        "value": "tubiiste"
+                      },
+                      {
+                        "label": "Xamaali (Muruq Maal)",
+                        "value": "xamaaliMuruqMaal"
+                      },
+                      {
+                        "label": "Rinjiile",
+                        "value": "rinjiile"
+                      },
+                      {
+                        "label": "Farsama yaqaan dabka gawaarida",
+                        "value": "farsamaYaqaanDabkaGawaarida"
+                      },
+                      {
+                        "label": "Caseeye ",
+                        "value": "caseeye"
+                      },
+                      {
+                        "label": "Kooke (Kuwa Cunada kariyo)",
+                        "value": "kookeKuwaCunadaKariyo"
+                      },
+                      {
+                        "label": "Kabalyeeri",
+                        "value": "kabalyeeri"
+                      },
+                      {
+                        "label": "Timajare",
+                        "value": "timajare"
+                      },
+                      {
+                        "label": "Kalkaaliye ",
+                        "value": "kalkaaliye"
+                      },
+                      {
+                        "label": "Doctor",
+                        "value": "doctor"
+                      },
+                      {
+                        "label": "Engineer",
+                        "value": "engineer"
+                      },
+                      {
+                        "label": "Umuliso",
+                        "value": "umuliso"
+                      },
+                      {
+                        "label": "Macalin School",
+                        "value": "macalinSchool"
+                      },
+                      {
+                        "label": "Prof",
+                        "value": "prof"
+                      },
+                      {
+                        "label": "Shaqale dowladeed",
+                        "value": "shaqaleDowladeed"
+                      },
+                      {
+                        "label": "Shaqaale hey,adeed",
+                        "value": "shaqaaleHeyAdeed"
+                      },
+                      {
+                        "label": "Shaqaale ganacsi",
+                        "value": "shaqaaleGanacsi"
+                      },
+                      {
+                        "label": "Ganacsade",
+                        "value": "ganacsade"
+                      },
+                      {
+                        "label": "Arday jamacadeed",
+                        "value": "ardayJamacadeed"
+                      },
+                      {
+                        "label": "Arday iskool",
+                        "value": "ardayIskool"
+                      },
+                      {
+                        "label": "otherSpecify",
+                        "value": "other"
+                      }
+                    ]
+                  }
                 },
                 {
-                  "key": "location",
-                  "label": "question.contact.location",
-                  "type": "textfield",
+                  "key": "primaryIncomeSource",
+                  "label": "question.adult.primaryIncomeSource",
+                  "type": "select",
+                  "validate": {
+                    "required": true
+                  },
+                  "conditional": {
+                    "show": true,
+                    "when": "employed",
+                    "eq": "no"
+                  },
+                  "data": {
+                    "values": [
+                      {
+                        "label": "occupation",
+                        "value": "occupation"
+                      },
+                      {
+                        "label": "familyAbroad",
+                        "value": "familyAbroad"
+                      },
+                      {
+                        "label": "financialAid",
+                        "value": "financialAid"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "educationLevel",
+                  "label": "question.adult.educationLevel",
+                  "type": "select",
+                  "validate": {
+                    "required": true
+                  },
+                  "dataSrc": "values",
+                  "data": {
+                    "values": [
+                      {
+                        "label": "none",
+                        "value": "none"
+                      },
+                      {
+                        "label": "primarySchool",
+                        "value": "primarySchool"
+                      },
+                      {
+                        "label": "secondarySchool",
+                        "value": "secondarySchool"
+                      },
+                      {
+                        "label": "university",
+                        "value": "university"
+                      },
+                      {
+                        "label": "islamicStudies",
+                        "value": "islamicStudies"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "monthlyIncome",
+                  "label": "question.adult.monthlyIncome",
+                  "type": "select",
+                  "data": {
+                    "values": [
+                      {
+                        "label": "0to99",
+                        "value": "0to99"
+                      },
+                      {
+                        "label": "100to499",
+                        "value": "100to499"
+                      },
+                      {
+                        "label": "500to999",
+                        "value": "500to999"
+                      },
+                      {
+                        "label": "1000to1999",
+                        "value": "1000to1999"
+                      },
+                      {
+                        "label": "2000to4999",
+                        "value": "2000to4999"
+                      },
+                      {
+                        "label": "5000to9999",
+                        "value": "5000to9999"
+                      },
+                      {
+                        "label": "10000to14999",
+                        "value": "10000to14999"
+                      },
+                      {
+                        "label": "15000to19999",
+                        "value": "15000to19999"
+                      },
+                      {
+                        "label": "over20000",
+                        "value": "over20000"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "customText",
+                  "key": "customTextSocioeconomicSection",
+                  "i18nKey": "healthSection"
+                },
+                {
+                  "key": "comorbidities",
+                  "type": "selectboxes",
+                  "label": "question.adult.comorbidities",
+                  "values": [
+                    {
+                      "label": "comorbidity.substanceAbuse",
+                      "value": "substanceAbuse"
+                    },
+                    {
+                      "label": "comorbidity.anaemia",
+                      "value": "anaemia"
+                    },
+                    {
+                      "label": "comorbidity.asthma",
+                      "value": "asthma"
+                    },
+                    {
+                      "label": "comorbidity.nervousSystemCondition",
+                      "value": "nervousSystemCondition"
+                    },
+                    {
+                      "label": "comorbidity.cancer",
+                      "value": "cancer"
+                    },
+                    {
+                      "label": "comorbidity.diabetes",
+                      "value": "diabetes"
+                    },
+                    {
+                      "label": "comorbidity.cardiac",
+                      "value": "cardiac"
+                    },
+                    {
+                      "label": "comorbidity.hepatitisOrChronicLiverCondition",
+                      "value": "hepatitisOrChronicLiverCondition"
+                    },
+                    {
+                      "label": "comorbidity.HIV",
+                      "value": "HIV"
+                    },
+                    {
+                      "label": "comorbidity.hypertension",
+                      "value": "hypertension"
+                    },
+                    {
+                      "label": "comorbidity.mentalHealthCondition",
+                      "value": "mentalHealthCondition"
+                    },
+                    {
+                      "label": "comorbidity.stroke",
+                      "value": "stroke"
+                    },
+                    {
+                      "label": "comorbidity.tuberculosis",
+                      "value": "tuberculosis"
+                    },
+                    {
+                      "label": "comorbidity.pulmonaryCondition",
+                      "value": "pulmonaryCondition"
+                    },
+                    {
+                      "label": "comorbidity.immuneImpairment",
+                      "value": "immuneImpairment"
+                    },
+                    {
+                      "label": "comorbidity.none",
+                      "value": "none"
+                    }
+                  ],
                   "validate": {
                     "required": true
                   }
                 },
                 {
-                  "key": "frequency",
-                  "label": "question.contact.frequency",
-                  "type": "radio",
+                  "key": "symptoms",
+                  "label": "question.adult.symptoms",
+                  "type": "selectboxes",
+                  "values": [
+                    {
+                      "label": "symptom.abdominalPain",
+                      "value": "abdominalPain"
+                    },
+                    {
+                      "label": "symptom.cough",
+                      "value": "cough"
+                    },
+                    {
+                      "label": "symptom.chills",
+                      "value": "chills"
+                    },
+                    {
+                      "label": "symptom.fever",
+                      "value": "fever"
+                    },
+                    {
+                      "label": "symptom.olfactoryImpairment",
+                      "value": "olfactoryImpairment"
+                    },
+                    {
+                      "label": "symptom.gustatoryImpairment",
+                      "value": "gustatoryImpairment"
+                    },
+                    {
+                      "label": "symptom.nausea",
+                      "value": "nausea"
+                    },
+                    {
+                      "label": "symptom.shortnessOfBreath",
+                      "value": "shortnessOfBreath"
+                    }
+                  ],
+                  "validate": {
+                    "required": true
+                  }
+                },
+                {
+                  "key": "abdominalPainOnset",
+                  "label": "symptomOnset.abdominalPain",
+                  "type": "datetime",
+                  "format": "yyyy-MM-dd",
                   "validate": {
                     "required": true
                   },
-                  "values": [
+                  "datePicker": {
+                    "maxDate": "moment()",
+                    "minDate": "2019-10-1"
+                  },
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "useLocaleSettings": true,
+                    "format": "yyyy-MM-dd",
+                    "time_24hr": true,
+                    "minDate": "2019-10-1",
+                    "maxDate": "moment()"
+                  }
+                },
+                {
+                  "key": "coughOnset",
+                  "label": "symptomOnset.cough",
+                  "type": "datetime",
+                  "format": "yyyy-MM-dd",
+                  "validate": {
+                    "required": true
+                  },
+                  "datePicker": {
+                    "maxDate": "moment()",
+                    "minDate": "2019-10-1"
+                  },
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "useLocaleSettings": true,
+                    "format": "yyyy-MM-dd",
+                    "time_24hr": true,
+                    "minDate": "2019-10-1",
+                    "maxDate": "moment()"
+                  }
+                },
+                {
+                  "key": "chillsOnset",
+                  "label": "symptomOnset.chills",
+                  "type": "datetime",
+                  "format": "yyyy-MM-dd",
+                  "validate": {
+                    "required": true
+                  },
+                  "datePicker": {
+                    "maxDate": "moment()",
+                    "minDate": "2019-10-1"
+                  },
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "useLocaleSettings": true,
+                    "format": "yyyy-MM-dd",
+                    "time_24hr": true,
+                    "minDate": "2019-10-1",
+                    "maxDate": "moment()"
+                  }
+                },
+                {
+                  "key": "feverOnset",
+                  "label": "symptomOnset.fever",
+                  "type": "datetime",
+                  "format": "yyyy-MM-dd",
+                  "validate": {
+                    "required": true
+                  },
+                  "datePicker": {
+                    "maxDate": "moment()",
+                    "minDate": "2019-10-1"
+                  },
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "useLocaleSettings": true,
+                    "format": "yyyy-MM-dd",
+                    "time_24hr": true,
+                    "minDate": "2019-10-1",
+                    "maxDate": "moment()"
+                  }
+                },
+                {
+                  "key": "olfactoryImpairmentOnset",
+                  "label": "symptomOnset.olfactoryImpairment",
+                  "type": "datetime",
+                  "format": "yyyy-MM-dd",
+                  "validate": {
+                    "required": true
+                  },
+                  "datePicker": {
+                    "maxDate": "moment()",
+                    "minDate": "2019-10-1"
+                  },
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "useLocaleSettings": true,
+                    "format": "yyyy-MM-dd",
+                    "time_24hr": true,
+                    "minDate": "2019-10-1",
+                    "maxDate": "moment()"
+                  }
+                },
+                {
+                  "key": "gustatoryImpairmentOnset",
+                  "label": "symptomOnset.gustatoryImpairment",
+                  "type": "datetime",
+                  "format": "yyyy-MM-dd",
+                  "validate": {
+                    "required": true
+                  },
+                  "datePicker": {
+                    "maxDate": "moment()",
+                    "minDate": "2019-10-1"
+                  },
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "useLocaleSettings": true,
+                    "format": "yyyy-MM-dd",
+                    "time_24hr": true,
+                    "minDate": "2019-10-1",
+                    "maxDate": "moment()"
+                  }
+                },
+                {
+                  "key": "nauseaOnset",
+                  "label": "symptomOnset.nausea",
+                  "type": "datetime",
+                  "format": "yyyy-MM-dd",
+                  "validate": {
+                    "required": true
+                  },
+                  "datePicker": {
+                    "maxDate": "moment()",
+                    "minDate": "2019-10-1"
+                  },
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "useLocaleSettings": true,
+                    "format": "yyyy-MM-dd",
+                    "time_24hr": true,
+                    "minDate": "2019-10-1",
+                    "maxDate": "moment()"
+                  }
+                },
+                {
+                  "key": "shortnessOfBreathOnset",
+                  "label": "symptomOnset.shortnessOfBreath",
+                  "type": "datetime",
+                  "format": "yyyy-MM-dd",
+                  "validate": {
+                    "required": true
+                  },
+                  "datePicker": {
+                    "maxDate": "moment()",
+                    "minDate": "2019-10-1"
+                  },
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "useLocaleSettings": true,
+                    "format": "yyyy-MM-dd",
+                    "time_24hr": true,
+                    "minDate": "2019-10-1",
+                    "maxDate": "moment()"
+                  }
+                },
+                {
+                  "type": "customText",
+                  "key": "customTextContactTracingSection",
+                  "i18nKey": "header.contactTracing"
+                },
+                {
+                  "key": "recentContactsSpokenCount",
+                  "label": "question.adult.recentContactsSpokenCount",
+                  "type": "number",
+                  "validate": {
+                    "required": true,
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "key": "contactTracingDate",
+                  "label": "question.adult.contactTracingDate",
+                  "type": "datetime",
+                  "format": "yyyy-MM-dd",
+                  "validate": {
+                    "required": true
+                  },
+                  "datePicker": {
+                    "maxDate": "moment()",
+                    "minDate": "2020-8-1"
+                  },
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "useLocaleSettings": true,
+                    "format": "yyyy-MM-dd",
+                    "time_24hr": true,
+                    "maxDate": "moment()",
+                    "minDate": "2020-8-1"
+                  }
+                },
+                {
+                  "key": "contacts",
+                  "label": "contact info",
+                  "type": "editgrid",
+                  "validate": {
+                    "required": false
+                  },
+                  "openWhenEmpty": false,
+                  "hideLabel": true,
+                  "templates": {
+                    "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\"</div>"
+                  },
+                  "components": [
                     {
-                      "label": "contact.frequency.daily",
-                      "value": "daily"
+                      "key": "name",
+                      "label": "question.contact.name",
+                      "type": "textfield",
+                      "validate": {
+                        "required": true
+                      }
                     },
                     {
-                      "label": "contact.frequency.weekly",
-                      "value": "weekly"
+                      "key": "age",
+                      "label": "question.contact.age",
+                      "type": "number",
+                      "validate": {
+                        "required": true,
+                        "min": 0,
+                        "max": 110
+                      }
                     },
                     {
-                      "label": "contact.frequency.monthly",
-                      "value": "monthly"
+                      "key": "gender",
+                      "label": "question.contact.gender",
+                      "type": "radio",
+                      "validate": {
+                        "required": true
+                      },
+                      "values": [
+                        {
+                          "label": "male",
+                          "value": "male"
+                        },
+                        {
+                          "label": "female",
+                          "value": "female"
+                        }
+                      ]
                     },
                     {
-                      "label": "contact.frequency.rarely",
-                      "value": "rarely"
+                      "key": "type",
+                      "label": "question.contact.type",
+                      "type": "radio",
+                      "validate": {
+                        "required": true
+                      },
+                      "values": [
+                        {
+                          "label": "contact.type.physical",
+                          "value": "physical"
+                        },
+                        {
+                          "label": "contact.type.nonphysical",
+                          "value": "nonphysical"
+                        }
+                      ]
                     },
                     {
-                      "label": "contact.frequency.firstMeeting",
-                      "value": "firstMeeting"
+                      "key": "relationship",
+                      "label": "question.contact.relationship",
+                      "type": "radio",
+                      "validate": {
+                        "required": true
+                      },
+                      "values": [
+                        {
+                          "label": "contact.relationship.householdMember",
+                          "value": "householdMember"
+                        },
+                        {
+                          "label": "contact.relationship.outsideRelative",
+                          "value": "outsideRelative"
+                        },
+                        {
+                          "label": "contact.relationship.colleague",
+                          "value": "colleague"
+                        },
+                        {
+                          "label": "contact.relationship.friend",
+                          "value": "friend"
+                        },
+                        {
+                          "label": "contact.relationship.other",
+                          "value": "other"
+                        }
+                      ]
                     },
                     {
-                      "label": "contact.frequency.uncertain",
-                      "value": "uncertain"
+                      "key": "location",
+                      "label": "question.contact.location",
+                      "type": "textfield",
+                      "validate": {
+                        "required": true
+                      }
                     },
                     {
-                      "label": "contact.frequency.undisclosed",
-                      "value": "undisclosed"
+                      "key": "frequency",
+                      "label": "question.contact.frequency",
+                      "type": "radio",
+                      "validate": {
+                        "required": true
+                      },
+                      "values": [
+                        {
+                          "label": "contact.frequency.daily",
+                          "value": "daily"
+                        },
+                        {
+                          "label": "contact.frequency.weekly",
+                          "value": "weekly"
+                        },
+                        {
+                          "label": "contact.frequency.monthly",
+                          "value": "monthly"
+                        },
+                        {
+                          "label": "contact.frequency.rarely",
+                          "value": "rarely"
+                        },
+                        {
+                          "label": "contact.frequency.firstMeeting",
+                          "value": "firstMeeting"
+                        },
+                        {
+                          "label": "contact.frequency.uncertain",
+                          "value": "uncertain"
+                        },
+                        {
+                          "label": "contact.frequency.undisclosed",
+                          "value": "undisclosed"
+                        }
+                      ]
+                    },
+                    {
+                      "key": "duration",
+                      "label": "question.contact.duration",
+                      "type": "radio",
+                      "validate": {
+                        "required": true
+                      },
+                      "values": [
+                        {
+                          "label": "contact.duration.under15m",
+                          "value": "under15m"
+                        },
+                        {
+                          "label": "contact.duration.15m-60m",
+                          "value": "15m-60m"
+                        },
+                        {
+                          "label": "contact.duration.1h-2h",
+                          "value": "1h-2h"
+                        },
+                        {
+                          "label": "contact.duration.2h-4h",
+                          "value": "2h-4h"
+                        },
+                        {
+                          "label": "contact.duration.over4h",
+                          "value": "over4h"
+                        }
+                      ]
                     }
                   ]
                 },
                 {
-                  "key": "duration",
-                  "label": "question.contact.duration",
-                  "type": "radio",
+                  "key": "recentContactsSeenCount",
+                  "label": "question.adult.recentContactsSeenCount",
+                  "type": "number",
                   "validate": {
-                    "required": true
-                  },
-                  "values": [
-                    {
-                      "label": "contact.duration.under15m",
-                      "value": "under15m"
-                    },
-                    {
-                      "label": "contact.duration.15m-60m",
-                      "value":  "15m-60m"
-                    },
-                    {
-                      "label": "contact.duration.1h-2h",
-                      "value":  "1h-2h"
-                    },
-                    {
-                      "label": "contact.duration.2h-4h",
-                      "value":  "2h-4h"
-                    },
-                    {
-                      "label": "contact.duration.over4h",
-                      "value":  "over4h"
-                    }
-                  ]
+                    "required": true,
+                    "min": 0,
+                    "max": 25
+                  }
                 }
               ]
-            },
-            {
-              "key": "recentContactsSeenCount",
-              "label": "question.adult.recentContactsSeenCount",
-              "type": "number",
-              "validate": {
-                "required": true,
-                "min": 0,
-                "max": 25
-              }
             }
           ]
         }
