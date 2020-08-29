@@ -19,13 +19,16 @@
     "movedInCount": "Since October 2019, how many people have moved into the household?",
     "movedOutCount": "How many individuals have moved out of this household?",
     "deathsCount": "How many deaths occurred in this household?",
-    "sectionStatus": "Is this resident available and consenting to fill out this section?",
-    "isLongtimeResident": "Has the resident lived in this household since at least October 2019?",
-    "symptoms": "This year, have you or are you experiencing any of the following symptoms?",
-    "comorbidities": "Has a health professional diagnosed you with any of the following conditions?",
-    "recentContactsSpokenCount": "Enter number of contacts:",
-    "contactTracingDate": "Confirm the date for which contacts are recorded.",
-    "recentContactsSeenCount": "Could you estimate the total number of other contacts, i.e. those who you met but with who you did not speak, yesterday?",
+    "adult": {
+      "sectionStatus": "Is this resident available and consenting to fill out this section?",
+      "isLongtimeResident": "Has the resident lived in this household since at least October 2019?",
+      "movedInDate": "When did this resident move in?",
+      "symptoms": "This year, have you or are you experiencing any of the following symptoms?",
+      "comorbidities": "Has a health professional diagnosed you with any of the following conditions?",
+      "recentContactsSpokenCount": "Enter number of contacts:",
+      "contactTracingDate": "Confirm the date for which contacts are recorded.",
+      "recentContactsSeenCount": "Could you estimate the total number of other contacts, i.e. those who you met but with who you did not speak, yesterday?"
+    },
     "contact": {
       "name": "Name of contact:",
       "age": "Age (in years) of contact:",

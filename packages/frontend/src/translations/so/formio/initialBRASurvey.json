@@ -19,13 +19,16 @@
     "movedInCount": "Tirada xubnaha guriga kusoo biiray?",
     "movedOutCount": "Tirada xubnaha guriga ka guurtay?",
     "deathsCount": "Tirada dhimashada guriga?",
-    "sectionStatus": "Helida ogalashaha deganayaasha?",
-    "isLongtimeResident": "Deganaha ma ku noolaa guriga ilaa Oktoobar 2019?",
-    "symptoms": "Calaamad ma isku aragtay?",
-    "comorbidities": "Cudur raaga/sooyaalka?",
-    "recentContactsSpokenCount": "Taabasho amma la kulmid:",
-    "contactTracingDate": "Xaqiiiji taariikhta aad is aragteen si aan u qoro.",
-    "recentContactsSeenCount": "Ma qiyaasi karta tirada dadka aad la kulantay shalay, waa kuwii aad la kulantay lakin aanad la hadlin? Shalayto",
+    "adult": {
+      "sectionStatus": "Helida ogalashaha deganayaasha?",
+      "isLongtimeResident": "Deganaha ma ku noolaa guriga ilaa Oktoobar 2019?",
+      "movedInDate": "Waqtiga xubnaha guriga kusoo biireen?",
+      "symptoms": "Calaamad ma isku aragtay?",
+      "comorbidities": "Cudur raaga/sooyaalka?",
+      "recentContactsSpokenCount": "Taabasho amma la kulmid:",
+      "contactTracingDate": "Xaqiiiji taariikhta aad is aragteen si aan u qoro.",
+      "recentContactsSeenCount": "Ma qiyaasi karta tirada dadka aad la kulantay shalay, waa kuwii aad la kulantay lakin aanad la hadlin? Shalayto"
+    },
     "contact": {
       "name": "Magaca:",
       "age": "Dada/ Cimriga:",

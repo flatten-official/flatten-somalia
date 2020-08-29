@@ -273,7 +273,7 @@
           "components": [
             {
               "key": "status",
-              "label": "question.sectionStatus",
+              "label": "question.adult.sectionStatus",
               "type": "radio",
               "validate": {
                 "required": true
@@ -295,7 +295,7 @@
             },
             {
               "key": "isLongtimeResident",
-              "label": "question.isLongtimeResident",
+              "label": "question.adult.isLongtimeResident",
               "type": "radio",
               "validate": {
                 "required": true
@@ -313,7 +313,7 @@
             },
             {
               "key": "movedInDate",
-              "label": "question.movedInDate",
+              "label": "question.adult.movedInDate",
               "format": "yyyy-MM-dd",
               "tableView": false,
               "datePicker": {
@@ -616,7 +616,7 @@
             {
               "key": "comorbidities",
               "type": "selectboxes",
-              "label": "question.comorbidities",
+              "label": "question.adult.comorbidities",
               "values": [
                 {
                   "label": "comorbidity.substanceAbuse",
@@ -689,7 +689,7 @@
             },
             {
               "key": "symptoms",
-              "label": "question.symptoms",
+              "label": "question.adult.symptoms",
               "type": "selectboxes",
               "values": [
                 {
@@ -912,7 +912,7 @@
             },
             {
               "key": "recentContactsSpokenCount",
-              "label": "question.recentContactsSpokenCount",
+              "label": "question.adult.recentContactsSpokenCount",
               "type": "number",
               "validate": {
                 "required": true,
@@ -1119,7 +1119,7 @@
             },
             {
               "key": "recentContactsSeenCount",
-              "label": "question.recentContactsSeenCount",
+              "label": "question.adult.recentContactsSeenCount",
               "type": "number",
               "validate": {
                 "required": true,
