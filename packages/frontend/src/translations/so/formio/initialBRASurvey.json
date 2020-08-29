@@ -73,31 +73,31 @@
   },
   "contact": {
     "type": {
-      "physical": null,
-      "nonphysical": null
+      "physical": "Korka sare/ Guud ka sare",
+      "nonphysical": "Aan guud ka ahayn"
     },
     "relationship": {
-      "householdMember": null,
-      "outsideRelative": null,
-      "colleague": null,
-      "friend": null,
-      "other": null
+      "householdMember": "Qof ka mid ah guriga/Qoyska",
+      "outsideRelative": "Qaraabo kale /xidhiidhkale",
+      "colleague": "Isku dugsi/isku waxbarasho",
+      "friend": "saaxiib",
+      "other": "Mid kale"
     },
     "frequency": {
-      "daily": null,
-      "weekly": null,
-      "monthly": null,
-      "rarely": null,
-      "firstMeeting": null,
-      "uncertain": null,
-      "undisclosed": null
+      "daily": "Badanaa ama Maalin Kasta",
+      "weekly": "Ugu yaraan Hal mar Usbuuciiba",
+      "monthly": "Ugu yaraan hal mar bishiiba",
+      "rarely": "In ka yar hal mar bishiiba",
+      "firstMeeting": "Waligayba hada ka hor lama kulmin/ Hada ka hor lama kulmin",
+      "uncertain": "Garan maago",
+      "undisclosed": "Diiday in ay jawaaban"
     },
     "duration": {
-      "under15m": null,
-      "15m-60m": null,
-      "1h-2h": null,
-      "2h-4h": null,
-      "over4h": null
+      "under15m": "Ka yar 15 daqiiqo (15 minits)",
+      "15m-60m": "15 daqiiqo kana yar 1 saac",
+      "1h-2h": "Hal saac kana yar laba saac (hal saac kana yar 2 saac)",
+      "2h-4h": "Laba saac kana yar afar saac (2 kana yar 4 saac)",
+      "over4h": "Ka badan afar saac (4 saac)"
     }
   },
   "warning": {

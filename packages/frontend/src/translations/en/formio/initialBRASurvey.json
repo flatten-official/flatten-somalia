@@ -73,31 +73,31 @@
   },
   "contact": {
     "type": {
-      "physical": null,
-      "nonphysical": null
+      "physical": "Physical",
+      "nonphysical": "Nonphysical"
     },
     "relationship": {
-      "householdMember": null,
-      "outsideRelative": null,
-      "colleague": null,
-      "friend": null,
-      "other": null
+      "householdMember": "Household member",
+      "outsideRelative": "Other relative",
+      "colleague": "Coworker or schoolmate",
+      "friend": "Friend",
+      "other": "Other"
     },
     "frequency": {
-      "daily": null,
-      "weekly": null,
-      "monthly": null,
-      "rarely": null,
-      "firstMeeting": null,
-      "uncertain": null,
-      "undisclosed": null
+      "daily": "Daily or almost daily",
+      "weekly": "At least once per week",
+      "monthly": "At least once per month",
+      "rarely": "Less than once per month",
+      "firstMeeting": "Never met before",
+      "uncertain": "Don’t know",
+      "undisclosed": "Refuse to answer"
     },
     "duration": {
-      "under15m": null,
-      "15m-60m": null,
-      "1h-2h": null,
-      "2h-4h": null,
-      "over4h": null
+      "under15m": "<15min",
+      "15m-60m": "15min-1h",
+      "1h-2h": "1h-2h",
+      "2h-4h": "2h-4h",
+      "over4h": ">4h"
     }
   },
   "warning": {
