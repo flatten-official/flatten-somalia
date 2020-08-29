@@ -156,7 +156,7 @@
           "label": "question.birthsCount",
           "type": "number",
           "validate": {
-            "custom": "valid = data.birthsCount < data.residentsCount - (data.movedInCount || 0) ? true : 'warning.tooMuch'",
+            "custom": "valid = data.birthsCount <= data.residentsCount - (data.movedInCount || 1)? true : 'warning.tooMuch'",
             "min": 0,
             "max": 25
           }
@@ -166,7 +166,7 @@
           "label": "question.movedInCount",
           "type": "number",
           "validate": {
-            "custom": "valid = data.movedInCount < data.residentsCount - (data.birthsCount || 0) ? true : 'warning.tooMuch'",
+            "custom": "valid = data.movedInCount <= data.residentsCount - (data.birthsCount || 0) ? true : 'warning.tooMuch'",
             "min": 0,
             "max": 25
           }
@@ -195,7 +195,8 @@
           "key": "longtimeResidents",
           "type": "number",
           "calculateValue": "value = data.residentsCount - data.birthsCount - data.movedInCount",
-          "hidden": true
+          "redrawOn": "data",
+          "hidden": false
         }
       ]
     },
@@ -274,13 +275,24 @@
       "type": "panel",
       "components": [
         {
+          "key": "enteredLongtimeResidents",
+          "type": "number",
+          "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'yes').length;",
+          "hidden": false
+        },
+        {
+          "key": "enteredNewResidents",
+          "type": "number",
+          "calculateValue": "value = data.adults.length - data.enteredLongtimeResidents;",
+          "hidden": false
+        },
+        {
           "key": "adults",
           "label": "header.adults",
           "type": "editgrid",
           "openWhenEmpty": false,
           "validate": {
-            "minLength": "data.residentsCount;",
-            "custom": "let longtimers = data.adults.filter(o => o.isLongtimeResident === 'yes').length; let newResidents = data.adults.length - longtimers; console.log(longtimers); valid = data.residentsCount - data.birthsCount === longtimers && data.movedInCount === newResidents ? true : longtimers + ' / ' + (data.residentsCount - data.birthsCount - data.movedInCount) + ' longtime residents,    ' + newResidents + ' / ' + data.movedInCount + ' new residents.';"
+            "custom": "valid =  data.enteredLongtimeResidents === data.residentsCount - data.birthsCount - data.movedInCount ? true : data.enteredLongtimeResidents + ' / ' + (data.longtimeResidents) + ' longtime residents,    ' + (data.enteredNewResidents) + ' / ' + data.movedInCount + ' new residents.';"
           },
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>Si aad u beddelatid tirada muddada dheer ama degganeyaasha cusub, tag bogga koowaad.</div>"
@@ -309,34 +321,30 @@
               ]
             },
             {
+              "key": "isLongtimeResident",
+              "label": "question.adult.isLongtimeResident",
+              "type": "radio",
+              "validate": {
+                "required": true
+              },
+              "values": [
+                {
+                  "label": "resident.longTerm",
+                  "value": "yes"
+                },
+                {
+                  "label": "resident.movedIn",
+                  "value": "no"
+                }
+              ]
+            },
+            {
               "conditional":{
                 "show": true,
                 "when": "status",
                 "eq": "consentGiven"
               },
               "components": [
-                {
-                  "type": "customText",
-                  "i18nKey": "demographicsSection"
-                },
-                {
-                  "key": "isLongtimeResident",
-                  "label": "question.adult.isLongtimeResident",
-                  "type": "radio",
-                  "validate": {
-                    "required": true
-                  },
-                  "values": [
-                    {
-                      "label": "resident.longTerm",
-                      "value": "yes"
-                    },
-                    {
-                      "label": "resident.movedIn",
-                      "value": "no"
-                    }
-                  ]
-                },
                 {
                   "key": "movedInDate",
                   "label": "question.adult.movedInDate",
@@ -364,6 +372,10 @@
                     "minDate": "2019-10-1",
                     "maxDate": "moment()"
                   }
+                },
+                {
+                  "type": "customText",
+                  "i18nKey": "demographicsSection"
                 },
                 {
                   "key": "age",
