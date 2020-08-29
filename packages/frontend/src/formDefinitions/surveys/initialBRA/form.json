@@ -207,7 +207,7 @@
             "custom": "valid = data.newbornResidents.length == data.birthsCount ? true : data.newbornResidents.length + ' / ' + data.birthsCount;"
           },
           "templates": {
-            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the required number of newborns, go to the first page.</div>"
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>Wax ka bedelida tirada dhalashada cusub, booqo boga koowaad.</div>"
           },
           "components": [
             {
@@ -268,7 +268,7 @@
             "custom": "let longtimers = data.adults.filter(o => o.isLongtimeResident === 'yes').length; let newResidents = data.adults.length - longtimers; console.log(longtimers); valid = data.residentsCount - data.birthsCount === longtimers && data.movedInCount === newResidents ? true : longtimers + ' / ' + (data.residentsCount - data.birthsCount - data.movedInCount) + ' longtime residents,    ' + newResidents + ' / ' + data.movedInCount + ' new residents.';"
           },
           "templates": {
-            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of longtime or new residents, go to the first page.</div>"
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>Si aad u beddelatid tirada muddada dheer ama degganeyaasha cusub, tag bogga koowaad.</div>"
           },
           "components": [
             {
@@ -1145,7 +1145,7 @@
             "custom": "valid = data.movedOutCount === data.movedOut.length ? true : data.movedOut.length + ' / ' + data.movedOutCount;"
           },
           "templates": {
-            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of residents having moved out, go to the first page.</div>"
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>Si loo beddelo tirada degganeyaashii hore, tag bogga koowaad.</div>"
           },
           "components": [
             {
@@ -1206,7 +1206,7 @@
           },
           "hideLabel": false,
           "templates": {
-            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of deaths, go to the first page.</div>"
+            "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>Wax ka bedelida tirada dhimashada, booqo boga koowaad.</div>"
           },
           "components": [
             {
