@@ -66,3 +66,16 @@ export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
 
   await endpoints.submitVolunteerForm(body);
 };
+
+export const getInitialBRASurveySubmitter = (schema, pageNames) => async (
+  storeData,
+  formioData
+) => {
+  const body = {
+    data: formioData,
+    metadata: getMetadata(storeData, pageNames),
+    schema,
+  };
+
+  await endpoints.submitInitialBRASurvey(body);
+};

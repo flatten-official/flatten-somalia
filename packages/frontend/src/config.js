@@ -6,6 +6,7 @@ import initialBRASurveyJSON from "./formDefinitions/surveys/initialBRA/form.json
 import {
   defaultSurveySubmitterFactory,
   getInitialHouseholdSubmitter,
+  getInitialBRASurveySubmitter,
 } from "./ui/pages/surveys/submitters";
 
 export const Routes = {
@@ -89,7 +90,7 @@ export const Surveys = {
     i18nTitleKey: "initialBRASurveyTitle",
     api: endpoints.submitInitialBRASurvey,
     formIOJSON: initialBRASurveyJSON,
-    onSubmit: defaultSurveySubmitterFactory(
+    onSubmit: getInitialBRASurveySubmitter(
       endpoints.submitInitialBRASurvey,
       Schemas.initialBRASurvey
     ),
