@@ -138,11 +138,6 @@
           }
         },
         {
-          "i18nKey": "RESIDENTS",
-          "type": "customText",
-          "key": "customTextEResidentsSection"
-        },
-        {
           "key": "residentsCount",
           "label": "question.residentsCount",
           "type": "number",
@@ -311,6 +306,10 @@
               },
               "components": [
                 {
+                  "type": "customText",
+                  "i18nKey": "demographicsSection"
+                },
+                {
                   "key": "isLongtimeResident",
                   "label": "question.adult.isLongtimeResident",
                   "type": "radio",
@@ -355,11 +354,6 @@
                     "minDate": "2019-10-1",
                     "maxDate": "moment()"
                   }
-                },
-                {
-                  "type": "customText",
-                  "key": "customTextSocioeconomicSection",
-                  "i18nKey": "socioeconomicSection"
                 },
                 {
                   "key": "age",
@@ -637,8 +631,7 @@
                 },
                 {
                   "type": "customText",
-                  "key": "customTextSocioeconomicSection",
-                  "i18nKey": "healthSection"
+                  "i18nKey": "medicalSection"
                 },
                 {
                   "key": "comorbidities",
@@ -978,8 +971,7 @@
                 },
                 {
                   "type": "customText",
-                  "key": "customTextContactTracingSection",
-                  "i18nKey": "header.contactTracing"
+                  "i18nKey": "contactTracing"
                 },
                 {
                   "key": "recentContactsSpokenCount",

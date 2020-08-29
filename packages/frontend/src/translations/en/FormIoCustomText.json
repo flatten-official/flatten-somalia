@@ -3,5 +3,6 @@
   "employmentSection": "Employment",
   "awarenessSection": "Awareness",
   "medicalSection": "Health",
-  "transportationSection": "Transportation"
+  "transportationSection": "Transportation",
+  "contactTracing": "Contacts Survey"
 }
