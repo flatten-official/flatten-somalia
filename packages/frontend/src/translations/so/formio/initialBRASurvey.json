@@ -77,7 +77,8 @@
     "olfactoryImpairment": "Ur la'aan",
     "gustatoryImpairment": "Dhadhan la'aan",
     "nausea": "Lalabo ama matag",
-    "shortnessOfBreath": "Neefsashada oo dhibta"
+    "shortnessOfBreath": "Neefsashada oo dhibta",
+    "none": "Midnaba/waxna"
   },
   "symptomOnset": {
     "abdominalPain": "Waqtigee calool xanuunka kugu bilawday?",

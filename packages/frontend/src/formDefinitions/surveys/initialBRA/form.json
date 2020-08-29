@@ -753,6 +753,10 @@
                     {
                       "label": "symptom.shortnessOfBreath",
                       "value": "shortnessOfBreath"
+                    },
+                    {
+                      "label": "symptom.none",
+                      "value": "none"
                     }
                   ]
                 },

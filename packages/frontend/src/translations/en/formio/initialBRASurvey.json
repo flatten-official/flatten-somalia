@@ -77,7 +77,8 @@
     "olfactoryImpairment": "Loss of sense of smell",
     "gustatoryImpairment": "Loss of sense of taste",
     "nausea": "Nausea and/or vomiting",
-    "shortnessOfBreath": "Shortness of breath affecting normal activities"
+    "shortnessOfBreath": "Shortness of breath affecting normal activities",
+    "none": "None of the above"
   },
   "symptomOnset": {
     "abdominalPain": "When did the abdominal pain start?",
