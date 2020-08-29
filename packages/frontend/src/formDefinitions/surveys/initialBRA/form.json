@@ -1038,7 +1038,7 @@
                     "eq": 0
                   },
                   "validate": {
-                    "required": false
+                    "custom": "const entries = row.contacts.length; const validAmount = row.recentContactsSpokenCount; if (entries >= validAmount) valid = 'warning.tooManyEntries'; if (entries <= validAmount) valid = 'warning.tooFewEntries'; if (entries === validAmount) valid = true;"
                   },
                   "openWhenEmpty": false,
                   "hideLabel": false,
