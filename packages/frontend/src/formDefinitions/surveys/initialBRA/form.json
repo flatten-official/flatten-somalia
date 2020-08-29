@@ -983,7 +983,7 @@
               "components": [
                 {
                   "key": "name",
-                  "label": "question.contact.mame",
+                  "label": "question.contact.name",
                   "type": "textfield",
                   "validate": {
                     "required": true
