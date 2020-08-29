@@ -2,41 +2,6 @@
   "name": "frontend",
   "version": "1.0.0",
   "private": true,
-  "main": "../../scripts/frontend/start.js",
-  "scripts": {
-    "build": "node ../../scripts/frontend/build.js",
-    "depcheck": "../../node_modules/.bin/depcheck . --ignores=\\\"eslint-*,babel*,*/webpack,prettier,*sass*,depcheck,font-awesome,formiojs\\\"",
-    "lint": "../../node_modules/.bin/eslint --fix .",
-    "start": "node ../../scripts/frontend/start.js",
-    "deploy": "node ../../scripts/createBranchJson.js && gcloud config set project flatten-staging-271921 && gcloud builds submit",
-    "auth": "gcloud auth login && gcloud ../../scripts/frontend/config set project flatten-staging-271921",
-    "serve": "npx serve --single --listen 3000 ./build"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": "eslint --cache --fix"
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.5.2",
@@ -67,12 +32,5 @@
     "redux-thunk": "^2.3.0",
     "seamless-immutable": "^7.1.4",
     "util-shared-constants": "1.0.0"
-  },
-  "devDependencies": {
-    "branch-name": "^1.0.0",
-    "depcheck": "^1.2.0",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.11",
-    "serve": "^11.3.2"
   }
 }
