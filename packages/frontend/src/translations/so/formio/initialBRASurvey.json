@@ -16,13 +16,13 @@
     "recentContactsSpokenCount": "Taabasho amma la kulmid:",
     "recentContactsSeenCount": "Ma qiyaasi karta tirada dadka aad la kulantay shalay, waa kuwii aad la kulantay lakin aanad la hadlin? Shalayto",
     "contact": {
-      "name": null,
-      "age": null,
-      "gender": null,
-      "type": null,
-      "relationship": null,
-      "frequency": null,
-      "duration": null
+      "name": "Magaca:",
+      "age": "Dada/ Cimriga:",
+      "gender": "Jinsiga:",
+      "type": "Nooca kulan ka/is araga:",
+      "relationship": "Xidhiidh la leh qofkale:",
+      "frequency": "Guud ahaan sidee qofkan kulankiinu siduu ahaa?",
+      "duration": "Wakhti intee leeg siisay/kugu qadatay inta aad la joogtay qofkan goobtan aad kula kulantay?"
     }
   },
   "resident": {
