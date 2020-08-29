@@ -54,22 +54,22 @@
     "shortnessOfBreath": "When did the shortness of breath start?"
   },
   "comorbidity": {
-    "substanceAbuse": null,
-    "anaemia": null,
-    "asthma": null,
-    "nervousSystemCondition": null,
-    "cancer": null,
-    "diabetes": null,
-    "cardiac": null,
-    "hepatitisOrChronicLiverCondition": null,
-    "HIV": null,
-    "hypertension": null,
-    "mentalHealthCondition": null,
-    "stroke": null,
-    "tuberculosis": null,
-    "pulmonaryCondition": null,
-    "immuneImpairment": null,
-    "none": null
+    "substanceAbuse": "Alcohol or other substance misuse",
+    "anaemia": "Anaemia",
+    "asthma": "Asthma",
+    "nervousSystemCondition": "Brain or nerve condition (e.g. dementia, Parkinson’s)",
+    "cancer": "Cancer",
+    "diabetes": "Diabetes (Type I or II)",
+    "cardiac": "Heart disease or heart problems",
+    "hepatitisOrChronicLiverCondition": "Hepatitis B or C, or other chronic liver disease",
+    "HIV": "HIV",
+    "hypertension": "Hypertension (high blood pressure)",
+    "mentalHealthCondition": "Mental health problems (e.g. depression, anxiety, or other mental disorders)",
+    "stroke": "Stroke",
+    "tuberculosis": "TB",
+    "pulmonaryCondition": "Other lung condition COPD, bronchitis or emphysema",
+    "immuneImpairment": "Other condition causing a weakened immune system/reduced ability to deal with infections (as a result of a disease or treatment)",
+    "none": "None of the above"
   },
   "contact": {
     "type": {

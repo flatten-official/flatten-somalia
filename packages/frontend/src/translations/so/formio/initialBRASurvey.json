@@ -54,22 +54,22 @@
     "shortnessOfBreath": "Waqtigee in neefta ku dhibto bilawday?"
   },
   "comorbidity": {
-    "substanceAbuse": null,
-    "anaemia": null,
-    "asthma": null,
-    "nervousSystemCondition": null,
-    "cancer": null,
-    "diabetes": null,
-    "cardiac": null,
-    "hepatitisOrChronicLiverCondition": null,
-    "HIV": null,
-    "hypertension": null,
-    "mentalHealthCondition": null,
-    "stroke": null,
-    "tuberculosis": null,
-    "pulmonaryCondition": null,
-    "immuneImpairment": null,
-    "none": null
+    "substanceAbuse": "Isticmaalka maandooriyaha/daroogada",
+    "anaemia": "Dhiigla'aan",
+    "asthma": "Neef",
+    "nervousSystemCondition": "Cudur dhimirka ah",
+    "cancer": "Kaankaro/kansar",
+    "diabetes": "Macaan/sokor/sokorow",
+    "cardiac": "Cudur wadnaha ah",
+    "hepatitisOrChronicLiverCondition": "Cagaarshoow",
+    "HIV": "HIV/aydhis",
+    "hypertension": "Dhiigkar",
+    "mentalHealthCondition": "Cudur dhimirka ah",
+    "stroke": "Istaroog",
+    "tuberculosis": "Gaaxo",
+    "pulmonaryCondition": "Cudurada sambabada",
+    "immuneImpairment": "Difaaca jirka/difaac yari",
+    "none": "Midnaba/waxna"
   },
   "contact": {
     "type": {
