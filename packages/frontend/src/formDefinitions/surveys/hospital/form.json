@@ -1,190 +1,81 @@
 {
-  "_id": "5eda7cac93e218020d6c6b18",
   "type": "form",
-  "tags": [],
-  "owner": "5ec0adf353208fac46755642",
   "components": [
     {
       "label": "enterPhoneNumber",
       "inputMask": "99 99 99 999",
-      "spellcheck": true,
-      "tableView": true,
-      "calculateServer": false,
       "validate": { "required": true },
       "key": "hospitalPhoneNumber",
-      "type": "phoneNumber",
-      "input": true
+      "type": "phoneNumber"
     },
     {
       "label": "email",
       "placeholder": "Optional",
-      "spellcheck": true,
-      "tableView": true,
-      "calculateServer": false,
-      "kickbox": { "enabled": true },
+      "spellcheck": false,
       "key": "hospitalEmail",
-      "type": "email",
-      "input": true
+      "type": "email"
     },
     {
       "label": "newPatients",
-      "mask": false,
-      "spellcheck": true,
-      "tableView": false,
-      "delimiter": false,
-      "requireDecimal": false,
-      "inputFormat": "plain",
-      "calculateServer": false,
       "validate": { "required": true, "min": 0 },
       "key": "newPatients",
-      "type": "number",
-      "input": true
+      "type": "number"
     },
     {
       "label": "dischargedPatients",
-      "mask": false,
-      "spellcheck": true,
-      "tableView": false,
-      "delimiter": false,
-      "requireDecimal": false,
-      "inputFormat": "plain",
-      "calculateServer": false,
       "validate": { "required": true, "min": 0 },
       "key": "dischargedPatients",
-      "type": "number",
-      "input": true
+      "type": "number"
     },
     {
       "label": "totalBedsOccupied",
-      "mask": false,
-      "spellcheck": true,
-      "tableView": false,
-      "delimiter": false,
-      "requireDecimal": false,
-      "inputFormat": "plain",
-      "calculateServer": false,
       "validate": { "required": true, "min": 0 },
       "key": "occupiedHospitalBeds",
-      "type": "number",
-      "input": true
+      "type": "number"
     },
     {
       "label": "bedsOccupiedInCriticalCare",
-      "mask": false,
-      "spellcheck": true,
-      "tableView": false,
-      "delimiter": false,
-      "requireDecimal": false,
-      "inputFormat": "plain",
-      "calculateServer": false,
       "validate": { "required": true },
       "key": "occupiedCriticalCareBeds",
-      "type": "number",
-      "input": true
+      "type": "number"
     },
     {
       "label": "bedAvailable",
-      "mask": false,
-      "spellcheck": true,
-      "tableView": false,
-      "delimiter": false,
-      "requireDecimal": false,
-      "inputFormat": "plain",
-      "calculateServer": false,
       "validate": { "required": true, "min": 0 },
       "key": "availableBeds",
-      "type": "number",
-      "input": true
+      "type": "number"
     },
     {
       "label": "patientsCurrentlyHospitalized",
-      "mask": false,
-      "spellcheck": true,
-      "tableView": false,
-      "delimiter": false,
-      "requireDecimal": false,
-      "inputFormat": "plain",
-      "calculateServer": false,
       "validate": { "required": true, "min": 0 },
       "key": "hospitalizedPatients",
-      "type": "number",
-      "input": true
+      "type": "number"
     },
     {
       "label": "confirmedPositiveCOVID19",
-      "mask": false,
-      "spellcheck": true,
-      "tableView": false,
-      "delimiter": false,
-      "requireDecimal": false,
-      "inputFormat": "plain",
-      "calculateServer": false,
       "validate": { "required": true, "min": 0 },
       "key": "confirmedCOVID19Cases",
-      "type": "number",
-      "input": true
+      "type": "number"
     },
     {
       "label": "suspectedCOVID19",
-      "mask": false,
-      "spellcheck": true,
-      "tableView": false,
-      "delimiter": false,
-      "requireDecimal": false,
-      "inputFormat": "plain",
-      "calculateServer": false,
       "validate": { "required": true, "min": 0 },
       "key": "suspectedCOVID19Cases",
-      "type": "number",
-      "input": true
+      "type": "number"
     },
     {
       "label": "negativeCOVID19",
-      "mask": false,
-      "spellcheck": true,
-      "tableView": false,
-      "delimiter": false,
-      "requireDecimal": false,
-      "inputFormat": "plain",
-      "calculateServer": false,
       "validate": { "required": true, "min": 0 },
       "key": "negativeCOVID19Cases",
-      "type": "number",
-      "input": true
+      "type": "number"
     },
     {
       "type": "button",
       "label": "submit",
       "key": "exclude-submit",
-      "disableOnInvalid": true,
-      "input": true,
-      "tableView": false
+      "disableOnInvalid": true
     }
   ],
-  "controller": "",
-  "revisions": "",
-  "_vid": 0,
   "title": "Hospital Volunteer Survey",
-  "display": "form",
-  "access": [
-    {
-      "roles": [
-        "5ec0c80753208f5aea755795",
-        "5ec0c80753208fac46755796",
-        "5ec0c80753208f19f0755797",
-        "5ed48bebb9eb600b183955f1",
-        "5ed48bebb9eb60cfa83955f2"
-      ],
-      "type": "read_all"
-    }
-  ],
-  "submissionAccess": [],
-  "settings": {},
-  "properties": {},
-  "name": "hospitalVolunteerSurvery",
-  "path": "hospitalvolunteersurvery",
-  "project": "5ec0c80753208f2b4d755794",
-  "created": "2020-06-05T17:11:08.323Z",
-  "modified": "2020-06-05T17:46:16.724Z",
-  "machineName": "yordvlchrlvervl:hospitalForm"
+  "display": "form"
 }
