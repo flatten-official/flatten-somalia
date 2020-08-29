@@ -186,6 +186,12 @@
             "min": 0,
             "max": 25
           }
+        },
+        {
+          "key": "longtimeResidents",
+          "type": "number",
+          "calculateValue": "value = data.residentsCount - data.birthsCount - data.movedInCount",
+          "hidden": true
         }
       ]
     },
