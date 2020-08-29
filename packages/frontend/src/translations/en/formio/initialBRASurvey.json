@@ -16,7 +16,7 @@
     "deaths": "Deaths:"
   },
   "question": {
-    "residentsCount": "How people live in your home?",
+    "residentsCount": "How many people live in your home?",
     "birthsCount": "How many births occurred in the household?",
     "movedInCount": "How many people have moved into the household?",
     "movedOutCount": "How many individuals have moved out of this household?",
