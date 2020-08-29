@@ -973,7 +973,7 @@
               "label": "contact info",
               "type": "editgrid",
               "validate": {
-                "custom": "valid = true"
+                "required": false
               },
               "openWhenEmpty": false,
               "hideLabel": true,
