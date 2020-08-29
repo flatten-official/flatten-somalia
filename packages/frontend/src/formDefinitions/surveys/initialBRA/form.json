@@ -212,7 +212,7 @@
           "components": [
             {
               "key": "age",
-              "label": "newborn.age",
+              "label": "question.newborn.age",
               "type": "number",
               "validate": {
                 "required": true,
@@ -222,7 +222,7 @@
             },
             {
               "key": "gender",
-              "label": "newborn.gender",
+              "label": "question.newborn.gender",
               "type": "textfield",
               "validate": {
                 "required": true
@@ -230,7 +230,7 @@
             },
             {
               "key": "birthdate",
-              "label": "newborn.birthdate",
+              "label": "question.newborn.birthdate",
               "type": "datetime",
               "format": "yyyy-MM-dd",
               "validate": {
@@ -1150,7 +1150,7 @@
           "components": [
             {
               "key": "movedOutDate",
-              "label": "movedOut.date",
+              "label": "question.movedOut.date",
               "format": "yyyy-MM-dd",
               "tableView": false,
               "datePicker": {
@@ -1173,7 +1173,7 @@
             },
             {
               "key": "age",
-              "label": "movedOut.age",
+              "label": "question.movedOut.age",
               "type": "number",
               "validate": {
                 "required": true,
@@ -1183,7 +1183,7 @@
             },
             {
               "key": "gender",
-              "label": "movedOut.gender",
+              "label": "question.movedOut.gender",
               "type": "textfield",
               "validate": {
                 "required": true
@@ -1211,7 +1211,7 @@
           "components": [
             {
               "key": "age",
-              "label": "death.age",
+              "label": "question.death.age",
               "type": "number",
               "validate": {
                 "required": true,
@@ -1221,7 +1221,7 @@
             },
             {
               "key": "gender",
-              "label": "death.gender",
+              "label": "question.death.gender",
               "type": "textfield",
               "validate": {
                 "required": true
@@ -1229,7 +1229,7 @@
             },
             {
               "key": "deathDate",
-              "label": "death.date",
+              "label": "question.death.date",
               "format": "yyyy-MM-dd",
               "tableView": false,
               "datePicker": {
