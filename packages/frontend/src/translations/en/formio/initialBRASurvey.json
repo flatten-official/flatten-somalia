@@ -5,7 +5,13 @@
     "newborns": "<h3>Newborns</h3>",
     "formerResidents": "Former Residents",
     "deaths": "<h3>Deaths</h3>",
-    "contactTracing": "<h3>Contacts Survey</h3>"
+    "contactTracing": "<h3>Contacts Survey</h3>",
+    "sinceOctober2019": null
+  },
+  "body": {
+    "neonateDeathsPrompt": null,
+    "recentContactsInfo": null,
+    "contactTracingInfo": null
   },
   "question": {
     "residentsCount": "How people live in your home?",
@@ -14,7 +20,10 @@
     "movedOutCount": "How many individuals have moved out of this household?",
     "deathsCount": "How many deaths occurred in this household?",
     "sectionStatus": "Is this resident available and consenting to fill out this section?",
+    "symptoms": null,
+    "comorbidities": null,
     "recentContactsSpokenCount": "Enter number of contacts:",
+    "contactTracingDate": null,
     "recentContactsSeenCount": "Could you estimate the total number of other contacts, i.e. those who you met but with who you did not speak, yesterday?",
     "contact": {
       "name": "Name of contact:",

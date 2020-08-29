@@ -5,7 +5,13 @@
     "newborns": "<h3>Dhalasho cusub</h3>",
     "formerResidents": "Deganayaashii hore",
     "deaths": "<h3>Dhimashada</h3>",
-    "contactTracing": "<h3>Xiriirka xog aruurinta</h3>"
+    "contactTracing": "<h3>Xiriirka xog aruurinta</h3>",
+    "sinceOctober2019": null
+  },
+  "body": {
+    "neonateDeathsPrompt": null,
+    "recentContactsInfo": null,
+    "contactTracingInfo": null
   },
   "question": {
     "residentsCount": "Immisa qof ayaa ku nool guriga?",
@@ -14,7 +20,10 @@
     "movedOutCount": "Tirada xubnaha guriga ka guurtay?",
     "deathsCount": "Tirada dhimashada guriga?",
     "sectionStatus": "Helida ogalashaha deganayaasha?",
+    "symptoms": null,
+    "comorbidities": null,
     "recentContactsSpokenCount": "Taabasho amma la kulmid:",
+    "contactTracingDate": null,
     "recentContactsSeenCount": "Ma qiyaasi karta tirada dadka aad la kulantay shalay, waa kuwii aad la kulantay lakin aanad la hadlin? Shalayto",
     "contact": {
       "name": "Magaca:",
