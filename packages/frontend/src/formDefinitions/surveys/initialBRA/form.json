@@ -223,10 +223,20 @@
             {
               "key": "gender",
               "label": "question.newborn.gender",
-              "type": "textfield",
+              "type": "radio",
               "validate": {
                 "required": true
-              }
+              },
+              "values": [
+                {
+                  "label": "male",
+                  "value": "male"
+                },
+                {
+                  "label": "female",
+                  "value": "female"
+                }
+              ]
             },
             {
               "key": "birthdate",
@@ -357,10 +367,20 @@
             {
               "key": "gender",
               "label": "question.adult.gender",
-              "type": "textfield",
+              "type": "radio",
               "validate": {
                 "required": true
-              }
+              },
+              "values": [
+                {
+                  "label": "male",
+                  "value": "male"
+                },
+                {
+                  "label": "female",
+                  "value": "female"
+                }
+              ]
             },
             {
               "key": "employed",
@@ -1184,10 +1204,20 @@
             {
               "key": "gender",
               "label": "question.movedOut.gender",
-              "type": "textfield",
+              "type": "radio",
               "validate": {
                 "required": true
-              }
+              },
+              "values": [
+                {
+                  "label": "male",
+                  "value": "male"
+                },
+                {
+                  "label": "female",
+                  "value": "female"
+                }
+              ]
             }
           ]
         }
@@ -1222,10 +1252,20 @@
             {
               "key": "gender",
               "label": "question.death.gender",
-              "type": "textfield",
+              "type": "radio",
               "validate": {
                 "required": true
-              }
+              },
+              "values": [
+                {
+                  "label": "male",
+                  "value": "male"
+                },
+                {
+                  "label": "female",
+                  "value": "female"
+                }
+              ]
             },
             {
               "key": "deathDate",
