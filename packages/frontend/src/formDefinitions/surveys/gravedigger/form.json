@@ -1,5 +1,7 @@
 {
+  "title": "Grave Digger Volunteer Survey Form",
   "type": "form",
+  "display": "form",
   "components": [
     {
       "label": "enterGravediggerPhoneNumber",
@@ -51,7 +53,5 @@
       "key": "exclude-submit",
       "disableOnInvalid": true
     }
-  ],
-  "title": "Grave Digger Volunteer Survey Form",
-  "display": "form"
+  ]
 }

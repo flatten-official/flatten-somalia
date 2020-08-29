@@ -1,5 +1,7 @@
 {
+  "title": "Hospital Volunteer Survey",
   "type": "form",
+  "display": "form",
   "components": [
     {
       "label": "enterPhoneNumber",
@@ -75,7 +77,5 @@
       "key": "exclude-submit",
       "disableOnInvalid": true
     }
-  ],
-  "title": "Hospital Volunteer Survey",
-  "display": "form"
+  ]
 }

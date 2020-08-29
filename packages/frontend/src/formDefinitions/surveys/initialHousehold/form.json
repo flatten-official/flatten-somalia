@@ -1,5 +1,7 @@
 {
+  "title": "Initial Volunteer Survey",
   "type": "form",
+  "display": "wizard",
   "components": [
     {
       "title": "Deganaanshaha",
@@ -3251,7 +3253,5 @@
       },
       "collapsible": false
     }
-  ],
-  "title": "Initial Volunteer Survey",
-  "display": "wizard"
+  ]
 }
