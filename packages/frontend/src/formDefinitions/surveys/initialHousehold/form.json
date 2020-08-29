@@ -150,6 +150,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -187,6 +188,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -221,6 +223,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -252,6 +255,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -286,6 +290,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -317,6 +322,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -351,6 +357,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -382,6 +389,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -413,6 +421,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -444,6 +453,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -478,6 +488,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -512,6 +523,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -546,6 +558,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -580,6 +593,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -611,6 +625,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -642,6 +657,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -673,6 +689,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -704,6 +721,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -735,6 +753,7 @@
           "label": "subdistrict",
           "widget": "choicesjs",
           "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
           "data": {
             "json": [
               {
@@ -1166,8 +1185,9 @@
             },
             {
               "label": "educationLevel",
-              "widget": "choicesjs",
-              "dataSrc": "json",
+          "widget": "choicesjs",
+          "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
               "data": {
                 "values": [
                   {
@@ -1251,8 +1271,9 @@
             },
             {
               "label": "COVID19KnowledgeLevel",
-              "widget": "choicesjs",
-              "dataSrc": "json",
+          "widget": "choicesjs",
+          "dataSrc": "json",
+          "template": "<span>{{ item.name }}</span>",
               "data": {
                 "values": [
                   {
