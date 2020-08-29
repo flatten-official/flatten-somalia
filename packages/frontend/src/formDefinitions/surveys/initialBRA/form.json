@@ -156,6 +156,7 @@
           "label": "question.birthsCount",
           "type": "number",
           "validate": {
+            "required": true,
             "custom": "valid = data.birthsCount <= data.residentsCount - (data.movedInCount || 1)? true : 'warning.tooMuch'",
             "min": 0,
             "max": 25
@@ -166,6 +167,7 @@
           "label": "question.movedInCount",
           "type": "number",
           "validate": {
+            "required": true,
             "custom": "valid = data.movedInCount <= data.residentsCount - (data.birthsCount || 0) ? true : 'warning.tooMuch'",
             "min": 0,
             "max": 25
@@ -286,8 +288,7 @@
                   "labelPosition": "left-right",
                   "labelWidth": 75,
                   "type": "textfield",
-                  "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'yes').length + ' / ' + data.longtimeResidentCount",
-                  "hidden": false
+                  "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'yes').length + ' / ' + data.longtimeResidentCount"
                 }
               ]
             },
@@ -299,8 +300,7 @@
                   "labelPosition": "left-right",
                   "labelWidth": 75,
                   "type": "textfield",
-                  "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'no').length + ' / ' + data.movedInCount",
-                  "hidden": false
+                  "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'no').length + ' / ' + data.movedInCount"
                 }
               ]
             }
@@ -394,8 +394,8 @@
                   }
                 },
                 {
-                  "type": "customText",
-                  "i18nKey": "demographicsSection"
+                  "i18nKey": "demographicsSection",
+                  "type": "customText"
                 },
                 {
                   "key": "age",
@@ -672,8 +672,8 @@
                   }
                 },
                 {
-                  "type": "customText",
-                  "i18nKey": "medicalSection"
+                  "i18nKey": "medicalSection",
+                  "type": "customText"
                 },
                 {
                   "key": "comorbidities",
@@ -1012,8 +1012,8 @@
                   }
                 },
                 {
-                  "type": "customText",
-                  "i18nKey": "contactTracing"
+                  "i18nKey": "contactTracing",
+                  "type": "customText"
                 },
                 {
                   "key": "recentContactsSpokenCount",
