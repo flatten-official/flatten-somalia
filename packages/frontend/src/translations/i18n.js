@@ -8,7 +8,7 @@ import formIOAddVolunteerEN from "./en/formio/AddVolunteer.json";
 import formIOInitialHouseholdSurveyEN from "./en/formio/InitialVolunteerSurvey.json";
 import formIOGraveDiggerSurveyEN from "./en/formio/GravediggerSurvey.json";
 import formIOHospitalSurveyEN from "./en/formio/HospitalSurvey.json";
-import formIOinitialBRASurveyEN from "./en/formio/initialBRASurvey.json";
+import formIOInitialBRASurveyEN from "./en/formio/initialBRASurvey.json";
 import formIOVolunteerLoginEN from "./en/formio/VolunteerLogin.json";
 
 // OTHER ENGLISH CONTENT
@@ -28,7 +28,7 @@ import formIOAddVolunteerSO from "./so/formio/AddVolunteer.json";
 import formIOInitialHouseholdSurveySO from "./so/formio/InitialVolunteerSurvey.json";
 import formIOGraveDiggerSurveySO from "./so/formio/GraveDiggerSurvey.json";
 import formIOHospitalSurveySO from "./so/formio/HospitalSurvey.json";
-import formIOinitialBRASurveySO from "./so/formio/initialBRASurvey.json";
+import formIOInitialBRASurveySO from "./so/formio/initialBRASurvey.json";
 import formIOVolunteerLoginSO from "./so/formio/VolunteerLogin.json";
 
 // OTHER SOMALI CONTENT
@@ -51,7 +51,7 @@ const resources = {
       ...formIOVolunteerLoginEN,
       ...formIOGraveDiggerSurveyEN,
       ...formIOHospitalSurveyEN,
-      ...formIOinitialBRASurveyEN,
+      ...formIOInitialBRASurveyEN,
     },
     Login: loginEN,
     Footer: footerEN,
@@ -72,7 +72,7 @@ const resources = {
       ...formIOVolunteerLoginSO,
       ...formIOGraveDiggerSurveySO,
       ...formIOHospitalSurveySO,
-      ...formIOinitialBRASurveySO,
+      ...formIOInitialBRASurveySO,
     },
     Login: loginSO,
     Footer: footerSO,
