@@ -6,12 +6,12 @@
     "formerResidents": "Former Residents",
     "deaths": "<h3>Deaths</h3>",
     "contactTracing": "<h3>Contacts Survey</h3>",
-    "sinceOctober2019": null
+    "sinceOctober2019": "<h3>Since October 2019:</h3>"
   },
   "body": {
-    "neonateDeathsPrompt": null,
-    "recentContactsInfo": null,
-    "contactTracingInfo": null
+    "neonateDeathsPrompt": "Probe for neonate deaths.",
+    "recentContactsInfo": "For each resident we will now ask you to remember who you have been in contact with yesterday, between the time of waking up yesterday and the time of waking up today. A contact is someone who you met in person and with who you exchanged at least a few words.",
+    "contactTracingInfo": "We will now ask you some characteristics for each contact, such as their age and sex. We also ask whether contact was physical or not. A physical contact includes hand shaking, embracing, kissing, and also sharing a glass or utensil that is passed from mouth to mouth."
   },
   "question": {
     "residentsCount": "How people live in your home?",
@@ -20,10 +20,11 @@
     "movedOutCount": "How many individuals have moved out of this household?",
     "deathsCount": "How many deaths occurred in this household?",
     "sectionStatus": "Is this resident available and consenting to fill out this section?",
-    "symptoms": null,
-    "comorbidities": null,
+    "isLongtimeResident": "Has the resident lived in this household since at least October 2019?",
+    "symptoms": "This year, have you or are you experiencing any of the following symptoms?",
+    "comorbidities": "Has a health professional diagnosed you with any of the following conditions?",
     "recentContactsSpokenCount": "Enter number of contacts:",
-    "contactTracingDate": null,
+    "contactTracingDate": "Confirm the date for which contacts are recorded.",
     "recentContactsSeenCount": "Could you estimate the total number of other contacts, i.e. those who you met but with who you did not speak, yesterday?",
     "contact": {
       "name": "Name of contact:",

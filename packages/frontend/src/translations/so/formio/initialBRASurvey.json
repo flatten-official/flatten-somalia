@@ -6,12 +6,12 @@
     "formerResidents": "Deganayaashii hore",
     "deaths": "<h3>Dhimashada</h3>",
     "contactTracing": "<h3>Xiriirka xog aruurinta</h3>",
-    "sinceOctober2019": null
+    "sinceOctober2019": "<h3>Ilaa Oktoobar 2019:</h3>"
   },
   "body": {
-    "neonateDeathsPrompt": null,
-    "recentContactsInfo": null,
-    "contactTracingInfo": null
+    "neonateDeathsPrompt": "Dhimashada dhalaanka cusub.",
+    "recentContactsInfo": "Hada waxan ku waydiinayaa in aad xasuusato cidii aad is aragteen shalayto,laga bilaabo markii aad kacday shalayto, ilaa maanta, is arag waxan uga jeedna qofka aad kulanteen ama is waydaarsateen ugu yaraan kalmado hadal ah.",
+    "contactTracingInfo": "Waxan imika ku waydiinaya astaamaha qof kasta oo aad is aragteensida da,da iyo jinsiga sido kale waxan ku waydiinayaa in is aragiinu ahaa mid taabasho ah, sida gacan qaad, salaan laab qabasho ah, dhunkasho ama in aad wadaagtaan weel cunto oo qof kasta afkiisa gaadha."
   },
   "question": {
     "residentsCount": "Immisa qof ayaa ku nool guriga?",
@@ -20,10 +20,11 @@
     "movedOutCount": "Tirada xubnaha guriga ka guurtay?",
     "deathsCount": "Tirada dhimashada guriga?",
     "sectionStatus": "Helida ogalashaha deganayaasha?",
-    "symptoms": null,
-    "comorbidities": null,
+    "isLongtimeResident": "Deganaha ma ku noolaa guriga ilaa Oktoobar 2019?",
+    "symptoms": "Calaamad ma isku aragtay?",
+    "comorbidities": "Cudur raaga/sooyaalka?",
     "recentContactsSpokenCount": "Taabasho amma la kulmid:",
-    "contactTracingDate": null,
+    "contactTracingDate": "Xaqiiiji taariikhta aad is aragteen si aan u qoro.",
     "recentContactsSeenCount": "Ma qiyaasi karta tirada dadka aad la kulantay shalay, waa kuwii aad la kulantay lakin aanad la hadlin? Shalayto",
     "contact": {
       "name": "Magaca:",
