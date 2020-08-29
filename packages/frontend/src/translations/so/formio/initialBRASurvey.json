@@ -7,14 +7,14 @@
     "contactTracing": null
   },
   "question": {
-    "residentsCount": null,
-    "birthsCount": null,
-    "movedInCount": null,
-    "movedOutCount": null,
-    "deathsCount": null,
-    "sectionStatus": null,
-    "recentContactsSpokenCount": null,
-    "recentContactsSeenCount": null,
+    "residentsCount": "Immisa qof ayaa ku nool guriga?",
+    "birthsCount": "Tirada dhalshada qoyska?",
+    "movedInCount": "Tirada xubnaha guriga kusoo biiray?",
+    "movedOutCount": "Tirada xubnaha guriga ka guurtay?",
+    "deathsCount": "Tirada dhimashada guriga?",
+    "sectionStatus": "Helida ogalashaha deganayaasha?",
+    "recentContactsSpokenCount": "Taabasho amma la kulmid:",
+    "recentContactsSeenCount": "Ma qiyaasi karta tirada dadka aad la kulantay shalay, waa kuwii aad la kulantay lakin aanad la hadlin? Shalayto",
     "contact": {
       "name": null,
       "age": null,

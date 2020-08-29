@@ -7,14 +7,14 @@
     "contactTracing": null
   },
   "question": {
-    "residentsCount": null,
-    "birthsCount": null,
-    "movedInCount": null,
-    "movedOutCount": null,
-    "deathsCount": null,
-    "sectionStatus": null,
-    "recentContactsSpokenCount": null,
-    "recentContactsSeenCount": null,
+    "residentsCount": "How people live in your home?",
+    "birthsCount": "How many births occurred in the household?",
+    "movedInCount": "Since October 2019, how many people have moved into the household?",
+    "movedOutCount": "How many individuals have moved out of this household?",
+    "deathsCount": "How many deaths occurred in this household?",
+    "sectionStatus": "Is this resident available and consenting to fill out this section?",
+    "recentContactsSpokenCount": "Enter number of contacts:",
+    "recentContactsSeenCount": "Could you estimate the total number of other contacts, i.e. those who you met but with who you did not speak, yesterday?",
     "contact": {
       "name": null,
       "age": null,
