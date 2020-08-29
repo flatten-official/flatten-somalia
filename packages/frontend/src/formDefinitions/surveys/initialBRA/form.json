@@ -616,7 +616,7 @@
             {
               "key": "comorbidities",
               "type": "selectboxes",
-              "label": "comorbidities",
+              "label": "question.comorbidities",
               "values": [
                 {
                   "label": "comorbidity.substanceAbuse",
@@ -688,50 +688,8 @@
               }
             },
             {
-              "key": "formerSymptoms",
-              "label": "formerSymptoms",
-              "type": "selectboxes",
-              "values": [
-                {
-                  "label": "symptom.abdominalPain",
-                  "value": "abdominalPain"
-                },
-                {
-                  "label": "symptom.cough",
-                  "value": "cough"
-                },
-                {
-                  "label": "symptom.chills",
-                  "value": "chills"
-                },
-                {
-                  "label": "symptom.fever",
-                  "value": "fever"
-                },
-                {
-                  "label": "symptom.olfactoryImpairment",
-                  "value": "olfactoryImpairment"
-                },
-                {
-                  "label": "symptom.gustatoryImpairment",
-                  "value": "gustatoryImpairment"
-                },
-                {
-                  "label": "symptom.nausea",
-                  "value": "nausea"
-                },
-                {
-                  "label": "symptom.shortnessOfBreath",
-                  "value": "shortnessOfBreath"
-                }
-              ],
-              "validate": {
-                "required": true
-              }
-            },
-            {
-              "key": "currentSymptoms",
-              "label": "formerSymptoms",
+              "key": "symptoms",
+              "label": "question.symptoms",
               "type": "selectboxes",
               "values": [
                 {
