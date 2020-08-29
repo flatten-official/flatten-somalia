@@ -175,7 +175,7 @@
         },
         {
           "key": "longtimeResidentCount",
-          "label": "header.longtimeResidents",
+          "label": "body.longtimeResidents",
           "type": "number",
           "labelPosition": "left-right",
           "labelWidth": 65,
