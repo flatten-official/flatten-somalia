@@ -952,6 +952,198 @@
                 "minDate": "2019-10-1",
                 "maxDate": "moment()"
               }
+            },
+            {
+              "type": "customText",
+              "key": "customTextContactTracingSection",
+              "i18nKey": "header.contactTracing"
+            },
+            {
+              "key": "recentContactInteractionCount",
+              "label": "question.recentContactInteractionCount",
+              "type": "number",
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 25
+              }
+            },
+            {
+              "key": "recentContactInteractions",
+              "label": "recentContactInteractions",
+              "type": "editgrid",
+              "validate": {
+                "custom": "valid = true"
+              },
+              "openWhenEmpty": false,
+              "hideLabel": true,
+              "templates": {
+                "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\"</div>"
+              },
+              "components": [
+                {
+                  "key": "name",
+                  "label": "question.contactName",
+                  "type": "textfield",
+                  "validate": {
+                    "required": true
+                  }
+                },
+                {
+                  "key": "age",
+                  "label": "question.contactAge",
+                  "type": "number",
+                  "validate": {
+                    "required": true,
+                    "min": 0,
+                    "max": 110
+                  }
+                },
+                {
+                  "key": "gender",
+                  "label": "question.contactGender",
+                  "type": "radio",
+                  "validate": {
+                    "required": true
+                  },
+                  "values": [
+                    {
+                      "label": "male",
+                      "value": "male"
+                    },
+                    {
+                      "label": "female",
+                      "value": "female"
+                    }
+                  ]
+                },
+                {
+                  "key": "type",
+                  "label": "question.contactType",
+                  "type": "radio",
+                  "validate": {
+                    "required": true
+                  },
+                  "values": [
+                    {
+                      "label": "contactType.physical",
+                      "value": "physical"
+                    },
+                    {
+                      "label": "contactType.nonphysical",
+                      "value": "nonphysical"
+                    }
+                  ]
+                },
+                {
+                  "key": "relationship",
+                  "label": "question.contactRelationship",
+                  "type": "radio",
+                  "validate": {
+                    "required": true
+                  },
+                  "values": [
+                    {
+                      "label": "relationship.householdMember",
+                      "value": "householdMember"
+                    },
+                    {
+                      "label": "relationship.outsideRelative",
+                      "value": "outsideRelative"
+                    },
+                    {
+                      "label": "relationship.colleague",
+                      "value": "colleague"
+                    },
+                    {
+                      "label": "relationship.friend",
+                      "value": "friend"
+                    },
+                    {
+                      "label": "relationship.other",
+                      "value": "other"
+                    }
+                  ]
+                },
+                {
+                  "key": "frequency",
+                  "label": "question.contactFrequency",
+                  "type": "radio",
+                  "validate": {
+                    "required": true
+                  },
+                  "values": [
+                    {
+                      "label": "contactFrequency.daily",
+                      "value": "daily"
+                    },
+                    {
+                      "label": "contactFrequency.weekly",
+                      "value": "weekly"
+                    },
+                    {
+                      "label": "contactFrequency.monthly",
+                      "value": "monthly"
+                    },
+                    {
+                      "label": "contactFrequency.rarely",
+                      "value": "rarely"
+                    },
+                    {
+                      "label": "contactFrequency.firstMeeting",
+                      "value": "firstMeeting"
+                    },
+                    {
+                      "label": "contactFrequency.uncertain",
+                      "value": "uncertain"
+                    },
+                    {
+                      "label": "contactFrequency.undisclosed",
+                      "value": "undisclosed"
+                    }
+                  ]
+                },
+                {
+                  "key": "duration",
+                  "label": "question.contactDuration",
+                  "type": "radio",
+                  "validate": {
+                    "required": true
+                  },
+                  "values": [
+                    {
+                      "label": "contactDuration.under15m",
+                      "value": "under15m"
+                    },
+                    {
+                      "label": "contactDuration.15m-60m",
+                      "value":  "15m-60m"
+                    },
+                    {
+                      "label": "contactDuration.1h-2h",
+                      "value":  "1h-2h"
+                    },
+                    {
+                      "label": "contactDuration.2h-4h",
+                      "value":  "2h-4h"
+                    },
+                    {
+                      "label": "contactDuration.over4h",
+                      "value":  "over4h"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "recentContactsSeenCount",
+              "label": "question.recentContactsSeenCount",
+              "type": "number",
+              "validate": {
+                "required": true,
+                "min": 0,
+                "max": 25
+              }
             }
           ]
         }
