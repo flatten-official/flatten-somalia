@@ -202,10 +202,10 @@
           "key": "newbornResidents",
           "label": "header.newborns",
           "type": "editgrid",
+          "openWhenEmpty": false,
           "validate": {
             "custom": "valid = data.newbornResidents.length == data.birthsCount ? true : data.newbornResidents.length + ' / ' + data.birthsCount;"
           },
-          "openWhenEmpty": false,
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the required number of newborns, go to the first page.</div>"
           },
@@ -262,11 +262,11 @@
           "key": "adults",
           "label": "header.adults",
           "type": "editgrid",
+          "openWhenEmpty": false,
           "validate": {
             "minLength": "data.residentsCount;",
             "custom": "let longtimers = data.adults.filter(o => o.isLongtimeResident === 'yes').length; let newResidents = data.adults.length - longtimers; console.log(longtimers); valid = data.residentsCount - data.birthsCount === longtimers && data.movedInCount === newResidents ? true : longtimers + ' / ' + (data.residentsCount - data.birthsCount - data.movedInCount) + ' longtime residents,    ' + newResidents + ' / ' + data.movedInCount + ' new residents.';"
           },
-          "openWhenEmpty": true,
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of longtime or new residents, go to the first page.</div>"
           },
@@ -1159,6 +1159,7 @@
           "key": "movedOut",
           "label": "header.formerResidents",
           "type": "editgrid",
+          "openWhenEmpty": false,
           "validate": {
             "minLength": "data.residentsCount;",
             "custom": "valid = data.movedOutCount === data.movedOut.length ? true : data.movedOut.length + ' / ' + data.movedOutCount;"
