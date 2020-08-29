@@ -959,8 +959,8 @@
               "i18nKey": "header.contactTracing"
             },
             {
-              "key": "recentContactInteractionCount",
-              "label": "question.recentContactInteractionCount",
+              "key": "recentContactsSpokenCount",
+              "label": "question.recentContactsSpokenCount",
               "type": "number",
               "validate": {
                 "required": true,
@@ -969,8 +969,8 @@
               }
             },
             {
-              "key": "recentContactInteractions",
-              "label": "recentContactInteractions",
+              "key": "contacts",
+              "label": "contact info",
               "type": "editgrid",
               "validate": {
                 "custom": "valid = true"
@@ -983,7 +983,7 @@
               "components": [
                 {
                   "key": "name",
-                  "label": "question.contactName",
+                  "label": "question.contact.mame",
                   "type": "textfield",
                   "validate": {
                     "required": true
@@ -991,7 +991,7 @@
                 },
                 {
                   "key": "age",
-                  "label": "question.contactAge",
+                  "label": "question.contact.age",
                   "type": "number",
                   "validate": {
                     "required": true,
@@ -1001,7 +1001,7 @@
                 },
                 {
                   "key": "gender",
-                  "label": "question.contactGender",
+                  "label": "question.contact.gender",
                   "type": "radio",
                   "validate": {
                     "required": true
@@ -1019,116 +1019,116 @@
                 },
                 {
                   "key": "type",
-                  "label": "question.contactType",
+                  "label": "question.contact.type",
                   "type": "radio",
                   "validate": {
                     "required": true
                   },
                   "values": [
                     {
-                      "label": "contactType.physical",
+                      "label": "contact.type.physical",
                       "value": "physical"
                     },
                     {
-                      "label": "contactType.nonphysical",
+                      "label": "contact.type.nonphysical",
                       "value": "nonphysical"
                     }
                   ]
                 },
                 {
                   "key": "relationship",
-                  "label": "question.contactRelationship",
+                  "label": "question.contact.relationship",
                   "type": "radio",
                   "validate": {
                     "required": true
                   },
                   "values": [
                     {
-                      "label": "relationship.householdMember",
+                      "label": "contact.relationship.householdMember",
                       "value": "householdMember"
                     },
                     {
-                      "label": "relationship.outsideRelative",
+                      "label": "contact.relationship.outsideRelative",
                       "value": "outsideRelative"
                     },
                     {
-                      "label": "relationship.colleague",
+                      "label": "contact.relationship.colleague",
                       "value": "colleague"
                     },
                     {
-                      "label": "relationship.friend",
+                      "label": "contact.relationship.friend",
                       "value": "friend"
                     },
                     {
-                      "label": "relationship.other",
+                      "label": "contact.relationship.other",
                       "value": "other"
                     }
                   ]
                 },
                 {
                   "key": "frequency",
-                  "label": "question.contactFrequency",
+                  "label": "question.contact.frequency",
                   "type": "radio",
                   "validate": {
                     "required": true
                   },
                   "values": [
                     {
-                      "label": "contactFrequency.daily",
+                      "label": "contact.frequency.daily",
                       "value": "daily"
                     },
                     {
-                      "label": "contactFrequency.weekly",
+                      "label": "contact.frequency.weekly",
                       "value": "weekly"
                     },
                     {
-                      "label": "contactFrequency.monthly",
+                      "label": "contact.frequency.monthly",
                       "value": "monthly"
                     },
                     {
-                      "label": "contactFrequency.rarely",
+                      "label": "contact.frequency.rarely",
                       "value": "rarely"
                     },
                     {
-                      "label": "contactFrequency.firstMeeting",
+                      "label": "contact.frequency.firstMeeting",
                       "value": "firstMeeting"
                     },
                     {
-                      "label": "contactFrequency.uncertain",
+                      "label": "contact.frequency.uncertain",
                       "value": "uncertain"
                     },
                     {
-                      "label": "contactFrequency.undisclosed",
+                      "label": "contact.frequency.undisclosed",
                       "value": "undisclosed"
                     }
                   ]
                 },
                 {
                   "key": "duration",
-                  "label": "question.contactDuration",
+                  "label": "question.contact.duration",
                   "type": "radio",
                   "validate": {
                     "required": true
                   },
                   "values": [
                     {
-                      "label": "contactDuration.under15m",
+                      "label": "contact.duration.under15m",
                       "value": "under15m"
                     },
                     {
-                      "label": "contactDuration.15m-60m",
+                      "label": "contact.duration.15m-60m",
                       "value":  "15m-60m"
                     },
                     {
-                      "label": "contactDuration.1h-2h",
+                      "label": "contact.duration.1h-2h",
                       "value":  "1h-2h"
                     },
                     {
-                      "label": "contactDuration.2h-4h",
+                      "label": "contact.duration.2h-4h",
                       "value":  "2h-4h"
                     },
                     {
-                      "label": "contactDuration.over4h",
+                      "label": "contact.duration.over4h",
                       "value":  "over4h"
                     }
                   ]

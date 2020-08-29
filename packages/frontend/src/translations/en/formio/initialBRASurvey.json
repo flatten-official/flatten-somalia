@@ -13,15 +13,17 @@
     "movedOutCount": null,
     "deathsCount": null,
     "sectionStatus": null,
-    "recentContactInteractionCount": null,
+    "recentContactsSpokenCount": null,
     "recentContactsSeenCount": null,
-    "contactName": null,
-    "contactAge": null,
-    "contactGender": null,
-    "contactType": null,
-    "contactRelationship": null,
-    "contactFrequency": null,
-    "contactDuration": null
+    "contact": {
+      "name": null,
+      "age": null,
+      "gender": null,
+      "type": null,
+      "relationship": null,
+      "frequency": null,
+      "duration": null
+    }
   },
   "resident": {
     "longTerm": null,
@@ -69,32 +71,34 @@
     "immuneImpairment": null,
     "none": null
   },
-  "contactType": {
-    "physical": null,
-    "nonphysical": null
-  },
-  "relationship": {
-    "householdMember": null,
-    "outsideRelative": null,
-    "colleague": null,
-    "friend": null,
-    "other": null
-  },
-  "contactFrequency": {
-    "daily": null,
-    "weekly": null,
-    "monthly": null,
-    "rarely": null,
-    "firstMeeting": null,
-    "uncertain": null,
-    "undisclosed": null
-  },
-  "contactDuration": {
-    "under15m": null,
-    "15m-60m": null,
-    "1h-2h": null,
-    "2h-4h": null,
-    "over4h": null
+  "contact": {
+    "type": {
+      "physical": null,
+      "nonphysical": null
+    },
+    "relationship": {
+      "householdMember": null,
+      "outsideRelative": null,
+      "colleague": null,
+      "friend": null,
+      "other": null
+    },
+    "frequency": {
+      "daily": null,
+      "weekly": null,
+      "monthly": null,
+      "rarely": null,
+      "firstMeeting": null,
+      "uncertain": null,
+      "undisclosed": null
+    },
+    "duration": {
+      "under15m": null,
+      "15m-60m": null,
+      "1h-2h": null,
+      "2h-4h": null,
+      "over4h": null
+    }
   },
   "warning": {
     "tooManyEntries": null,
