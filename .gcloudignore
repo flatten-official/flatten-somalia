@@ -1,23 +1,28 @@
 # This is the ignore file used when uploading this repository to Google Cloud Build
+# This file is only used during manual builds
 
 # Ignore packages that are never deployed (in any environment)
 /packages/db-scripts
 
 # Ignore all docs
-README.md
+*.md
 /docs
 apidoc.json
+LICENSE
 
 # Ignore git files
 .git
 .github
 .gitattributes
-.gitignore
+# Note we don't exclude .gitignore because it is read in the deployment .gcloudignores
 
 # Ignore configuration files
 .eslintignore
 .eslintrc.js
 jest.config.js
+
+# Ignore test files
+*.test.js
 
 # Ignore all scripts
 /scripts/*
