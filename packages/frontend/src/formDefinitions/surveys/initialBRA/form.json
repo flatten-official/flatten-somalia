@@ -333,9 +333,9 @@
                   "label": "question.adult.movedInDate",
                   "type": "datetime",
                   "conditional": {
-                    "when": "isLongTimeResident",
-                    "eq": "yes",
-                    "show": true
+                    "show": true,
+                    "when": "isLongtimeResident",
+                    "eq": "no"
                   },
                   "validate": {
                     "required": true
