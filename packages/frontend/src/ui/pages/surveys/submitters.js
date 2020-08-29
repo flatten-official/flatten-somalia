@@ -72,7 +72,10 @@ export const getInitialBRASurveySubmitter = (schema, pageNames) => async (
   formioData
 ) => {
   const body = {
-    data: formioData,
+    data: {
+      followUpId: storeData.followUpId,
+      ...formioData,
+    },
     metadata: getMetadata(storeData, pageNames),
     schema,
   };
