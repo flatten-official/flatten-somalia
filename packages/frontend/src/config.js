@@ -87,10 +87,10 @@ export const Surveys = {
     route: Routes.initialBRASurvey,
     surveyKey: "initialBRASurvey",
     i18nTitleKey: "initialBRASurveyTitle",
-    api: endpoints.initialBRASurvey,
+    api: endpoints.submitInitialBRASurvey,
     formIOJSON: initialBRASurveyJSON,
     onSubmit: defaultSurveySubmitterFactory(
-      endpoints.initialBRASurvey,
+      endpoints.submitInitialBRASurvey,
       Schemas.initialBRASurvey
     ),
     options: {

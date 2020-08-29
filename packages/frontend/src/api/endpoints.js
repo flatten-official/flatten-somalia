@@ -26,6 +26,9 @@ const submitGraveDiggerSurvey = (data) =>
 const submitHospitalSurvey = (data) =>
   request("POST", "/survey/hospital", { data });
 
+const submitInitialBRASurvey = (data) =>
+  request("POST", "/survey/initialBRA", { data });
+
 const listVolunteers = () => request("GET", "/volunteer/list");
 
 const changeVolunteerAccess = (access, volunteerId) =>
@@ -39,6 +42,7 @@ export default {
   addVolunteer,
   submitGraveDiggerSurvey,
   submitHospitalSurvey,
+  submitInitialBRASurvey,
   listVolunteers,
   changeVolunteerAccess,
 };

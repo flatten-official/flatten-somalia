@@ -60,6 +60,7 @@ const AuthenticatedAppContent = () => {
         {makeSurveyRoute(Surveys.initialHousehold)}
         {makeSurveyRoute(Surveys.gravedigger)}
         {makeSurveyRoute(Surveys.hospital)}
+        {makeSurveyRoute(Surveys.initialBRA)}
         {makePrivateRoute(
           Routes.addVolunteer,
           AddVolunteerPage,
