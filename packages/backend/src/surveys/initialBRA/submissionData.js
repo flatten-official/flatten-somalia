@@ -1,11 +1,10 @@
-const { FormSchema, getSubmissionMetadata } = require("../sharedDataSchemas");
+const { mongoose } = require("util-db");
+const { getSubmissionMetadata } = require("../sharedDataSchemas");
 const { createModel } = require("../../utils/mongoose");
 
 const model = createModel("initialBRASurveySubmission", {
   metadata: getSubmissionMetadata(true),
-  surveyData: {
-    submissionSchema: FormSchema,
-  },
+  surveyData: mongoose.Mixed,
 });
 
 const create = async (content) => {

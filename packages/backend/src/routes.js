@@ -9,6 +9,7 @@ const getAuthRoute = require("./auth/routes/getAuthRoute");
 const submitInitialRoute = require("./surveys/initialHousehold/submissionRoute");
 const submitGravediggerRoute = require("./surveys/gravedigger/submissionRoute");
 const submitHospitalRoute = require("./surveys/hospital/submissionRoute");
+const submitInitialBRARoute = require("./surveys/initialBRA/submissionRoute");
 const addVolunteerRoute = require("./volunteer/addVolunteerRoute");
 const listVolunteersRoute = require("./volunteer/listVolunteersRoute");
 const changeAccessRoute = require("./volunteer/changeAccessRoute");
@@ -197,7 +198,7 @@ router.post(
 router.post(
   "/survey/initialBRA",
   protectedMiddleware([Permissions.submitForms]),
-  submitHospitalRoute,
+  submitInitialBRARoute,
   surveyErrorHandler
 );
 
