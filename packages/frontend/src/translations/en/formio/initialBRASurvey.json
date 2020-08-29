@@ -1,10 +1,10 @@
 {
   "header": {
     "householdResidents": "Residents",
-    "adults": "Adult Residents",
-    "newborns": "Newborns",
-    "deaths": "Deaths",
-    "contactTracing": "Contacts Survey"
+    "adults": "<h3>Adult Residents</h3>",
+    "newborns": "<h3>Newborns</h3>",
+    "deaths": "<h3>Deaths</h3>",
+    "contactTracing": "<h3>Contacts Survey</h3>"
   },
   "question": {
     "residentsCount": "How people live in your home?",

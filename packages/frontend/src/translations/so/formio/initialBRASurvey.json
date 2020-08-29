@@ -1,10 +1,10 @@
 {
   "header": {
     "householdResidents": "Deganeyaasha",
-    "adults": "Deganayaasha qaangaarka ah",
-    "newborns": "Dhalasho cusub",
-    "deaths": "Dhimashada",
-    "contactTracing": "Xiriirka xog aruurinta"
+    "adults": "<h3>Deganayaasha qaangaarka ah</h3>",
+    "newborns": "<h3>Dhalasho cusub</h3>",
+    "deaths": "<h3>Dhimashada</h3>",
+    "contactTracing": "<h3>Xiriirka xog aruurinta</h3>"
   },
   "question": {
     "residentsCount": "Immisa qof ayaa ku nool guriga?",
