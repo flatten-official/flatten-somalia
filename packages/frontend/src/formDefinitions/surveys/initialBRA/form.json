@@ -761,6 +761,11 @@
                   "label": "symptomOnset.abdominalPain",
                   "type": "datetime",
                   "format": "yyyy-MM-dd",
+                  "conditional": {
+                    "show":true,
+                    "when": "symptoms",
+                    "eq": "abdominalPain"
+                  },
                   "validate": {
                     "required": true
                   },
@@ -783,6 +788,11 @@
                   "label": "symptomOnset.cough",
                   "type": "datetime",
                   "format": "yyyy-MM-dd",
+                  "conditional": {
+                    "show": true,
+                    "when": "symptoms",
+                    "eq": "cough"
+                  },
                   "validate": {
                     "required": true
                   },
@@ -805,6 +815,11 @@
                   "label": "symptomOnset.chills",
                   "type": "datetime",
                   "format": "yyyy-MM-dd",
+                  "conditional": {
+                    "show": true,
+                    "when": "symptoms",
+                    "eq": "chills"
+                  },
                   "validate": {
                     "required": true
                   },
@@ -827,6 +842,11 @@
                   "label": "symptomOnset.fever",
                   "type": "datetime",
                   "format": "yyyy-MM-dd",
+                  "conditional": {
+                    "show": true,
+                    "when": "symptoms",
+                    "eq": "fever"
+                  },
                   "validate": {
                     "required": true
                   },
@@ -849,6 +869,11 @@
                   "label": "symptomOnset.olfactoryImpairment",
                   "type": "datetime",
                   "format": "yyyy-MM-dd",
+                  "conditional": {
+                    "show": true,
+                    "when": "symptoms",
+                    "eq": "olfactoryImpairment"
+                  },
                   "validate": {
                     "required": true
                   },
@@ -871,6 +896,11 @@
                   "label": "symptomOnset.gustatoryImpairment",
                   "type": "datetime",
                   "format": "yyyy-MM-dd",
+                  "conditional": {
+                    "show": true,
+                    "when": "symptoms",
+                    "eq": "gustatoryImpairment"
+                  },
                   "validate": {
                     "required": true
                   },
@@ -893,6 +923,11 @@
                   "label": "symptomOnset.nausea",
                   "type": "datetime",
                   "format": "yyyy-MM-dd",
+                  "conditional": {
+                    "show": true,
+                    "when": "symptoms",
+                    "eq": "nausea"
+                  },
                   "validate": {
                     "required": true
                   },
@@ -915,6 +950,11 @@
                   "label": "symptomOnset.shortnessOfBreath",
                   "type": "datetime",
                   "format": "yyyy-MM-dd",
+                  "conditional": {
+                    "show": true,
+                    "when": "symptoms",
+                    "eq": "shortnessOfBreath"
+                  },
                   "validate": {
                     "required": true
                   },
