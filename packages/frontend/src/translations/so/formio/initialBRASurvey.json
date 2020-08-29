@@ -19,6 +19,11 @@
     "movedInCount": "Tirada xubnaha guriga kusoo biiray?",
     "movedOutCount": "Tirada xubnaha guriga ka guurtay?",
     "deathsCount": "Tirada dhimashada guriga?",
+    "newborn": {
+      "age": null,
+      "gender": null,
+      "birthdate": null
+    },
     "adult": {
       "sectionStatus": "Helida ogalashaha deganayaasha?",
       "isLongtimeResident": "Deganaha ma ku noolaa guriga ilaa Oktoobar 2019?",
@@ -38,6 +43,16 @@
       "location": "Halkeed ku kulanteen qofkaa shalay magacow mesha hada:",
       "frequency": "Guud ahaan sidee qofkan kulankiinu siduu ahaa?",
       "duration": "Wakhti intee leeg siisay/kugu qadatay inta aad la joogtay qofkan goobtan aad kula kulantay?"
+    },
+    "movedOut": {
+      "date": null,
+      "age": null,
+      "gender": null
+    },
+    "death": {
+      "age": null,
+      "gender": null,
+      "date": null
     }
   },
   "resident": {

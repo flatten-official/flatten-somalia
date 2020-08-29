@@ -19,6 +19,11 @@
     "movedInCount": "Since October 2019, how many people have moved into the household?",
     "movedOutCount": "How many individuals have moved out of this household?",
     "deathsCount": "How many deaths occurred in this household?",
+    "newborn": {
+      "age": null,
+      "gender": null,
+      "birthdate": null
+    },
     "adult": {
       "sectionStatus": "Is this resident available and consenting to fill out this section?",
       "isLongtimeResident": "Has the resident lived in this household since at least October 2019?",
@@ -38,6 +43,16 @@
       "location": "Where did the contact take place?",
       "frequency": "Select frequency of contact:",
       "duration": "Select duration of contact:"
+    },
+    "movedOut": {
+      "date": null,
+      "age": null,
+      "gender": null
+    },
+    "death": {
+      "age": null,
+      "gender": null,
+      "date": null
     }
   },
   "resident": {
