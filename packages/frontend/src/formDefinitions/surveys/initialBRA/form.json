@@ -1199,12 +1199,12 @@
       "components": [
         {
           "key": "deaths",
-          "label": "deaths",
+          "label": "header.deaths",
           "type": "editgrid",
           "validate": {
             "custom": "valid = data.deathsCount === data.deaths.length ? true : data.deaths.length + ' / ' + data.deathsCount;"
           },
-          "hideLabel": true,
+          "hideLabel": false,
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of deaths, go to the first page.</div>"
           },
