@@ -45,14 +45,14 @@
       "duration": "Select duration of contact:"
     },
     "movedOut": {
-      "date": null,
-      "age": null,
-      "gender": null
+      "date": "When did this former resident move out?",
+      "age": "How old is this former resident?",
+      "gender": "What is this former resident's gender?"
     },
     "death": {
-      "age": null,
-      "gender": null,
-      "date": null
+      "date": "When did the resident die?",
+      "age": "What was the deceased resident's age?",
+      "gender": "What was the deceased resident's gender?"
     }
   },
   "resident": {

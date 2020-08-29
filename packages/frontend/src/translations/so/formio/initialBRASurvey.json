@@ -45,14 +45,14 @@
       "duration": "Wakhti intee leeg siisay/kugu qadatay inta aad la joogtay qofkan goobtan aad kula kulantay?"
     },
     "movedOut": {
-      "date": null,
-      "age": null,
-      "gender": null
+      "date": "Waqtiga xubnaha guriga ka guureen?",
+      "age": "Da'da xubnaha guriga ka guuray?",
+      "gender": "Iinsiga xubnaha guriga ka guuray?"
     },
     "death": {
-      "age": null,
-      "gender": null,
-      "date": null
+      "date": "Waqtiga dhimashada ee xubnaha guriga?",
+      "age": "Da'da xubnaha ku dhuntay guriga?",
+      "gender": "Jinsiga xubnaha ku dhintay guriga?"
     }
   },
   "resident": {
