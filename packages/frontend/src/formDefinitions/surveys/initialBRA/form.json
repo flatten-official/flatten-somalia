@@ -922,7 +922,7 @@
             },
             {
               "key": "contactTracingDate",
-              "label": "question.contactTracingDate",
+              "label": "question.adult.contactTracingDate",
               "type": "datetime",
               "format": "yyyy-MM-dd",
               "validate": {
