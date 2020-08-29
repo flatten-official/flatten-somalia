@@ -90,10 +90,7 @@ export const Surveys = {
     i18nTitleKey: "initialBRASurveyTitle",
     api: endpoints.submitInitialBRASurvey,
     formIOJSON: initialBRASurveyJSON,
-    onSubmit: getInitialBRASurveySubmitter(
-      endpoints.submitInitialBRASurvey,
-      Schemas.initialBRASurvey
-    ),
+    onSubmit: getInitialBRASurveySubmitter(Schemas.initialBRASurvey),
     options: {
       enableManualLocation: true,
     },
