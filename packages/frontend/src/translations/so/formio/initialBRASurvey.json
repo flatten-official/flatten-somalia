@@ -4,8 +4,7 @@
     "adults": "<h3>Deganayaasha qaangaarka ah</h3>",
     "newborns": "<h3>Dhalasho cusub</h3>",
     "formerResidents": "<h3>Deganayaashii hore</h3>",
-    "deaths": "<h3>Dhimashada</h3>",
-    "sinceOctober2019": "<h3>Ilaa Oktoobar 2019:</h3>"
+    "deaths": "<h3>Dhimashada</h3>"
   },
   "body": {
     "neonateDeathsPrompt": "Dhimashada dhalaanka cusub.",

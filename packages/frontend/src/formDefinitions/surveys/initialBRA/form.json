@@ -148,6 +148,10 @@
           }
         },
         {
+          "i18nKey": "sinceOctober2019",
+          "type": "customText"
+        },
+        {
           "key": "birthsCount",
           "label": "question.birthsCount",
           "type": "number",

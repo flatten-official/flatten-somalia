@@ -4,8 +4,7 @@
     "adults": "<h3>Adult Residents</h3>",
     "newborns": "<h3>Newborns</h3>",
     "formerResidents": "<h3>Former Residents</h3>",
-    "deaths": "<h3>Deaths</h3>",
-    "sinceOctober2019": "<h3>Since October 2019:</h3>"
+    "deaths": "<h3>Deaths</h3>"
   },
   "body": {
     "neonateDeathsPrompt": "Probe for neonate deaths.",
@@ -14,7 +13,7 @@
   "question": {
     "residentsCount": "How people live in your home?",
     "birthsCount": "How many births occurred in the household?",
-    "movedInCount": "Since October 2019, how many people have moved into the household?",
+    "movedInCount": "How many people have moved into the household?",
     "movedOutCount": "How many individuals have moved out of this household?",
     "deathsCount": "How many deaths occurred in this household?",
     "newborn": {
