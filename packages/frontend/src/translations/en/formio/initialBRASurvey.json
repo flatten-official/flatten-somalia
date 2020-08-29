@@ -60,7 +60,7 @@
     }
   },
   "resident": {
-    "longTerm": "Yes, they're longtime resident.",
+    "longTerm": "Yes, they're a longtime resident.",
     "movedIn": "No, they recently moved in.",
     "sectionConsentGiven": "The resident grants consent to complete this section.",
     "sectionConsentDenied": "The resident denies consent to complete this section.",
