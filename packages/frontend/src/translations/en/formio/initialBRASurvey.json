@@ -136,6 +136,7 @@
     }
   },
   "warning": {
+    "tooMuch": "Too many.",
     "tooManyEntries": "Too many entries!",
     "tooFewEntries": "Not enough entries!"
   }

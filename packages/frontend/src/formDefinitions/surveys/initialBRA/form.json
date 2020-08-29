@@ -152,7 +152,7 @@
           "label": "question.birthsCount",
           "type": "number",
           "validate": {
-            "required": true,
+            "custom": "valid = data.birthsCount < data.residentsCount - (data.movedInCount || 0) ? true : 'warning.tooMuch'",
             "min": 0,
             "max": 25
           }
@@ -162,7 +162,7 @@
           "label": "question.movedInCount",
           "type": "number",
           "validate": {
-            "required": true,
+            "custom": "valid = data.movedInCount < data.residentsCount - (data.birthsCount || 0) ? true : 'warning.tooMuch'",
             "min": 0,
             "max": 25
           }

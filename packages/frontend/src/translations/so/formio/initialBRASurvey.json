@@ -136,6 +136,7 @@
     }
   },
   "warning": {
+    "tooMuch": "Inbadan ayaa lasiiyay.",
     "tooManyEntries": "Tiro badan ayaa soo gashay!",
     "tooFewEntries": "Tiro ku filan ma soo gelin!"
   }
