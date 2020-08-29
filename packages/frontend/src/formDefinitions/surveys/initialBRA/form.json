@@ -144,7 +144,7 @@
         },
         {
           "key": "residentsCount",
-          "label": "residentsCount",
+          "label": "question.residentsCount",
           "type": "number",
           "validate": {
             "required": true,
@@ -154,7 +154,7 @@
         },
         {
           "key": "birthsCount",
-          "label": "birthsCount",
+          "label": "question.birthsCount",
           "type": "number",
           "validate": {
             "required": true,
@@ -164,7 +164,7 @@
         },
         {
           "key": "movedInCount",
-          "label": "movedInCount",
+          "label": "question.movedInCount",
           "type": "number",
           "validate": {
             "required": true,
@@ -174,7 +174,7 @@
         },
         {
           "key": "movedOutCount",
-          "label": "movedOutCount",
+          "label": "question.movedOutCount",
           "type": "number",
           "validate": {
             "required": true,
@@ -184,7 +184,7 @@
         },
         {
           "key": "deathsCount",
-          "label": "deathsCount",
+          "label": "question.deathsCount",
           "type": "number",
           "validate": {
             "required": true,
@@ -200,7 +200,7 @@
       "components": [
         {
           "key": "newbornResidents",
-          "label": "<h3>newbornResidents</h3>",
+          "label": "header.newborns",
           "type": "editgrid",
           "validate": {
             "custom": "valid = data.newbornResidents.length == data.birthsCount ? true : data.newbornResidents.length + ' / ' + data.birthsCount;"
@@ -261,7 +261,7 @@
       "components": [
         {
           "key": "adults",
-          "label": "adults",
+          "label": "header.adults",
           "type": "editgrid",
           "validate": {
             "minLength": "data.residentsCount;",
@@ -1159,7 +1159,7 @@
       "components": [
         {
           "key": "movedOut",
-          "label": "movedOut",
+          "label": "header.formerResidents",
           "type": "editgrid",
           "validate": {
             "minLength": "data.residentsCount;",
