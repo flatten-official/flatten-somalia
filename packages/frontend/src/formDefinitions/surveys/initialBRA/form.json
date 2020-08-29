@@ -269,7 +269,6 @@
           ]
         },
         {
-          "key": "newbornsProgress",
           "label": "body.newborns",
           "labelPosition": "left-right",
           "labelWidth": 65,
@@ -1228,7 +1227,6 @@
             {
               "components": [
                 {
-                  "key": "longtimeResidentProgress",
                   "label": "body.longtimeResidents",
                   "labelPosition": "left-right",
                   "labelWidth": 65,
@@ -1243,7 +1241,6 @@
             {
               "components": [
                 {
-                  "key": "newResidentProgress",
                   "label": "body.newResidents",
                   "labelPosition": "left-right",
                   "labelWidth": 65,
@@ -1326,7 +1323,6 @@
           ]
         },
         {
-          "key": "movedOutProgress",
           "label": "body.formerResidents",
           "labelPosition": "left-right",
           "labelWidth": 65,
@@ -1405,7 +1401,6 @@
           ]
         },
         {
-          "key": "deathsProgress",
           "label": "body.deaths",
           "labelPosition": "left-right",
           "labelWidth": 65,
