@@ -206,7 +206,6 @@
             "custom": "valid = data.newbornResidents.length == data.birthsCount ? true : data.newbornResidents.length + ' / ' + data.birthsCount;"
           },
           "openWhenEmpty": false,
-          "hideLabel": false,
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the required number of newborns, go to the first page.</div>"
           },
@@ -268,7 +267,6 @@
             "custom": "let longtimers = data.adults.filter(o => o.isLongtimeResident === 'yes').length; let newResidents = data.adults.length - longtimers; console.log(longtimers); valid = data.residentsCount - data.birthsCount === longtimers && data.movedInCount === newResidents ? true : longtimers + ' / ' + (data.residentsCount - data.birthsCount - data.movedInCount) + ' longtime residents,    ' + newResidents + ' / ' + data.movedInCount + ' new residents.';"
           },
           "openWhenEmpty": true,
-          "hideLabel": true,
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of longtime or new residents, go to the first page.</div>"
           },
@@ -1165,7 +1163,6 @@
             "minLength": "data.residentsCount;",
             "custom": "valid = data.movedOutCount === data.movedOut.length ? true : data.movedOut.length + ' / ' + data.movedOutCount;"
           },
-          "hideLabel": true,
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>To change the number of residents having moved out, go to the first page.</div>"
           },
