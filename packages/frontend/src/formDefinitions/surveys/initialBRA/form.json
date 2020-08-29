@@ -921,6 +921,28 @@
               }
             },
             {
+              "key": "contactTracingDate",
+              "label": "question.contactTracingDate",
+              "type": "datetime",
+              "format": "yyyy-MM-dd",
+              "validate": {
+                "required": true
+              },
+              "datePicker": {
+                "maxDate": "moment()",
+                "minDate": "2020-8-1"
+              },
+              "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "useLocaleSettings": true,
+                "format": "yyyy-MM-dd",
+                "time_24hr": true,
+                "maxDate": "moment()",
+                "minDate": "2020-8-1"
+              }
+            },
+            {
               "key": "contacts",
               "label": "contact info",
               "type": "editgrid",
