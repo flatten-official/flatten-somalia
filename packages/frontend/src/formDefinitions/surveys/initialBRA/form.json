@@ -178,7 +178,7 @@
           "label": "header.longtimeResidents",
           "type": "number",
           "labelPosition": "left-right",
-          "labelWidth": 75,
+          "labelWidth": 65,
           "calculateValue": "value = data.residentsCount - data.birthsCount - data.movedInCount"
         },
         {
@@ -272,7 +272,7 @@
           "key": "newbornsProgress",
           "label": "body.newborns",
           "labelPosition": "left-right",
-          "labelWidth": 75,
+          "labelWidth": 65,
           "type": "textfield",
           "calculateValue": "value = data.newbornResidents.length + ' / ' + data.birthsCount",
           "validate": {
@@ -1231,7 +1231,7 @@
                   "key": "longtimeResidentProgress",
                   "label": "body.longtimeResidents",
                   "labelPosition": "left-right",
-                  "labelWidth": 75,
+                  "labelWidth": 65,
                   "type": "textfield",
                   "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'yes').length + ' / ' + data.longtimeResidentCount",
                   "validate": {
@@ -1246,7 +1246,7 @@
                   "key": "newResidentProgress",
                   "label": "body.newResidents",
                   "labelPosition": "left-right",
-                  "labelWidth": 75,
+                  "labelWidth": 65,
                   "type": "textfield",
                   "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'no').length + ' / ' + data.movedInCount",
                   "validate": {
@@ -1329,7 +1329,7 @@
           "key": "movedOutProgress",
           "label": "body.formerResidents",
           "labelPosition": "left-right",
-          "labelWidth": 75,
+          "labelWidth": 65,
           "type": "textfield",
           "calculateValue": "value = data.movedOut.length + ' / ' + data.movedOutCount",
           "validate": {
@@ -1408,7 +1408,7 @@
           "key": "deathsProgress",
           "label": "body.deaths",
           "labelPosition": "left-right",
-          "labelWidth": 75,
+          "labelWidth": 65,
           "type": "textfield",
           "calculateValue": "value = data.deaths.length + ' / ' + data.deathsCount",
           "validate": {
