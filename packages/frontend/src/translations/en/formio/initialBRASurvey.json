@@ -3,6 +3,7 @@
     "householdResidents": "Residents",
     "adults": "<h3>Adult Residents</h3>",
     "newborns": "<h3>Newborns</h3>",
+    "formerResidents": "Former Residents",
     "deaths": "<h3>Deaths</h3>",
     "contactTracing": "<h3>Contacts Survey</h3>"
   },
