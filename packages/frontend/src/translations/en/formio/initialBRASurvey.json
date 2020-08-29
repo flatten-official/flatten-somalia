@@ -4,13 +4,16 @@
     "adults": "<h3>Adult Residents</h3>",
     "newborns": "<h3>Newborns</h3>",
     "formerResidents": "<h3>Former Residents</h3>",
-    "deaths": "<h3>Deaths</h3>",
-    "longtimeResidents": "Longtime residents",
-    "newResidents": "New residents"
+    "deaths": "<h3>Deaths</h3>"
   },
   "body": {
     "neonateDeathsPrompt": "Probe for neonate deaths.",
-    "contactTracingInfo": "We will now ask you some characteristics for each contact, such as their age and sex. We also ask whether contact was physical or not. A physical contact includes hand shaking, embracing, kissing, and also sharing a glass or utensil that is passed from mouth to mouth."
+    "contactTracingInfo": "We will now ask you some characteristics for each contact, such as their age and sex. We also ask whether contact was physical or not. A physical contact includes hand shaking, embracing, kissing, and also sharing a glass or utensil that is passed from mouth to mouth.",
+    "longtimeResidents": "Longtime residents:",
+    "newResidents": "New residents:",
+    "newborns": "Newborns:",
+    "formerResidents": "Former Residents:",
+    "deaths": "Deaths:"
   },
   "question": {
     "residentsCount": "How people live in your home?",

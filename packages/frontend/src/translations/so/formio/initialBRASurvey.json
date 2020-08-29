@@ -4,13 +4,16 @@
     "adults": "<h3>Deganayaasha qaangaarka ah</h3>",
     "newborns": "<h3>Dhalasho cusub</h3>",
     "formerResidents": "<h3>Deganayaashii hore</h3>",
-    "deaths": "<h3>Dhimashada</h3>",
-    "longtimeResidents": "Degenayaasha mudada dheer:",
-    "newResidents": "Deeganayaasha cusub:"
+    "deaths": "<h3>Dhimashada</h3>"
   },
   "body": {
     "neonateDeathsPrompt": "Dhimashada dhalaanka cusub.",
-    "contactTracingInfo": "Waxan imika ku waydiinaya astaamaha qof kasta oo aad is aragteensida da,da iyo jinsiga sido kale waxan ku waydiinayaa in is aragiinu ahaa mid taabasho ah, sida gacan qaad, salaan laab qabasho ah, dhunkasho ama in aad wadaagtaan weel cunto oo qof kasta afkiisa gaadha."
+    "contactTracingInfo": "Waxan imika ku waydiinaya astaamaha qof kasta oo aad is aragteensida da,da iyo jinsiga sido kale waxan ku waydiinayaa in is aragiinu ahaa mid taabasho ah, sida gacan qaad, salaan laab qabasho ah, dhunkasho ama in aad wadaagtaan weel cunto oo qof kasta afkiisa gaadha.",
+    "longtimeResidents": "Degenayaasha mudada dheer:",
+    "newResidents": "Deeganayaasha cusub:",
+    "newborns": "Dhalasho cusub:",
+    "formerResidents": "Deganayaashii hore:",
+    "deaths": "Dhimashada:"
   },
   "question": {
     "residentsCount": "Immisa qof ayaa ku nool guriga?",

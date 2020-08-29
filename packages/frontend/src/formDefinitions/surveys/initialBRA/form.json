@@ -212,9 +212,6 @@
           "label": "header.newborns",
           "type": "editgrid",
           "openWhenEmpty": false,
-          "validate": {
-            "custom": "valid = data.newbornResidents.length == data.birthsCount ? true : data.newbornResidents.length + ' / ' + data.birthsCount;"
-          },
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>Wax ka bedelida tirada dhalashada cusub, booqo boga koowaad.</div>"
           },
@@ -270,6 +267,17 @@
               }
             }
           ]
+        },
+        {
+          "key": "newbornsProgress",
+          "label": "body.newborns",
+          "labelPosition": "left-right",
+          "labelWidth": 75,
+          "type": "textfield",
+          "calculateValue": "value = data.newbornResidents.length + ' / ' + data.birthsCount",
+          "validate": {
+            "custom": "const entries = data.newbornResidents.length; const validAmount = data.birthsCount; if (entries >= validAmount) valid = 'warning.tooManyEntries'; if (entries <= validAmount) valid = 'warning.tooFewEntries'; if (entries === validAmount) valid = true;"
+          }
         }
       ]
     },
@@ -278,42 +286,10 @@
       "type": "panel",
       "components": [
         {
-          "type": "columns",
-          "columns": [
-            {
-              "components": [
-                {
-                  "key": "longtimeResidentProgress",
-                  "label": "header.longtimeResidents",
-                  "labelPosition": "left-right",
-                  "labelWidth": 75,
-                  "type": "textfield",
-                  "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'yes').length + ' / ' + data.longtimeResidentCount"
-                }
-              ]
-            },
-            {
-              "components": [
-                {
-                  "key": "newResidentProgress",
-                  "label": "header.newResidents",
-                  "labelPosition": "left-right",
-                  "labelWidth": 75,
-                  "type": "textfield",
-                  "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'no').length + ' / ' + data.movedInCount"
-                }
-              ]
-            }
-          ]
-        },
-        {
           "key": "adults",
           "label": "header.adults",
           "type": "editgrid",
           "openWhenEmpty": false,
-          "validate": {
-            "custom": "const longtimeResidentsEntered = data.adults.filter(o => o.isLongtimeResident === 'yes').length; valid = longtimeResidentsEntered === data.longtimeResidentCount ? true : data.longtimeResidentProgress + ',      ' + data.newResidentProgress;"
-          },
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>Si aad u beddelatid tirada muddada dheer ama degganeyaasha cusub, tag bogga koowaad.</div>"
           },
@@ -1245,6 +1221,41 @@
               ]
             }
           ]
+        },
+        {
+          "type": "columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "key": "longtimeResidentProgress",
+                  "label": "body.longtimeResidents",
+                  "labelPosition": "left-right",
+                  "labelWidth": 75,
+                  "type": "textfield",
+                  "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'yes').length + ' / ' + data.longtimeResidentCount",
+                  "validate": {
+                    "custom": "const entries = data.adults.filter(o => o.isLongtimeResident === 'yes').length; const validAmount = data.longtimeResidentCount; if (entries >= validAmount) valid = 'warning.tooManyEntries'; if (entries <= validAmount) valid = 'warning.tooFewEntries'; if (entries === validAmount) valid = true;"
+                  }
+                }
+              ]
+            },
+            {
+              "components": [
+                {
+                  "key": "newResidentProgress",
+                  "label": "body.newResidents",
+                  "labelPosition": "left-right",
+                  "labelWidth": 75,
+                  "type": "textfield",
+                  "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'no').length + ' / ' + data.movedInCount",
+                  "validate": {
+                    "custom": "const entries = data.adults.filter(o => o.isLongtimeResident === 'no').length; const validAmount = data.movedInCount; if (entries >= validAmount) valid = 'warning.tooManyEntries'; if (entries <= validAmount) valid = 'warning.tooFewEntries'; if (entries === validAmount) valid = true;"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -1257,10 +1268,6 @@
           "label": "header.formerResidents",
           "type": "editgrid",
           "openWhenEmpty": false,
-          "validate": {
-            "minLength": "data.residentsCount;",
-            "custom": "valid = data.movedOutCount === data.movedOut.length ? true : data.movedOut.length + ' / ' + data.movedOutCount;"
-          },
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>Si loo beddelo tirada degganeyaashii hore, tag bogga koowaad.</div>"
           },
@@ -1317,6 +1324,17 @@
               ]
             }
           ]
+        },
+        {
+          "key": "movedOutProgress",
+          "label": "body.formerResidents",
+          "labelPosition": "left-right",
+          "labelWidth": 75,
+          "type": "textfield",
+          "calculateValue": "value = data.movedOut.length + ' / ' + data.movedOutCount",
+          "validate": {
+            "custom": "const entries = data.movedOut.length; const validAmount = data.movedOutCount; if (entries >= validAmount) valid = 'warning.tooManyEntries'; if (entries <= validAmount) valid = 'warning.tooFewEntries'; if (entries === validAmount) valid = true;"
+          }
         }
       ]
     },
@@ -1328,9 +1346,6 @@
           "key": "deaths",
           "label": "header.deaths",
           "type": "editgrid",
-          "validate": {
-            "custom": "valid = data.deathsCount === data.deaths.length ? true : data.deaths.length + ' / ' + data.deathsCount;"
-          },
           "hideLabel": false,
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>Wax ka bedelida tirada dhimashada, booqo boga koowaad.</div>"
@@ -1388,6 +1403,17 @@
               }
             }
           ]
+        },
+        {
+          "key": "deathsProgress",
+          "label": "body.deaths",
+          "labelPosition": "left-right",
+          "labelWidth": 75,
+          "type": "textfield",
+          "calculateValue": "value = data.deaths.length + ' / ' + data.deathsCount",
+          "validate": {
+            "custom": "const entries = data.deaths.length; const validAmount = data.deathsCount; if (entries >= validAmount) valid = 'warning.tooManyEntries'; if (entries <= validAmount) valid = 'warning.tooFewEntries'; if (entries === validAmount) valid = true;"
+          }
         }
       ]
     }
