@@ -27,11 +27,11 @@
     }
   },
   "resident": {
-    "longTerm": null,
-    "movedIn": null,
-    "sectionConsentGiven": null,
-    "sectionConsentDenied": null,
-    "unavailable": null
+    "longTerm": "Haa, waa deganayaasaha mudada dheer.",
+    "movedIn": "Maya, dhawaan ayey so degeen,",
+    "sectionConsentGiven": "Wakiilka ogalaasho ee deganaha si loo buuxiyo qeybtiisa.",
+    "sectionConsentDenied": "Deganaha diidmadiisa ogalaasho ee buuxinta qeybtan.",
+    "unavailable": "Deganaha aan la heli karin."
   },
   "symptom": {
     "abdominalPain": null,

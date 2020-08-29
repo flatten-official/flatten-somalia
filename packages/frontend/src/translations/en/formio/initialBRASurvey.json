@@ -27,11 +27,11 @@
     }
   },
   "resident": {
-    "longTerm": null,
-    "movedIn": null,
-    "sectionConsentGiven": null,
-    "sectionConsentDenied": null,
-    "unavailable": null
+    "longTerm": "Yes, they're longtime resident.",
+    "movedIn": "No, they recently moved in.",
+    "sectionConsentGiven": "The resident grants consent to complete this section.",
+    "sectionConsentDenied": "The resident denies consent to complete this section.",
+    "unavailable": "The resident is unavailable."
   },
   "symptom": {
     "abdominalPain": null,
