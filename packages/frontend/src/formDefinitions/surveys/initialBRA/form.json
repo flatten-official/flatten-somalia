@@ -346,7 +346,7 @@
             },
             {
               "key": "age",
-              "label": "ageQuestion",
+              "label": "question.adult.age",
               "type": "number",
               "validate": {
                 "required": true,
@@ -356,7 +356,7 @@
             },
             {
               "key": "gender",
-              "label": "genderQuestion",
+              "label": "question.adult.gender",
               "type": "textfield",
               "validate": {
                 "required": true
@@ -364,7 +364,7 @@
             },
             {
               "key": "employed",
-              "label": "employmentQuestion",
+              "label": "question.adult.employed",
               "type": "radio",
               "validate": {
                 "required": true
@@ -382,7 +382,7 @@
             },
             {
               "key": "occupation",
-              "label": "occupationQuestion",
+              "label": "question.adult.occupation",
               "type": "select",
               "validate": {
                 "required": true
@@ -503,7 +503,7 @@
             },
             {
               "key": "primaryIncomeSource",
-              "label": "primaryIncomeSourceQuestion",
+              "label": "question.adult.primaryIncomeSource",
               "type": "select",
               "validate": {
                 "required": true
@@ -532,7 +532,7 @@
             },
             {
               "key": "educationLevel",
-              "label": "educationLevelQuestion",
+              "label": "question.adult.educationLevel",
               "type": "select",
               "validate": {
                 "required": true
@@ -565,7 +565,7 @@
             },
             {
               "key": "monthlyIncome",
-              "label": "monthlyIncomeQuestion",
+              "label": "question.adult.monthlyIncome",
               "type": "select",
               "data": {
                 "values": [
