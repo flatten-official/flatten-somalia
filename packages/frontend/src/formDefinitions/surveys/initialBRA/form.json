@@ -192,7 +192,7 @@
           }
         },
         {
-          "key": "longtimeResidents",
+          "key": "longtimeResidentCount",
           "type": "number",
           "calculateValue": "value = data.residentsCount - data.birthsCount - data.movedInCount",
           "redrawOn": "data",
@@ -275,15 +275,15 @@
       "type": "panel",
       "components": [
         {
-          "key": "enteredLongtimeResidents",
-          "type": "number",
-          "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'yes').length;",
+          "key": "longtimeResidentProgress",
+          "type": "textfield",
+          "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'yes').length + ' / ' + data.longtimeResidentCount",
           "hidden": false
         },
         {
-          "key": "enteredNewResidents",
-          "type": "number",
-          "calculateValue": "value = data.adults.length - data.enteredLongtimeResidents;",
+          "key": "newResidentProgress",
+          "type": "textfield",
+          "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'no').length + ' / ' + data.movedInCount",
           "hidden": false
         },
         {
@@ -292,7 +292,7 @@
           "type": "editgrid",
           "openWhenEmpty": false,
           "validate": {
-            "custom": "valid =  data.enteredLongtimeResidents === data.residentsCount - data.birthsCount - data.movedInCount ? true : data.enteredLongtimeResidents + ' / ' + (data.longtimeResidents) + ' longtime residents,    ' + (data.enteredNewResidents) + ' / ' + data.movedInCount + ' new residents.';"
+            "custom": "const longtimeResidentsEntered = data.adults.filter(o => o.isLongtimeResident === 'yes').length; valid = longtimeResidentsEntered === data.longtimeResidentCount ? true : data.longtimeResidentsProgress + ',  ' + data.newResidentProgress;"
           },
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>Si aad u beddelatid tirada muddada dheer ama degganeyaasha cusub, tag bogga koowaad.</div>"
