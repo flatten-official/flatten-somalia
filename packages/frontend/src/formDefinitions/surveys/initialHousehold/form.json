@@ -56,7 +56,8 @@
           "label": "email",
           "placeholder": "optional",
           "key": "email",
-          "type": "email"
+          "type": "email",
+          "spellcheck": false
         },
         {
           "label": "district",
