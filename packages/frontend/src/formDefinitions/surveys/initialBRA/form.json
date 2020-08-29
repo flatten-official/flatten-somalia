@@ -172,6 +172,14 @@
           }
         },
         {
+          "key": "longtimeResidentCount",
+          "label": "header.longtimeResidents",
+          "type": "number",
+          "labelPosition": "left-right",
+          "labelWidth": 75,
+          "calculateValue": "value = data.residentsCount - data.birthsCount - data.movedInCount"
+        },
+        {
           "key": "movedOutCount",
           "label": "question.movedOutCount",
           "type": "number",
@@ -190,13 +198,6 @@
             "min": 0,
             "max": 25
           }
-        },
-        {
-          "key": "longtimeResidentCount",
-          "type": "number",
-          "calculateValue": "value = data.residentsCount - data.birthsCount - data.movedInCount",
-          "redrawOn": "data",
-          "hidden": false
         }
       ]
     },
@@ -275,16 +276,35 @@
       "type": "panel",
       "components": [
         {
-          "key": "longtimeResidentProgress",
-          "type": "textfield",
-          "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'yes').length + ' / ' + data.longtimeResidentCount",
-          "hidden": false
-        },
-        {
-          "key": "newResidentProgress",
-          "type": "textfield",
-          "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'no').length + ' / ' + data.movedInCount",
-          "hidden": false
+          "type": "columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "key": "longtimeResidentProgress",
+                  "label": "header.longtimeResidents",
+                  "labelPosition": "left-right",
+                  "labelWidth": 75,
+                  "type": "textfield",
+                  "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'yes').length + ' / ' + data.longtimeResidentCount",
+                  "hidden": false
+                }
+              ]
+            },
+            {
+              "components": [
+                {
+                  "key": "newResidentProgress",
+                  "label": "header.newResidents",
+                  "labelPosition": "left-right",
+                  "labelWidth": 75,
+                  "type": "textfield",
+                  "calculateValue": "value = data.adults.filter(o => o.isLongtimeResident === 'no').length + ' / ' + data.movedInCount",
+                  "hidden": false
+                }
+              ]
+            }
+          ]
         },
         {
           "key": "adults",
@@ -292,7 +312,7 @@
           "type": "editgrid",
           "openWhenEmpty": false,
           "validate": {
-            "custom": "const longtimeResidentsEntered = data.adults.filter(o => o.isLongtimeResident === 'yes').length; valid = longtimeResidentsEntered === data.longtimeResidentCount ? true : data.longtimeResidentsProgress + ',  ' + data.newResidentProgress;"
+            "custom": "const longtimeResidentsEntered = data.adults.filter(o => o.isLongtimeResident === 'yes').length; valid = longtimeResidentsEntered === data.longtimeResidentCount ? true : data.longtimeResidentProgress + ',      ' + data.newResidentProgress;"
           },
           "templates": {
             "header": "<div class=\"row\">Si aad ugu darto mid kale, dhagsii \"Ku dar\".<br>Si aad u beddelatid tirada muddada dheer ama degganeyaasha cusub, tag bogga koowaad.</div>"

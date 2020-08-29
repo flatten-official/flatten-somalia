@@ -4,7 +4,9 @@
     "adults": "<h3>Adult Residents</h3>",
     "newborns": "<h3>Newborns</h3>",
     "formerResidents": "<h3>Former Residents</h3>",
-    "deaths": "<h3>Deaths</h3>"
+    "deaths": "<h3>Deaths</h3>",
+    "longtimeResidents": "Longtime residents",
+    "newResidents": "New residents"
   },
   "body": {
     "neonateDeathsPrompt": "Probe for neonate deaths.",
