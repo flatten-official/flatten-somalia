@@ -7,7 +7,7 @@
     "bootstrap": "^4.5.2",
     "bootswatch": "^4.5.2",
     "connected-react-router": "^6.8.0",
-    "formiojs": "^4.11.2",
+    "formiojs": "^4.11.3",
     "history": "^4.10.1",
     "i18next": "^19.6.3",
     "i18next-browser-languagedetector": "^6.0.0",
