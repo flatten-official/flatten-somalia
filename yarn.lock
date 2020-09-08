@@ -2978,9 +2978,9 @@ bindings@^1.5.0:
     file-uri-to-path "1.0.0"
 
 bl@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/bl/-/bl-2.2.0.tgz#e1a574cdf528e4053019bb800b041c0ac88da493"
-  integrity sha512-wbgvOpqopSr7uq6fJrLH8EsvYMJf9gzfo2jCsL2eTy75qXPukA4pCgHamOQkZtY5vmfVtjB+P3LNlMHW5CEZXA==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/bl/-/bl-2.2.1.tgz#8c11a7b730655c5d56898cdc871224f40fd901d5"
+  integrity sha512-6Pesp1w0DEX1N550i/uGV/TqucVL4AM/pgThFSN/Qq9si1/DF9aIHs1BxD8V/QU0HoeHO6cQRTAuYnLPKq1e4g==
   dependencies:
     readable-stream "^2.3.5"
     safe-buffer "^5.1.1"
@@ -6045,10 +6045,10 @@ formidable@^1.2.0:
   resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.2.2.tgz#bf69aea2972982675f00865342b982986f6b8dd9"
   integrity sha512-V8gLm+41I/8kguQ4/o1D3RIHRmhYFG4pnNyonvua+40rqcEmT4+V71yaZ3B457xbbgCsCfjSPi65u/W6vK1U5Q==
 
-formiojs@^4.11.2, formiojs@^4.9.0:
-  version "4.11.2"
-  resolved "https://registry.yarnpkg.com/formiojs/-/formiojs-4.11.2.tgz#9000fef3258071b91649092686532287f4cc6fa8"
-  integrity sha512-PV7E5veKAOWPtPu3eo20N2CV+BS8xWoPsOrA+mde3+7Sdpz6bk3KYLHvaknY4/4ekgCeK1pKRlLNZHbEgtwN5w==
+formiojs@^4.11.3, formiojs@^4.9.0:
+  version "4.11.3"
+  resolved "https://registry.yarnpkg.com/formiojs/-/formiojs-4.11.3.tgz#2fc272c4e3695c86694764e04c97fa25866107d9"
+  integrity sha512-PByP/XtorxPEL7e4RTfTjJP/OdBDJob9TAeQ3u1s9NG3Rr7iU7njpTpJ4kOpW1OXrnFpUIufDxGokgu6IVoY3Q==
   dependencies:
     "@formio/bootstrap3" "^2.6.4"
     "@formio/semantic" "^2.4.4"
