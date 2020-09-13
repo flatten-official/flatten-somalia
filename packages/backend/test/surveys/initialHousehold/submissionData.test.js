@@ -19,11 +19,11 @@ const testSubmissions = [
       timeToComplete: 27858,
       consentGiven: "true",
       uploadTimestamp: Date.now(),
+      version: "1.0.3",
     },
     followUp: { inProgress: false },
     addedBy: mongoose.Types.ObjectId(dummyVolunteerId),
     teamName: "Flatten",
-    submissionSchema: { form: "initialSurvey", version: "1.0.3" },
     people: [
       {
         _id: mongoose.Types.ObjectId("5ee92dcba42df10007109857"),
@@ -551,7 +551,6 @@ describe("submission database functions", () => {
     const submission = await Submission.create(
       testSubmissions[0].addedBy,
       "testTeam",
-      testSubmissions[0].submissionSchema,
       testSubmissions[0].metadata,
       people.map((person) => person._id),
       testPeopleDataInitial[0],
@@ -572,11 +571,8 @@ describe("submission database functions", () => {
     expect(retrievedSubmission.addedBy).toStrictEqual(
       testSubmissions[0].addedBy
     );
-    expect(retrievedSubmission.submissionSchema.form).toStrictEqual(
-      testSubmissions[0].submissionSchema.form
-    );
-    expect(retrievedSubmission.submissionSchema.version).toStrictEqual(
-      testSubmissions[0].submissionSchema.version
+    expect(retrievedSubmission.metadata.version).toStrictEqual(
+      testSubmissions[0].metadata.version
     );
     expect(retrievedSubmission.metadata.filledOutTimestamp).toStrictEqual(
       testSubmissions[0].metadata.filledOutTimestamp

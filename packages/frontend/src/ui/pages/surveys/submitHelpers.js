@@ -1,8 +1,7 @@
-import endpoints from "../../../api/endpoints";
-
-const getMetadata = (storeData, pageNames) => {
+const getMetadata = (version, storeData, pageNames) => {
   const endTime = Date.now();
   const metadata = {
+    version,
     endTime: endTime,
     timeToComplete: endTime - storeData.startTime,
     location: storeData.location,
@@ -23,46 +22,40 @@ const getMetadata = (storeData, pageNames) => {
   return metadata;
 };
 
-const preFormatFormio = (formioData) => {
+export const preFormatFormio = (formioData) => {
   Object.keys(formioData).forEach((key) => {
     if (key.startsWith("exclude-")) delete formioData[key];
   });
 };
 
-export const defaultSurveySubmitterFactory = (endpoint, schema) => async (
+export const defaultSubmitBodyFormatter = (
+  version,
   storeData,
-  formioData
-) => {
-  preFormatFormio(formioData);
+  formioData,
+  pageNames
+) => ({
+  metadata: getMetadata(version, storeData, pageNames),
+  data: formioData,
+});
 
-  const body = {
-    metadata: getMetadata(storeData),
-    schema,
-    data: formioData,
-  };
-
-  await endpoint(body);
-};
-
-export const getInitialHouseholdSubmitter = (schema, pageNames) => async (
+export const initialHouseholdSubmitBodyFormatter = (
+  version,
   storeData,
-  formioData
+  formioData,
+  pageNames
 ) => {
-  preFormatFormio(formioData);
-
   const body = {
     household: {
       followUpId: storeData.followUpId,
     },
     people: formioData.personGrid,
     deaths: formioData.deathGrid,
-    metadata: getMetadata(storeData, pageNames),
-    schema,
+    metadata: getMetadata(version, storeData, pageNames),
   };
 
   Object.entries(formioData).forEach(([k, v]) => {
     if (!(k === "personGrid" || k === "deathGrid")) body.household[k] = v;
   });
 
-  await endpoints.submitVolunteerForm(body);
+  return body;
 };

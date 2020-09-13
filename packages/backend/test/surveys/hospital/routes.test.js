@@ -1,12 +1,7 @@
 const { getApp } = require("../../../src/app");
-
 const db = require("util-db/inMemoryDb");
-
 const { login } = require("../../utils/requests");
-
-const HospitalSurveySubmission = require("../../../src/surveys/hospital/submissionData");
-const { getAllPermissionsExcept } = require("../../utils/permissions");
-const { Permissions } = require("../../../src/volunteer/volunteerData");
+const HospitalSurveyModel = require("../../../src/surveys/models/hospital");
 
 const testData = {
   hospitalRequestBody: {
@@ -21,8 +16,8 @@ const testData = {
         wasManual: false,
       },
       consentGiven: true,
+      version: "1.0.0",
     },
-    schema: { form: "hospital", version: "1.0.0" },
     data: {
       hospitalPhoneNumber: "11 11 11 111",
       hospitalEmail: "test@test.ca",
@@ -50,8 +45,8 @@ const testData = {
         wasManual: false,
       },
       consentGiven: true,
+      version: "1.0.0",
     },
-    schema: { form: "hospital", version: "1.0.0" },
     data: {
       hospitalPhoneNumber: "11 11 11 111",
       hospitalEmail: "test@test.ca",
@@ -88,36 +83,9 @@ describe("hospital survey submissions", () => {
       .send(testData.hospitalRequestBody)
       .expect(200);
 
-    const submissionDocuments = await HospitalSurveySubmission.model.find();
+    const submissionDocuments = await HospitalSurveyModel.find();
 
     expect(submissionDocuments).toHaveLength(1);
-  });
-
-  it("should fail for a user without the right permissions", async () => {
-    // create two agents each one missing one of the permissions
-    const { agent: agentAccess } = await login(
-      app,
-      getAllPermissionsExcept(Permissions.access)
-    );
-
-    const { agent: agentSubmitForms } = await login(
-      app,
-      getAllPermissionsExcept(Permissions.submitForms)
-    );
-
-    await agentAccess
-      .post("/survey/hospital")
-      .send(testData.hospitalRequestBody)
-      .expect(403);
-
-    await agentSubmitForms
-      .post("/survey/hospital")
-      .send(testData.hospitalRequestBody)
-      .expect(403);
-
-    const submissionDocuments = await HospitalSurveySubmission.model.find();
-
-    expect(submissionDocuments).toHaveLength(0);
   });
 
   // eslint-disable-next-line jest/expect-expect
@@ -129,7 +97,7 @@ describe("hospital survey submissions", () => {
       .send(testData.hospitalBadRequestBody)
       .expect(400);
 
-    const submissionDocuments = await HospitalSurveySubmission.model.find();
+    const submissionDocuments = await HospitalSurveyModel.find();
 
     expect(submissionDocuments).toHaveLength(0);
   });

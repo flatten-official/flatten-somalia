@@ -1,6 +1,7 @@
+const { Surveys } = require("../config");
 const { mongoose } = require("util-db");
 const { createModel } = require("../../utils/mongoose");
-const { getSubmissionMetadata, FormSchema } = require("../sharedDataSchemas");
+const { getSubmissionMetadata } = require("../sharedDataSchemas");
 const {
   personDataSchema,
   householdDataSchema,
@@ -39,20 +40,7 @@ const model = createModel("Submission", {
       required: true,
     },
   },
-  // form schema version (the thing contained in the models object)
-  submissionSchema: FormSchema,
-  metadata: getSubmissionMetadata(true, false, false, [
-    // general
-    "start",
-    "location",
-    "consent",
-    // initial household survey
-    "basicinfo",
-    "people",
-    "deaths",
-    "socialsurveyquestions",
-    "followupconsent",
-  ]),
+  metadata: getSubmissionMetadata(Surveys.initialHousehold),
   // this is filled in when this submissionInitial has been followed up with
   // submissionInitial -> household
   followUp: {
@@ -75,7 +63,6 @@ const model = createModel("Submission", {
 async function create(
   submitterId,
   submitterTeamName,
-  submissionSchema,
   metadata,
   peopleIds,
   peopleData,
@@ -93,7 +80,6 @@ async function create(
   const submission = new model({
     addedBy: submitterId,
     teamName: submitterTeamName,
-    submissionSchema,
     metadata,
     people,
     household: {

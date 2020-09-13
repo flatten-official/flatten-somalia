@@ -12,8 +12,6 @@ const Submission = require("../../../src/surveys/initialHousehold/submissionData
 const Household = require("../../../src/surveys/initialHousehold/householdData");
 const Person = require("../../../src/surveys/initialHousehold/peopleData");
 const { sleep } = require("../../utils/time");
-const { getAllPermissionsExcept } = require("../../utils/permissions");
-const { Permissions } = require("../../../src/volunteer/volunteerData");
 
 const INVALID_REQUEST_BODIES = [
   {},
@@ -78,8 +76,8 @@ const INVALID_REQUEST_BODIES = [
         wasManual: true,
       },
       consentGiven: true,
+      version: "1.0.3",
     },
-    schema: { form: "initialSurvey", version: "1.0.3" },
   },
   // MISSING CONSENT
   {
@@ -125,8 +123,8 @@ const INVALID_REQUEST_BODIES = [
         altitude: null,
         wasManual: true,
       },
+      version: "1.0.3",
     },
-    schema: { form: "initialSurvey", version: "1.0.3" },
   },
   // missing metadata
   {
@@ -162,13 +160,13 @@ const INVALID_REQUEST_BODIES = [
       residentsCount: 2,
     },
     people: [],
-    schema: { form: "initialSurvey", version: "1.0.3" },
+    version: "1.0.3",
   },
 ];
 
-const validSchema = { form: "initialSurvey", version: "1.0.4" };
 const validMetadata = [
   {
+    version: "1.0.4",
     endTime: 1592588144839,
     timeToComplete: 107757,
     location: {
@@ -181,6 +179,7 @@ const validMetadata = [
     consentGiven: true,
   },
   {
+    version: "1.0.4",
     endTime: 1592587961275,
     timeToComplete: 31055,
     location: {
@@ -1466,7 +1465,7 @@ const invalidDeadPeople = [
   },
 ];
 
-describe("test /submit", () => {
+describe("test /survey/initialHousehold", () => {
   let app;
 
   beforeAll(async () => {
@@ -1482,7 +1481,7 @@ describe("test /submit", () => {
     const { agent } = await login(app);
 
     for (const reqBody of VALID_REQ_BODIES) {
-      await agent.post("/submit/initial").send(reqBody).expect(200);
+      await agent.post("/survey/initialHousehold").send(reqBody).expect(200);
 
       // Used to avoid "unable to read from a snapshot due to pending collection catalog changes" when using transactions
       // eslint-disable-next-line jest/no-if
@@ -1511,7 +1510,7 @@ describe("test /submit", () => {
     const request = VALID_REQ_BODIES[0];
 
     const { agent, volunteer } = await login(app);
-    await agent.post("/submit/initial").send(request).expect(200);
+    await agent.post("/survey/initialHousehold").send(request).expect(200);
 
     const allSubmissions = await Submission.model.find();
     const allHouseholds = await Household.model.find();
@@ -1538,9 +1537,8 @@ describe("test /submit", () => {
     for (const metadata of validMetadata) {
       household.followUpId += "1";
       await agent
-        .post("/submit/initial")
+        .post("/survey/initialHousehold")
         .send({
-          schema: validSchema,
           metadata,
           household,
           people: [],
@@ -1561,9 +1559,8 @@ describe("test /submit", () => {
 
     for (const household of validHouseholdData) {
       await agent
-        .post("/submit/initial")
+        .post("/survey/initialHousehold")
         .send({
-          schema: validSchema,
           metadata: validMetadata[0],
           household,
           people: [],
@@ -1588,9 +1585,8 @@ describe("test /submit", () => {
     const household = minimumHouseholdData;
 
     await agent
-      .post("/submit/initial")
+      .post("/survey/initialHousehold")
       .send({
-        schema: validSchema,
         metadata: validMetadata[0],
         household,
         people: validLivingPeople,
@@ -1611,9 +1607,8 @@ describe("test /submit", () => {
     };
 
     await agent
-      .post("/submit/initial")
+      .post("/survey/initialHousehold")
       .send({
-        schema: validSchema,
         metadata: validMetadata[0],
         household,
         people: [],
@@ -1629,9 +1624,8 @@ describe("test /submit", () => {
     const { agent } = await login(app);
 
     await agent
-      .post("/submit/initial")
+      .post("/survey/initialHousehold")
       .send({
-        schema: validSchema,
         metadata: {
           caphfdasoif: "invalid",
           ...validMetadata[0],
@@ -1653,9 +1647,8 @@ describe("test /submit", () => {
     for (const household of invalidHouseholdData) {
       log.debug(household.followUpId);
       await agent
-        .post("/submit/initial")
+        .post("/survey/initialHousehold")
         .send({
-          schema: validSchema,
           metadata: validMetadata[0],
           household,
           people: [],
@@ -1677,9 +1670,8 @@ describe("test /submit", () => {
 
     for (const person of invalidLivingPeople) {
       await agent
-        .post("/submit/initial")
+        .post("/survey/initialHousehold")
         .send({
-          schema: validSchema,
           metadata: validMetadata[0],
           household,
           people: [person],
@@ -1701,9 +1693,8 @@ describe("test /submit", () => {
     };
 
     await agent
-      .post("/submit/initial")
+      .post("/survey/initialHousehold")
       .send({
-        schema: validSchema,
         metadata: validMetadata[0],
         household,
         people: [],
@@ -1722,8 +1713,14 @@ describe("test /submit", () => {
     async () => {
       const { agent } = await login(app);
 
-      await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(200);
-      await agent.post("/submit/initial").send(VALID_REQ_BODIES[1]).expect(409);
+      await agent
+        .post("/survey/initialHousehold")
+        .send(VALID_REQ_BODIES[1])
+        .expect(200);
+      await agent
+        .post("/survey/initialHousehold")
+        .send(VALID_REQ_BODIES[1])
+        .expect(409);
 
       const allSubmissions = await Submission.model.find();
       const allHouseholds = await Household.model.find();
@@ -1735,42 +1732,11 @@ describe("test /submit", () => {
     }
   );
 
-  it("should fail for a user without access or submitForm permissions", async () => {
-    // create two agents each one missing one of the permissions
-    const { agent: agentAccess } = await login(
-      app,
-      getAllPermissionsExcept(Permissions.access)
-    );
-
-    const { agent: agentSubmitForms } = await login(
-      app,
-      getAllPermissionsExcept(Permissions.submitForms)
-    );
-
-    await agentAccess
-      .post("/submit/initial")
-      .send(VALID_REQ_BODIES[0])
-      .expect(403);
-
-    await agentSubmitForms
-      .post("/submit/initial")
-      .send(VALID_REQ_BODIES[1])
-      .expect(403);
-
-    const allSubmissions = await Submission.model.find();
-    const allHouseholds = await Household.model.find();
-    const allPeople = await Person.model.find();
-
-    expect(allSubmissions).toHaveLength(0);
-    expect(allHouseholds).toHaveLength(0);
-    expect(allPeople).toHaveLength(0);
-  });
-
   it("should fail for an invalid submission", async () => {
     const { agent } = await login(app);
 
     for (const reqBody of INVALID_REQUEST_BODIES) {
-      await agent.post("/submit/initial").send(reqBody).expect(400);
+      await agent.post("/survey/initialHousehold").send(reqBody).expect(400);
     }
 
     const allSubmissions = await Submission.model.find();

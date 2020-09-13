@@ -1,80 +1,33 @@
-import endpoints from "./api/endpoints";
-import graveDiggerSurveyJSON from "./formDefinitions/surveys/gravedigger/form.json";
-import hospitalSurveyJSON from "./formDefinitions/surveys/hospital/form.json";
-import initialHouseholdJSON from "./formDefinitions/surveys/initialHousehold/form.json";
-import {
-  defaultSurveySubmitterFactory,
-  getInitialHouseholdSubmitter,
-} from "./ui/pages/surveys/submitters";
+import graveDiggerSurveyJSON from "./formDefinitions/surveys/gravedigger.json";
+import hospitalSurveyJSON from "./formDefinitions/surveys/hospital.json";
+import initialHouseholdJSON from "./formDefinitions/surveys/initialHousehold.json";
+import { initialHouseholdSubmitBodyFormatter } from "./ui/pages/surveys/submitHelpers";
+import { Surveys as SharedSurveyRefs } from "util-shared-constants";
 
 export const Routes = {
   home: "/",
-  initialHouseholdSurvey: "/surveys/initialHousehold",
-  gravediggerSurvey: "/surveys/gravedigger",
-  hospitalSurvey: "/surveys/hospital",
+  surveyPrefix: "/surveys/",
   addVolunteer: "/admin/addVolunteer",
   admin: "/admin/list",
 };
 
-const Schemas = {
-  gravedigger: {
-    form: "gravediggerSurvey",
-    version: "0.1.0",
-  },
-  hospital: {
-    form: "hospitalSurvey",
-    version: "0.1.0",
-  },
-  initialHousehold: {
-    form: "initialSurvey",
-    version: "1.0.6",
-  },
-};
-
 export const Surveys = {
+  initialHousehold: {
+    ...SharedSurveyRefs.initialHousehold,
+    i18nTitleKey: "initialHouseholdTitle",
+    formIOJSON: initialHouseholdJSON,
+    customSubmitBodyFormatter: initialHouseholdSubmitBodyFormatter,
+  },
   gravedigger: {
-    route: Routes.gravediggerSurvey,
-    surveyKey: "graveDigger",
+    ...SharedSurveyRefs.gravedigger,
     i18nTitleKey: "graveDiggerTitle",
-    api: endpoints.submitGraveDiggerSurvey,
     formIOJSON: graveDiggerSurveyJSON,
-    onSubmit: defaultSurveySubmitterFactory(
-      endpoints.submitGraveDiggerSurvey,
-      Schemas.gravedigger
-    ),
-    options: {
-      enableManualLocation: false,
-    },
+    disabled: true,
   },
   hospital: {
-    route: Routes.hospitalSurvey,
-    surveyKey: "hospital",
+    ...SharedSurveyRefs.hospital,
     i18nTitleKey: "hospitalTitle",
-    api: endpoints.submitHospitalSurvey,
     formIOJSON: hospitalSurveyJSON,
-    onSubmit: defaultSurveySubmitterFactory(
-      endpoints.submitHospitalSurvey,
-      Schemas.hospital
-    ),
-    options: {
-      enableManualLocation: true,
-    },
-  },
-  initialHousehold: {
-    route: Routes.initialHouseholdSurvey,
-    surveyKey: "initialHousehold",
-    i18nTitleKey: "initialHouseholdTitle",
-    api: endpoints.submitVolunteerForm,
-    formIOJSON: initialHouseholdJSON,
-    onSubmit: getInitialHouseholdSubmitter(Schemas.initialHousehold, [
-      "basicinfo",
-      "people",
-      "deaths",
-      "socialsurveyquestions",
-      "followupconsent",
-    ]),
-    options: {
-      enableManualLocation: true,
-    },
+    disabled: true,
   },
 };

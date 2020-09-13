@@ -1,16 +1,15 @@
 const { mongoose } = require("util-db");
 
-const FormSchema = {
-  form: { type: String, index: true, required: true }, // eg. 'somaliaInitialVolunteerSurvey'
-  version: { type: String, index: true, required: true }, // eg. '1.0.0'
+const DEFAULT_PAGE_NAMES = ["start", "consent", "location"];
+
+const getPageTimingsSchema = (customPageNames = []) => {
+  const schema = {};
+  for (const name of DEFAULT_PAGE_NAMES.concat(customPageNames))
+    schema[name] = Number;
+  return schema;
 };
 
-const getSubmissionMetadata = (
-  requireLocation,
-  includeTeamName = true,
-  includeAddedBy = true,
-  pages = []
-) => {
+const getSubmissionMetadata = (survey) => {
   let metadata = {
     location: {
       type: {
@@ -20,7 +19,7 @@ const getSubmissionMetadata = (
         altitude: Number,
         wasManual: Boolean,
       },
-      required: requireLocation,
+      required: survey.enableManualLocation, // if manual location is enabled then they must select a location
     },
     // recorded on the user's browser with JS Date.now()
     endTime: { type: Number, index: true },
@@ -32,13 +31,12 @@ const getSubmissionMetadata = (
       default: Date.now,
     },
     consentGiven: { type: String, required: true },
-    pageTimings: pages.reduce((acc, curr) => {
-      acc[curr] = { type: Number };
-      return acc;
-    }, {}),
+    pageTimings: getPageTimingsSchema(survey.customPageNames),
+    version: { type: String, index: true, required: true },
   };
 
-  if (includeAddedBy)
+  // The initialHousehold survey specifies these properties outside of the metadata hence why we have a flag to disable this
+  if (!survey.legacyMetadata)
     metadata = {
       ...metadata,
       addedBy: {
@@ -46,11 +44,6 @@ const getSubmissionMetadata = (
         required: true,
         index: true,
       },
-    };
-
-  if (includeTeamName)
-    metadata = {
-      ...metadata,
       teamName: {
         type: String,
         required: true,
@@ -61,4 +54,4 @@ const getSubmissionMetadata = (
   return metadata;
 };
 
-module.exports = { FormSchema, getSubmissionMetadata };
+module.exports = { getSubmissionMetadata };

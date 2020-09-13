@@ -6,6 +6,13 @@ version  |  commit (optional)
 	* changes
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.0.7
+    * drop field `submissionSchema.form`
+    * move `submissionSchema.version` to `metadata.version`
+
+1.0.6
+    * Implement page timings (https://github.com/flatten-official/flatten-volunteer/pull/69)
+
 1.0.5
     * Backend schema changes (https://github.com/flatten-official/backend-so/pull/39)
     * Use strict mode

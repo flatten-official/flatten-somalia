@@ -11,21 +11,27 @@ import {
   ConnectedLocationPicker,
 } from "./ConnectedComponents";
 import { logout, UNAUTHENTICATED_CONTEXT } from "../../appActions";
+import { preFormatFormio } from "./submitHelpers";
+import endpoints from "../../../api/endpoints";
+import { defaultSubmitBodyFormatter } from "./submitHelpers";
 
 /**
  * This function returns a survey page component.
- * @param surveyKey a string representing the form
+ * @param key a string representing the survey
  * @param i18nTitleKey the i18next key for the form title
  * @param formIOJSON the JSON formIO definition
- * @param onSubmit called with the form data when the form is submitted
- * @param options object containing details on specific form (e.g. should we use manual location picker)
+ * @param buildSubmissionBody called with the form data when the form is submitted
+ * @param enableManualLocation should we use manual location picker
+ * @param version the version of the form
  */
 const SurveyPageFactory = ({
-  surveyKey,
+  key,
   i18nTitleKey,
   formIOJSON,
-  onSubmit,
-  options,
+  customSubmitBodyFormatter,
+  enableManualLocation,
+  version,
+  customPageNames,
 }) => {
   // Need to use a Class rather than functional components
   // Since the functional component was running into stale closure issues.
@@ -47,7 +53,20 @@ const SurveyPageFactory = ({
      */
     submitHook = async (formIOData) => {
       try {
-        await onSubmit(this.props.surveyData, formIOData);
+        preFormatFormio(formIOData);
+
+        const bodyFormatterArgs = [
+          version,
+          this.props.surveyData,
+          formIOData,
+          customPageNames,
+        ];
+
+        const body = customSubmitBodyFormatter
+          ? customSubmitBodyFormatter(...bodyFormatterArgs)
+          : defaultSubmitBodyFormatter(...bodyFormatterArgs);
+
+        await endpoints.submitSurvey(body, key);
       } catch (e) {
         // If error is 401, session is invalid so logout user
         if (e.response && e.response.status === 401) this.props.logout();
@@ -70,11 +89,7 @@ const SurveyPageFactory = ({
 
       // Use undefined rather than "not" since if location is not found will set to null
       if (surveyData.location === undefined)
-        return (
-          <ConnectedLocationPicker
-            enableManual={options.enableManualLocation}
-          />
-        );
+        return <ConnectedLocationPicker enableManual={enableManualLocation} />;
 
       return (
         <Form
@@ -100,8 +115,7 @@ const SurveyPageFactory = ({
   });
 
   const mapDispatchToProps = (dispatch) => ({
-    restartSurvey: () =>
-      dispatch({ type: Types.RESTART_SURVEY, payload: surveyKey }),
+    restartSurvey: () => dispatch({ type: Types.RESTART_SURVEY, payload: key }),
     notifyCompleted: () => dispatch({ type: Types.NOTIFY_COMPLETED_SURVEY }),
     recordPageTiming: (pageNum, time) =>
       dispatch({ type: Types.ADD_PAGE_TIMING, payload: { pageNum, time } }),
