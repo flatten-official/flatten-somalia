@@ -61,6 +61,9 @@ async function initialSubmission(
   });
 }
 
+/**
+ * Wraps the api function to catch conflicting follow up id key errors and return a warning rather than an error.
+ */
 const errorHandler = (apiFunction) => async (...args) => {
   try {
     await apiFunction(...args);
