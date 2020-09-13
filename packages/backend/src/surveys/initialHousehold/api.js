@@ -61,6 +61,9 @@ async function initialSubmission(
   });
 }
 
+/**
+ * Wraps the api function to catch conflicting follow up id key errors and return a warning rather than an error.
+ */
 const errorHandler = (apiFunction) => async (...args) => {
   try {
     await apiFunction(...args);
@@ -75,7 +78,7 @@ const errorHandler = (apiFunction) => async (...args) => {
         status: 409,
       });
       throw new ApiError(
-        "Failed. You are submitting forms too quickly or someone else is using your account. Please restart survey.",
+        "Failed. You are submitting forms too quickly or someone else is using your account. Please restart the survey.",
         409
       );
     } else throw e;

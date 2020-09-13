@@ -17,6 +17,10 @@ const Footer = () => {
       <a href="https://flatten.ca/about-us" className="footerLink">
         Flatten
       </a>
+      {" | "}
+      <a href="mailto:flattenofficial@gmail.com" className="footerLink">
+        {t("sendFeedback")}
+      </a>
       {branchName ? ` | Branch: ${branchName}` : ""}
     </footer>
   );
